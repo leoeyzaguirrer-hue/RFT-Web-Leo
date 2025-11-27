@@ -1,100 +1,439 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Plataforma ACT–RFT</title>
+  <meta charset="UTF-8">
+  <title>Plataforma ACT–RFT · Portada</title>
 
-    <!-- Tipografías -->
-    <link href="https://fonts.cdnfonts.com/css/coco-gothic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Tipografías -->
+  <link href="https://fonts.cdnfonts.com/css/coco-gothic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        /* Fondo premium */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Noto Sans', sans-serif;
-            background: linear-gradient(#0A2A5C, #E9EFF8, #FFFFFF);
-            min-height: 100vh;
-            color: #000;
-            position: relative;
-            overflow-x: hidden;
-        }
+  <style>
+    /* ================================
+       🎨 ESTILO GLOBAL (TU DISEÑO)
+    ================================= */
 
-        /* Patrón geométrico */
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(#FDBF12 1px, transparent 1px),
-                linear-gradient(120deg, rgba(250,250,250,0.10) 1px, transparent 1px);
-            background-size: 18px 18px, 120px 120px;
-            opacity: 0.15;
-            pointer-events: none;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        h1 {
-            font-family: 'Coco Gothic', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #0A2A5C;
-            text-align: center;
-            margin-top: 100px;
-            font-size: 48px;
-        }
+    body {
+      margin: 0;
+      font-family: 'Noto Sans', sans-serif;
+      background: linear-gradient(to bottom, #E9EFF8, #FFFFFF, #F3F6FB);
+      min-height: 100vh;
+      color: #0A2A5C;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-        h2 {
-            text-align: center;
-            font-weight: 400;
-            color: #132F66;
-            margin-top: -10px;
-        }
+    /* Patrón geométrico sutil */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(#0A2A5C 1px, transparent 1px),
+        linear-gradient(135deg, rgba(10,42,92,0.18) 1px, transparent 1px);
+      background-size: 18px 18px, 120px 120px;
+      opacity: 0.10; /* dentro de tu rango 8–12% */
+      pointer-events: none;
+      z-index: -1;
+    }
 
-        /* Tarjeta premium */
-        .tarjeta {
-            background: linear-gradient(135deg, #0A2A5C, #132F66, #000);
-            border: 2px solid #FDBF12;
-            border-radius: 32px;
-            padding: 24px;
-            margin: 40px auto;
-            max-width: 800px;
-            color: white;
-            text-align: center;
-            box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
-        }
+    h1, h2, h3, h4 {
+      font-family: 'Coco Gothic', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
 
-        /* Botón premium */
-        .boton {
-            background: #FF7A30;
-            color: white;
-            padding: 14px 26px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-top: 20px;
-            font-weight: 700;
-            text-decoration: none;
-            font-family: 'Coco Gothic', sans-serif;
-            letter-spacing: 1px;
-        }
+    /* Animaciones base */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-        .boton:hover {
-            background: #FDBF12;
-            color: #0A2A5C;
-            transition: 0.3s ease;
-        }
-    </style>
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* ================================
+       HEADER / HERO
+    ================================= */
+
+    header {
+      padding: 24px 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-texto {
+      font-family: 'Coco Gothic', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #0A2A5C;
+    }
+
+    .badge-ctx {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #0A2A5C;
+      background: rgba(255,255,255,0.8);
+    }
+
+    .hero {
+      padding: 40px 20px 10px;
+      text-align: left;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 32px;
+      align-items: center;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .hero-titulos h1 {
+      font-size: 40px;
+      margin: 0 0 12px;
+      color: #0A2A5C;
+      text-shadow: 0 0 12px rgba(255,255,255,0.9);
+    }
+
+    .hero-titulos h2 {
+      font-size: 18px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #132F66;
+      margin: 0 0 18px;
+    }
+
+    .hero-titulos p {
+      margin: 0;
+      font-size: 14px;
+      color: #132F66;
+      max-width: 520px;
+    }
+
+    /* Hexágonos flotantes dorados */
+    .hero-visual {
+      position: relative;
+      min-height: 220px;
+    }
+
+    .hex {
+      position: absolute;
+      width: 90px;
+      height: 52px;
+      background: #FDBF12;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      box-shadow: 0 0 18px rgba(253,191,18,0.5);
+      opacity: 0.85;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .hex:nth-child(1) { top: 18px; left: 15%; }
+    .hex:nth-child(2) { top: 110px; right: 8%; animation-delay: 0.8s; transform: scale(0.9); }
+    .hex:nth-child(3) { bottom: 0; left: 40%; animation-delay: 1.4s; transform: scale(1.1); }
+
+    .hero-visual-inner {
+      position: absolute;
+      inset: 18px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #0A2A5C, #132F66, #000000);
+      border: 3px solid #FDBF12;
+      box-shadow: 0 0 25px rgba(0,0,0,0.45);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #FFFFFF;
+    }
+
+    .hero-visual-inner h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #FDBF12;
+    }
+
+    .hero-visual-inner p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    /* ================================
+       BOTONES (tu especificación)
+    ================================= */
+
+    .botones-cta {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primario,
+    .btn-secundario {
+      border-radius: 32px;
+      padding: 10px 22px;
+      font-family: 'Coco Gothic', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primario {
+      background: #FDBF12;
+      color: #0A2A5C;
+      box-shadow: 0 8px 20px rgba(253,191,18,0.35);
+    }
+
+    .btn-primario:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 24px rgba(253,191,18,0.55);
+      filter: brightness(1.05);
+    }
+
+    .btn-secundario {
+      background: #FFFFFF;
+      color: #0A2A5C;
+      border: 1px solid #0A2A5C;
+    }
+
+    .btn-secundario:hover {
+      background: #0A2A5C;
+      color: #FFFFFF;
+    }
+
+    /* ================================
+       SECCIÓN MÓDULOS (PANTALLA 0)
+    ================================= */
+
+    .seccion-modulos {
+      padding: 20px 20px 60px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+      animation: fadeInUp 0.7s ease-out;
+    }
+
+    .seccion-modulos h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #0A2A5C;
+    }
+
+    .seccion-modulos p {
+      font-size: 13px;
+      margin: 0 0 24px;
+      color: #132F66;
+    }
+
+    .grid-modulos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .modulo-card {
+      background: linear-gradient(135deg, #0A2A5C, #132F66, #000000);
+      border-radius: 32px;
+      border: 3px solid #FDBF12;
+      padding: 18px 20px 16px;
+      color: #FFFFFF;
+      box-shadow: 0 0 22px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .modulo-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 26px rgba(0,0,0,0.55);
+      border-color: #FFFFFF;
+    }
+
+    .modulo-titulo {
+      font-size: 15px;
+      margin: 0 0 8px;
+      color: #FDBF12;
+    }
+
+    .modulo-descripcion {
+      font-size: 12px;
+      margin: 0;
+      color: #E5ECFF;
+    }
+
+    .estado-modulo {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #FDBF12;
+      background: rgba(0,0,0,0.45);
+    }
+
+    .estado-modulo.bloqueado::before {
+      content: "🔒 ";
+    }
+
+    .estado-modulo.activo::before {
+      content: "▶ ";
+    }
+
+    /* Responsive simple */
+    @media (max-width: 830px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+      .hero-visual {
+        order: -1;
+        min-height: 260px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <h1>Plataforma ACT–RFT</h1>
-    <h2>Formación profesional basada en ciencia del comportamiento</h2>
-
-    <div class="tarjeta">
-        <p>Bienvenido a la plataforma oficial donde aprenderás ACT, RFT y ciencia del lenguaje desde un enfoque conductual–contextual.</p>
-        <a class="boton" href="#">Ingresar a los módulos</a>
+  <!-- HEADER -->
+  <header>
+    <div class="logo-texto">
+      Plataforma ACT–RFT
     </div>
+    <div class="badge-ctx">
+      Ciencia del comportamiento · Formación profesional
+    </div>
+  </header>
+
+  <!-- HERO PRINCIPAL -->
+  <section class="hero">
+    <div class="hero-titulos">
+      <h1>Formación ACT–RFT</h1>
+      <h2>Ciencia del lenguaje, procesos clínicos y práctica contextual aplicada.</h2>
+      <p>
+        Esta plataforma organiza tu aprendizaje en módulos técnicos y progresivos:
+        desde los fundamentos del contextualismo funcional y la ciencia del lenguaje,
+        hasta procesos clínicos como fusión, yo como contexto y construcción de intervenciones desde ACT.
+      </p>
+
+      <div class="botones-cta">
+        <a href="#modulos" class="btn-primario">Explorar módulos</a>
+        <a href="#modulos" class="btn-secundario">Empezar por la introducción</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+
+      <div class="hero-visual-inner">
+        <h3>Mapa ACT–RFT</h3>
+        <p>
+          Módulos secuenciales: Introducción · Ciencia del Lenguaje ·
+          Aprendizaje Relacional · Enmarques · Fusión · Yo como Contexto ·
+          Reglas vs contingencias · Recursos clínicos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANTALLA 0 · TARJETAS DE MÓDULOS -->
+  <section id="modulos" class="seccion-modulos">
+    <h3>Módulos de la plataforma</h3>
+    <p>Selecciona un módulo para explorar su contenido. Más adelante, cada tarjeta te llevará al módulo dinámico correspondiente.</p>
+
+    <div class="grid-modulos">
+      <!-- Aquí listamos los módulos que mencionaste -->
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo activo">Intro</div>
+        <h4 class="modulo-titulo">Introducción · Contexto y objetivos</h4>
+        <p class="modulo-descripcion">
+          Marco general de la plataforma, contextualismo funcional y cómo se organizarán los demás módulos.
+        </p>
+      </a>
+
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo activo">Ciencia</div>
+        <h4 class="modulo-titulo">Ciencia del Lenguaje</h4>
+        <p class="modulo-descripcion">
+          Lenguaje como conducta, unidad de análisis, verdad como lo que funciona y conducta privada.
+        </p>
+      </a>
+
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo activo">LPT / AARR</div>
+        <h4 class="modulo-titulo">Aprendizaje Relacional</h4>
+        <p class="modulo-descripcion">
+          AARR, derivación, bidireccionalidad, redes relacionales y paso a sistemas complejos.
+        </p>
+      </a>
+
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo activo">Frames</div>
+        <h4 class="modulo-titulo">Enmarques Relacionales</h4>
+        <p class="modulo-descripcion">
+          Coordinación, oposición, comparación, jerarquía, temporalidad, deícticos y su papel clínico.
+        </p>
+      </a>
+
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo activo">Procesos</div>
+        <h4 class="modulo-titulo">Fusión Cognitiva</h4>
+        <p class="modulo-descripcion">
+          Procesos de fusión desde RFT y ACT, funciones de control verbal y estrategias de defusión.
+        </p>
+      </a>
+
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo activo">Self</div>
+        <h4 class="modulo-titulo">Yo como Contexto</h4>
+        <p class="modulo-descripcion">
+          Enmarcamiento deíctico, jerarquía del yo, self como contenido/proceso/contexto y su uso clínico.
+        </p>
+      </a>
+
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo bloqueado">Próximo</div>
+        <h4 class="modulo-titulo">Reglas vs Contingencias</h4>
+        <p class="modulo-descripcion">
+          Pliance, tracking, augmenting y problemas clínicos asociados al control verbal rígido.
+        </p>
+      </a>
+
+      <a href="#" class="modulo-card">
+        <div class="estado-modulo bloqueado">Próximo</div>
+        <h4 class="modulo-titulo">Recursos y herramientas</h4>
+        <p class="modulo-descripcion">
+          Formatos, experimentos, ejercicios y recursos descargables para la práctica clínica contextual.
+        </p>
+      </a>
+    </div>
+  </section>
 
 </body>
 </html>
