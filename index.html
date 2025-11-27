@@ -44,7 +44,6 @@
       z-index: -1;
     }
 
-
     /* =========================================
        HEADER
     ========================================== */
@@ -57,7 +56,7 @@
     }
 
     .logo-img {
-      height: 56px;
+      height: 82px;
     }
 
     .badge-ctx {
@@ -66,10 +65,9 @@
       padding: 4px 10px;
       border-radius: 999px;
       border: 1px solid #FFFFFF;
-      background: rgba(255,255,255,0.35);
+      background: rgba(255, 255, 255, 0.35);
       color: #FFFFFF;
     }
-
 
     /* =========================================
        HERO
@@ -92,7 +90,7 @@
       margin: 0 0 10px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      text-shadow: 0 0 12px rgba(0,0,0,0.35);
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
     }
 
     .hero-titulos h2 {
@@ -108,7 +106,10 @@
       color: #E9EFF8;
     }
 
-    /* CTA */
+    /* =========================================
+       CTA
+    ========================================== */
+
     .botones-cta {
       margin-top: 20px;
       display: flex;
@@ -132,16 +133,16 @@
     .btn-primario {
       background: #FDBF12;
       color: #0A2A5C;
-      box-shadow: 0 6px 18px rgba(253,191,18,0.35);
+      box-shadow: 0 6px 18px rgba(253, 191, 18, 0.35);
     }
 
     .btn-primario:hover {
       transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 8px 24px rgba(253,191,18,0.5);
+      box-shadow: 0 8px 24px rgba(253, 191, 18, 0.5);
     }
 
     .btn-secundario {
-      background: rgba(255,255,255,0.35);
+      background: rgba(255, 255, 255, 0.35);
       color: #FFFFFF;
       border: 1px solid #FFFFFF;
     }
@@ -151,9 +152,8 @@
       color: #0A2A5C;
     }
 
-
     /* =========================================
-       DECORACIÓN HEXÁGONOS (IMAGEN REAL)
+       HERO DECORACIÓN
     ========================================== */
 
     .hero-visual {
@@ -168,22 +168,37 @@
       animation: float 6s ease-in-out infinite;
     }
 
-    .hex1 { top: 0; left: 10%; animation-delay: 0s; }
-    .hex2 { top: 100px; right: 5%; animation-delay: 1s; transform: scale(0.85); }
-    .hex3 { bottom: 0; left: 40%; animation-delay: 2s; transform: scale(1.1); }
+    .hex1 {
+      top: 0;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .hex2 {
+      top: 100px;
+      right: 5%;
+      animation-delay: 1s;
+      transform: scale(0.85);
+    }
+
+    .hex3 {
+      bottom: 0;
+      left: 40%;
+      animation-delay: 2s;
+      transform: scale(1.1);
+    }
 
     .hero-box {
       position: absolute;
       inset: 18px;
       border-radius: 28px;
-      background: linear-gradient(135deg, rgba(0,0,0,0.65), rgba(10,42,92,0.75));
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.65), rgba(10, 42, 92, 0.75));
       border: 3px solid #FDBF12;
       padding: 20px;
       backdrop-filter: blur(4px);
       color: white;
-      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
     }
-
 
     /* =========================================
        SECCIÓN DE MÓDULOS
@@ -197,9 +212,9 @@
     }
 
     .grid-modulos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     .modulo-card {
@@ -208,30 +223,28 @@
       border: 4px solid #FDBF12;
       padding: 20px;
       color: #FFFFFF;
-      box-shadow: 0 0 20px rgba(0,0,0,0.45);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.45);
       position: relative;
       transition: 0.35s ease;
       cursor: pointer;
-      text-decoration: none;
     }
 
     .modulo-card:hover {
-      transform: translateY(-4px) scale(1.03);
+      transform: scale(1.02);
       border-color: #FFFFFF;
-      box-shadow: 0 0 28px rgba(0,0,0,0.55);
     }
 
     .modulo-titulo {
       color: #FDBF12;
-      font-size: 17px;
-      margin-bottom: 8px;
-      text-shadow: 0 0 4px rgba(253,191,18,0.45);
+      font-size: 20px;
+      margin-bottom: 6px;
+      text-shadow: 0 0 4px rgba(253, 191, 18, 0.45);
     }
 
     .modulo-descripcion {
       color: #FFFFFF;
       font-size: 14px;
-      text-shadow: 0 0 6px rgba(255,255,255,0.35);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
     }
 
     .estado-modulo {
@@ -241,31 +254,124 @@
       font-size: 11px;
       padding: 3px 8px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.45);
+      background: rgba(0, 0, 0, 0.45);
       border: 1px solid #FDBF12;
       color: #FFFFFF;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    .estado-modulo.bloqueado::before { content: "🔒 "; }
-    .estado-modulo.activo::before { content: "▶ "; }
+    /* =========================================
+       ACORDEÓN PREMIUM — CAJA EXTERNA
+    ========================================== */
 
+    .acordeon-contenido {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease, opacity 0.35s ease;
+      opacity: 0;
+    }
 
-    /* Animaciones */
+    .acordeon-activo {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .acordeon-caja {
+      background: linear-gradient(135deg, #000000, #0A2A5C, #132F66);
+      border: 3px solid #FDBF12;
+      border-radius: 24px;
+      padding: 16px 22px;
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.45);
+      animation: fadeInUp 0.4s ease-out;
+    }
+
+    .submodulo-item {
+      padding: 10px 0;
+      font-size: 15px;
+      color: #FFFFFF;
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      transition: 0.25s;
+    }
+
+    .submodulo-item:hover {
+      padding-left: 6px;
+      color: #FDBF12;
+    }
+
+    @media (max-width: 830px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+    }
+
+    /* ANIMACIONES */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
     }
-
   </style>
-</head>
 
+  <script>
+    /* =========================================
+       JS — ACORDEÓN EXCLUSIVO
+    ========================================== */
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".modulo-card");
+      let activo = null;
+
+      cards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const contenido = card.nextElementSibling;
+
+          // Si ya está abierto, lo cerramos
+          if (contenido.classList.contains("acordeon-activo")) {
+            contenido.classList.remove("acordeon-activo");
+            activo = null;
+            return;
+          }
+
+          // Cerrar otro acordeón abierto
+          if (activo && activo !== contenido) {
+            activo.classList.remove("acordeon-activo");
+          }
+
+          // Abrir este
+          contenido.classList.add("acordeon-activo");
+          activo = contenido;
+        });
+      });
+    });
+  </script>
+
+</head>
 
 <body>
 
@@ -275,22 +381,20 @@
     <div class="badge-ctx">Ciencia del comportamiento · Formación profesional</div>
   </header>
 
-
   <!-- HERO -->
   <section class="hero">
-
     <div class="hero-titulos">
       <h1>Formación ACT–RFT</h1>
-      <h2>Ciencia del lenguaje y procesos clínicos desde el contextualismo funcional.</h2>
+      <h2>Ciencia del lenguaje, procesos clínicos y práctica contextual aplicada.</h2>
 
       <p>
-        Aprende ACT y RFT desde fundamentos rigurosos y un diseño pedagógico progresivo,
-        integrando ciencia del lenguaje, análisis funcional y estrategias clínicas.
+        Plataforma técnica completa basada en contextualismo funcional, aprendizaje relacional
+        y procesos clínicos derivados de ACT y la RFT.
       </p>
 
       <div class="botones-cta">
         <a href="#modulos" class="btn-primario">Explorar módulos</a>
-        <a href="#modulos" class="btn-secundario">Empezar por la introducción</a>
+        <a href="#modulos" class="btn-secundario">Empezar por filosofía contextual</a>
       </div>
     </div>
 
@@ -300,56 +404,97 @@
       <img class="hex-img hex3" src="https://i.imgur.com/DRmd4Ot.png">
 
       <div class="hero-box">
-        <h3 style="color:#FDBF12;margin:0 0 6px;">Mapa ACT–RFT</h3>
+        <h3 style="color:#FDBF12;margin:0 0 6px;">Mapa de módulos</h3>
         <p>
-          Introducción · Ciencia del Lenguaje · Aprendizaje Relacional · Enmarques ·
-          Fusión · Yo como Contexto · Reglas vs Contingencias · Recursos Clínicos.
+          Filosofía contextual · Ciencia del Lenguaje · Procesos clínicos ·
+          Actuares clínicos · Recursos aplicados.
         </p>
       </div>
     </div>
-
   </section>
 
-
-  <!-- MÓDULOS -->
+  <!-- MÓDULOS + ACORDEONES -->
   <section id="modulos" class="seccion-modulos">
-
     <div class="grid-modulos">
 
-      <a class="modulo-card"><div class="estado-modulo activo"></div>
-        <h4 class="modulo-titulo">Introducción · Contexto y objetivos</h4>
-        <p class="modulo-descripcion">Marco general del programa y fundamentos del contextualismo.</p></a>
+      <!-- 1. FILOSOFÍA CONTEXTUAL -->
+      <div class="modulo-card"> 
+        <div class="estado-modulo activo"></div>
+        <h4 class="modulo-titulo">Filosofía contextual</h4>
+        <p class="modulo-descripcion">Contextualismo funcional, unidad de análisis, verdad funcional, conducta privada y lenguaje como conducta.</p>
+      </div>
 
-      <a class="modulo-card"><div class="estado-modulo activo"></div>
-        <h4 class="modulo-titulo">Ciencia del Lenguaje</h4>
-        <p class="modulo-descripcion">Lenguaje como conducta, unidad de análisis, verdad funcional.</p></a>
+      <div class="acordeon-contenido">
+        <div class="acordeon-caja">
+          <div class="submodulo-item">1.1 Contextualismo funcional</div>
+          <div class="submodulo-item">1.2 Unidad de análisis</div>
+          <div class="submodulo-item">1.3 Verdad como lo que funciona</div>
+          <div class="submodulo-item">1.4 Conducta privada ≠ mente</div>
+          <div class="submodulo-item">1.5 Lenguaje como conducta</div>
+        </div>
+      </div>
 
-      <a class="modulo-card"><div class="estado-modulo activo"></div>
-        <h4 class="modulo-titulo">Aprendizaje Relacional</h4>
-        <p class="modulo-descripcion">AARR, derivación, bidireccionalidad, redes y sistemas complejos.</p></a>
+      <!-- 2. CIENCIA DEL LENGUAJE -->
+      <div class="modulo-card"> 
+        <div class="estado-modulo activo"></div>
+        <h4 class="modulo-titulo">Ciencia del lenguaje</h4>
+        <p class="modulo-descripcion">Equivalencia de estímulos, AARR, enmarques relacionales y transformación de funciones.</p>
+      </div>
 
-      <a class="modulo-card"><div class="estado-modulo activo"></div>
-        <h4 class="modulo-titulo">Enmarques Relacionales</h4>
-        <p class="modulo-descripcion">Coordinación, oposición, comparación, jerarquía, temporalidad.</p></a>
+      <div class="acordeon-contenido">
+        <div class="acordeon-caja">
+          <div class="submodulo-item">2.0 Equivalencia de estímulos</div>
+          <div class="submodulo-item">2.1 Aprendizaje relacional</div>
+          <div class="submodulo-item">2.2 Enmarques relacionales</div>
+          <div class="submodulo-item">2.3 Transformación de funciones</div>
+        </div>
+      </div>
 
-      <a class="modulo-card"><div class="estado-modulo activo"></div>
-        <h4 class="modulo-titulo">Fusión Cognitiva</h4>
-        <p class="modulo-descripcion">Funciones de control verbal y estrategias de defusión.</p></a>
+      <!-- 3. PROCESOS CLÍNICOS -->
+      <div class="modulo-card"> 
+        <div class="estado-modulo activo"></div>
+        <h4 class="modulo-titulo">Procesos clínicos</h4>
+        <p class="modulo-descripcion">Fusión cognitiva, yo como contexto, reglas vs contingencias y evitación.</p>
+      </div>
 
-      <a class="modulo-card"><div class="estado-modulo activo"></div>
-        <h4 class="modulo-titulo">Yo como Contexto</h4>
-        <p class="modulo-descripcion">Enmarques deícticos y jerárquicos para flexibilidad del yo.</p></a>
+      <div class="acordeon-contenido">
+        <div class="acordeon-caja">
+          <div class="submodulo-item">3.1 Fusión</div>
+          <div class="submodulo-item">3.2 Yo como contexto</div>
+          <div class="submodulo-item">3.3 Reglas vs contingencias</div>
+          <div class="submodulo-item">3.4 Evitación y regulación</div>
+        </div>
+      </div>
 
-      <a class="modulo-card"><div class="estado-modulo bloqueado"></div>
-        <h4 class="modulo-titulo">Reglas vs Contingencias</h4>
-        <p class="modulo-descripcion">Pliance, tracking, augmenting y problemas clínicos del control verbal.</p></a>
+      <!-- 4. ACTUARES CLÍNICOS -->
+      <div class="modulo-card"> 
+        <div class="estado-modulo activo"></div>
+        <h4 class="modulo-titulo">Actuares clínicos</h4>
+        <p class="modulo-descripcion">Aplicación clínica de ACT como modelo relacional y ejercicios aplicados.</p>
+      </div>
 
-      <a class="modulo-card"><div class="estado-modulo bloqueado"></div>
-        <h4 class="modulo-titulo">Recursos y herramientas</h4>
-        <p class="modulo-descripcion">Formularios, ejercicios clínicos y material de consulta.</p></a>
+      <div class="acordeon-contenido">
+        <div class="acordeon-caja">
+          <div class="submodulo-item">4.1 ACT como aplicación relacional</div>
+          <div class="submodulo-item">4.2 Ejercicios desde ACT & RFT</div>
+        </div>
+      </div>
+
+      <!-- 5. RECURSOS -->
+      <div class="modulo-card"> 
+        <div class="estado-modulo bloqueado"></div>
+        <h4 class="modulo-titulo">Recursos</h4>
+        <p class="modulo-descripcion">Experimentos interactivos y biblioteca de conceptos expertos.</p>
+      </div>
+
+      <div class="acordeon-contenido">
+        <div class="acordeon-caja">
+          <div class="submodulo-item">5.1 Experimentos interactivos</div>
+          <div class="submodulo-item">5.2 Biblioteca de conceptos</div>
+        </div>
+      </div>
 
     </div>
-
   </section>
 
 </body>
