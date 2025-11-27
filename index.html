@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Plataforma ACT–RFT</title>
+
+    <!-- Tipografías -->
+    <link href="https://fonts.cdnfonts.com/css/coco-gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Fondo premium */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            background: linear-gradient(#0A2A5C, #E9EFF8, #FFFFFF);
+            min-height: 100vh;
+            color: #000;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Patrón geométrico */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(#FDBF12 1px, transparent 1px),
+                linear-gradient(120deg, rgba(250,250,250,0.10) 1px, transparent 1px);
+            background-size: 18px 18px, 120px 120px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Coco Gothic', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #0A2A5C;
+            text-align: center;
+            margin-top: 100px;
+            font-size: 48px;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 400;
+            color: #132F66;
+            margin-top: -10px;
+        }
+
+        /* Tarjeta premium */
+        .tarjeta {
+            background: linear-gradient(135deg, #0A2A5C, #132F66, #000);
+            border: 2px solid #FDBF12;
+            border-radius: 32px;
+            padding: 24px;
+            margin: 40px auto;
+            max-width: 800px;
+            color: white;
+            text-align: center;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Botón premium */
+        .boton {
+            background: #FF7A30;
+            color: white;
+            padding: 14px 26px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            font-family: 'Coco Gothic', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .boton:hover {
+            background: #FDBF12;
+            color: #0A2A5C;
+            transition: 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Plataforma ACT–RFT</h1>
+    <h2>Formación profesional basada en ciencia del comportamiento</h2>
+
+    <div class="tarjeta">
+        <p>Bienvenido a la plataforma oficial donde aprenderás ACT, RFT y ciencia del lenguaje desde un enfoque conductual–contextual.</p>
+        <a class="boton" href="#">Ingresar a los módulos</a>
+    </div>
+
+</body>
+</html>
