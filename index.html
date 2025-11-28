@@ -1,34 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFT / ACT — Plataforma Interactiva</title>
+    <title>Plataforma RFT/ACT – Leo Eyzaguirre</title>
 
-    <!-- ================================
-         ESTILOS CSS
-    ================================= -->
+    <!-- ESTILOS GLOBALES -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
 
-    <!-- FUENTES -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ESTILO EXTRA PARA LA PORTADA -->
+    <style>
+        /* ----------------------------------------
+           HERO FULLSCREEN
+        ---------------------------------------- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background-image: url("assets/backdrops/blue-back.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Overlay */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .hero-content {
+            position: relative;
+            color: white;
+            max-width: 900px;
+            padding: 20px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            font-weight: 400;
+            color: #FDBF12;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.85;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .hero-icon {
+            width: 150px;
+            filter: drop-shadow(0 0 12px rgba(253, 191, 18, 0.7));
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .btn-hero {
+            padding: 16px 40px;
+            background: #FDBF12;
+            border: none;
+            color: #0A2A5C;
+            font-size: 22px;
+            border-radius: 32px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn-hero:hover {
+            background: #ffcc3a;
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(253, 191, 18, 0.6);
+        }
+
+        /* ----------------------------------------
+           MENÚ MAESTRO (SECCIONES)
+        ---------------------------------------- */
+
+        .menu-maestro {
+            padding: 80px 20px;
+            background: #F3F6FB;
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 40px;
+            font-weight: 800;
+            color: #0A2A5C;
+            margin-bottom: 40px;
+        }
+
+        .modulos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 40px;
+        }
+
+        .modulo-card {
+            background: linear-gradient(145deg, #0A2A5C, #132F66, #000000);
+            color: white;
+            padding: 30px;
+            border-radius: 28px;
+            border: 3px solid #FDBF12;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+            transition: 0.35s ease;
+            cursor: pointer;
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(253, 191, 18, 0.4);
+        }
+
+        .modulo-card h3 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .modulo-card p {
+            opacity: 0.85;
+        }
+    </style>
+
 </head>
+
 <body>
 
-    <!-- CONTENEDOR PRINCIPAL DE LA APP -->
-    <main id="app"></main>
+    <!-- ----------------------------------------
+         HERO FULLSCREEN
+    ---------------------------------------- -->
+    <section class="hero">
+        <div class="hero-content">
 
-    <!-- ================================
-         ARCHIVOS JAVASCRIPT
-    ================================= -->
-    <script src="js/ui.js"></script>
-    <script src="js/components.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/main.js"></script>
+            <img src="assets/icons/hex-gold-back.png" class="hero-icon" alt="Ícono dorado">
+
+            <h1>PLATAFORMA EDUCATIVA RFT / ACT</h1>
+            <h2>Formación conductual-contextual técnica y aplicada</h2>
+
+            <p>
+                Explora una plataforma diseñada para aprender RFT, ACT y modelos contextuales de manera clara,
+                profunda y basada en experiencias interactivas. Construida para terapeutas que desean comprender
+                el lenguaje, el comportamiento y el cambio clínico desde sus procesos fundamentales.
+            </p>
+
+            <button class="btn-hero" onclick="window.location.href='pages/unidad-analisis.html'">
+                INGRESAR A LA PLATAFORMA
+            </button>
+
+        </div>
+    </section>
+
+
+
+    <!-- ----------------------------------------
+         MENÚ MAESTRO
+    ---------------------------------------- -->
+    <section class="menu-maestro">
+
+        <h2 class="menu-title">Módulos del Programa</h2>
+
+        <div class="modulos-grid">
+
+            <div class="modulo-card" onclick="window.location.href='pages/unidad-analisis.html'">
+                <h3>Filosofía Contextual</h3>
+                <p>Contextualismo funcional, unidad de análisis, verdad pragmática, conducta privada, lenguaje como acción.</p>
+            </div>
+
+            <div class="modulo-card">
+                <h3>Ciencia del Lenguaje</h3>
+                <p>Equivalencia, aprendizaje relacional, enmarques, transformación de funciones.</p>
+            </div>
+
+            <div class="modulo-card">
+                <h3>Procesos Clínicos</h3>
+                <p>Fusión, evitación, yo, reglas vs contingencias, regulación psicológica.</p>
+            </div>
+
+            <div class="modulo-card">
+                <h3>Actuares Clínicos</h3>
+                <p>Aplicación de ACT y herramientas basadas en RFT.</p>
+            </div>
+
+            <div class="modulo-card">
+                <h3>Recursos</h3>
+                <p>Experimentos interactivos, biblioteca de conceptos, material técnico.</p>
+            </div>
+
+        </div>
+    </section>
 
 </body>
+
 </html>
