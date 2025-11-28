@@ -1,10 +1,17 @@
-// animations.js
-function initAnimations() {
-    console.log("Animaciones activadas");
+/* =======================================================
+   SISTEMA DE ANIMACIONES — Fade, Slide, Glow
+   ======================================================= */
 
-    const elements = document.querySelectorAll("[data-animate]");
-    elements.forEach(el => {
-        el.classList.add("animate-" + el.dataset.animate);
-    });
+function initAnimations() {
+    console.log("Animaciones listas");
 }
 
+/* Animación de aparición */
+function fadeIn(el) {
+    el.classList.add("fade-in");
+}
+
+/* Brillo dorado */
+function glow(el) {
+    el.classList.add("glow-gold");
+}
