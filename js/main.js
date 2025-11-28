@@ -73,9 +73,9 @@ function createNavigationBar() {
     nav.classList.add("nav-buttons");
 
     nav.innerHTML = `
-        <button id="btn-prev" class="btn-secondary">Anterior</button>
-        <button id="btn-next" class="btn-primary">Siguiente</button>
-    `;
+    <button id="btn-prev" class="btn-ghost">Anterior</button>
+    <button id="btn-next" class="btn-gold">Siguiente</button>
+`;
 
     document.getElementById("app").appendChild(nav);
 }
