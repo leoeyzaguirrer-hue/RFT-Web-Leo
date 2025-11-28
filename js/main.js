@@ -152,15 +152,15 @@ function loadPortadaUnidadAnalisis() {
             <div class="screen-left">
                 <div class="screen-box">
 
-                    <h1 class="screen-title" style="font-size:42px;">
+                    <h1 class="screen-title" style="font-size:58px; line-height:1.2;">
                         UNIDAD DE ANÁLISIS:<br>CONDUCTA EN CONTEXTO
                     </h1>
 
-                    <h3 class="screen-desc" style="color:#FDBF12; font-size:22px;">
+                    <h3 class="screen-desc" style="color:#FDBF12; font-size:28px; margin-bottom:30px;">
                         Cómo analizamos la conducta desde el contextualismo funcional
                     </h3>
 
-                    <p class="screen-desc" style="font-size:18px;">
+                   <p class="screen-desc" style="font-size:18px;">
                         Este submódulo resuelve un problema frecuente:
                         analizar pensamientos o emociones sin considerar
                         <strong>las condiciones ambientales</strong> que les dan función.
