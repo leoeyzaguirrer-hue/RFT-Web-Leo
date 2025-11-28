@@ -32,4 +32,9 @@
     border: 1px dashed rgba(253, 191, 18, 0.5);
     border-radius: 16px;
 }
+.nav-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
 
