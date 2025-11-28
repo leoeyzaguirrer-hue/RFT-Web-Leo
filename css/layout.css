@@ -54,3 +54,7 @@
     justify-content: space-between;
 }
 
+.screen-left, 
+.screen-right {
+    padding: 40px !important;
+}
