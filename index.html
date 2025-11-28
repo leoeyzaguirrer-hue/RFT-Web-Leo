@@ -13,17 +13,17 @@
         body {
             margin: 0;
             font-family: "Noto Sans", sans-serif;
-            background: url("./assets/backgrounds/blue-back.png");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: url("./assets/backgrounds/hex-blue-back.png") !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
             color: white;
         }
 
         .portada {
             width: 100%;
             min-height: 100vh;
-            padding: 140px 80px 60px 80px; /* BAJAMOS EL TEXTO */
+            padding: 150px 80px 60px 80px; 
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -63,41 +63,41 @@
             font-family: "Coco Gothic", sans-serif;
             font-size: 60px;
             line-height: 1.1;
-            margin: 0;
-            margin-bottom: 16px;
+            margin: 0 0 16px 0;
             text-shadow: 0 0 8px rgba(0,0,0,0.45);
         }
 
         h2 {
             font-size: 28px;
-            color: #FDBF12;
-            margin-top: 0;
+            color: #FDBF12 !important;
             margin-bottom: 22px;
         }
 
         .pregunta {
             font-size: 22px;
-            opacity: 0.9;
+            opacity: 0.95 !important;
             margin-bottom: 18px;
+            color: #FFFFFF !important;
         }
 
         .intro {
             width: 60%;
             font-size: 18px;
-            opacity: 0.85;
+            opacity: 0.92 !important;
             line-height: 1.5;
             margin-bottom: 50px;
+            color: #FFFFFF !important;
         }
 
         /* ACORDEONES */
         .acordeon-container {
-            margin-top: 30px;
+            margin-top: 40px;
             width: 70%;
         }
 
         .acordeon {
-            background: rgba(10,42,92,0.45); /* AZUL OSCURO PREMIUM */
-            border: 1px solid rgba(253,191,18,0.4); /* DORADO */
+            background: rgba(10,42,92,0.55) !important;
+            border: 1px solid rgba(253,191,18,0.45) !important;
             border-radius: 16px;
             padding: 18px 22px;
             margin-bottom: 14px;
@@ -106,17 +106,18 @@
         }
 
         .acordeon:hover {
-            background: rgba(10,42,92,0.65);
+            background: rgba(10,42,92,0.75) !important;
             transform: scale(1.02);
         }
 
         .acordeon h3 {
             margin: 0;
-            font-size: 22px;
-            color: #FFFFFF;
-            text-shadow: 0 0 5px rgba(0,0,0,0.45);
+            font-size: 24px;
+            color: #FFFFFF !important;
+            text-shadow: 0 0 6px rgba(0,0,0,0.6);
             display: flex;
             justify-content: space-between;
+            font-weight: 600;
         }
 
         .submodulos {
@@ -130,26 +131,26 @@
         .submodulos button {
             padding: 10px 14px;
             border-radius: 10px;
-            border: 1px solid #FDBF12;
-            background: rgba(253,191,18,0.08);
-            color: #FDBF12;
+            border: 1px solid #FDBF12 !important;
+            background: rgba(253,191,18,0.12) !important;
+            color: #FDBF12 !important;
             cursor: pointer;
             transition: 0.2s;
             text-align: left;
         }
 
         .submodulos button:hover {
-            background: #FDBF12;
-            color: #0A2A5C;
+            background: #FDBF12 !important;
+            color: #0A2A5C !important;
             transform: scale(1.02);
         }
 
         /* BOTÓN INICIO */
         .btn-start {
-            margin-top: 40px;
+            margin-top: 50px;
             padding: 16px 36px;
-            background: #FDBF12;
-            color: #0A2A5C;
+            background: #FDBF12 !important;
+            color: #0A2A5C !important;
             border-radius: 30px;
             font-size: 22px;
             border: none;
@@ -184,7 +185,9 @@
         <h2>Un mapa funcional del comportamiento verbal</h2>
 
         <!-- PREGUNTA -->
-        <p class="pregunta">¿Cómo surge el significado y cómo transforma nuestra conducta en contexto?</p>
+        <p class="pregunta">
+            ¿Cómo surge el significado y cómo transforma nuestra conducta en contexto?
+        </p>
 
         <!-- INTRO -->
         <p class="intro">
@@ -196,7 +199,7 @@
         <!-- ACORDEONES -->
         <div class="acordeon-container">
 
-            <!-- FILOSOFÍA CONTEXTUAL -->
+            <!-- 1. FILOSOFÍA CONTEXTUAL -->
             <div class="acordeon" onclick="toggleAcordeon(this)">
                 <h3>Filosofía Contextual <span>⬡</span></h3>
                 <div class="submodulos">
@@ -208,7 +211,7 @@
                 </div>
             </div>
 
-            <!-- CIENCIA DEL LENGUAJE -->
+            <!-- 2. CIENCIA DEL LENGUAJE -->
             <div class="acordeon" onclick="toggleAcordeon(this)">
                 <h3>Ciencia del Lenguaje <span>⬡</span></h3>
                 <div class="submodulos">
@@ -219,7 +222,7 @@
                 </div>
             </div>
 
-            <!-- PROCESOS CLÍNICOS -->
+            <!-- 3. PROCESOS CLÍNICOS -->
             <div class="acordeon" onclick="toggleAcordeon(this)">
                 <h3>Procesos Clínicos <span>⬡</span></h3>
                 <div class="submodulos">
@@ -230,7 +233,7 @@
                 </div>
             </div>
 
-            <!-- ACTUARES -->
+            <!-- 4. ACTUARES -->
             <div class="acordeon" onclick="toggleAcordeon(this)">
                 <h3>Actuares Clínicos <span>⬡</span></h3>
                 <div class="submodulos">
@@ -239,7 +242,7 @@
                 </div>
             </div>
 
-            <!-- RECURSOS -->
+            <!-- 5. RECURSOS -->
             <div class="acordeon" onclick="toggleAcordeon(this)">
                 <h3>Recursos <span>⬡</span></h3>
                 <div class="submodulos">
