@@ -119,7 +119,7 @@ function createPremiumScreens() {
 
                     <!-- ICONO HEXAGONAL -->
                     <div class="hexagon-icon">
-                        <img src="assets/icons/hexagon-gold.svg">
+                        <img src="assets/icons/hex-gold.png">
                     </div>
 
                     <!-- TÍTULO -->
