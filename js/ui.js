@@ -1,13 +1,23 @@
-// ui.js
-function initUI() {
-    console.log("UI inicializada");
+/* =======================================================
+   SISTEMA DE UI — Botones, toggles, etc.
+   ======================================================= */
 
-    // Delegación para botones de navegación
-    document.body.addEventListener("click", (e) => {
-        if (e.target.matches("[data-page]")) {
-            const page = e.target.getAttribute("data-page");
-            loadPage(page);
-        }
-    });
+function initUI() {
+    console.log("UI Inicializada");
 }
 
+
+/* Mostrar/ocultar elementos */
+function show(el) { el.style.display = "block"; }
+function hide(el) { el.style.display = "none"; }
+
+
+/* Activar/desactivar botones */
+function enable(btn) { btn.disabled = false; }
+function disable(btn) { btn.disabled = true; }
+
+
+/* Mensajes internos */
+function alertBox(msg) {
+    alert(msg);
+}
