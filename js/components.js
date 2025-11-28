@@ -1,32 +1,37 @@
-// components.js
-console.log("Component system listo");
+/* =======================================================
+   COMPONENTES — Tarjetas, acordeones, experimentos
+   ======================================================= */
 
-/**
- * Crea una tarjeta interactiva
- */
-function createCard({ title, content }) {
+
+/* Tarjeta premium */
+function createCard(title, text) {
     const card = document.createElement("div");
-    card.className = "card";
+    card.classList.add("card-premium");
 
     card.innerHTML = `
         <h3>${title}</h3>
-        <p>${content}</p>
+        <p>${text}</p>
     `;
 
     return card;
 }
 
-/**
- * Crea un acordeón (para tus submódulos)
- */
+
+/* Acordeón simple */
 function createAccordion(trigger, content) {
     const t = document.querySelector(trigger);
     const c = document.querySelector(content);
 
-    if (t && c) {
-        t.addEventListener("click", () => {
-            c.classList.toggle("open");
-        });
-    }
+    if (!t || !c) return;
+
+    t.addEventListener("click", () => {
+        c.classList.toggle("open");
+    });
 }
 
+
+/* Evaluación simple */
+function createCheck(answer, correct, callback) {
+    if (answer === correct) callback(true);
+    else callback(false);
+}
