@@ -6,22 +6,69 @@
     <title>RFT · Plataforma Educativa</title>
 
     <style>
-
         /* =============================
-           GLOBAL PREMIUM
+           GLOBAL PREMIUM CLARO
         ============================= */
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            background: url("./assets/backgrounds/blue-back.png") no-repeat center center fixed !important;
-            background-size: cover !important;
-            color: white;
+        :root {
+            --azul-fondo: #0A2A5C;
+            --azul-profundo: #132F66;
+            --azul-texto: #0A2540;
+            --dorado: #FDBF12;
+            --acento-rosa: #FF7A30;
+            --blanco: #FFFFFF;
+            --gris-suave: #E9EFF8;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--azul-texto);
+            background:
+                radial-gradient(circle at 10% 20%, rgba(250, 250, 255, 0.9) 0, transparent 50%),
+                radial-gradient(circle at 80% 0%, rgba(228, 238, 255, 0.9) 0, transparent 55%),
+                linear-gradient(180deg, #E9EFF8 0%, #FFFFFF 40%, #F3F6FB 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Patrón técnico sutil sobre el fondo */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(135deg, rgba(10, 42, 92, 0.07) 1px, transparent 1px),
+                linear-gradient(225deg, rgba(10, 42, 92, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mix-blend-mode: soft-light;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        /* Capa muy sutil con el fondo azul original mezclado */
+        .texture-layer {
+            position: fixed;
+            inset: 0;
+            background: url("./assets/backgrounds/blue-back.png") center/cover no-repeat;
+            mix-blend-mode: soft-light;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* =============================
+           SECCIÓN PORTADA
+        ============================= */
         .portada {
             width: 100%;
             min-height: 100vh;
-            padding: 0 80px 60px 80px; /* ← QUITAMOS EL PADDING SUPERIOR */
+            padding: 32px 80px 60px 80px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -31,170 +78,401 @@
         /* LOGO SUPERIOR IZQUIERDA */
         .logo-superior {
             position: absolute;
-            top: 40px;
+            top: 28px;
             left: 60px;
             z-index: 10;
         }
+
         .logo-superior img {
-            height: 230px;  /* ← LOGO AGRANDADO DEFINITIVO */
-            filter: drop-shadow(0 0 8px rgba(0,0,0,0.4));
+            height: 230px; /* tamaño premium */
+            filter: drop-shadow(0 0 12px rgba(0,0,0,0.35));
         }
 
-        /* HEXÁGONO FLOTANTE */
+        /* GRID PRINCIPAL: TEXTO + VISUAL TÉCNICO */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            align-items: center;
+            column-gap: 64px;
+            margin-top: 220px; /* despeja el logo */
+        }
+
+        /* COLUMNA DE TEXTO */
+        .hero-text h1 {
+            font-family: "Coco Gothic", system-ui, sans-serif;
+            font-size: 54px;
+            line-height: 1.1;
+            margin: 0 0 12px 0;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--azul-texto);
+        }
+
+        .hero-text h1 span {
+            color: var(--dorado);
+        }
+
+        .hero-text h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--azul-profundo);
+            margin: 0 0 18px 0;
+        }
+
+        .pregunta {
+            font-size: 20px;
+            margin: 0 0 14px 0;
+            font-weight: 500;
+            color: var(--azul-profundo);
+        }
+
+        .intro {
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 640px;
+            margin: 0 0 28px 0;
+            color: rgba(6, 23, 46, 0.92);
+        }
+
+        /* BOTÓN DE INICIO */
+        .btn-start {
+            margin-top: 10px;
+            padding: 16px 34px;
+            background: linear-gradient(135deg, var(--dorado), #FFD976);
+            color: #1A1F3B;
+            border-radius: 999px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.12),
+                0 0 18px rgba(253,191,18,0.55);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow:
+                0 14px 30px rgba(0,0,0,0.18),
+                0 0 28px rgba(253,191,18,0.7);
+            filter: brightness(1.03);
+        }
+
+        /* VISUAL TÉCNICO PREMIUM (HEX + NODOS FLOTANTES) */
+        .hero-visual {
+            position: relative;
+            min-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visual-card {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            aspect-ratio: 4/3;
+            border-radius: 32px;
+            padding: 24px 26px;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(255,255,255,0.9) 0, transparent 55%),
+                radial-gradient(circle at 90% 100%, rgba(250,239,210,0.9) 0, transparent 60%),
+                linear-gradient(145deg, rgba(10,42,92,0.96), rgba(10,35,78,0.98));
+            box-shadow:
+                0 22px 45px rgba(0,0,0,0.35),
+                0 0 24px rgba(253,191,18,0.35);
+            overflow: hidden;
+            color: #FFFFFF;
+        }
+
+        .visual-label {
+            font-size: 12px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            opacity: 0.75;
+            margin-bottom: 6px;
+        }
+
+        .visual-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .visual-text {
+            font-size: 14px;
+            line-height: 1.5;
+            max-width: 240px;
+            opacity: 0.9;
+        }
+
+        /* Hexágono principal */
         .hex-floating {
             position: absolute;
-            top: 160px;
-            right: 160px;
-            width: 200px;
-            opacity: 0.95;
-            animation: float 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 15px rgba(255,215,0,0.35));
+            right: -32px;
+            top: -18px;
+            width: 160px;
+            opacity: 0.98;
+            filter: drop-shadow(0 0 18px rgba(253,191,18,0.7));
+            animation: float 4.5s ease-in-out infinite;
         }
 
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
 
-        /* TEXTOS */
-        h1 {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 62px;
-            line-height: 1.1;
-            margin: 260px 0 18px 0; /* ← ESTE ES EL ESPACIADOR REAL */
-            text-shadow: 0 0 10px rgba(0,0,0,0.55);
+        /* Nodos relacionales flotantes */
+        .node {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 2px solid rgba(253,191,18,0.9);
+            background: rgba(15, 52, 110, 0.95);
+            box-shadow: 0 0 12px rgba(253,191,18,0.7);
         }
 
-        h2 {
-            font-size: 30px;
-            color: #FDBF12 !important;
-            margin-bottom: 25px;
+        .node::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: inherit;
+            background: radial-gradient(circle at 30% 20%, #FFFFFF, transparent 65%);
+            opacity: 0.85;
         }
 
-        .pregunta {
-            font-size: 24px;
-            opacity: 1 !important;
-            margin-bottom: 18px;
-            font-weight: 500;
+        .node.n1 { left: 18%; top: 64%; }
+        .node.n2 { left: 52%; top: 78%; }
+        .node.n3 { left: 70%; top: 52%; }
+
+        /* Líneas de conexión simulando redes relacionales */
+        .link-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(253,191,18,0.1),
+                rgba(253,191,18,0.9),
+                rgba(253,191,18,0.1)
+            );
+            transform-origin: left center;
+            opacity: 0.85;
         }
 
-        .intro {
-            width: 65%;
-            font-size: 19px;
-            opacity: 0.95 !important;
-            line-height: 1.55;
-            margin-bottom: 50px;
+        .link1 {
+            left: 22%;
+            top: 69%;
+            width: 34%;
+            transform: rotate(8deg);
         }
 
-        /* ACORDEONES */
+        .link2 {
+            left: 28%;
+            top: 59%;
+            width: 50%;
+            transform: rotate(-18deg);
+        }
+
+        /* =============================
+           ACORDEONES
+        ============================= */
+        .section-label {
+            margin-top: 70px;
+            font-size: 13px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(6, 23, 46, 0.75);
+        }
+
         .acordeon-container {
-            margin-top: 40px;
-            width: 70%;
+            margin-top: 14px;
+            width: 100%;
+            max-width: 880px;
         }
 
         .acordeon {
-            background: rgba(0,0,0,0.45);
-            border: 1px solid rgba(253,191,18,0.5);
-            border-radius: 16px;
-            padding: 18px 22px;
-            margin-bottom: 14px;
+            background: rgba(255,255,255,0.88);
+            border-radius: 18px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
             cursor: pointer;
-            transition: 0.25s;
+            transition: 0.22s ease;
+            border: 1px solid rgba(10,42,92,0.06);
+            box-shadow:
+                0 10px 28px rgba(15, 37, 68, 0.04);
         }
 
         .acordeon:hover {
-            background: rgba(0,0,0,0.6);
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow:
+                0 16px 32px rgba(15, 37, 68, 0.06);
+            border-color: rgba(253,191,18,0.5);
         }
 
         .acordeon h3 {
             margin: 0;
-            font-size: 24px;
-            color: white;
-            text-shadow: 0 0 8px rgba(0,0,0,0.6);
+            font-size: 18px;
+            color: var(--azul-texto);
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-weight: 600;
         }
 
+        .acordeon h3 span {
+            color: var(--dorado);
+            font-size: 18px;
+        }
+
         .submodulos {
-            margin-top: 12px;
-            padding-left: 12px;
+            margin-top: 10px;
+            padding-left: 4px;
             display: none;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .submodulos button {
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid #FDBF12;
-            background: rgba(253,191,18,0.12);
-            color: #FDBF12;
+            padding: 8px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(10,42,92,0.18);
+            background: rgba(14, 37, 73, 0.03);
+            color: var(--azul-profundo);
             cursor: pointer;
             transition: 0.2s;
             text-align: left;
+            font-size: 14px;
         }
 
         .submodulos button:hover {
-            background: #FDBF12;
-            color: #0A2A5C;
-            transform: scale(1.02);
+            background: linear-gradient(90deg, rgba(253,191,18,0.1), rgba(255,255,255,1));
+            border-color: rgba(253,191,18,0.8);
+            color: var(--azul-texto);
+            transform: translateY(-1px);
         }
 
-        /* BOTÓN INICIO */
-        .btn-start {
-            margin-top: 60px;
-            padding: 18px 38px;
-            background: #FDBF12;
-            color: #0A2A5C;
-            border-radius: 32px;
-            font-size: 24px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            width: fit-content;
+        /* =============================
+           RESPONSIVE
+        ============================= */
+        @media (max-width: 1024px) {
+            .portada {
+                padding: 24px 24px 40px 24px;
+            }
+
+            .logo-superior {
+                top: 18px;
+                left: 18px;
+            }
+
+            .logo-superior img {
+                height: 190px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                row-gap: 40px;
+                margin-top: 190px;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
         }
 
-        .btn-start:hover {
-            transform: scale(1.06);
-            box-shadow: 0 0 20px rgba(253,191,18,0.55);
-        }
+        @media (max-width: 720px) {
+            .logo-superior img {
+                height: 150px;
+            }
 
+            .hero-grid {
+                margin-top: 160px;
+            }
+
+            .hero-text h1 {
+                font-size: 34px;
+            }
+
+            .hero-text h2 {
+                font-size: 18px;
+            }
+
+            .intro {
+                font-size: 15px;
+            }
+
+            .acordeon-container {
+                max-width: 100%;
+            }
+
+            .visual-card {
+                max-width: 320px;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <div class="texture-layer"></div>
 
     <section class="portada">
 
         <!-- LOGO -->
         <div class="logo-superior">
-            <img src="./assets/logo/logo-main.png" alt="Logo">
+            <img src="./assets/logo/logo-main.png" alt="Logo RFT · Plataforma Educativa">
         </div>
 
-        <!-- HEXÁGONO FLOTANTE -->
-        <img src="./assets/icons/hex-gold.png" class="hex-floating">
+        <!-- HERO PRINCIPAL -->
+        <div class="hero-grid">
 
-        <!-- TÍTULO -->
-        <h1>PLATAFORMA EDUCATIVA RFT · ACT</h1>
-        <h2>Un mapa funcional del comportamiento verbal</h2>
+            <!-- TEXTO -->
+            <div class="hero-text">
+                <h1>Plataforma Educativa <span>RFT · ACT</span></h1>
+                <h2>Un mapa funcional del comportamiento verbal</h2>
 
-        <!-- PREGUNTA -->
-        <p class="pregunta">
-            ¿Cómo surge el significado y cómo transforma nuestra conducta en contexto?
-        </p>
+                <p class="pregunta">
+                    ¿Cómo surge el significado y cómo transforma nuestra conducta en contexto?
+                </p>
 
-        <!-- INTRO -->
-        <p class="intro">
-            Esta plataforma presenta un recorrido técnico y progresivo a través del contextualismo funcional,
-            el aprendizaje relacional y los procesos clínicos que sostienen la Terapia de Aceptación y
-            Compromiso (ACT), con ejercicios interactivos y aplicaciones clínicas avanzadas.
-        </p>
+                <p class="intro">
+                    Esta plataforma presenta un recorrido técnico y progresivo a través del contextualismo funcional,
+                    el aprendizaje relacional y los procesos clínicos que sostienen la Terapia de Aceptación y
+                    Compromiso (ACT), con ejercicios interactivos y aplicaciones clínicas avanzadas.
+                </p>
+
+                <button class="btn-start">Iniciar plataforma</button>
+            </div>
+
+            <!-- VISUAL TÉCNICO PREMIUM -->
+            <div class="hero-visual">
+                <div class="visual-card">
+                    <div class="visual-label">Mapa Relacional</div>
+                    <div class="visual-title">Lenguaje como conducta</div>
+                    <div class="visual-text">
+                        Redes de significado, funciones que se transforman y
+                        contextos que organizan la conducta: una vista técnica del
+                        lenguaje como acción, no como “reflejo interno”.
+                    </div>
+
+                    <!-- Hexágono dorado principal -->
+                    <img src="./assets/icons/hex-gold.png" class="hex-floating" alt="Hexágono dorado RFT">
+
+                    <!-- Nodos y conexiones -->
+                    <div class="node n1"></div>
+                    <div class="node n2"></div>
+                    <div class="node n3"></div>
+                    <div class="link-line link1"></div>
+                    <div class="link-line link2"></div>
+                </div>
+            </div>
+        </div>
 
         <!-- ACORDEONES -->
+        <p class="section-label">Explora la plataforma</p>
+
         <div class="acordeon-container">
 
             <!-- 1. FILOSOFÍA CONTEXTUAL -->
@@ -236,7 +514,7 @@
                 <h3>Actuares Clínicos <span>⬡</span></h3>
                 <div class="submodulos">
                     <button>ACT como Aplicación Relacional</button>
-                    <button>Ejercicios desde ACT & RFT</button>
+                    <button>Ejercicios desde ACT &amp; RFT</button>
                 </div>
             </div>
 
@@ -251,11 +529,7 @@
 
         </div>
 
-        <!-- BOTÓN -->
-        <button class="btn-start">Iniciar Plataforma</button>
-
     </section>
-
 
     <script>
         function toggleAcordeon(el) {
@@ -265,6 +539,5 @@
             sub.style.display = isOpen ? "none" : "flex";
         }
     </script>
-
 </body>
 </html>
