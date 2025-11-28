@@ -13,17 +13,15 @@
         body {
             margin: 0;
             font-family: "Noto Sans", sans-serif;
-            background: url("./assets/backgrounds/hex-blue-back.png") !important;
+            background: url("./assets/backgrounds/blue-back.png") no-repeat center center fixed !important;
             background-size: cover !important;
-            background-position: center !important;
-            background-attachment: fixed !important;
             color: white;
         }
 
         .portada {
             width: 100%;
             min-height: 100vh;
-            padding: 150px 80px 60px 80px; 
+            padding: 150px 80px 60px 80px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -38,8 +36,8 @@
             z-index: 10;
         }
         .logo-superior img {
-            height: 180px;
-            filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+            height: 150px;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.4));
         }
 
         /* HEXÁGONO FLOTANTE */
@@ -50,7 +48,7 @@
             width: 200px;
             opacity: 0.95;
             animation: float 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 15px rgba(255,215,0,0.4));
+            filter: drop-shadow(0 0 15px rgba(255,215,0,0.35));
         }
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -61,32 +59,31 @@
         /* TEXTOS */
         h1 {
             font-family: "Coco Gothic", sans-serif;
-            font-size: 60px;
+            font-size: 62px;
             line-height: 1.1;
-            margin: 0 0 16px 0;
-            text-shadow: 0 0 8px rgba(0,0,0,0.45);
+            margin: 0 0 18px 0;
+            text-shadow: 0 0 10px rgba(0,0,0,0.55);
         }
 
         h2 {
-            font-size: 28px;
+            font-size: 30px;
             color: #FDBF12 !important;
-            margin-bottom: 22px;
+            margin-bottom: 25px;
         }
 
         .pregunta {
-            font-size: 22px;
-            opacity: 0.95 !important;
+            font-size: 24px;
+            opacity: 1 !important;
             margin-bottom: 18px;
-            color: #FFFFFF !important;
+            font-weight: 500;
         }
 
         .intro {
-            width: 60%;
-            font-size: 18px;
-            opacity: 0.92 !important;
-            line-height: 1.5;
+            width: 65%;
+            font-size: 19px;
+            opacity: 0.95 !important;
+            line-height: 1.55;
             margin-bottom: 50px;
-            color: #FFFFFF !important;
         }
 
         /* ACORDEONES */
@@ -96,8 +93,8 @@
         }
 
         .acordeon {
-            background: rgba(10,42,92,0.55) !important;
-            border: 1px solid rgba(253,191,18,0.45) !important;
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(253,191,18,0.5);
             border-radius: 16px;
             padding: 18px 22px;
             margin-bottom: 14px;
@@ -106,15 +103,15 @@
         }
 
         .acordeon:hover {
-            background: rgba(10,42,92,0.75) !important;
+            background: rgba(0,0,0,0.6);
             transform: scale(1.02);
         }
 
         .acordeon h3 {
             margin: 0;
             font-size: 24px;
-            color: #FFFFFF !important;
-            text-shadow: 0 0 6px rgba(0,0,0,0.6);
+            color: white;
+            text-shadow: 0 0 8px rgba(0,0,0,0.6);
             display: flex;
             justify-content: space-between;
             font-weight: 600;
@@ -131,28 +128,28 @@
         .submodulos button {
             padding: 10px 14px;
             border-radius: 10px;
-            border: 1px solid #FDBF12 !important;
-            background: rgba(253,191,18,0.12) !important;
-            color: #FDBF12 !important;
+            border: 1px solid #FDBF12;
+            background: rgba(253,191,18,0.12);
+            color: #FDBF12;
             cursor: pointer;
             transition: 0.2s;
             text-align: left;
         }
 
         .submodulos button:hover {
-            background: #FDBF12 !important;
-            color: #0A2A5C !important;
+            background: #FDBF12;
+            color: #0A2A5C;
             transform: scale(1.02);
         }
 
         /* BOTÓN INICIO */
         .btn-start {
-            margin-top: 50px;
-            padding: 16px 36px;
-            background: #FDBF12 !important;
-            color: #0A2A5C !important;
-            border-radius: 30px;
-            font-size: 22px;
+            margin-top: 60px;
+            padding: 18px 38px;
+            background: #FDBF12;
+            color: #0A2A5C;
+            border-radius: 32px;
+            font-size: 24px;
             border: none;
             cursor: pointer;
             font-weight: bold;
@@ -162,7 +159,7 @@
 
         .btn-start:hover {
             transform: scale(1.06);
-            box-shadow: 0 0 15px rgba(253,191,18,0.55);
+            box-shadow: 0 0 20px rgba(253,191,18,0.55);
         }
 
     </style>
@@ -191,9 +188,9 @@
 
         <!-- INTRO -->
         <p class="intro">
-            Esta plataforma presenta un recorrido técnico y progresivo a través de los fundamentos del 
-            contextualismo funcional, el aprendizaje relacional y los procesos clínicos que sostienen 
-            la Terapia de Aceptación y Compromiso (ACT), con ejercicios interactivos y aplicaciones clínicas.
+            Esta plataforma presenta un recorrido técnico y progresivo a través del contextualismo funcional,
+            el aprendizaje relacional y los procesos clínicos que sostienen la Terapia de Aceptación y
+            Compromiso (ACT), con ejercicios interactivos y aplicaciones clínicas avanzadas.
         </p>
 
         <!-- ACORDEONES -->
@@ -253,6 +250,7 @@
 
         </div>
 
+        <!-- BOTÓN -->
         <button class="btn-start">Iniciar Plataforma</button>
 
     </section>
