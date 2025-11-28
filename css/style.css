@@ -1,1 +1,171 @@
+/* -----------------------------------------------------------
+   VARIABLES GLOBALES (COLORES, TIPOGRAFÍA, ESPACIADO)
+----------------------------------------------------------- */
+:root {
+  /* Paleta oficial */
+  --blue-deep: #0A2A5C;
+  --blue-mid: #132F66;
+  --black-deep: #000000;
+  --gold: #FDBF12;
+  --orange: #FF7A30;
+
+  /* Fondos */
+  --bg-top: #E9EFF8;
+  --bg-mid: #FFFFFF;
+  --bg-bottom: #F3F6FB;
+
+  /* Tipografías base */
+  --font-title: "Coco Gothic", sans-serif;
+  --font-body: "Noto Sans", sans-serif;
+
+  /* Espaciado profesional */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+
+  /* Transición global */
+  --transition: 0.35s ease;
+}
+
+
+/* -----------------------------------------------------------
+   RESET PROFESIONAL
+----------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(to bottom, var(--bg-top), var(--bg-mid), var(--bg-bottom));
+  color: var(--blue-deep);
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  /* fondo geométrico premium */
+  background-image:
+    linear-gradient(135deg, rgba(10,42,92,0.10) 1px, transparent 1px),
+    linear-gradient(225deg, rgba(10,42,92,0.10) 1px, transparent 1px),
+    radial-gradient(rgba(10,42,92,0.12) 1px, transparent 0);
+
+  background-size:
+    32px 32px,
+    32px 32px,
+    5px 5px;
+}
+
+
+/* -----------------------------------------------------------
+   TIPOGRAFÍA GLOBAL
+----------------------------------------------------------- */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-title);
+  color: var(--blue-deep);
+  margin-bottom: var(--space-md);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+/* Aura dorada en títulos */
+h1::after, h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 60px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 2px;
+  filter: drop-shadow(0 0 6px rgba(253,191,18,0.6));
+}
+
+p {
+  margin-bottom: var(--space-md);
+  font-size: 1rem;
+}
+
+
+/* -----------------------------------------------------------
+   CONTENEDORES Y LAYOUT
+----------------------------------------------------------- */
+
+/* Contenedor general */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding-top: var(--space-lg);
+}
+
+/* Sección premium */
+.section {
+  padding: var(--space-xl) 0;
+  position: relative;
+}
+
+/* Iluminación suave detrás de secciones */
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255,255,255,0.75), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* -----------------------------------------------------------
+   EFECTOS PREMIUM AVANZADOS
+----------------------------------------------------------- */
+
+/* Subrayado animado para texto técnico */
+.highlight {
+  background-image: linear-gradient(to right, var(--gold), var(--orange));
+  background-size: 0% 3px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--transition);
+}
+
+.highlight:hover {
+  background-size: 100% 3px;
+}
+
+/* Scroll premium */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(10,42,92,0.08);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--orange);
+}
+
+/* Cursor premium sutil */
+body {
+  cursor: default;
+}
+
+a, button {
+  cursor: pointer;
+  transition: var(--transition);
+}
 
