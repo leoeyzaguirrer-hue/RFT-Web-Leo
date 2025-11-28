@@ -245,4 +245,51 @@
   top: 0;
   left: 0;
 }
+/* =======================================================
+   BOTONES PREMIUM PARA NAVEGACIÓN
+   ======================================================= */
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.nav-buttons button {
+    padding: 14px 32px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    border-radius: 32px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* Botón Anterior */
+#btn-prev {
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+}
+
+#btn-prev:hover {
+    background: var(--gold);
+    color: var(--blue-deep);
+    box-shadow: 0 0 18px rgba(253,191,18,0.6);
+    transform: translateY(-3px);
+}
+
+/* Botón Siguiente */
+#btn-next {
+    background: var(--gold);
+    border: 2px solid var(--gold);
+    color: var(--blue-deep);
+}
+
+#btn-next:hover {
+    background: #ffcc33;
+    border-color: #ffcc33;
+    box-shadow: 0 0 18px rgba(253,191,18,0.6);
+    transform: translateY(-3px);
+}
 
