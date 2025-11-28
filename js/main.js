@@ -9,7 +9,7 @@ const totalScreens = 8;         // Número total de pantallas por submódulo
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Sistema cargado: Unidad de Análisis");
 
-    loadScreens();       // Crea las pantallas internas
+    createPremiumScreens();       // Crea las pantallas internas
     showScreen(1);       // Muestra la primera pantalla
     setupNavigation();   // Activa botones anterior/siguiente
 });
@@ -116,4 +116,49 @@ function animateScreen(num) {
     screen.classList.remove("fade-in");
     void screen.offsetWidth; // reinicia animación
     screen.classList.add("fade-in");
+}
+/* =======================================================
+   CREAR PANTALLAS PREMIUM (estructura visual C)
+   ======================================================= */
+
+function createPremiumScreens() {
+    const app = document.getElementById("app");
+
+    // Limpia pantalla antes de insertar pantallas
+    app.innerHTML = "";
+
+    for (let i = 1; i <= totalScreens; i++) {
+        const section = document.createElement("section");
+        section.id = `screen-${i}`;
+        section.className = "screen premium-screen";
+        section.style.display = "none";
+
+        section.innerHTML = `
+            <div class="screen-grid">
+
+                <!-- Columna izquierda -->
+                <div class="screen-left">
+                    <div class="screen-box">
+                        <h2 class="screen-title">Pantalla ${i}</h2>
+                        <p class="screen-desc">Contenido pendiente.</p>
+                    </div>
+                </div>
+
+                <!-- Columna derecha -->
+                <div class="screen-right">
+                    <div class="screen-panel">
+                        <div class="panel-placeholder">
+                            <!-- Aquí podrás poner tarjetas, ejercicios, etc. -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        `;
+
+        app.appendChild(section);
+    }
+
+    // Agregar barra de navegación premium
+    createNavigationBar();
 }
