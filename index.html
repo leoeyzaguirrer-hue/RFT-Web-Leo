@@ -1,314 +1,272 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma RFT / ACT – Leo Eyzaguirre</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plataforma RFT — Inicio</title>
 
-    <!-- CSS GLOBAL -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <!-- ESTILOS GLOBALES -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
 
-    <!-- ESTILO EXTRA PORTADA -->
     <style>
-        /* ===========================
-           HERO FULLSCREEN
-        ============================ */
-        .hero {
-            position: relative;
-            height: 100vh;
+        /* =====================================================
+           ESTILO DE PORTADA (DISEÑO B — PREMIUM)
+           ===================================================== */
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Coco Gothic', sans-serif;
+            background: url("assets/backgrounds/Hex-blue-back.png") center/cover no-repeat fixed,
+                        linear-gradient(180deg, #0A2A5C, #132F66, #0A2A5C);
+            color: white;
+        }
+
+        .portada-wrapper {
             width: 100%;
-            background-image: url("assets/backdrops/blue-back.png");
-            background-size: cover;
-            background-position: center;
+            min-height: 100vh;
+            padding: 80px 0;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .portada-container {
+            width: 85%;
+            max-width: 1100px;
+            background: rgba(10, 25, 50, 0.65);
+            border: 2px solid #FDBF12;
+            border-radius: 32px;
+            padding: 60px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 40px rgba(0,0,0,0.35);
+            animation: fade-in 0.6s ease-out;
+        }
+
+        .hexagon-icon {
             text-align: center;
+            margin-bottom: 30px;
         }
 
-        /* SUPER OVERLAY NEGRO SUAVE */
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
+        .hexagon-icon img {
+            width: 95px;
+            filter: drop-shadow(0 0 12px rgba(253,191,18,0.75));
         }
 
-        .hero-content {
-            position: relative;
-            color: white;
-            max-width: 900px;
-            padding: 20px;
-            animation: fadeIn 1.2s ease;
-        }
-
-        .hero-icon {
-            width: 150px;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 0 12px rgba(253,191,18,0.7));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero h1 {
-            font-size: 64px;
-            font-weight: 900;
+        h1 {
+            text-align: center;
+            font-size: 48px;
             margin-bottom: 10px;
+            color: #FFFFFF;
         }
 
-        .hero h2 {
-            font-size: 28px;
+        h2 {
+            text-align: center;
+            font-size: 22px;
             color: #FDBF12;
-            margin-bottom: 18px;
+            margin-bottom: 30px;
         }
 
-        .hero p {
+        .pregunta {
+            text-align: center;
             font-size: 20px;
             opacity: 0.9;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+        }
+
+        .intro {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            text-align: center;
+            font-size: 17px;
+            opacity: 0.85;
             line-height: 1.5;
         }
 
-        .btn-hero {
-            padding: 15px 38px;
-            font-size: 22px;
-            background: #FDBF12;
-            color: #0A2A5C;
-            border-radius: 32px;
-            border: none;
+        /* ===============================
+           ACORDEONES
+           =============================== */
+
+        .acordeon {
+            background: rgba(255,255,255,0.07);
+            padding: 18px 24px;
+            border-radius: 20px;
+            margin-bottom: 16px;
             cursor: pointer;
-            font-weight: 700;
-            transition: 0.3s;
+            border: 1px solid rgba(253,191,18,0.4);
+            transition: 0.25s;
         }
 
-        .btn-hero:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 14px rgba(253,191,18,0.6);
+        .acordeon:hover {
+            background: rgba(255,255,255,0.12);
+            transform: scale(1.01);
         }
 
-
-        /* ===========================
-           MENÚ MAESTRO
-        ============================ */
-        .menu-maestro {
-            padding: 80px 20px;
-            background: #F3F6FB;
-        }
-
-        .menu-title {
-            text-align: center;
-            font-size: 40px;
-            font-weight: 800;
-            color: #0A2A5C;
-            margin-bottom: 40px;
-        }
-
-        .modulos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            padding: 0 40px;
-        }
-
-        .modulo-card {
-            background: linear-gradient(145deg, #0A2A5C, #132F66, #000000);
-            color: white;
-            padding: 30px;
-            border-radius: 28px;
-            border: 3px solid #FDBF12;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            transition: 0.35s;
-            cursor: pointer;
-        }
-
-        .modulo-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 0 18px rgba(253, 191, 18, 0.4);
-        }
-
-        /* ===========================
-           ACORDEÓN PREMIUM
-        ============================ */
-        .modulo-header {
+        .acordeon-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            cursor: pointer;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 600;
         }
 
-        .modulo-header h3 {
-            font-size: 26px;
-        }
-
-        .modulo-header .arrow {
-            font-size: 22px;
-            transition: .3s;
+        .modulo-icon {
             color: #FDBF12;
-        }
-
-        .modulo-card.open .arrow {
-            transform: rotate(180deg);
+            font-size: 28px;
+            margin-right: 12px;
         }
 
         .submodulos {
             display: none;
-            margin-top: 18px;
-        }
-
-        .modulo-card.open .submodulos {
-            display: block;
+            margin-top: 12px;
+            padding-left: 10px;
         }
 
         .submodulos button {
             width: 100%;
-            text-align: left;
-            padding: 12px;
-            margin-bottom: 12px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid #FDBF12;
+            margin: 6px 0;
+            padding: 10px 14px;
             border-radius: 12px;
-            color: white;
-            font-size: 16px;
+            background: #132F66;
+            color: #FFF;
+            border: 1px solid #FDBF12;
             cursor: pointer;
-            transition: .3s;
+            transition: 0.2s;
         }
 
         .submodulos button:hover {
             background: #FDBF12;
             color: #0A2A5C;
-            transform: scale(1.02);
         }
-    </style>
 
+        /* BOTÓN PRINCIPAL */
+
+        .btn-iniciar {
+            display: block;
+            margin: 40px auto 0 auto;
+            padding: 16px 42px;
+            background: #FDBF12;
+            color: #0A2A5C;
+            border-radius: 22px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: 0.25s;
+        }
+
+        .btn-iniciar:hover {
+            background: #FFC93F;
+            transform: scale(1.05);
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <!-- ===========================
-         HERO PRINCIPAL
-    ============================ -->
-    <section class="hero">
-        <div class="hero-content">
+    <div class="portada-wrapper">
 
-            <img src="assets/icons/hex-gold-back.png" class="hero-icon">
+        <div class="portada-container">
 
-            <h1>PLATAFORMA RFT / ACT</h1>
-            <h2>Formación conductual-contextual técnica y aplicada</h2>
+            <!-- ICONO -->
+            <div class="hexagon-icon">
+                <img src="assets/icons/hex-gold.png" alt="Hexágono dorado">
+            </div>
 
-            <p><strong>Pregunta:</strong>  
-                ¿Cómo surge el significado y cómo transforma nuestra conducta en contexto?
+            <!-- TÍTULOS -->
+            <h1>PLATAFORMA EDUCATIVA RFT / ACT</h1>
+            <h2>Un mapa interactivo del comportamiento verbal humano</h2>
+
+            <!-- PREGUNTA -->
+            <p class="pregunta">¿Cómo surge el significado y cómo transforma nuestra conducta?</p>
+
+            <!-- INTRO -->
+            <p class="intro">
+                Esta plataforma explora la Teoría del Marco Relacional (RFT) y su aplicación en psicoterapia
+                contemporánea desde un enfoque funcional-contextual. Aprende paso a paso cómo se forma el lenguaje,
+                cómo se transforma la función psicológica y cómo aplicarlo clínicamente en ACT, FAP o DBT.
             </p>
 
-            <p>
-                La Teoría del Marco Relacional (RFT) explica cómo el lenguaje genera funciones
-                psicológicas que influyen en la acción, el sufrimiento y el cambio clínico.
-                Este sitio te guía desde las bases filosóficas hasta aplicaciones clínicas avanzadas.
-            </p>
+            <!-- ACORDEONES -->
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <div class="acordeon-header">
+                    <span><span class="modulo-icon">⬡</span> Filosofía Contextual</span>
+                </div>
+                <div class="submodulos">
+                    <button onclick="location.href='pages/unidad-analisis.html'">Contextualismo funcional</button>
+                    <button>Unidad de Análisis</button>
+                    <button>Verdad como lo que Funciona</button>
+                    <button>Conducta Privada ≠ Mente</button>
+                    <button>Lenguaje como Conducta</button>
+                </div>
+            </div>
 
-            <button class="btn-hero">
-                Comenzar
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <div class="acordeon-header">
+                    <span><span class="modulo-icon">⬡</span> Ciencia del Lenguaje</span>
+                </div>
+                <div class="submodulos">
+                    <button>Equivalencia de estímulos</button>
+                    <button>Aprendizaje Relacional</button>
+                    <button>Enmarques</button>
+                    <button>Transformación de funciones</button>
+                </div>
+            </div>
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <div class="acordeon-header">
+                    <span><span class="modulo-icon">⬡</span> Procesos Clínicos</span>
+                </div>
+                <div class="submodulos">
+                    <button>Fusión</button>
+                    <button>Yo como Contexto</button>
+                    <button>Reglas vs Contingencias</button>
+                    <button>Evitación y Regulación</button>
+                </div>
+            </div>
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <div class="acordeon-header">
+                    <span><span class="modulo-icon">⬡</span> Actuares Clínicos</span>
+                </div>
+                <div class="submodulos">
+                    <button>ACT como Aplicación Relacional</button>
+                    <button>Ejercicios desde ACT & RFT</button>
+                </div>
+            </div>
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <div class="acordeon-header">
+                    <span><span class="modulo-icon">⬡</span> Recursos</span>
+                </div>
+                <div class="submodulos">
+                    <button>Experimentos Interactivos</button>
+                    <button>Biblioteca de Conceptos</button>
+                </div>
+            </div>
+
+            <!-- BOTÓN INICIO -->
+            <button class="btn-iniciar" onclick="location.href='pages/unidad-analisis.html'">
+                INICIAR VIAJE
             </button>
 
         </div>
-    </section>
+
+    </div>
 
 
-
-    <!-- ===========================
-         MENÚ MAESTRO CON ACORDEONES
-    ============================ -->
-    <section class="menu-maestro">
-
-        <h2 class="menu-title">Módulos del Programa</h2>
-
-        <div class="modulos-grid">
-
-            <!-- MODULO 1 -->
-            <div class="modulo-card modulo-acordeon">
-                <div class="modulo-header" onclick="toggleModulo(this)">
-                    <h3>1. FILOSOFÍA CONTEXTUAL</h3>
-                    <span class="arrow">▼</span>
-                </div>
-
-                <div class="submodulos">
-                    <button>1.1 Contextualismo funcional</button>
-                    <button onclick="window.location.href='pages/unidad-analisis.html'">1.2 Unidad de Análisis</button>
-                    <button>1.3 Verdad como lo que Funciona</button>
-                    <button>1.4 Conducta Privada ≠ Mente</button>
-                    <button>1.5 Lenguaje como Conducta</button>
-                </div>
-            </div>
-
-            <!-- MODULO 2 -->
-            <div class="modulo-card modulo-acordeon">
-                <div class="modulo-header" onclick="toggleModulo(this)">
-                    <h3>2. CIENCIA DEL LENGUAJE</h3>
-                    <span class="arrow">▼</span>
-                </div>
-
-                <div class="submodulos">
-                    <button>2.0 Equivalencia de estímulos</button>
-                    <button>2.1 Aprendizaje Relacional</button>
-                    <button>2.2 Enmarques</button>
-                    <button>2.3 Transformación de funciones</button>
-                </div>
-            </div>
-
-            <!-- MODULO 3 -->
-            <div class="modulo-card modulo-acordeon">
-                <div class="modulo-header" onclick="toggleModulo(this)">
-                    <h3>3. PROCESOS CLÍNICOS</h3>
-                    <span class="arrow">▼</span>
-                </div>
-
-                <div class="submodulos">
-                    <button>3.1 Fusión</button>
-                    <button>3.2 Yo como Contexto</button>
-                    <button>3.3 Reglas vs Contingencias</button>
-                    <button>3.4 Evitación y Regulación</button>
-                </div>
-            </div>
-
-            <!-- MODULO 4 -->
-            <div class="modulo-card modulo-acordeon">
-                <div class="modulo-header" onclick="toggleModulo(this)">
-                    <h3>4. ACTUARES CLÍNICOS</h3>
-                    <span class="arrow">▼</span>
-                </div>
-
-                <div class="submodulos">
-                    <button>4.1 ACT como Aplicación Relacional</button>
-                    <button>4.2 Ejercicios desde ACT & RFT</button>
-                </div>
-            </div>
-
-            <!-- MODULO 5 -->
-            <div class="modulo-card modulo-acordeon">
-                <div class="modulo-header" onclick="toggleModulo(this)">
-                    <h3>5. RECURSOS</h3>
-                    <span class="arrow">▼</span>
-                </div>
-
-                <div class="submodulos">
-                    <button>5.1 Experimentos Interactivos</button>
-                    <button>5.2 Biblioteca de Conceptos</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-
-    <!-- ===========================
-         JS ACORDEÓN
-    ============================ -->
     <script>
-        function toggleModulo(element) {
-            element.parentElement.classList.toggle("open");
+        /* =====================================================
+           FUNCIÓN ACORDEÓN
+           ===================================================== */
+        function toggleAcordeon(el) {
+            const box = el.querySelector(".submodulos");
+            const visible = box.style.display === "block";
+            box.style.display = visible ? "none" : "block";
         }
     </script>
 
