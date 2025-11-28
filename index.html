@@ -21,7 +21,7 @@
         .portada {
             width: 100%;
             min-height: 100vh;
-            padding: 260px 80px 60px 80px; /* ← BAJADO PARA QUE NO CHOQUE CON EL LOGO */
+            padding: 0 80px 60px 80px; /* ← QUITAMOS EL PADDING SUPERIOR */
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -36,7 +36,7 @@
             z-index: 10;
         }
         .logo-superior img {
-            height: 210px;  /* ← LOGO AGRANDADO */
+            height: 230px;  /* ← LOGO AGRANDADO DEFINITIVO */
             filter: drop-shadow(0 0 8px rgba(0,0,0,0.4));
         }
 
@@ -50,6 +50,7 @@
             animation: float 4s ease-in-out infinite;
             filter: drop-shadow(0 0 15px rgba(255,215,0,0.35));
         }
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
@@ -61,7 +62,7 @@
             font-family: "Coco Gothic", sans-serif;
             font-size: 62px;
             line-height: 1.1;
-            margin: 0 0 18px 0;
+            margin: 260px 0 18px 0; /* ← ESTE ES EL ESPACIADOR REAL */
             text-shadow: 0 0 10px rgba(0,0,0,0.55);
         }
 
