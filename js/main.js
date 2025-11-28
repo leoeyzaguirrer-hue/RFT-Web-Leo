@@ -3,15 +3,16 @@
    Opción B — Avanzado con sistema de progreso
    ======================================================= */
 
-let currentScreen = 1;          // Pantalla actual
-const totalScreens = 8;         // Número total de pantallas por submódulo
+let currentScreen = 1;
+const totalScreens = 8;
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Sistema cargado: Unidad de Análisis");
 
-    createPremiumScreens();       // Crea las pantallas internas
-    showScreen(1);                // Muestra la primera pantalla
-    setupNavigation();            // Activa botones anterior/siguiente
+    createPremiumScreens();       // Crea las pantallas base
+    loadPortadaUnidadAnalisis();  // Inserta contenido en Pantalla 1
+    showScreen(1);                // Muestra Pantalla 1
+    setupNavigation();            // Activa botones
 });
 
 
@@ -23,19 +24,17 @@ function showScreen(num) {
     currentScreen = num;
 
     document.querySelectorAll(".screen").forEach((sc, i) => {
-        sc.style.display = i + 1 === num ? "block" : "none";
+        sc.style.display = (i + 1 === num) ? "block" : "none";
     });
 
     updateNavButtons();
     animateScreen(num);
-
-    console.log(`Mostrando pantalla ${num}`);
 }
 
 
 
 /* =======================================================
-   BOTONES ANTERIOR / SIGUIENTE
+   BARRA DE NAVEGACIÓN PREMIUM
    ======================================================= */
 
 function createNavigationBar() {
@@ -43,32 +42,38 @@ function createNavigationBar() {
     nav.classList.add("nav-buttons");
 
     nav.innerHTML = `
-    <button id="btn-prev" class="btn-ghost">Anterior</button>
-    <button id="btn-next" class="btn-gold">Siguiente</button>
-`;
+        <button id="btn-prev" class="btn-ghost">Anterior</button>
+        <button id="btn-next" class="btn-gold">Siguiente</button>
+    `;
 
     document.getElementById("app").appendChild(nav);
 }
 
 function setupNavigation() {
-    document.getElementById("btn-prev").addEventListener("click", () => {
-        if (currentScreen > 1) showScreen(currentScreen - 1);
-    });
+    document.getElementById("app").addEventListener("click", (e) => {
 
-    document.getElementById("btn-next").addEventListener("click", () => {
-        if (currentScreen < totalScreens) showScreen(currentScreen + 1);
+        if (e.target.id === "btn-prev" && currentScreen > 1) {
+            showScreen(currentScreen - 1);
+        }
+
+        if (e.target.id === "btn-next" && currentScreen < totalScreens) {
+            showScreen(currentScreen + 1);
+        }
+
     });
 }
 
 
 
 /* =======================================================
-   CONTROLAR VISIBILIDAD DE BOTONES
+   CONTROL DE VISIBILIDAD
    ======================================================= */
 
 function updateNavButtons() {
     const prev = document.getElementById("btn-prev");
     const next = document.getElementById("btn-next");
+
+    if (!prev || !next) return;
 
     prev.style.visibility = currentScreen === 1 ? "hidden" : "visible";
     next.style.visibility = currentScreen === totalScreens ? "hidden" : "visible";
@@ -77,20 +82,22 @@ function updateNavButtons() {
 
 
 /* =======================================================
-   ANIMACIÓN DE ENTRADA DE PANTALLAS
+   ANIMACIÓN DE ENTRADA
    ======================================================= */
 
 function animateScreen(num) {
     const screen = document.getElementById(`screen-${num}`);
+    if (!screen) return;
+
     screen.classList.remove("fade-in");
-    void screen.offsetWidth; // reinicia animación
+    void screen.offsetWidth;
     screen.classList.add("fade-in");
 }
 
 
 
 /* =======================================================
-   CREAR PANTALLAS PREMIUM (estructura visual)
+   CREAR 8 PANTALLAS PREMIUM VACÍAS
    ======================================================= */
 
 function createPremiumScreens() {
@@ -98,142 +105,89 @@ function createPremiumScreens() {
     app.innerHTML = "";
 
     for (let i = 1; i <= totalScreens; i++) {
-
         const section = document.createElement("section");
         section.id = `screen-${i}`;
         section.className = "screen premium-screen";
         section.style.display = "none";
 
-        /* ============================================
-           PANTALLA 1 — PORTADA DEL CURSO RFT
-        ============================================ */
-        if (i === 1) {
+        section.innerHTML = `
+            <div class="screen-grid">
 
-            section.innerHTML = `
-                <div class="portada-rft">
-
-                    <!-- LOGO SUPERIOR -->
-                    <div class="logo-superior">
-                        <img src="assets/logo/logo-main.png" class="logo-main">
+                <div class="screen-left">
+                    <div class="screen-box">
+                        <h2 class="screen-title">Pantalla ${i}</h2>
+                        <p class="screen-desc">Contenido pendiente.</p>
                     </div>
-
-                    <!-- ICONO HEXAGONAL -->
-                    <div class="hexagon-icon">
-                        <img src="assets/icons/hex-gold.png">
-                    </div>
-
-                    <!-- TÍTULO -->
-                    <h1 class="titulo-portada">TEORÍA DEL MARCO RELACIONAL (RFT)</h1>
-
-                    <!-- SUBTÍTULO -->
-                    <h2 class="subtitulo-portada">Un mapa funcional del comportamiento verbal</h2>
-
-                    <!-- PREGUNTA -->
-                    <p class="pregunta-portada">
-                        ¿Cómo surge el significado y cómo transforma nuestra conducta en contexto?
-                    </p>
-
-                    <!-- INTRODUCCIÓN -->
-                    <p class="intro-portada">
-                        El lenguaje humano no es solo un sistema para describir el mundo, sino una forma 
-                        de actuar que transforma nuestra experiencia y regulación psicológica. La Teoría 
-                        del Marco Relacional ofrece un modelo funcional para comprender cómo las 
-                        relaciones simbólicas generan patrones de conducta, sufrimiento y flexibilidad.
-                    </p>
-
-                    <!-- MÓDULOS -->
-                    <div class="modulos-container">
-
-                        <div class="modulo acordeon" onclick="toggleSubmodulo(this)">
-                            <div class="modulo-header">⬡ Filosofía Contextual</div>
-                            <div class="submodulos">
-                                <button>Contextualismo Funcional</button>
-                                <button>Unidad de Análisis</button>
-                                <button>Verdad como lo que Funciona</button>
-                                <button>Conducta Privada ≠ Mente</button>
-                                <button>Lenguaje como Conducta</button>
-                            </div>
-                        </div>
-
-                        <div class="modulo acordeon" onclick="toggleSubmodulo(this)">
-                            <div class="modulo-header">⬡ Ciencia del Lenguaje</div>
-                            <div class="submodulos">
-                                <button>Equivalencia de Estímulos</button>
-                                <button>Aprendizaje Relacional</button>
-                                <button>Enmarques</button>
-                                <button>Transformación de Funciones</button>
-                            </div>
-                        </div>
-
-                        <div class="modulo acordeon" onclick="toggleSubmodulo(this)">
-                            <div class="modulo-header">⬡ Procesos Clínicos</div>
-                            <div class="submodulos">
-                                <button>Fusión</button>
-                                <button>Yo como Contexto</button>
-                                <button>Reglas vs Contingencias</button>
-                                <button>Evitación y Regulación</button>
-                            </div>
-                        </div>
-
-                        <div class="modulo acordeon" onclick="toggleSubmodulo(this)">
-                            <div class="modulo-header">⬡ Actuares Clínicos</div>
-                            <div class="submodulos">
-                                <button>ACT como Aplicación Relacional</button>
-                                <button>Ejercicios desde ACT & RFT</button>
-                            </div>
-                        </div>
-
-                        <div class="modulo acordeon" onclick="toggleSubmodulo(this)">
-                            <div class="modulo-header">⬡ Recursos</div>
-                            <div class="submodulos">
-                                <button>Experimentos Interactivos</button>
-                                <button>Biblioteca de Conceptos</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- BOTÓN PRINCIPAL -->
-                    <button class="btn-premium btn-primario iniciar-viaje">
-                        Iniciar Viaje
-                    </button>
-
-                    <!-- AUTORÍA -->
-                    <p class="creditos-portada">
-                        Diseño por Leo Eyzaguirre — Plataforma RFT/ACT
-                    </p>
-
                 </div>
-            `;
 
-        } else {
-
-            /* ============================================
-               DEMÁS PANTALLAS (vacías por ahora)
-            ============================================ */
-            section.innerHTML = `
-                <div class="screen-grid">
-
-                    <div class="screen-left">
-                        <div class="screen-box">
-                            <h2 class="screen-title">Pantalla ${i}</h2>
-                            <p class="screen-desc">Contenido pendiente.</p>
-                        </div>
+                <div class="screen-right">
+                    <div class="screen-panel">
+                        <div class="panel-placeholder"></div>
                     </div>
-
-                    <div class="screen-right">
-                        <div class="screen-panel">
-                            <div class="panel-placeholder">
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            `;
-        }
+
+            </div>
+        `;
 
         app.appendChild(section);
     }
 
     createNavigationBar();
+}
+
+
+
+/* =======================================================
+   PANTALLA 1 — PORTADA PREMIUM DEL SUBMÓDULO
+   ======================================================= */
+
+function loadPortadaUnidadAnalisis() {
+
+    const p1 = document.getElementById("screen-1");
+
+    p1.innerHTML = `
+        <div class="screen-grid fade-in">
+
+            <!-- IZQUIERDA -->
+            <div class="screen-left">
+                <div class="screen-box">
+
+                    <h1 class="screen-title" style="font-size:42px;">
+                        UNIDAD DE ANÁLISIS:<br>CONDUCTA EN CONTEXTO
+                    </h1>
+
+                    <h3 class="screen-desc" style="color:#FDBF12; font-size:22px;">
+                        Cómo analizamos la conducta desde el contextualismo funcional
+                    </h3>
+
+                    <p class="screen-desc" style="font-size:18px;">
+                        Este submódulo resuelve un problema frecuente:
+                        analizar pensamientos o emociones sin considerar
+                        <strong>las condiciones ambientales</strong> que les dan función.
+                    </p>
+
+                    <p class="screen-desc" style="font-size:17px; opacity:0.8;">
+                        Aquí aprenderás por qué la unidad de análisis no es “la mente”,
+                        sino la <strong>relación funcional entre acción y contexto</strong>.
+                    </p>
+
+                    <button class="btn-gold" 
+                            style="margin-top:30px;" 
+                            onclick="showScreen(2)">
+                        Comenzar
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- DERECHA -->
+            <div class="screen-right">
+                <div class="screen-panel" style="text-align:center;">
+                    <img src="../assets/icons/hex-gold-back.png"
+                         style="width:220px; opacity:0.9; filter:drop-shadow(0 0 12px rgba(253,191,18,0.6));">
+                </div>
+            </div>
+
+        </div>
+    `;
 }
