@@ -191,3 +191,9 @@ function loadPortadaUnidadAnalisis() {
         </div>
     `;
 }
+<script>
+function toggleModulo(element) {
+    const card = element.parentElement;
+    card.classList.toggle("open");
+}
+</script>
