@@ -35,6 +35,22 @@
 .nav-buttons {
     width: 100%;
     display: flex;
+   /* ===========================================
+   HACER QUE CADA PANTALLA USE TODA LA ALTURA
+   =========================================== */
+
+.premium-screen {
+    min-height: 100vh;  /* ALTURA COMPLETA */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-grid {
+    width: 90%;
+    max-width: 1600px;   /* MÁS ANCHO, MÁS ELEGANTE */
+}
+
     justify-content: space-between;
 }
 
