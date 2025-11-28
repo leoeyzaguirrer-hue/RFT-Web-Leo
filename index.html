@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RFT · Plataforma Educativa</title>
 
-    <!-- ESTILOS -->
-    <link rel="stylesheet" href="./css/style.css">
     <style>
 
         /* =============================
@@ -15,7 +13,7 @@
         body {
             margin: 0;
             font-family: "Noto Sans", sans-serif;
-            background: url./assets/backgrounds/blue-back.png;
+            background: url("./assets/backgrounds/blue-back.png");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -25,12 +23,11 @@
         .portada {
             width: 100%;
             min-height: 100vh;
-            padding: 60px 80px;
+            padding: 140px 80px 60px 80px; /* BAJAMOS EL TEXTO */
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             position: relative;
-            backdrop-filter: blur(1px);
         }
 
         /* LOGO SUPERIOR IZQUIERDA */
@@ -38,6 +35,7 @@
             position: absolute;
             top: 40px;
             left: 60px;
+            z-index: 10;
         }
         .logo-superior img {
             height: 90px;
@@ -47,7 +45,7 @@
         /* HEXÁGONO FLOTANTE */
         .hex-floating {
             position: absolute;
-            top: 140px;
+            top: 160px;
             right: 160px;
             width: 200px;
             opacity: 0.95;
@@ -98,11 +96,9 @@
         }
 
         .acordeon {
-            .acordeon {
-    background: rgba(10, 42, 92, 0.45); /* azul oscuro semitransparente */
-    border: 1px solid rgba(253,191,18,0.4); /* dorado leve */
-}
-            border-radius: 14px;
+            background: rgba(10,42,92,0.45); /* AZUL OSCURO PREMIUM */
+            border: 1px solid rgba(253,191,18,0.4); /* DORADO */
+            border-radius: 16px;
             padding: 18px 22px;
             margin-bottom: 14px;
             cursor: pointer;
@@ -110,13 +106,15 @@
         }
 
         .acordeon:hover {
-            background: rgba(0,0,0,0.55);
+            background: rgba(10,42,92,0.65);
             transform: scale(1.02);
         }
 
         .acordeon h3 {
             margin: 0;
             font-size: 22px;
+            color: #FFFFFF;
+            text-shadow: 0 0 5px rgba(0,0,0,0.45);
             display: flex;
             justify-content: space-between;
         }
