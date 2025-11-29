@@ -1,223 +1,1095 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P6 · Contextualismo en la Clínica</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P6 · Contextualismo en la Clínica</title>
 
-    <style>
-        :root {
-            --azul-1: #0A2A5C;
-            --azul-2: #132F66;
-            --azul-3: #000C1A;
-            --dorado: #FDBF12;
-            --dorado-soft: #FFD978;
-            --blanco: #FFFFFF;
-        }
+  <style>
+    :root {
+      --azul-1: #0A2A5C;
+      --azul-2: #132F66;
+      --azul-3: #000C1A;
+      --dorado: #FDBF12;
+      --dorado-soft: #FFD978;
+      --blanco: #FFFFFF;
+    }
 
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            background: linear-gradient(160deg, var(--azul-1), var(--azul-3));
-            color: var(--blanco);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        /* HEXÁGONOS */
-        .hex {
-            position: fixed;
-            width: 380px;
-            height: 380px;
-            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
-            opacity: 0.07;
-            z-index: -2;
-            animation: floatHex 16s ease-in-out infinite;
-        }
-        .hex.h1 { top: 10%; left: 6%; }
-        .hex.h2 { bottom: 10%; right: 8%; transform: rotate(20deg); }
+    body {
+      margin: 0;
+      font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, #12346d 0%, #050913 55%, #000000 100%);
+      color: var(--blanco);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        @keyframes floatHex {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-16px); }
-            100% { transform: translateY(0); }
-        }
+    /* FONDO HEXAGONAL + PARTÍCULAS */
+    .hex {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      background: url("../assets/icons/hex-gold.png") no-repeat center/contain;
+      opacity: 0.07;
+      z-index: -2;
+      animation: floatHex 18s ease-in-out infinite;
+      pointer-events: none;
+    }
 
-        /* CONTENEDOR */
-        .container {
-            max-width: 980px;
-            margin: 60px auto;
-            padding: 20px 40px;
-            text-align: center;
-        }
+    .hex.h1 { top: 6%; left: 4%; }
+    .hex.h2 { bottom: 8%; right: 6%; transform: rotate(18deg); }
 
-        h1 {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 34px;
-            text-transform: uppercase;
-        }
+    @keyframes floatHex {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
 
-        .sub {
-            font-size: 22px;
-            opacity: 0.85;
-            margin-top: 6px;
-            margin-bottom: 28px;
-        }
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(253,191,18,0.18) 0, transparent 55%),
+        radial-gradient(circle at 82% 82%, rgba(253,191,18,0.13) 0, transparent 55%);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+    }
 
-        p.descripcion {
-            font-size: 20px;
-            max-width: 780px;
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
+    /* TOP NAV */
+    .top-nav {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+    }
 
-        /* NODOS CLÍNICOS */
-        .nodes-container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 14px;
-            margin-top: 40px;
-        }
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.7);
+      background: rgba(0,0,0,0.45);
+      color: var(--blanco);
+      font-size: 16px;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: 0.25s ease;
+      backdrop-filter: blur(6px);
+    }
 
-        .node {
-            background: rgba(255,255,255,0.05);
-            padding: 16px;
-            border-radius: 20px;
-            border: 2px solid rgba(253,191,18,0.35);
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 18px;
-            line-height: 1.3;
-            backdrop-filter: blur(6px);
-        }
+    .top-nav a:hover {
+      background: rgba(253,191,18,0.16);
+      box-shadow: 0 0 16px rgba(253,191,18,0.8);
+    }
 
-        .node:hover {
-            transform: translateY(-6px);
-            border-color: var(--dorado);
-            box-shadow: 0 0 16px rgba(253,191,18,0.5);
-        }
+    .top-nav span.icon {
+      font-size: 18px;
+      line-height: 1;
+    }
 
-        .node.active {
-            background: rgba(253,191,18,0.15);
-            border-color: var(--dorado);
-            box-shadow: 0 0 26px rgba(253,191,18,0.7);
-        }
+    /* CONTENEDOR GENERAL */
+    .container {
+      max-width: 1120px;
+      margin: 90px auto 60px auto;
+      padding: 0 28px 40px 28px;
+    }
 
-        /* PANEL DE EXPLICACIÓN */
-        .panel {
-            margin-top: 40px;
-            background: rgba(253,191,18,0.12);
-            padding: 26px;
-            border-radius: 18px;
-            border: 2px solid var(--dorado);
-            display: none;
-            font-size: 21px;
-            max-width: 760px;
-            line-height: 1.6;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeIn 0.4s ease;
-        }
+    /* SECCIONES */
+    .section {
+      margin-bottom: 52px;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+    .section-header {
+      margin-bottom: 22px;
+    }
 
-        /* BOTONES */
-        .nav-buttons {
-            margin-top: 50px;
-            display: flex;
-            justify-content: space-between;
-        }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.7);
+      background: rgba(0,0,0,0.5);
+      font-size: 16px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
 
-        .btn {
-            padding: 14px 28px;
-            font-size: 18px;
-            border-radius: 999px;
-            cursor: pointer;
-            border: 2px solid var(--dorado);
-            background: var(--dorado);
-            color: #000C1A;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-        .btn:hover {
-            box-shadow: 0 0 18px rgba(253,191,18,0.8);
-        }
-    </style>
+    .badge-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dorado-soft);
+      box-shadow: 0 0 12px rgba(253,191,18,0.9);
+    }
+
+    h1 {
+      font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 42px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 12px 0 10px 0;
+      text-align: center;
+      text-shadow: 0 0 12px rgba(0,0,0,0.8);
+    }
+
+    .sub {
+      font-size: 28px;
+      opacity: 0.92;
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 18px auto;
+    }
+
+    p.descripcion {
+      font-size: 22px;
+      line-height: 1.8;
+      opacity: 0.94;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* SECCIÓN CASO + AVATAR */
+    .case-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 30px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 960px) {
+      .case-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .case-card {
+      border-radius: 32px;
+      padding: 22px 24px 24px 24px;
+      background: linear-gradient(140deg, rgba(253,191,18,0.18), rgba(0,0,0,0.88));
+      border: 2px solid rgba(253,191,18,0.85);
+      box-shadow:
+        0 18px 38px rgba(0,0,0,0.85),
+        0 0 22px rgba(253,191,18,0.55);
+    }
+
+    .case-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .case-label {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.9;
+      margin-bottom: 6px;
+    }
+
+    .case-body {
+      font-size: 22px;
+      line-height: 1.8;
+      opacity: 0.96;
+    }
+
+    .case-body strong {
+      color: var(--dorado-soft);
+    }
+
+    /* AVATAR (MISMO DISEÑO QUE P7) */
+    .avatar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-label {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.88;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid rgba(253,191,18,0.9);
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, #f7d88e 25%, #f09d4c 45%, #6b2d12 100%);
+      box-shadow:
+        0 0 22px rgba(253,191,18,0.95),
+        0 18px 32px rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    .avatar-face {
+      width: 64%;
+      height: 64%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe6c7 0, #f4b27b 40%, #a25733 100%);
+      position: relative;
+    }
+
+    .avatar-face::before,
+    .avatar-face::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      top: 38%;
+      background: #3b2314;
+    }
+
+    .avatar-face::before { left: 22%; }
+    .avatar-face::after  { right: 22%; }
+
+    .avatar-mouth {
+      position: absolute;
+      width: 48%;
+      height: 20%;
+      border-radius: 0 0 40px 40px;
+      border-bottom: 3px solid #3b2314;
+      left: 50%;
+      top: 60%;
+      transform: translateX(-50%);
+    }
+
+    .avatar.state-1 .avatar-mouth {
+      border-radius: 40px 40px 0 0;
+      border-bottom: none;
+      border-top: 3px solid #3b2314;
+      top: 66%;
+    }
+
+    .avatar.state-2 .avatar-mouth {
+      transform: translateX(-50%) translateY(2px);
+    }
+
+    .avatar.state-3 .avatar-mouth {
+      border-bottom-width: 4px;
+    }
+
+    .avatar.state-4 .avatar-mouth {
+      border-bottom-width: 4px;
+      top: 58%;
+    }
+
+    .avatar.state-1 {
+      filter: grayscale(0.2) brightness(0.85);
+    }
+
+    .avatar.state-2 {
+      filter: none;
+    }
+
+    .avatar.state-3 {
+      filter: saturate(1.1);
+    }
+
+    .avatar.state-4 {
+      filter: saturate(1.25) brightness(1.06);
+      box-shadow:
+        0 0 26px rgba(253,191,18,1),
+        0 20px 34px rgba(0,0,0,0.9);
+      transform: translateY(-4px);
+    }
+
+    .avatar-caption {
+      font-size: 20px;
+      max-width: 320px;
+      text-align: center;
+      opacity: 0.92;
+    }
+
+    /* SECCIÓN CADENA FUNCIONAL ACTUAL */
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .section-subtitle {
+      font-size: 22px;
+      opacity: 0.9;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .chain-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: flex-start;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 960px) {
+      .chain-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chain-visual {
+      position: relative;
+      border-radius: 30px;
+      padding: 26px 22px 26px 22px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.04) 0, rgba(0,0,0,0.9) 60%);
+      border: 2px solid rgba(253,191,18,0.45);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.85),
+        0 0 18px rgba(253,191,18,0.23);
+      min-height: 260px;
+    }
+
+    .chain-visual-label {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .chain-node {
+      position: relative;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 18px;
+      font-size: 22px;
+      line-height: 1.4;
+      background: rgba(255,255,255,0.04);
+      border: 2px solid rgba(253,191,18,0.32);
+      cursor: pointer;
+      transition: 0.26s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .chain-node span.chip-label {
+      display: inline-block;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .chain-node strong {
+      display: block;
+    }
+
+    .chain-node:hover {
+      transform: translateX(4px);
+      border-color: var(--dorado);
+      box-shadow: 0 0 16px rgba(253,191,18,0.7);
+    }
+
+    .chain-node.active {
+      background: rgba(253,191,18,0.16);
+      border-color: var(--dorado);
+      box-shadow:
+        0 0 22px rgba(253,191,18,0.9),
+        0 12px 24px rgba(0,0,0,0.9);
+    }
+
+    .chain-line {
+      position: absolute;
+      left: 12px;
+      width: 2px;
+      background: linear-gradient(
+        to bottom,
+        rgba(253,191,18,0.0),
+        rgba(253,191,18,0.9),
+        rgba(253,191,18,0.0)
+      );
+      opacity: 0.7;
+      top: 54px;
+      bottom: 24px;
+      filter: drop-shadow(0 0 12px rgba(253,191,18,0.7));
+    }
+
+    .panel-functional {
+      border-radius: 30px;
+      padding: 22px 24px 24px 24px;
+      background: linear-gradient(145deg, rgba(253,191,18,0.2), rgba(0,0,0,0.92));
+      border: 2px solid rgba(253,191,18,0.9);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.9),
+        0 0 22px rgba(253,191,18,0.7);
+      font-size: 22px;
+      line-height: 1.8;
+      opacity: 0.97;
+    }
+
+    .panel-functional-header {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    .panel-functional strong {
+      color: var(--dorado-soft);
+    }
+
+    /* SECCIÓN INTERVENCIÓN ACT */
+    .intervention-banner {
+      border-radius: 26px;
+      padding: 18px 22px;
+      background: rgba(0,0,0,0.7);
+      border: 1px dashed rgba(253,191,18,0.8);
+      font-size: 20px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .toggle-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .toggle-label {
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    .toggle-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(253,191,18,0.8);
+      background: rgba(10,10,10,0.9);
+      color: var(--blanco);
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.26s ease;
+    }
+
+    .toggle-btn.active {
+      background: var(--dorado);
+      color: #000C1A;
+      box-shadow: 0 0 18px rgba(253,191,18,1);
+    }
+
+    .toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
+
+    .intervention-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .intervention-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .intervention-node {
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 18px;
+      font-size: 22px;
+      line-height: 1.4;
+      background: rgba(253,191,18,0.1);
+      border: 2px solid rgba(253,191,18,0.6);
+      cursor: pointer;
+      transition: 0.26s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .intervention-node span.chip-label {
+      display: inline-block;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .intervention-node:hover {
+      transform: translateX(4px);
+      box-shadow: 0 0 20px rgba(253,191,18,0.9);
+    }
+
+    .intervention-node.active {
+      background: rgba(253,191,18,0.22);
+      border-color: var(--dorado);
+      box-shadow:
+        0 0 24px rgba(253,191,18,1),
+        0 12px 26px rgba(0,0,0,0.9);
+    }
+
+    .intervention-panel {
+      border-radius: 28px;
+      padding: 22px 24px;
+      background: linear-gradient(145deg, rgba(0,0,0,0.9), rgba(253,191,18,0.24));
+      border: 2px solid rgba(253,191,18,0.85);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.9),
+        0 0 22px rgba(253,191,18,0.7);
+      font-size: 22px;
+      line-height: 1.8;
+      opacity: 0.97;
+    }
+
+    .intervention-panel-header {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    .intervention-panel strong {
+      color: var(--dorado-soft);
+    }
+
+    /* MICRO EXPERIMENTO */
+    .experiment-box {
+      border-radius: 26px;
+      padding: 18px 20px 20px 20px;
+      background: rgba(0,0,0,0.7);
+      border: 1px dashed rgba(253,191,18,0.9);
+      font-size: 20px;
+      line-height: 1.8;
+      margin-top: 10px;
+    }
+
+    .experiment-title {
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .experiment-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0 8px 0;
+    }
+
+    .exp-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(253,191,18,0.9);
+      background: rgba(10,10,10,0.9);
+      color: var(--blanco);
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.26s ease;
+    }
+
+    .exp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
+
+    .exp-btn.active {
+      background: var(--dorado);
+      color: #000C1A;
+      box-shadow: 0 0 20px rgba(253,191,18,1);
+    }
+
+    .experiment-result {
+      font-size: 20px;
+      margin-top: 6px;
+      opacity: 0.96;
+    }
+
+    /* CIERRE + NAVEGACIÓN */
+    .closing-text {
+      font-size: 22px;
+      line-height: 1.8;
+      opacity: 0.95;
+      max-width: 900px;
+      margin: 12px auto 0 auto;
+      text-align: center;
+    }
+
+    .nav-buttons {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 22px;
+      border-radius: 999px;
+      border: 2px solid var(--dorado);
+      background: var(--dorado);
+      color: #000C1A;
+      cursor: pointer;
+      transition: 0.26s ease;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--blanco);
+      border-color: rgba(253,191,18,0.8);
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 22px rgba(253,191,18,1);
+      transform: translateY(-2px);
+    }
+
+    .btn span.arrow {
+      font-size: 22px;
+      line-height: 1;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="hex h1"></div>
-<div class="hex h2"></div>
+  <div class="particles"></div>
+  <div class="hex h1"></div>
+  <div class="hex h2"></div>
 
-<div class="container">
+  <div class="top-nav">
+    <a href="index.html">
+      <span class="icon">⟵</span>
+      Volver al menú del módulo
+    </a>
+  </div>
 
-    <h1>Contextualismo Funcional en la Clínica</h1>
-    <div class="sub">Cómo cambia la forma de intervenir desde ACT y RFT</div>
+  <div class="container">
 
-    <p class="descripcion">
+    <!-- SECCIÓN 1: TÍTULO -->
+    <section class="section">
+      <div class="section-header" style="text-align:center;">
+        <div class="badge">
+          <div class="badge-dot"></div>
+          PANTALLA 6 · CONTEXTUALISMO EN LA CLÍNICA
+        </div>
+      </div>
+
+      <h1>Contextualismo Funcional en la Clínica</h1>
+      <div class="sub">
+        Cómo cambia la forma de intervenir cuando trabajas con historia, contexto y lenguaje
+      </div>
+      <p class="descripcion">
         Desde el contextualismo funcional no buscamos “corregir pensamientos”, sino
-        alterar sus funciones mediante nuevos contextos, nuevas prácticas y nuevas
-        relaciones. Aquí verás cómo se aplica esto a un caso real.
-    </p>
+        <strong>transformar su función</strong> modificando el contexto, las contingencias y las redes
+        relacionales que los sostienen. En esta pantalla explorarás un caso clínico y verás
+        cómo la misma frase puede sostener evitación o flexibilidad, según el contexto que crees.
+      </p>
+    </section>
 
-    <!-- NODOS CLÍNICOS -->
-    <div class="nodes-container">
-
-        <div class="node" data-info="El antecedente activa funciones aprendidas a lo largo de la historia.">
-            Antecedente<br>(reunión)
+    <!-- SECCIÓN 2: CASO + AVATAR -->
+    <section class="section">
+      <div class="case-grid">
+        <div class="case-card">
+          <div class="case-label">Caso clínico · Ana</div>
+          <div class="case-title">“No quiero incomodar a nadie”</div>
+          <div class="case-body">
+            Ana evita asistir a reuniones de trabajo. Cada vez que recibe una invitación aparece
+            el pensamiento <strong>«voy a molestar»</strong>, siente un nudo en la garganta y decide no ir.
+            A corto plazo siente alivio, pero a largo plazo se queda aislada, pierde oportunidades
+            y refuerza la idea de que su presencia es un problema.
+            <br><br>
+            El objetivo no es convencerla de que “sí es valiosa”,
+            sino <strong>cambiar la función</strong> de ese evento verbal dentro de su conducta-en-contexto.
+          </div>
         </div>
 
-        <div class="node" data-info="El evento verbal funciona como estímulo que organiza la conducta.">
-            Evento verbal<br>“voy a molestar”
+        <div class="avatar-wrapper">
+          <div class="avatar-label">Estado clínico actual</div>
+          <div class="avatar state-1" id="avatar">
+            <div class="avatar-face">
+              <div class="avatar-mouth"></div>
+            </div>
+          </div>
+          <div class="avatar-caption" id="avatar-caption">
+            Ana se contrae y se protege. El contexto de evitación domina: la prioridad es
+            alejarse del malestar inmediato, aunque eso la aleje también de sus valores.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: CADENA FUNCIONAL ACTUAL -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">1. Cadena funcional: cómo opera el problema hoy</div>
+        <div class="section-subtitle">
+          Toca cada elemento para ver su función dentro de la conducta-en-contexto. Observa
+          cómo no son “cosas internas”, sino partes de una interacción histórica.
+        </div>
+      </div>
+
+      <div class="chain-grid">
+        <div class="chain-visual">
+          <div class="chain-visual-label">Elementos de la cadena (modo problema)</div>
+          <div class="chain-line"></div>
+
+          <div
+            class="chain-node"
+            data-type="actual"
+            data-title="Antecedente: invitación a la reunión"
+            data-body="La notificación de la reunión actúa como estímulo antecedente que reactiva una historia de críticas, incomodidad y experiencias previas de sentirse ‘de más’. No es neutra: llega cargada de funciones aprendidas."
+            data-avatar-state="1"
+          >
+            <span class="chip-label">Antecedente</span>
+            <strong>Invitación a la reunión</strong>
+          </div>
+
+          <div
+            class="chain-node"
+            data-type="actual"
+            data-title="Evento verbal: «voy a molestar»"
+            data-body="La frase «voy a molestar» funciona como regla que organiza la conducta de Ana. No es un espejo de la realidad interna, sino un patrón verbal que, al presentarse, aumenta la probabilidad de retirarse para evitar conflicto o vergüenza."
+            data-avatar-state="1"
+          >
+            <span class="chip-label">Evento verbal</span>
+            <strong>“Voy a molestar”</strong>
+          </div>
+
+          <div
+            class="chain-node"
+            data-type="actual"
+            data-title="Sensación corporal: nudo en la garganta"
+            data-body="El nudo en la garganta es una respuesta corporal aprendida en este tipo de contextos, modulada por la historia de Ana. Funciona como señal interna que confirma la regla: ‘si siento esto, es porque algo anda mal, mejor me quedo al margen’."
+            data-avatar-state="1"
+          >
+            <span class="chip-label">Sensación</span>
+            <strong>Nudo en la garganta</strong>
+          </div>
+
+          <div
+            class="chain-node"
+            data-type="actual"
+            data-title="Conducta de evitación"
+            data-body="Ana responde evitando: no va a la reunión, posterga la respuesta o pone excusas. Desde un análisis funcional, esta respuesta es comprensible: reduce contacto con estímulos que han adquirido función aversiva, tanto externos como internos."
+            data-avatar-state="1"
+          >
+            <span class="chip-label">Respuesta</span>
+            <strong>No asistir a la reunión</strong>
+          </div>
+
+          <div
+            class="chain-node"
+            data-type="actual"
+            data-title="Consecuencia: alivio inmediato"
+            data-body="Cuando Ana se queda en casa siente alivio. El nudo disminuye, el pensamiento se apaga un poco. Este alivio funciona como <strong>reforzador negativo</strong>, consolidando la cadena de evitación y aumentando la probabilidad de repetirla en el futuro."
+            data-avatar-state="2"
+          >
+            <span class="chip-label">Consecuencia</span>
+            <strong>Alivio momentáneo</strong>
+          </div>
         </div>
 
-        <div class="node" data-info="Las sensaciones son acciones corporales reguladas por el contexto.">
-            Sensación<br>(nudo en la garganta)
+        <div class="panel-functional" id="panel-functional">
+          <div class="panel-functional-header">Lectura funcional</div>
+          <div class="panel-functional-body" id="panel-functional-body">
+            La notificación de la reunión actúa como estímulo antecedente que reactiva
+            una historia de críticas, incomodidad y experiencias previas de sentirse
+            “de más”. No es neutra: llega cargada de funciones aprendidas.
+            <br><br>
+            El foco del contextualismo funcional es cómo estos elementos se articulan
+            en una <strong>unidad de conducta-en-contexto</strong>, no en buscar una “verdad interna”
+            sobre Ana.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: INTERVENCIÓN ACT -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">2. Intervención ACT: cambiar contexto y función</div>
+        <div class="section-subtitle">
+          Ahora observa cómo la misma frase «voy a molestar» puede adquirir otra función cuando
+          trabajamos con atención, valores y acción flexible. No cambia el contenido, cambia el
+          contexto funcional en el que aparece.
+        </div>
+      </div>
+
+      <div class="intervention-banner">
+        En esta parte, el terapeuta ACT no discute con el pensamiento de Ana. En lugar de intentar
+        demostrarle que “no molesta”, crea un contexto donde ese pensamiento puede estar presente
+        mientras ella se acerca a lo que le importa.
+        <div class="toggle-row">
+          <div class="toggle-label">Modo de visualización:</div>
+          <button class="toggle-btn active" id="toggle-problem">Cadena problema</button>
+          <button class="toggle-btn" id="toggle-intervention">Cadena con intervención</button>
+        </div>
+      </div>
+
+      <div class="intervention-grid">
+        <div>
+          <!-- NODOS INTERVENCIÓN -->
+          <div
+            class="intervention-node"
+            data-title="Atención flexible al momento presente"
+            data-body="En lugar de fusionarse automáticamente con la historia de crítica, Ana practica notar la invitación y las sensaciones como eventos que aparecen en este momento. La atención se mueve del ‘¿qué significa de mí?’ al ‘¿qué está pasando aquí y ahora?’."
+            data-avatar-state="2"
+          >
+            <span class="chip-label">Proceso</span>
+            <strong>Atención flexible</strong>
+          </div>
+
+          <div
+            class="intervention-node"
+            data-title="Defusión: ver la frase como frase"
+            data-body="Ana aprende a notar «voy a molestar» como un conjunto de palabras que su mente produce, no como un mandato literal que debe obedecer. Al cambiar el contexto relacional, la frase pierde parte de su función aversiva y se vuelve un estímulo que puede observar sin reaccionar automáticamente."
+            data-avatar-state="3"
+          >
+            <span class="chip-label">Proceso</span>
+            <strong>Defusión de la regla</strong>
+          </div>
+
+          <div
+            class="intervention-node"
+            data-title="Valores: ¿qué tipo de colega quiere ser?"
+            data-body="Desde ACT, el terapeuta ayuda a Ana a contactar qué tipo de colega quiere ser: quizá presente, colaboradora, disponible para construir proyectos. Este nuevo marco de significado reconfigura la red: la reunión ya no es solo una amenaza, también es una oportunidad para vivir sus valores."
+            data-avatar-state="3"
+          >
+            <span class="chip-label">Dirección</span>
+            <strong>Clarificación de valores</strong>
+          </div>
+
+          <div
+            class="intervention-node"
+            data-title="Acción flexible con malestar presente"
+            data-body="En lugar de esperar a que desaparezca la ansiedad, Ana puede elegir una acción pequeña y viable: conectarse a la reunión, quedarse diez minutos, saludar, escuchar. El pensamiento y el nudo siguen ahí, pero su función cambia: ya no dirigen la conducta, conviven con una acción guiada por valores."
+            data-avatar-state="4"
+          >
+            <span class="chip-label">Respuesta</span>
+            <strong>Acercarse a la reunión</strong>
+          </div>
         </div>
 
-        <div class="node" data-info="La evitación funciona por el alivio inmediato que produce.">
-            Evitación<br>(no ir)
+        <div class="intervention-panel" id="intervention-panel">
+          <div class="intervention-panel-header">Lectura funcional de la intervención</div>
+          <div id="intervention-panel-body">
+            Cuando trabajamos desde ACT, no intentamos probarle a Ana que “no molesta”.
+            Cambiamos el contexto en el que aparece el pensamiento «voy a molestar», de modo
+            que pueda ser observado como pensamiento mientras se activa una dirección valiosa.
+            <br><br>
+            La función del lenguaje se transforma: de justificar la evitación, pasa a ser
+            un evento privado que puede coexistir con acciones al servicio de sus valores.
+          </div>
+
+          <div class="experiment-box">
+            <div class="experiment-title">Micro-experimento: contenido vs función</div>
+            <div>Elige qué tipo de intervención harías y observa qué ocurre con Ana.</div>
+            <div class="experiment-options">
+              <button class="exp-btn active" data-exp="contenido">
+                Discutir el contenido del pensamiento
+              </button>
+              <button class="exp-btn" data-exp="contexto">
+                Cambiar el contexto funcional
+              </button>
+            </div>
+            <div class="experiment-result" id="experiment-result">
+              Si te centras en convencerla de que “no molesta”, es probable que la conversación
+              se vuelva una lucha lógica. Ana puede asentir en sesión, pero la función del
+              pensamiento permanece: cuando vuelva a sentirse insegura, la misma regla seguirá
+              guiando la evitación.
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="node" data-info="El alivio momentáneo refuerza negativamente la evitación.">
-            Consecuencia<br>(alivio)
-        </div>
+    <!-- SECCIÓN 5: CIERRE -->
+    <section class="section">
+      <div class="section-header" style="text-align:center;">
+        <div class="section-title" style="text-align:center;">3. Cierre clínico</div>
+      </div>
+      <p class="closing-text">
+        En contextualismo funcional, el foco no está en eliminar pensamientos o emociones
+        problemáticas, sino en comprender <strong>cómo funcionan</strong> dentro de la conducta-en-contexto
+        y crear condiciones para que esa función cambie. ACT y RFT aportan herramientas
+        precisas para diseñar nuevos contextos donde el lenguaje deje de sostener evitación
+        y se convierta en aliado al servicio de los valores.
+      </p>
 
-    </div>
+      <div class="nav-buttons">
+        <a href="p5.html" class="btn secondary">
+          <span class="arrow">⟵</span>
+          Volver a P5 · Contingencias, historia y función
+        </a>
+        <a href="p7.html" class="btn">
+          P7 · Integración ACT–RFT–Contextualismo
+          <span class="arrow">⟶</span>
+        </a>
+      </div>
+    </section>
 
-    <!-- PANEL DE INFORMACIÓN -->
-    <div class="panel" id="panel"></div>
+  </div>
 
-    <!-- NAVEGACIÓN -->
-    <div class="nav-buttons">
-        <button class="btn" onclick="window.location.href='p5.html'">← Pantalla anterior</button>
-        <button class="btn" onclick="window.location.href='p7.html'">Siguiente pantalla →</button>
-    </div>
+  <script>
+    // Avatar global
+    const avatar = document.getElementById("avatar");
+    const avatarCaption = document.getElementById("avatar-caption");
 
-</div>
+    function setAvatarState(state, caption) {
+      avatar.classList.remove("state-1", "state-2", "state-3", "state-4");
+      avatar.classList.add("state-" + state);
+      if (caption) {
+        avatarCaption.innerHTML = caption;
+      }
+    }
 
-<script>
-    const nodes = document.querySelectorAll(".node");
-    const panel = document.getElementById("panel");
+    // Cadena funcional (modo problema)
+    const chainNodes = document.querySelectorAll(".chain-node");
+    const panelFunctionalBody = document.getElementById("panel-functional-body");
 
-    nodes.forEach(node => {
-        node.addEventListener("click", () => {
-            nodes.forEach(n => n.classList.remove("active"));
-            node.classList.add("active");
+    chainNodes.forEach(node => {
+      node.addEventListener("click", () => {
+        chainNodes.forEach(n => n.classList.remove("active"));
+        node.classList.add("active");
 
-            panel.style.display = "block";
-            panel.textContent = node.dataset.info;
-        });
+        const title = node.getAttribute("data-title");
+        const body = node.getAttribute("data-body");
+        const avatarState = node.getAttribute("data-avatar-state");
+
+        panelFunctionalBody.innerHTML = "<strong>" + title + ".</strong> " + body;
+
+        if (avatarState) {
+          if (avatarState === "1") {
+            setAvatarState("1",
+              "Ana se contrae y se protege. El contexto de evitación domina: todo parece confirmar que es mejor no estar en la reunión."
+            );
+          } else if (avatarState === "2") {
+            setAvatarState("2",
+              "El alivio momentáneo trae algo de descanso, pero refuerza el ciclo de evitación. A largo plazo, su mundo se hace más pequeño."
+            );
+          }
+        }
+      });
     });
-</script>
+
+    // Estado inicial: primer nodo
+    if (chainNodes.length > 0) {
+      chainNodes[0].click();
+    }
+
+    // Intervención ACT
+    const interventionNodes = document.querySelectorAll(".intervention-node");
+    const interventionPanelBody = document.getElementById("intervention-panel-body");
+
+    interventionNodes.forEach(node => {
+      node.addEventListener("click", () => {
+        interventionNodes.forEach(n => n.classList.remove("active"));
+        node.classList.add("active");
+
+        const title = node.getAttribute("data-title");
+        const body = node.getAttribute("data-body");
+        const avatarState = node.getAttribute("data-avatar-state");
+
+        interventionPanelBody.innerHTML = "<strong>" + title + ".</strong> " + body;
+
+        if (avatarState) {
+          if (avatarState === "2") {
+            setAvatarState("2",
+              "Ana comienza a notar lo que siente y piensa sin reaccionar de inmediato. Hay un poco más de espacio para elegir."
+            );
+          } else if (avatarState === "3") {
+            setAvatarState("3",
+              "El pensamiento sigue ahí, pero su función cambia: deja de ser una orden automática y se vuelve algo que puede observar."
+            );
+          } else if (avatarState === "4") {
+            setAvatarState("4",
+              "Ana da un pequeño paso en dirección a sus valores. El malestar la acompaña, pero ya no manda: ahora acompaña una vida más amplia."
+            );
+          }
+        }
+      });
+    });
+
+    // Toggle problema / intervención (solo estilo visual para ahora)
+    const toggleProblem = document.getElementById("toggle-problem");
+    const toggleIntervention = document.getElementById("toggle-intervention");
+
+    toggleProblem.addEventListener("click", () => {
+      toggleProblem.classList.add("active");
+      toggleIntervention.classList.remove("active");
+      // Cuando vuelve a problema, marcamos primer nodo de la cadena
+      if (chainNodes.length > 0) {
+        chainNodes[0].click();
+      }
+    });
+
+    toggleIntervention.addEventListener("click", () => {
+      toggleIntervention.classList.add("active");
+      toggleProblem.classList.remove("active");
+      // Cuando va a intervención, marcamos primer nodo de intervención
+      if (interventionNodes.length > 0) {
+        interventionNodes[0].click();
+      }
+    });
+
+    // Micro-experimento
+    const expButtons = document.querySelectorAll(".exp-btn");
+    const experimentResult = document.getElementById("experiment-result");
+
+    expButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        expButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const mode = btn.getAttribute("data-exp");
+
+        if (mode === "contenido") {
+          experimentResult.innerHTML =
+            "Si te centras en convencerla de que “no molesta”, es probable que la conversación se vuelva una lucha lógica. Ana puede asentir en sesión, pero la función del pensamiento permanece: cuando vuelva a sentirse insegura, la misma regla seguirá guiando la evitación.";
+          setAvatarState("1",
+            "Aunque el terapeuta gane la discusión lógica, Ana sigue organizada por la misma regla: para no molestar, mejor se esconde."
+          );
+        } else if (mode === "contexto") {
+          experimentResult.innerHTML =
+            "Cuando cambias el contexto funcional, ayudas a Ana a notar el pensamiento como pensamiento, a contactar sus valores y a ensayar respuestas flexibles. La frase «voy a molestar» puede seguir apareciendo, pero su función se transforma: deja de ser una orden y se vuelve un ruido de fondo mientras ella actúa en dirección a lo que le importa.";
+          setAvatarState("4",
+            "El pensamiento sigue ahí, pero ahora convive con acciones guiadas por valores. Ana se expande en lugar de contraerse."
+          );
+        }
+      });
+    });
+
+    // Estado inicial del experimento
+    if (expButtons.length > 0) {
+      expButtons[0].click();
+    }
+  </script>
 
 </body>
 </html>
-
-
