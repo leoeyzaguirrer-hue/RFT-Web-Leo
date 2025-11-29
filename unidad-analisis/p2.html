@@ -1,1 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lección 1 — ¿Qué es una unidad de análisis?</title>
+
+    <!-- CSS exclusivo del módulo -->
+    <link rel="stylesheet" href="style-unidad-analisis.css" />
+
+    <!-- JS exclusivo de esta pantalla -->
+    <script defer src="p2.js"></script>
+</head>
+
+<body class="ua-body">
+
+    <!-- FONDO -->
+    <div class="ua-bg-layer">
+        <span class="ua-bg-node n1"></span>
+        <span class="ua-bg-node n2"></span>
+        <span class="ua-bg-node n3"></span>
+        <span class="ua-bg-node n4"></span>
+        <span class="ua-bg-line l1"></span>
+        <span class="ua-bg-line l2"></span>
+        <span class="ua-bg-line l3"></span>
+    </div>
+
+    <!-- =========================================
+         HERO / INTRODUCCIÓN CONCEPTUAL
+    ========================================== -->
+    <header class="ua-hero ua-fade-in">
+
+        <div class="ua-breadcrumb">
+            <span class="ua-breadcrumb-dot"></span>
+            LECCIÓN 1 · ¿QUÉ ES UNA UNIDAD DE ANÁLISIS?
+        </div>
+
+        <h1 class="ua-title-main">
+            De etiquetas a episodios  
+            <span>cómo recortamos la conducta para poder influirla</span>
+        </h1>
+
+        <p class="ua-subtitle-main">
+            Sosteniéndonos en el contextualismo funcional, la ciencia psicológica se organiza para predecir e influir la conducta
+            con precisión, alcance y profundidad.  
+            Para lograrlo, necesitamos definir <strong>qué fragmento de la vida observamos</strong>.  
+            Ese fragmento es la unidad de análisis.
+        </p>
+
+        <div class="ua-continuidad">
+            Una unidad de análisis no es una etiqueta ni un contenido mental aislado:
+            es un <strong>episodio funcional</strong>: acciones en un contexto específico que producen consecuencias.
+        </div>
+
+    </header>
+
+    <!-- ======================================================
+         EXPERIMENTO 1 — EL EXPERIMENTO DEL ZOOM
+    ======================================================= -->
+    <section class="ua-main-card ua-fade-in">
+
+        <div class="ua-section-label">Experimento 1</div>
+        <div class="ua-section-title">El experimento del zoom</div>
+
+        <p class="ua-text">
+            Observa la escena. Sin recorte, parece caos.  
+            Pasa el cursor sobre la lupa para ver micro-acciones ocultas.
+        </p>
+
+        <div class="ua-zoom-box">
+            <img src="https://i.imgur.com/9v9VxwF.jpeg" class="ua-zoom-scene" />
+
+            <div class="ua-lupa" id="lupa">
+                ▼ Pasa el cursor por aquí
+            </div>
+
+            <div class="ua-zoom-detail" id="zoomDetail">
+                Manos sudorosas…  
+                Evita contacto visual…  
+                Revisa el celular…  
+                Mensaje del jefe en pantalla…
+            </div>
+        </div>
+
+        <p class="ua-text">
+            <strong>Conclusión:</strong> sin recorte funcional, no podemos predecir ni influir la conducta.  
+            La unidad de análisis es ese recorte.
+        </p>
+
+    </section>
+
+    <!-- ======================================================
+         LOS 3 ERRORES MÁS COMUNES
+    ======================================================= -->
+    <section class="ua-main-card ua-fade-in">
+
+        <div class="ua-section-label">Concepto clave</div>
+        <div class="ua-section-title">Los 3 errores más comunes</div>
+
+        <p class="ua-text">Arrastra cada error hacia su explicación correcta.</p>
+
+        <div class="ua-drag-grid">
+
+            <div class="ua-drag-item" draggable="true">Confundir conducta con rasgos</div>
+            <div class="ua-drag-item" draggable="true">Confundir eventos privados con causas internas</div>
+            <div class="ua-drag-item" draggable="true">Olvidar el contexto</div>
+
+        </div>
+
+        <div class="ua-drop-zone" id="drop1">Explicación 1</div>
+        <div class="ua-drop-zone" id="drop2">Explicación 2</div>
+        <div class="ua-drop-zone" id="drop3">Explicación 3</div>
+
+    </section>
+
+    <!-- ======================================================
+         EXPERIMENTO 2 — CAMBIAR EL CONTEXTO
+    ======================================================= -->
+    <section class="ua-main-card ua-fade-in">
+
+        <div class="ua-section-label">Experimento 2</div>
+        <div class="ua-section-title">¿Qué cambia si cambia el contexto?</div>
+
+        <p class="ua-text">Haz clic en cada contexto para ver cómo cambia la unidad.</p>
+
+        <div class="ua-context-buttons">
+            <button class="ua-btn-primary context-btn" data-context="A">Contexto A</button>
+            <button class="ua-btn-primary context-btn" data-context="B">Contexto B</button>
+            <button class="ua-btn-primary context-btn" data-context="C">Contexto C</button>
+            <button class="ua-btn-primary context-btn" data-context="D">Contexto D</button>
+        </div>
+
+        <div class="ua-context-box" id="contextBox">
+            Selecciona un contexto.
+        </div>
+
+    </section>
+
+    <!-- ======================================================
+         DEFINICIÓN PROFUNDA
+    ======================================================= -->
+    <section class="ua-main-card ua-fade-in">
+
+        <div class="ua-section-label">Definición técnica</div>
+        <div class="ua-section-title">Unidad de análisis: definición profesional</div>
+
+        <p class="ua-text">
+            Una unidad de análisis es un episodio de acción-en-contexto donde podemos observar:
+        </p>
+
+        <ul class="ua-list">
+            <li>qué hace la persona,</li>
+            <li>en qué situación lo hace,</li>
+            <li>qué efectos tiene a corto y largo plazo.</li>
+        </ul>
+
+        <p class="ua-text">
+            Sin necesidad de rasgos, diagnósticos ni explicaciones internas.
+        </p>
+
+    </section>
+
+    <!-- ======================================================
+         EXPERIMENTO 3 — DESARMAR UNA ETIQUETA
+    ======================================================= -->
+    <section class="ua-main-card ua-fade-in">
+
+        <div class="ua-section-label">Experimento 3</div>
+        <div class="ua-section-title">Desarmando una etiqueta</div>
+
+        <p class="ua-text">Haz clic en una etiqueta para desarmarla.</p>
+
+        <div class="ua-tag-buttons">
+            <button class="ua-btn-ghost tag-btn" data-tag="ansioso">“Es ansioso”</button>
+            <button class="ua-btn-ghost tag-btn" data-tag="procrastinador">“Soy procrastinador”</button>
+            <button class="ua-btn-ghost tag-btn" data-tag="dependiente">“Es dependiente”</button>
+        </div>
+
+        <div class="ua-tag-result" id="tagResult">
+            Selecciona una etiqueta.
+        </div>
+
+    </section>
+
+    <!-- ======================================================
+         CIERRE
+    ======================================================= -->
+    <section class="ua-main-card ua-fade-in">
+        <div class="ua-section-title">Cierre</div>
+        <p class="ua-text">
+            Ya aprendiste a reconocer qué constituye un episodio funcional.
+            En la siguiente lección veremos cómo descomponerlo en el Modelo ABC.
+        </p>
+        <div class="ua-btn-row">
+            <a href="p3.html" class="ua-btn-primary">Continuar a Lección 2 →</a>
+        </div>
+    </section>
+
+</body>
+
+</html>
 
