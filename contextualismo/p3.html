@@ -1,299 +1,944 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P3 · Fundamentos del Contextualismo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P3 · Fundamentos del Contextualismo Funcional</title>
 
-    <!-- ===========================
-         ESTILO GLOBAL PREMIUM
-    ============================ -->
-    <style>
-        :root {
-            --azul-1: #0A2A5C;
-            --azul-2: #132F66;
-            --azul-3: #000C1A;
-            --dorado: #FDBF12;
-            --dorado-soft: #FFD980;
-            --texto: #E9ECF5;
-            --blanco: #FFFFFF;
-        }
+  <style>
+    :root {
+      --azul-1: #0A2A5C;
+      --azul-2: #132F66;
+      --azul-3: #000C1A;
+      --azul-soft: #E3ECFF;
+      --dorado: #FDBF12;
+      --dorado-soft: #FFD978;
+      --blanco: #FFFFFF;
+      --gris-texto: #2B3650;
+    }
 
-        * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            color: var(--texto);
-            background: linear-gradient(180deg, var(--azul-1), var(--azul-3));
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 40px 28px 80px;
-        }
+    body {
+      margin: 0;
+      font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(10,42,92,0.12), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(253,191,18,0.14), transparent 55%),
+        linear-gradient(180deg, #E9EFF8 0%, #FFFFFF 38%, #F5F7FC 100%);
+      color: var(--gris-texto);
+    }
 
-        /* PATRÓN HEXAGONAL PREMIUM */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: url('../assets/backgrounds/hex-pattern.png');
-            background-size: 420px;
-            opacity: 0.09;
-            z-index: -2;
-        }
+    /* HEXÁGONOS SUAVES */
+    .hex-bg {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      background: url("../assets/icons/hex-gold.png") no-repeat center/contain;
+      opacity: 0.05;
+      z-index: -1;
+      pointer-events: none;
+      filter: drop-shadow(0 0 12px rgba(253,191,18,0.35));
+      animation: floatHex 18s ease-in-out infinite;
+    }
 
-        /* HEXÁGONOS DORADOS */
-        .hex {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
-            opacity: 0.07;
-            filter: blur(1px);
-            animation: float 14s ease-in-out infinite;
-            z-index: -1;
-        }
-        .h1 { top: 10%; left: 6%; }
-        .h2 { bottom: 12%; right: 4%; animation-delay: 4s; }
+    .hex-bg.h1 { top: -40px; left: -40px; }
+    .hex-bg.h2 { bottom: -60px; right: -20px; transform: rotate(18deg); }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-14px); }
-            100% { transform: translateY(0px); }
-        }
+    @keyframes floatHex {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
 
-        /* ============================
-           TITULOS
-        ============================ */
-        h1 {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 34px;
-            margin: 0 0 8px;
-            color: var(--blanco);
-        }
+    /* BOTÓN VOLVER */
+    .top-nav {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+    }
 
-        h2 {
-            font-size: 22px;
-            margin: 4px 0 22px;
-            color: var(--dorado);
-            font-weight: 500;
-        }
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(10,42,92,0.18);
+      background: rgba(255,255,255,0.9);
+      color: var(--azul-1);
+      font-size: 14px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+      transition: 0.2s ease;
+    }
 
-        p {
-            font-size: 20px;
-            line-height: 1.55;
-            max-width: 880px;
-        }
+    .top-nav a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+    }
 
-        /* ============================
-           CONTENEDOR PRINCIPAL
-        ============================ */
-        .content-box {
-            background: rgba(255,255,255,0.06);
-            border: 2px solid rgba(255,255,255,0.08);
-            padding: 32px;
-            border-radius: 22px;
-            margin-top: 32px;
-            backdrop-filter: blur(6px);
-        }
+    /* CONTENEDOR PRINCIPAL */
+    .container {
+      max-width: 1160px;
+      margin: 90px auto 70px auto;
+      padding: 0 24px 40px 24px;
+    }
 
-        /* EJEMPLO */
-        .example-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 22px;
-            margin-top: 24px;
-        }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(10,42,92,0.20);
+      background: rgba(255,255,255,0.9);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--azul-2);
+      margin-bottom: 12px;
+    }
 
-        .example {
-            background: rgba(255,255,255,0.04);
-            padding: 20px;
-            border-radius: 16px;
-            border-left: 4px solid var(--dorado);
-            font-size: 19px;
-            line-height: 1.5;
-        }
+    .tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dorado);
+      box-shadow: 0 0 10px rgba(253,191,18,0.8);
+    }
 
-        /* ============================
-           ACTIVIDAD DRAG & DROP
-        ============================ */
-        .activity-title {
-            font-size: 22px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            color: var(--blanco);
-        }
+    h1 {
+      font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 34px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin: 0 0 8px 0;
+      color: var(--azul-1);
+    }
 
-        .drag-container {
-            display: flex;
-            gap: 26px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-        }
+    .sub {
+      font-size: 20px;
+      opacity: 0.9;
+      max-width: 760px;
+      margin-bottom: 14px;
+    }
 
-        .draggable {
-            padding: 14px 18px;
-            background: rgba(255,255,255,0.08);
-            border: 2px solid rgba(255,255,255,0.12);
-            border-radius: 16px;
-            cursor: grab;
-            font-size: 19px;
-            width: 220px;
-            text-align: center;
-            transition: 0.25s;
-        }
-        .draggable:hover { border-color: var(--dorado); }
+    .intro {
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 860px;
+      margin-bottom: 24px;
+    }
 
-        .drop-zone {
-            width: 240px;
-            height: 70px;
-            border: 2px dashed var(--dorado);
-            border-radius: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--dorado);
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 14px;
-        }
+    /* TARJETAS GENERALES */
+    .card-soft {
+      background: rgba(255,255,255,0.96);
+      border-radius: 24px;
+      padding: 18px 20px 20px 20px;
+      box-shadow:
+        0 12px 26px rgba(15,33,71,0.08),
+        0 0 0 1px rgba(10,42,92,0.04);
+      margin-bottom: 24px;
+    }
 
-        /* FEEDBACK */
-        .correct-banner {
-            display: none;
-            margin-top: 26px;
-            padding: 24px;
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
-            border-radius: 18px;
-            color: #1A1A1A;
-            font-weight: bold;
-            font-size: 20px;
-            text-align: center;
-            box-shadow: 0 0 24px rgba(253,191,18,0.45);
-        }
+    .card-title-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--azul-2);
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
 
-        /* NAVEGACIÓN */
-        .nav-buttons {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-        }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--azul-1);
+      margin-bottom: 8px;
+    }
 
-        .btn {
-            padding: 14px 26px;
-            font-size: 18px;
-            border-radius: 999px;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-        }
+    .card-body {
+      font-size: 17px;
+      line-height: 1.7;
+    }
 
-        .btn-back {
-            background: rgba(255,255,255,0.12);
-            color: var(--blanco);
-        }
+    .bullets {
+      margin-top: 8px;
+      padding-left: 18px;
+      font-size: 17px;
+      line-height: 1.7;
+    }
 
-        .btn-next {
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
-            color: #1A1A1A;
-        }
-    </style>
+    .highlight {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, rgba(253,191,18,0.12), rgba(255,255,255,0.9));
+      border-left: 4px solid var(--dorado);
+      font-size: 16px;
+    }
+
+    /* SECCIONES */
+    .section-heading {
+      margin-top: 34px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--azul-2);
+      opacity: 0.9;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--azul-1);
+      margin-bottom: 8px;
+    }
+
+    .section-text {
+      font-size: 17px;
+      max-width: 800px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    /* OPCIONES MULTIPLE CHOICE */
+    .option-card {
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(10,42,92,0.12);
+      background: #F7F8FD;
+      font-size: 15px;
+      cursor: pointer;
+      text-align: left;
+      transition: 0.18s ease;
+      margin-bottom: 8px;
+    }
+
+    .option-card:hover {
+      background: #EEF2FF;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(15,33,71,0.10);
+    }
+
+    .option-card.correct {
+      border-color: rgba(46,160,67,0.9);
+      background: #E6F7EA;
+      box-shadow: 0 0 0 1px rgba(46,160,67,0.6);
+    }
+
+    .option-card.wrong {
+      border-color: rgba(200,50,50,0.7);
+      background: #FDEAEA;
+      box-shadow: 0 0 0 1px rgba(200,50,50,0.55);
+    }
+
+    .mc-feedback {
+      margin-top: 8px;
+      font-size: 15px;
+      min-height: 38px;
+      color: var(--azul-2);
+    }
+
+    /* GRID CRITERIOS */
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 960px) {
+      .criteria-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .criteria-col {
+      background: rgba(255,255,255,0.96);
+      border-radius: 18px;
+      border: 1px solid rgba(10,42,92,0.08);
+      padding: 10px 12px 12px 12px;
+      box-shadow: 0 8px 18px rgba(15,33,71,0.05);
+      min-height: 120px;
+    }
+
+    .criteria-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--azul-1);
+      margin-bottom: 4px;
+    }
+
+    .criteria-sub {
+      font-size: 13px;
+      color: var(--azul-2);
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+
+    .drop-zone {
+      border-radius: 14px;
+      border: 1px dashed rgba(10,42,92,0.25);
+      padding: 8px;
+      min-height: 60px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .draggable {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(10,42,92,0.3);
+      background: #F0F3FF;
+      font-size: 14px;
+      cursor: grab;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.18s ease;
+    }
+
+    .draggable:hover {
+      background: #E1E7FF;
+      transform: translateY(-1px);
+    }
+
+    .draggable-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dorado);
+    }
+
+    .drag-pool {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .criteria-feedback {
+      margin-top: 10px;
+      font-size: 14px;
+      min-height: 40px;
+    }
+
+    .criteria-feedback.ok {
+      color: #1C7A3F;
+    }
+
+    .criteria-feedback.warn {
+      color: #A0492D;
+    }
+
+    /* TARJETAS CLIC PARA REVELAR */
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 960px) {
+      .cards-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .reveal-card {
+      border-radius: 18px;
+      border: 1px solid rgba(10,42,92,0.12);
+      background: #F7F8FD;
+      padding: 12px 14px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.18s ease;
+      min-height: 80px;
+    }
+
+    .reveal-card:hover {
+      background: #EEF2FF;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15,33,71,0.12);
+    }
+
+    .reveal-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--azul-1);
+    }
+
+    .reveal-extra {
+      margin-top: 6px;
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .reveal-card.active {
+      background: linear-gradient(135deg, #FFFFFF, #FFF6E1);
+      border-color: var(--dorado);
+      box-shadow: 0 0 0 1px rgba(253,191,18,0.7);
+    }
+
+    /* CONTEXTOS MENSAJE */
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 1020px) {
+      .context-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .context-card {
+      border-radius: 18px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(10,42,92,0.10);
+      padding: 12px 14px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      box-shadow: 0 6px 16px rgba(15,33,71,0.06);
+    }
+
+    .context-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--azul-1);
+    }
+
+    .context-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(15,33,71,0.12);
+      border-color: rgba(253,191,18,0.7);
+    }
+
+    .context-card.active {
+      border-color: var(--dorado);
+      box-shadow: 0 0 0 2px rgba(253,191,18,0.7);
+      background: linear-gradient(135deg, #FFFFFF, #FFF7E3);
+    }
+
+    .context-result {
+      margin-top: 10px;
+      font-size: 16px;
+      min-height: 50px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.9);
+      border-left: 4px solid rgba(10,42,92,0.14);
+    }
+
+    /* NAVEGACIÓN INFERIOR */
+    .nav-buttons {
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-nav {
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--azul-1);
+      background: var(--azul-1);
+      color: var(--blanco);
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.22s ease;
+    }
+
+    .btn-nav.secondary {
+      background: transparent;
+      color: var(--azul-1);
+      border-color: rgba(10,42,92,0.4);
+    }
+
+    .btn-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15,33,71,0.22);
+    }
+  </style>
 </head>
-
 <body>
 
-    <!-- FONDOS -->
-    <div class="hex h1"></div>
-    <div class="hex h2"></div>
+  <div class="hex-bg h1"></div>
+  <div class="hex-bg h2"></div>
 
-    <!-- TITULOS -->
-    <h1>Fundamentos del Contextualismo Funcional</h1>
-    <h2>El criterio de verdad pragmático y el propósito central</h2>
+  <div class="top-nav">
+    <a href="index.html">⟵ Volver al menú del módulo</a>
+  </div>
 
-    <div class="content-box">
+  <div class="container">
 
-        <p>
-            El contextualismo funcional establece que un modelo es válido si <b>predice</b> e <b>influye</b> 
-            la conducta de forma efectiva, con precisión, alcance y profundidad. No buscamos explicaciones 
-            internas, sino funciones en contexto.
-        </p>
-
-        <!-- EJEMPLO -->
-        <div class="example-grid">
-
-            <div class="example">
-                🎤 <b>Estímulo externo:</b> un micrófono.<br>
-                💬 <b>Pensamiento:</b> “voy a fallar”.<br>
-                🤲 <b>Respuesta corporal:</b> temblor.<br>
-                🚶‍♂️ <b>Conducta:</b> evitar hablar.
-            </div>
-
-            <div class="example">
-                El contextualismo no atribuye esto a “inseguridad interna”, sino a una 
-                <b>historia de aprendizaje</b>, <b>marcos relacionales</b> y <b>funciones adquiridas</b>.
-            </div>
-
-        </div>
-
-        <!-- ACTIVIDAD DRAG AND DROP -->
-        <h3 class="activity-title">Actividad: Arrastra cada elemento a su categoría</h3>
-
-        <div class="drag-container">
-            <div class="draggable" draggable="true" id="item1">🎤 Micrófono</div>
-            <div class="draggable" draggable="true" id="item2">🤲 Temblor</div>
-            <div class="draggable" draggable="true" id="item3">💬 “Voy a fallar”</div>
-            <div class="draggable" draggable="true" id="item4">🚶‍♂️ Evitar hablar</div>
-        </div>
-
-        <!-- ZONAS -->
-        <div class="drag-container">
-            <div class="drop-zone" data-target="item1">Contexto antecedente</div>
-            <div class="drop-zone" data-target="item2">Respuesta corporal</div>
-            <div class="drop-zone" data-target="item3">Evento verbal</div>
-            <div class="drop-zone" data-target="item4">Conducta operante</div>
-        </div>
-
-        <div id="banner" class="correct-banner">
-            ✔ ¡Correcto! El análisis funcional depende de cómo se relacionan todos estos elementos.
-        </div>
-
+    <div class="tag">
+      <span class="tag-dot"></span>
+      PANTALLA 3 · FUNDAMENTOS DEL CONTEXTUALISMO
     </div>
 
-    <!-- NAVEGACIÓN -->
+    <h1>Fundamentos del contextualismo funcional</h1>
+
+    <div class="sub">
+      Criterio pragmático de verdad y propósito central de la ciencia en la psicología conductual contextual.
+    </div>
+
+    <p class="intro">
+      El contextualismo funcional propone que una explicación es válida si permite
+      <strong>predecir e influir la conducta</strong> con precisión, alcance y profundidad.
+      En lugar de buscar causas internas, describe cómo historia, contexto y lenguaje
+      organizan la conducta-en-contexto. Este criterio es la base del análisis funcional, ACT y RFT.
+    </p>
+
+    <!-- SECCIÓN 1: VERDAD = LO QUE FUNCIONA -->
+    <section class="card-soft">
+      <div class="card-title-label">Idea central</div>
+      <div class="card-title">“Verdad” como lo que funciona</div>
+
+      <div class="card-body">
+        Desde el contextualismo funcional, una filosofía de la ciencia no busca descubrir
+        entidades internas ocultas, sino establecer <strong>criterios pragmáticos</strong>:
+        <ul class="bullets">
+          <li>¿Qué explicaciones permiten <strong>predecir</strong> la conducta?</li>
+          <li>¿Qué explicaciones permiten <strong>influenciarla</strong> de manera efectiva?</li>
+          <li>¿Con qué <strong>precisión, alcance y profundidad</strong> lo hacen?</li>
+        </ul>
+
+        <div class="highlight">
+          Un modelo es “verdadero” en la medida en que guía acciones útiles
+          sobre la conducta-en-contexto, no porque describa con exactitud un
+          “mundo interno” independiente.
+        </div>
+
+        <div style="margin-top: 14px; font-size: 15px;">
+          Micro-actividad: elige el criterio de verdad más coherente con el contextualismo funcional.
+        </div>
+
+        <button
+          class="option-card mc1-option"
+          data-correct="false"
+          data-feedback="Esta opción corresponde a una filosofía representacional: la verdad como espejo de una realidad interna. El contextualismo funcional no se centra en “describir” un interior, sino en guiar acciones eficaces.">
+          A) Una explicación es verdadera si representa fielmente la realidad interna del individuo.
+        </button>
+
+        <button
+          class="option-card mc1-option"
+          data-correct="false"
+          data-feedback="La coherencia lógica puede ser deseable, pero no es suficiente para una ciencia contextual. Podemos tener explicaciones lógicamente elegantes que no permiten intervenir con eficacia.">
+          B) Una explicación es verdadera si es lógicamente coherente, aunque no cambie nada en la conducta.
+        </button>
+
+        <button
+          class="option-card mc1-option"
+          data-correct="true"
+          data-feedback="Este es el criterio pragmático: lo que cuenta como verdad es lo que funciona para predecir e influir la conducta con precisión, alcance y profundidad, al servicio de propósitos definidos.">
+          C) Una explicación es verdadera si funciona para predecir e influir la conducta con precisión, alcance y profundidad.
+        </button>
+
+        <button
+          class="option-card mc1-option"
+          data-correct="false"
+          data-feedback="Apelar a la autoridad del terapeuta introduce criterios personales más que científicos. El contextualismo funcional demanda criterios explícitos, públicos y ligados a efectos sobre la conducta.">
+          D) Una explicación es verdadera si el terapeuta considera que refleja bien lo que ve en sesión.
+        </button>
+
+        <div class="mc-feedback" id="mc1-feedback">
+          Elige una opción para ver cómo cambia el criterio de verdad según la filosofía.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: PRECISIÓN, ALCANCE, PROFUNDIDAD -->
+    <div class="section-heading">Evaluar explicaciones</div>
+    <div class="section-title">Precisión, alcance y profundidad</div>
+    <div class="section-text">
+      Hayes, Barnes-Holmes y Wilson proponen que una ciencia contextual evalúa sus modelos
+      según tres criterios principales:
+    </div>
+
+    <section class="card-soft">
+      <div class="card-body">
+        <ul class="bullets">
+          <li><strong>Precisión</strong>: qué tan bien predice una conducta en un contexto específico.</li>
+          <li><strong>Alcance</strong>: cuántos fenómenos distintos puede organizar esa explicación.</li>
+          <li><strong>Profundidad</strong>: qué tan coherente es con principios de la ciencia natural
+              (evolución, aprendizaje, variabilidad).</li>
+        </ul>
+
+        <div style="margin-top: 10px; font-size: 15px;">
+          Actividad: arrastra cada enunciado al criterio que mejor ilustra.
+        </div>
+
+        <!-- POOL DRAGGABLES -->
+        <div class="drag-pool" id="drag-pool">
+          <div class="draggable" draggable="true" data-target="precision">
+            <span class="draggable-dot"></span>
+            Predice que evitar una reunión reduce la ansiedad inmediata.
+          </div>
+          <div class="draggable" draggable="true" data-target="alcance">
+            <span class="draggable-dot"></span>
+            Organiza evitación, rigidez y conducta verbal bajo los mismos principios.
+          </div>
+          <div class="draggable" draggable="true" data-target="profundidad">
+            <span class="draggable-dot"></span>
+            Es consistente con procesos de aprendizaje y evolución del organismo.
+          </div>
+          <div class="draggable" draggable="true" data-target="baja-precision">
+            <span class="draggable-dot"></span>
+            Funciona solo en un caso aislado y falla al generalizar.
+          </div>
+          <div class="draggable" draggable="true" data-target="baja-alcance">
+            <span class="draggable-dot"></span>
+            Explica ansiedad y tristeza con la misma causa interna inespecífica.
+          </div>
+          <div class="draggable" draggable="true" data-target="baja-profundidad">
+            <span class="draggable-dot"></span>
+            Ignora historia de aprendizaje y solo apela a rasgos internos fijos.
+          </div>
+        </div>
+
+        <!-- GRID CRITERIOS -->
+        <div class="criteria-grid">
+          <div class="criteria-col" data-criterion="precision">
+            <div class="criteria-title">Precisión</div>
+            <div class="criteria-sub">Predicción ajustada a contextos específicos</div>
+            <div class="drop-zone" data-accept="precision baja-precision"></div>
+          </div>
+          <div class="criteria-col" data-criterion="alcance">
+            <div class="criteria-title">Alcance</div>
+            <div class="criteria-sub">Variedad de fenómenos que organiza</div>
+            <div class="drop-zone" data-accept="alcance baja-alcance"></div>
+          </div>
+          <div class="criteria-col" data-criterion="profundidad">
+            <div class="criteria-title">Profundidad</div>
+            <div class="criteria-sub">Coherencia con la ciencia natural</div>
+            <div class="drop-zone" data-accept="profundidad baja-profundidad"></div>
+          </div>
+        </div>
+
+        <div class="criteria-feedback" id="criteria-feedback">
+          Arrastra cada enunciado a la categoría que creas adecuada. Luego observa qué tan completa es tu clasificación.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: EVENTO = INTERACCIÓN -->
+    <div class="section-heading">Qué es un “evento”</div>
+    <div class="section-title">El evento como conducta-en-contexto</div>
+    <div class="section-text">
+      En el contextualismo funcional, un evento psicológico no es una “cosa dentro” de la persona.
+      Es la <strong>interacción</strong> entre historia de aprendizaje, estímulos actuales, redes verbales
+      y respuestas del organismo.
+    </div>
+
+    <section class="card-soft">
+      <div class="card-body">
+        Toca cada tarjeta para ver cómo se vuelve parte del evento:
+
+        <div class="cards-row">
+          <div class="reveal-card" data-extra="El mensaje adquiere función según la historia relacional de la persona con frases similares. No es neutro: participa en patrones de predicción y evitación.">
+            <strong>📩 Mensaje: “Necesitamos hablar”</strong>
+            <span class="reveal-extra"></span>
+          </div>
+
+          <div class="reveal-card" data-extra="Pensar «algo malo hice» es una acción verbal bajo control contextual; no es un espejo de la realidad, sino un elemento que guía la conducta.">
+            <strong>💬 Pensamiento: «algo malo hice»</strong>
+            <span class="reveal-extra"></span>
+          </div>
+
+          <div class="reveal-card" data-extra="El peso en el pecho forma parte del patrón de respuesta del organismo. Integra historia, lenguaje y situación actual en una misma unidad funcional.">
+            <strong>🤲 Sensación: peso en el pecho</strong>
+            <span class="reveal-extra"></span>
+          </div>
+        </div>
+
+        <div class="highlight" style="margin-top: 16px;">
+          El evento que analizamos es la <strong>conducta-en-contexto</strong> que emerge de la
+          interacción de todos estos elementos, no un solo componente aislado.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: EXPLICACIÓN CONTEXTUALISTA vs MENTALISTA -->
+    <div class="section-heading">Diferentes formas de explicar</div>
+    <div class="section-title">Explicación nombres vs explicación funcional</div>
+    <div class="section-text">
+      Decir que alguien actúa “porque tiene ansiedad” puede ser solo una etiqueta.
+      El contextualismo funcional busca variables modificables: antecedentes, funciones, historia, contingencias, redes verbales.
+    </div>
+
+    <section class="card-soft">
+      <div class="card-body">
+        Caso: Ana evita contestar un correo importante del trabajo.  
+        Elige la explicación más coherente con un enfoque contextual funcional:
+
+        <button
+          class="option-card mc2-option"
+          data-correct="false"
+          data-feedback="Nombrar ‘miedo al rechazo’ sin describir cómo se organiza en la historia y el contexto mantiene la explicación en el plano de etiquetas internas. Falta análisis funcional.">
+          A) Ana actúa así porque tiene miedo al rechazo y ese es su rasgo principal.
+        </button>
+
+        <button
+          class="option-card mc2-option"
+          data-correct="false"
+          data-feedback="Hablar de “interpretar mal” sigue ubicando el problema en un déficit interno general, sin especificar variables contextuales ni funciones concretas.">
+          B) Ana interpreta mal las señales sociales y eso explica su conducta.
+        </button>
+
+        <button
+          class="option-card mc2-option"
+          data-correct="true"
+          data-feedback="Esta explicación contextualiza la frase “voy a quedar mal” en la historia de Ana y describe su función actual: señal de amenaza que organiza evitación. Esto permite intervenir sobre funciones y contextos, no solo sobre etiquetas internas.">
+          C) La historia de Ana con críticas hace que “voy a quedar mal” funcione como señal de amenaza,
+          organizando evitación del correo y alivio inmediato.
+        </button>
+
+        <button
+          class="option-card mc2-option"
+          data-correct="false"
+          data-feedback="Describir a Ana como “muy sensible” introduce un rasgo global poco operativo. El contextualismo funcional pide descripciones funcionales ligadas a contextos específicos.">
+          D) Ana es muy sensible emocionalmente y por eso evita situaciones exigentes.
+        </button>
+
+        <div class="mc-feedback" id="mc2-feedback">
+          Toca una opción para ver cómo cambia la forma de explicar la misma conducta.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: CONTEXTO CAMBIA FUNCIÓN -->
+    <div class="section-heading">Mismo estímulo, funciones distintas</div>
+    <div class="section-title">El contexto hace al evento</div>
+    <div class="section-text">
+      Un mismo mensaje puede adquirir funciones muy distintas según la historia y el contexto.
+      El contextualismo no pregunta “¿qué significa en abstracto?”, sino <strong>qué hace en la conducta aquí y ahora</strong>.
+    </div>
+
+    <section class="card-soft">
+      <div class="card-body">
+        Mensaje base: <strong>📩 “Tenemos que hablar”</strong>
+
+        <div class="context-grid">
+          <button
+            class="context-card ctx"
+            data-funcion="Tras varias discusiones recientes, el mensaje funciona como <strong>señal de posible conflicto</strong>. La conducta probable es tensión, defensa o evitación.">
+            <strong>Contexto A · Pareja tras varios conflictos</strong>
+            Últimos encuentros marcados por reproches y discusiones pendientes.
+          </button>
+
+          <button
+            class="context-card ctx"
+            data-funcion="En un entorno donde el jefe suele reconocer el trabajo, el mensaje funciona como <strong>oportunidad</strong>. La conducta probable es preparación, acercamiento, curiosidad.">
+            <strong>Contexto B · Jefatura que da retroalimentación constructiva</strong>
+            Reuniones previas asociadas a reconocimiento y revisión de ideas.
+          </button>
+
+          <button
+            class="context-card ctx"
+            data-funcion="Entre amistades cercanas, el mensaje puede funcionar como <strong>invitar a aclarar algo importante</strong>, con mezcla de vulnerabilidad y confianza. La conducta probable es diálogo y exploración.">
+            <strong>Contexto C · Amigo cercano y confiable</strong>
+            Historial de conversaciones honestas donde se cuidan mutuamente.
+          </button>
+        </div>
+
+        <div class="context-result" id="context-result-3">
+          Toca cada contexto para ver cómo cambia la función del mismo mensaje según la historia y la relación.
+        </div>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section class="card-soft">
+      <div class="card-title-label">Cierre de la pantalla</div>
+      <div class="card-title">Del criterio pragmático a la unidad de análisis</div>
+      <div class="card-body">
+        En esta pantalla revisaste cómo el contextualismo funcional evalúa sus explicaciones:
+        <strong>lo verdadero es lo que funciona</strong> para predecir e influir la conducta con
+        precisión, alcance y profundidad.  
+        También viste que:
+        <ul class="bullets">
+          <li>los eventos psicológicos se entienden como <strong>conducta-en-contexto</strong>,</li>
+          <li>las explicaciones útiles describen <strong>funciones</strong>, no solo contenidos,</li>
+          <li>el contexto y la historia transforman las funciones de los eventos.</li>
+        </ul>
+        Esto prepara el paso siguiente del módulo: definir con claridad
+        <strong>cuál es la unidad de análisis</strong> en esta filosofía: la conducta-en-contexto.
+      </div>
+    </section>
+
+    <!-- NAVEGACIÓN INFERIOR -->
     <div class="nav-buttons">
-        <button class="btn btn-back" onclick="location.href='p2.html'">Volver</button>
-        <button class="btn btn-next" onclick="location.href='p4.html'">Siguiente</button>
+      <a href="p2.html" class="btn-nav secondary">
+        ⟵ Volver a P2 · ¿Qué es una filosofía de la ciencia?
+      </a>
+      <a href="p4.html" class="btn-nav">
+        P4 · La conducta como evento interactivo ⟶
+      </a>
     </div>
 
-    <!-- SCRIPT DRAG & DROP -->
-    <script>
-        const draggables = document.querySelectorAll(".draggable");
-        const drops = document.querySelectorAll(".drop-zone");
+  </div>
 
-        draggables.forEach(el => {
-            el.addEventListener("dragstart", e => {
-                e.dataTransfer.setData("id", e.target.id);
-            });
+  <script>
+    // MULTIPLE CHOICE 1
+    const mc1Options = document.querySelectorAll(".mc1-option");
+    const mc1Feedback = document.getElementById("mc1-feedback");
+
+    mc1Options.forEach(card => {
+      card.addEventListener("click", () => {
+        mc1Options.forEach(c => c.classList.remove("correct", "wrong"));
+        const isCorrect = card.dataset.correct === "true";
+        card.classList.add(isCorrect ? "correct" : "wrong");
+        mc1Feedback.innerHTML = card.dataset.feedback;
+      });
+    });
+
+    // MULTIPLE CHOICE 2
+    const mc2Options = document.querySelectorAll(".mc2-option");
+    const mc2Feedback = document.getElementById("mc2-feedback");
+
+    mc2Options.forEach(card => {
+      card.addEventListener("click", () => {
+        mc2Options.forEach(c => c.classList.remove("correct", "wrong"));
+        const isCorrect = card.dataset.correct === "true";
+        card.classList.add(isCorrect ? "correct" : "wrong");
+        mc2Feedback.innerHTML = card.dataset.feedback;
+      });
+    });
+
+    // DRAG & DROP CRITERIOS
+    const draggables = document.querySelectorAll(".draggable");
+    const dropZones = document.querySelectorAll(".drop-zone");
+    const dragPool = document.getElementById("drag-pool");
+    const criteriaFeedback = document.getElementById("criteria-feedback");
+
+    draggables.forEach(el => {
+      el.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("text/plain", el.dataset.target);
+        e.dataTransfer.effectAllowed = "move";
+        el.classList.add("dragging");
+      });
+
+      el.addEventListener("dragend", () => {
+        el.classList.remove("dragging");
+      });
+    });
+
+    dropZones.forEach(zone => {
+      zone.addEventListener("dragover", e => {
+        e.preventDefault();
+      });
+
+      zone.addEventListener("drop", e => {
+        e.preventDefault();
+        const targetKey = e.dataTransfer.getData("text/plain");
+        const dragged = document.querySelector(`.draggable[data-target="${targetKey}"]`);
+        if (!dragged) return;
+
+        // Evitar duplicados en el mismo drop
+        if (!zone.contains(dragged)) {
+          zone.appendChild(dragged);
+        }
+
+        evaluarCriterios();
+      });
+    });
+
+    // Permitir volver a la pool si se suelta allí
+    dragPool.addEventListener("dragover", e => {
+      e.preventDefault();
+    });
+
+    dragPool.addEventListener("drop", e => {
+      e.preventDefault();
+      const targetKey = e.dataTransfer.getData("text/plain");
+      const dragged = document.querySelector(`.draggable[data-target="${targetKey}"]`);
+      if (!dragged) return;
+      dragPool.appendChild(dragged);
+      evaluarCriterios();
+    });
+
+    function evaluarCriterios() {
+      let correctos = 0;
+      let totalEsperado = 6;
+
+      dropZones.forEach(zone => {
+        const aceptados = (zone.dataset.accept || "").split(" ");
+        const hijos = zone.querySelectorAll(".draggable");
+        hijos.forEach(h => {
+          if (aceptados.includes(h.dataset.target)) {
+            correctos++;
+          }
         });
+      });
 
-        drops.forEach(zone => {
-            zone.addEventListener("dragover", e => e.preventDefault());
-            zone.addEventListener("drop", e => {
-                const id = e.dataTransfer.getData("id");
-                if (zone.dataset.target === id) {
-                    zone.style.background = "rgba(253,191,18,0.25)";
-                    zone.style.borderColor = "var(--dorado)";
-                    document.querySelector(`#${id}`).style.opacity = "0.4";
+      if (correctos === totalEsperado) {
+        criteriaFeedback.textContent =
+          "Excelente: has distribuido correctamente los ejemplos. Precisión, alcance y profundidad trabajan juntas para evaluar la utilidad de una explicación contextual.";
+        criteriaFeedback.classList.add("ok");
+        criteriaFeedback.classList.remove("warn");
+      } else if (correctos > 0) {
+        criteriaFeedback.textContent =
+          "Vas en camino: algunos ejemplos ya están bien ubicados. Revisa qué criterio ilustra mejor cada enunciado para completar la clasificación.";
+        criteriaFeedback.classList.add("warn");
+        criteriaFeedback.classList.remove("ok");
+      } else {
+        criteriaFeedback.textContent =
+          "Aún no has ubicado ejemplos correctos. Recuerda: precisión = predicción ajustada, alcance = variedad de fenómenos, profundidad = coherencia con la ciencia natural.";
+        criteriaFeedback.classList.add("warn");
+        criteriaFeedback.classList.remove("ok");
+      }
+    }
 
-                    // ¿Ya completó todo?
-                    const done = [...drops].every(z => z.style.background !== "");
-                    if (done) {
-                        document.getElementById("banner").style.display = "block";
-                    }
-                }
-            });
-        });
-    </script>
+    // TARJETAS CLIC PARA REVELAR
+    const revealCards = document.querySelectorAll(".reveal-card");
+
+    revealCards.forEach(card => {
+      const extraText = card.dataset.extra;
+      const extraSpan = card.querySelector(".reveal-extra");
+
+      card.addEventListener("click", () => {
+        if (card.classList.contains("active")) {
+          card.classList.remove("active");
+          extraSpan.textContent = "";
+        } else {
+          card.classList.add("active");
+          extraSpan.innerHTML = extraText;
+        }
+      });
+    });
+
+    // CONTEXTOS MENSAJE
+    const ctxCards = document.querySelectorAll(".context-card.ctx");
+    const contextResult3 = document.getElementById("context-result-3");
+
+    ctxCards.forEach(card => {
+      card.addEventListener("click", () => {
+        ctxCards.forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        contextResult3.innerHTML = card.dataset.funcion;
+      });
+    });
+  </script>
 
 </body>
 </html>
