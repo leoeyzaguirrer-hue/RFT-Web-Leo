@@ -1,169 +1,160 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contextualismo Funcional · Pantalla 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contextualismo Funcional · Módulo</title>
 
-    <style>
-        :root {
-            --azul-1: #0A2A5C;
-            --azul-2: #132F66;
-            --azul-3: #000C1A;
-            --dorado: #FDBF12;
-            --dorado-2: #FFD978;
-            --blanco: #FFFFFF;
-            --gris-claro: #F7F9FC;
-        }
+<style>
 
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            background: linear-gradient(
-                180deg,
-                #FFFFFF 0%,
-                #F3F5FA 100%
-            );
-            padding: 40px 60px;
-            color: #1F2430;
-            position: relative;
-            min-height: 100vh;
-        }
+/* ============================================
+   PALETA GLOBAL
+============================================ */
+:root {
+    --azul-1:#0A2A5C;
+    --azul-2:#132F66;
+    --azul-3:#000C1A;
+    --azul-soft:#0A2A5Cdd;
+    --dorado:#FDBF12;
+    --dorado-soft:#FFD978;
+    --blanco:#FFFFFF;
+}
 
-        /* Líneas técnicas sutiles */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(135deg, rgba(10,42,92,0.06) 1px, transparent 1px),
-                linear-gradient(225deg, rgba(255,191,18,0.04) 1px, transparent 1px);
-            background-size: 48px 48px;
-            pointer-events: none;
-            z-index: -1;
-        }
+/* ============================================
+   FONDO DEL MÓDULO (versión suave)
+============================================ */
+body{
+    margin:0;
+    font-family:"Noto Sans", sans-serif;
+    background:
+        linear-gradient(160deg, rgba(10,42,92,0.55), rgba(19,47,102,0.50), rgba(0,12,26,0.55)),
+        url('../assets/patterns/lines.png');
+    background-size:cover;
+    color:var(--blanco);
+    min-height:100vh;
+    overflow-x:hidden;
+}
 
-        /* NODOS DORADOS */
-        .node {
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 2px solid var(--dorado);
-            background: rgba(255,255,255,0.9);
-            box-shadow: 0 0 10px rgba(253,191,18,0.7);
-            animation: float 8s ease-in-out infinite;
-            opacity: 0.8;
-            pointer-events: none;
-        }
-        .n1 { top: 18%; left: 6%; }
-        .n2 { top: 70%; left: 80%; animation-delay: 2s; }
-        .n3 { top: 44%; left: 40%; animation-delay: 4s; }
+/* HEXÁGONO CENTRAL DETRÁS DEL TÍTULO */
+.hex-central{
+    position:absolute;
+    top:120px;
+    left:50%;
+    transform:translateX(-50%);
+    width:400px;
+    height:400px;
+    background:url('../assets/icons/hex-gold.png') no-repeat center/contain;
+    opacity:0.10;
+    filter:drop-shadow(0 0 18px rgba(253,191,18,0.35));
+    pointer-events:none;
+}
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
+/* ============================================
+   CONTENEDOR PRINCIPAL
+============================================ */
+.contenido{
+    padding:160px 80px;
+    position:relative;
+    z-index:2;
+}
 
-        /* TITULO */
-        .titulo {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 34px;
-            margin-bottom: 12px;
-        }
+/* ============================================
+   TIPOGRAFÍAS
+============================================ */
+h1{
+    font-family:"Coco Gothic", sans-serif;
+    font-size:34px;
+    text-transform:uppercase;
+    text-align:center;
+    margin-bottom:12px;
+}
 
-        .subtitulo {
-            font-size: 22px;
-            opacity: 0.75;
-            margin-bottom: 25px;
-        }
+.sub{
+    font-size:26px;
+    text-align:center;
+    opacity:0.9;
+    margin-bottom:40px;
+}
 
-        /* TARJETAS */
-        .grid-opciones {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
+/* ============================================
+   TARJETAS PRINCIPALES
+============================================ */
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:32px;
+    max-width:900px;
+    margin:0 auto;
+}
 
-        .card {
-            background: var(--blanco);
-            border-radius: 18px;
-            padding: 22px;
-            border: 2px solid var(--dorado);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 20px;
-        }
+.card{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,215,80,0.35);
+    padding:22px;
+    border-radius:20px;
+    backdrop-filter:blur(8px);
+    text-align:center;
+    font-size:22px;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(253,191,18,0.45);
-        }
+.card:hover{
+    background:rgba(255,215,80,0.22);
+    transform:translateY(-6px);
+    border-color:var(--dorado);
+}
 
-        /* BOTÓN PRINCIPAL */
-        .btn {
-            margin-top: 40px;
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-2));
-            border-radius: 999px;
-            padding: 16px 36px;
-            border: none;
-            font-size: 22px;
-            font-weight: bold;
-            color: #1A1F3B;
-            cursor: pointer;
-            box-shadow: 0 0 18px rgba(253,191,18,0.55);
-            transition: 0.3s;
-        }
+/* ============================================
+   BOTÓN PRINCIPAL
+============================================ */
+.btn{
+    margin-top:50px;
+    display:block;
+    width:max-content;
+    padding:16px 34px;
+    background:linear-gradient(135deg, var(--dorado), var(--dorado-soft));
+    color:#1A1F3B;
+    border-radius:999px;
+    font-size:22px;
+    font-weight:bold;
+    margin-left:auto;
+    margin-right:auto;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-        .btn:hover {
-            transform: scale(1.05);
-        }
-    </style>
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 24px rgba(253,191,18,0.6);
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- NODOS -->
-    <div class="node n1"></div>
-    <div class="node n2"></div>
-    <div class="node n3"></div>
+<!-- HEXÁGONO GRANDE CENTRAL -->
+<div class="hex-central"></div>
 
-    <!-- TITULO -->
-    <h1 class="titulo">Bienvenid@ al Contextualismo Funcional</h1>
-    <h2 class="subtitulo">La base de toda la ciencia del comportamiento contextual</h2>
+<section class="contenido">
 
-    <p style="font-size:21px; max-width:760px; line-height:1.6;">
-        Este módulo te introduce a la filosofía que sostiene ACT, RFT y todo el análisis funcional moderno.
-        Aquí aprenderás qué significa analizar la conducta en contexto, por qué los eventos psicológicos se entienden
-        como acciones, y cómo esta perspectiva organiza los modelos clínicos actuales.
-    </p>
+    <h1>Bienvenid@ al Contextualismo Funcional</h1>
 
-    <!-- TARJETAS -->
-    <div class="grid-opciones">
-
-        <div class="card" onclick="location.href='p2.html'">
-            ¿Qué es una filosofía de la ciencia?
-        </div>
-
-        <div class="card" onclick="location.href='p3.html'">
-            ¿Qué es el contextualismo funcional?
-        </div>
-
-        <div class="card" onclick="location.href='p4.html'">
-            ¿Qué significa analizar conducta en contexto?
-        </div>
-
-        <div class="card" onclick="location.href='p5.html'">
-            ¿Por qué esta filosofía es la base de ACT/RFT?
-        </div>
-
+    <div class="sub">
+        La base de toda la ciencia del comportamiento contextual
     </div>
 
-    <!-- BOTÓN -->
-    <button class="btn" onclick="location.href='p2.html'">Comenzar módulo</button>
+    <div class="card-grid">
+        <div class="card">¿Qué es una filosofía de la ciencia?</div>
+        <div class="card">¿Qué es el contextualismo funcional?</div>
+        <div class="card">¿Qué significa analizar conducta en contexto?</div>
+        <div class="card">¿Por qué es la base de ACT/RFT?</div>
+    </div>
+
+    <button class="btn">Comenzar módulo</button>
+
+</section>
 
 </body>
 </html>
