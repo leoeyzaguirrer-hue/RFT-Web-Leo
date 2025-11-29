@@ -3,158 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contextualismo Funcional · Módulo</title>
+    <title>Contextualismo Funcional · RFT</title>
 
-<style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           PALETA GLOBAL
+        ============================================ */
+        :root {
+            --azul-1: #0A2A5C;
+            --azul-2: #000C1A;
+            --azul-3: #132F66;
+            --dorado: #FDBF12;
+            --dorado-soft: #FFD978;
+            --blanco: #FFFFFF;
+        }
 
-/* ============================================
-   PALETA GLOBAL
-============================================ */
-:root {
-    --azul-1:#0A2A5C;
-    --azul-2:#132F66;
-    --azul-3:#000C1A;
-    --azul-soft:#0A2A5Cdd;
-    --dorado:#FDBF12;
-    --dorado-soft:#FFD978;
-    --blanco:#FFFFFF;
-}
+        body {
+            margin: 0;
+            font-family: "Noto Sans", sans-serif;
+            background: linear-gradient(180deg, var(--azul-1), var(--azul-2));
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--blanco);
+            position: relative;
+        }
 
-/* ============================================
-   FONDO DEL MÓDULO (versión suave)
-============================================ */
-body{
-    margin:0;
-    font-family:"Noto Sans", sans-serif;
-    background:
-        linear-gradient(160deg, rgba(10,42,92,0.55), rgba(19,47,102,0.50), rgba(0,12,26,0.55)),
-        url('../assets/patterns/lines.png');
-    background-size:cover;
-    color:var(--blanco);
-    min-height:100vh;
-    overflow-x:hidden;
-}
+        /* ============================================
+           PATRÓN HEXAGONAL DE FONDO
+        ============================================ */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/icons/pattern-hexagons.png');
+            background-size: 480px;
+            background-repeat: repeat;
+            opacity: 0.08;
+            z-index: -3;
+        }
 
-/* HEXÁGONO CENTRAL DETRÁS DEL TÍTULO */
-.hex-central{
-    position:absolute;
-    top:120px;
-    left:50%;
-    transform:translateX(-50%);
-    width:400px;
-    height:400px;
-    background:url('../assets/icons/hex-gold.png') no-repeat center/contain;
-    opacity:0.10;
-    filter:drop-shadow(0 0 18px rgba(253,191,18,0.35));
-    pointer-events:none;
-}
+        /* HEXÁGONOS BLUR DORADOS */
+        .hex-blur {
+            position: fixed;
+            width: 440px;
+            height: 440px;
+            background: radial-gradient(circle, rgba(253,191,18,0.35), transparent 70%);
+            filter: blur(40px);
+            z-index: -2;
+        }
 
-/* ============================================
-   CONTENEDOR PRINCIPAL
-============================================ */
-.contenido{
-    padding:160px 80px;
-    position:relative;
-    z-index:2;
-}
+        .hex-1 { top: 10%; left: 15%; }
+        .hex-2 { bottom: 12%; right: 18%; }
 
-/* ============================================
-   TIPOGRAFÍAS
-============================================ */
-h1{
-    font-family:"Coco Gothic", sans-serif;
-    font-size:34px;
-    text-transform:uppercase;
-    text-align:center;
-    margin-bottom:12px;
-}
+        /* ============================================
+           HERO PRINCIPAL
+        ============================================ */
+        .hero {
+            text-align: center;
+            padding-top: 120px;
+            padding-bottom: 40px;
+        }
 
-.sub{
-    font-size:26px;
-    text-align:center;
-    opacity:0.9;
-    margin-bottom:40px;
-}
+        .etiqueta {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--dorado);
+            margin-bottom: 12px;
+        }
 
-/* ============================================
-   TARJETAS PRINCIPALES
-============================================ */
-.card-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:32px;
-    max-width:900px;
-    margin:0 auto;
-}
+        .titulo {
+            font-family: "Coco Gothic", sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+        }
 
-.card{
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,215,80,0.35);
-    padding:22px;
-    border-radius:20px;
-    backdrop-filter:blur(8px);
-    text-align:center;
-    font-size:22px;
-    cursor:pointer;
-    transition:0.3s;
-}
+        .subtitulo {
+            margin-top: 10px;
+            font-size: 22px;
+            opacity: 0.9;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-.card:hover{
-    background:rgba(255,215,80,0.22);
-    transform:translateY(-6px);
-    border-color:var(--dorado);
-}
+        .descripcion {
+            margin-top: 14px;
+            font-size: 18px;
+            line-height: 1.55;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.85;
+        }
 
-/* ============================================
-   BOTÓN PRINCIPAL
-============================================ */
-.btn{
-    margin-top:50px;
-    display:block;
-    width:max-content;
-    padding:16px 34px;
-    background:linear-gradient(135deg, var(--dorado), var(--dorado-soft));
-    color:#1A1F3B;
-    border-radius:999px;
-    font-size:22px;
-    font-weight:bold;
-    margin-left:auto;
-    margin-right:auto;
-    cursor:pointer;
-    transition:0.3s;
-}
+        /* ============================================
+           TARJETAS PREMIUM (GRID 2x2)
+        ============================================ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 26px;
+            max-width: 860px;
+            margin: 60px auto 20px;
+        }
 
-.btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 24px rgba(253,191,18,0.6);
-}
+        .card {
+            background: linear-gradient(145deg, var(--azul-1), var(--azul-3));
+            border: 2px solid var(--dorado);
+            border-radius: 28px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.25s;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+        }
 
-</style>
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 48px rgba(253,191,18,0.45);
+        }
+
+        /* ============================================
+           SECCIÓN EXPLICATIVA
+        ============================================ */
+        .explicacion {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 18px;
+            opacity: 0.85;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           BOTÓN PRINCIPAL
+        ============================================ */
+        .btn {
+            margin: 40px auto 20px;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
+            color: #1A1A1A;
+            padding: 16px 40px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 20px;
+            border: 2px solid #E7B300;
+            box-shadow: 0 0 18px rgba(253,191,18,0.5);
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 26px rgba(253,191,18,0.7);
+        }
+
+        .duracion {
+            margin-top: 6px;
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.58;
+        }
+
+    </style>
 </head>
 
 <body>
 
-<!-- HEXÁGONO GRANDE CENTRAL -->
-<div class="hex-central"></div>
+    <!-- HEXÁGONOS BLUR -->
+    <div class="hex-blur hex-1"></div>
+    <div class="hex-blur hex-2"></div>
 
-<section class="contenido">
+    <!-- HERO -->
+    <section class="hero">
+        <div class="etiqueta">▣ MÓDULO FUNDAMENTAL</div>
 
-    <h1>Bienvenid@ al Contextualismo Funcional</h1>
+        <h1 class="titulo">CONTEXTUALISMO FUNCIONAL</h1>
 
-    <div class="sub">
-        La base de toda la ciencia del comportamiento contextual
+        <p class="subtitulo">
+            La base filosófica que sostiene la ciencia del comportamiento contextual
+        </p>
+
+        <p class="descripcion">
+            Este módulo introduce cómo analizamos la conducta en función del contexto, 
+            el criterio pragmático de verdad y la unidad de análisis que hace posible ACT, RFT 
+            y toda la tradición conductual-contextual.
+        </p>
+    </section>
+
+    <!-- GRID DE TARJETAS -->
+    <div class="grid">
+        <div class="card" onclick="window.location.href='p2.html'">
+            ¿Qué es una filosofía de la ciencia?
+        </div>
+
+        <div class="card" onclick="window.location.href='p3.html'">
+            ¿Qué es el contextualismo funcional?
+        </div>
+
+        <div class="card" onclick="window.location.href='p4.html'">
+            ¿Qué significa analizar conducta en contexto?
+        </div>
+
+        <div class="card" onclick="window.location.href='p5.html'">
+            ¿Por qué es la base de ACT/RFT?
+        </div>
     </div>
 
-    <div class="card-grid">
-        <div class="card">¿Qué es una filosofía de la ciencia?</div>
-        <div class="card">¿Qué es el contextualismo funcional?</div>
-        <div class="card">¿Qué significa analizar conducta en contexto?</div>
-        <div class="card">¿Por qué es la base de ACT/RFT?</div>
+    <!-- EXPLICACIÓN CORTA -->
+    <p class="explicacion">
+        Comprender el contextualismo funcional te permitirá interpretar todo el análisis funcional, 
+        los procesos de ACT y la lógica de la RFT desde bases coherentes y precisas.
+    </p>
+
+    <!-- BOTÓN PRINCIPAL -->
+    <div style="text-align:center;">
+        <a class="btn" href="p2.html">Comenzar módulo →</a>
+        <div class="duracion">Duración total: 8–12 minutos</div>
     </div>
-
-    <button class="btn">Comenzar módulo</button>
-
-</section>
 
 </body>
 </html>
