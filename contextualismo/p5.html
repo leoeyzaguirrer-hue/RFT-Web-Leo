@@ -1,1 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P5 · Contingencias, Historia y Función</title>
+
+    <!-- ===========================
+         ESTILO GLOBAL PREMIUM
+    ============================ -->
+    <style>
+        :root {
+            --azul-1: #0A2A5C;
+            --azul-3: #000C1A;
+            --dorado: #FDBF12;
+            --dorado-soft: #FFD980;
+            --texto: #E9ECF5;
+            --blanco: #FFFFFF;
+            --card-bg: rgba(255,255,255,0.07);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Noto Sans", sans-serif;
+            color: var(--texto);
+            background: linear-gradient(180deg, var(--azul-1), var(--azul-3));
+            min-height: 100vh;
+            padding: 40px 28px 120px;
+            overflow-x: hidden;
+        }
+
+        /* FONDO HEXAGONAL */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/backgrounds/hex-pattern.png');
+            background-size: 420px;
+            opacity: 0.08;
+            z-index: -2;
+        }
+
+        /* HEXÁGONOS DORADOS */
+        .hex {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
+            opacity: 0.07;
+            filter: blur(1px);
+            animation: float 14s ease-in-out infinite;
+            z-index: -1;
+        }
+        .h1 { top: 10%; left: 6%; }
+        .h2 { bottom: 12%; right: 4%; animation-delay: 3s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* TÍTULOS */
+        h1 {
+            font-family: "Coco Gothic", sans-serif;
+            font-size: 34px;
+            color: var(--blanco);
+            margin: 0 0 8px;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin: 4px 0 26px;
+            color: var(--dorado);
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.55;
+            max-width: 880px;
+        }
+
+        /* CONTENEDOR */
+        .content-box {
+            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.08);
+            padding: 32px;
+            border-radius: 22px;
+            margin-top: 32px;
+            backdrop-filter: blur(6px);
+        }
+
+        /* EJEMPLO VISUAL */
+        .stimulus-row {
+            display: flex;
+            gap: 18px;
+            margin-top: 26px;
+            flex-wrap: wrap;
+        }
+
+        .stimulus {
+            background: var(--card-bg);
+            border: 2px solid rgba(255,255,255,0.18);
+            border-radius: 18px;
+            padding: 18px;
+            width: 200px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        /* ACTIVIDAD */
+        .activity-title {
+            margin-top: 36px;
+            font-size: 22px;
+            color: var(--dorado);
+            font-weight: bold;
+        }
+
+        .options {
+            margin-top: 18px;
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+            padding: 18px;
+            border-radius: 16px;
+            width: 200px;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .option:hover {
+            border-color: var(--dorado);
+            box-shadow: 0 0 18px rgba(253,191,18,0.3);
+            transform: translateY(-6px);
+        }
+
+        .option.correct {
+            background: rgba(253,191,18,0.25);
+            border-color: var(--dorado);
+            color: var(--blanco);
+        }
+
+        #result {
+            margin-top: 22px;
+            font-size: 20px;
+            color: var(--dorado-soft);
+            font-weight: bold;
+        }
+
+        /* NAV */
+        .nav-buttons {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 14px 26px;
+            font-size: 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.10);
+            color: var(--blanco);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
+            color: #1A1A1A;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEX BACKGROUND -->
+    <div class="hex h1"></div>
+    <div class="hex h2"></div>
+
+    <!-- TITLES -->
+    <h1>Contingencias, historia y función</h1>
+    <h2>Lo importante no es el contenido, sino el rol que cumple</h2>
+
+    <div class="content-box">
+
+        <p>
+            En contextualismo funcional, la pregunta central no es <b>“¿qué es este evento?”</b>, sino:
+            <br><br>
+            <b>“¿Qué función cumple en este contexto según la historia de aprendizaje de la persona?”</b>
+        </p>
+
+        <p>
+            La misma palabra, imagen o sensación puede tener funciones totalmente distintas según:
+            <br>
+            — historia de reforzamiento  
+            — controles actuales  
+            — redes relacionales que transforman funciones
+        </p>
+
+        <h2 style="margin-top:40px; color: var(--dorado);">Ejemplo visual</h2>
+
+        <div class="stimulus-row">
+            <div class="stimulus">🪑 Silla de madera</div>
+            <div class="stimulus">🔳 Icono minimalista de silla</div>
+            <div class="stimulus">📝 Palabra “SILLA”</div>
+        </div>
+
+        <p style="margin-top:16px;">
+            Aunque son distintos físicamente, funcionan igual gracias a marcos de coordinación aprendidos.
+        </p>
+
+        <!-- ACTIVIDAD -->
+        <div class="activity-title">Actividad: ¿Cuál trataría como “silla” un niño de 3 años?</div>
+
+        <div class="options">
+            <div class="option" onclick="check(this, false)">🪑 Silla de madera</div>
+            <div class="option" onclick="check(this, false)">🔳 Icono minimalista</div>
+            <div class="option" onclick="check(this, true)">📝 Palabra “SILLA”</div>
+        </div>
+
+        <div id="result"></div>
+
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-buttons">
+        <button class="btn btn-back" onclick="location.href='p4.html'">Volver</button>
+        <button class="btn btn-next" onclick="location.href='p6.html'">Siguiente</button>
+    </div>
+
+    <script>
+        function check(el, isCorrect) {
+            document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+            if (isCorrect) {
+                el.classList.add('correct');
+                document.getElementById('result').innerText = "Correcto: un niño requiere historia directa para usar la palabra escrita.";
+            } else {
+                document.getElementById('result').innerText = "No exactamente. Un niño pequeño aún no responde a símbolos abstractos sin historia previa.";
+            }
+        }
+    </script>
+
+</body>
+</html>
 
