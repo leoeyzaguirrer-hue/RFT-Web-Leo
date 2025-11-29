@@ -1,6 +1,6 @@
 /* ============================================================
-   MÓDULO: UNIDAD DE ANÁLISIS
-   Estilo blanco técnico + nodos dorados + layout editorial
+   MÓDULO UNIDAD DE ANÁLISIS
+   Estilo cinematográfico · nodos dorados · diseño editorial premium
 ============================================================ */
 
 /* Paleta específica */
@@ -27,7 +27,7 @@
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  font-size: 20px;  /* ⭐ NUEVO tamaño base mayor */
+  font-size: 20px;
 }
 
 /* Patrón geométrico */
@@ -109,9 +109,8 @@
 /* ============================================================
    ENCABEZADO
 ============================================================ */
-
 .ua-breadcrumb {
-  font-size: 14px;  /* ⭐ más grande */
+  font-size: 14px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(10,42,92,0.65);
@@ -129,19 +128,26 @@
   box-shadow: 0 0 10px rgba(253,191,18,0.65);
 }
 
-/* Título */
 .ua-title-main {
   font-family: "Coco Gothic", system-ui, sans-serif;
-  font-size: 42px;     /* ⭐ MUCHO MÁS GRANDE */
+  font-size: 42px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 6px 0 16px;
   color: var(--ua-azul-1);
 }
-/* ============================================================
-   HERO CINEMATOGRÁFICO + ENFOQUE
-============================================================ */
 
+.ua-title-main span {
+  display: block;
+  font-size: 22px;
+  color: var(--ua-dorado);
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+}
+
+/* ============================================================
+   HERO CINEMATOGRÁFICO
+============================================================ */
 .ua-hero {
   padding: 70px 20px 40px;
   max-width: 1100px;
@@ -151,14 +157,6 @@
 
 .ua-hero-text {
   max-width: 900px;
-}
-
-.ua-title-main span {
-  display: block;
-  font-size: 22px;
-  color: var(--ua-dorado);
-  letter-spacing: 0.04em;
-  margin-top: 6px;
 }
 
 .ua-focus-circle {
@@ -187,7 +185,6 @@
   100% { transform: translateX(-50%) scale(1); opacity: 0.35; }
 }
 
-/* Continuidad epistemológica */
 .ua-continuidad {
   margin-top: 18px;
   padding-left: 10px;
@@ -203,11 +200,9 @@
   font-weight: 600;
 }
 
-
 /* ============================================================
    BLOQUE ANTES / DESPUÉS
 ============================================================ */
-
 .ua-antes-despues {
   max-width: 1050px;
   margin: 0 auto 40px;
@@ -245,11 +240,9 @@
   color: var(--ua-texto-main);
 }
 
-
 /* ============================================================
    TARJETAS PREMIUM DEL MÓDULO
 ============================================================ */
-
 .ua-mod-grid {
   margin-top: 20px;
   display: grid;
@@ -301,20 +294,9 @@
   color: rgba(10,35,64,0.85);
 }
 
-/* Subtítulo */
-/* Subtítulo */
-.ua-subtitle-main {
-  font-size: 20px;   /* ⭐ más grande para legibilidad */
-  line-height: 1.7;
-  max-width: 900px;
-  color: var(--ua-texto-soft);
-  margin-bottom: 32px;
-}
-
-/* =============================================
-   SUPER-CARD (hoja grande académica)
-============================================= */
-
+/* ============================================================
+   SUPER-CARD GENERAL
+============================================================ */
 .ua-main-card {
   background: rgba(255,255,255,0.98);
   border-radius: 26px;
@@ -360,10 +342,9 @@
   margin-bottom: 8px;
 }
 
-/* =============================================
-   BOTONES
-============================================= */
-
+/* ============================================================
+   BOTONES PREMIUM
+============================================================ */
 .ua-btn-row {
   margin-top: 26px;
   display: flex;
@@ -372,17 +353,70 @@
 }
 
 .ua-btn-primary {
-  padding: 14px 26px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--ua-azul-1), var(--ua-azul-2));
+  color: #ffffff;
+  border-radius: 999px;
+  border: 2px solid var(--ua-dorado);
   font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 18px 38px rgba(10,42,92,0.32);
+  transition: 0.22s ease;
+}
+
+.ua-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 48px rgba(10,42,92,0.42);
+  background: linear-gradient(135deg, var(--ua-azul-2), var(--ua-azul-1));
 }
 
 .ua-btn-ghost {
-  padding: 12px 22px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(10,42,92,0.25);
+  background: rgba(255,255,255,0.72);
+  color: var(--ua-azul-1);
   font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.22s ease;
 }
 
-/* Footer navegación */
+.ua-btn-ghost:hover {
+  background: rgba(255,255,255,1);
+  border-color: rgba(253,191,18,0.7);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
 .ua-footer-nav {
   margin-top: 35px;
 }
 
+/* ============================================================
+   ANIMACIONES
+============================================================ */
+.ua-fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ua-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
