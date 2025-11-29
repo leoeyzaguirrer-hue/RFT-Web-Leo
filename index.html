@@ -37,7 +37,7 @@
             overflow-x: hidden;
         }
 
-        /* Líneas y puntos técnicos en el fondo */
+        /* Líneas técnicas del fondo */
         body::before {
             content: "";
             position: fixed;
@@ -50,6 +50,44 @@
             opacity: 0.5;
             z-index: -1;
         }
+
+        /* ============================================
+           NODOS FLOTANTES DE FONDO
+        ============================================ */
+        .bg-nodes {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-node {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 999px;
+            border: 2px solid rgba(120,185,255,0.9);
+            background: rgba(5,20,60,0.9);
+            box-shadow:
+                0 0 10px rgba(120,185,255,0.9),
+                0 0 20px rgba(120,185,255,0.4);
+            opacity: 0.75;
+            animation: nodeFloat 18s ease-in-out infinite;
+        }
+
+        .bg-node::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: inherit;
+            background: radial-gradient(circle at 30% 20%, #FFFFFF, transparent 65%);
+        }
+
+        .bg-node.n-a { top: 18%; left: 16%; animation-delay: 0s; }
+        .bg-node.n-b { top: 32%; left: 78%; animation-delay: 3s; }
+        .bg-node.n-c { top: 64%; left: 24%; animation-delay: 6s; }
+        .bg-node.n-d { top: 72%; left: 72%; animation-delay: 9s; }
+        .bg-node.n-e { top: 48%; left: 50%; animation-delay: 12s; }
 
         /* ============================================
            PORTADA
@@ -71,7 +109,7 @@
         }
 
         /* ============================================
-           GRID PRINCIPAL
+           HERO GRID
         ============================================ */
         .hero-grid {
             margin-top: 230px;
@@ -79,9 +117,10 @@
             grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
             gap: 60px;
             align-items: center;
+            animation: heroFloat 16s ease-in-out infinite;
         }
 
-        /* TEXTO */
+        /* TEXTOS */
         .hero-text h1 {
             font-family: "Coco Gothic", sans-serif;
             font-size: 54px;
@@ -131,7 +170,7 @@
         }
 
         /* ============================================
-           NUEVA TARJETA MAPA RELACIONAL (VERSIÓN CLARA)
+           TARJETA MAPA RELACIONAL
         ============================================ */
         .hero-visual {
             display: flex;
@@ -148,6 +187,49 @@
                 0 18px 48px rgba(0,0,0,0.55),
                 0 0 16px rgba(255,215,100,0.35);
             position: relative;
+            overflow: hidden;
+            animation: cardGlow 10s ease-in-out infinite;
+        }
+
+        .decor-line {
+            position: absolute;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 8px rgba(253,191,18,0.7));
+            animation: linePulse 6s ease-in-out infinite;
+        }
+
+        .decor-line.dl-top {
+            top: 10%;
+            left: 8%;
+            width: 70%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(253,191,18,0.0),
+                rgba(253,191,18,0.85),
+                rgba(253,191,18,0.0));
+        }
+
+        .decor-line.dl-right {
+            top: 22%;
+            right: 6%;
+            width: 2px;
+            height: 50%;
+            background: linear-gradient(180deg,
+                rgba(253,191,18,0.0),
+                rgba(253,191,18,0.85),
+                rgba(253,191,18,0.0));
+        }
+
+        .decor-line.dl-diag {
+            bottom: 10%;
+            left: 5%;
+            width: 60%;
+            height: 2px;
+            transform: rotate(-18deg);
+            background: linear-gradient(90deg,
+                rgba(253,191,18,0.0),
+                rgba(253,191,18,0.85),
+                rgba(253,191,18,0.0));
         }
 
         .visual-label {
@@ -171,7 +253,7 @@
         }
 
         /* ============================================
-           ACORDEONES (OSCUROS PREMIUM)
+           ACORDEONES
         ============================================ */
         .section-label {
             margin-top: 80px;
@@ -235,12 +317,57 @@
         }
 
         /* ============================================
-           SCRIPT ACORDEÓN
+           ANIMACIONES
         ============================================ */
+        @keyframes heroFloat {
+            0%   { transform: translateY(0px); }
+            25%  { transform: translateY(-6px); }
+            50%  { transform: translateY(2px); }
+            75%  { transform: translateY(-3px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes cardGlow {
+            0%,100% {
+                box-shadow:
+                    0 18px 48px rgba(0,0,0,0.55),
+                    0 0 10px rgba(255,215,100,0.25);
+                transform: translateY(0px);
+            }
+            50% {
+                box-shadow:
+                    0 24px 60px rgba(0,0,0,0.7),
+                    0 0 26px rgba(255,215,100,0.55);
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes nodeFloat {
+            0%   { transform: translate(0,0); opacity: 0.4; }
+            25%  { transform: translate(12px,-14px); opacity: 0.8; }
+            50%  { transform: translate(-8px,6px); opacity: 0.6; }
+            75%  { transform: translate(6px,-10px); opacity: 0.9; }
+            100% { transform: translate(0,0); opacity: 0.4; }
+        }
+
+        @keyframes linePulse {
+            0%,100% { opacity: 0.2; }
+            20%,80% { opacity: 0.9; }
+            50%     { opacity: 0.4; }
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- NODOS FLOTANTES -->
+    <div class="bg-nodes">
+        <span class="bg-node n-a"></span>
+        <span class="bg-node n-b"></span>
+        <span class="bg-node n-c"></span>
+        <span class="bg-node n-d"></span>
+        <span class="bg-node n-e"></span>
+    </div>
 
     <section class="portada">
 
@@ -256,7 +383,7 @@
                 <h2>Un mapa funcional del comportamiento verbal</h2>
 
                 <p class="pregunta">
-                    ¿Cómo surge el significado y cómo transforma nuestra conducta en contexto?
+                    ¿Cómo surge el significado y cómo transforma nuestra conducta?
                 </p>
 
                 <p class="intro">
@@ -268,15 +395,21 @@
                 <button class="btn-start">Iniciar plataforma</button>
             </div>
 
-            <!-- NUEVA TARJETA MAPA RELACIONAL -->
+            <!-- TARJETA PREMIUM -->
             <div class="hero-visual">
                 <div class="visual-card">
+
+                    <span class="decor-line dl-top"></span>
+                    <span class="decor-line dl-right"></span>
+                    <span class="decor-line dl-diag"></span>
+
                     <div class="visual-label">Secuencia Técnica</div>
                     <div class="visual-title">Mapa Relacional</div>
                     <div class="visual-text">
                         Un vistazo a cómo las redes de significado organizan la conducta.
                         Perspectiva funcional, contingencial y relacional.
                     </div>
+
                 </div>
             </div>
 
@@ -322,7 +455,7 @@
                 <h3>Actuares Clínicos <span>⬡</span></h3>
                 <div class="submodulos">
                     <button>ACT como Aplicación Relacional</button>
-                    <button>Ejercicios desde ACT &amp; RFT</button>
+                    <button>Ejercicios desde ACT & RFT</button>
                 </div>
             </div>
 
@@ -342,7 +475,8 @@
         function toggleAcordeon(el) {
             const sub = el.querySelector(".submodulos");
             const isOpen = sub.style.display === "flex";
-            document.querySelectorAll(".submodulos").forEach(s => s.style.display = "none");
+            document.querySelectorAll(".submodulos")
+                .forEach(s => s.style.display = "none");
             sub.style.display = isOpen ? "none" : "flex";
         }
     </script>
