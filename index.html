@@ -3,167 +3,523 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contextualismo Funcional · Pantalla 1</title>
+    <title>RFT · Plataforma Educativa</title>
 
     <style>
+        /* ============================================
+           PALETA GLOBAL
+        ============================================ */
         :root {
             --azul-1: #0A2A5C;
             --azul-2: #132F66;
             --azul-3: #000C1A;
+            --azul-4: #0F3250;
             --dorado: #FDBF12;
-            --dorado-2: #FFD978;
+            --dorado-soft: #FFD978;
             --blanco: #FFFFFF;
-            --gris-claro: #F7F9FC;
         }
 
+        * { box-sizing: border-box; }
+
+        /* ============================================
+           FONDO GLOBAL DARK PREMIUM
+        ============================================ */
         body {
             margin: 0;
             font-family: "Noto Sans", sans-serif;
-            background: linear-gradient(
-                180deg,
-                #FFFFFF 0%,
-                #F3F5FA 100%
-            );
-            padding: 40px 60px;
-            color: #1F2430;
-            position: relative;
+            color: var(--blanco);
+            background:
+                radial-gradient(circle at 10% 20%, rgba(0,40,90,0.7), transparent 45%),
+                radial-gradient(circle at 90% 0%, rgba(0,70,130,0.6), transparent 55%),
+                linear-gradient(160deg, var(--azul-1) 0%, var(--azul-2) 40%, var(--azul-3) 100%);
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Líneas técnicas sutiles */
+        /* PATRÓN GLOBAL */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
+            pointer-events: none;
             background-image:
-                linear-gradient(135deg, rgba(10,42,92,0.06) 1px, transparent 1px),
-                linear-gradient(225deg, rgba(255,191,18,0.04) 1px, transparent 1px);
-            background-size: 48px 48px;
+                linear-gradient(135deg, rgba(253,191,18,0.07) 1px, transparent 1px),
+                linear-gradient(225deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 42px 42px;
+            opacity: 0.45;
+            z-index: -1;
+        }
+
+        /* ============================================
+           HEXÁGONOS FANTASMA
+        ============================================ */
+        .hex-bg {
+            position: fixed;
+            width: 340px;
+            height: 340px;
+            background: url('./assets/icons/hex-gold.png') no-repeat center/contain;
+            opacity: 0.06;
+            z-index: -2;
+            filter: drop-shadow(0 0 12px rgba(253,191,18,0.4));
+            animation: heroFloat 18s ease-in-out infinite;
+        }
+        .hex-bg.h1 { top: 10%; left: 6%; }
+        .hex-bg.h2 { bottom: 12%; right: 8%; transform: rotate(22deg); }
+
+        /* ============================================
+           NODOS Y LÍNEAS
+        ============================================ */
+        .bg-nodes {
+            position: fixed;
+            inset: 0;
             pointer-events: none;
             z-index: -1;
         }
 
-        /* NODOS DORADOS */
-        .node {
+        .bg-node {
             position: absolute;
             width: 14px;
             height: 14px;
-            border-radius: 50%;
-            border: 2px solid var(--dorado);
-            background: rgba(255,255,255,0.9);
-            box-shadow: 0 0 10px rgba(253,191,18,0.7);
-            animation: float 8s ease-in-out infinite;
-            opacity: 0.8;
-            pointer-events: none;
-        }
-        .n1 { top: 18%; left: 6%; }
-        .n2 { top: 70%; left: 80%; animation-delay: 2s; }
-        .n3 { top: 44%; left: 40%; animation-delay: 4s; }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* TITULO */
-        .titulo {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 34px;
-            margin-bottom: 12px;
-        }
-
-        .subtitulo {
-            font-size: 22px;
-            opacity: 0.75;
-            margin-bottom: 25px;
-        }
-
-        /* TARJETAS */
-        .grid-opciones {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .card {
-            background: var(--blanco);
-            border-radius: 18px;
-            padding: 22px;
-            border: 2px solid var(--dorado);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 20px;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(253,191,18,0.45);
-        }
-
-        /* BOTÓN PRINCIPAL */
-        .btn {
-            margin-top: 40px;
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-2));
             border-radius: 999px;
-            padding: 16px 36px;
-            border: none;
-            font-size: 22px;
-            font-weight: bold;
-            color: #1A1F3B;
-            cursor: pointer;
-            box-shadow: 0 0 18px rgba(253,191,18,0.55);
-            transition: 0.3s;
+            border: 2px solid rgba(253,191,18,0.9);
+            background: rgba(10,20,60,0.9);
+            box-shadow:
+                0 0 14px rgba(253,191,18,0.8),
+                0 0 22px rgba(253,191,18,0.35);
+            opacity: 0.7;
+            animation: nodeFloat 16s ease-in-out infinite;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
+        .bg-node.n-a { top: 18%; left: 16%; animation-delay: 0s; }
+        .bg-node.n-b { top: 32%; left: 78%; animation-delay: 3s; }
+        .bg-node.n-c { top: 64%; left: 24%; animation-delay: 6s; }
+        .bg-node.n-d { top: 72%; left: 72%; animation-delay: 9s; }
+        .bg-node.n-e { top: 48%; left: 50%; animation-delay: 12s; }
+
+        /* LÍNEAS */
+        .bg-line {
+            position: absolute;
+            width: 160px;
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(253,191,18,0),
+                rgba(253,191,18,0.7),
+                rgba(253,191,18,0)
+            );
+            opacity: 0.45;
+            filter: drop-shadow(0 0 12px rgba(253,191,18,0.35));
+            animation: linePulse 8s ease-in-out infinite;
+        }
+
+        .bg-line.l1 { top: 22%; left: 18%; transform: rotate(12deg); }
+        .bg-line.l2 { top: 36%; right: 20%; transform: rotate(-18deg); }
+        .bg-line.l3 { bottom: 28%; left: 22%; transform: rotate(22deg); }
+        .bg-line.l4 { bottom: 18%; right: 26%; transform: rotate(4deg); }
+
+        /* ============================================
+           PORTADA
+        ============================================ */
+        .portada { padding: 40px 80px 60px 80px; position: relative; }
+
+        /* LOGO */
+        .logo-superior {
+            position: absolute;
+            top: 32px;
+            left: 60px;
+            z-index: 10;
+        }
+        .logo-superior img {
+            height: 240px;
+            filter: drop-shadow(0 0 18px rgba(255,255,255,0.55));
+            animation: logoFade 2.4s ease;
+        }
+
+        /* ============================================
+           GRID PRINCIPAL
+        ============================================ */
+        .hero-grid {
+            margin-top: 240px;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* TEXTO */
+        .hero-text h1 {
+            font-family: "Coco Gothic", sans-serif;
+            font-size: 54px;
+            text-transform: uppercase;
+            margin: 0 0 12px 0;
+        }
+
+        .hero-text h1 span { color: var(--dorado); }
+
+        .hero-text h2 {
+            font-size: 22px;
+            margin-bottom: 18px;
+            color: #DDE6FF;
+        }
+
+        .pregunta { font-size: 20px; margin-bottom: 14px; }
+
+        .intro {
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 640px;
+            opacity: 0.85;
+        }
+
+        .btn-start {
+            margin-top: 20px;
+            padding: 16px 34px;
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
+            border-radius: 999px;
+            color: #1A1F3B;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* ============================================
+           TARJETA VISUAL
+        ============================================ */
+        .hero-visual { display: flex; justify-content: center; }
+
+        .visual-card {
+            background: linear-gradient(145deg, #FFFFFF 0%, #F7F7F7 100%);
+            color: var(--azul-4);
+            border-radius: 30px;
+            padding: 28px;
+            width: 360px;
+            box-shadow:
+                0 18px 48px rgba(0,0,0,0.5),
+                0 0 18px rgba(255,215,100,0.4);
+            position: relative;
+            overflow: hidden;
+            animation: cardGlow 10s ease-in-out infinite;
+        }
+
+        .decor-line {
+            position: absolute;
+            background: linear-gradient(90deg,
+                rgba(253,191,18,0),
+                rgba(253,191,18,0.9),
+                rgba(253,191,18,0)
+            );
+            height: 2px;
+            opacity: 0.7;
+            animation: linePulse 6s ease-in-out infinite;
+        }
+
+        .decor-line.dl-top { top: 9%; left: 8%; width: 70%; }
+        .decor-line.dl-right {
+            top: 26%; right: 6%; width: 2px; height: 54%;
+            background: linear-gradient(180deg,
+                rgba(253,191,18,0),
+                rgba(253,191,18,0.9),
+                rgba(253,191,18,0)
+            );
+        }
+        .decor-line.dl-diag {
+            bottom: 10%; left: 5%; width: 60%;
+            transform: rotate(-18deg);
+        }
+
+        .visual-label { font-size: 12px; text-transform: uppercase; opacity: 0.6; }
+        .visual-title { font-size: 22px; font-weight: bold; margin: 6px 0 8px 0; }
+
+        .visual-text { font-size: 14px; line-height: 1.6; opacity: 0.9; }
+
+        /* ============================================
+           ACORDEONES
+        ============================================ */
+        .section-label {
+            margin-top: 90px;
+            font-size: 13px;
+            text-transform: uppercase;
+            opacity: 0.75;
+        }
+
+        .acordeon-container { max-width: 880px; }
+
+        .acordeon {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,215,80,0.25);
+            border-radius: 18px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(6px);
+            cursor: pointer;
+            transition: 0.25s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .acordeon.open {
+            border-color: var(--dorado);
+        }
+
+        .acordeon h3 {
+            font-size: 18px;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .icono {
+            transition: 0.3s;
+            color: var(--dorado);
+        }
+
+        .acordeon.open .icono {
+            transform: rotate(90deg);
+        }
+
+        .submodulos {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .submodulos button {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,215,80,0.35);
+            color: var(--blanco);
+            border-radius: 999px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        /* ============================================
+           ANIMACIONES
+        ============================================ */
+        @keyframes heroFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes logoFade {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardGlow {
+            0% {
+                box-shadow:
+                    0 18px 48px rgba(0,0,0,0.5),
+                    0 0 10px rgba(255,215,100,0.3);
+            }
+            50% {
+                box-shadow:
+                    0 28px 68px rgba(0,0,0,0.7),
+                    0 0 24px rgba(255,215,100,0.55);
+            }
+            100% {
+                box-shadow:
+                    0 18px 48px rgba(0,0,0,0.5),
+                    0 0 10px rgba(255,215,100,0.3);
+            }
+        }
+
+        @keyframes nodeFloat {
+            0% { transform: translate(0,0); opacity: 0.5; }
+            50% { transform: translate(12px,-14px); opacity: 0.9; }
+            100% { transform: translate(0,0); opacity: 0.5; }
+        }
+
+        @keyframes linePulse {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.9; }
+            100% { opacity: 0.2; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- NODOS -->
-    <div class="node n1"></div>
-    <div class="node n2"></div>
-    <div class="node n3"></div>
+    <!-- HEXÁGONOS DE FONDO -->
+    <div class="hex-bg h1"></div>
+    <div class="hex-bg h2"></div>
 
-    <!-- TITULO -->
-    <h1 class="titulo">Bienvenid@ al Contextualismo Funcional</h1>
-    <h2 class="subtitulo">La base de toda la ciencia del comportamiento contextual</h2>
+    <!-- NODOS + LÍNEAS -->
+    <div class="bg-nodes">
+        <span class="bg-node n-a"></span>
+        <span class="bg-node n-b"></span>
+        <span class="bg-node n-c"></span>
+        <span class="bg-node n-d"></span>
+        <span class="bg-node n-e"></span>
 
-    <p style="font-size:21px; max-width:760px; line-height:1.6;">
-        Este módulo te introduce a la filosofía que sostiene ACT, RFT y todo el análisis funcional moderno.
-        Aquí aprenderás qué significa analizar la conducta en contexto, por qué los eventos psicológicos se entienden
-        como acciones, y cómo esta perspectiva organiza los modelos clínicos actuales.
-    </p>
-
-    <!-- TARJETAS -->
-    <div class="grid-opciones">
-
-        <div class="card" onclick="location.href='p2.html'">
-            ¿Qué es una filosofía de la ciencia?
-        </div>
-
-        <div class="card" onclick="location.href='p3.html'">
-            ¿Qué es el contextualismo funcional?
-        </div>
-
-        <div class="card" onclick="location.href='p4.html'">
-            ¿Qué significa analizar conducta en contexto?
-        </div>
-
-        <div class="card" onclick="location.href='p5.html'">
-            ¿Por qué esta filosofía es la base de ACT/RFT?
-        </div>
-
+        <span class="bg-line l1"></span>
+        <span class="bg-line l2"></span>
+        <span class="bg-line l3"></span>
+        <span class="bg-line l4"></span>
     </div>
 
-    <!-- BOTÓN -->
-    <button class="btn" onclick="location.href='p2.html'">Comenzar módulo</button>
+    <section class="portada">
+
+        <!-- LOGO -->
+        <div class="logo-superior">
+            <img src="./assets/logo/logo-main.png" alt="logo">
+        </div>
+
+        <div class="hero-grid">
+
+            <div class="hero-text">
+                <h1>Plataforma Educativa <span>RFT · ACT</span></h1>
+                <h2>Un mapa funcional del comportamiento verbal</h2>
+
+                <p class="pregunta">
+                    ¿Cómo surge el significado y cómo transforma nuestra conducta?
+                </p>
+
+                <p class="intro">
+                    Esta plataforma presenta un recorrido técnico y progresivo a través del contextualismo funcional,
+                    el aprendizaje relacional y los procesos clínicos que sostienen la Terapia de Aceptación y
+                    Compromiso (ACT), con ejercicios interactivos y aplicaciones clínicas avanzadas.
+                </p>
+
+                <button class="btn-start">Iniciar plataforma</button>
+            </div>
+
+            <!-- TARJETA -->
+            <div class="hero-visual">
+                <div class="visual-card">
+                    <span class="decor-line dl-top"></span>
+                    <span class="decor-line dl-right"></span>
+                    <span class="decor-line dl-diag"></span>
+
+                    <div class="visual-label">Secuencia Técnica</div>
+                    <div class="visual-title">Mapa Relacional</div>
+
+                    <div class="visual-text">
+                        Las relaciones simbólicas permiten derivar vastas redes de significado que transforman cómo pensamos, sentimos y actuamos.
+                        A partir de unas pocas relaciones entrenadas surge una red que organiza nuestra experiencia y guía nuestra conducta en contexto.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="section-label">Explora la plataforma</p>
+
+        <div class="acordeon-container">
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <h3>Filosofía Contextual <span class="icono">⬡</span></h3>
+                <div class="submodulos">
+                    <button>Contextualismo Funcional</button>
+                    <button>Unidad de Análisis</button>
+                    <button>Verdad como lo que Funciona</button>
+                    <button>Conducta Privada ≠ Mente</button>
+                    <button>Lenguaje como Conducta</button>
+                </div>
+            </div>
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <h3>Ciencia del Lenguaje <span class="icono">⬡</span></h3>
+                <div class="submodulos">
+                    <button>Equivalencia de Estímulos</button>
+                    <button>Aprendizaje Relacional</button>
+                    <button>Enmarques</button>
+                    <button>Transformación de Funciones</button>
+                </div>
+            </div>
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <h3>Procesos Clínicos <span class="icono">⬡</span></h3>
+                <div class="submodulos">
+                    <button>Fusión</button>
+                    <button>Yo como Contexto</button>
+                    <button>Reglas vs Contingencias</button>
+                    <button>Evitación y Regulación</button>
+                </div>
+            </div>
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <h3>Actuares Clínicos <span class="icono">⬡</span></h3>
+                <div class="submodulos">
+                    <button>ACT como Aplicación Relacional</button>
+                    <button>Ejercicios desde ACT & RFT</button>
+                </div>
+            </div>
+
+            <div class="acordeon" onclick="toggleAcordeon(this)">
+                <h3>Recursos <span class="icono">⬡</span></h3>
+                <div class="submodulos">
+                    <button>Experimentos Interactivos</button>
+                    <button>Biblioteca de Conceptos</button>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================================
+         SCRIPT ACORDEÓN + PARALLAX + SCROLLREVEAL
+    ============================================ -->
+    <script>
+        /* ACORDEONES DINÁMICOS */
+        function toggleAcordeon(el) {
+            const sub = el.querySelector(".submodulos");
+            const icon = el.querySelector(".icono");
+
+            const isOpen = sub.style.display === "flex";
+
+            document.querySelectorAll(".submodulos")
+                .forEach(s => s.style.display = "none");
+
+            document.querySelectorAll(".acordeon")
+                .forEach(a => a.classList.remove("open"));
+
+            if (!isOpen) {
+                sub.style.display = "flex";
+                el.classList.add("open");
+            }
+        }
+
+        /* PARALLAX NODOS Y LÍNEAS */
+        document.addEventListener("mousemove", e => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+            document.querySelectorAll(".bg-node").forEach(n => {
+                n.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            document.querySelectorAll(".bg-line").forEach(l => {
+                l.style.transform = `translate(${x / 2}px, ${y / 2}px)`;
+            });
+
+            document.querySelectorAll(".hex-bg").forEach(h => {
+                h.style.transform = `translate(${x / 3}px, ${y / 3}px)`;
+            });
+        });
+
+        /* SCROLL REVEAL */
+        const revealElements = document.querySelectorAll(".acordeon, .section-label");
+
+        function revealOnScroll() {
+            const trigger = window.innerHeight * 0.9;
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect().top;
+                if (rect < trigger) {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }
+            });
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+    </script>
 
 </body>
 </html>
