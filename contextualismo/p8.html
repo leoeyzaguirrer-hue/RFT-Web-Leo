@@ -1,274 +1,804 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P8 · Cierre del Módulo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P8 · Cierre del Módulo</title>
 
-    <style>
-        :root {
-            --azul-1: #0A2A5C;
-            --azul-2: #132F66;
-            --azul-3: #000C1A;
-            --dorado: #FDBF12;
-            --dorado-glow: rgba(253,191,18,0.65);
-            --blanco: #FFFFFF;
-        }
+  <style>
+    :root {
+      --azul-1: #0A2A5C;
+      --azul-2: #132F66;
+      --azul-3: #000C1A;
+      --dorado: #FDBF12;
+      --dorado-soft: #FFD978;
+      --blanco: #FFFFFF;
+    }
 
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            background: linear-gradient(180deg, var(--azul-3), var(--azul-1));
-            color: var(--blanco);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        /* HEXÁGONOS FONDO */
-        .hex {
-            position: fixed;
-            width: 430px;
-            height: 430px;
-            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
-            opacity: 0.07;
-            z-index: -2;
-            animation: floatHex 20s ease-in-out infinite;
-            filter: drop-shadow(0 0 18px var(--dorado-glow));
-        }
+    body {
+      margin: 0;
+      font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, #12346d 0%, #050913 55%, #000000 100%);
+      color: var(--blanco);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        .hex.h1 { top: 6%; left: -4%; }
-        .hex.h2 { bottom: 6%; right: -4%; transform: rotate(18deg); }
+    /* FONDO HEXAGONAL PREMIUM */
+    .hex {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      background: url("../assets/icons/hex-gold.png") no-repeat center/contain;
+      opacity: 0.06;
+      z-index: -2;
+      animation: floatHex 18s ease-in-out infinite;
+      pointer-events: none;
+    }
 
-        @keyframes floatHex {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0); }
-        }
+    .hex.h1 { top: 6%; left: 4%; }
+    .hex.h2 { bottom: 8%; right: 6%; transform: rotate(18deg); }
 
-        /* CONTENEDOR */
-        .container {
-            max-width: 960px;
-            margin: 60px auto;
-            padding: 20px 40px;
-            text-align: center;
-        }
+    @keyframes floatHex {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
 
-        h1 {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 40px;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-            color: var(--dorado);
-            letter-spacing: 0.1em;
-            animation: fadeIn 1.2s ease;
-        }
+    /* PARTÍCULAS DORADAS SUAVES */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(253,191,18,0.15) 0, transparent 55%),
+        radial-gradient(circle at 88% 82%, rgba(253,191,18,0.12) 0, transparent 55%);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+    }
 
-        .sub {
-            font-size: 24px;
-            opacity: 0.92;
-            margin-bottom: 50px;
-            max-width: 760px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-            animation: fadeIn 1.4s ease;
-        }
+    /* BOTÓN VOLVER AL MENÚ */
+    .top-nav {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+    }
 
-        /* SECCIÓN LOGRO */
-        .achievement-box {
-            background: rgba(255,255,255,0.05);
-            border: 1.5px solid rgba(253,191,18,0.35);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(4px);
-            animation: fadeIn 1.6s ease;
-        }
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.7);
+      background: rgba(0,0,0,0.45);
+      color: var(--blanco);
+      font-size: 14px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: 0.25s ease;
+      backdrop-filter: blur(6px);
+    }
 
-        .achievement-title {
-            font-size: 22px;
-            color: var(--dorado);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 16px;
-        }
+    .top-nav a:hover {
+      background: rgba(253,191,18,0.15);
+      box-shadow: 0 0 16px rgba(253,191,18,0.7);
+    }
 
-        .achievement-text {
-            font-size: 19px;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
+    .top-nav span.icon {
+      font-size: 16px;
+      line-height: 1;
+    }
 
-        /* CHECKLIST */
-        .checklist {
-            max-width: 760px;
-            margin: 40px auto;
-            text-align: left;
-            animation: fadeIn 1.8s ease;
-        }
+    /* CONTENEDOR PRINCIPAL */
+    .container {
+      max-width: 980px;
+      margin: 90px auto 60px auto;
+      padding: 0 30px 40px 30px;
+      text-align: center;
+    }
 
-        .item {
-            display: flex;
-            gap: 14px;
-            margin-bottom: 22px;
-            background: rgba(255,255,255,0.07);
-            padding: 18px;
-            border-radius: 16px;
-            border: 1px solid rgba(253,191,18,0.35);
-            backdrop-filter: blur(4px);
-            transition: 0.25s;
-        }
+    @media (max-width: 880px) {
+      .container {
+        padding-inline: 18px;
+      }
+    }
 
-        .item:hover {
-            border-color: var(--dorado);
-            box-shadow: 0 0 18px rgba(255,200,50,0.55);
-        }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.6);
+      background: rgba(0,0,0,0.45);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 auto 12px auto;
+    }
 
-        .check-icon {
-            font-size: 26px;
-            color: var(--dorado);
-            margin-top: -3px;
-        }
+    .tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dorado-soft);
+      box-shadow: 0 0 10px rgba(253,191,18,0.8);
+    }
 
-        .item-text {
-            font-size: 20px;
-            line-height: 1.55;
-        }
+    h1 {
+      font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 34px; /* 34px como acordamos */
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: center;
+      margin: 10px 0 8px 0;
+    }
 
-        /* SEPARADOR */
-        .divider {
-            margin: 50px auto;
-            width: 220px;
-            height: 2px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                var(--dorado),
-                transparent
-            );
-            opacity: 0.75;
-            animation: fadeIn 2s ease;
-        }
+    .sub {
+      font-size: 22px;
+      opacity: 0.9;
+      text-align: center;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
 
-        /* TRANSICIÓN */
-        .transition-text {
-            font-size: 22px;
-            max-width: 820px;
-            margin: 0 auto;
-            line-height: 1.7;
-            opacity: 0.92;
-            animation: fadeIn 2.2s ease;
-        }
+    p.descripcion {
+      font-size: 18px;
+      opacity: 0.94;
+      max-width: 860px;
+      margin: 0 auto 30px auto;
+      line-height: 1.7;
+      text-align: center;
+    }
 
-        /* BOTONES */
-        .nav-buttons {
-            margin-top: 60px;
-            display: flex;
-            justify-content: space-between;
-            animation: fadeIn 2.4s ease;
-        }
+    /* BLOQUE GLASS DE SÍNTESIS */
+    .glass-block {
+      max-width: 880px;
+      margin: 0 auto 40px auto;
+      padding: 18px 22px;
+      border-radius: 26px;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.78), rgba(0,0,0,0.55));
+      border: 1px solid rgba(253,191,18,0.35);
+      backdrop-filter: blur(14px);
+      box-shadow:
+        0 14px 36px rgba(0,0,0,0.9),
+        0 0 22px rgba(253,191,18,0.45);
+      text-align: left;
+    }
 
-        .btn {
-            padding: 14px 28px;
-            font-size: 18px;
-            border-radius: 999px;
-            border: 2px solid var(--dorado);
-            background: var(--dorado);
-            color: var(--azul-3);
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: bold;
-        }
+    .glass-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--dorado-soft);
+      margin-bottom: 6px;
+    }
 
-        .btn:hover {
-            box-shadow: 0 0 26px rgba(253,191,18,0.9);
-        }
+    .glass-text {
+      font-size: 17px;
+      line-height: 1.7;
+      opacity: 0.96;
+    }
 
-        /* ANIMACIONES */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .glass-text strong {
+      color: var(--dorado-soft);
+    }
 
-    </style>
+    /* INSIGHTS FLOTANTES (SIN CUADRADOS GRANDES) */
+    .insights-section {
+      margin-top: 32px;
+    }
+
+    .insights-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    .insights-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .insight-pill {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.6);
+      background: rgba(1,5,14,0.65);
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow:
+        0 8px 22px rgba(0,0,0,0.7),
+        0 0 16px rgba(253,191,18,0.32);
+    }
+
+    .insight-pill-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--dorado-soft);
+      box-shadow: 0 0 10px rgba(253,191,18,0.85);
+    }
+
+    .insight-pill:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 28px rgba(0,0,0,0.85),
+        0 0 22px rgba(253,191,18,0.9);
+    }
+
+    .insight-pill.active {
+      background: radial-gradient(circle at top left, rgba(253,191,18,0.6), #02040b);
+      border-color: var(--dorado);
+    }
+
+    .insight-detail {
+      max-width: 880px;
+      margin: 0 auto 30px auto;
+      padding: 14px 18px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.52);
+      border: 1px solid rgba(253,191,18,0.38);
+      backdrop-filter: blur(10px);
+      text-align: left;
+    }
+
+    .insight-detail-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .insight-detail-body {
+      font-size: 16px;
+      line-height: 1.7;
+      opacity: 0.97;
+    }
+
+    .insight-detail-body strong {
+      color: var(--dorado-soft);
+    }
+
+    /* LÍNEA DE PROGRESO DEL MÓDULO */
+    .progress-section {
+      margin-top: 22px;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.86;
+      margin-bottom: 8px;
+    }
+
+    .progress-line-wrapper {
+      max-width: 880px;
+      margin: 0 auto 10px auto;
+      position: relative;
+      padding: 12px 0 4px 0;
+    }
+
+    .progress-line {
+      position: absolute;
+      left: 4%;
+      right: 4%;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        rgba(253,191,18,0.0),
+        rgba(253,191,18,0.8),
+        rgba(253,191,18,0.0)
+      );
+      opacity: 0.7;
+      box-shadow: 0 0 16px rgba(253,191,18,0.8);
+    }
+
+    .progress-dots {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .p-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(253,191,18,0.9);
+      background: rgba(0,0,0,0.9);
+      box-shadow: 0 0 14px rgba(253,191,18,0.8);
+      cursor: pointer;
+      position: relative;
+      transition: 0.22s ease;
+    }
+
+    .p-dot::after {
+      content: attr(data-label);
+      position: absolute;
+      top: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+
+    .p-dot.active {
+      background: var(--dorado);
+      box-shadow:
+        0 0 20px rgba(253,191,18,1),
+        0 0 26px rgba(253,191,18,0.95);
+      transform: translateY(-3px);
+    }
+
+    .progress-text {
+      max-width: 860px;
+      margin: 14px auto 30px auto;
+      padding: 10px 14px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(253,191,18,0.4);
+      backdrop-filter: blur(10px);
+      font-size: 16px;
+      line-height: 1.7;
+      opacity: 0.97;
+      text-align: left;
+    }
+
+    .progress-text strong {
+      color: var(--dorado-soft);
+    }
+
+    /* FRASE CLAVE DE CIERRE */
+    .key-phrase {
+      max-width: 820px;
+      margin: 18px auto 30px auto;
+      font-size: 18px;
+      line-height: 1.7;
+      text-align: center;
+      opacity: 0.96;
+    }
+
+    .key-phrase strong {
+      color: var(--dorado-soft);
+    }
+
+    /* PORTAL DORADO AL SIGUIENTE MÓDULO (ÉPICO) */
+    .portal-section {
+      margin-top: 22px;
+    }
+
+    .portal-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.86;
+      margin-bottom: 10px;
+    }
+
+    .portal-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .portal-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .portal {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.95) 0, rgba(253,191,18,0.9) 18%, rgba(255,122,48,0.7) 40%, rgba(0,0,0,0.98) 72%);
+      box-shadow:
+        0 0 40px rgba(253,191,18,1),
+        0 0 90px rgba(255,122,48,0.85),
+        0 0 120px rgba(10,42,92,0.9);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      transition: transform 0.45s ease, box-shadow 0.45s ease, filter 0.45s ease;
+      overflow: hidden;
+    }
+
+    .portal-ring {
+      position: absolute;
+      inset: 14px;
+      border-radius: 50%;
+      border: 1.8px solid rgba(255,255,255,0.75);
+      box-shadow:
+        0 0 24px rgba(255,255,255,0.9),
+        0 0 42px rgba(253,191,18,0.9);
+      opacity: 0.85;
+    }
+
+    .portal-title {
+      position: relative;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .portal-main {
+      position: relative;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .portal-main span {
+      display: block;
+    }
+
+    .portal-sub {
+      position: relative;
+      font-size: 13px;
+      opacity: 0.9;
+      text-align: center;
+      max-width: 170px;
+    }
+
+    .portal:hover {
+      transform: scale(1.05) translateY(-4px);
+      box-shadow:
+        0 0 55px rgba(253,191,18,1),
+        0 0 120px rgba(255,122,48,0.95),
+        0 0 150px rgba(10,42,92,1);
+      filter: saturate(1.1) brightness(1.05);
+    }
+
+    .portal-note {
+      font-size: 13px;
+      opacity: 0.88;
+      margin-bottom: 24px;
+    }
+
+    /* NAV INFERIOR */
+    .nav-buttons {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      font-size: 16px;
+      border-radius: 999px;
+      border: 2px solid var(--dorado);
+      background: var(--dorado);
+      color: #000C1A;
+      cursor: pointer;
+      transition: 0.28s ease;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--blanco);
+      border-color: rgba(253,191,18,0.75);
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 20px rgba(253,191,18,0.95);
+      transform: translateY(-2px);
+    }
+
+    .btn span.arrow {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    /* ANIMACIÓN ENTRADA */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .container > * {
+      animation: fadeIn 0.9s ease forwards;
+    }
+
+    @media (max-width: 720px) {
+      .progress-line {
+        display: none;
+      }
+      .p-dot::after {
+        position: static;
+        transform: none;
+        margin-top: 4px;
+      }
+      .progress-dots {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="hex h1"></div>
-<div class="hex h2"></div>
+  <div class="particles"></div>
+  <div class="hex h1"></div>
+  <div class="hex h2"></div>
 
-<div class="container">
+  <div class="top-nav">
+    <a href="index.html">
+      <span class="icon">⟵</span>
+      Volver al menú del módulo
+    </a>
+  </div>
 
-    <h1>🎉 Cierre del Módulo</h1>
+  <div class="container">
+
+    <div class="tag">
+      <div class="tag-dot"></div>
+      PANTALLA 8 · CIERRE DEL MÓDULO
+    </div>
+
+    <h1>Cierre · Contextualismo funcional</h1>
+
     <div class="sub">
-        Has completado el recorrido por los fundamentos del <strong>Contextualismo Funcional</strong>,
-        la filosofía que sostiene ACT, RFT y todo el enfoque conductual-contextual moderno.
+      Has completado el recorrido por la filosofía que sostiene el enfoque
+      conductual-contextual, el análisis funcional, la RFT y ACT.
     </div>
 
-    <!-- LOGRO PRINCIPAL -->
-    <div class="achievement-box">
-        <div class="achievement-title">Tu logro</div>
-        <div class="achievement-text">
-            Comprendiste por qué la ciencia contextual no busca causas internas,
-            sino <strong>explicaciones que funcionen</strong> para predecir e influir la conducta
-            en su contexto.  
-            Este entendimiento es la base de todo análisis funcional avanzado.
+    <p class="descripcion">
+      Esta pantalla resume lo esencial que te llevas del módulo y abre la puerta al
+      siguiente bloque: <strong>la unidad de análisis</strong>. Piensa este cierre como un
+      puente entre comprender la filosofía y empezar a usarla de forma sistemática en
+      tu práctica clínica.
+    </p>
+
+    <!-- SÍNTESIS PRINCIPAL -->
+    <section class="glass-block">
+      <div class="glass-title">Qué cambió con este módulo</div>
+      <div class="glass-text">
+        Pasaste de entender la psicología como una búsqueda de causas internas a verla
+        como una <strong>ciencia contextual</strong>, cuyo criterio de verdad es lo que
+        <strong>funciona para predecir e influenciar la conducta</strong>. Aprendiste que
+        pensar, sentir e imaginar son formas de acción bajo control contextual, y que
+        el lenguaje transforma funciones en redes relacionales, no solo nombra cosas
+        que ya estaban ahí.
+      </div>
+    </section>
+
+    <!-- INSIGHTS FLOTANTES -->
+    <section class="insights-section">
+      <div class="insights-label">Toca cada insight para ver el cierre teórico</div>
+
+      <div class="insights-grid">
+        <button
+          class="insight-pill"
+          data-title="Filosofía: verdad como función"
+          data-body="El contextualismo funcional define la ‘verdad’ en términos de <strong>eficacia pragmática</strong>: un modelo es válido si permite predecir e influir la conducta con precisión, alcance y profundidad. Este criterio orienta cómo formulamos problemas clínicos y qué consideramos una explicación útil."
+        >
+          <span class="insight-pill-dot"></span>
+          <span>Contextualismo funcional</span>
+        </button>
+
+        <button
+          class="insight-pill"
+          data-title="Análisis funcional: conducta-en-contexto"
+          data-body="El análisis funcional organiza la experiencia como <strong>conducta-en-contexto</strong>: antecedentes, respuestas (públicas y privadas) y consecuencias, en continuidad con la historia de aprendizaje. Esto evita explicar los problemas con rasgos internos y orienta la intervención a las funciones, no a las etiquetas."
+        >
+          <span class="insight-pill-dot"></span>
+          <span>Análisis funcional</span>
+        </button>
+
+        <button
+          class="insight-pill"
+          data-title="RFT: el lenguaje como cambio de funciones"
+          data-body="La RFT describe cómo el lenguaje humano genera <strong>marcos relacionales</strong> que transforman funciones psicológicas. Un pensamiento, una palabra o una imagen pueden cambiar lo que un estímulo hace en la conducta sin nuevo contacto directo, ampliando o rigidizando los repertorios del individuo."
+        >
+          <span class="insight-pill-dot"></span>
+          <span>RFT y redes relacionales</span>
+        </button>
+
+        <button
+          class="insight-pill"
+          data-title="ACT: dirigir el cambio hacia los valores"
+          data-body="ACT toma esta base filosófica y procesual para diseñar contextos donde la persona pueda <strong>notar</strong> sus eventos privados, <strong>tomar perspectiva</strong> y <strong>elegir acciones valiosas</strong>. La intervención se centra en cambiar la función del lenguaje y la conducta, no en ganar discusiones lógicas con los pensamientos."
+        >
+          <span class="insight-pill-dot"></span>
+          <span>ACT en la clínica</span>
+        </button>
+      </div>
+
+      <div class="insight-detail">
+        <div class="insight-detail-title" id="insight-title">
+          Filosofía: verdad como función
         </div>
-    </div>
-
-    <!-- CHECKLIST -->
-    <div class="checklist">
-
-        <div class="item">
-            <div class="check-icon">✔</div>
-            <div class="item-text">Comprendiste el criterio pragmático de verdad.</div>
+        <div class="insight-detail-body" id="insight-body">
+          El contextualismo funcional define la ‘verdad’ en términos de
+          <strong>eficacia pragmática</strong>: un modelo es válido si permite predecir e
+          influir la conducta con precisión, alcance y profundidad. Este criterio
+          orienta cómo formulamos problemas clínicos y qué consideramos una explicación
+          útil.
         </div>
+      </div>
+    </section>
 
-        <div class="item">
-            <div class="check-icon">✔</div>
-            <div class="item-text">Diferencias explicación funcional vs explicación mentalista.</div>
+    <!-- PROGRESO DEL MÓDULO -->
+    <section class="progress-section">
+      <div class="progress-label">Tu recorrido en este módulo</div>
+
+      <div class="progress-line-wrapper">
+        <div class="progress-line"></div>
+        <div class="progress-dots">
+          <div
+            class="p-dot"
+            data-step="1"
+            data-label="Filosofía"
+            data-text="1. Definiste la psicología contextual como una ciencia orientada a <strong>predecir e influir</strong> la conducta, con un criterio pragmático de verdad. Desde aquí, los fenómenos ‘internos’ se leen como acciones, no como causas internas ocultas."
+          ></div>
+          <div
+            class="p-dot"
+            data-step="2"
+            data-label="Evento"
+            data-text="2. Pasaste de preguntar ‘¿qué significa realmente este pensamiento?’ a preguntar ‘¿qué hace este evento en la conducta de la persona, dado su contexto e historia?’. El foco se desplazó a la <strong>conducta-en-contexto</strong>."
+          ></div>
+          <div
+            class="p-dot"
+            data-step="3"
+            data-label="Función"
+            data-text="3. Aprendiste a distinguir el contenido del evento (lo que dice el pensamiento) de su <strong>función</strong> (lo que produce en la conducta). Esta distinción es central para no quedar atrapado en debates cognitivos estériles."
+          ></div>
+          <div
+            class="p-dot"
+            data-step="4"
+            data-label="Lenguaje"
+            data-text="4. Integraste la idea de que el lenguaje, vía marcos relacionales, puede expandir o rigidizar los problemas al <strong>transformar funciones</strong>. La RFT te da una lente para entender cómo se amplifica el sufrimiento sin nuevos eventos externos."
+          ></div>
+          <div
+            class="p-dot"
+            data-step="5"
+            data-label="Acción valiosa"
+            data-text="5. Viste cómo ACT usa esta base para centrar el trabajo clínico en <strong>acciones guiadas por valores</strong>, entrenando nuevas respuestas bajo las mismas señales internas y externas, en lugar de esperar a que los pensamientos cambien primero."
+          ></div>
         </div>
+      </div>
 
-        <div class="item">
-            <div class="check-icon">✔</div>
-            <div class="item-text">Reconoces que pensar, sentir, recordar e imaginar son formas de conducta.</div>
-        </div>
+      <div class="progress-text" id="progress-text">
+        1. Definiste la psicología contextual como una ciencia orientada a
+        <strong>predecir e influir</strong> la conducta, con un criterio pragmático de
+        verdad. Desde aquí, los fenómenos ‘internos’ se leen como acciones, no como
+        causas internas ocultas.
+      </div>
+    </section>
 
-        <div class="item">
-            <div class="check-icon">✔</div>
-            <div class="item-text">Identificaste cómo la historia y el lenguaje transforman funciones psicológicas.</div>
-        </div>
+    <!-- FRASE CLAVE -->
+    <p class="key-phrase">
+      En este módulo no solo revisaste conceptos: aprendiste a mirar los problemas
+      psicológicos como <strong>patrones de conducta-en-contexto</strong>, moldeados por
+      historia, contingencias y lenguaje. <strong>No tratamos síntomas, transformamos
+      funciones</strong> para abrir espacio a acciones valiosas.
+    </p>
 
-        <div class="item">
-            <div class="check-icon">✔</div>
-            <div class="item-text">Entendiste que ACT y RFT emergen coherentemente de este modelo.</div>
-        </div>
+    <!-- PORTAL AL SIGUIENTE MÓDULO -->
+    <section class="portal-section">
+      <div class="portal-label">Siguiente paso en tu formación</div>
 
-    </div>
+      <div class="portal-wrapper">
+        <a href="../unidad/index.html" class="portal-link">
+          <div class="portal">
+            <div class="portal-ring"></div>
+            <div class="portal-title">Siguiente módulo</div>
+            <div class="portal-main">
+              <span>Unidad de</span>
+              <span>análisis</span>
+            </div>
+            <div class="portal-sub">
+              La conducta-en-contexto como unidad mínima para un análisis funcional
+              avanzado.
+            </div>
+          </div>
+        </a>
+      </div>
 
-    <!-- SEPARADOR PREMIUM -->
-    <div class="divider"></div>
+      <div class="portal-note">
+        Haz clic en el portal para comenzar el módulo de <strong>Unidad de Análisis</strong>.
+      </div>
+    </section>
 
-    <!-- TRANSICIÓN AL SIGUIENTE MÓDULO -->
-    <div class="transition-text">
-        Ahora estás listo para avanzar al siguiente bloque:  
-        <br><br>
-        <strong>📘 La Unidad de Análisis: la conducta-en-contexto</strong>  
-        <br><br>
-        Es el núcleo que ordena cómo hacemos análisis funcional,
-        cómo interpretamos la conducta, y cómo empezamos a abrir camino hacia  
-        <strong>Aprendizaje Relacional (RFT)</strong>.
-    </div>
-
-    <!-- BOTONES -->
+    <!-- NAV INFERIOR -->
     <div class="nav-buttons">
-        <button class="btn" onclick="window.location.href='p7.html'">← Volver a P7</button>
-        <button class="btn" onclick="window.location.href='../unidad/index.html'">Ir al siguiente módulo →</button>
+      <a href="p7.html" class="btn secondary">
+        <span class="arrow">⟵</span>
+        Volver a P7 · Integración
+      </a>
+      <a href="../unidad/index.html" class="btn">
+        Ir al módulo · Unidad de Análisis
+        <span class="arrow">⟶</span>
+      </a>
     </div>
 
-</div>
+  </div>
+
+  <script>
+    // INSIGHTS
+    const insightPills = document.querySelectorAll(".insight-pill");
+    const insightTitle = document.getElementById("insight-title");
+    const insightBody = document.getElementById("insight-body");
+
+    function setActiveInsight(pill) {
+      insightPills.forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+
+      const title = pill.getAttribute("data-title");
+      const body = pill.getAttribute("data-body");
+
+      insightTitle.innerHTML = title;
+      insightBody.innerHTML = body;
+    }
+
+    insightPills.forEach(pill => {
+      pill.addEventListener("click", () => setActiveInsight(pill));
+    });
+
+    // Estado inicial: primer insight activo
+    if (insightPills.length > 0) {
+      setActiveInsight(insightPills[0]);
+    }
+
+    // PROGRESO
+    const pDots = document.querySelectorAll(".p-dot");
+    const progressText = document.getElementById("progress-text");
+
+    function setActiveStep(dot) {
+      pDots.forEach(d => d.classList.remove("active"));
+      dot.classList.add("active");
+      const text = dot.getAttribute("data-text");
+      if (text) {
+        progressText.innerHTML = text;
+      }
+    }
+
+    pDots.forEach(dot => {
+      dot.addEventListener("click", () => setActiveStep(dot));
+    });
+
+    // Estado inicial: primer punto activo
+    if (pDots.length > 0) {
+      setActiveStep(pDots[0]);
+    }
+  </script>
 
 </body>
 </html>
