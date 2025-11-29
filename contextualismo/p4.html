@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P4 · La conducta como evento interactivo</title>
+
+    <!-- ===========================
+         ESTILO GLOBAL PREMIUM
+    ============================ -->
+    <style>
+        :root {
+            --azul-1: #0A2A5C;
+            --azul-3: #000C1A;
+            --dorado: #FDBF12;
+            --dorado-soft: #FFD980;
+            --texto: #E9ECF5;
+            --blanco: #FFFFFF;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Noto Sans", sans-serif;
+            color: var(--texto);
+            background: linear-gradient(180deg, var(--azul-1), var(--azul-3));
+            min-height: 100vh;
+            padding: 40px 28px 80px;
+            overflow-x: hidden;
+        }
+
+        /* HEXAGON PATTERN */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/backgrounds/hex-pattern.png');
+            background-size: 420px;
+            opacity: 0.09;
+            z-index: -2;
+        }
+
+        /* HEXÁGONOS DORADOS */
+        .hex {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
+            opacity: 0.07;
+            filter: blur(1px);
+            animation: float 14s ease-in-out infinite;
+            z-index: -1;
+        }
+        .h1 { top: 10%; left: 6%; }
+        .h2 { bottom: 12%; right: 4%; animation-delay: 3s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* TÍTULOS */
+        h1 {
+            font-family: "Coco Gothic", sans-serif;
+            font-size: 34px;
+            color: var(--blanco);
+            margin: 0 0 8px;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin: 4px 0 26px;
+            color: var(--dorado);
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.55;
+            max-width: 880px;
+        }
+
+        /* CONTENEDOR */
+        .content-box {
+            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.08);
+            padding: 32px;
+            border-radius: 22px;
+            margin-top: 32px;
+            backdrop-filter: blur(6px);
+        }
+
+        /* TARJETAS CLIC PARA REVELAR */
+        .cards {
+            margin-top: 32px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.07);
+            border: 2px solid rgba(255,255,255,0.15);
+            padding: 22px;
+            border-radius: 18px;
+            width: 260px;
+            cursor: pointer;
+            transition: .25s;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .card:hover {
+            border-color: var(--dorado);
+            transform: translateY(-6px);
+            box-shadow: 0 0 18px rgba(253,191,18,0.35);
+        }
+
+        .card.revealed {
+            background: rgba(253,191,18,0.18);
+            border-color: var(--dorado);
+            color: var(--blanco);
+        }
+
+        .card-text {
+            margin-top: 16px;
+            font-size: 18px;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .card.revealed .card-text {
+            display: block;
+        }
+
+        /* NAVEGACIÓN */
+        .nav-buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 14px 26px;
+            font-size: 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.12);
+            color: var(--blanco);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
+            color: #1A1A1A;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FONDOS -->
+    <div class="hex h1"></div>
+    <div class="hex h2"></div>
+
+    <!-- TÍTULOS -->
+    <h1>La conducta como evento interactivo</h1>
+    <h2>Pensar, sentir e imaginar como formas de acción</h2>
+
+    <div class="content-box">
+
+        <p>
+            En contextualismo funcional, toda acción —incluyendo pensar, recordar, imaginar o sentir—
+            es <b>conducta</b>. No se trata de “cosas dentro”, sino de <b>interacciones</b> entre una persona y su
+            historia, contexto actual y redes relacionales.
+        </p>
+
+        <p>
+            Los llamados “eventos privados” son acciones controladas por contingencias y marcos relacionales.
+            No se explican por procesos internos ocultos, sino por cómo la persona ha aprendido a responder.
+        </p>
+
+        <!-- TARJETAS -->
+        <div class="cards">
+
+            <div class="card" onclick="reveal(this)">
+                🍎 Ver la manzana
+                <div class="card-text">
+                    Una acción perceptual bajo control de estímulos presentes. Conducta abierta.
+                </div>
+            </div>
+
+            <div class="card" onclick="reveal(this)">
+                🗣️ Decir “manzana”
+                <div class="card-text">
+                    Conducta verbal gobernada por historia de reforzamiento y marcos relacionales.
+                </div>
+            </div>
+
+            <div class="card" onclick="reveal(this)">
+                💭 Recordar una manzana
+                <div class="card-text">
+                    Conducta encubierta: acción sin estímulo presente, modulada por redes relacionales.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- NAVEGACIÓN -->
+    <div class="nav-buttons">
+        <button class="btn btn-back" onclick="location.href='p3.html'">Volver</button>
+        <button class="btn btn-next" onclick="location.href='p5.html'">Siguiente</button>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function reveal(card) {
+            card.classList.toggle("revealed");
+        }
+    </script>
+
+</body>
+</html>
 
