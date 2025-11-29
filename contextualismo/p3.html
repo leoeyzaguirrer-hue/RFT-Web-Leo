@@ -1,114 +1,299 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Contextualismo funcional · Pantalla 3</title>
-  <link rel="stylesheet" href="style-contextualismo.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P3 · Fundamentos del Contextualismo</title>
+
+    <!-- ===========================
+         ESTILO GLOBAL PREMIUM
+    ============================ -->
+    <style>
+        :root {
+            --azul-1: #0A2A5C;
+            --azul-2: #132F66;
+            --azul-3: #000C1A;
+            --dorado: #FDBF12;
+            --dorado-soft: #FFD980;
+            --texto: #E9ECF5;
+            --blanco: #FFFFFF;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Noto Sans", sans-serif;
+            color: var(--texto);
+            background: linear-gradient(180deg, var(--azul-1), var(--azul-3));
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 40px 28px 80px;
+        }
+
+        /* PATRÓN HEXAGONAL PREMIUM */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('../assets/backgrounds/hex-pattern.png');
+            background-size: 420px;
+            opacity: 0.09;
+            z-index: -2;
+        }
+
+        /* HEXÁGONOS DORADOS */
+        .hex {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
+            opacity: 0.07;
+            filter: blur(1px);
+            animation: float 14s ease-in-out infinite;
+            z-index: -1;
+        }
+        .h1 { top: 10%; left: 6%; }
+        .h2 { bottom: 12%; right: 4%; animation-delay: 4s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ============================
+           TITULOS
+        ============================ */
+        h1 {
+            font-family: "Coco Gothic", sans-serif;
+            font-size: 34px;
+            margin: 0 0 8px;
+            color: var(--blanco);
+        }
+
+        h2 {
+            font-size: 22px;
+            margin: 4px 0 22px;
+            color: var(--dorado);
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.55;
+            max-width: 880px;
+        }
+
+        /* ============================
+           CONTENEDOR PRINCIPAL
+        ============================ */
+        .content-box {
+            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.08);
+            padding: 32px;
+            border-radius: 22px;
+            margin-top: 32px;
+            backdrop-filter: blur(6px);
+        }
+
+        /* EJEMPLO */
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-top: 24px;
+        }
+
+        .example {
+            background: rgba(255,255,255,0.04);
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 4px solid var(--dorado);
+            font-size: 19px;
+            line-height: 1.5;
+        }
+
+        /* ============================
+           ACTIVIDAD DRAG & DROP
+        ============================ */
+        .activity-title {
+            font-size: 22px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--blanco);
+        }
+
+        .drag-container {
+            display: flex;
+            gap: 26px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .draggable {
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            cursor: grab;
+            font-size: 19px;
+            width: 220px;
+            text-align: center;
+            transition: 0.25s;
+        }
+        .draggable:hover { border-color: var(--dorado); }
+
+        .drop-zone {
+            width: 240px;
+            height: 70px;
+            border: 2px dashed var(--dorado);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dorado);
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 14px;
+        }
+
+        /* FEEDBACK */
+        .correct-banner {
+            display: none;
+            margin-top: 26px;
+            padding: 24px;
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
+            border-radius: 18px;
+            color: #1A1A1A;
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+            box-shadow: 0 0 24px rgba(253,191,18,0.45);
+        }
+
+        /* NAVEGACIÓN */
+        .nav-buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 14px 26px;
+            font-size: 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.12);
+            color: var(--blanco);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
+            color: #1A1A1A;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="mod-page">
-    <div class="mod-inner">
 
-      <div class="mod-breadcrumb">Filosofía contextual · Submódulo 1 · Pantalla 3</div>
-      <div class="mod-tag">
-        <span class="mod-tag-dot"></span>
-        Fundamentos del contextualismo funcional
-      </div>
-      <h1 class="mod-title">Verdad como lo que funciona</h1>
-      <p class="mod-subtitle">
-        El propósito central del contextualismo funcional es predecir e influenciar la conducta con precisión, alcance y profundidad.
-      </p>
+    <!-- FONDOS -->
+    <div class="hex h1"></div>
+    <div class="hex h2"></div>
 
-      <div class="mod-layout">
-        <!-- Columna teoría -->
-        <div class="mod-card">
-          <h2>Criterio de verdad contextual</h2>
-          <p>
-            El contextualismo funcional define su propósito como:
-          </p>
-          <p class="mod-small">
-            <em>“Predecir e influenciar la conducta con precisión, alcance y profundidad.”</em> (Hayes, Barnes-Holmes & Wilson)
-          </p>
-          <p>
-            Esto implica que un modelo es útil si:
-          </p>
-          <ul class="mod-list">
-            <li>Predice la conducta en un contexto dado.</li>
-            <li>Permite influirla de forma efectiva.</li>
-            <li>Se mantiene coherente con la ciencia natural.</li>
-            <li>Ayuda a generar cambio real, no solo explicaciones internas elegantes.</li>
-          </ul>
-          <p class="mod-small">
-            No buscamos una “fotografía interna” perfecta, sino una herramienta potente para intervenir sobre patrones de comportamiento.
-          </p>
+    <!-- TITULOS -->
+    <h1>Fundamentos del Contextualismo Funcional</h1>
+    <h2>El criterio de verdad pragmático y el propósito central</h2>
+
+    <div class="content-box">
+
+        <p>
+            El contextualismo funcional establece que un modelo es válido si <b>predice</b> e <b>influye</b> 
+            la conducta de forma efectiva, con precisión, alcance y profundidad. No buscamos explicaciones 
+            internas, sino funciones en contexto.
+        </p>
+
+        <!-- EJEMPLO -->
+        <div class="example-grid">
+
+            <div class="example">
+                🎤 <b>Estímulo externo:</b> un micrófono.<br>
+                💬 <b>Pensamiento:</b> “voy a fallar”.<br>
+                🤲 <b>Respuesta corporal:</b> temblor.<br>
+                🚶‍♂️ <b>Conducta:</b> evitar hablar.
+            </div>
+
+            <div class="example">
+                El contextualismo no atribuye esto a “inseguridad interna”, sino a una 
+                <b>historia de aprendizaje</b>, <b>marcos relacionales</b> y <b>funciones adquiridas</b>.
+            </div>
+
         </div>
 
-        <!-- Columna ejemplo interactivo -->
-        <div class="mod-card">
-          <h2>Ejemplo: miedo a hablar en público</h2>
-          <p class="mod-small">
-            Persona con miedo a hablar en público:
-          </p>
-          <ul class="mod-list">
-            <li><strong>Estímulo externo:</strong> micrófono frente al grupo.</li>
-            <li><strong>Evento verbal:</strong> “voy a fallar”.</li>
-            <li><strong>Respuesta corporal:</strong> temblor en las manos.</li>
-            <li><strong>Conducta:</strong> evitar participar.</li>
-          </ul>
-          <p class="mod-small">
-            El contextualismo no lo reduce a una “inseguridad interna”, sino a una historia de aprendizaje, redes relacionales y funciones adquiridas.
-          </p>
+        <!-- ACTIVIDAD DRAG AND DROP -->
+        <h3 class="activity-title">Actividad: Arrastra cada elemento a su categoría</h3>
 
-          <hr style="margin: 14px 0; border-top: 1px solid rgba(10,42,92,0.12);">
-
-          <p class="mod-small"><strong>Actividad · Relaciona cada elemento con su lugar en el análisis funcional:</strong></p>
-
-          <div class="option-grid">
-            <div class="option-card" onclick="showMapping()">
-              <div class="option-label">Elemento</div>
-              <div class="option-title">Micrófono</div>
-              <p class="mod-small">¿Contexto antecedente, respuesta, evento verbal o conducta?</p>
-            </div>
-            <div class="option-card" onclick="showMapping()">
-              <div class="option-label">Elemento</div>
-              <div class="option-title">Pensamiento “voy a fallar”</div>
-              <p class="mod-small">¿Evento interno o función discriminativa?</p>
-            </div>
-            <div class="option-card" onclick="showMapping()">
-              <div class="option-label">Elemento</div>
-              <div class="option-title">Temblor en manos</div>
-              <p class="mod-small">¿Respuesta corporal, estímulo o consecuencia?</p>
-            </div>
-            <div class="option-card" onclick="showMapping()">
-              <div class="option-label">Elemento</div>
-              <div class="option-title">Evitar hablar</div>
-              <p class="mod-small">¿Conducta operante o simple reacción?</p>
-            </div>
-          </div>
-
-          <div id="map-feedback" class="feedback">
-            <strong>Mapa funcional sugerido:</strong><br />
-            Micrófono → <em>Contexto antecedente.</em><br />
-            Pensamiento “voy a fallar” → <em>Evento verbal con función discriminativa (señala amenaza, dirige conducta).</em><br />
-            Temblor en manos → <em>Respuesta corporal dentro del patrón de miedo.</em><br />
-            Evitar hablar → <em>Conducta operante que suele mantenerse por alivio inmediato (reforzamiento negativo).</em>
-          </div>
+        <div class="drag-container">
+            <div class="draggable" draggable="true" id="item1">🎤 Micrófono</div>
+            <div class="draggable" draggable="true" id="item2">🤲 Temblor</div>
+            <div class="draggable" draggable="true" id="item3">💬 “Voy a fallar”</div>
+            <div class="draggable" draggable="true" id="item4">🚶‍♂️ Evitar hablar</div>
         </div>
-      </div>
 
-      <div class="mod-footer-nav">
-        <a href="p2.html"><button class="btn-ghost"><span>←</span> Pantalla 2</button></a>
-        <a href="p4.html"><button class="btn-main">Pantalla 4: Conducta como evento interactivo</button></a>
-      </div>
+        <!-- ZONAS -->
+        <div class="drag-container">
+            <div class="drop-zone" data-target="item1">Contexto antecedente</div>
+            <div class="drop-zone" data-target="item2">Respuesta corporal</div>
+            <div class="drop-zone" data-target="item3">Evento verbal</div>
+            <div class="drop-zone" data-target="item4">Conducta operante</div>
+        </div>
+
+        <div id="banner" class="correct-banner">
+            ✔ ¡Correcto! El análisis funcional depende de cómo se relacionan todos estos elementos.
+        </div>
 
     </div>
-  </div>
 
-  <script>
-    function showMapping() {
-      document.getElementById("map-feedback").style.display = "block";
-    }
-  </script>
+    <!-- NAVEGACIÓN -->
+    <div class="nav-buttons">
+        <button class="btn btn-back" onclick="location.href='p2.html'">Volver</button>
+        <button class="btn btn-next" onclick="location.href='p4.html'">Siguiente</button>
+    </div>
+
+    <!-- SCRIPT DRAG & DROP -->
+    <script>
+        const draggables = document.querySelectorAll(".draggable");
+        const drops = document.querySelectorAll(".drop-zone");
+
+        draggables.forEach(el => {
+            el.addEventListener("dragstart", e => {
+                e.dataTransfer.setData("id", e.target.id);
+            });
+        });
+
+        drops.forEach(zone => {
+            zone.addEventListener("dragover", e => e.preventDefault());
+            zone.addEventListener("drop", e => {
+                const id = e.dataTransfer.getData("id");
+                if (zone.dataset.target === id) {
+                    zone.style.background = "rgba(253,191,18,0.25)";
+                    zone.style.borderColor = "var(--dorado)";
+                    document.querySelector(`#${id}`).style.opacity = "0.4";
+
+                    // ¿Ya completó todo?
+                    const done = [...drops].every(z => z.style.background !== "");
+                    if (done) {
+                        document.getElementById("banner").style.display = "block";
+                    }
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
-
