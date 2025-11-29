@@ -22,7 +22,7 @@
         * { box-sizing: border-box; }
 
         /* ============================================
-           FONDO GLOBAL DARK-PREMIUM TÉCNICO
+           FONDO GLOBAL
         ============================================ */
         body {
             margin: 0;
@@ -37,7 +37,6 @@
             overflow-x: hidden;
         }
 
-        /* Líneas técnicas del fondo */
         body::before {
             content: "";
             position: fixed;
@@ -52,7 +51,7 @@
         }
 
         /* ============================================
-           NODOS FLOTANTES DE FONDO
+           NODOS FLOTANTES
         ============================================ */
         .bg-nodes {
             position: fixed;
@@ -66,11 +65,14 @@
             width: 14px;
             height: 14px;
             border-radius: 999px;
-            border: 2px solid rgba(120,185,255,0.9);
-            background: rgba(5,20,60,0.9);
+
+            /* BORDE DORADO + BORDE AZUL LUMINOSO */
+            border: 2px solid rgba(253,191,18,0.85);
             box-shadow:
-                0 0 10px rgba(120,185,255,0.9),
-                0 0 20px rgba(120,185,255,0.4);
+                0 0 14px rgba(120,185,255,0.9),
+                0 0 26px rgba(253,191,18,0.45);
+
+            background: rgba(5,20,60,0.95);
             opacity: 0.75;
             animation: nodeFloat 18s ease-in-out infinite;
         }
@@ -83,11 +85,35 @@
             background: radial-gradient(circle at 30% 20%, #FFFFFF, transparent 65%);
         }
 
+        /* NODOS POSICIONES */
         .bg-node.n-a { top: 18%; left: 16%; animation-delay: 0s; }
         .bg-node.n-b { top: 32%; left: 78%; animation-delay: 3s; }
         .bg-node.n-c { top: 64%; left: 24%; animation-delay: 6s; }
         .bg-node.n-d { top: 72%; left: 72%; animation-delay: 9s; }
         .bg-node.n-e { top: 48%; left: 50%; animation-delay: 12s; }
+
+        /* ============================================
+           LÍNEAS DORADAS CERCA DE LOS NODOS
+        ============================================ */
+        .bg-line {
+            position: absolute;
+            background: linear-gradient(90deg,
+                rgba(253,191,18,0),
+                rgba(253,191,18,0.8),
+                rgba(253,191,18,0)
+            );
+            height: 2px;
+            width: 120px;
+            filter: drop-shadow(0 0 6px rgba(253,191,18,0.8));
+            opacity: 0.55;
+            animation: linePulse 7s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .bg-line.l1 { top: 20%; left: 10%; transform: rotate(-15deg); }
+        .bg-line.l2 { top: 35%; left: 75%; transform: rotate(12deg); }
+        .bg-line.l3 { top: 60%; left: 22%; transform: rotate(-6deg); }
+        .bg-line.l4 { top: 70%; left: 70%; transform: rotate(8deg); }
 
         /* ============================================
            PORTADA
@@ -104,12 +130,25 @@
         }
 
         .logo-superior img {
+
+            /* MARCO BLANCO SUAVE */
+            padding: 8px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 22px;
+
+            /* BORDE BLANCO SUTIL */
+            border: 2px solid rgba(255,255,255,0.55);
+
+            /* GLOW */
+            box-shadow:
+                0 0 16px rgba(255,255,255,0.55),
+                0 0 26px rgba(255,255,255,0.3);
+
             height: 230px;
-            filter: drop-shadow(0 0 16px rgba(255,255,255,0.2));
         }
 
         /* ============================================
-           HERO GRID
+           HERO
         ============================================ */
         .hero-grid {
             margin-top: 230px;
@@ -120,7 +159,6 @@
             animation: heroFloat 16s ease-in-out infinite;
         }
 
-        /* TEXTOS */
         .hero-text h1 {
             font-family: "Coco Gothic", sans-serif;
             font-size: 54px;
@@ -170,7 +208,7 @@
         }
 
         /* ============================================
-           TARJETA MAPA RELACIONAL
+           TARJETA PREMIUM
         ============================================ */
         .hero-visual {
             display: flex;
@@ -191,6 +229,7 @@
             animation: cardGlow 10s ease-in-out infinite;
         }
 
+        /* LÍNEAS DORADAS DE LA TARJETA */
         .decor-line {
             position: absolute;
             opacity: 0.8;
@@ -204,9 +243,9 @@
             width: 70%;
             height: 2px;
             background: linear-gradient(90deg,
-                rgba(253,191,18,0.0),
+                rgba(253,191,18,0),
                 rgba(253,191,18,0.85),
-                rgba(253,191,18,0.0));
+                rgba(253,191,18,0));
         }
 
         .decor-line.dl-right {
@@ -215,9 +254,9 @@
             width: 2px;
             height: 50%;
             background: linear-gradient(180deg,
-                rgba(253,191,18,0.0),
+                rgba(253,191,18,0),
                 rgba(253,191,18,0.85),
-                rgba(253,191,18,0.0));
+                rgba(253,191,18,0));
         }
 
         .decor-line.dl-diag {
@@ -227,30 +266,14 @@
             height: 2px;
             transform: rotate(-18deg);
             background: linear-gradient(90deg,
-                rgba(253,191,18,0.0),
+                rgba(253,191,18,0),
                 rgba(253,191,18,0.85),
-                rgba(253,191,18,0.0));
+                rgba(253,191,18,0));
         }
 
-        .visual-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            opacity: 0.6;
-        }
-
-        .visual-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 6px 0 8px 0;
-        }
-
-        .visual-text {
-            font-size: 14px;
-            line-height: 1.5;
-            opacity: 0.9;
-            max-width: 260px;
-        }
+        .visual-label { font-size: 12px; text-transform: uppercase; opacity: 0.6; }
+        .visual-title { font-size: 22px; font-weight: bold; margin-top: 6px; }
+        .visual-text { font-size: 14px; opacity: 0.9; line-height: 1.5; max-width: 260px; }
 
         /* ============================================
            ACORDEONES
@@ -263,10 +286,7 @@
             opacity: 0.75;
         }
 
-        .acordeon-container {
-            width: 100%;
-            max-width: 880px;
-        }
+        .acordeon-container { width: 100%; max-width: 880px; }
 
         .acordeon {
             background: rgba(255,255,255,0.04);
@@ -320,11 +340,11 @@
            ANIMACIONES
         ============================================ */
         @keyframes heroFloat {
-            0%   { transform: translateY(0px); }
+            0%   { transform: translateY(0); }
             25%  { transform: translateY(-6px); }
             50%  { transform: translateY(2px); }
             75%  { transform: translateY(-3px); }
-            100% { transform: translateY(0px); }
+            100% { transform: translateY(0); }
         }
 
         @keyframes cardGlow {
@@ -332,13 +352,11 @@
                 box-shadow:
                     0 18px 48px rgba(0,0,0,0.55),
                     0 0 10px rgba(255,215,100,0.25);
-                transform: translateY(0px);
             }
             50% {
                 box-shadow:
                     0 24px 60px rgba(0,0,0,0.7),
                     0 0 26px rgba(255,215,100,0.55);
-                transform: translateY(-4px);
             }
         }
 
@@ -351,8 +369,8 @@
         }
 
         @keyframes linePulse {
-            0%,100% { opacity: 0.2; }
-            20%,80% { opacity: 0.9; }
+            0%,100% { opacity: 0.25; }
+            25%,75% { opacity: 0.8; }
             50%     { opacity: 0.4; }
         }
     </style>
@@ -360,31 +378,32 @@
 
 <body>
 
-    <!-- NODOS FLOTANTES -->
+    <!-- NODOS + LÍNEAS DORADAS -->
     <div class="bg-nodes">
         <span class="bg-node n-a"></span>
         <span class="bg-node n-b"></span>
         <span class="bg-node n-c"></span>
         <span class="bg-node n-d"></span>
         <span class="bg-node n-e"></span>
+
+        <span class="bg-line l1"></span>
+        <span class="bg-line l2"></span>
+        <span class="bg-line l3"></span>
+        <span class="bg-line l4"></span>
     </div>
 
     <section class="portada">
 
         <div class="logo-superior">
-            <img src="./assets/logo/logo-main.png">
+            <img src="./assets/logo/logo-main.png" alt="Logo">
         </div>
 
         <div class="hero-grid">
 
-            <!-- TEXTO -->
             <div class="hero-text">
                 <h1>Plataforma Educativa <span>RFT · ACT</span></h1>
                 <h2>Un mapa funcional del comportamiento verbal</h2>
-
-                <p class="pregunta">
-                    ¿Cómo surge el significado y cómo transforma nuestra conducta?
-                </p>
+                <p class="pregunta">¿Cómo surge el significado y cómo transforma nuestra conducta?</p>
 
                 <p class="intro">
                     Esta plataforma presenta un recorrido técnico y progresivo a través del contextualismo funcional,
@@ -415,7 +434,6 @@
 
         </div>
 
-        <!-- ACORDEONES -->
         <p class="section-label">Explora la plataforma</p>
 
         <div class="acordeon-container">
