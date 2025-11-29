@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contextualismo funcional · Pantalla 2</title>
+  <link rel="stylesheet" href="style-contextualismo.css" />
+</head>
+<body>
+  <div class="mod-page">
+    <div class="mod-inner">
+
+      <div class="mod-breadcrumb">Filosofía contextual · Submódulo 1 · Pantalla 2</div>
+      <div class="mod-tag">
+        <span class="mod-tag-dot"></span>
+        ¿Qué es una filosofía de la ciencia?
+      </div>
+      <h1 class="mod-title">Filosofía de la ciencia: el marco que organiza todo</h1>
+      <p class="mod-subtitle">
+        Antes de hablar de conducta y contexto, necesitamos decidir qué consideramos un evento, una explicación y una “verdad útil”.
+      </p>
+
+      <div class="mod-layout">
+        <!-- Columna texto -->
+        <div class="mod-card">
+          <h2>¿Qué hace una filosofía de la ciencia?</h2>
+          <p>
+            Una filosofía de la ciencia es un conjunto de criterios para responder preguntas básicas como:
+          </p>
+          <ul class="mod-list">
+            <li>¿Qué estudiamos?</li>
+            <li>¿Cómo explicamos lo que ocurre?</li>
+            <li>¿Qué cuenta como evidencia?</li>
+            <li>¿Qué hace que un modelo sea “verdadero” o útil?</li>
+          </ul>
+          <p>
+            En psicología contextual, lo “verdadero” no es lo que representa fielmente una realidad interna oculta,
+            sino lo que funciona mejor para <strong>predecir e influenciar la conducta</strong> en contexto.
+          </p>
+
+          <p class="mod-small">
+            Cambiamos de preguntar “¿qué es realmente esto por dentro?” a “¿qué hace esta interacción conducta–contexto y cómo podemos influirla?”.
+          </p>
+        </div>
+
+        <!-- Columna ejemplo + interacción -->
+        <div class="mod-card">
+          <h2>Ejemplo: un mensaje de WhatsApp</h2>
+          <p class="mod-small">
+            Imagina esta secuencia:
+          </p>
+          <ul class="mod-list">
+            <li><strong>Estímulo 1:</strong> recibes un mensaje: “Necesitamos hablar”.</li>
+            <li><strong>Estímulo 2:</strong> aparece el pensamiento: “algo malo hice”.</li>
+            <li><strong>Estímulo 3:</strong> notas un peso en el pecho.</li>
+          </ul>
+          <p class="mod-small">
+            El contextualismo no pregunta “¿qué significa realmente el mensaje por dentro?”, sino:
+            <em>“¿Qué hace esta interacción mensaje–pensamiento–sensación en este contexto específico?”</em>
+          </p>
+
+          <hr style="margin: 14px 0; border: none; border-top: 1px solid rgba(10,42,92,0.12);" />
+
+          <p class="mod-small"><strong>Actividad · Selecciona qué es “real” en contextualismo:</strong></p>
+
+          <div class="option-grid">
+            <div class="option-card" onclick="selectAnswer(1)">
+              <div class="option-title">El mensaje en sí</div>
+            </div>
+            <div class="option-card" onclick="selectAnswer(2)">
+              <div class="option-title">La interpretación interna</div>
+            </div>
+            <div class="option-card" onclick="selectAnswer(3)">
+              <div class="option-title">La conducta que ocurre después</div>
+            </div>
+            <div class="option-card" onclick="selectAnswer(4)">
+              <div class="option-title">La relación mensaje–persona–historia–contexto</div>
+            </div>
+          </div>
+
+          <div id="feedback" class="feedback">
+            En contextualismo funcional, el <strong>evento</strong> no es un estímulo aislado ni un pensamiento en solitario,
+            sino la <strong>conducta-en-contexto</strong>: la interacción histórica y situacional entre la persona, el mensaje,
+            las funciones aprendidas y lo que ocurre después.
+          </div>
+        </div>
+      </div>
+
+      <div class="mod-footer-nav">
+        <a href="index.html"><button class="btn-ghost"><span>←</span> Pantalla 1</button></a>
+        <a href="p3.html"><button class="btn-main">Pantalla 3: Fundamentos del contextualismo funcional</button></a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function selectAnswer(id) {
+      const fb = document.getElementById("feedback");
+      fb.style.display = "block";
+    }
+  </script>
+</body>
+</html>
 
