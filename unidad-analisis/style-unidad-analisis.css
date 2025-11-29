@@ -420,3 +420,92 @@
   opacity: 1;
   transform: translateY(0);
 }
+/* ================================
+   P2 — ESTILOS ESPECÍFICOS
+================================ */
+
+.ua-zoom-box {
+  position: relative;
+  margin-top: 20px;
+}
+
+.ua-zoom-scene {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.ua-lupa {
+  background: rgba(255,255,255,0.8);
+  padding: 12px 20px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-top: 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+.ua-zoom-detail {
+  margin-top: 14px;
+  padding: 14px;
+  background: rgba(253, 191, 18, 0.15);
+  border-left: 3px solid var(--ua-dorado);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+/* Drop zones */
+.ua-drag-grid {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ua-drag-item {
+  padding: 10px 14px;
+  background: white;
+  border-radius: 14px;
+  border: 2px dashed rgba(10,42,92,0.3);
+  cursor: grab;
+}
+
+.ua-drop-zone {
+  background: #f0f2f8;
+  border: 2px dashed rgba(10,42,92,0.3);
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  min-height: 60px;
+}
+
+/* Contextos */
+.ua-context-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.ua-context-box {
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 18px;
+  min-height: 60px;
+  border: 1px solid rgba(10,42,92,0.12);
+}
+
+/* Etiquetas */
+.ua-tag-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ua-tag-result {
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid rgba(10,42,92,0.12);
+  min-height: 80px;
+  line-height: 1.6;
+}
