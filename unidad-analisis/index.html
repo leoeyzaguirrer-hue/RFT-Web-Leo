@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unidad de Análisis · RFT · ACT</title>
 
-    <!-- Estilos globales -->
-        <!-- Estilo exclusivo del módulo -->
-    <link rel="stylesheet" href="style-unidad-analisis.css">
+    <!-- SOLO EL STYLE DEL MÓDULO -->
+    <link rel="stylesheet" href="style-unidad-analisis.css" />
 </head>
 
 <body class="ua-body">
 
-    <!-- CAPA DE NODOS Y LÍNEAS -->
+    <!-- CAPA DE NODOS / LÍNEAS / ENFOQUE -->
     <div class="ua-bg-layer">
+        <div class="ua-focus-circle"></div>
+
         <span class="ua-bg-node n1"></span>
         <span class="ua-bg-node n2"></span>
         <span class="ua-bg-node n3"></span>
@@ -25,50 +26,125 @@
         <span class="ua-bg-line l3"></span>
     </div>
 
-    <!-- CONTENIDO CENTRAL -->
-    <main class="ua-page">
+    <!-- ===========================
+         HERO CINEMATOGRÁFICO
+    ============================ -->
+    <header class="ua-hero ua-fade-in">
 
-        <div class="ua-inner ua-fade-in">
+        <div class="ua-hero-text">
 
-            <!-- Breadcrumb -->
             <div class="ua-breadcrumb">
                 <span class="ua-breadcrumb-dot"></span>
-                PANTALLA 1 · UNIDAD DE ANÁLISIS
+                MÓDULO 2 · UNIDAD DE ANÁLISIS
             </div>
 
-            <!-- Título principal -->
-            <h1 class="ua-title-main">Unidad de Análisis: conducta-en-contexto</h1>
+            <h1 class="ua-title-main">
+                Unidad de Análisis  
+                <span>La conducta-en-contexto como lente</span>
+            </h1>
 
-            <!-- Subtítulo -->
             <p class="ua-subtitle-main">
-                El contextualismo funcional sostiene que lo que analizamos no son “síntomas” ni “rasgos internos”,
-                sino acciones situadas: lo que una persona hace en un contexto específico y las consecuencias
-                que mantienen ese patrón. Esta pantalla presenta el mapa general del módulo y sus cuatro lecciones.
+                Todo lo que hacemos ocurre en un flujo continuo de situaciones.
+                Aquí aprenderás a recortar ese flujo para revelar lo que realmente
+                importa: <strong>las relaciones funcionales que predicen e influyen la conducta humana.</strong>
             </p>
 
-            <!-- SUPER-CARD PREMIUM -->
+            <!-- BLOQUE DE CONTINUIDAD -->
+            <div class="ua-continuidad">
+                <strong>Venimos del módulo anterior:</strong> ¿Qué es la ciencia
+                para el contextualismo funcional?  
+                <br>  
+                Ahora avanzamos a la pregunta inevitable:
+                <span class="ua-continuidad-pregunta">¿qué exactamente analizamos?</span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ===========================
+         BLOQUE ANTES / DESPUÉS
+    ============================ -->
+    <section class="ua-antes-despues ua-fade-in">
+
+        <div class="ua-ad-card ad-antes">
+            <div class="ua-ad-label">ANTES (mentalista)</div>
+            <div class="ua-ad-text">
+                “Es inseguro. Tiene ansiedad social.”
+            </div>
+        </div>
+
+        <div class="ua-ad-card ad-despues">
+            <div class="ua-ad-label">DESPUÉS (contextual)</div>
+            <div class="ua-ad-text">
+                “Cuando el profesor pide exponer (A), baja la mirada y revisa su celular (B),  
+                siente alivio inmediato (C).”
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ===========================
+         TARJETAS PREMIUM DEL MÓDULO
+    ============================ -->
+    <main class="ua-page ua-fade-in">
+
+        <div class="ua-inner">
+
             <section class="ua-main-card">
 
                 <div class="ua-section-label">Contenido del módulo</div>
                 <div class="ua-section-title">Mapa general</div>
 
                 <p class="ua-text">
-                    Este módulo responde una pregunta central: <strong>¿qué exactamente analizamos cuando
-                    hacemos ciencia conductual contextual?</strong> Verás que la unidad de análisis no es un
-                    pensamiento aislado ni una etiqueta diagnóstica, sino un episodio funcional compuesto por:
+                    Este módulo responde la pregunta central del análisis funcional contextual:
+                    <strong>¿qué exactamente analizamos cuando hacemos ciencia conductual contextual?</strong>
+                    La unidad de análisis no es un pensamiento aislado ni una etiqueta diagnóstica,
+                    sino un episodio funcional compuesto por antecedentes, acciones y consecuencias.
                 </p>
 
-                <ul class="ua-list">
-                    <li>Condiciones antecedentes relevantes (A)</li>
-                    <li>Acciones observables y verbales en contexto (B)</li>
-                    <li>Consecuencias inmediatas y a largo plazo (C)</li>
-                </ul>
+                <!-- TARJETAS -->
+                <div class="ua-mod-grid">
 
-                <p class="ua-text">
-                    Desde esta base, avanzaremos hacia clases funcionales, patrones conductuales y cómo el
-                    lenguaje —desde RFT— entra dentro del ABC para transformar la conducta humana.
-                </p>
+                    <!-- LECCIÓN 1 -->
+                    <div class="ua-mod-card" onclick="location.href='p2.html'">
+                        <div class="ua-mod-icon">◎</div>
+                        <h3>Lección 1  
+                            <span>¿Qué analizamos?</span>
+                        </h3>
+                        <p>El concepto de conducta-en-contexto como recorte técnico y útil.</p>
+                    </div>
 
+                    <!-- LECCIÓN 2 -->
+                    <div class="ua-mod-card">
+                        <div class="ua-mod-icon">△</div>
+                        <h3>Lección 2  
+                            <span>El Modelo ABC</span>
+                        </h3>
+                        <p>Más que una fórmula: la unidad mínima para intervención precisa.</p>
+                    </div>
+
+                    <!-- LECCIÓN 3 -->
+                    <div class="ua-mod-card">
+                        <div class="ua-mod-icon">◇</div>
+                        <h3>Lección 3  
+                            <span>Clases funcionales</span>
+                        </h3>
+                        <p>Cómo patrones distintos cumplen funciones equivalentes.</p>
+                    </div>
+
+                    <!-- LECCIÓN 4 -->
+                    <div class="ua-mod-card">
+                        <div class="ua-mod-icon">⬡</div>
+                        <h3>Lección 4  
+                            <span>Lenguaje dentro del ABC</span>
+                        </h3>
+                        <p>Cómo el lenguaje reorganiza las funciones del episodio conductual.</p>
+                    </div>
+
+                </div>
+
+                <!-- BOTONES -->
                 <div class="ua-btn-row">
                     <a href="p2.html" class="ua-btn-primary">Comenzar lección 1</a>
                     <a href="../contextualismo/index.html" class="ua-btn-ghost">Volver a contextualismo</a>
@@ -76,7 +152,7 @@
 
             </section>
 
-            <!-- Navegación inferior -->
+            <!-- NAV INFERIOR -->
             <div class="ua-footer-nav">
                 <span></span>
                 <a href="p2.html" class="ua-btn-primary">Siguiente →</a>
@@ -86,16 +162,16 @@
 
     </main>
 
-    <!-- Script para animación de entrada -->
+    <!-- ACTIVADOR DE ANIMACIONES -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
-                document.querySelector(".ua-fade-in").classList.add("ua-visible");
-            }, 120);
+                document.querySelectorAll(".ua-fade-in")
+                    .forEach(el => el.classList.add("ua-visible"));
+            }, 160);
         });
     </script>
 
 </body>
 
 </html>
-
