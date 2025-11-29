@@ -1,1 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P7 · Integración ACT–RFT</title>
+
+    <style>
+        :root {
+            --azul-1: #0A2A5C;
+            --azul-2: #132F66;
+            --azul-3: #000C1A;
+            --dorado: #FDBF12;
+            --dorado-soft: #FFD978;
+            --blanco: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Noto Sans", sans-serif;
+            background: linear-gradient(160deg, var(--azul-1), var(--azul-3));
+            color: var(--blanco);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* FONDO HEX */
+        .hex {
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
+            opacity: 0.06;
+            z-index: -2;
+            animation: floatHex 18s ease-in-out infinite;
+        }
+        .hex.h1 { top: 8%; left: 6%; }
+        .hex.h2 { bottom: 10%; right: 8%; transform: rotate(22deg); }
+
+        @keyframes floatHex {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* CONTENEDOR */
+        .container {
+            max-width: 980px;
+            margin: 60px auto;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: "Coco Gothic", sans-serif;
+            font-size: 34px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-size: 22px;
+            opacity: 0.85;
+            margin-bottom: 30px;
+        }
+
+        p.descripcion {
+            font-size: 21px;
+            opacity: 0.9;
+            max-width: 780px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+        }
+
+        /* RED DE NODOS */
+        .network {
+            margin-top: 50px;
+            position: relative;
+            width: 100%;
+            max-width: 780px;
+            height: 340px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg,
+                rgba(253,191,18,0),
+                rgba(253,191,18,0.85),
+                rgba(253,191,18,0)
+            );
+            opacity: 0.55;
+            filter: drop-shadow(0 0 10px rgba(253,191,18,0.6));
+        }
+
+        /* posiciones de líneas (conexiones) */
+        .l1 { top: 36%; left: 23%; width: 54%; transform: rotate(6deg); }
+        .l2 { top: 60%; left: 23%; width: 54%; transform: rotate(-6deg); }
+        .l3 { top: 48%; left: 9%; width: 82%; }
+
+        /* NODOS */
+        .node {
+            position: absolute;
+            width: 150px;
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(253,191,18,0.35);
+            font-size: 18px;
+            line-height: 1.3;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .node:hover {
+            transform: translateY(-6px);
+            border-color: var(--dorado);
+            box-shadow: 0 0 18px rgba(253,191,18,0.6);
+        }
+
+        .node.active {
+            background: rgba(253,191,18,0.2);
+            border-color: var(--dorado);
+            box-shadow: 0 0 26px rgba(253,191,18,0.75);
+        }
+
+        /* ubicaciones */
+        .n1 { top: 20%; left: 3%; }
+        .n2 { top: 8%; right: 6%; }
+        .n3 { bottom: 12%; left: 12%; }
+        .n4 { bottom: 10%; right: 10%; }
+
+        /* PANEL CENTRAL */
+        .panel {
+            margin-top: 50px;
+            background: rgba(253,191,18,0.12);
+            border: 2px solid var(--dorado);
+            padding: 26px;
+            border-radius: 18px;
+            font-size: 21px;
+            display: none;
+            line-height: 1.6;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* NAV */
+        .nav-buttons {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 999px;
+            border: 2px solid var(--dorado);
+            background: var(--dorado);
+            color: #000C1A;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .btn:hover {
+            box-shadow: 0 0 18px rgba(253,191,18,0.8);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="hex h1"></div>
+<div class="hex h2"></div>
+
+<div class="container">
+
+    <h1>Integración ACT – RFT</h1>
+    <div class="sub">Por qué esta filosofía sostiene toda la ciencia contextual</div>
+
+    <p class="descripcion">
+        ACT, RFT y el análisis funcional surgen del contextualismo funcional. Aquí verás cómo se
+        conectan sus propósitos: predecir, influenciar y comprender la conducta en contexto.
+    </p>
+
+    <!-- RED RELACIONAL -->
+    <div class="network">
+
+        <!-- Líneas -->
+        <div class="line l1"></div>
+        <div class="line l2"></div>
+        <div class="line l3"></div>
+
+        <!-- Nodos -->
+        <div class="node n1" data-info="El contextualismo funcional define el propósito: predecir e influenciar conducta desde criterios pragmáticos.">
+            Contextualismo<br>Funcional
+        </div>
+
+        <div class="node n2" data-info="El análisis funcional organiza la conducta según historia, contexto actual y funciones.">
+            Análisis<br>Funcional
+        </div>
+
+        <div class="node n3" data-info="La RFT explica cómo surge el lenguaje, cómo se forman redes de significado y cómo transforman funciones.">
+            RFT
+        </div>
+
+        <div class="node n4" data-info="ACT aplica estos principios al cambio clínico mediante procesos psicológicos flexibles.">
+            ACT
+        </div>
+
+    </div>
+
+    <!-- PANEL -->
+    <div class="panel" id="panel"></div>
+
+    <!-- NAV -->
+    <div class="nav-buttons">
+        <button class="btn" onclick="window.location.href='p6.html'">← Pantalla anterior</button>
+        <button class="btn" onclick="window.location.href='p8.html'">Siguiente pantalla →</button>
+    </div>
+
+</div>
+
+<script>
+    const nodes = document.querySelectorAll(".node");
+    const panel = document.getElementById("panel");
+
+    nodes.forEach(node => {
+        node.addEventListener("click", () => {
+            nodes.forEach(n => n.classList.remove("active"));
+            node.classList.add("active");
+
+            panel.style.display = "block";
+            panel.textContent = node.dataset.info;
+        });
+    });
+</script>
+
+</body>
+</html>
 
