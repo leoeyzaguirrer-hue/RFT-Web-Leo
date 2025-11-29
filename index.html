@@ -6,64 +6,56 @@
     <title>RFT · Plataforma Educativa</title>
 
     <style>
+        /* ============================================
+           PALETA GLOBAL
+        ============================================ */
         :root {
-            --azul-fondo: #0A2A5C;
-            --azul-profundo: #132F66;
-            --azul-texto: #0A2540;
+            --azul-1: #0A2A5C;
+            --azul-2: #132F66;
+            --azul-3: #000C1A;
+            --azul-4: #0F3250;
             --dorado: #FDBF12;
-            --acento-rosa: #FF7A30;
+            --dorado-soft: #FFD978;
             --blanco: #FFFFFF;
-            --gris-suave: #E9EFF8;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
+        /* ============================================
+           FONDO GLOBAL DARK-PREMIUM TÉCNICO
+        ============================================ */
         body {
             margin: 0;
-            font-family: "Noto Sans", system-ui, sans-serif;
-            color: var(--azul-texto);
+            font-family: "Noto Sans", sans-serif;
+            color: var(--blanco);
             background:
-                radial-gradient(circle at 10% 20%, rgba(250,250,255,0.9) 0, transparent 50%),
-                radial-gradient(circle at 80% 0%, rgba(228,238,255,0.9) 0, transparent 55%),
-                linear-gradient(180deg, #E9EFF8 0%, #FFFFFF 40%, #F3F6FB 100%);
+                radial-gradient(circle at 10% 20%, rgba(0,40,90,0.7), transparent 45%),
+                radial-gradient(circle at 90% 0%, rgba(0,70,130,0.6), transparent 55%),
+                linear-gradient(160deg, var(--azul-1) 0%, var(--azul-2) 40%, var(--azul-3) 100%);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
 
+        /* Líneas y puntos técnicos en el fondo */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             pointer-events: none;
             background-image:
-                linear-gradient(135deg, rgba(10,42,92,0.07) 1px, transparent 1px),
-                linear-gradient(225deg, rgba(10,42,92,0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mix-blend-mode: soft-light;
-            opacity: 0.7;
+                linear-gradient(135deg, rgba(253,191,18,0.07) 1px, transparent 1px),
+                linear-gradient(225deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 42px 42px;
+            opacity: 0.5;
             z-index: -1;
         }
 
-        .texture-layer {
-            position: fixed;
-            inset: 0;
-            background: url("./assets/backgrounds/blue-back.png") center/cover no-repeat;
-            mix-blend-mode: soft-light;
-            opacity: 0.45;
-            pointer-events: none;
-            z-index: -2;
-        }
-
+        /* ============================================
+           PORTADA
+        ============================================ */
         .portada {
-            width: 100%;
-            min-height: 100vh;
             padding: 32px 80px 60px 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
             position: relative;
         }
 
@@ -71,337 +63,194 @@
             position: absolute;
             top: 28px;
             left: 60px;
-            z-index: 10;
         }
 
         .logo-superior img {
             height: 230px;
-            filter: drop-shadow(0 0 12px rgba(0,0,0,0.35));
+            filter: drop-shadow(0 0 16px rgba(255,255,255,0.2));
         }
 
+        /* ============================================
+           GRID PRINCIPAL
+        ============================================ */
         .hero-grid {
+            margin-top: 230px;
             display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+            gap: 60px;
             align-items: center;
-            column-gap: 64px;
-            margin-top: 220px;
         }
 
+        /* TEXTO */
         .hero-text h1 {
-            font-family: "Coco Gothic", system-ui, sans-serif;
+            font-family: "Coco Gothic", sans-serif;
             font-size: 54px;
-            line-height: 1.1;
-            margin: 0 0 12px 0;
-            letter-spacing: 0.04em;
             text-transform: uppercase;
-            color: var(--azul-texto);
+            margin: 0 0 12px 0;
+            letter-spacing: 0.03em;
         }
 
-        .hero-text h1 span {
-            color: var(--dorado);
-        }
+        .hero-text h1 span { color: var(--dorado); }
 
         .hero-text h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--azul-profundo);
-            margin: 0 0 18px 0;
+            font-size: 22px;
+            margin-bottom: 18px;
+            color: #DDE6FF;
         }
 
         .pregunta {
             font-size: 20px;
-            margin: 0 0 14px 0;
             font-weight: 500;
-            color: var(--azul-profundo);
+            margin-bottom: 14px;
+            color: #EDEDED;
         }
 
         .intro {
             font-size: 17px;
             line-height: 1.6;
             max-width: 640px;
-            margin: 0 0 28px 0;
-            color: rgba(6,23,46,0.92);
+            opacity: 0.85;
         }
 
         .btn-start {
-            margin-top: 10px;
+            margin-top: 20px;
             padding: 16px 34px;
-            background: linear-gradient(135deg, var(--dorado), #FFD976);
-            color: #1A1F3B;
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
             border-radius: 999px;
+            color: #1A1F3B;
+            font-weight: bold;
             font-size: 18px;
-            border: none;
             cursor: pointer;
-            font-weight: 700;
+            border: none;
             letter-spacing: 0.04em;
-            text-transform: uppercase;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12),
-                        0 0 18px rgba(253,191,18,0.55);
-            transition: 0.25s ease;
         }
 
         .btn-start:hover {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 14px 30px rgba(0,0,0,0.18),
-                        0 0 28px rgba(253,191,18,0.7);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 28px rgba(253,191,18,0.7);
         }
 
+        /* ============================================
+           NUEVA TARJETA MAPA RELACIONAL (VERSIÓN CLARA)
+        ============================================ */
         .hero-visual {
-            position: relative;
-            min-height: 260px;
             display: flex;
-            align-items: center;
             justify-content: center;
         }
 
         .visual-card {
-            position: relative;
-            width: 100%;
-            max-width: 360px;
-            aspect-ratio: 4/3;
-            border-radius: 32px;
-            padding: 24px 26px;
-            background:
-                radial-gradient(circle at 10% 0%, rgba(255,255,255,0.9) 0, transparent 55%),
-                radial-gradient(circle at 90% 100%, rgba(250,239,210,0.9) 0, transparent 60%),
-                linear-gradient(145deg, rgba(10,42,92,0.96), rgba(10,35,78,0.98));
+            background: linear-gradient(145deg, #FFFFFF 0%, #F7F7F7 100%);
+            color: var(--azul-4);
+            border-radius: 28px;
+            padding: 26px;
+            width: 360px;
             box-shadow:
-                0 22px 45px rgba(0,0,0,0.35),
-                0 0 24px rgba(253,191,18,0.35);
-            overflow: hidden;
-            color: #FFFFFF;
+                0 18px 48px rgba(0,0,0,0.55),
+                0 0 16px rgba(255,215,100,0.35);
+            position: relative;
         }
 
         .visual-label {
             font-size: 12px;
-            letter-spacing: 0.16em;
             text-transform: uppercase;
-            opacity: 0.75;
-            margin-bottom: 6px;
+            letter-spacing: 0.15em;
+            opacity: 0.6;
         }
 
         .visual-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 6px 0 8px 0;
         }
 
         .visual-text {
             font-size: 14px;
             line-height: 1.5;
-            max-width: 240px;
             opacity: 0.9;
+            max-width: 260px;
         }
 
-        .hex-floating {
-            position: absolute;
-            right: -32px;
-            top: -18px;
-            width: 160px;
-            opacity: 0.98;
-            filter: drop-shadow(0 0 18px rgba(253,191,18,0.7));
-            animation: float 4.5s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .node {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            border-radius: 999px;
-            border: 2px solid rgba(253,191,18,0.9);
-            background: rgba(15,52,110,0.95);
-            box-shadow: 0 0 12px rgba(253,191,18,0.7);
-        }
-
-        .node::after {
-            content: "";
-            position: absolute;
-            inset: 4px;
-            border-radius: inherit;
-            background: radial-gradient(circle at 30% 20%, #FFFFFF, transparent 65%);
-            opacity: 0.85;
-        }
-
-        .node.n1 { left: 18%; top: 64%; }
-        .node.n2 { left: 52%; top: 78%; }
-        .node.n3 { left: 70%; top: 52%; }
-
-        .link-line {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg,
-                rgba(253,191,18,0.1),
-                rgba(253,191,18,0.9),
-                rgba(253,191,18,0.1)
-            );
-            transform-origin: left center;
-            opacity: 0.85;
-        }
-
-        .link1 {
-            left: 22%;
-            top: 69%;
-            width: 34%;
-            transform: rotate(8deg);
-        }
-
-        .link2 {
-            left: 28%;
-            top: 59%;
-            width: 50%;
-            transform: rotate(-18deg);
-        }
-
-        /* ETIQUETA SOBRE ACORDEONES */
+        /* ============================================
+           ACORDEONES (OSCUROS PREMIUM)
+        ============================================ */
         .section-label {
-            margin-top: 70px;
+            margin-top: 80px;
             font-size: 13px;
-            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgba(6,23,46,0.75);
+            letter-spacing: 0.16em;
+            opacity: 0.75;
         }
 
-        /* ACORDEONES PREMIUM CLAROS ARREGLADOS */
         .acordeon-container {
-            margin-top: 14px;
             width: 100%;
             max-width: 880px;
         }
 
         .acordeon {
-            background: rgba(10,42,92,0.06);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,215,80,0.25);
             border-radius: 18px;
             padding: 16px 20px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(6px);
             cursor: pointer;
-            transition: 0.25s ease;
-            border: 1px solid rgba(10,42,92,0.12);
-            box-shadow: 0 10px 28px rgba(15,37,68,0.04);
+            transition: 0.25s;
         }
 
         .acordeon:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--dorado);
             transform: translateY(-2px);
-            border-color: rgba(253,191,18,0.55);
-            background: rgba(10,42,92,0.12);
-            box-shadow: 0 14px 32px rgba(15,37,68,0.08);
         }
 
         .acordeon h3 {
-            margin: 0;
             font-size: 18px;
-            color: var(--azul-texto);
+            margin: 0;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
         }
 
-        .acordeon h3 span {
-            color: var(--dorado);
-            font-size: 18px;
-        }
+        .acordeon h3 span { color: var(--dorado); }
 
         .submodulos {
-            margin-top: 10px;
-            padding-left: 4px;
             display: none;
             flex-direction: column;
             gap: 8px;
+            margin-top: 10px;
         }
 
         .submodulos button {
-            padding: 8px 11px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,215,80,0.35);
+            color: var(--blanco);
             border-radius: 999px;
-            border: 1px solid rgba(10,42,92,0.18);
-            background: rgba(14,37,73,0.03);
-            color: var(--azul-profundo);
+            padding: 8px 12px;
             cursor: pointer;
-            transition: 0.2s;
-            text-align: left;
-            font-size: 14px;
+            transition: 0.25s;
         }
 
         .submodulos button:hover {
-            background: linear-gradient(90deg, rgba(253,191,18,0.1), rgba(255,255,255,1));
-            border-color: rgba(253,191,18,0.8);
-            color: var(--azul-texto);
-            transform: translateY(-1px);
+            background: rgba(255,215,80,0.2);
+            border-color: var(--dorado);
         }
 
-        @media (max-width: 1024px) {
-            .portada {
-                padding: 24px 24px 40px 24px;
-            }
-
-            .logo-superior {
-                top: 18px;
-                left: 18px;
-            }
-
-            .logo-superior img {
-                height: 190px;
-            }
-
-            .hero-grid {
-                grid-template-columns: 1fr;
-                row-gap: 40px;
-                margin-top: 190px;
-            }
-
-            .hero-visual {
-                order: -1;
-            }
-        }
-
-        @media (max-width: 720px) {
-            .logo-superior img {
-                height: 150px;
-            }
-
-            .hero-grid {
-                margin-top: 160px;
-            }
-
-            .hero-text h1 {
-                font-size: 34px;
-            }
-
-            .hero-text h2 {
-                font-size: 18px;
-            }
-
-            .intro {
-                font-size: 15px;
-            }
-
-            .acordeon-container {
-                max-width: 100%;
-            }
-
-            .visual-card {
-                max-width: 320px;
-            }
-        }
+        /* ============================================
+           SCRIPT ACORDEÓN
+        ============================================ */
     </style>
 </head>
 
 <body>
-    <div class="texture-layer"></div>
 
     <section class="portada">
 
         <div class="logo-superior">
-            <img src="./assets/logo/logo-main.png" alt="Logo RFT · Plataforma Educativa">
+            <img src="./assets/logo/logo-main.png">
         </div>
 
         <div class="hero-grid">
 
+            <!-- TEXTO -->
             <div class="hero-text">
                 <h1>Plataforma Educativa <span>RFT · ACT</span></h1>
                 <h2>Un mapa funcional del comportamiento verbal</h2>
@@ -419,27 +268,21 @@
                 <button class="btn-start">Iniciar plataforma</button>
             </div>
 
+            <!-- NUEVA TARJETA MAPA RELACIONAL -->
             <div class="hero-visual">
                 <div class="visual-card">
-                    <div class="visual-label">Mapa Relacional</div>
-                    <div class="visual-title">Lenguaje como conducta</div>
+                    <div class="visual-label">Secuencia Técnica</div>
+                    <div class="visual-title">Mapa Relacional</div>
                     <div class="visual-text">
-                        Redes de significado, funciones que se transforman y
-                        contextos que organizan la conducta: una vista técnica del
-                        lenguaje como acción, no como “reflejo interno”.
+                        Un vistazo a cómo las redes de significado organizan la conducta.
+                        Perspectiva funcional, contingencial y relacional.
                     </div>
-
-                    <img src="./assets/icons/hex-gold.png" class="hex-floating" alt="Hexágono dorado RFT">
-
-                    <div class="node n1"></div>
-                    <div class="node n2"></div>
-                    <div class="node n3"></div>
-                    <div class="link-line link1"></div>
-                    <div class="link-line link2"></div>
                 </div>
             </div>
+
         </div>
 
+        <!-- ACORDEONES -->
         <p class="section-label">Explora la plataforma</p>
 
         <div class="acordeon-container">
