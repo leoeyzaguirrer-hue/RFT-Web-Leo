@@ -1,384 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RFT · Plataforma Educativa</title>
-
-    <style>
-        /* ============================================
-           PALETA GLOBAL
-        ============================================ */
-        :root {
-            --azul-1: #0A2A5C;
-            --azul-2: #132F66;
-            --azul-3: #000C1A;
-            --azul-4: #0F3250;
-            --dorado: #FDBF12;
-            --dorado-soft: #FFD978;
-            --blanco: #FFFFFF;
-        }
-
-        * { box-sizing: border-box; }
-
-        /* ============================================
-           FONDO GLOBAL
-        ============================================ */
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            color: var(--blanco);
-            background:
-                radial-gradient(circle at 10% 20%, rgba(0,40,90,0.7), transparent 45%),
-                radial-gradient(circle at 90% 0%, rgba(0,70,130,0.6), transparent 55%),
-                linear-gradient(160deg, var(--azul-1) 0%, var(--azul-2) 40%, var(--azul-3) 100%);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background-image:
-                linear-gradient(135deg, rgba(253,191,18,0.07) 1px, transparent 1px),
-                linear-gradient(225deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 42px 42px;
-            opacity: 0.5;
-            z-index: -1;
-        }
-
-        /* ============================================
-           NODOS FLOTANTES
-        ============================================ */
-        .bg-nodes {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .bg-node {
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            border-radius: 999px;
-
-            /* BORDE DORADO + BORDE AZUL LUMINOSO */
-            border: 2px solid rgba(253,191,18,0.85);
-            box-shadow:
-                0 0 14px rgba(120,185,255,0.9),
-                0 0 26px rgba(253,191,18,0.45);
-
-            background: rgba(5,20,60,0.95);
-            opacity: 0.75;
-            animation: nodeFloat 18s ease-in-out infinite;
-        }
-
-        .bg-node::after {
-            content: "";
-            position: absolute;
-            inset: 4px;
-            border-radius: inherit;
-            background: radial-gradient(circle at 30% 20%, #FFFFFF, transparent 65%);
-        }
-
-        /* NODOS POSICIONES */
-        .bg-node.n-a { top: 18%; left: 16%; animation-delay: 0s; }
-        .bg-node.n-b { top: 32%; left: 78%; animation-delay: 3s; }
-        .bg-node.n-c { top: 64%; left: 24%; animation-delay: 6s; }
-        .bg-node.n-d { top: 72%; left: 72%; animation-delay: 9s; }
-        .bg-node.n-e { top: 48%; left: 50%; animation-delay: 12s; }
-
-        /* ============================================
-           LÍNEAS DORADAS CERCA DE LOS NODOS
-        ============================================ */
-        .bg-line {
-            position: absolute;
-            background: linear-gradient(90deg,
-                rgba(253,191,18,0),
-                rgba(253,191,18,0.8),
-                rgba(253,191,18,0)
-            );
-            height: 2px;
-            width: 120px;
-            filter: drop-shadow(0 0 6px rgba(253,191,18,0.8));
-            opacity: 0.55;
-            animation: linePulse 7s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        .bg-line.l1 { top: 20%; left: 10%; transform: rotate(-15deg); }
-        .bg-line.l2 { top: 35%; left: 75%; transform: rotate(12deg); }
-        .bg-line.l3 { top: 60%; left: 22%; transform: rotate(-6deg); }
-        .bg-line.l4 { top: 70%; left: 70%; transform: rotate(8deg); }
-
-        /* ============================================
-           PORTADA
-        ============================================ */
-        .portada {
-            padding: 32px 80px 60px 80px;
-            position: relative;
-        }
-
-        .logo-superior {
-            position: absolute;
-            top: 28px;
-            left: 60px;
-        }
-
-        .logo-superior img {
-
-            /* MARCO BLANCO SUAVE */
-            padding: 8px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 22px;
-
-            /* BORDE BLANCO SUTIL */
-            border: 2px solid rgba(255,255,255,0.55);
-
-            /* GLOW */
-            box-shadow:
-                0 0 16px rgba(255,255,255,0.55),
-                0 0 26px rgba(255,255,255,0.3);
-
-            height: 230px;
-        }
-
-        /* ============================================
-           HERO
-        ============================================ */
-        .hero-grid {
-            margin-top: 230px;
-            display: grid;
-            grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
-            gap: 60px;
-            align-items: center;
-            animation: heroFloat 16s ease-in-out infinite;
-        }
-
-        .hero-text h1 {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 54px;
-            text-transform: uppercase;
-            margin: 0 0 12px 0;
-            letter-spacing: 0.03em;
-        }
-
-        .hero-text h1 span { color: var(--dorado); }
-
-        .hero-text h2 {
-            font-size: 22px;
-            margin-bottom: 18px;
-            color: #DDE6FF;
-        }
-
-        .pregunta {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 14px;
-            color: #EDEDED;
-        }
-
-        .intro {
-            font-size: 17px;
-            line-height: 1.6;
-            max-width: 640px;
-            opacity: 0.85;
-        }
-
-        .btn-start {
-            margin-top: 20px;
-            padding: 16px 34px;
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
-            border-radius: 999px;
-            color: #1A1F3B;
-            font-weight: bold;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            letter-spacing: 0.04em;
-        }
-
-        .btn-start:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 0 28px rgba(253,191,18,0.7);
-        }
-
-        /* ============================================
-           TARJETA PREMIUM
-        ============================================ */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-        }
-
-        .visual-card {
-            background: linear-gradient(145deg, #FFFFFF 0%, #F7F7F7 100%);
-            color: var(--azul-4);
-            border-radius: 28px;
-            padding: 26px;
-            width: 360px;
-            box-shadow:
-                0 18px 48px rgba(0,0,0,0.55),
-                0 0 16px rgba(255,215,100,0.35);
-            position: relative;
-            overflow: hidden;
-            animation: cardGlow 10s ease-in-out infinite;
-        }
-
-        /* LÍNEAS DORADAS DE LA TARJETA */
-        .decor-line {
-            position: absolute;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 8px rgba(253,191,18,0.7));
-            animation: linePulse 6s ease-in-out infinite;
-        }
-
-        .decor-line.dl-top {
-            top: 10%;
-            left: 8%;
-            width: 70%;
-            height: 2px;
-            background: linear-gradient(90deg,
-                rgba(253,191,18,0),
-                rgba(253,191,18,0.85),
-                rgba(253,191,18,0));
-        }
-
-        .decor-line.dl-right {
-            top: 22%;
-            right: 6%;
-            width: 2px;
-            height: 50%;
-            background: linear-gradient(180deg,
-                rgba(253,191,18,0),
-                rgba(253,191,18,0.85),
-                rgba(253,191,18,0));
-        }
-
-        .decor-line.dl-diag {
-            bottom: 10%;
-            left: 5%;
-            width: 60%;
-            height: 2px;
-            transform: rotate(-18deg);
-            background: linear-gradient(90deg,
-                rgba(253,191,18,0),
-                rgba(253,191,18,0.85),
-                rgba(253,191,18,0));
-        }
-
-        .visual-label { font-size: 12px; text-transform: uppercase; opacity: 0.6; }
-        .visual-title { font-size: 22px; font-weight: bold; margin-top: 6px; }
-        .visual-text { font-size: 14px; opacity: 0.9; line-height: 1.5; max-width: 260px; }
-
-        /* ============================================
-           ACORDEONES
-        ============================================ */
-        .section-label {
-            margin-top: 80px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            opacity: 0.75;
-        }
-
-        .acordeon-container { width: 100%; max-width: 880px; }
-
-        .acordeon {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,215,80,0.25);
-            border-radius: 18px;
-            padding: 16px 20px;
-            margin-bottom: 14px;
-            backdrop-filter: blur(6px);
-            cursor: pointer;
-            transition: 0.25s;
-        }
-
-        .acordeon:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: var(--dorado);
-            transform: translateY(-2px);
-        }
-
-        .acordeon h3 {
-            font-size: 18px;
-            margin: 0;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .acordeon h3 span { color: var(--dorado); }
-
-        .submodulos {
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .submodulos button {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,215,80,0.35);
-            color: var(--blanco);
-            border-radius: 999px;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-
-        .submodulos button:hover {
-            background: rgba(255,215,80,0.2);
-            border-color: var(--dorado);
-        }
-
-        /* ============================================
-           ANIMACIONES
-        ============================================ */
-        @keyframes heroFloat {
-            0%   { transform: translateY(0); }
-            25%  { transform: translateY(-6px); }
-            50%  { transform: translateY(2px); }
-            75%  { transform: translateY(-3px); }
-            100% { transform: translateY(0); }
-        }
-
-        @keyframes cardGlow {
-            0%,100% {
-                box-shadow:
-                    0 18px 48px rgba(0,0,0,0.55),
-                    0 0 10px rgba(255,215,100,0.25);
-            }
-            50% {
-                box-shadow:
-                    0 24px 60px rgba(0,0,0,0.7),
-                    0 0 26px rgba(255,215,100,0.55);
-            }
-        }
-
-        @keyframes nodeFloat {
-            0%   { transform: translate(0,0); opacity: 0.4; }
-            25%  { transform: translate(12px,-14px); opacity: 0.8; }
-            50%  { transform: translate(-8px,6px); opacity: 0.6; }
-            75%  { transform: translate(6px,-10px); opacity: 0.9; }
-            100% { transform: translate(0,0); opacity: 0.4; }
-        }
-
-        @keyframes linePulse {
-            0%,100% { opacity: 0.25; }
-            25%,75% { opacity: 0.8; }
-            50%     { opacity: 0.4; }
-        }
-    </style>
-</head>
-
 <body>
 
-    <!-- NODOS + LÍNEAS DORADAS -->
+    <!-- HEXÁGONOS DE FONDO -->
+    <div class="hex-bg h1"></div>
+    <div class="hex-bg h2"></div>
+
+    <!-- NODOS + LÍNEAS -->
     <div class="bg-nodes">
         <span class="bg-node n-a"></span>
         <span class="bg-node n-b"></span>
@@ -394,8 +20,9 @@
 
     <section class="portada">
 
+        <!-- LOGO -->
         <div class="logo-superior">
-            <img src="./assets/logo/logo-main.png" alt="Logo">
+            <img src="./assets/logo/logo-main.png" alt="logo">
         </div>
 
         <div class="hero-grid">
@@ -403,7 +30,10 @@
             <div class="hero-text">
                 <h1>Plataforma Educativa <span>RFT · ACT</span></h1>
                 <h2>Un mapa funcional del comportamiento verbal</h2>
-                <p class="pregunta">¿Cómo surge el significado y cómo transforma nuestra conducta?</p>
+
+                <p class="pregunta">
+                    ¿Cómo surge el significado y cómo transforma nuestra conducta?
+                </p>
 
                 <p class="intro">
                     Esta plataforma presenta un recorrido técnico y progresivo a través del contextualismo funcional,
@@ -414,10 +44,9 @@
                 <button class="btn-start">Iniciar plataforma</button>
             </div>
 
-            <!-- TARJETA PREMIUM -->
+            <!-- TARJETA -->
             <div class="hero-visual">
                 <div class="visual-card">
-
                     <span class="decor-line dl-top"></span>
                     <span class="decor-line dl-right"></span>
                     <span class="decor-line dl-diag"></span>
@@ -428,7 +57,6 @@
                         Un vistazo a cómo las redes de significado organizan la conducta.
                         Perspectiva funcional, contingencial y relacional.
                     </div>
-
                 </div>
             </div>
 
@@ -439,7 +67,7 @@
         <div class="acordeon-container">
 
             <div class="acordeon" onclick="toggleAcordeon(this)">
-                <h3>Filosofía Contextual <span>⬡</span></h3>
+                <h3>Filosofía Contextual <span class="icono">⬡</span></h3>
                 <div class="submodulos">
                     <button>Contextualismo Funcional</button>
                     <button>Unidad de Análisis</button>
@@ -450,7 +78,7 @@
             </div>
 
             <div class="acordeon" onclick="toggleAcordeon(this)">
-                <h3>Ciencia del Lenguaje <span>⬡</span></h3>
+                <h3>Ciencia del Lenguaje <span class="icono">⬡</span></h3>
                 <div class="submodulos">
                     <button>Equivalencia de Estímulos</button>
                     <button>Aprendizaje Relacional</button>
@@ -460,7 +88,7 @@
             </div>
 
             <div class="acordeon" onclick="toggleAcordeon(this)">
-                <h3>Procesos Clínicos <span>⬡</span></h3>
+                <h3>Procesos Clínicos <span class="icono">⬡</span></h3>
                 <div class="submodulos">
                     <button>Fusión</button>
                     <button>Yo como Contexto</button>
@@ -470,7 +98,7 @@
             </div>
 
             <div class="acordeon" onclick="toggleAcordeon(this)">
-                <h3>Actuares Clínicos <span>⬡</span></h3>
+                <h3>Actuares Clínicos <span class="icono">⬡</span></h3>
                 <div class="submodulos">
                     <button>ACT como Aplicación Relacional</button>
                     <button>Ejercicios desde ACT & RFT</button>
@@ -478,7 +106,7 @@
             </div>
 
             <div class="acordeon" onclick="toggleAcordeon(this)">
-                <h3>Recursos <span>⬡</span></h3>
+                <h3>Recursos <span class="icono">⬡</span></h3>
                 <div class="submodulos">
                     <button>Experimentos Interactivos</button>
                     <button>Biblioteca de Conceptos</button>
@@ -489,14 +117,64 @@
 
     </section>
 
+
+    <!-- ============================================
+         SCRIPT ACORDEÓN + PARALLAX + SCROLLREVEAL
+    ============================================ -->
     <script>
+        /* ACORDEONES DINÁMICOS */
         function toggleAcordeon(el) {
             const sub = el.querySelector(".submodulos");
+            const icon = el.querySelector(".icono");
+
             const isOpen = sub.style.display === "flex";
+
             document.querySelectorAll(".submodulos")
                 .forEach(s => s.style.display = "none");
-            sub.style.display = isOpen ? "none" : "flex";
+
+            document.querySelectorAll(".acordeon")
+                .forEach(a => a.classList.remove("open"));
+
+            if (!isOpen) {
+                sub.style.display = "flex";
+                el.classList.add("open");
+            }
         }
+
+        /* PARALLAX NODOS Y LÍNEAS */
+        document.addEventListener("mousemove", e => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+            document.querySelectorAll(".bg-node").forEach(n => {
+                n.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            document.querySelectorAll(".bg-line").forEach(l => {
+                l.style.transform = `translate(${x/2}px, ${y/2}px) rotate(${l.dataset.rot || 0}deg)`;
+            });
+
+            document.querySelectorAll(".hex-bg").forEach(h => {
+                h.style.transform = `translate(${x/3}px, ${y/3}px)`;
+            });
+        });
+
+        /* SCROLL REVEAL CASERO */
+        const revealElements = document.querySelectorAll(".acordeon, .section-label");
+
+        function revealOnScroll() {
+            const trigger = window.innerHeight * 0.9;
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect().top;
+                if (rect < trigger) {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }
+            });
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
     </script>
 
 </body>
