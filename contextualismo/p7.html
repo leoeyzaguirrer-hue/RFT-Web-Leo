@@ -105,13 +105,10 @@
       padding: 20px 32px 40px 32px;
     }
 
-    h1 {
-      font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 34px;
-      text-transform: uppercase;
-      letter-spacing: 0.11em;
-      text-align: center;
-      margin: 10px 0 8px 0;
+    @media (max-width: 880px) {
+      .container {
+        padding-inline: 18px;
+      }
     }
 
     .tag {
@@ -136,6 +133,15 @@
       box-shadow: 0 0 10px rgba(253,191,18,0.8);
     }
 
+    h1 {
+      font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 34px;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      text-align: center;
+      margin: 10px 0 8px 0;
+    }
+
     .sub {
       font-size: 22px;
       opacity: 0.9;
@@ -146,33 +152,34 @@
     p.descripcion {
       font-size: 19px;
       opacity: 0.92;
-      max-width: 780px;
+      max-width: 880px;
       margin: 0 auto 26px auto;
       line-height: 1.7;
       text-align: center;
     }
 
-    /* CHIPS DE CAPAS */
+    /* BARRA DE CAPAS (SIN CAJAS GRANDES) */
     .layers-bar {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       margin: 26px auto 34px auto;
     }
 
     .layer-chip {
-      padding: 7px 16px;
+      padding: 6px 14px;
       border-radius: 999px;
       border: 1px solid rgba(253,191,18,0.6);
-      background: rgba(5,12,24,0.7);
-      font-size: 13px;
-      letter-spacing: 0.06em;
+      background: rgba(5,12,24,0.45);
+      font-size: 12px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      opacity: 0.85;
+      opacity: 0.9;
+      backdrop-filter: blur(6px);
     }
 
     .layer-dot {
@@ -183,175 +190,102 @@
       box-shadow: 0 0 8px rgba(253,191,18,0.7);
     }
 
-    /* LAYOUT CENTRAL: RED + PANEL */
-    .main-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 26px;
-      align-items: stretch;
-      margin-top: 18px;
-    }
-
-    @media (max-width: 880px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-      .container {
-        padding-inline: 18px;
-      }
-    }
-
-    /* RED INTERACTIVA */
-    .network-card {
-      position: relative;
-      border-radius: 32px;
-      padding: 22px 20px 26px 20px;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.04) 0, rgba(0,0,0,0.85) 60%);
-      border: 2px solid rgba(253,191,18,0.45);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,0.6),
-        0 0 18px rgba(253,191,18,0.2);
-      overflow: hidden;
-    }
-
-    .network-title {
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-bottom: 10px;
-      opacity: 0.9;
-    }
-
-    .network-sub {
-      font-size: 14px;
-      opacity: 0.86;
-      margin-bottom: 16px;
-    }
-
-    .network {
-      position: relative;
-      width: 100%;
-      height: 320px;
+    /* SECCIÓN FLUJO INTERACTIVO (SIN TARJETAS) */
+    .flow-section {
       margin-top: 12px;
     }
 
-    /* LÍNEAS ENTRE NODOS */
-    .line {
-      position: absolute;
-      height: 2px;
-      background: linear-gradient(90deg,
-        rgba(253,191,18,0),
-        rgba(253,191,18,0.85),
-        rgba(253,191,18,0)
-      );
-      opacity: 0.6;
-      filter: drop-shadow(0 0 10px rgba(253,191,18,0.6));
+    .flow-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.85;
+      text-align: center;
+      margin-bottom: 10px;
     }
 
-    .l1 { top: 26%; left: 24%; width: 52%; transform: rotate(-6deg); }
-    .l2 { top: 52%; left: 24%; width: 52%; transform: rotate(7deg); }
-    .l3 { top: 54%; left: 8%;  width: 84%; transform: rotate(0deg); }
+    .flow-map {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      height: 230px;
+      margin: 0 auto 18px auto;
+    }
 
-    /* NODOS */
-    .node {
+    /* Línea curva sugerida */
+    .flow-curve {
       position: absolute;
-      width: 160px;
-      padding: 14px 12px;
-      border-radius: 20px;
-      background: radial-gradient(circle at top left, rgba(253,191,18,0.22), rgba(0,0,0,0.96));
-      border: 2px solid rgba(253,191,18,0.5);
-      font-size: 15px;
+      inset: 50% 6%;
+      height: 0;
+      border-top: 2px solid rgba(253,191,18,0.4);
+      border-radius: 999px;
+      transform: translateY(-50%);
+      box-shadow: 0 0 12px rgba(253,191,18,0.4);
+    }
+
+    .flow-node {
+      position: absolute;
+      min-width: 150px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.7);
+      background: rgba(1,5,14,0.85);
+      backdrop-filter: blur(10px);
+      font-size: 14px;
       line-height: 1.3;
       cursor: pointer;
-      transition: 0.28s ease;
-      backdrop-filter: blur(5px);
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: flex-start;
+      transition: 0.25s ease;
       box-shadow:
-        0 8px 24px rgba(0,0,0,0.6),
-        0 0 12px rgba(253,191,18,0.35);
+        0 8px 22px rgba(0,0,0,0.6),
+        0 0 14px rgba(253,191,18,0.3);
     }
 
-    .node span.label-header {
+    .flow-node-label {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      opacity: 0.78;
-      display: block;
-      margin-bottom: 4px;
+      letter-spacing: 0.16em;
+      opacity: 0.75;
     }
 
-    .node strong {
-      font-size: 15px;
+    .flow-node-title {
+      font-weight: 700;
     }
 
-    .node:hover {
+    .flow-node:hover {
       transform: translateY(-6px) scale(1.03);
       box-shadow:
-        0 12px 30px rgba(0,0,0,0.75),
-        0 0 20px rgba(253,191,18,0.9);
+        0 10px 26px rgba(0,0,0,0.8),
+        0 0 22px rgba(253,191,18,0.9);
     }
 
-    .node.active {
-      background: radial-gradient(circle at top left, rgba(253,191,18,0.55), rgba(0,0,0,0.96));
+    .flow-node.active {
+      background: radial-gradient(circle at top left, rgba(253,191,18,0.5), #02040b);
       border-color: var(--dorado);
       box-shadow:
-        0 14px 34px rgba(0,0,0,0.85),
-        0 0 26px rgba(253,191,18,0.95);
+        0 12px 32px rgba(0,0,0,0.9),
+        0 0 26px rgba(253,191,18,1);
     }
 
-    .n1 { top: 8%; left: 4%; }
-    .n2 { top: 10%; right: 4%; }
-    .n3 { bottom: 12%; left: 10%; }
-    .n4 { bottom: 10%; right: 10%; }
+    /* Posiciones de nodos en la curva */
+    .flow-node.f1 { top: 18%; left: 6%; }
+    .flow-node.f2 { top: 8%; left: 50%; transform: translateX(-50%); }
+    .flow-node.f3 { top: 18%; right: 6%; }
+    .flow-node.f4 { bottom: 8%; left: 50%; transform: translateX(-50%); }
 
-    /* NODO CENTRAL: CONDUCTA EN CONTEXTO */
-    .core-node {
-      position: absolute;
-      inset: 50% auto auto 50%;
-      width: 190px;
-      height: 190px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 3px solid rgba(253,191,18,0.85);
-      background: radial-gradient(circle, rgba(253,191,18,0.28), rgba(1,3,10,0.98));
+    /* AVATAR CLÍNICO MINI (SE MANTIENE) */
+    .avatar-wrapper {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 18px;
-      box-shadow:
-        0 0 32px rgba(253,191,18,0.7),
-        0 18px 40px rgba(0,0,0,0.9);
+      margin: 4px 0 10px 0;
     }
 
-    .core-node-title {
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.88;
-    }
-
-    .core-node-main {
-      font-size: 18px;
-      font-weight: 700;
-      margin-top: 4px;
-    }
-
-    .core-node-tag {
-      margin-top: 8px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      opacity: 0.78;
-    }
-
-    /* AVATAR CLÍNICO MINI */
     .avatar {
-      position: absolute;
-      bottom: -8px;
-      right: 14px;
-      width: 72px;
-      height: 72px;
+      width: 78px;
+      height: 78px;
       border-radius: 50%;
       border: 2px solid rgba(253,191,18,0.9);
       background: radial-gradient(circle at 30% 20%, #ffffff 0, #f7d88e 25%, #f09d4c 45%, #6b2d12 100%);
@@ -418,6 +352,12 @@
       top: 58%;
     }
 
+    .avatar.state-5 .avatar-mouth {
+      border-bottom-width: 4px;
+      top: 56%;
+      transform: translateX(-50%) translateY(-1px);
+    }
+
     .avatar.state-1 {
       filter: grayscale(0.1) brightness(0.85);
     }
@@ -435,69 +375,156 @@
       box-shadow:
         0 0 26px rgba(253,191,18,1),
         0 18px 32px rgba(0,0,0,0.9);
-      transform: translateY(-4px);
+      transform: translateY(-2px);
     }
 
-    /* PANEL EXPLICATIVO */
-    .panel-card {
-      border-radius: 32px;
-      padding: 22px 24px 26px 24px;
-      background: linear-gradient(150deg, rgba(253,191,18,0.18), rgba(0,0,0,0.9));
-      border: 2px solid rgba(253,191,18,0.9);
+    .avatar.state-5 {
+      filter: saturate(1.3) brightness(1.1);
       box-shadow:
-        0 18px 40px rgba(0,0,0,0.85),
-        0 0 22px rgba(253,191,18,0.7);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+        0 0 30px rgba(253,191,18,1),
+        0 20px 36px rgba(0,0,0,0.95);
+      transform: translateY(-4px) scale(1.03);
     }
 
-    .panel-kicker {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      opacity: 0.88;
+    /* PANEL DE TEXTO FLOTANTE (GLASSMORPHISM, NO CAJA DUROTA) */
+    .flow-info {
+      max-width: 920px;
+      margin: 0 auto 26px auto;
+      padding: 16px 18px;
+      border-radius: 26px;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.75), rgba(0,0,0,0.55));
+      border: 1px solid rgba(253,191,18,0.35);
+      backdrop-filter: blur(14px);
+      box-shadow:
+        0 14px 36px rgba(0,0,0,0.9),
+        0 0 22px rgba(253,191,18,0.5);
     }
 
-    .panel-title {
-      font-size: 21px;
+    .flow-info-title {
+      font-size: 19px;
       font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .panel-body {
+    .flow-info-body {
       font-size: 17px;
       line-height: 1.7;
       opacity: 0.96;
+      margin-bottom: 10px;
     }
 
-    .panel-body strong {
+    .flow-info-example-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.86;
+      margin-bottom: 4px;
+    }
+
+    .flow-info-example {
+      font-size: 16px;
+      line-height: 1.7;
+      opacity: 0.97;
+    }
+
+    .flow-info strong {
       color: var(--dorado-soft);
     }
 
-    .panel-example-label {
+    /* TIMELINE INTERACTIVA */
+    .timeline-section {
+      margin-top: 10px;
+    }
+
+    .timeline-label {
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      opacity: 0.9;
-      margin-top: 6px;
+      opacity: 0.86;
+      text-align: center;
+      margin-bottom: 6px;
     }
 
-    .panel-example {
+    .timeline-dots {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      max-width: 860px;
+      margin: 0 auto 10px auto;
+      position: relative;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        rgba(253,191,18,0.0),
+        rgba(253,191,18,0.7),
+        rgba(253,191,18,0.0)
+      );
+      opacity: 0.6;
+    }
+
+    .t-dot {
+      position: relative;
+      z-index: 1;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(253,191,18,0.9);
+      background: rgba(0,0,0,0.9);
+      box-shadow: 0 0 12px rgba(253,191,18,0.8);
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .t-dot::after {
+      content: attr(data-short);
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+
+    .t-dot.active {
+      background: var(--dorado);
+      box-shadow:
+        0 0 18px rgba(253,191,18,1),
+        0 0 22px rgba(253,191,18,0.9);
+      transform: translateY(-3px);
+    }
+
+    .timeline-text {
+      max-width: 880px;
+      margin: 18px auto 26px auto;
+      padding: 12px 16px;
+      border-radius: 24px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(253,191,18,0.4);
+      backdrop-filter: blur(12px);
       font-size: 16px;
       line-height: 1.7;
-      background: rgba(0,0,0,0.45);
-      border-radius: 20px;
-      padding: 12px 14px;
-      border: 1px solid rgba(253,191,18,0.45);
+      opacity: 0.97;
     }
 
-    /* MICRO EXPERIMENTO */
+    /* MICRO EXPERIMENTO INTEGRADOR */
     .experiment {
-      margin-top: 6px;
-      border-radius: 22px;
-      background: rgba(0,0,0,0.65);
-      border: 1px dashed rgba(253,191,18,0.7);
+      max-width: 880px;
+      margin: 0 auto 26px auto;
       padding: 12px 14px 14px 14px;
+      border-radius: 24px;
+      background: rgba(0,0,0,0.6);
+      border: 1px dashed rgba(253,191,18,0.7);
+      backdrop-filter: blur(10px);
     }
 
     .experiment-label {
@@ -513,6 +540,7 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 4px;
+      margin-bottom: 6px;
     }
 
     .exp-pill {
@@ -540,8 +568,22 @@
 
     .experiment-result {
       font-size: 14px;
-      margin-top: 8px;
+      margin-top: 4px;
+      opacity: 0.96;
+    }
+
+    /* MENSAJE FINAL */
+    .closing-text {
+      max-width: 820px;
+      margin: 18px auto 0 auto;
+      font-size: 17px;
+      line-height: 1.7;
+      text-align: center;
       opacity: 0.95;
+    }
+
+    .closing-text strong {
+      color: var(--dorado-soft);
     }
 
     /* NAV INFERIOR */
@@ -584,6 +626,43 @@
       font-size: 17px;
       line-height: 1;
     }
+
+    @media (max-width: 720px) {
+      .flow-map {
+        height: 260px;
+      }
+      .flow-node.f1,
+      .flow-node.f2,
+      .flow-node.f3,
+      .flow-node.f4 {
+        position: static;
+        transform: none;
+        margin: 6px auto;
+        display: block;
+        text-align: left;
+      }
+      .flow-curve {
+        display: none;
+      }
+      .flow-map {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .timeline-dots {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .timeline-line {
+        display: none;
+      }
+      .t-dot::after {
+        position: static;
+        display: block;
+        transform: none;
+        margin-top: 4px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -606,15 +685,17 @@
       PANTALLA 7 · INTEGRACIÓN
     </div>
 
-    <h1>Contextualismo, RFT y ACT</h1>
+    <h1>Contextualismo, Análisis Funcional, RFT y ACT</h1>
 
-    <div class="sub">Cómo se articula la filosofía con el análisis funcional y la intervención clínica</div>
+    <div class="sub">
+      Cómo se articulan filosofía, lenguaje y clínica para comprender y transformar la conducta.
+    </div>
 
     <p class="descripcion">
-      Aquí reunimos todo el módulo: verás cómo el <strong>contextualismo funcional</strong>
-      define el propósito de la psicología, cómo el <strong>análisis funcional</strong> organiza la conducta,
-      cómo la <strong>RFT</strong> explica el papel del lenguaje y cómo <strong>ACT</strong> aplica estos principios
-      para transformar la función de los eventos privados.
+      Esta pantalla reúne los hilos centrales del módulo: el <strong>contextualismo funcional</strong>
+      define el propósito y el criterio de verdad; el <strong>análisis funcional</strong> organiza la conducta;
+      la <strong>RFT</strong> explica cómo el lenguaje transforma funciones; y <strong>ACT</strong> aplica estos principios
+      para cambiar la forma en que las personas actúan en su vida, sin pelear con el contenido del pensamiento.
     </p>
 
     <div class="layers-bar">
@@ -632,133 +713,162 @@
       </div>
     </div>
 
-    <div class="main-grid">
+    <!-- SECCIÓN FLUJO INTERACTIVO -->
+    <section class="flow-section">
+      <div class="flow-label">Toca cada punto del flujo para ver su aporte</div>
 
-      <!-- TARJETA RED INTERACTIVA -->
-      <section class="network-card">
-        <div class="network-title">Mapa interactivo de integración</div>
-        <div class="network-sub">
-          Toca cada nodo para ver cómo contribuye a entender la <strong>conducta-en-contexto</strong>.
-          Fíjate cómo cambia también el estado del avatar clínico.
+      <div class="flow-map">
+        <div class="flow-curve"></div>
+
+        <div
+          class="flow-node f1"
+          data-title="Contextualismo funcional: ¿qué cuenta como ‘verdadero’?"
+          data-body="El contextualismo funcional define la verdad como lo que <strong>funciona</strong> para predecir e influenciar la conducta con precisión, alcance y profundidad. Un modelo es útil si nos permite intervenir de manera efectiva, no si describe fielmente una ‘realidad interna’."
+          data-example="Mensaje: «Necesitamos hablar». En una historia de crítica, la frase adquiere función de amenaza y conduce a evitación. En un contexto de apoyo, puede funcionar como oportunidad de cuidado. El evento a analizar es la <strong>interacción mensaje–persona–historia–situación</strong>, no solo el texto."
+          data-avatar-state="1"
+        >
+          <div class="flow-node-label">Filosofía</div>
+          <div class="flow-node-title">Contextualismo funcional</div>
         </div>
 
-        <div class="network">
-
-          <!-- Líneas -->
-          <div class="line l1"></div>
-          <div class="line l2"></div>
-          <div class="line l3"></div>
-
-          <!-- Nodo central -->
-          <div class="core-node">
-            <div class="core-node-title">Unidad de análisis</div>
-            <div class="core-node-main">Conducta<br>en contexto</div>
-            <div class="core-node-tag">Historia · Contingencias · Lenguaje</div>
-          </div>
-
-          <!-- Nodos periféricos -->
-          <div
-            class="node n1"
-            data-node="filosofia"
-            data-title="Contextualismo funcional: propósito de la ciencia"
-            data-body="El contextualismo funcional define lo ‘verdadero’ como lo que <strong>funciona</strong> para predecir e influenciar la conducta con precisión, alcance y profundidad. Una explicación es útil cuando nos permite intervenir de manera efectiva en la vida de las personas."
-            data-example="Mensaje: «Necesitamos hablar». En un contexto de historia de crítica, esta frase puede adquirir función de amenaza y conducir a evitación. En un contexto de apoyo, puede funcionar como oportunidad de cuidado o reparación. El evento es la <strong>interacción mensaje–persona–historia–situación</strong>, no solo el texto."
-            data-avatar-state="1"
-          >
-            <span class="label-header">Filosofía</span>
-            <strong>Contextualismo<br>funcional</strong>
-          </div>
-
-          <div
-            class="node n2"
-            data-node="analisis"
-            data-title="Análisis funcional: organizar la conducta"
-            data-body="El análisis funcional toma esa filosofía y la traduce en una forma concreta de trabajar: identificar <strong>antecedentes</strong>, <strong>respuestas</strong> (públicas y privadas) y <strong>consecuencias</strong>, siempre en relación con la historia de aprendizaje. Pensar y sentir son formas de hacer algo bajo control contextual."
-            data-example="Caso: Ana recibe la invitación a una reunión. Antecedente: notificación en el teléfono. Respuestas privadas: «voy a molestar», nudo en la garganta. Conducta: evita asistir. Consecuencia inmediata: alivio. El análisis funcional organiza estos elementos para que podamos intervenir sobre las funciones, no sobre ‘etiquetas internas’."
-            data-avatar-state="2"
-          >
-            <span class="label-header">Organización</span>
-            <strong>Análisis<br>funcional</strong>
-          </div>
-
-          <div
-            class="node n3"
-            data-node="rft"
-            data-title="RFT: cómo el lenguaje transforma funciones"
-            data-body="La Teoría del Marco Relacional (RFT) explica cómo el lenguaje humano permite que estímulos distintos compartan funciones por medio de relaciones arbitrariamente aplicables. Un pensamiento, una imagen o una palabra pueden cambiar lo que un evento hace en la conducta, aunque nada cambie físicamente."
-            data-example="Micrófono + historia de fracaso → el micrófono adquiere función de amenaza. Más tarde, solo imaginar «presentar» puede generar la misma respuesta corporal. A través de marcos de coordinación, comparación y jerarquía, la red verbal <strong>transforma las funciones</strong> de los eventos sin nuevo contacto directo."
-            data-avatar-state="3"
-          >
-            <span class="label-header">Procesos</span>
-            <strong>RFT y redes<br>relacionales</strong>
-          </div>
-
-          <div
-            class="node n4"
-            data-node="act"
-            data-title="ACT: cambiar funciones, no contenidos"
-            data-body="ACT utiliza el contextualismo funcional y la RFT para diseñar contextos donde las funciones de los eventos privados cambian. En lugar de discutir si un pensamiento es ‘verdadero’, se trabaja para que ese mismo pensamiento pierda poder evitativo y coexista con acciones guiadas por valores."
-            data-example="Ana puede notar «voy a molestar» como pensamiento, contactar la ansiedad en el cuerpo y, al mismo tiempo, acercarse a su valor de colaboración asistiendo brevemente a la reunión. El contexto terapéutico entrena nuevas respuestas bajo las mismas señales, modificando la función del lenguaje en su vida diaria."
-            data-avatar-state="4"
-          >
-            <span class="label-header">Aplicación</span>
-            <strong>ACT<br>en la clínica</strong>
-          </div>
-
-          <!-- Avatar clínico -->
-          <div class="avatar state-1" id="avatar">
-            <div class="avatar-face">
-              <div class="avatar-mouth"></div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- PANEL DE TEXTO + MICRO EXPERIMENTO -->
-      <section class="panel-card">
-        <div class="panel-kicker">Cuando tocas un nodo en el mapa</div>
-        <div class="panel-title" id="panel-title">
-          Contextualismo funcional: propósito de la ciencia
-        </div>
-        <div class="panel-body" id="panel-body">
-          El contextualismo funcional define lo ‘verdadero’ como lo que
-          <strong>funciona</strong> para predecir e influenciar la conducta con precisión,
-          alcance y profundidad. Una explicación es útil cuando nos permite
-          intervenir de manera efectiva en la vida de las personas.
+        <div
+          class="flow-node f2"
+          data-title="Análisis funcional: organizar la conducta-en-contexto"
+          data-body="El análisis funcional traduce la filosofía en una forma concreta de trabajo: identificar <strong>antecedentes</strong>, <strong>respuestas</strong> (públicas y privadas) y <strong>consecuencias</strong>, siempre en relación con la historia de aprendizaje. Pensar, sentir e imaginar son distintas formas de conducta bajo control contextual."
+          data-example="Caso: Ana recibe la invitación a una reunión. Antecedente: notificación en el teléfono. Respuestas privadas: «voy a molestar», nudo en la garganta. Conducta: evita asistir. Consecuencia inmediata: alivio. El análisis funcional organiza estos elementos para intervenir sobre las <strong>funciones</strong>, no sobre ‘etiquetas internas’."
+          data-avatar-state="2"
+        >
+          <div class="flow-node-label">Organización</div>
+          <div class="flow-node-title">Análisis funcional</div>
         </div>
 
-        <div class="panel-example-label">Ejemplo clínico</div>
-        <div class="panel-example" id="panel-example">
-          Mensaje: «Necesitamos hablar». En un contexto de historia de crítica,
-          esta frase puede adquirir función de amenaza y conducir a evitación.
-          En un contexto de apoyo, puede funcionar como oportunidad de cuidado
-          o reparación. El evento es la <strong>interacción mensaje–persona–historia–situación</strong>,
-          no solo el texto.
+        <div
+          class="flow-node f3"
+          data-title="RFT: cómo el lenguaje transforma funciones"
+          data-body="La Teoría del Marco Relacional explica cómo el lenguaje humano permite que estímulos distintos compartan funciones mediante relaciones arbitrariamente aplicables. Un pensamiento, una imagen o una palabra pueden cambiar lo que un evento hace en la conducta, aunque nada cambie físicamente en el ambiente."
+          data-example="Micrófono + historia de fracaso → el micrófono adquiere función de amenaza. Más tarde, solo imaginar ‘presentar’ puede generar la misma respuesta corporal. A través de marcos de coordinación, comparación y jerarquía, la red verbal <strong>transforma las funciones</strong> sin nuevo contacto directo con el estímulo original."
+          data-avatar-state="3"
+        >
+          <div class="flow-node-label">Procesos</div>
+          <div class="flow-node-title">RFT y redes relacionales</div>
         </div>
 
-        <div class="experiment">
-          <div class="experiment-label">Micro-experimento: ¿Dónde ponemos el foco?</div>
-          <div class="experiment-options">
-            <button class="exp-pill active" data-exp="contenido">
-              En el contenido del pensamiento
-            </button>
-            <button class="exp-pill" data-exp="funcion">
-              En la función en contexto
-            </button>
-            <button class="exp-pill" data-exp="coherencia">
-              En la coherencia ACT–RFT
-            </button>
-          </div>
-          <div class="experiment-result" id="experiment-result">
-            Si centramos la intervención solo en el contenido, podemos quedarnos
-            atrapados discutiendo si el pensamiento es cierto o no, sin modificar
-            realmente la forma en que la persona actúa en su vida diaria.
+        <div
+          class="flow-node f4"
+          data-title="ACT: cambiar funciones al servicio de los valores"
+          data-body="ACT utiliza el contextualismo y la RFT para diseñar contextos donde las funciones de los eventos privados cambian. En lugar de discutir si un pensamiento es ‘verdadero’, se trabaja para que pierda poder evitativo y pueda coexistir con acciones guiadas por <strong>valores</strong> personales."
+          data-example="Ana puede notar «voy a molestar» como pensamiento, contactar la ansiedad en el cuerpo y, al mismo tiempo, acercarse a su valor de colaboración asistiendo brevemente a la reunión. El contexto terapéutico entrena nuevas respuestas bajo las mismas señales, modificando la función del lenguaje en su vida diaria."
+          data-avatar-state="4"
+        >
+          <div class="flow-node-label">Aplicación</div>
+          <div class="flow-node-title">ACT en la clínica</div>
+        </div>
+      </div>
+
+      <div class="avatar-wrapper">
+        <div class="avatar state-1" id="avatar">
+          <div class="avatar-face">
+            <div class="avatar-mouth"></div>
           </div>
         </div>
-      </section>
+      </div>
 
-    </div>
+      <div class="flow-info">
+        <div class="flow-info-title" id="flow-title">
+          Contextualismo funcional: ¿qué cuenta como ‘verdadero’?
+        </div>
+        <div class="flow-info-body" id="flow-body">
+          El contextualismo funcional define la verdad como lo que <strong>funciona</strong> para predecir e influenciar
+          la conducta con precisión, alcance y profundidad. Un modelo es útil si nos permite intervenir de manera
+          efectiva, no si describe fielmente una ‘realidad interna’.
+        </div>
+        <div class="flow-info-example-label">Ejemplo clínico</div>
+        <div class="flow-info-example" id="flow-example">
+          Mensaje: «Necesitamos hablar». En una historia de crítica, la frase adquiere función de amenaza y conduce
+          a evitación. En un contexto de apoyo, puede funcionar como oportunidad de cuidado. El evento a analizar es
+          la <strong>interacción mensaje–persona–historia–situación</strong>, no solo el texto.
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE: DE EVENTO A ACCIÓN VALIOSA -->
+    <section class="timeline-section">
+      <div class="timeline-label">Del evento a la acción valiosa · Paso a paso</div>
+
+      <div class="timeline-dots">
+        <div class="timeline-line"></div>
+
+        <div
+          class="t-dot"
+          data-step="1"
+          data-short="Señal"
+          data-text="1. Señal: aparece un acontecimiento en la vida de la persona (por ejemplo, la invitación a una reunión o el mensaje «Necesitamos hablar»). Desde el contextualismo, no se analiza el estímulo aislado, sino su lugar dentro de la historia y del contexto actual."
+        ></div>
+
+        <div
+          class="t-dot"
+          data-step="2"
+          data-short="Respuesta privada"
+          data-text="2. Respuesta privada: surgen pensamientos, imágenes o sensaciones corporales (por ejemplo, «voy a molestar», nudo en el estómago). La RFT ayuda a entender cómo estas respuestas se construyen relacionalmente y adquieren funciones específicas."
+        ></div>
+
+        <div
+          class="t-dot"
+          data-step="3"
+          data-short="Función"
+          data-text="3. Función: lo relevante es qué hace todo esto en la conducta. Si la combinación señal–lenguaje–sensaciones conduce a evitación y alivio inmediato, la función es evitativa y se refuerza por reducción de malestar."
+        ></div>
+
+        <div
+          class="t-dot"
+          data-step="4"
+          data-short="Transformación"
+          data-text="4. Transformación relacional: a través de marcos de coordinación, comparación o jerarquía, nuevos estímulos (palabras, recuerdos, lugares) heredan funciones aversivas sin contacto directo. El problema se expande en la red verbal."
+        ></div>
+
+        <div
+          class="t-dot"
+          data-step="5"
+          data-short="Acción valiosa"
+          data-text="5. Acción valiosa: ACT propone crear contextos donde la persona pueda notar sus eventos privados, tomar perspectiva y elegir conductas coherentes con sus valores, aun en presencia de ansiedad. El cambio clínico se observa en lo que hace, no solo en lo que siente o piensa."
+        ></div>
+      </div>
+
+      <div class="timeline-text" id="timeline-text">
+        1. Señal: aparece un acontecimiento en la vida de la persona (por ejemplo, la invitación a una reunión
+        o el mensaje «Necesitamos hablar»). Desde el contextualismo, no se analiza el estímulo aislado, sino su lugar
+        dentro de la historia y del contexto actual.
+      </div>
+    </section>
+
+    <!-- MICRO EXPERIMENTO INTEGRADOR -->
+    <section class="experiment">
+      <div class="experiment-label">Micro-experimento: ¿dónde pones el foco al intervenir?</div>
+      <div class="experiment-options">
+        <button class="exp-pill active" data-exp="contenido">
+          En el contenido del pensamiento
+        </button>
+        <button class="exp-pill" data-exp="funcion">
+          En la función del pensamiento
+        </button>
+        <button class="exp-pill" data-exp="contexto">
+          En el contexto y los valores
+        </button>
+      </div>
+      <div class="experiment-result" id="experiment-result">
+        Si centramos la intervención solo en el contenido, podemos quedarnos atrapados discutiendo si el pensamiento
+        es ‘cierto’ o ‘equivocado’, sin modificar realmente los patrones de evitación o acercamiento que la persona
+        despliega en su vida cotidiana.
+      </div>
+    </section>
+
+    <!-- MENSAJE FINAL DE INTEGRACIÓN -->
+    <p class="closing-text">
+      En una perspectiva <strong>contextualista</strong>, coherente con la <strong>RFT</strong> y <strong>ACT</strong>, no intentamos
+      eliminar pensamientos ni emociones, sino cambiar la forma en que funcionan en la vida de la persona. Filosofía,
+      análisis funcional, procesos relacionales y valores se integran cuando el foco está en <strong>transformar la función
+      de los eventos privados al servicio de una vida más amplia y significativa</strong>.
+    </p>
 
     <!-- NAV INFERIOR -->
     <div class="nav-buttons">
@@ -775,15 +885,15 @@
   </div>
 
   <script>
-    // Nodos interactivos
-    const nodes = document.querySelectorAll(".node");
-    const panelTitle = document.getElementById("panel-title");
-    const panelBody = document.getElementById("panel-body");
-    const panelExample = document.getElementById("panel-example");
+    // ---- Flujo interactivo (nodos) ----
+    const flowNodes = document.querySelectorAll(".flow-node");
+    const flowTitle = document.getElementById("flow-title");
+    const flowBody = document.getElementById("flow-body");
+    const flowExample = document.getElementById("flow-example");
     const avatar = document.getElementById("avatar");
 
-    function setActiveNode(node) {
-      nodes.forEach(n => n.classList.remove("active"));
+    function setActiveFlowNode(node) {
+      flowNodes.forEach(n => n.classList.remove("active"));
       node.classList.add("active");
 
       const title = node.getAttribute("data-title");
@@ -791,27 +901,50 @@
       const example = node.getAttribute("data-example");
       const avatarState = node.getAttribute("data-avatar-state");
 
-      panelTitle.innerHTML = title;
-      panelBody.innerHTML = body;
-      panelExample.innerHTML = example;
+      flowTitle.innerHTML = title;
+      flowBody.innerHTML = body;
+      flowExample.innerHTML = example;
 
-      // Actualizar estado del avatar
-      avatar.classList.remove("state-1", "state-2", "state-3", "state-4");
+      avatar.classList.remove("state-1", "state-2", "state-3", "state-4", "state-5");
       if (avatarState) {
         avatar.classList.add("state-" + avatarState);
       }
     }
 
-    nodes.forEach(node => {
-      node.addEventListener("click", () => setActiveNode(node));
+    flowNodes.forEach(node => {
+      node.addEventListener("click", () => setActiveFlowNode(node));
     });
 
     // Estado inicial: primer nodo activo
-    if (nodes.length > 0) {
-      setActiveNode(nodes[0]);
+    if (flowNodes.length > 0) {
+      setActiveFlowNode(flowNodes[0]);
     }
 
-    // Micro-experimento
+    // Si el usuario ha pasado por todos los nodos, puedes usar esto para activar un estado 5 más adelante
+    // (por ahora no lo forzamos automáticamente, para mantenerlo simple).
+
+    // ---- Timeline interactiva ----
+    const tDots = document.querySelectorAll(".t-dot");
+    const tText = document.getElementById("timeline-text");
+
+    function setActiveStep(dot) {
+      tDots.forEach(d => d.classList.remove("active"));
+      dot.classList.add("active");
+      const text = dot.getAttribute("data-text");
+      if (text) {
+        tText.innerHTML = text;
+      }
+    }
+
+    tDots.forEach(dot => {
+      dot.addEventListener("click", () => setActiveStep(dot));
+    });
+
+    if (tDots.length > 0) {
+      setActiveStep(tDots[0]);
+    }
+
+    // ---- Micro-experimento ----
     const expPills = document.querySelectorAll(".exp-pill");
     const expResult = document.getElementById("experiment-result");
 
@@ -822,13 +955,16 @@
 
       if (mode === "contenido") {
         expResult.innerHTML =
-          "Si centramos la intervención solo en el contenido, podemos quedarnos atrapados discutiendo si el pensamiento es cierto o no, sin modificar realmente la forma en que la persona actúa en su vida diaria.";
+          "Si centramos la intervención solo en el contenido, podemos quedarnos atrapados discutiendo si el pensamiento es ‘cierto’ o ‘equivocado’, sin modificar realmente los patrones de evitación o acercamiento que la persona despliega en su vida cotidiana.";
       } else if (mode === "funcion") {
         expResult.innerHTML =
-          "Cuando miramos la <strong>función</strong>, preguntamos: ¿qué hace este evento verbal en la conducta de la persona aquí y ahora? Esto abre espacio para cambiar el contexto, las contingencias y los marcos relacionales que mantienen el problema.";
-      } else if (mode === "coherencia") {
+          "Al poner el foco en la <strong>función</strong> del pensamiento, preguntamos: ¿qué hace este evento verbal en la conducta aquí y ahora? Esto abre la puerta a intervenir sobre las relaciones y contingencias que mantienen el problema, más que sobre el relato en sí.";
+      } else if (mode === "contexto") {
         expResult.innerHTML =
-          "La coherencia ACT–RFT aparece cuando usamos el análisis funcional y los procesos relacionales para diseñar intervenciones que cambian la función del lenguaje, al servicio de los <strong>valores</strong> del consultante, no de ganar una discusión lógica.";
+          "Cuando intervenimos sobre el <strong>contexto</strong> y los <strong>valores</strong>, usamos ACT y RFT para diseñar situaciones donde los mismos pensamientos pueden coexistir con acciones valiosas. Es el nivel en el que la integración filosofía–análisis funcional–lenguaje–clínica se vuelve más visible.";
+        // Ocasión para mostrar un estado de mayor integración en el avatar
+        avatar.classList.remove("state-1", "state-2", "state-3", "state-4");
+        avatar.classList.add("state-5");
       }
     }
 
