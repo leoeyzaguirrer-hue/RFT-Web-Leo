@@ -2,45 +2,189 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de prueba — P3</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lección 3 · Clases Funcionales y Patrones</title>
 
-    <!-- estilo del módulo -->
-    <link rel="stylesheet" href="style-unidad-analisis.css">
+  <!-- STYLE GENERAL DEL MÓDULO -->
+  <link rel="stylesheet" href="style-unidad-analisis.css" />
+
+  <!-- JS DE ESTA PANTALLA -->
+  <script defer src="p3.js"></script>
 </head>
 
 <body class="ua-body">
 
-    <div class="ua-bg-layer">
-        <span class="ua-bg-node n1"></span>
-        <span class="ua-bg-node n2"></span>
-        <span class="ua-bg-node n3"></span>
-        <span class="ua-bg-node n4"></span>
-        <span class="ua-bg-line l1"></span>
-        <span class="ua-bg-line l2"></span>
-        <span class="ua-bg-line l3"></span>
+  <!-- CAPA DE NODOS -->
+  <div class="ua-bg-layer">
+    <div class="ua-focus-circle"></div>
+    <span class="ua-bg-node n1"></span>
+    <span class="ua-bg-node n2"></span>
+    <span class="ua-bg-node n3"></span>
+    <span class="ua-bg-node n4"></span>
+    <span class="ua-bg-line l1"></span>
+    <span class="ua-bg-line l2"></span>
+    <span class="ua-bg-line l3"></span>
+  </div>
+
+  <!-- HERO -->
+  <header class="ua-hero ua-fade-in">
+    <div class="ua-hero-text">
+      <div class="ua-breadcrumb">
+        <span class="ua-breadcrumb-dot"></span>
+        LECCIÓN 3 · CLASES FUNCIONALES Y PATRONES
+      </div>
+
+      <h1 class="ua-title-main">
+        De un ABC a un patrón
+        <span>Cómo diferentes formas sirven para la misma función</span>
+      </h1>
+
+      <p class="ua-subtitle-main">
+        Esta lección te muestra cómo varios episodios (ABC) pueden unirse
+        en <strong>clases funcionales</strong>, y cómo esas clases forman
+        <strong>patrones conductuales</strong>.
+      </p>
     </div>
+  </header>
 
-    <main class="ua-page">
-        <div class="ua-inner ua-main-card">
+  <!-- MAIN -->
+  <main class="ua-page ua-fade-in">
+    <div class="ua-inner">
+      <section class="ua-main-card">
 
-            <h1 class="ua-title-main">P3 — PRUEBA</h1>
+        <div class="ua-section-label">Lección 3</div>
+        <div class="ua-section-title">Clases funcionales y patrones</div>
 
-            <p class="ua-text">
-                Si estás viendo esta página, entonces GitHub Pages está funcionando correctamente
-                y el problema NO es la carpeta <strong>unidad-analisis</strong>.
+        <p class="ua-text">
+          Un ABC aislado nos da una unidad puntual. Pero cuando varias unidades
+          comparten <strong>la misma función</strong>, forman una clase funcional.
+          Y cuando esas clases se repiten a lo largo del tiempo, obtenemos un
+          <strong>patrón conductual</strong>.
+        </p>
+
+        <!-- ===============================
+             BLOQUE A: DE ABC A CLASE
+        ================================ -->
+        <div class="ua-p3-block">
+
+          <h3 class="ua-subtitle">1 · De un ABC a una clase funcional</h3>
+
+          <div class="ua-info-card">
+            <p class="ua-text-small">
+              Según Törneke, una clase funcional une conductas diferentes
+              que logran la misma consecuencia. La forma cambia, la función se mantiene.
             </p>
+          </div>
 
-            <p class="ua-text">
-                Esto indicaría que el problema está dentro de <strong>p2.html</strong> o su JS.
-            </p>
+          <p class="ua-text">Ejemplo de clase funcional: <strong>evitación social</strong></p>
 
-            <a href="index.html" class="ua-btn-primary">Volver al inicio del módulo</a>
+          <ul class="ua-list">
+            <li>📩 Dar una excusa para no ir.</li>
+            <li>📱 Mirar el celular compulsivamente.</li>
+            <li>🚶‍♂️ Llegar tarde para no saludar.</li>
+            <li>🚪 Salir al baño cuando toca hablar.</li>
+          </ul>
+
+          <p class="ua-text">
+            Todas estas conductas, aunque diferentes en forma, comparten:
+            <strong>reducir contacto social inmediato → alivio 😮‍💨</strong>.
+          </p>
+
+          <!-- ACTIVIDAD PREMIUM (arrastrar-conceptual) -->
+          <div class="ua-subtitle">Actividad: ¿qué conductas pertenecen a la misma clase?</div>
+
+          <p class="ua-text-small">
+            Arrastra las conductas a la zona si crees que pertenecen
+            a la clase “evitación social”.
+          </p>
+
+          <div class="ua-drag-area">
+            <div class="ua-drag-token" draggable="true" data-class="evitar">
+              📩 Poner una excusa para no ir
+            </div>
+
+            <div class="ua-drag-token" draggable="true" data-class="evitar">
+              🚪 Salir al baño cuando toca hablar
+            </div>
+
+            <div class="ua-drag-token" draggable="true" data-class="neutro">
+              📚 Estudiar en la biblioteca
+            </div>
+
+            <div class="ua-drag-token" draggable="true" data-class="evitar">
+              📱 Mirar el celular para evitar saludar
+            </div>
+
+            <div class="ua-drag-token" draggable="true" data-class="neutro">
+              🍎 Pedir un snack
+            </div>
+          </div>
+
+          <div id="drop-evitacion" class="ua-drop-premium">
+            <strong>Zona: Clase funcional “evitación social”</strong>
+            <p class="ua-text-small">Suelta aquí solo las que cumplen la misma función.</p>
+          </div>
+
         </div>
-    </main>
+
+        <!-- ===============================
+             BLOQUE B: MICRO Y MACRO
+        =============================== -->
+        <div class="ua-p3-block">
+
+          <h3 class="ua-subtitle">2 · Micro-unidades y macro-patrones</h3>
+
+          <p class="ua-text">
+            El tamaño de la unidad es pragmático: depende de lo que necesitamos
+            para predecir e influir en la conducta.
+          </p>
+
+          <div class="ua-micro-macro-box">
+
+            <div class="ua-micro-macro-card">
+              <div class="ua-micro-title">⏱️ Micro-episodio</div>
+              <p class="ua-text-small">
+                “Ante una invitación, dice ‘mejor no’ y siente alivio.”
+              </p>
+              <p class="ua-text-small">Útil para detectar ABC y función inmediata.</p>
+            </div>
+
+            <div class="ua-micro-macro-card">
+              <div class="ua-macro-title">🗺️ Macro-patrón</div>
+              <p class="ua-text-small">
+                “En 5 años ha evitado amistades, trabajos y oportunidades.”
+              </p>
+              <p class="ua-text-small">
+                Útil para ver repercusiones amplias y continuidad funcional.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ===============================
+             CIERRE
+        =============================== -->
+        <h3 class="ua-subtitle">Cierre de la lección</h3>
+
+        <p class="ua-text">
+          • Un ABC es una unidad puntual.<br>
+          • Varios ABC con la misma función → clase funcional.<br>
+          • Muchas clases repetidas en el tiempo → patrón.<br><br>
+          El análisis contextual trabaja donde sea más útil: segundos, días o años.
+        </p>
+
+        <div class="ua-btn-row">
+          <a href="p4.html" class="ua-btn-primary">Continuar a Lección 4 →</a>
+          <a href="index.html" class="ua-btn-ghost">Volver al mapa del módulo</a>
+        </div>
+
+      </section>
+    </div>
+  </main>
 
 </body>
 
 </html>
-
