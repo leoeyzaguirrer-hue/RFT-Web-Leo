@@ -1,91 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Contextualismo funcional · Pantalla 1</title>
-  <link rel="stylesheet" href="style-contextualismo.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contextualismo Funcional · Pantalla 1</title>
+
+    <style>
+        :root {
+            --azul-1: #0A2A5C;
+            --azul-2: #132F66;
+            --azul-3: #000C1A;
+            --dorado: #FDBF12;
+            --dorado-2: #FFD978;
+            --blanco: #FFFFFF;
+            --gris-claro: #F7F9FC;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Noto Sans", sans-serif;
+            background: linear-gradient(
+                180deg,
+                #FFFFFF 0%,
+                #F3F5FA 100%
+            );
+            padding: 40px 60px;
+            color: #1F2430;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Líneas técnicas sutiles */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(135deg, rgba(10,42,92,0.06) 1px, transparent 1px),
+                linear-gradient(225deg, rgba(255,191,18,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* NODOS DORADOS */
+        .node {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--dorado);
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 0 10px rgba(253,191,18,0.7);
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .n1 { top: 18%; left: 6%; }
+        .n2 { top: 70%; left: 80%; animation-delay: 2s; }
+        .n3 { top: 44%; left: 40%; animation-delay: 4s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* TITULO */
+        .titulo {
+            font-family: "Coco Gothic", sans-serif;
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .subtitulo {
+            font-size: 22px;
+            opacity: 0.75;
+            margin-bottom: 25px;
+        }
+
+        /* TARJETAS */
+        .grid-opciones {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--blanco);
+            border-radius: 18px;
+            padding: 22px;
+            border: 2px solid var(--dorado);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(253,191,18,0.45);
+        }
+
+        /* BOTÓN PRINCIPAL */
+        .btn {
+            margin-top: 40px;
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-2));
+            border-radius: 999px;
+            padding: 16px 36px;
+            border: none;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1A1F3B;
+            cursor: pointer;
+            box-shadow: 0 0 18px rgba(253,191,18,0.55);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
+
 <body>
-  <div class="mod-page">
-    <div class="mod-inner">
 
-      <div class="mod-breadcrumb">Filosofía contextual · Submódulo 1</div>
-      <div class="mod-tag">
-        <span class="mod-tag-dot"></span>
-        Contextualismo funcional
-      </div>
-      <h1 class="mod-title">Bienvenid@ al contextualismo funcional</h1>
-      <p class="mod-subtitle">
-        La base de toda la ciencia del comportamiento contextual y el punto de partida para entender ACT, RFT y el análisis funcional.
-      </p>
+    <!-- NODOS -->
+    <div class="node n1"></div>
+    <div class="node n2"></div>
+    <div class="node n3"></div>
 
-      <div class="mod-layout">
-        <!-- Texto principal -->
-        <div class="mod-card">
-          <h2>De qué va este módulo</h2>
-          <p>
-            Este módulo te introduce a la filosofía que sostiene ACT, RFT y el análisis funcional moderno. Aquí explorarás qué significa analizar
-            la conducta en contexto, por qué los eventos psicológicos se entienden como acciones, y cómo esta perspectiva organiza los modelos
-            clínicos actuales.
-          </p>
-          <p class="mod-small">
-            Puedes avanzar de forma secuencial o usar las tarjetas de la derecha para saltar a los ejes que más te interesen.
-          </p>
+    <!-- TITULO -->
+    <h1 class="titulo">Bienvenid@ al Contextualismo Funcional</h1>
+    <h2 class="subtitulo">La base de toda la ciencia del comportamiento contextual</h2>
 
-          <div class="btn-row">
-            <a href="p2.html"><button class="btn-main">Comenzar módulo</button></a>
-            <a href="../index.html"><button class="btn-ghost"><span>←</span> Volver a la portada</button></a>
-          </div>
+    <p style="font-size:21px; max-width:760px; line-height:1.6;">
+        Este módulo te introduce a la filosofía que sostiene ACT, RFT y todo el análisis funcional moderno.
+        Aquí aprenderás qué significa analizar la conducta en contexto, por qué los eventos psicológicos se entienden
+        como acciones, y cómo esta perspectiva organiza los modelos clínicos actuales.
+    </p>
+
+    <!-- TARJETAS -->
+    <div class="grid-opciones">
+
+        <div class="card" onclick="location.href='p2.html'">
+            ¿Qué es una filosofía de la ciencia?
         </div>
 
-        <!-- Tarjetas-botón -->
-        <div class="mod-card">
-          <h2>Explora por foco</h2>
-          <p class="mod-small">
-            Cada tarjeta abre una parte clave del contextualismo funcional.
-          </p>
-
-          <div class="option-grid">
-            <a href="p2.html" style="text-decoration:none;">
-              <div class="option-card">
-                <div class="option-label">Eje 1</div>
-                <div class="option-title">¿Qué es una filosofía de la ciencia?</div>
-              </div>
-            </a>
-
-            <a href="p3.html" style="text-decoration:none;">
-              <div class="option-card">
-                <div class="option-label">Eje 2</div>
-                <div class="option-title">¿Qué es el contextualismo funcional?</div>
-              </div>
-            </a>
-
-            <a href="p4.html" style="text-decoration:none;">
-              <div class="option-card">
-                <div class="option-label">Eje 3</div>
-                <div class="option-title">¿Qué significa analizar conducta en contexto?</div>
-              </div>
-            </a>
-
-            <a href="p7.html" style="text-decoration:none;">
-              <div class="option-card">
-                <div class="option-label">Eje 4</div>
-                <div class="option-title">¿Por qué esta filosofía sostiene ACT y RFT?</div>
-              </div>
-            </a>
-          </div>
+        <div class="card" onclick="location.href='p3.html'">
+            ¿Qué es el contextualismo funcional?
         </div>
-      </div>
 
-      <div class="mod-footer-nav">
-        <span class="mod-small">
-          Módulo 1 de Filosofía Contextual · 8 pantallas interactivas.
-        </span>
-        <a href="p2.html"><button class="btn-main">Ir a Pantalla 2</button></a>
-      </div>
+        <div class="card" onclick="location.href='p4.html'">
+            ¿Qué significa analizar conducta en contexto?
+        </div>
+
+        <div class="card" onclick="location.href='p5.html'">
+            ¿Por qué esta filosofía es la base de ACT/RFT?
+        </div>
 
     </div>
-  </div>
+
+    <!-- BOTÓN -->
+    <button class="btn" onclick="location.href='p2.html'">Comenzar módulo</button>
+
 </body>
 </html>
-
