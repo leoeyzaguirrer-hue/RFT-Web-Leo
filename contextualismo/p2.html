@@ -30,15 +30,16 @@
         radial-gradient(circle at bottom right, rgba(253,191,18,0.14), transparent 55%),
         linear-gradient(180deg, #E9EFF8 0%, #FFFFFF 38%, #F5F7FC 100%);
       color: var(--gris-texto);
+      font-size: 19px; /* 🔥 AUMENTADO */
     }
 
     /* HEXÁGONOS SUAVES */
     .hex-bg {
       position: fixed;
-      width: 320px;
-      height: 320px;
+      width: 340px; /* 🔥 un poco más grande */
+      height: 340px;
       background: url("../assets/icons/hex-gold.png") no-repeat center/contain;
-      opacity: 0.05;
+      opacity: 0.06;
       z-index: -1;
       pointer-events: none;
       filter: drop-shadow(0 0 12px rgba(253,191,18,0.35));
@@ -65,12 +66,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      padding: 10px 18px; /* 🔥 ligeramente más grande */
       border-radius: 999px;
       border: 1px solid rgba(10,42,92,0.18);
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       color: var(--azul-1);
-      font-size: 14px;
+      font-size: 16px; /* 🔥 aumentado */
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -78,356 +79,174 @@
       transition: 0.2s ease;
     }
 
-    .top-nav a:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
-    }
-
-    /* CONTENEDOR PRINCIPAL */
+    /* CONTENEDOR GENERAL */
     .container {
       max-width: 1160px;
       margin: 90px auto 70px auto;
       padding: 0 24px 40px 24px;
     }
 
+    /* TAG LINE */
     .tag {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(10,42,92,0.20);
-      background: rgba(255,255,255,0.9);
-      font-size: 13px;
+      border: 1px solid rgba(10,42,92,0.22);
+      background: rgba(255,255,255,0.95);
+      font-size: 15px; /* 🔥 aumentado */
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--azul-2);
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
 
-    .tag-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--dorado);
-      box-shadow: 0 0 10px rgba(253,191,18,0.8);
-    }
-
+    /* TITULOS */
     h1 {
       font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 34px;
+      font-size: 34px; /* 🔥 igual que P3 */
       letter-spacing: 0.10em;
       text-transform: uppercase;
-      margin: 0 0 8px 0;
+      margin: 0 0 10px 0;
       color: var(--azul-1);
     }
 
     .sub {
-      font-size: 20px;
+      font-size: 22px; /* 🔥 aumentado */
       opacity: 0.9;
-      max-width: 720px;
-      margin-bottom: 14px;
+      max-width: 760px;
+      margin-bottom: 16px;
     }
 
     .intro {
-      font-size: 18px;
-      line-height: 1.7;
-      max-width: 820px;
-      margin-bottom: 26px;
+      font-size: 20px; /* 🔥 aumentado */
+      line-height: 1.75;
+      max-width: 860px;
+      margin-bottom: 28px;
     }
 
-    /* GRID SUPERIOR: TEORÍA + EXPERIMENTO 1 */
-    .top-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: 28px;
-      align-items: flex-start;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 900px) {
-      .top-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
+    /* TARJETAS */
     .card-soft {
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.97);
       border-radius: 24px;
-      padding: 18px 20px 20px 20px;
+      padding: 22px 24px; /* 🔥 más amplio */
       box-shadow:
         0 12px 26px rgba(15,33,71,0.08),
         0 0 0 1px rgba(10,42,92,0.04);
     }
 
-    .card-title-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--azul-2);
-      opacity: 0.85;
-      margin-bottom: 6px;
-    }
-
     .card-title {
-      font-size: 20px;
+      font-size: 22px; /* 🔥 aumentado */
       font-weight: 700;
       color: var(--azul-1);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .card-title-label {
+      font-size: 15px; /* 🔥 aumentado */
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
+      color: var(--azul-2);
+      opacity: 0.85;
     }
 
     .card-body {
-      font-size: 17px;
-      line-height: 1.7;
+      font-size: 19px; /* 🔥 aumentado */
+      line-height: 1.75;
     }
 
     .bullets {
-      margin-top: 10px;
-      padding-left: 18px;
-      font-size: 17px;
-      line-height: 1.7;
+      font-size: 19px; /* 🔥 aumentado */
+      line-height: 1.75;
+      margin-top: 12px;
+      padding-left: 20px;
     }
 
     .highlight {
-      margin-top: 14px;
-      padding: 10px 12px;
+      margin-top: 18px;
+      padding: 12px 14px;
+      font-size: 18px; /* 🔥 aumentado */
       border-radius: 14px;
-      background: linear-gradient(90deg, rgba(253,191,18,0.12), rgba(255,255,255,0.9));
+      background: linear-gradient(90deg, rgba(253,191,18,0.16), rgba(255,255,255,0.95));
       border-left: 4px solid var(--dorado);
-      font-size: 16px;
     }
 
-    /* EXPERIMENTO 1: ELIGE LA EXPLICACIÓN */
-    .exp1-case {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    .exp1-options {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
+    /* EXPERIMENTO 1 */
     .option-card {
-      border-radius: 16px;
-      padding: 10px 12px;
-      border: 1px solid rgba(10,42,92,0.12);
-      background: #F7F8FD;
-      font-size: 15px;
-      cursor: pointer;
-      text-align: left;
-      transition: 0.18s ease;
-    }
-
-    .option-card:hover {
-      background: #EEF2FF;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(15,33,71,0.10);
-    }
-
-    .option-card.correct {
-      border-color: rgba(46,160,67,0.9);
-      background: #E6F7EA;
-      box-shadow: 0 0 0 1px rgba(46,160,67,0.6);
-    }
-
-    .option-card.wrong {
-      border-color: rgba(200,50,50,0.7);
-      background: #FDEAEA;
-      box-shadow: 0 0 0 1px rgba(200,50,50,0.55);
+      font-size: 18px; /* 🔥 aumentado */
+      padding: 12px 14px;
     }
 
     .exp1-feedback {
-      margin-top: 10px;
-      font-size: 15px;
-      min-height: 40px;
-      color: var(--azul-2);
+      font-size: 18px; /* 🔥 aumentado */
+      margin-top: 12px;
     }
 
-    /* BLOQUE CENTRAL: CONTEXTO CAMBIA FUNCIÓN */
+    /* SECCIONES */
     .section-heading {
-      margin-top: 40px;
-      margin-bottom: 10px;
-      font-size: 14px;
-      text-transform: uppercase;
+      margin-top: 44px;
+      margin-bottom: 12px;
+      font-size: 16px; /* 🔥 aumentado */
       letter-spacing: 0.18em;
-      color: var(--azul-2);
-      opacity: 0.9;
+      text-transform: uppercase;
     }
 
     .section-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--azul-1);
-      margin-bottom: 8px;
+      font-size: 24px; /* 🔥 aumentado */
+      margin-bottom: 10px;
     }
 
     .section-text {
-      font-size: 17px;
-      max-width: 800px;
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .context-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-
-    @media (max-width: 1020px) {
-      .context-grid {
-        grid-template-columns: 1fr;
-      }
+      font-size: 20px; /* 🔥 aumentado */
+      max-width: 820px;
+      margin-bottom: 22px;
+      line-height: 1.75;
     }
 
     .context-card {
-      border-radius: 18px;
-      background: rgba(255,255,255,0.96);
-      border: 1px solid rgba(10,42,92,0.10);
-      padding: 12px 14px;
-      font-size: 15px;
-      cursor: pointer;
-      transition: 0.2s ease;
-      box-shadow: 0 6px 16px rgba(15,33,71,0.06);
-    }
-
-    .context-card strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--azul-1);
-    }
-
-    .context-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(15,33,71,0.12);
-      border-color: rgba(253,191,18,0.7);
-    }
-
-    .context-card.active {
-      border-color: var(--dorado);
-      box-shadow: 0 0 0 2px rgba(253,191,18,0.7);
-      background: linear-gradient(135deg, #FFFFFF, #FFF7E3);
+      font-size: 18px; /* 🔥 aumentado */
     }
 
     .context-result {
-      margin-top: 10px;
-      font-size: 16px;
-      min-height: 50px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.9);
-      border-left: 4px solid rgba(10,42,92,0.14);
+      font-size: 19px; /* 🔥 aumentado */
+      padding: 12px 14px;
     }
 
-    /* EXPERIMENTO 3: ¿QUÉ ES UN EVENTO? */
-    .event-block {
-      margin-top: 34px;
-      padding: 18px 18px 20px 18px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.96);
-      box-shadow:
-        0 10px 22px rgba(15,33,71,0.06),
-        0 0 0 1px rgba(10,42,92,0.04);
-    }
-
+    /* EVENTOS */
     .event-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--azul-1);
-      margin-bottom: 8px;
+      font-size: 20px; /* 🔥 aumentado */
     }
 
     .event-text {
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-
-    .event-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
+      font-size: 19px;
     }
 
     .event-pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(10,42,92,0.16);
-      background: #F4F6FF;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.18s ease;
-    }
-
-    .event-pill:hover {
-      background: #E4E9FF;
-      transform: translateY(-1px);
-    }
-
-    .event-pill.active {
-      background: var(--dorado);
-      color: #000C1A;
-      border-color: var(--dorado);
-      box-shadow: 0 0 14px rgba(253,191,18,0.7);
+      font-size: 17px;
     }
 
     .event-result {
-      font-size: 15px;
-      line-height: 1.7;
-      padding-top: 4px;
+      font-size: 19px;
+      line-height: 1.75;
     }
 
-    /* NAVEGACIÓN INFERIOR */
-    .nav-buttons {
-      margin-top: 40px;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
+    /* BOTONES */
     .btn-nav {
-      padding: 11px 20px;
-      border-radius: 999px;
-      border: 2px solid var(--azul-1);
-      background: var(--azul-1);
-      color: var(--blanco);
-      font-size: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: 0.22s ease;
-    }
-
-    .btn-nav.secondary {
-      background: transparent;
-      color: var(--azul-1);
-      border-color: rgba(10,42,92,0.4);
-    }
-
-    .btn-nav:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(15,33,71,0.22);
+      font-size: 18px; /* 🔥 aumentado */
+      padding: 13px 22px;
     }
 
   </style>
 </head>
+
 <body>
 
   <div class="hex-bg h1"></div>
   <div class="hex-bg h2"></div>
 
   <div class="top-nav">
-    <a href="index.html">⟵ Volver al menú del módulo</a>
+    <a href="index.html">⟵ Volver</a>
   </div>
 
   <div class="container">
@@ -444,15 +263,13 @@
     </div>
 
     <p class="intro">
-      Una filosofía de la ciencia establece el marco de juego: qué estudiamos, cómo explicamos y qué consideramos
-      útil. En contextualismo funcional, los eventos psicológicos se entienden como <strong>conducta-en-contexto</strong>,
-      y la “verdad” se evalúa por su capacidad de predecir e influenciar la conducta de forma efectiva.
+      Una filosofía de la ciencia establece el marco de juego: qué estudiamos, cómo explicamos y qué consideramos útil.  
+      En contextualismo funcional, los eventos psicológicos se entienden como <strong>conducta-en-contexto</strong>, y la “verdad” se evalúa por su capacidad de predecir e influenciar la conducta de forma efectiva.
     </p>
 
-    <!-- GRID SUPERIOR -->
     <div class="top-grid">
 
-      <!-- COLUMNA IZQUIERDA: TEORÍA -->
+      <!-- TEORÍA -->
       <section class="card-soft">
         <div class="card-title-label">Marco conceptual</div>
         <div class="card-title">El rol de una filosofía de la ciencia</div>
@@ -460,194 +277,140 @@
         <div class="card-body">
           Una filosofía de la ciencia responde preguntas como:
           <ul class="bullets">
-            <li><strong>¿Qué estudiamos?</strong> (¿eventos internos, conductas, interacciones?)</li>
-            <li><strong>¿Cómo explicamos?</strong> (¿por causas internas o por relaciones funcionales?)</li>
-            <li><strong>¿Qué cuenta como evidencia?</strong> (¿informes privados, observación, predicción?)</li>
+            <li><strong>¿Qué estudiamos?</strong> Eventos, interacciones, conducta operante encubierta o abierta.</li>
+            <li><strong>¿Cómo explicamos?</strong> Por relaciones funcionales, no causas internas.</li>
+            <li><strong>¿Qué cuenta como evidencia?</strong> Predicción, influencia y análisis funcional.</li>
             <li><strong>¿Qué hace que un modelo sea “verdadero”?</strong></li>
           </ul>
 
           <div class="highlight">
-            En el <strong>contextualismo funcional</strong>, algo es “verdadero” en la medida en que
-            <strong>funciona para predecir e influenciar la conducta con precisión, alcance y profundidad</strong>,
-            no porque describa fielmente un “mundo interno”.
+            En el contextualismo funcional, “verdadero” = lo que funciona para predecir e influir conducta con precisión, alcance y profundidad.
           </div>
         </div>
       </section>
 
-      <!-- COLUMNA DERECHA: EXPERIMENTO 1 -->
+      <!-- EXPERIMENTO 1 -->
       <section class="card-soft">
         <div class="card-title-label">Micro-experimento 1</div>
         <div class="card-title">¿Qué explicación es contextualista?</div>
 
         <div class="exp1-case">
-          Caso breve:  
-          Ana recibe un mensaje de WhatsApp que dice <strong>“Necesitamos hablar”</strong>.  
-          Su corazón se acelera y en su mente aparece: «algo malo hice».
+          Caso: Ana recibe un mensaje que dice <strong>“Necesitamos hablar”</strong>.  
+          Su corazón se acelera e interpreta: «algo malo hice».
         </div>
 
         <div class="exp1-case">
-          Elige la explicación que corresponde a un <strong>contextualismo funcional</strong>:
+          Elige la explicación contextual-funcional:
         </div>
 
         <div class="exp1-options">
-          <button
-            class="option-card"
-            data-correct="false"
-            data-feedback="Aquí el foco está en un déficit interno (“interpreta mal”), como si el problema viviera dentro de Ana. Un contextualismo funcional busca explicar la conducta a partir de historia, contexto y funciones actuales, no por rasgos internos fijos.">
-            A) Ana interpreta mal el mensaje porque tiene un sesgo interno de negatividad.
-          </button>
+          <button class="option-card" data-correct="false" data-feedback="Esto apela a un rasgo interno (‘sesgo negativo’). Falta análisis funcional.">A) Tiene un sesgo interno de negatividad.</button>
 
-          <button
-            class="option-card"
-            data-correct="false"
-            data-feedback="Esta explicación mentalista ubica la causa en un rasgo interno (“baja autoestima”) sin describir cómo se organizan las respuestas en contexto. Un análisis funcional contextual pide especificar contingencias e historia de aprendizaje.">
-            B) Ana reacciona así porque tiene baja autoestima y ese es su problema central.
-          </button>
+          <button class="option-card" data-correct="false" data-feedback="Baja autoestima = etiqueta interna. No es explicación contextual.">B) Reacciona así porque tiene baja autoestima.</button>
 
-          <button
-            class="option-card"
-            data-correct="true"
-            data-feedback="Esta es una explicación contextual-funcional: el evento que estudiamos es la interacción mensaje–historia–red verbal–contexto actual, y lo que importa es cómo eso organiza la conducta (evitación, ansiedad, búsqueda de seguridad, etc.).">
-            C) La historia de Ana con mensajes similares hace que “Necesitamos hablar” funcione como señal de amenaza,
-            organizando respuestas de ansiedad y evitación en este contexto concreto.
-          </button>
+          <button class="option-card" data-correct="true" data-feedback="Correcto: explica el evento como interacción entre historia, mensaje y funciones aprendidas.">C) Su historia hace que esa frase funcione como señal de amenaza.</button>
 
-          <button
-            class="option-card"
-            data-correct="false"
-            data-feedback="Aquí se asume que el mensaje simboliza algo interno estable, sin entrar en las relaciones funcionales que lo vuelven amenazante. El contextualismo funcional se centra en lo que hace el evento en la conducta, no en lo que representa internamente.">
-            D) El mensaje simboliza para Ana que ella es una persona problemática y siempre causa conflictos.
-          </button>
+          <button class="option-card" data-correct="false" data-feedback="Describe el mensaje como símbolo interno sin explicar su función en contexto.">D) El mensaje simboliza que ella es problemática.</button>
         </div>
 
-        <div class="exp1-feedback" id="exp1-feedback">
-          Toca una opción para ver el tipo de explicación que estás usando.
-        </div>
+        <div class="exp1-feedback" id="feedback">Toca una opción para comparar explicaciones.</div>
       </section>
+
     </div>
 
-    <!-- BLOQUE: CONTEXTO CAMBIA FUNCIÓN -->
+    <!-- CONTEXTO CAMBIA FUNCIÓN -->
     <div class="section-heading">Mismo estímulo, distintas funciones</div>
     <div class="section-title">El contexto hace al evento</div>
     <div class="section-text">
-      En contextualismo funcional, un mismo estímulo puede adquirir <strong>funciones muy distintas</strong>
-      según la historia y el contexto. No analizamos el mensaje aislado, sino la
-      <strong>conducta-en-contexto</strong> que emerge de su interacción con la persona.
+      Un mismo mensaje no tiene un significado fijo: adquiere funciones según historia, relación y situación actual.
     </div>
 
     <div class="context-grid">
-      <button
-        class="context-card"
-        data-funcion="Después de varias discusiones recientes, “Tenemos que hablar” funciona como señal de posible conflicto. La función principal es <strong>amenaza</strong>, y la conducta probable es evitación o defensa.">
-        <strong>Contexto A · Pareja tras una discusión</strong>
-        Últimamente han tenido roces y conversaciones tensas. El mensaje llega tarde en la noche.
+      <button class="context-card" data-funcion="Tras discusiones recientes, funciona como señal de posible conflicto → evitación.">
+        <strong>Contexto A · Pareja tras conflicto</strong>
+        Conversaciones tensas recientes.
       </button>
 
-      <button
-        class="context-card"
-        data-funcion="Con un jefe que suele reconocer el trabajo, el mismo mensaje puede funcionar como <strong>oportunidad</strong> de validación o crecimiento. La conducta probable es acercamiento, preparación, curiosidad.">
-        <strong>Contexto B · Jefe que suele reconocer el trabajo</strong>
-        Su jefe suele invitarle a hablar cuando quiere felicitar o revisar ideas.
+      <button class="context-card" data-funcion="Con un jefe que reconoce el trabajo, funciona como oportunidad → acercamiento.">
+        <strong>Contexto B · Jefatura constructiva</strong>
+        Mensajes previos asociados a validación.
       </button>
 
-      <button
-        class="context-card"
-        data-funcion="En una historia de mucha crítica, “Tenemos que hablar” puede funcionar como <strong>advertencia</strong>; la persona se prepara para justificarse o minimizar daño. Puede aparecer tensión, autocontrol excesivo o sumisión.">
-        <strong>Contexto C · Figura muy crítica</strong>
-        En el pasado, esa frase casi siempre anticipó regaños o juicios duros.
+      <button class="context-card" data-funcion="Con historia crítica, funciona como advertencia → defensa o sumisión.">
+        <strong>Contexto C · Figura crítica</strong>
+        Historia de reproches.
       </button>
     </div>
 
     <div class="context-result" id="context-result">
-      Toca cada contexto para ver cómo cambia la función del mismo mensaje según la historia y la situación actual.
+      Toca cada contexto para ver cómo cambia la función del mensaje.
     </div>
 
-    <!-- EXPERIMENTO 3: ¿QUÉ ES UN EVENTO? -->
+    <!-- ¿QUÉ ES UN EVENTO? -->
     <section class="event-block">
-      <div class="event-title">¿Qué consideramos un “evento” en contextualismo funcional?</div>
+      <div class="event-title">¿Qué es un “evento”?</div>
       <div class="event-text">
-        Observa estos elementos y toca los que creas que son “conducta”:
+        Toca los elementos que creas que son conducta:
       </div>
 
       <div class="event-pills">
-        <button class="event-pill" data-name="pensamiento">
-          Frase interna: «no puedo con esto»
-        </button>
-        <button class="event-pill" data-name="latido">
-          Latido acelerado en el pecho
-        </button>
-        <button class="event-pill" data-name="recuerdo">
-          Recordar la voz de tu padre criticándote
-        </button>
-        <button class="event-pill" data-name="celular">
-          Mirar el celular una y otra vez
-        </button>
+        <button class="event-pill">Pensamiento: «no puedo con esto»</button>
+        <button class="event-pill">Latido acelerado</button>
+        <button class="event-pill">Recordar una crítica pasada</button>
+        <button class="event-pill">Mirar el celular repetidamente</button>
       </div>
 
       <div class="event-result" id="event-result">
-        En contextualismo funcional, todos estos elementos pueden analizarse como <strong>conducta</strong>:
-        acciones abiertas o encubiertas bajo control contextual. El “evento” que estudiamos es la
-        <strong>interacción persona–historia–contexto</strong>, no un objeto aislado dentro de la mente.
+        En contextualismo funcional, todos estos elementos son conducta: acciones encubiertas o abiertas bajo control contextual.
       </div>
     </section>
 
-    <!-- NAVEGACIÓN INFERIOR -->
+    <!-- NAVEGACIÓN -->
     <div class="nav-buttons">
-      <a href="p1.html" class="btn-nav secondary">
-        ⟵ Volver a P1 · Bienvenida
-      </a>
-      <a href="p3.html" class="btn-nav">
-        P3 · Fundamentos del contextualismo funcional ⟶
-      </a>
+      <a href="p1.html" class="btn-nav secondary">⟵ Volver a P1</a>
+      <a href="p3.html" class="btn-nav">P3 · Fundamentos del contextualismo ⟶</a>
     </div>
 
   </div>
 
   <script>
-    // EXPERIMENTO 1: ELIGE LA EXPLICACIÓN
-    const optionCards = document.querySelectorAll(".option-card");
-    const exp1Feedback = document.getElementById("exp1-feedback");
+    // OP1
+    const cards = document.querySelectorAll(".option-card");
+    const feedback = document.getElementById("feedback");
 
-    optionCards.forEach(card => {
-      card.addEventListener("click", () => {
-        optionCards.forEach(c => c.classList.remove("correct", "wrong"));
-        const isCorrect = card.dataset.correct === "true";
-        card.classList.add(isCorrect ? "correct" : "wrong");
-        exp1Feedback.innerHTML = card.dataset.feedback;
+    cards.forEach(c => {
+      c.addEventListener("click", () => {
+        cards.forEach(x => x.classList.remove("correct","wrong"));
+        const ok = c.dataset.correct === "true";
+        c.classList.add(ok ? "correct" : "wrong");
+        feedback.innerHTML = c.dataset.feedback;
       });
     });
 
-    // BLOQUE CONTEXTO: MISMO MENSAJE, DISTINTAS FUNCIONES
-    const contextCards = document.querySelectorAll(".context-card");
-    const contextResult = document.getElementById("context-result");
+    // CONTEXTO
+    const ctx = document.querySelectorAll(".context-card");
+    const ctxRes = document.getElementById("context-result");
 
-    contextCards.forEach(card => {
+    ctx.forEach(card => {
       card.addEventListener("click", () => {
-        contextCards.forEach(c => c.classList.remove("active"));
+        ctx.forEach(c => c.classList.remove("active"));
         card.classList.add("active");
-        contextResult.innerHTML = card.dataset.funcion;
+        ctxRes.innerHTML = card.dataset.funcion;
       });
     });
 
-    // EXPERIMENTO 3: ¿QUÉ ES UN EVENTO?
-    const eventPills = document.querySelectorAll(".event-pill");
-    const eventResult = document.getElementById("event-result");
+    // EVENTO
+    const pills = document.querySelectorAll(".event-pill");
+    const result = document.getElementById("event-result");
 
-    eventPills.forEach(pill => {
-      pill.addEventListener("click", () => {
-        pill.classList.toggle("active");
-
-        const activos = Array.from(eventPills).filter(p => p.classList.contains("active")).length;
-
-        if (activos === 0) {
-          eventResult.innerHTML =
-            "En contextualismo funcional, todos estos elementos pueden analizarse como conducta. El énfasis no está en si son ‘internos’ o ‘externos’, sino en cómo participan en patrones de acción-en-contexto.";
-        } else if (activos > 0 && activos < eventPills.length) {
-          eventResult.innerHTML =
-            "Estás seleccionando algunos elementos como conducta. Desde un enfoque contextual, también los pensamientos, recuerdos y sensaciones corporales son formas de acción bajo control contextual.";
+    pills.forEach(p => {
+      p.addEventListener("click", ()=> {
+        p.classList.toggle("active");
+        const activos = [...pills].filter(x => x.classList.contains("active")).length;
+        if (activos === pills.length) {
+          result.innerHTML = "Correcto: en el contextualismo funcional, todos estos elementos se conceptualizan como conducta-en-contexto.";
         } else {
-          eventResult.innerHTML =
-            "Correcto: en contextualismo funcional, <strong>todos</strong> estos elementos pueden entenderse como conducta. El “evento” que estudiamos es la organización funcional de estas acciones en relación con historia, contexto y consecuencias.";
+          result.innerHTML = "Selecciona para ver cómo cada componente participa en la acción-en-contexto.";
         }
       });
     });
