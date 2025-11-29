@@ -1,10 +1,9 @@
 /* ============================================================
    MÓDULO: UNIDAD DE ANÁLISIS
    Estilo blanco técnico + nodos dorados + layout editorial
-   (Este CSS se carga SOLO en las páginas del módulo)
 ============================================================ */
 
-/* Paleta específica del módulo (reutiliza nombres globales) */
+/* Paleta específica */
 :root {
   --ua-azul-1: #0A2A5C;
   --ua-azul-2: #132F66;
@@ -18,27 +17,20 @@
 }
 
 /* ============================================================
-   FONDO GLOBAL DEL MÓDULO
-   (usa la clase ua-body para no afectar otros módulos)
+   FONDO GENERAL
 ============================================================ */
-
 .ua-body {
   margin: 0;
-  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--ua-texto-main);
-  background: linear-gradient(
-    180deg,
-    #f1f4fb 0%,
-    #ffffff 45%,
-    var(--ua-azul-bg) 100%
-  );
+  background: linear-gradient(180deg, #f1f4fb 0%, #ffffff 45%, var(--ua-azul-bg) 100%);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  font-size: 20px;  /* ⭐ NUEVO tamaño base mayor */
 }
 
-/* Patrón geométrico muy suave */
+/* Patrón geométrico */
 .ua-body::before {
   content: "";
   position: fixed;
@@ -53,29 +45,20 @@
 }
 
 /* ============================================================
-   NODOS Y LÍNEAS DE FONDO
+   NODOS + LÍNEAS
 ============================================================ */
+.ua-bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
 
-.ua-bg-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -2;
-}
-
-/* Nodos dorados suaves */
 .ua-bg-node {
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 999px;
   border: 2px solid rgba(253, 191, 18, 0.9);
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow:
-    0 0 12px rgba(253, 191, 18, 0.65),
-    0 0 22px rgba(253, 191, 18, 0.32);
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 14px rgba(253,191,18,0.7);
   animation: uaFloatNode 16s ease-in-out infinite;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .ua-bg-node.n1 { top: 12%; left: 18%; animation-delay: 0s; }
@@ -84,24 +67,17 @@
 .ua-bg-node.n4 { bottom: 18%; right: 22%; animation-delay: 12s; }
 
 @keyframes uaFloatNode {
-  0%   { transform: translate(0, 0); opacity: 0.6; }
-  50%  { transform: translate(12px, -16px); opacity: 1; }
-  100% { transform: translate(0, 0); opacity: 0.6; }
+  0% { transform: translate(0,0); opacity: 0.6; }
+  50% { transform: translate(14px,-16px); opacity: 1; }
+  100% { transform: translate(0,0); opacity: 0.6; }
 }
 
-/* Líneas relacionales muy sutiles */
 .ua-bg-line {
   position: absolute;
   height: 2px;
-  width: 180px;
-  background: linear-gradient(
-    90deg,
-    rgba(253, 191, 18, 0),
-    rgba(253, 191, 18, 0.65),
-    rgba(253, 191, 18, 0)
-  );
+  width: 200px;
+  background: linear-gradient(90deg, transparent, rgba(253,191,18,0.6), transparent);
   opacity: 0.35;
-  filter: drop-shadow(0 0 10px rgba(253, 191, 18, 0.3));
   animation: uaLinePulse 12s ease-in-out infinite;
 }
 
@@ -110,18 +86,17 @@
 .ua-bg-line.l3 { bottom: 26%; left: 22%; transform: rotate(18deg); }
 
 @keyframes uaLinePulse {
-  0%   { opacity: 0.18; }
-  50%  { opacity: 0.8; }
+  0% { opacity: 0.18; }
+  50% { opacity: 0.75; }
   100% { opacity: 0.18; }
 }
 
 /* ============================================================
-   LAYOUT EDITORIAL CENTRADO
+   LAYOUT CENTRAL
 ============================================================ */
-
 .ua-page {
   min-height: 100vh;
-  padding: 40px 18px 60px;
+  padding: 40px 20px 70px;
   display: flex;
   justify-content: center;
 }
@@ -131,336 +106,39 @@
   max-width: 1200px;
 }
 
-/* Encabezado superior (breadcrumb + título + subtítulo) */
+/* ============================================================
+   ENCABEZADO
+============================================================ */
+
 .ua-breadcrumb {
-  font-size: 12px;
+  font-size: 14px;  /* ⭐ más grande */
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(10, 42, 92, 0.65);
+  color: rgba(10,42,92,0.65);
   margin-bottom: 6px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .ua-breadcrumb-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
   background: var(--ua-dorado);
-  box-shadow: 0 0 10px rgba(253, 191, 18, 0.65);
+  box-shadow: 0 0 10px rgba(253,191,18,0.65);
 }
 
+/* Título */
 .ua-title-main {
   font-family: "Coco Gothic", system-ui, sans-serif;
-  font-size: 34px; /* tamaño que pediste */
+  font-size: 42px;     /* ⭐ MUCHO MÁS GRANDE */
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
+  margin: 6px 0 16px;
   color: var(--ua-azul-1);
-  margin: 6px 0 8px;
 }
 
+/* Subtítulo */
 .ua-subtitle-main {
-  font-size: 18px;
-  color: var(--ua-texto-soft);
-  max-width: 820px;
-  line-height: 1.6;
-  margin-bottom: 26px;
-}
-
-/* ============================================================
-   SUPER-CARD AMPLIA (HOJA ACADÉMICA)
-============================================================ */
-
-.ua-main-card {
-  position: relative;
-  margin-top: 8px;
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 26px;
-  border: 1px solid rgba(10, 42, 92, 0.08);
-  box-shadow:
-    0 24px 60px rgba(4, 24, 60, 0.16),
-    0 0 0 1px rgba(255, 255, 255, 0.9);
-  padding: 26px 30px 24px;
-  overflow: hidden;
-}
-
-/* Barra lateral dorada sutil (estilo editorial) */
-.ua-main-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 18px;
-  bottom: 18px;
-  width: 3px;
-  border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    rgba(253, 191, 18, 0),
-    rgba(253, 191, 18, 0.85),
-    rgba(253, 191, 18, 0)
-  );
-  opacity: 0.8;
-}
-
-/* Encabezado de sección dentro de la card */
-.ua-section-label {
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(10, 42, 92, 0.7);
-  margin-bottom: 4px;
-}
-
-.ua-section-title {
-  font-family: "Coco Gothic", system-ui, sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ua-azul-2);
-  margin-bottom: 10px;
-}
-
-/* Texto dentro de la card */
-.ua-text {
-  font-size: 16px;
-  line-height: 1.7;
-  color: rgba(10, 35, 64, 0.92);
-  margin-bottom: 12px;
-}
-
-.ua-text-small {
-  font-size: 14px;
-  line-height: 1.7;
-  color: rgba(10, 35, 64, 0.8);
-}
-
-/* Listas estilizadas */
-.ua-list {
-  margin: 10px 0 8px 20px;
-  font-size: 15px;
-  color: rgba(10, 35, 64, 0.92);
-}
-
-.ua-list li {
-  margin-bottom: 4px;
-}
-
-/* ============================================================
-   BOTONES Y NAVEGACIÓN INFERIOR
-============================================================ */
-
-.ua-btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.ua-btn-primary {
-  padding: 11px 24px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--ua-azul-1), var(--ua-azul-2));
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 2px solid var(--ua-dorado);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 16px 32px rgba(10, 42, 92, 0.32);
-  transition: transform 0.18s ease, box-shadow 0.22s ease, background 0.2s ease;
-}
-
-.ua-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(10, 42, 92, 0.42);
-  background: linear-gradient(135deg, var(--ua-azul-2), var(--ua-azul-1));
-}
-
-.ua-btn-ghost {
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(10, 42, 92, 0.2);
-  background: rgba(255, 255, 255, 0.78);
-  color: var(--ua-azul-1);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.16s ease;
-}
-
-.ua-btn-ghost:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(253, 191, 18, 0.7);
-  transform: translateY(-1px);
-}
-
-/* Navegación pie de página del módulo */
-.ua-footer-nav {
-  margin-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* ============================================================
-   ELEMENTOS PARA INTERACCIONES
-============================================================ */
-
-/* Opciones tipo botón (selección múltiple, etc.) */
-.ua-option-grid {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 10px;
-}
-
-.ua-option {
-  background: rgba(255, 255, 255, 0.96);
-  border-radius: 18px;
-  border: 1px solid rgba(10, 42, 92, 0.12);
-  padding: 10px 12px 9px;
-  font-size: 14px;
-  cursor: pointer;
-  text-align: left;
-  transition: border 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease,
-    background 0.18s ease;
-}
-
-.ua-option:hover {
-  border-color: rgba(253, 191, 18, 0.75);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.06);
-  transform: translateY(-1px);
-}
-
-.ua-option.ua-selected {
-  border-color: rgba(253, 191, 18, 0.9);
-  background: linear-gradient(
-    135deg,
-    rgba(253, 191, 18, 0.12),
-    rgba(255, 255, 255, 1)
-  );
-}
-
-/* Feedback técnico */
-.ua-feedback {
-  margin-top: 12px;
-  padding: 10px 12px;
-  border-radius: 16px;
-  font-size: 14px;
-  background: rgba(253, 191, 18, 0.12);
-  border: 1px solid rgba(253, 191, 18, 0.7);
-  color: #6a4c00;
-  display: none; /* se mostrará vía JS */
-}
-
-/* Zonas de drag & drop (para ejercicios de arrastrar) */
-.ua-drag-row {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-}
-
-.ua-drag-item {
-  padding: 8px 10px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px dashed rgba(10, 42, 92, 0.3);
-  font-size: 14px;
-  cursor: grab;
-}
-
-.ua-drop-zone {
-  margin-top: 10px;
-  padding: 10px 12px;
-  min-height: 60px;
-  border-radius: 16px;
-  border: 2px dashed rgba(10, 42, 92, 0.18);
-  background: rgba(244, 247, 252, 0.9);
-  font-size: 14px;
-}
-
-/* Pequeño diagrama ABC / nodos clicables */
-.ua-diagram {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
-}
-
-.ua-node {
-  border-radius: 18px;
-  padding: 10px 12px;
-  border: 1px solid rgba(10, 42, 92, 0.14);
-  background: rgba(255, 255, 255, 0.98);
-  font-size: 14px;
-  cursor: pointer;
-  transition: border 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
-}
-
-.ua-node span {
-  display: block;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(10, 42, 92, 0.7);
-  margin-bottom: 2px;
-}
-
-.ua-node:hover {
-  border-color: rgba(253, 191, 18, 0.9);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
-  transform: translateY(-1px);
-}
-
-/* ============================================================
-   ANIMACIÓN DE ENTRADA SUAVE
-============================================================ */
-
-.ua-fade-in {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.ua-fade-in.ua-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================================
-   RESPONSIVE
-============================================================ */
-
-@media (max-width: 900px) {
-  .ua-page {
-    padding: 26px 12px 40px;
-  }
-
-  .ua-title-main {
-    font-size: 26px;
-  }
-
-  .ua-subtitle-main {
-    font-size: 16px;
-  }
-
-  .ua-main-card {
-    padding: 20px 18px 18px;
-    border-radius: 22px;
-  }
-}
-
+  font
