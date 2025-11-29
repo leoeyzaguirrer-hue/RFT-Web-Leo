@@ -1,256 +1,1102 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P2 · Filosofía de la Ciencia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P5 · Contingencias, Historia y Función</title>
 
-    <!-- ===========================
-         ESTILO GLOBAL PREMIUM
-    ============================ -->
-    <style>
-        :root {
-            --azul-1: #0A2A5C;
-            --azul-2: #132F66;
-            --azul-3: #000C1A;
-            --dorado: #FDBF12;
-            --dorado-soft: #FFD980;
-            --texto: #E9ECF5;
-            --blanco: #FFFFFF;
-        }
+  <style>
+    :root {
+      --azul-1: #0A2A5C;
+      --azul-2: #132F66;
+      --azul-3: #000C1A;
+      --dorado: #FDBF12;
+      --dorado-soft: #FFD980;
+      --texto: #E9ECF5;
+      --blanco: #FFFFFF;
+    }
 
-        * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            color: var(--texto);
-            background: linear-gradient(180deg, var(--azul-1), var(--azul-3));
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 40px 28px 80px;
-        }
+    body {
+      margin: 0;
+      font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--texto);
+      background: radial-gradient(circle at top left, #12346d 0%, #050913 55%, #000000 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        /* PATRÓN HEXAGONAL PREMIUM */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: url('../assets/backgrounds/hex-pattern.png');
-            background-size: 420px;
-            opacity: 0.09;
-            z-index: -2;
-        }
+    /* FONDO PATRÓN + HEXÁGONOS */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("../assets/backgrounds/hex-pattern.png");
+      background-size: 420px;
+      opacity: 0.09;
+      z-index: -3;
+      pointer-events: none;
+    }
 
-        /* HEXÁGONOS DORADOS */
-        .hex {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
-            opacity: 0.07;
-            filter: blur(1px);
-            animation: float 14s ease-in-out infinite;
-            z-index: -1;
-        }
-        .h1 { top: 10%; left: 6%; }
-        .h2 { bottom: 12%; right: 4%; animation-delay: 4s; }
+    .hex {
+      position: fixed;
+      width: 360px;
+      height: 360px;
+      background: url("../assets/icons/hex-gold.png") no-repeat center/contain;
+      opacity: 0.07;
+      filter: blur(1px);
+      animation: floatHex 18s ease-in-out infinite;
+      z-index: -2;
+      pointer-events: none;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-14px); }
-            100% { transform: translateY(0px); }
-        }
+    .hex.h1 { top: 8%; left: 4%; }
+    .hex.h2 { bottom: 10%; right: 4%; animation-delay: 3s; }
 
-        /* ============================
-           TITULOS
-        ============================ */
-        h1 {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 34px;
-            margin: 0 0 8px;
-            color: var(--blanco);
-            letter-spacing: 1px;
-        }
+    @keyframes floatHex {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+      100% { transform: translateY(0); }
+    }
 
-        h2 {
-            font-size: 22px;
-            margin: 4px 0 18px;
-            color: var(--dorado);
-            font-weight: 500;
-        }
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle at 16% 18%, rgba(253,191,18,0.18) 0, transparent 55%),
+        radial-gradient(circle at 80% 82%, rgba(253,191,18,0.13) 0, transparent 55%);
+      opacity: 0.75;
+      mix-blend-mode: screen;
+    }
 
-        p {
-            font-size: 20px;
-            line-height: 1.55;
-            max-width: 780px;
-        }
+    /* TOP NAV */
+    .top-nav {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+    }
 
-        /* ============================
-           CONTENEDOR PRINCIPAL
-        ============================ */
-        .content-box {
-            background: rgba(255,255,255,0.06);
-            border: 2px solid rgba(255,255,255,0.08);
-            padding: 28px 32px;
-            border-radius: 22px;
-            margin-top: 32px;
-            backdrop-filter: blur(6px);
-        }
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.8);
+      background: rgba(0,0,0,0.55);
+      color: var(--blanco);
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      backdrop-filter: blur(6px);
+      transition: 0.25s ease;
+    }
 
-        /* ============================
-           EJEMPLO
-        ============================ */
-        .example-box {
-            margin-top: 22px;
-            padding: 20px;
-            background: rgba(255,255,255,0.04);
-            border-left: 4px solid var(--dorado);
-            border-radius: 14px;
-        }
+    .top-nav a:hover {
+      background: rgba(253,191,18,0.16);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
 
-        /* ============================
-           ACTIVIDAD
-        ============================ */
-        .activity-title {
-            font-size: 22px;
-            margin-top: 40px;
-            margin-bottom: 12px;
-            color: var(--blanco);
-        }
+    .top-nav .icon { font-size: 18px; }
 
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-top: 10px;
-        }
+    /* CONTENEDOR PRINCIPAL */
+    .container {
+      max-width: 1120px;
+      margin: 90px auto 70px auto;
+      padding: 0 28px 40px 28px;
+    }
 
-        .option {
-            padding: 16px 20px;
-            background: rgba(255,255,255,0.06);
-            border: 2px solid rgba(255,255,255,0.08);
-            border-radius: 18px;
-            cursor: pointer;
-            font-size: 20px;
-            transition: 0.25s;
-        }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.8);
+      background: rgba(0,0,0,0.55);
+      font-size: 16px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
 
-        .option:hover {
-            transform: scale(1.02);
-            border-color: var(--dorado);
-        }
+    .badge-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dorado-soft);
+      box-shadow: 0 0 12px rgba(253,191,18,0.9);
+    }
 
-        /* FEEDBACK CORRECTO: BANNER DORADO */
-        .correct-banner {
-            display: none;
-            margin-top: 26px;
-            padding: 24px;
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
-            border-radius: 18px;
-            color: #1A1A1A;
-            font-weight: bold;
-            font-size: 20px;
-            text-align: center;
-            box-shadow: 0 0 24px rgba(253,191,18,0.45);
-            animation: pop 0.4s ease;
-        }
+    h1 {
+      font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 42px;
+      color: var(--blanco);
+      margin: 12px 0 10px 0;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      text-shadow: 0 0 12px rgba(0,0,0,0.8);
+    }
 
-        @keyframes pop {
-            0% { transform: scale(0.85); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+    .sub {
+      font-size: 28px;
+      color: var(--dorado-soft);
+      opacity: 0.95;
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 18px auto;
+    }
 
-        /* BOTONES DE NAVEGACIÓN */
-        .nav-buttons {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-        }
+    p.descripcion {
+      font-size: 22px;
+      line-height: 1.8;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      opacity: 0.95;
+    }
 
-        .btn {
-            padding: 14px 26px;
-            font-size: 18px;
-            border-radius: 999px;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-        }
+    .section {
+      margin-top: 44px;
+    }
 
-        .btn-back {
-            background: rgba(255,255,255,0.12);
-            color: var(--blanco);
-        }
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
 
-        .btn-next {
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
-            color: #1A1A1A;
-        }
-    </style>
+    .section-subtitle {
+      font-size: 22px;
+      opacity: 0.92;
+      max-width: 920px;
+      margin-bottom: 18px;
+    }
+
+    /* SECCIÓN 2: EJEMPLO VISUAL */
+    .silla-grid {
+      margin-top: 16px;
+      border-radius: 28px;
+      padding: 24px 22px 26px 22px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.04), rgba(0,0,0,0.92));
+      border: 2px solid rgba(253,191,18,0.5);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.85),
+        0 0 16px rgba(253,191,18,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .silla-header {
+      font-size: 20px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    .silla-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+
+    .stimulus-card {
+      flex: 1 1 180px;
+      min-width: 180px;
+      border-radius: 22px;
+      padding: 18px 16px 20px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 2px solid rgba(253,191,18,0.32);
+      text-align: center;
+      font-size: 22px;
+      line-height: 1.4;
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+      transition: 0.26s ease;
+    }
+
+    .stimulus-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(253,191,18,0.11), transparent 55%);
+      opacity: 0;
+      transition: 0.26s ease;
+    }
+
+    .stimulus-emoji {
+      font-size: 40px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .stimulus-label {
+      font-size: 20px;
+      opacity: 0.96;
+    }
+
+    .stimulus-note {
+      margin-top: 8px;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .stimulus-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--dorado);
+      box-shadow: 0 0 20px rgba(253,191,18,0.9);
+    }
+
+    .stimulus-card:hover::before {
+      opacity: 1;
+    }
+
+    .silla-footnote {
+      margin-top: 14px;
+      font-size: 20px;
+      opacity: 0.95;
+    }
+
+    /* LÍNEA RELACIONAL */
+    .silla-line {
+      position: absolute;
+      top: 50%;
+      left: 4%;
+      right: 4%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        rgba(253,191,18,0),
+        rgba(253,191,18,0.85),
+        rgba(253,191,18,0)
+      );
+      opacity: 0.7;
+      filter: drop-shadow(0 0 12px rgba(253,191,18,0.8));
+    }
+
+    /* SECCIÓN 3: DRAG & DROP */
+    .dd-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: flex-start;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .dd-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dd-panel {
+      border-radius: 28px;
+      padding: 22px 22px 24px 22px;
+      background: linear-gradient(145deg, rgba(0,0,0,0.9), rgba(255,255,255,0.06));
+      border: 2px solid rgba(253,191,18,0.5);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.85),
+        0 0 18px rgba(253,191,18,0.25);
+    }
+
+    .dd-panel-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .dd-panel-text {
+      font-size: 20px;
+      line-height: 1.8;
+      opacity: 0.96;
+    }
+
+    .dd-draggables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .drag-item {
+      padding: 10px 14px;
+      border-radius: 20px;
+      border: 2px solid rgba(253,191,18,0.7);
+      background: rgba(0,0,0,0.8);
+      font-size: 20px;
+      cursor: grab;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s ease;
+    }
+
+    .drag-item span.icon {
+      font-size: 26px;
+    }
+
+    .drag-item.dragging {
+      opacity: 0.7;
+      transform: scale(1.03);
+    }
+
+    .dd-targets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .drop-zone {
+      flex: 1 1 200px;
+      min-height: 120px;
+      border-radius: 22px;
+      border: 2px dashed rgba(253,191,18,0.7);
+      background: rgba(0,0,0,0.6);
+      padding: 14px 12px;
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: 0.22s ease;
+    }
+
+    .drop-label {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .drop-zone.over {
+      box-shadow: 0 0 20px rgba(253,191,18,1);
+      border-style: solid;
+    }
+
+    .drop-placeholder {
+      font-size: 18px;
+      opacity: 0.75;
+    }
+
+    .dd-result {
+      margin-top: 14px;
+      font-size: 20px;
+      color: var(--dorado-soft);
+    }
+
+    .dd-reset {
+      margin-top: 10px;
+      font-size: 18px;
+      border-radius: 999px;
+      padding: 8px 16px;
+      border: 2px solid rgba(253,191,18,0.8);
+      background: rgba(0,0,0,0.85);
+      color: var(--blanco);
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .dd-reset:hover {
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+      transform: translateY(-2px);
+    }
+
+    /* SECCIÓN 4: EXPERIMENTO CONTENIDO VS CONTEXTO + AVATAR */
+    .cone-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+      gap: 26px;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 960px) {
+      .cone-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cone-card {
+      border-radius: 28px;
+      padding: 22px 22px 24px 22px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(0,0,0,0.95));
+      border: 2px solid rgba(253,191,18,0.6);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.9),
+        0 0 20px rgba(253,191,18,0.25);
+    }
+
+    .cone-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .cone-item {
+      flex: 1 1 140px;
+      min-width: 160px;
+      border-radius: 20px;
+      padding: 14px 12px;
+      background: rgba(255,255,255,0.06);
+      border: 2px solid rgba(253,191,18,0.32);
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .cone-icon {
+      font-size: 38px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .cone-caption {
+      font-size: 18px;
+      opacity: 0.95;
+    }
+
+    .cone-note {
+      margin-top: 10px;
+      font-size: 20px;
+      opacity: 0.96;
+    }
+
+    .experiment-box {
+      margin-top: 18px;
+      border-radius: 24px;
+      padding: 16px 18px 18px 18px;
+      background: rgba(0,0,0,0.8);
+      border: 1px dashed rgba(253,191,18,0.9);
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .experiment-title {
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .experiment-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .exp-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(253,191,18,0.9);
+      background: rgba(10,10,10,0.9);
+      color: var(--blanco);
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.26s ease;
+    }
+
+    .exp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
+
+    .exp-btn.active {
+      background: var(--dorado);
+      color: #000C1A;
+      box-shadow: 0 0 20px rgba(253,191,18,1);
+    }
+
+    .experiment-result {
+      margin-top: 8px;
+      font-size: 20px;
+      opacity: 0.96;
+    }
+
+    /* AVATAR MISMO ESTILO QUE P6/P7 */
+    .avatar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-label {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid rgba(253,191,18,0.9);
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, #f7d88e 25%, #f09d4c 45%, #6b2d12 100%);
+      box-shadow:
+        0 0 22px rgba(253,191,18,0.95),
+        0 18px 32px rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    .avatar-face {
+      width: 64%;
+      height: 64%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe6c7 0, #f4b27b 40%, #a25733 100%);
+      position: relative;
+    }
+
+    .avatar-face::before,
+    .avatar-face::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      top: 38%;
+      background: #3b2314;
+    }
+
+    .avatar-face::before { left: 22%; }
+    .avatar-face::after  { right: 22%; }
+
+    .avatar-mouth {
+      position: absolute;
+      width: 48%;
+      height: 20%;
+      border-radius: 0 0 40px 40px;
+      border-bottom: 3px solid #3b2314;
+      left: 50%;
+      top: 60%;
+      transform: translateX(-50%);
+    }
+
+    .avatar.state-1 .avatar-mouth {
+      border-radius: 40px 40px 0 0;
+      border-bottom: none;
+      border-top: 3px solid #3b2314;
+      top: 66%;
+    }
+
+    .avatar.state-2 .avatar-mouth {
+      transform: translateX(-50%) translateY(2px);
+    }
+
+    .avatar.state-3 .avatar-mouth {
+      border-bottom-width: 4px;
+    }
+
+    .avatar.state-4 .avatar-mouth {
+      border-bottom-width: 4px;
+      top: 58%;
+    }
+
+    .avatar.state-1 {
+      filter: grayscale(0.25) brightness(0.85);
+    }
+
+    .avatar.state-2 {
+      filter: none;
+    }
+
+    .avatar.state-3 {
+      filter: saturate(1.1);
+    }
+
+    .avatar.state-4 {
+      filter: saturate(1.25) brightness(1.06);
+      box-shadow:
+        0 0 26px rgba(253,191,18,1),
+        0 20px 34px rgba(0,0,0,0.9);
+      transform: translateY(-4px);
+    }
+
+    .avatar-caption {
+      font-size: 20px;
+      max-width: 340px;
+      text-align: center;
+      opacity: 0.94;
+    }
+
+    /* CIERRE + NAV */
+    .closing {
+      margin-top: 28px;
+      font-size: 22px;
+      line-height: 1.8;
+      text-align: center;
+      max-width: 920px;
+      margin-inline: auto;
+      opacity: 0.96;
+    }
+
+    .nav-buttons {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 22px;
+      border-radius: 999px;
+      border: 2px solid var(--dorado);
+      background: var(--dorado);
+      color: #000C1A;
+      cursor: pointer;
+      transition: 0.26s ease;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--blanco);
+      border-color: rgba(253,191,18,0.8);
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 22px rgba(253,191,18,1);
+      transform: translateY(-2px);
+    }
+
+    .btn span.arrow {
+      font-size: 22px;
+      line-height: 1;
+    }
+  </style>
 </head>
-
 <body>
 
-    <!-- FONDOS -->
-    <div class="hex h1"></div>
-    <div class="hex h2"></div>
+  <div class="particles"></div>
+  <div class="hex h1"></div>
+  <div class="hex h2"></div>
 
-    <!-- TITULOS -->
-    <h1>¿Qué es una Filosofía de la Ciencia?</h1>
-    <h2>Criterios para definir qué es un evento, una explicación y la verdad funcional</h2>
+  <div class="top-nav">
+    <a href="index.html">
+      <span class="icon">⟵</span>
+      Volver al menú del módulo
+    </a>
+  </div>
 
-    <div class="content-box">
+  <div class="container">
 
-        <p>
-            Una filosofía de la ciencia define cómo entendemos los eventos, qué cuenta como 
-            explicación y qué consideramos “verdadero”. Para la psicología contextual, lo verdadero 
-            no es lo que representa fielmente una “realidad interna”, sino lo que funciona para 
-            predecir e influenciar la conducta.
-        </p>
+    <!-- SECCIÓN 1: TÍTULO E INTRODUCCIÓN -->
+    <section class="section" style="margin-top:0;">
+      <div style="text-align:center; margin-bottom: 10px;">
+        <div class="badge">
+          <div class="badge-dot"></div>
+          PANTALLA 5 · CONTINGENCIAS, HISTORIA Y FUNCIÓN
+        </div>
+      </div>
 
-        <!-- EJEMPLO -->
-        <div class="example-box">
-            <p><b>Ejemplo real:</b></p>
-            <p>📩 Mensaje: “Necesitamos hablar”.<br>
-               💭 Pensamiento: “algo malo hice”.<br>
-               🫀 Sensación: peso en el pecho.</p>
+      <h1>Contingencias, historia y función</h1>
+      <div class="sub">Lo importante no es el contenido del evento, sino lo que hace en contexto</div>
+      <p class="descripcion">
+        En contextualismo funcional, la pregunta central no es
+        <strong>«¿qué es este pensamiento, imagen o sensación?»</strong>, sino:
+        <br><br>
+        <strong>«¿Qué función cumple en este contexto, dado lo que esta persona ha aprendido?»</strong>
+        <br><br>
+        La misma palabra, figura o sensación corporal puede sostener evitación, acercamiento o
+        indiferencia según la <strong>historia de reforzamiento</strong>, los <strong>controles actuales</strong> y las
+        <strong>redes relacionales</strong> que transforman su función.
+      </p>
+    </section>
 
-            <p>
-                El contextualismo pregunta: <b>¿Qué hace esta interacción mensaje–pensamiento–sensación 
-                en este contexto?</b>
-            </p>
+    <!-- SECCIÓN 2: EJEMPLO VISUAL SILLA -->
+    <section class="section">
+      <div class="section-title">1. Ejemplo visual: tres estímulos, una función</div>
+      <div class="section-subtitle">
+        Todos estos estímulos pueden funcionar como “silla”, aunque no comparten la misma forma física.
+        Lo que los une no es su materia, es la <strong>historia de aprendizaje</strong> que los relaciona.
+      </div>
+
+      <div class="silla-grid">
+        <div class="silla-header">Estímulos coordinados por historia</div>
+        <div class="silla-row">
+          <div class="stimulus-card">
+            <span class="stimulus-emoji">🪑</span>
+            <div class="stimulus-label">Silla de madera</div>
+            <div class="stimulus-note">
+              Contacto directo: sentarse, tocarla, moverla.
+            </div>
+          </div>
+
+          <div class="stimulus-card">
+            <span class="stimulus-emoji">🔳</span>
+            <div class="stimulus-label">Icono minimalista</div>
+            <div class="stimulus-note">
+              Representa “silla” por aprendizaje simbólico.
+            </div>
+          </div>
+
+          <div class="stimulus-card">
+            <span class="stimulus-emoji">📝</span>
+            <div class="stimulus-label">Palabra «SILLA»</div>
+            <div class="stimulus-note">
+              Una secuencia de letras que llegó a tener la
+              misma función gracias a la historia verbal.
+            </div>
+          </div>
         </div>
 
-        <!-- ACTIVIDAD -->
-        <h3 class="activity-title">Actividad: ¿Qué es “real” según el contextualismo?</h3>
+        <div class="silla-line"></div>
 
-        <div class="options">
-            <div class="option" onclick="check(1)">El mensaje en sí</div>
-            <div class="option" onclick="check(2)">La interpretación interna</div>
-            <div class="option" onclick="check(3)">La conducta que ocurre después</div>
-            <div class="option" onclick="check(4)">La relación entre mensaje–persona–historia–contexto</div>
+        <div class="silla-footnote">
+          Aunque son <strong>muy diferentes físicamente</strong>, pueden evocar la misma respuesta
+          (sentarse, imaginar sentarse, hablar de sentarse). La función no está “dentro”
+          del estímulo, surge de la <strong>relación entre estímulo, historia y contexto actual</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: DRAG & DROP -->
+    <section class="section">
+      <div class="section-title">2. Actividad: historia directa vs función derivada</div>
+      <div class="section-subtitle">
+        Arrastra cada estímulo a la categoría que mejor describa cómo suele adquirir su función.
+        No pienses en “correcto” o “incorrecto” moralmente, sino en <strong>qué tipo de historia</strong>
+        suele ser necesaria para que funcione como “silla”.
+      </div>
+
+      <div class="dd-grid">
+        <div class="dd-panel">
+          <div class="dd-panel-title">Estímulos a clasificar</div>
+          <div class="dd-panel-text">
+            Imagina a un niño pequeño que está aprendiendo. Para que un estímulo funcione como
+            “silla”, a veces basta con historia directa; otras veces requiere redes verbales
+            más complejas. Usa tu intuición y luego revisa la lectura funcional.
+          </div>
+
+          <div class="dd-draggables" id="dd-draggables">
+            <div class="drag-item" draggable="true" data-item="madera">
+              <span class="icon">🪑</span>
+              Silla de madera
+            </div>
+            <div class="drag-item" draggable="true" data-item="icono">
+              <span class="icon">🔳</span>
+              Icono de silla
+            </div>
+            <div class="drag-item" draggable="true" data-item="palabra">
+              <span class="icon">📝</span>
+              Palabra «SILLA»
+            </div>
+          </div>
+
+          <button class="dd-reset" id="dd-reset">Reiniciar actividad</button>
         </div>
 
-        <div id="banner" class="correct-banner">
-            ✔ En contextualismo funcional, el evento es la conducta-en-contexto, no el estímulo aislado.
+        <div class="dd-panel">
+          <div class="dd-panel-title">Zonas de clasificación</div>
+          <div class="dd-targets">
+            <div class="drop-zone" data-zone="directa">
+              <div class="drop-label">Historia directa</div>
+              <div class="drop-placeholder">Arrastra aquí los estímulos cuyo uso depende sobre todo de contacto directo (sentarse, tocar, ver en acción).</div>
+            </div>
+
+            <div class="drop-zone" data-zone="derivada">
+              <div class="drop-label">Función derivada / relacional</div>
+              <div class="drop-placeholder">Arrastra aquí los estímulos que requieren redes verbales (palabras, símbolos, lectoescritura) para funcionar como “silla”.</div>
+            </div>
+          </div>
+
+          <div class="dd-result" id="dd-result">
+            Clasifica los estímulos y luego revisa la lectura funcional que aparecerá aquí.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: EXPERIMENTO CONTENIDO VS CONTEXTO + AVATAR -->
+    <section class="section">
+      <div class="section-title">3. Experimento: el mismo estímulo, distintas funciones</div>
+      <div class="section-subtitle">
+        Ahora observa cómo un <strong>mismo estímulo físico</strong> puede adquirir funciones completamente
+        distintas según el contexto. Esta lógica es la misma que luego aplicaremos a
+        pensamientos, recuerdos e imágenes en la clínica.
+      </div>
+
+      <div class="cone-grid">
+        <div class="cone-card">
+          <div class="section-subtitle" style="margin-bottom:10px;">
+            Tres escenas con el mismo cono amarillo:
+          </div>
+
+          <div class="cone-row">
+            <div class="cone-item">
+              <span class="cone-icon">🟡</span>
+              <div class="cone-caption">
+                Cono en el parque, usado como juguete.
+              </div>
+            </div>
+            <div class="cone-item">
+              <span class="cone-icon">🟡🟡</span>
+              <div class="cone-caption">
+                Dos conos marcando “no pasar”.
+              </div>
+            </div>
+            <div class="cone-item">
+              <span class="cone-icon">🚗🟡</span>
+              <div class="cone-caption">
+                Cono en la calle indicando peligro cerca del auto.
+              </div>
+            </div>
+          </div>
+
+          <div class="cone-note">
+            El cono no trae una función escrita en su superficie. Esa función se construye
+            por <strong>historia de interacción</strong> (jugar, ser detenido, evitar peligro) y por
+            el <strong>contexto actual</strong> en el que aparece.
+          </div>
+
+          <div class="experiment-box">
+            <div class="experiment-title">Micro-experimento: ¿Qué cambiarías primero?</div>
+            <div>Elige el tipo de intervención y observa qué pasa con la función del cono (y del avatar).</div>
+            <div class="experiment-options">
+              <button class="exp-btn active" data-exp="contenido">Cambiar el estímulo (contenido)</button>
+              <button class="exp-btn" data-exp="contexto">Cambiar el contexto (contingencias)</button>
+            </div>
+            <div class="experiment-result" id="experiment-result">
+              Si solo cambias el cono por otro objeto similar (por ejemplo, un cubo amarillo),
+              pero mantienes las mismas señales, la misma calle y la misma historia de accidentes,
+              la función de “peligro” probablemente se mantiene.
+            </div>
+          </div>
         </div>
 
-    </div>
+        <div class="avatar-wrapper">
+          <div class="avatar-label">Respuesta del organismo</div>
+          <div class="avatar state-1" id="avatar">
+            <div class="avatar-face">
+              <div class="avatar-mouth"></div>
+            </div>
+          </div>
+          <div class="avatar-caption" id="avatar-caption">
+            Cuando el contexto sugiere amenaza (calles peligrosas, frenadas bruscas, historias de
+            accidentes), el mismo cono puede disparar tensión y evitación, incluso si no ha
+            ocurrido nada todavía en esta ocasión.
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- NAVEGACIÓN -->
-    <div class="nav-buttons">
-        <button class="btn btn-back" onclick="location.href='index.html'">Volver</button>
-        <button class="btn btn-next" onclick="location.href='p3.html'">Siguiente</button>
-    </div>
+    <!-- SECCIÓN 5: CIERRE + NAV -->
+    <section class="section">
+      <div class="section-title" style="text-align:center;">4. Cierre: función como puente hacia la clínica</div>
+      <p class="closing">
+        La función de un evento no está en su forma física ni en su “contenido interno”,
+        sino en la <strong>relación</strong> entre ese evento, la historia del organismo y el contexto
+        actual. Esta forma de pensar nos prepara para el siguiente paso: analizar
+        <strong>conducta-en-contexto</strong> en la clínica, incluyendo pensamientos y emociones como
+        parte de cadenas funcionales que podemos influir.
+        <br><br>
+        En la próxima pantalla aplicarás estas ideas directamente a un caso clínico, viendo
+        cómo las funciones se organizan en una cadena y cómo se puede intervenir desde ACT.
+      </p>
 
-    <!-- SCRIPT -->
-    <script>
-        function check(id) {
-            if (id === 4) {
-                document.getElementById("banner").style.display = "block";
-            }
+      <div class="nav-buttons">
+        <a href="p4.html" class="btn secondary">
+          <span class="arrow">⟵</span>
+          Volver a P4 · Conducta como evento interactivo
+        </a>
+        <a href="p6.html" class="btn">
+          P6 · Contextualismo en la clínica
+          <span class="arrow">⟶</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // ---------- DRAG & DROP ----------
+    const dragItems = document.querySelectorAll(".drag-item");
+    const dropZones = document.querySelectorAll(".drop-zone");
+    const ddResult = document.getElementById("dd-result");
+    const ddResetBtn = document.getElementById("dd-reset");
+    const ddOrigin = document.getElementById("dd-draggables");
+
+    let draggedItem = null;
+
+    dragItems.forEach(item => {
+      item.addEventListener("dragstart", (e) => {
+        draggedItem = item;
+        item.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+      });
+
+      item.addEventListener("dragend", () => {
+        draggedItem = null;
+        item.classList.remove("dragging");
+      });
+    });
+
+    dropZones.forEach(zone => {
+      zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        zone.classList.add("over");
+      });
+
+      zone.addEventListener("dragleave", () => {
+        zone.classList.remove("over");
+      });
+
+      zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zone.classList.remove("over");
+        if (!draggedItem) return;
+
+        // mover elemento
+        zone.appendChild(draggedItem);
+        // quitar placeholder si existe
+        const placeholder = zone.querySelector(".drop-placeholder");
+        if (placeholder) {
+          placeholder.remove();
         }
-    </script>
+        evaluarClasificacion();
+      });
+    });
+
+    ddResetBtn.addEventListener("click", () => {
+      // devolver todos los ítems al origen
+      dragItems.forEach(item => ddOrigin.appendChild(item));
+      // restaurar placeholders
+      dropZones.forEach(zone => {
+        zone.innerHTML = "";
+        const labelText = zone.getAttribute("data-zone") === "directa"
+          ? "Historia directa"
+          : "Función derivada / relacional";
+        const label = document.createElement("div");
+        label.className = "drop-label";
+        label.textContent = labelText;
+        const placeholder = document.createElement("div");
+        placeholder.className = "drop-placeholder";
+        placeholder.textContent =
+          zone.getAttribute("data-zone") === "directa"
+            ? "Arrastra aquí los estímulos cuyo uso depende sobre todo de contacto directo (sentarse, tocar, ver en acción)."
+            : "Arrastra aquí los estímulos que requieren redes verbales (palabras, símbolos, lectoescritura) para funcionar como “silla”.";
+        zone.appendChild(label);
+        zone.appendChild(placeholder);
+      });
+      ddResult.textContent = "Clasifica los estímulos y luego revisa la lectura funcional que aparecerá aquí.";
+    });
+
+    function evaluarClasificacion() {
+      const mappingCorrecto = {
+        directa: ["madera"],
+        derivada: ["icono", "palabra"]
+      };
+
+      const mappingUsuario = { directa: [], derivada: [] };
+
+      dropZones.forEach(zone => {
+        const zoneType = zone.getAttribute("data-zone");
+        const items = zone.querySelectorAll(".drag-item");
+        items.forEach(item => {
+          const key = item.getAttribute("data-item");
+          mappingUsuario[zoneType].push(key);
+        });
+      });
+
+      const okDirecta = arraysIguales(
+        mappingUsuario.directa.sort(),
+        mappingCorrecto.directa.sort()
+      );
+      const okDerivada = arraysIguales(
+        mappingUsuario.derivada.sort(),
+        mappingCorrecto.derivada.sort()
+      );
+
+      if (okDirecta && okDerivada) {
+        ddResult.innerHTML =
+          "Muy bien: normalmente la <strong>silla de madera</strong> adquiere su función por historia directa "+
+          "(sentarse, tocarla, verla en uso). El <strong>icono</strong> y la <strong>palabra «SILLA»</strong> requieren "+
+          "redes verbales y marcos relacionales que transforman su función. Esta misma lógica se aplicará luego "+
+          "a pensamientos e imágenes en la clínica.";
+      } else {
+        ddResult.innerHTML =
+          "Tu clasificación muestra algo importante: a veces olvidamos de dónde viene la función. "+
+          "Para muchos niños, la palabra escrita o el icono necesitarán una historia verbal más compleja "+
+          "para funcionar como “silla”. Lo relevante no es acertar perfecto, sino entrenar la mirada: "+
+          "<strong>¿qué tipo de historia hace posible esta función?</strong>";
+      }
+    }
+
+    function arraysIguales(a, b) {
+      if (a.length !== b.length) return false;
+      for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+      }
+      return true;
+    }
+
+    // ---------- AVATAR + EXPERIMENTO CONTEXTO ----------
+    const avatar = document.getElementById("avatar");
+    const avatarCaption = document.getElementById("avatar-caption");
+    const expButtons = document.querySelectorAll(".exp-btn");
+    const experimentResult = document.getElementById("experiment-result");
+
+    function setAvatarState(state, caption) {
+      avatar.classList.remove("state-1", "state-2", "state-3", "state-4");
+      avatar.classList.add("state-" + state);
+      if (caption) avatarCaption.innerHTML = caption;
+    }
+
+    expButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        expButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const mode = btn.getAttribute("data-exp");
+
+        if (mode === "contenido") {
+          experimentResult.innerHTML =
+            "Si solo cambias el cono por otro objeto parecido (por ejemplo, un cubo amarillo), "+
+            "pero mantienes la misma calle peligrosa, las mismas historias de frenazos y los mismos "+
+            "relatos de accidentes, la función de “peligro” probablemente se mantiene. El organismo "+
+            "sigue respondiendo con tensión y evitación.";
+          setAvatarState("1",
+            "El cuerpo se mantiene en alerta. Cambiar el objeto sin modificar el contexto funcional "+
+            "deja intacta la función de amenaza."
+          );
+        } else if (mode === "contexto") {
+          experimentResult.innerHTML =
+            "Cuando cambias el contexto funcional (por ejemplo, entrenando nuevas asociaciones en un espacio "+
+            "seguro, aclarando señales, modificando consecuencias), la función puede transformarse aunque "+
+            "el cono siga siendo exactamente el mismo. El organismo aprende que no siempre significa “peligro inmediato”.";
+          setAvatarState("4",
+            "La respuesta corporal se flexibiliza. El mismo estímulo puede ser notado sin disparar la "+
+            "misma cadena de alerta y evitación."
+          );
+        }
+      });
+    });
+
+    // Estado inicial del experimento
+    if (expButtons.length > 0) {
+      expButtons[0].click();
+    }
+  </script>
 
 </body>
 </html>
