@@ -1,231 +1,1103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P4 · La conducta como evento interactivo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P4 · La conducta como evento interactivo</title>
 
-    <!-- ===========================
-         ESTILO GLOBAL PREMIUM
-    ============================ -->
-    <style>
-        :root {
-            --azul-1: #0A2A5C;
-            --azul-3: #000C1A;
-            --dorado: #FDBF12;
-            --dorado-soft: #FFD980;
-            --texto: #E9ECF5;
-            --blanco: #FFFFFF;
-        }
+  <style>
+    :root {
+      --azul-1: #0A2A5C;
+      --azul-2: #132F66;
+      --azul-3: #000C1A;
+      --dorado: #FDBF12;
+      --dorado-soft: #FFD980;
+      --texto: #E9ECF5;
+      --blanco: #FFFFFF;
+    }
 
-        * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-        body {
-            margin: 0;
-            font-family: "Noto Sans", sans-serif;
-            color: var(--texto);
-            background: linear-gradient(180deg, var(--azul-1), var(--azul-3));
-            min-height: 100vh;
-            padding: 40px 28px 80px;
-            overflow-x: hidden;
-        }
+    body {
+      margin: 0;
+      font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--texto);
+      background: radial-gradient(circle at top left, #12346d 0%, #050913 55%, #000000 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        /* HEXAGON PATTERN */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: url('../assets/backgrounds/hex-pattern.png');
-            background-size: 420px;
-            opacity: 0.09;
-            z-index: -2;
-        }
+    /* FONDO PATRÓN + HEXÁGONOS */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("../assets/backgrounds/hex-pattern.png");
+      background-size: 420px;
+      opacity: 0.09;
+      z-index: -3;
+      pointer-events: none;
+    }
 
-        /* HEXÁGONOS DORADOS */
-        .hex {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: url('../assets/icons/hex-gold.png') no-repeat center/contain;
-            opacity: 0.07;
-            filter: blur(1px);
-            animation: float 14s ease-in-out infinite;
-            z-index: -1;
-        }
-        .h1 { top: 10%; left: 6%; }
-        .h2 { bottom: 12%; right: 4%; animation-delay: 3s; }
+    .hex {
+      position: fixed;
+      width: 360px;
+      height: 360px;
+      background: url("../assets/icons/hex-gold.png") no-repeat center/contain;
+      opacity: 0.07;
+      filter: blur(1px);
+      animation: floatHex 18s ease-in-out infinite;
+      z-index: -2;
+      pointer-events: none;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-14px); }
-            100% { transform: translateY(0px); }
-        }
+    .hex.h1 { top: 8%; left: 4%; }
+    .hex.h2 { bottom: 10%; right: 4%; animation-delay: 3s; }
 
-        /* TÍTULOS */
-        h1 {
-            font-family: "Coco Gothic", sans-serif;
-            font-size: 34px;
-            color: var(--blanco);
-            margin: 0 0 8px;
-        }
+    @keyframes floatHex {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+      100% { transform: translateY(0); }
+    }
 
-        h2 {
-            font-size: 22px;
-            margin: 4px 0 26px;
-            color: var(--dorado);
-        }
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle at 16% 18%, rgba(253,191,18,0.18) 0, transparent 55%),
+        radial-gradient(circle at 80% 82%, rgba(253,191,18,0.13) 0, transparent 55%);
+      opacity: 0.75;
+      mix-blend-mode: screen;
+    }
 
-        p {
-            font-size: 20px;
-            line-height: 1.55;
-            max-width: 880px;
-        }
+    /* TOP NAV */
+    .top-nav {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+    }
 
-        /* CONTENEDOR */
-        .content-box {
-            background: rgba(255,255,255,0.06);
-            border: 2px solid rgba(255,255,255,0.08);
-            padding: 32px;
-            border-radius: 22px;
-            margin-top: 32px;
-            backdrop-filter: blur(6px);
-        }
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.8);
+      background: rgba(0,0,0,0.55);
+      color: var(--blanco);
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      backdrop-filter: blur(6px);
+      transition: 0.25s ease;
+    }
 
-        /* TARJETAS CLIC PARA REVELAR */
-        .cards {
-            margin-top: 32px;
-            display: flex;
-            gap: 22px;
-            flex-wrap: wrap;
-        }
+    .top-nav a:hover {
+      background: rgba(253,191,18,0.16);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
 
-        .card {
-            background: rgba(255,255,255,0.07);
-            border: 2px solid rgba(255,255,255,0.15);
-            padding: 22px;
-            border-radius: 18px;
-            width: 260px;
-            cursor: pointer;
-            transition: .25s;
-            font-size: 20px;
-            text-align: center;
-        }
+    .top-nav .icon { font-size: 18px; }
 
-        .card:hover {
-            border-color: var(--dorado);
-            transform: translateY(-6px);
-            box-shadow: 0 0 18px rgba(253,191,18,0.35);
-        }
+    /* CONTENEDOR PRINCIPAL */
+    .container {
+      max-width: 1120px;
+      margin: 90px auto 70px auto;
+      padding: 0 28px 40px 28px;
+    }
 
-        .card.revealed {
-            background: rgba(253,191,18,0.18);
-            border-color: var(--dorado);
-            color: var(--blanco);
-        }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(253,191,18,0.8);
+      background: rgba(0,0,0,0.55);
+      font-size: 16px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
 
-        .card-text {
-            margin-top: 16px;
-            font-size: 18px;
-            display: none;
-            line-height: 1.5;
-        }
+    .badge-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dorado-soft);
+      box-shadow: 0 0 12px rgba(253,191,18,0.9);
+    }
 
-        .card.revealed .card-text {
-            display: block;
-        }
+    h1 {
+      font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 42px;
+      color: var(--blanco);
+      margin: 12px 0 10px 0;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      text-shadow: 0 0 12px rgba(0,0,0,0.8);
+    }
 
-        /* NAVEGACIÓN */
-        .nav-buttons {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-        }
+    .sub {
+      font-size: 28px;
+      color: var(--dorado-soft);
+      opacity: 0.95;
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 18px auto;
+    }
 
-        .btn {
-            padding: 14px 26px;
-            font-size: 18px;
-            border-radius: 999px;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-        }
+    p.descripcion {
+      font-size: 22px;
+      line-height: 1.8;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      opacity: 0.95;
+    }
 
-        .btn-back {
-            background: rgba(255,255,255,0.12);
-            color: var(--blanco);
-        }
+    .section {
+      margin-top: 44px;
+    }
 
-        .btn-next {
-            background: linear-gradient(135deg, var(--dorado), var(--dorado-soft));
-            color: #1A1A1A;
-        }
-    </style>
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 22px;
+      opacity: 0.92;
+      max-width: 920px;
+      margin-bottom: 18px;
+    }
+
+    /* SECCIÓN 2: QUIZ PENSAMIENTO/ACCIÓN */
+    .quiz-card {
+      border-radius: 28px;
+      padding: 22px 22px 24px 22px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(0,0,0,0.95));
+      border: 2px solid rgba(253,191,18,0.6);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.9),
+        0 0 20px rgba(253,191,18,0.25);
+    }
+
+    .quiz-phrase-label {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .quiz-phrase {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .quiz-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(253,191,18,0.8);
+      background: rgba(0,0,0,0.85);
+      color: var(--blanco);
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.24s ease;
+    }
+
+    .quiz-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
+
+    .quiz-btn.correct {
+      background: var(--dorado);
+      color: #000C1A;
+      box-shadow: 0 0 18px rgba(253,191,18,1);
+    }
+
+    .quiz-btn.wrong {
+      background: rgba(180,40,40,0.85);
+      border-color: rgba(255,190,190,0.9);
+    }
+
+    .quiz-result {
+      margin-top: 10px;
+      font-size: 20px;
+      color: var(--dorado-soft);
+      opacity: 0.96;
+    }
+
+    /* SECCIÓN 3: SENTIR / IMAGINAR + AVATAR */
+    .feel-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+      gap: 26px;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 960px) {
+      .feel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feel-card {
+      border-radius: 28px;
+      padding: 22px 22px 24px 22px;
+      background: linear-gradient(145deg, rgba(0,0,0,0.92), rgba(255,255,255,0.06));
+      border: 2px solid rgba(253,191,18,0.5);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.9),
+        0 0 18px rgba(253,191,18,0.25);
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .feel-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .feel-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(253,191,18,0.9);
+      background: rgba(10,10,10,0.9);
+      color: var(--blanco);
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.26s ease;
+    }
+
+    .feel-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
+
+    .feel-btn.active {
+      background: var(--dorado);
+      color: #000C1A;
+      box-shadow: 0 0 20px rgba(253,191,18,1);
+    }
+
+    .feel-result {
+      margin-top: 6px;
+      font-size: 20px;
+      opacity: 0.96;
+    }
+
+    .avatar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-label {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid rgba(253,191,18,0.9);
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, #f7d88e 25%, #f09d4c 45%, #6b2d12 100%);
+      box-shadow:
+        0 0 22px rgba(253,191,18,0.95),
+        0 18px 32px rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    .avatar-face {
+      width: 64%;
+      height: 64%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe6c7 0, #f4b27b 40%, #a25733 100%);
+      position: relative;
+    }
+
+    .avatar-face::before,
+    .avatar-face::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      top: 38%;
+      background: #3b2314;
+    }
+
+    .avatar-face::before { left: 22%; }
+    .avatar-face::after  { right: 22%; }
+
+    .avatar-mouth {
+      position: absolute;
+      width: 48%;
+      height: 20%;
+      border-radius: 0 0 40px 40px;
+      border-bottom: 3px solid #3b2314;
+      left: 50%;
+      top: 60%;
+      transform: translateX(-50%);
+    }
+
+    .avatar.state-1 .avatar-mouth {
+      border-radius: 40px 40px 0 0;
+      border-bottom: none;
+      border-top: 3px solid #3b2314;
+      top: 66%;
+    }
+
+    .avatar.state-2 .avatar-mouth {
+      transform: translateX(-50%) translateY(2px);
+    }
+
+    .avatar.state-3 .avatar-mouth {
+      border-bottom-width: 4px;
+    }
+
+    .avatar.state-4 .avatar-mouth {
+      border-bottom-width: 4px;
+      top: 58%;
+    }
+
+    .avatar.state-1 {
+      filter: grayscale(0.25) brightness(0.85);
+    }
+
+    .avatar.state-2 {
+      filter: none;
+    }
+
+    .avatar.state-3 {
+      filter: saturate(1.1);
+    }
+
+    .avatar.state-4 {
+      filter: saturate(1.25) brightness(1.06);
+      box-shadow:
+        0 0 26px rgba(253,191,18,1),
+        0 20px 34px rgba(0,0,0,0.9);
+      transform: translateY(-4px);
+    }
+
+    .avatar-caption {
+      font-size: 20px;
+      max-width: 340px;
+      text-align: center;
+      opacity: 0.94;
+    }
+
+    /* SECCIÓN 4: MANZANA — TRES FORMAS DE ACCIÓN */
+    .apple-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 960px) {
+      .apple-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .apple-card {
+      flex: 1 1 200px;
+      border-radius: 22px;
+      padding: 18px 16px 20px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 2px solid rgba(253,191,18,0.32);
+      text-align: center;
+      font-size: 22px;
+      line-height: 1.4;
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.26s ease;
+    }
+
+    .apple-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(253,191,18,0.11), transparent 55%);
+      opacity: 0;
+      transition: 0.26s ease;
+    }
+
+    .apple-icon {
+      font-size: 40px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .apple-label {
+      font-size: 20px;
+      opacity: 0.96;
+    }
+
+    .apple-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--dorado);
+      box-shadow: 0 0 20px rgba(253,191,18,0.9);
+    }
+
+    .apple-card:hover::before {
+      opacity: 1;
+    }
+
+    .apple-card.active {
+      background: rgba(253,191,18,0.18);
+      border-color: var(--dorado);
+      box-shadow:
+        0 0 22px rgba(253,191,18,1),
+        0 14px 28px rgba(0,0,0,0.9);
+    }
+
+    .apple-panel {
+      border-radius: 28px;
+      padding: 22px 22px 24px 22px;
+      background: linear-gradient(145deg, rgba(0,0,0,0.92), rgba(253,191,18,0.18));
+      border: 2px solid rgba(253,191,18,0.9);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.9),
+        0 0 22px rgba(253,191,18,0.7);
+      font-size: 22px;
+      line-height: 1.8;
+      opacity: 0.97;
+    }
+
+    .apple-panel-header {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    /* SECCIÓN 5: QUIZ CONTROL */
+    .control-card {
+      border-radius: 28px;
+      padding: 22px 22px 24px 22px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(0,0,0,0.95));
+      border: 2px solid rgba(253,191,18,0.6);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.9),
+        0 0 20px rgba(253,191,18,0.25);
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .control-phrase-label {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .control-phrase {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .network-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 960px) {
+      .network-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* SECCIÓN 6: MICRO RED CONDUCTA */
+    .network-card {
+      border-radius: 28px;
+      padding: 22px 22px 24px 22px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.04), rgba(0,0,0,0.95));
+      border: 2px solid rgba(253,191,18,0.6);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.9),
+        0 0 20px rgba(253,191,18,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .network-nodes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .network-node {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 2px solid rgba(253,191,18,0.7);
+      background: rgba(0,0,0,0.85);
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .network-node:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(253,191,18,0.9);
+    }
+
+    .network-node.active {
+      background: var(--dorado);
+      color: #000C1A;
+      box-shadow: 0 0 20px rgba(253,191,18,1);
+    }
+
+    .network-lines {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(253,191,18,0.12), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(253,191,18,0.1), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .network-panel {
+      margin-top: 12px;
+      font-size: 20px;
+      line-height: 1.8;
+      opacity: 0.96;
+    }
+
+    /* CIERRE + NAV */
+    .closing {
+      margin-top: 28px;
+      font-size: 22px;
+      line-height: 1.8;
+      text-align: center;
+      max-width: 920px;
+      margin-inline: auto;
+      opacity: 0.96;
+    }
+
+    .nav-buttons {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 22px;
+      border-radius: 999px;
+      border: 2px solid var(--dorado);
+      background: var(--dorado);
+      color: #000C1A;
+      cursor: pointer;
+      transition: 0.26s ease;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--blanco);
+      border-color: rgba(253,191,18,0.8);
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 22px rgba(253,191,18,1);
+      transform: translateY(-2px);
+    }
+
+    .btn span.arrow {
+      font-size: 22px;
+      line-height: 1;
+    }
+  </style>
 </head>
-
 <body>
 
-    <!-- FONDOS -->
-    <div class="hex h1"></div>
-    <div class="hex h2"></div>
+  <div class="particles"></div>
+  <div class="hex h1"></div>
+  <div class="hex h2"></div>
 
-    <!-- TÍTULOS -->
-    <h1>La conducta como evento interactivo</h1>
-    <h2>Pensar, sentir e imaginar como formas de acción</h2>
+  <div class="top-nav">
+    <a href="index.html">
+      <span class="icon">⟵</span>
+      Volver al menú del módulo
+    </a>
+  </div>
 
-    <div class="content-box">
+  <div class="container">
 
-        <p>
-            En contextualismo funcional, toda acción —incluyendo pensar, recordar, imaginar o sentir—
-            es <b>conducta</b>. No se trata de “cosas dentro”, sino de <b>interacciones</b> entre una persona y su
-            historia, contexto actual y redes relacionales.
-        </p>
+    <!-- SECCIÓN 1: TÍTULO E INTRODUCCIÓN -->
+    <section class="section" style="margin-top:0;">
+      <div style="text-align:center; margin-bottom: 10px;">
+        <div class="badge">
+          <div class="badge-dot"></div>
+          PANTALLA 4 · LA CONDUCTA COMO EVENTO INTERACTIVO
+        </div>
+      </div>
 
-        <p>
-            Los llamados “eventos privados” son acciones controladas por contingencias y marcos relacionales.
-            No se explican por procesos internos ocultos, sino por cómo la persona ha aprendido a responder.
-        </p>
+      <h1>La conducta como evento interactivo</h1>
+      <div class="sub">Pensar, sentir e imaginar como formas de acción en contexto</div>
+      <p class="descripcion">
+        Desde el contextualismo funcional, <strong>todo lo que una persona hace</strong> —hablar, mover el cuerpo,
+        recordar, imaginar, sentir— es <strong>conducta</strong>. No estudiamos “cosas dentro” como entidades
+        misteriosas, sino <strong>acciones</strong> que ocurren en interacción con historia, contexto actual y
+        redes relacionales. Los llamados “eventos privados” son formas de acción, no objetos ocultos.
+      </p>
+    </section>
 
-        <!-- TARJETAS -->
-        <div class="cards">
+    <!-- SECCIÓN 2: QUIZ PENSAMIENTO / ACCIÓN -->
+    <section class="section">
+      <div class="section-title">1. Experimento: ¿pensamiento o acción?</div>
+      <div class="section-subtitle">
+        Mira esta frase como si apareciera en tu mente antes de empezar una tarea. Elige cómo la entenderías
+        desde una visión mentalista y cómo la entendemos desde el contextualismo funcional.
+      </div>
 
-            <div class="card" onclick="reveal(this)">
-                🍎 Ver la manzana
-                <div class="card-text">
-                    Una acción perceptual bajo control de estímulos presentes. Conducta abierta.
-                </div>
-            </div>
+      <div class="quiz-card">
+        <div class="quiz-phrase-label">Evento privado</div>
+        <div class="quiz-phrase">«No sirvo para esto»</div>
 
-            <div class="card" onclick="reveal(this)">
-                🗣️ Decir “manzana”
-                <div class="card-text">
-                    Conducta verbal gobernada por historia de reforzamiento y marcos relacionales.
-                </div>
-            </div>
-
-            <div class="card" onclick="reveal(this)">
-                💭 Recordar una manzana
-                <div class="card-text">
-                    Conducta encubierta: acción sin estímulo presente, modulada por redes relacionales.
-                </div>
-            </div>
-
+        <div class="quiz-options">
+          <button
+            class="quiz-btn"
+            data-quiz="1"
+            data-correct="false"
+          >
+            Un objeto mental dentro de la cabeza
+          </button>
+          <button
+            class="quiz-btn"
+            data-quiz="1"
+            data-correct="false"
+          >
+            Una representación interna de la realidad
+          </button>
+          <button
+            class="quiz-btn"
+            data-quiz="1"
+            data-correct="true"
+          >
+            Una acción verbal en interacción con un contexto
+          </button>
         </div>
 
-    </div>
+        <div id="quiz1-result" class="quiz-result">
+          Elige una opción para ver la lectura contextual.
+        </div>
+      </div>
+    </section>
 
-    <!-- NAVEGACIÓN -->
-    <div class="nav-buttons">
-        <button class="btn btn-back" onclick="location.href='p3.html'">Volver</button>
-        <button class="btn btn-next" onclick="location.href='p5.html'">Siguiente</button>
-    </div>
+    <!-- SECCIÓN 3: SENTIR / IMAGINAR + AVATAR -->
+    <section class="section">
+      <div class="section-title">2. Sentir vs. imaginar: dos acciones distintas</div>
+      <div class="section-subtitle">
+        Ahora haz un mini experimento. No necesitas hacerlo perfecto: basta con que sigas las instrucciones
+        mientras observas qué hace tu conducta.
+      </div>
 
-    <!-- SCRIPT -->
-    <script>
-        function reveal(card) {
-            card.classList.toggle("revealed");
+      <div class="feel-grid">
+        <div class="feel-card">
+          <div class="section-subtitle" style="margin-bottom:6px;">
+            Elige qué hacer ahora mismo:
+          </div>
+
+          <div class="feel-options">
+            <button class="feel-btn" data-feel="sentir">
+              Sentir tu brazo en este momento
+            </button>
+            <button class="feel-btn" data-feel="imaginar">
+              Imaginar tu brazo sin mirarlo
+            </button>
+          </div>
+
+          <div class="feel-result" id="feel-result">
+            Si decides “sentir tu brazo”, llevarás la atención a sensaciones presentes. Si decides “imaginar tu brazo”,
+            producirás imágenes y palabras sin contacto directo con el estímulo. En ambos casos estás <strong>actuando</strong>.
+          </div>
+        </div>
+
+        <div class="avatar-wrapper">
+          <div class="avatar-label">Estado de la acción</div>
+          <div class="avatar state-2" id="avatar">
+            <div class="avatar-face">
+              <div class="avatar-mouth"></div>
+            </div>
+          </div>
+          <div class="avatar-caption" id="avatar-caption">
+            Cuando sientes el brazo, tu conducta está bajo <strong>control directo</strong> de estímulos presentes.
+            Cuando lo imaginas, tu conducta está guiada por <strong>redes relacionales</strong> construidas en tu historia.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: MANZANA — TRES FORMAS DE ACCIÓN -->
+    <section class="section">
+      <div class="section-title">3. Ver, decir, recordar: el caso de la manzana</div>
+      <div class="section-subtitle">
+        Piensa en una manzana. No importa la variedad, el color o el tamaño. Lo que nos interesa ahora es
+        <strong>qué haces</strong> al verla, nombrarla o recordarla. Toca cada tarjeta para ver cómo lo entiende el contextualismo.
+      </div>
+
+      <div class="apple-grid">
+        <div>
+          <div
+            class="apple-card"
+            data-apple="ver"
+          >
+            <span class="apple-icon">🍎</span>
+            <div class="apple-label">Ver una manzana frente a ti</div>
+          </div>
+
+          <div
+            class="apple-card"
+            data-apple="decir"
+          >
+            <span class="apple-icon">🗣️</span>
+            <div class="apple-label">Decir en voz alta “manzana”</div>
+          </div>
+
+          <div
+            class="apple-card"
+            data-apple="recordar"
+          >
+            <span class="apple-icon">💭</span>
+            <div class="apple-label">Recordar una manzana sin verla</div>
+          </div>
+        </div>
+
+        <div class="apple-panel" id="apple-panel">
+          <div class="apple-panel-header">Lectura contextual</div>
+          <div id="apple-panel-body">
+            Toca una de las tarjetas para ver cómo se entiende esa acción desde el contextualismo funcional.
+            Recuerda: en todos los casos hablamos de <strong>conducta</strong>, pero bajo diferentes formas de control.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: QUIZ CONTROL -->
+    <section class="section">
+      <div class="section-title">4. ¿Qué controla esta acción?</div>
+      <div class="section-subtitle">
+        Ahora volvemos a un ejemplo verbal. Imagina a una persona que, antes de entrar a una reunión o
+        enviar un mensaje, nota que aparece esta frase:
+      </div>
+
+      <div class="control-card">
+        <div class="control-phrase-label">Evento verbal</div>
+        <div class="control-phrase">«Creo que me van a criticar»</div>
+
+        <div class="quiz-options">
+          <button
+            class="quiz-btn"
+            data-quiz="2"
+            data-correct="false"
+          >
+            Está controlado solo por lo que pasa en este momento
+          </button>
+          <button
+            class="quiz-btn"
+            data-quiz="2"
+            data-correct="true"
+          >
+            Está controlado principalmente por historia verbal y relacional
+          </button>
+          <button
+            class="quiz-btn"
+            data-quiz="2"
+            data-correct="false"
+          >
+            No es conducta, es “la realidad interna hablando”
+          </button>
+        </div>
+
+        <div id="quiz2-result" class="quiz-result">
+          Elige una respuesta para ver cómo se analiza funcionalmente este evento.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: MICRO RED CONDUCTA -->
+    <section class="section">
+      <div class="section-title">5. Micro red: todo es acción en interacción</div>
+      <div class="section-subtitle">
+        Para el contextualismo funcional, no hay un “dentro” mental opuesto a un “afuera” conductual.
+        Solo hay <strong>formas distintas de acción</strong> del organismo, articuladas en una red.
+      </div>
+
+      <div class="network-grid">
+        <div class="network-card">
+          <div class="section-subtitle" style="margin-bottom:6px;">
+            Toca cada nodo para ver cómo encaja en la red de conducta.
+          </div>
+
+          <div class="network-nodes">
+            <div class="network-node" data-node="percepcion">Percepción (ver, oír, oler)</div>
+            <div class="network-node" data-node="accion-publica">Acción pública (hablar, moverse)</div>
+            <div class="network-node" data-node="evento-verbal">Evento verbal (pensar en palabras)</div>
+            <div class="network-node" data-node="imagen">Imagen/recuerdo</div>
+            <div class="network-node" data-node="sensacion">Sensación corporal</div>
+          </div>
+
+          <div class="network-lines"></div>
+
+          <div class="network-panel" id="network-panel">
+            Todo esto es <strong>conducta</strong>: formas diferentes de interacción organismo–contexto.
+            Lo que cambia son los estímulos implicados, la historia que los organiza y el grado en que son
+            accesibles a observadores externos.
+          </div>
+        </div>
+
+        <div class="control-card">
+          <div class="section-subtitle" style="margin-bottom:6px;">
+            Idea clave para la clínica:
+          </div>
+          <p>
+            Cuando tratamos pensamientos, emociones o recuerdos como <strong>acciones en contexto</strong>, podemos
+            analizarlos con las mismas herramientas que usamos para cualquier otra conducta:
+            antecedentes, consecuencias, funciones, historia.
+            <br><br>
+            Esta forma de mirar los eventos privados prepara el camino para el siguiente paso del módulo:
+            entender cómo <strong>contingencias e historia</strong> organizan esas funciones (P5) y cómo usarlas
+            en la intervención (P6).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: CIERRE + NAV -->
+    <section class="section">
+      <div class="section-title" style="text-align:center;">6. Cierre: de la “mente” a la conducta-en-contexto</div>
+      <p class="closing">
+        Ver pensar, sentir e imaginar como <strong>formas de acción</strong> nos permite salir del mentalismo.
+        En lugar de buscar causas internas ocultas, analizamos cómo cada evento se inserta en una red de
+        historia, contexto y relaciones. Esta es la base para entender por qué una misma frase puede
+        sostener evitación o flexibilidad según la función que cumpla.
+        <br><br>
+        En la siguiente pantalla profundizarás en esa idea: <strong>contingencias, historia y función</strong>,
+        preparando el terreno para el análisis clínico contextual de los módulos posteriores.
+      </p>
+
+      <div class="nav-buttons">
+        <a href="p3.html" class="btn secondary">
+          <span class="arrow">⟵</span>
+          Volver a P3 · Contexto, historia y niveles
+        </a>
+        <a href="p5.html" class="btn">
+          P5 · Contingencias, historia y función
+          <span class="arrow">⟶</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // ---------- QUIZ GENÉRICO ----------
+    const quizButtons = document.querySelectorAll(".quiz-btn");
+
+    quizButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const quizId = btn.getAttribute("data-quiz");
+        const isCorrect = btn.getAttribute("data-correct") === "true";
+        const resultEl = document.getElementById(
+          quizId === "1" ? "quiz1-result" : "quiz2-result"
+        );
+
+        // reset estilos de ese quiz
+        quizButtons.forEach(b => {
+          if (b.getAttribute("data-quiz") === quizId) {
+            b.classList.remove("correct", "wrong");
+          }
+        });
+
+        if (isCorrect) {
+          btn.classList.add("correct");
+          if (quizId === "1") {
+            resultEl.innerHTML =
+              "Exacto. «No sirvo para esto» es <strong>conducta verbal</strong>: una acción en la que la "+
+              "persona se relaciona con su propia historia, con la tarea y con posibles consecuencias. "+
+              "No necesitamos suponer una ‘cosa interna’; basta con analizar <strong>qué hace</strong> esta "+
+              "frase en contexto.";
+          } else {
+            resultEl.innerHTML =
+              "Correcto. La frase «Creo que me van a criticar» suele estar organizada por una "+
+              "<strong>historia verbal y relacional</strong>: experiencias previas, comentarios, reglas "+
+              "aprendidas. Esto no la hace menos ‘real’, pero orienta el análisis hacia <strong>funciones</strong> "+
+              "y no hacia entidades internas.";
+          }
+        } else {
+          btn.classList.add("wrong");
+          if (quizId === "1") {
+            resultEl.innerHTML =
+              "Esa forma de entenderlo se parece más a una visión mentalista: como si hubiera un objeto "+
+              "interno que ‘contiene’ la verdad sobre la persona. El contextualismo funcional propone otra cosa: "+
+              "ver la frase como <strong>una acción verbal</strong> que ocurre en un contexto y cumple funciones.";
+          } else {
+            resultEl.innerHTML =
+              "Si asumimos que está controlado solo por lo que pasa ahora o que es la ‘realidad interna hablando’, "+
+              "perdemos de vista la historia de aprendizaje. El contextualismo invita a preguntar: "+
+              "¿qué historia y qué redes relacionales hacen posible que esta frase aparezca y mantenga ciertas conductas?";
+          }
         }
-    </script>
+      });
+    });
+
+    // ---------- AVATAR + SENTIR / IMAGINAR ----------
+    const avatar = document.getElementById("avatar");
+    const avatarCaption = document.getElementById("avatar-caption");
+    const feelButtons = document.querySelectorAll(".feel-btn");
+    const feelResult = document.getElementById("feel-result");
+
+    function setAvatarState(state, caption) {
+      avatar.classList.remove("state-1", "state-2", "state-3", "state-4");
+      avatar.classList.add("state-" + state);
+      if (caption) {
+        avatarCaption.innerHTML = caption;
+      }
+    }
+
+    feelButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        feelButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const mode = btn.getAttribute("data-feel");
+        if (mode === "sentir") {
+          feelResult.innerHTML =
+            "Cuando llevas la atención a tu brazo ahora mismo, realizas una acción perceptiva "+
+            "bajo <strong>control directo</strong> de estímulos presentes: temperatura, presión, postura. "+
+            "Es conducta abierta o semiabierta, aunque otros no vean exactamente lo que sientes.";
+          setAvatarState("3",
+            "El organismo se orienta al aquí y ahora. La acción está anclada en estímulos presentes."
+          );
+        } else {
+          feelResult.innerHTML =
+            "Cuando imaginas tu brazo sin mirarlo, tu conducta está guiada por <strong>redes relacionales</strong>: "+
+            "imágenes, palabras, recuerdos. No hay estímulo físico presente, pero sigues actuando: "+
+            "produces eventos verbales y perceptivos encubiertos.";
+          setAvatarState("4",
+            "La acción se organiza por historia y lenguaje. El cuerpo sigue actuando, aunque el estímulo no esté presente."
+          );
+        }
+      });
+    });
+
+    // Estado inicial avatar
+    setAvatarState("2",
+      "Cuando sientes o imaginas, tu organismo siempre está haciendo algo. Cambia el tipo de control, pero sigue siendo conducta."
+    );
+
+    // ---------- APPLE CARDS ----------
+    const appleCards = document.querySelectorAll(".apple-card");
+    const applePanelBody = document.getElementById("apple-panel-body");
+
+    appleCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const type = card.getAttribute("data-apple");
+        appleCards.forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+
+        if (type === "ver") {
+          applePanelBody.innerHTML =
+            "<strong>Ver una manzana frente a ti.</strong> Esta es una acción perceptual: tu organismo "+
+            "responde a estímulos presentes (color, forma, brillo, olor). Es conducta abierta, observable "+
+            "desde fuera si alguien mira dónde diriges la vista.";
+        } else if (type === "decir") {
+          applePanelBody.innerHTML =
+            "<strong>Decir “manzana”.</strong> Aquí hablamos de <strong>conducta verbal</strong>. Para que esa "+
+            "respuesta exista, necesitaste una historia de aprendizaje: que otros dijeran la palabra, que te "+
+            "corrigieran, que la reforzaran. No es un reflejo interno, es una forma de acción moldeada por la comunidad verbal.";
+        } else if (type === "recordar") {
+          applePanelBody.innerHTML =
+            "<strong>Recordar una manzana sin verla.</strong> Esto es conducta encubierta guiada por redes "+
+            "relacionales: imágenes, palabras, sabores simulados. No hay manzana presente, pero tu organismo "+
+            "actúa como si coordinara estímulos a partir de su historia. Sigue siendo <strong>conducta-en-contexto</strong>.";
+        }
+      });
+    });
+
+    // ---------- NETWORK NODES ----------
+    const networkNodes = document.querySelectorAll(".network-node");
+    const networkPanel = document.getElementById("network-panel");
+
+    networkNodes.forEach(node => {
+      node.addEventListener("click", () => {
+        const type = node.getAttribute("data-node");
+        networkNodes.forEach(n => n.classList.remove("active"));
+        node.classList.add("active");
+
+        if (type === "percepcion") {
+          networkPanel.innerHTML =
+            "La <strong>percepción</strong> (ver, oír, oler) es conducta bajo control de estímulos presentes. "+
+            "No necesitamos suponer ‘copias internas’: basta con analizar cómo el organismo se orienta y responde al entorno.";
+        } else if (type === "accion-publica") {
+          networkPanel.innerHTML =
+            "La <strong>acción pública</strong> incluye hablar, moverse, escribir, gesticular. Es la parte más visible "+
+            "de la red conductual, pero está íntimamente conectada con eventos privados que también son conducta.";
+        } else if (type === "evento-verbal") {
+          networkPanel.innerHTML =
+            "Un <strong>evento verbal</strong> (pensar en palabras) es conducta relacional que suele estar "+
+            "controlada por historia verbal: reglas, categorías, comparaciones. No es un ‘eco interno’, es una forma de actuar.";
+        } else if (type === "imagen") {
+          networkPanel.innerHTML =
+            "Las <strong>imágenes y recuerdos</strong> son acciones en las que el organismo coordina estímulos ausentes "+
+            "a partir de su historia. Aunque no haya escena externa, hay conducta: el organismo organiza su experiencia.";
+        } else if (type === "sensacion") {
+          networkPanel.innerHTML =
+            "Las <strong>sensaciones corporales</strong> (nudo en el estómago, presión en el pecho) son respuestas "+
+            "fisiológicas que también forman parte de la conducta. Adquieren función según cómo se relacionan con "+
+            "palabras, historias y contextos previos.";
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
-
