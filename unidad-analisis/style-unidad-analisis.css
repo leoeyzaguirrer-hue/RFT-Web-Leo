@@ -222,6 +222,58 @@
 .ua-footer-nav {
   margin-top: 35px;
 }
+/* =============================================
+   BOTONES (versión premium del módulo)
+============================================= */
+
+.ua-btn-primary {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--ua-azul-1), var(--ua-azul-2));
+  color: #ffffff;
+  border-radius: 999px;
+  border: 2px solid var(--ua-dorado);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 18px 38px rgba(10,42,92,0.32);
+  transition: 0.22s ease;https://github.com/leoeyzaguirrer-hue/RFT-Web-Leo/blob/main/unidad-analisis/style-unidad-analisis.css
+}
+
+.ua-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 48px rgba(10,42,92,0.42);
+  background: linear-gradient(135deg, var(--ua-azul-2), var(--ua-azul-1));
+}
+
+.ua-btn-ghost {
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(10,42,92,0.25);
+  background: rgba(255,255,255,0.72);
+  color: var(--ua-azul-1);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.22s ease;
+}
+
+.ua-btn-ghost:hover {
+  background: rgba(255,255,255,1);
+  border-color: rgba(253,191,18,0.7);
+  transform: translateY(-2px);
+}
+
 /* ============================================================
    HERO CINEMATOGRÁFICO + ENFOQUE
 ============================================================ */
