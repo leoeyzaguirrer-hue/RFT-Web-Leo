@@ -1441,3 +1441,67 @@
     text-align: left;
   }
 }
+/* ===============================
+   QUIZ FINAL — ESTILO PREMIUM
+================================= */
+
+.ua-quiz-card {
+  margin-top: 40px;
+}
+
+.ua-quiz-question {
+  background: var(--ua-azul-bg, #f4f7fc);
+  border-left: 5px solid var(--ua-dorado, #fdbf12);
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 28px;
+}
+
+.ua-quiz-btn {
+  width: 100%;
+  margin: 6px 0;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1.5px solid #d8dfea;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-size: 0.95rem;
+}
+
+.ua-quiz-btn:hover {
+  background: #f0f3ff;
+}
+
+.ua-correct {
+  background: #d1f7c4 !important;
+  border-color: #63c75a !important;
+}
+
+.ua-wrong {
+  background: #ffd2d2 !important;
+  border-color: #ff6b6b !important;
+}
+
+/* Resultados */
+.ua-quiz-result {
+  margin-top: 18px;
+  font-size: 1.1rem;
+  min-height: 28px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.ua-result-good {
+  color: #1b8e3f;
+}
+
+.ua-result-bad {
+  color: #b22222;
+}
+
+/* Botón reinicio */
+.ua-quiz-reset {
+  display: block;
+  margin: 20px auto 0;
+}
