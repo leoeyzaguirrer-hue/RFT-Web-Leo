@@ -1,0 +1,224 @@
+/***********************************************
+   UNIDAD 3 — VERDAD COMO LO QUE FUNCIONA
+   ESTILO CINEMATOGRÁFICO AZUL + DORADO
+************************************************/
+
+/* PALETA */
+:root {
+    --v-azul-1: #000C1A;
+    --v-azul-2: #0A2A5C;
+    --v-azul-3: #132F66;
+    --v-dorado: #FDBF12;
+    --v-dorado-soft: rgba(253, 191, 18, 0.55);
+    --v-blanco: #FFFFFF;
+    --v-blanco-soft: rgba(255,255,255,0.90);
+}
+
+/* RESET */
+body, h1, h2, h3, p, a, div, span {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CUERPO */
+.v-body {
+    font-family: "Noto Sans", sans-serif;
+    color: var(--v-blanco);
+    background: linear-gradient(160deg, var(--v-azul-1), var(--v-azul-2), var(--v-azul-3));
+    overflow-x: hidden;
+}
+
+/***********************************************
+   FONDO ANIMADO
+************************************************/
+
+.v-bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* Nodos dorados */
+.v-node {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--v-dorado);
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0.45;
+    animation: floatNode 12s ease-in-out infinite;
+}
+
+.n1 { top: 20%; left: 15%; }
+.n2 { top: 60%; left: 70%; animation-delay: 2s; }
+.n3 { top: 80%; left: 30%; animation-delay: 4s; }
+
+/* Líneas doradas */
+.v-line {
+    position: absolute;
+    width: 2px;
+    height: 160px;
+    background: var(--v-dorado-soft);
+    opacity: 0.3;
+    animation: riseLine 10s linear infinite;
+}
+
+.l1 { bottom: -200px; left: 20%; }
+.l2 { bottom: -200px; left: 80%; animation-delay: 2s; }
+
+@keyframes floatNode {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes riseLine {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-140vh); }
+}
+
+/***********************************************
+   CONTENIDO PRINCIPAL
+************************************************/
+
+.v-container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 70px auto;
+    text-align: center;
+}
+
+/* TITULARES — LETRAS GRANDES */
+.v-title {
+    font-family: "Coco Gothic", sans-serif;
+    font-size: clamp(32px, 4vw, 42px); /* GRANDE */
+    font-weight: 700;
+    color: var(--v-blanco);
+    margin-bottom: 8px;
+    text-shadow: 0 0 18px rgba(253, 191, 18, 0.35);
+}
+
+.v-subtitle {
+    font-size: clamp(20px, 2.2vw, 26px);
+    color: var(--v-blanco-soft);
+    margin-bottom: 30px;
+}
+
+/* NARRATIVA */
+.v-narrativa p {
+    font-size: clamp(18px, 2vw, 21px);
+    max-width: 880px;
+    margin: 0 auto 40px auto;
+    line-height: 1.55;
+}
+
+/***********************************************
+   MAPA DEL MÓDULO (TARJETAS)
+************************************************/
+
+.v-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+}
+
+.v-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(253, 191, 18, 0.35);
+    border-radius: 22px;
+    padding: 26px;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s;
+    position: relative;
+}
+
+.v-card h3 {
+    font-family: "Coco Gothic", sans-serif;
+    font-size: 22px;
+    color: var(--v-dorado);
+    margin-bottom: 6px;
+}
+
+.v-card p {
+    font-size: 18px;
+    color: var(--v-blanco);
+    line-height: 1.45;
+}
+
+/* HOVER */
+.v-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--v-dorado);
+    box-shadow:
+        0 0 22px rgba(253, 191, 18, 0.25),
+        0 6px 25px rgba(0, 0, 0, 0.45);
+}
+
+/***********************************************
+   TOOLTIP
+************************************************/
+
+.v-card[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20,20,20,0.88);
+    backdrop-filter: blur(6px);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    width: max-content;
+    max-width: 220px;
+    color: var(--v-blanco-soft);
+    border: 1px solid var(--v-dorado-soft);
+    white-space: normal;
+    z-index: 10;
+}
+
+/***********************************************
+   BOTONES
+************************************************/
+
+.v-buttons {
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.v-btn-primary,
+.v-btn-secondary {
+    padding: 14px 28px;
+    border-radius: 18px;
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    transition: 0.3s ease;
+}
+
+.v-btn-primary {
+    background: var(--v-dorado);
+    color: var(--v-azul-1);
+    font-weight: 700;
+}
+
+.v-btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+.v-btn-secondary {
+    border: 2px solid var(--v-dorado);
+    color: var(--v-blanco);
+}
+
+.v-btn-secondary:hover {
+    background: rgba(253, 191, 18, 0.2);
+}
