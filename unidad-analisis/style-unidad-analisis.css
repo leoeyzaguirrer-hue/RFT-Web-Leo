@@ -114,6 +114,17 @@
 /* ============================================================
    ENCABEZADO / HERO
 ============================================================ */
+.ua-hero {
+  padding: 70px 20px 40px;
+  max-width: 1100px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.ua-hero-text {
+  max-width: 900px;
+}
+
 .ua-breadcrumb {
   font-size: 14px;
   letter-spacing: 0.14em;
@@ -157,17 +168,6 @@
   color: rgba(10,35,64,0.9);
 }
 
-.ua-hero {
-  padding: 70px 20px 40px;
-  max-width: 1100px;
-  margin: 0 auto 30px;
-  position: relative;
-}
-
-.ua-hero-text {
-  max-width: 900px;
-}
-
 .ua-focus-circle {
   position: absolute;
   top: 20%;
@@ -194,6 +194,7 @@
   100% { transform: translateX(-50%) scale(1); opacity: 0.35; }
 }
 
+/* Bloque de continuidad */
 .ua-continuidad {
   margin-top: 18px;
   padding-left: 10px;
@@ -357,9 +358,29 @@
   margin-bottom: 8px;
 }
 
-.ua-list-small {
-  font-size: 16px;
+/* Checklist premium (lista con bullets personalizados) */
+.ua-checklist {
+  margin: 14px 0 20px 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: 18px;
   line-height: 1.6;
+  color: rgba(10,35,64,0.9);
+}
+
+.ua-checklist li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 8px;
+}
+
+.ua-checklist li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 16px;
+  color: var(--ua-dorado);
 }
 
 /* ============================================================
@@ -420,6 +441,31 @@
   transform: translateY(-2px);
 }
 
+/* Botón mini (footer) */
+.ua-btn-mini {
+  border-radius: 999px;
+  border: 1px solid rgba(10,42,92,0.25);
+  background: rgba(248,250,252,0.95);
+  padding: 8px 16px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  color: var(--ua-azul-1);
+}
+
+.ua-btn-mini:hover {
+  background: #ffffff;
+  border-color: rgba(10,42,92,0.5);
+  transform: translateY(-1px);
+}
+
 /* ============================================================
    FOOTER
 ============================================================ */
@@ -428,6 +474,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* ============================================================
@@ -445,10 +492,8 @@
 }
 
 /* ============================================================
-   P2 — ESTILOS ESPECÍFICOS
+   LEYENDA DE ICONOS
 ============================================================ */
-
-/* ---------- Leyenda de emojis ---------- */
 .ua-icons-legend {
   margin-top: 26px;
   padding: 22px 20px 18px;
@@ -487,7 +532,9 @@
   color: rgba(10,35,64,0.8);
 }
 
-/* ---------- Acordeón clásico ---------- */
+/* ============================================================
+   ACORDEÓN — COMPATIBLE CON p6.js
+============================================================ */
 .ua-accordion {
   margin-top: 20px;
   border-radius: 18px;
@@ -520,19 +567,19 @@
   background: rgba(233,239,248,1);
 }
 
-.ua-acc-icon {
+.ua-acc-header .ua-acc-icon {
   font-size: 18px;
   transform: rotate(0deg);
   transition: transform 0.22s ease;
 }
 
-.ua-acc-header.ua-acc-open {
+.ua-acc-header.active {
   background: #ffffff;
   color: var(--ua-azul-2);
   border-bottom: 1px solid rgba(10,42,92,0.08);
 }
 
-.ua-acc-header.ua-acc-open .ua-acc-icon {
+.ua-acc-header.active .ua-acc-icon {
   transform: rotate(90deg);
 }
 
@@ -541,7 +588,7 @@
   overflow: hidden;
   padding: 0 18px;
   background: #ffffff;
-  transition: max-height 0.28s ease;
+  transition: max-height 0.32s ease;
 }
 
 .ua-acc-panel > *:first-child {
@@ -552,7 +599,9 @@
   margin-bottom: 18px;
 }
 
-/* ---------- Zoom (por si lo usas luego) ---------- */
+/* ============================================================
+   ZOOM (opcional)
+============================================================ */
 .ua-zoom-box {
   position: relative;
   margin-top: 20px;
@@ -583,7 +632,9 @@
   border-radius: 12px;
 }
 
-/* ---------- Drag & Drop (genérico) ---------- */
+/* ============================================================
+   DRAG & DROP GENÉRICO
+============================================================ */
 .ua-drag-grid {
   display: flex;
   gap: 12px;
@@ -646,7 +697,7 @@
   border-color: rgba(253,191,18,0.8);
 }
 
-/* Drag & Drop en columnas (actividad mentalista) */
+/* Drag & Drop en columnas */
 .ua-drag-grid-columns {
   display: grid;
   grid-template-columns: minmax(240px, 1.1fr) repeat(2, minmax(220px, 1fr));
@@ -659,7 +710,9 @@
   color: var(--ua-azul-2);
 }
 
-/* ---------- Contextos ---------- */
+/* ============================================================
+   CONTEXTOS / CAJAS AUXILIARES
+============================================================ */
 .ua-context-buttons {
   display: flex;
   gap: 10px;
@@ -692,12 +745,14 @@
   box-shadow: 0 10px 22px rgba(0,0,0,0.06);
 }
 
-/* ---------- Info boxes ---------- */
+/* Info box genérico */
 .ua-info-box {
   margin-top: 10px;
 }
 
-/* ---------- Etiquetas (desarmar etiqueta) ---------- */
+/* ============================================================
+   ETIQUETAS / TAGS (P6)
+============================================================ */
 .ua-tag-buttons {
   display: flex;
   gap: 10px;
@@ -734,7 +789,74 @@
   color: var(--ua-azul-1);
 }
 
-/* ---------- Ejemplo central ---------- */
+/* Tarjetas de caso */
+.ua-tag {
+  padding: 10px 14px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(10,42,92,0.18);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.5;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+
+.ua-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+  border-color: rgba(253,191,18,0.7);
+}
+
+.ua-tag.active {
+  border-color: var(--ua-dorado);
+  background: #fffdf5;
+  box-shadow: 0 10px 22px rgba(253,191,18,0.25);
+}
+
+.ua-tag-placed {
+  opacity: 0.7;
+}
+
+/* Panel de tags del caso */
+.ua-tag-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+
+/* Contenedores ABC (P6) */
+.ua-containers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.ua-container-box {
+  background: rgba(244,247,252,0.98);
+  border-radius: 16px;
+  padding: 10px 12px 12px;
+  border: 1px solid rgba(10,42,92,0.14);
+}
+
+.ua-container-box h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--ua-azul-2);
+}
+
+.ua-box-body {
+  min-height: 70px;
+  background: rgba(255,255,255,0.98);
+  border-radius: 12px;
+  padding: 8px;
+  border: 1px dashed rgba(10,42,92,0.22);
+}
+
+/* ============================================================
+   EJEMPLOS / BLOQUES
+============================================================ */
 .ua-example-steps {
   margin-top: 10px;
   display: grid;
@@ -762,14 +884,34 @@
   box-shadow: 0 16px 34px rgba(0,0,0,0.08);
 }
 
-/* ---------- Hints / textos auxiliares ---------- */
+/* ============================================================
+   HINTS / TEXTOS AUXILIARES
+============================================================ */
 .ua-hint {
   font-size: 14px;
   color: rgba(10,35,64,0.7);
   margin-top: 8px;
 }
 
-/* ---------- Mini práctica: unidad de análisis ---------- */
+.ua-hint-center {
+  text-align: center;
+  font-size: 15px;
+  color: rgba(10,35,64,0.65);
+  margin: 12px 0 22px;
+  font-style: italic;
+}
+
+.ua-mini-ok {
+  color: #0a7a3b;
+}
+
+.ua-mini-error {
+  color: #b02a2a;
+}
+
+/* ============================================================
+   MINI PRÁCTICA / LISTAS
+============================================================ */
 .ua-mini-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -789,7 +931,7 @@
   margin-top: 8px;
 }
 
-.ua-btn-mini {
+.ua-btn-mini-inline {
   flex: 1;
   border-radius: 999px;
   border: 1px solid rgba(10,42,92,0.25);
@@ -800,7 +942,7 @@
   transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
-.ua-btn-mini:hover {
+.ua-btn-mini-inline:hover {
   background: #ffffff;
   border-color: rgba(10,42,92,0.5);
 }
@@ -817,99 +959,13 @@
   min-height: 16px;
 }
 
-.ua-mini-ok {
-  color: #1e8b4d;
-}
-
-.ua-mini-error {
-  color: #c0392b;
-}
-
-/* ---------- Utilidades ---------- */
-.ua-text em {
-  font-style: italic;
-}
-
 /* ============================================================
-   RESPONSIVE
+   P3 — ESTILOS PREMIUM PARA CLASES FUNCIONALES
 ============================================================ */
-@media (max-width: 900px) {
-  .ua-page {
-    padding: 30px 14px 60px;
-  }
-
-  .ua-main-card {
-    padding: 24px 20px;
-  }
-
-  .ua-title-main {
-    font-size: 32px;
-  }
-
-  .ua-title-main span {
-    font-size: 18px;
-  }
-
-  .ua-text {
-    font-size: 18px;
-  }
-
-  .ua-list {
-    font-size: 18px;
-  }
-
-  .ua-drag-grid-columns {
-    grid-template-columns: 1fr;
-  }
-
-  .ua-footer-nav {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 600px) {
-  .ua-hero {
-    padding: 50px 16px 30px;
-  }
-
-  .ua-main-card {
-    padding: 20px 16px;
-  }
-
-  .ua-icons-legend {
-    padding: 18px 14px;
-  }
-
-  .ua-legend-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .ua-mini-list {
-    grid-template-columns: 1fr;
-  }
-
-  .ua-btn-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .ua-btn-primary,
-  .ua-btn-ghost {
-    justify-content: center;
-    width: 100%;
-  }
-}
-/* ============================================================
-   P3 — ESTILOS PREMIUM PARA CLASES FUNCIONALES Y PATRONES
-   Interactividad nivel 3 (drag & drop profesional)
-============================================================ */
-
-/* Contenedor principal de la lección */
 .ua-p3-block {
   margin-bottom: 36px;
 }
 
-/* Títulos secundarios */
 .ua-subtitle {
   font-size: 22px;
   font-weight: 600;
@@ -917,7 +973,6 @@
   margin: 20px 0 10px;
 }
 
-/* Caja explicativa premium */
 .ua-info-card {
   background: rgba(255,255,255,0.92);
   border-radius: 22px;
@@ -927,7 +982,7 @@
   margin: 18px 0;
 }
 
-/* Drag & Drop sofisticado */
+/* Drag & drop sofisticado */
 .ua-drag-area {
   margin-top: 26px;
   display: flex;
@@ -978,7 +1033,6 @@
   box-shadow: inset 0 0 16px rgba(255,107,107,0.25);
 }
 
-/* Mini-señalizador */
 .ua-mini-signal {
   background: rgba(255,255,255,0.92);
   padding: 18px;
@@ -987,7 +1041,6 @@
   margin-top: 26px;
 }
 
-/* Tarjetas micro/macro */
 .ua-micro-macro-box {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
@@ -1009,148 +1062,10 @@
   color: var(--ua-azul-1);
   margin-bottom: 10px;
 }
+
 /* ============================================================
-   RESPONSIVE · OPTIMIZACIÓN PARA CELULAR
-   (Pantallas menores a 768px)
-============================================================ */
-@media (max-width: 768px) {
-
-  /* ---------- Layout general ---------- */
-  .ua-page {
-    padding: 20px 14px 50px;
-  }
-
-  .ua-inner {
-    max-width: 100%;
-  }
-
-  body.ua-body {
-    font-size: 18px;
-  }
-
-  /* ---------- Hero ---------- */
-  .ua-hero {
-    padding: 40px 10px 20px;
-    text-align: left;
-  }
-
-  .ua-title-main {
-    font-size: 30px;
-  }
-
-  .ua-title-main span {
-    font-size: 16px;
-  }
-
-  .ua-subtitle-main {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  /* ---------- Icon legend ---------- */
-  .ua-icons-legend {
-    padding: 16px;
-  }
-
-  .ua-legend-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .ua-icon-label {
-    font-size: 13px;
-  }
-
-  /* ---------- Acordeones ---------- */
-  .ua-acc-header {
-    padding: 14px 16px;
-    font-size: 16px;
-  }
-
-  .ua-acc-icon {
-    font-size: 18px;
-  }
-
-  .ua-acc-panel {
-    padding: 14px 10px;
-  }
-
-  /* ---------- Textos ---------- */
-  .ua-text {
-    font-size: 18px;
-    line-height: 1.6;
-  }
-
-  .ua-text-small {
-    font-size: 14px;
-  }
-
-  .ua-list {
-    font-size: 18px;
-  }
-
-  /* ---------- Grids y tarjetas ---------- */
-  .ua-mod-grid,
-  .ua-legend-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ua-drag-grid {
-    flex-direction: column;
-  }
-
-  .ua-drag-grid-columns {
-    flex-direction: column;
-  }
-
-  .ua-drag-column h4 {
-    font-size: 16px;
-  }
-
-  .ua-drop-zone {
-    min-height: 80px;
-  }
-
-  /* ---------- Botones ---------- */
-  .ua-btn-primary,
-  .ua-btn-ghost {
-    width: 100%;
-    justify-content: center;
-    padding: 14px;
-    font-size: 14px;
-  }
-
-  .ua-context-buttons {
-    flex-direction: column;
-  }
-
-  .ua-context-btn {
-    width: 100%;
-  }
-
-  /* ---------- Ejemplos ---------- */
-  .ua-example-block {
-    padding: 14px;
-  }
-
-  .ua-example-label {
-    font-size: 16px;
-  }
-
-  /* ---------- Mini práctica ---------- */
-  .ua-mini-item {
-    padding: 12px;
-  }
-
-  .ua-btn-mini {
-    width: 48%;
-  }
-}
-/* ================================
    P3 — TIMELINE ABC Y ACTIVIDADES
-================================ */
-
-/* Timeline horizontal ABC */
+============================================================ */
 .ua-abc-timeline {
   margin: 24px 0 18px;
   padding: 12px 16px;
@@ -1217,7 +1132,6 @@
   color: var(--ua-azul-2);
 }
 
-/* Opciones del mini experimento */
 .ua-func-options {
   display: flex;
   flex-direction: column;
@@ -1230,12 +1144,10 @@
   box-shadow: 0 8px 18px rgba(253,191,18,0.26);
 }
 
-/* Patrón funcional */
 .ua-pattern-box {
   margin-top: 14px;
 }
 
-/* Builder ABC */
 .ua-abc-builder {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1263,65 +1175,13 @@
   box-shadow: 0 8px 18px rgba(253,191,18,0.22);
 }
 
-/* Caja de reflexión final */
 .ua-reflection-box {
   margin: 18px 0 22px;
 }
 
-/* Por si no estaba definida aún */
-.ua-hint {
-  font-size: 14px;
-  color: rgba(10,35,64,0.7);
-}
-
-/* Feedback OK / Error (reutilizado de P2 si ya está) */
-.ua-mini-ok {
-  color: #0a7a3b;
-}
-
-.ua-mini-error {
-  color: #b02a2a;
-}
-.ua-hint-center {
-  text-align: center;
-  font-size: 15px;
-  color: rgba(10,35,64,0.65);
-  margin: 12px 0 22px;
-  font-style: italic;
-}
-/* ================================
+/* ============================================================
    P5 — ESTILOS ESPECÍFICOS
-================================ */
-
-/* Bloques de ejemplo (si no existen ya en tu CSS) */
-.ua-example-block {
-  background: rgba(255,255,255,0.96);
-  border-radius: 18px;
-  border: 1px solid rgba(10,42,92,0.10);
-  padding: 18px 20px;
-  margin: 18px 0;
-}
-
-.ua-example-label {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(10,42,92,0.7);
-  margin-bottom: 8px;
-}
-
-/* Lista más compacta para ejemplos */
-.ua-list-small {
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-/* Hint centrado (ya lo usas, por si falta) */
-.ua-hint-center {
-  text-align: center;
-}
-
-/* Estímulos (perro, palabra, icono, noticia) */
+============================================================ */
 .ua-stimulus-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1361,7 +1221,6 @@
   color: rgba(10,35,64,0.7);
 }
 
-/* Caja de relaciones verbales */
 .ua-relations-box {
   margin-top: 14px;
   padding: 14px 16px;
@@ -1377,7 +1236,6 @@
   margin: 0 0 6px;
 }
 
-/* Bloques de pregunta del mini-experimento */
 .ua-question {
   margin: 18px 0;
   padding: 16px 18px;
@@ -1421,30 +1279,9 @@
   color: rgba(10,35,64,0.78);
 }
 
-/* Responsive suave para móviles */
-@media (max-width: 768px) {
-  .ua-example-block {
-    padding: 14px 14px;
-  }
-
-  .ua-stimulus-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ua-question-buttons {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .ua-answer-btn {
-    width: 100%;
-    text-align: left;
-  }
-}
-/* ===============================
-   QUIZ FINAL — ESTILO PREMIUM
-================================= */
-
+/* ============================================================
+   QUIZ FINAL (P8)
+============================================================ */
 .ua-quiz-card {
   margin-top: 40px;
 }
@@ -1467,6 +1304,7 @@
   cursor: pointer;
   transition: 0.25s ease;
   font-size: 0.95rem;
+  text-align: left;
 }
 
 .ua-quiz-btn:hover {
@@ -1483,7 +1321,6 @@
   border-color: #ff6b6b !important;
 }
 
-/* Resultados */
 .ua-quiz-result {
   margin-top: 18px;
   font-size: 1.1rem;
@@ -1500,8 +1337,209 @@
   color: #b22222;
 }
 
-/* Botón reinicio */
 .ua-quiz-reset {
   display: block;
   margin: 20px auto 0;
+}
+
+/* ============================================================
+   UTILIDADES
+============================================================ */
+.ua-text em {
+  font-style: italic;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+  .ua-page {
+    padding: 30px 14px 60px;
+  }
+
+  .ua-main-card {
+    padding: 24px 20px;
+  }
+
+  .ua-title-main {
+    font-size: 32px;
+  }
+
+  .ua-title-main span {
+    font-size: 18px;
+  }
+
+  .ua-text {
+    font-size: 18px;
+  }
+
+  .ua-list {
+    font-size: 18px;
+  }
+
+  .ua-drag-grid-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-footer-nav {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .ua-page {
+    padding: 20px 14px 50px;
+  }
+
+  .ua-inner {
+    max-width: 100%;
+  }
+
+  body.ua-body {
+    font-size: 18px;
+  }
+
+  .ua-hero {
+    padding: 40px 10px 20px;
+    text-align: left;
+  }
+
+  .ua-title-main {
+    font-size: 30px;
+  }
+
+  .ua-title-main span {
+    font-size: 16px;
+  }
+
+  .ua-subtitle-main {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .ua-icons-legend {
+    padding: 16px;
+  }
+
+  .ua-legend-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .ua-icon-label {
+    font-size: 13px;
+  }
+
+  .ua-acc-header {
+    padding: 14px 16px;
+  }
+
+  .ua-acc-panel {
+    padding: 0 14px;
+  }
+
+  .ua-text {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .ua-text-small {
+    font-size: 14px;
+  }
+
+  .ua-list {
+    font-size: 18px;
+  }
+
+  .ua-mod-grid,
+  .ua-legend-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-drag-grid {
+    flex-direction: column;
+  }
+
+  .ua-drag-grid-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-drop-zone {
+    min-height: 80px;
+  }
+
+  .ua-btn-primary,
+  .ua-btn-ghost {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  .ua-context-buttons {
+    flex-direction: column;
+  }
+
+  .ua-context-btn {
+    width: 100%;
+  }
+
+  .ua-example-block {
+    padding: 14px;
+  }
+
+  .ua-mini-item {
+    padding: 12px;
+  }
+
+  .ua-btn-mini-inline {
+    width: 48%;
+  }
+
+  .ua-stimulus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-question-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ua-answer-btn {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .ua-hero {
+    padding: 50px 16px 30px;
+  }
+
+  .ua-main-card {
+    padding: 20px 16px;
+  }
+
+  .ua-icons-legend {
+    padding: 18px 14px;
+  }
+
+  .ua-legend-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ua-mini-list {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ua-btn-primary,
+  .ua-btn-ghost {
+    justify-content: center;
+    width: 100%;
+  }
 }
