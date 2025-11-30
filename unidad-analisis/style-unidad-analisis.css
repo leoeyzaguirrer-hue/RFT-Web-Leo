@@ -1282,3 +1282,10 @@
 .ua-mini-error {
   color: #b02a2a;
 }
+.ua-hint-center {
+  text-align: center;
+  font-size: 15px;
+  color: rgba(10,35,64,0.65);
+  margin: 12px 0 22px;
+  font-style: italic;
+}
