@@ -16,7 +16,7 @@
 
 <body class="ua-body">
 
-    <!-- CAPA DECORATIVA (NODOS + LÍNEAS + BRILLOS) -->
+    <!-- CAPA DECORATIVA (NODOS + LÍNEAS) -->
     <div class="ua-bg-layer">
         <span class="ua-bg-node n1"></span>
         <span class="ua-bg-node n2"></span>
@@ -85,68 +85,73 @@
     </section>
 
     <!-- ===============================
-         TARJETAS DEL MÓDULO
+         CANVAS BLANCO (todo el contenido del módulo)
     =============================== -->
     <main class="ua-page ua-fade-in">
 
-        <div class="ua-inner">
+        <div class="ua-content-wrapper">
 
-            <section class="ua-main-card">
+            <div class="ua-inner">
 
-                <div class="ua-section-label">Contenido del módulo</div>
-                <div class="ua-section-title">Mapa general</div>
+                <section class="ua-main-card">
 
-                <p class="ua-text">
-                    Este módulo responde la pregunta central del análisis funcional contextual:
-                    <strong>¿qué exactamente analizamos cuando hacemos ciencia conductual contextual?</strong>
-                    La unidad de análisis no es un pensamiento aislado ni una etiqueta diagnóstica,
-                    sino un episodio funcional compuesto por antecedentes, acciones y consecuencias.
-                </p>
+                    <div class="ua-section-label">Contenido del módulo</div>
+                    <div class="ua-section-title">Mapa general</div>
 
-                <div class="ua-mod-grid">
+                    <p class="ua-text">
+                        Este módulo responde la pregunta central del análisis funcional contextual:
+                        <strong>¿qué exactamente analizamos cuando hacemos ciencia conductual contextual?</strong>
+                        La unidad de análisis no es un pensamiento aislado ni una etiqueta diagnóstica,
+                        sino un episodio funcional compuesto por antecedentes, acciones y consecuencias.
+                    </p>
 
-                    <div class="ua-mod-card" onclick="location.href='p2.html'">
-                        <div class="ua-mod-icon">◎</div>
-                        <h3>Lección 1 <span>¿Qué analizamos?</span></h3>
-                        <p>El concepto de conducta-en-contexto como recorte técnico y útil.</p>
+                    <div class="ua-mod-grid">
+
+                        <div class="ua-mod-card" onclick="location.href='p2.html'">
+                            <div class="ua-mod-icon">◎</div>
+                            <h3>Lección 1 <span>¿Qué analizamos?</span></h3>
+                            <p>El concepto de conducta-en-contexto como recorte técnico y útil.</p>
+                        </div>
+
+                        <div class="ua-mod-card">
+                            <div class="ua-mod-icon">△</div>
+                            <h3>Lección 2 <span>El Modelo ABC</span></h3>
+                            <p>Más que una fórmula: la unidad mínima para intervención precisa.</p>
+                        </div>
+
+                        <div class="ua-mod-card">
+                            <div class="ua-mod-icon">◇</div>
+                            <h3>Lección 3 <span>Clases funcionales</span></h3>
+                            <p>Cómo patrones distintos cumplen funciones equivalentes.</p>
+                        </div>
+
+                        <div class="ua-mod-card">
+                            <div class="ua-mod-icon">⬡</div>
+                            <h3>Lección 4 <span>Lenguaje y ABC</span></h3>
+                            <p>Cómo el lenguaje reorganiza las funciones del episodio conductual.</p>
+                        </div>
+
                     </div>
 
-                    <div class="ua-mod-card">
-                        <div class="ua-mod-icon">△</div>
-                        <h3>Lección 2 <span>El Modelo ABC</span></h3>
-                        <p>Más que una fórmula: la unidad mínima para intervención precisa.</p>
+                    <div class="ua-btn-row">
+                        <a href="p2.html" class="ua-btn-primary">Comenzar lección 1</a>
+                        <a href="../contextualismo/index.html" class="ua-btn-ghost">Volver a contextualismo</a>
                     </div>
 
-                    <div class="ua-mod-card">
-                        <div class="ua-mod-icon">◇</div>
-                        <h3>Lección 3 <span>Clases funcionales</span></h3>
-                        <p>Cómo patrones distintos cumplen funciones equivalentes.</p>
-                    </div>
+                </section>
 
-                    <div class="ua-mod-card">
-                        <div class="ua-mod-icon">⬡</div>
-                        <h3>Lección 4 <span>Lenguaje y ABC</span></h3>
-                        <p>Cómo el lenguaje reorganiza las funciones del episodio conductual.</p>
-                    </div>
-
+                <div class="ua-footer-nav">
+                    <span></span>
+                    <a href="p2.html" class="ua-btn-primary">Siguiente →</a>
                 </div>
 
-                <div class="ua-btn-row">
-                    <a href="p2.html" class="ua-btn-primary">Comenzar lección 1</a>
-                    <a href="../contextualismo/index.html" class="ua-btn-ghost">Volver a contextualismo</a>
-                </div>
-
-            </section>
-
-            <div class="ua-footer-nav">
-                <span></span>
-                <a href="p2.html" class="ua-btn-primary">Siguiente →</a>
             </div>
 
         </div>
 
     </main>
 
+    <!-- ANIMACIÓN DE ENTRADA -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
