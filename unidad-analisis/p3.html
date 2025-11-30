@@ -4,184 +4,412 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lección 3 · Clases Funcionales y Patrones</title>
+  <title>Lección 2 · Modelo ABC · Unidad de Análisis · RFT · ACT</title>
 
-  <!-- STYLE GENERAL DEL MÓDULO -->
+  <!-- SOLO EL STYLE DEL MÓDULO -->
   <link rel="stylesheet" href="style-unidad-analisis.css" />
 
-  <!-- JS DE ESTA PANTALLA -->
+  <!-- JS ESPECÍFICO DE ESTA PANTALLA -->
   <script defer src="p3.js"></script>
 </head>
 
 <body class="ua-body">
 
-  <!-- CAPA DE NODOS -->
+  <!-- CAPA DE NODOS / LÍNEAS / ENFOQUE (MISMA QUE EN index.html) -->
   <div class="ua-bg-layer">
     <div class="ua-focus-circle"></div>
+
     <span class="ua-bg-node n1"></span>
     <span class="ua-bg-node n2"></span>
     <span class="ua-bg-node n3"></span>
     <span class="ua-bg-node n4"></span>
+
     <span class="ua-bg-line l1"></span>
     <span class="ua-bg-line l2"></span>
     <span class="ua-bg-line l3"></span>
   </div>
 
-  <!-- HERO -->
+  <!-- ===========================
+       HERO LECCIÓN 2
+  ============================ -->
   <header class="ua-hero ua-fade-in">
     <div class="ua-hero-text">
+
       <div class="ua-breadcrumb">
         <span class="ua-breadcrumb-dot"></span>
-        LECCIÓN 3 · CLASES FUNCIONALES Y PATRONES
+        LECCIÓN 2 · EL MODELO ABC
       </div>
 
       <h1 class="ua-title-main">
-        De un ABC a un patrón
-        <span>Cómo diferentes formas sirven para la misma función</span>
+        El ABC como cámara lenta
+        <span>Ver la mecánica de lo que mantiene la conducta</span>
       </h1>
 
       <p class="ua-subtitle-main">
-        Esta lección te muestra cómo varios episodios (ABC) pueden unirse
-        en <strong>clases funcionales</strong>, y cómo esas clases forman
-        <strong>patrones conductuales</strong>.
+        El Modelo ABC no es solo una fórmula. Es un <strong>lente de cámara lenta</strong>:
+        te permite ver cómo un episodio se organiza en una secuencia de
+        <strong>antecedentes, acciones y consecuencias</strong>. Cuando entiendes esa
+        mecánica, dejas de pelear con rasgos y empiezas a intervenir sobre la función.
       </p>
+
+      <div class="ua-continuidad">
+        <strong>Escena clínica:</strong> Mariana, 41 años, profesional independiente,
+        quiere presentar con seguridad sus ideas frente a clientes. Sin embargo,
+        <em>“cada vez que llega el momento, hablo lo mínimo y salgo rápido del tema”</em>.
+        <br />
+        En esta lección bajarás ese episodio a cámara lenta con el ABC para ver
+        <span class="ua-continuidad-pregunta">
+          qué lo mantiene vivo, incluso cuando ella dice que quiere cambiar.
+        </span>
+      </div>
+
     </div>
   </header>
 
-  <!-- MAIN -->
+  <!-- ===========================
+       MAIN · ACORDEÓN
+  ============================ -->
   <main class="ua-page ua-fade-in">
     <div class="ua-inner">
+
       <section class="ua-main-card">
 
-        <div class="ua-section-label">Lección 3</div>
-        <div class="ua-section-title">Clases funcionales y patrones</div>
+        <div class="ua-section-label">Lección 2</div>
+        <div class="ua-section-title">El Modelo ABC como lente funcional</div>
 
         <p class="ua-text">
-          Un ABC aislado nos da una unidad puntual. Pero cuando varias unidades
-          comparten <strong>la misma función</strong>, forman una clase funcional.
-          Y cuando esas clases se repiten a lo largo del tiempo, obtenemos un
-          <strong>patrón conductual</strong>.
+          En esta pantalla usarás el Modelo ABC para describir con precisión lo que ocurre
+          en un episodio de conducta. El foco no estará en “qué tiene” Mariana, sino en
+          <strong>qué hace, en qué situación y con qué consecuencias</strong>. Iremos sección
+          por sección usando un acordeón.
         </p>
 
-        <!-- ===============================
-             BLOQUE A: DE ABC A CLASE
-        ================================ -->
-        <div class="ua-p3-block">
+        <p class="ua-hint ua-hint-center">
+          Esta lección está organizada en secciones desplegables.
+          Haz clic en cada título para abrir el contenido.
+        </p>
 
-          <h3 class="ua-subtitle">1 · De un ABC a una clase funcional</h3>
-
-          <div class="ua-info-card">
-            <p class="ua-text-small">
-              Según Törneke, una clase funcional une conductas diferentes
-              que logran la misma consecuencia. La forma cambia, la función se mantiene.
+        <!-- ======================
+             1. CÁMARA LENTA DEL ABC
+        ======================= -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="abc-intro">
+            <span>1 · El ABC como cámara lenta de la conducta</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Cuando miras un episodio de conducta a velocidad normal, suele parecer
+              inevitable: “soy así”, “me bloqueo”, “no puedo evitarlo”. El Modelo ABC
+              funciona como una <strong>cámara lenta funcional</strong>: divide el episodio
+              en tres piezas que se encadenan en el tiempo y en la función.
             </p>
-          </div>
 
-          <p class="ua-text">Ejemplo de clase funcional: <strong>evitación social</strong></p>
+            <p class="ua-text">
+              El ABC no busca etiquetar a la persona, sino describir <strong>la relación
+              entre lo que ocurre antes (A), lo que hace (B) y lo que obtiene o evita (C)</strong>.
+              Así deja de ser un misterio y se convierte en algo que podemos influir.
+            </p>
 
-          <ul class="ua-list">
-            <li>📩 Dar una excusa para no ir.</li>
-            <li>📱 Mirar el celular compulsivamente.</li>
-            <li>🚶‍♂️ Llegar tarde para no saludar.</li>
-            <li>🚪 Salir al baño cuando toca hablar.</li>
-          </ul>
+            <p class="ua-text">
+              Con Mariana, no diremos “tiene miedo a equivocarse” como explicación final.
+              En cambio, miraremos <strong>qué pasa justo antes, qué hace y qué efecto
+              inmediato tiene esa acción</strong> cuando está frente a un cliente.
+            </p>
 
-          <p class="ua-text">
-            Todas estas conductas, aunque diferentes en forma, comparten:
-            <strong>reducir contacto social inmediato → alivio 😮‍💨</strong>.
-          </p>
-
-          <!-- ACTIVIDAD PREMIUM (arrastrar-conceptual) -->
-          <div class="ua-subtitle">Actividad: ¿qué conductas pertenecen a la misma clase?</div>
-
-          <p class="ua-text-small">
-            Arrastra las conductas a la zona si crees que pertenecen
-            a la clase “evitación social”.
-          </p>
-
-          <div class="ua-drag-area">
-            <div class="ua-drag-token" draggable="true" data-class="evitar">
-              📩 Poner una excusa para no ir
+            <!-- TIMELINE CINEMATOGRÁFICA ABC -->
+            <div class="ua-abc-timeline">
+              <button class="ua-abc-step ua-abc-step-active" data-abc="A">
+                <span class="ua-abc-step-label">🅰️ Antecedente</span>
+                <span class="ua-abc-step-caption">Lo que abre la escena</span>
+              </button>
+              <div class="ua-abc-arrow">➔</div>
+              <button class="ua-abc-step" data-abc="B">
+                <span class="ua-abc-step-label">🔵 Conducta (B)</span>
+                <span class="ua-abc-step-caption">Lo que hace Mariana</span>
+              </button>
+              <div class="ua-abc-arrow">➔</div>
+              <button class="ua-abc-step" data-abc="C">
+                <span class="ua-abc-step-label">🟡 Consecuencia</span>
+                <span class="ua-abc-step-caption">Lo que obtiene o evita</span>
+              </button>
             </div>
 
-            <div class="ua-drag-token" draggable="true" data-class="evitar">
-              🚪 Salir al baño cuando toca hablar
-            </div>
-
-            <div class="ua-drag-token" draggable="true" data-class="neutro">
-              📚 Estudiar en la biblioteca
-            </div>
-
-            <div class="ua-drag-token" draggable="true" data-class="evitar">
-              📱 Mirar el celular para evitar saludar
-            </div>
-
-            <div class="ua-drag-token" draggable="true" data-class="neutro">
-              🍎 Pedir un snack
-            </div>
-          </div>
-
-          <div id="drop-evitacion" class="ua-drop-premium">
-            <strong>Zona: Clase funcional “evitación social”</strong>
-            <p class="ua-text-small">Suelta aquí solo las que cumplen la misma función.</p>
-          </div>
-
-        </div>
-
-        <!-- ===============================
-             BLOQUE B: MICRO Y MACRO
-        =============================== -->
-        <div class="ua-p3-block">
-
-          <h3 class="ua-subtitle">2 · Micro-unidades y macro-patrones</h3>
-
-          <p class="ua-text">
-            El tamaño de la unidad es pragmático: depende de lo que necesitamos
-            para predecir e influir en la conducta.
-          </p>
-
-          <div class="ua-micro-macro-box">
-
-            <div class="ua-micro-macro-card">
-              <div class="ua-micro-title">⏱️ Micro-episodio</div>
+            <!-- DETALLES ABC -->
+            <div id="abc-A" class="ua-context-box ua-abc-detail">
+              <h4 class="ua-abc-title">🅰️ Antecedente · Situación concreta</h4>
               <p class="ua-text-small">
-                “Ante una invitación, dice ‘mejor no’ y siente alivio.”
+                Es todo lo que hace probable que la conducta ocurra: lugar, personas,
+                demandas, señales verbales. En nuestro caso:
               </p>
-              <p class="ua-text-small">Útil para detectar ABC y función inmediata.</p>
+              <p class="ua-text-small ua-hint">
+                “Un cliente le pide a Mariana que explique los detalles técnicos de su propuesta,
+                frente a varias personas en una sala de reuniones.”
+              </p>
             </div>
 
-            <div class="ua-micro-macro-card">
-              <div class="ua-macro-title">🗺️ Macro-patrón</div>
+            <div id="abc-B" class="ua-context-box ua-abc-detail ua-abc-hidden">
+              <h4 class="ua-abc-title">🔵 Conducta (B) · Acción observable</h4>
               <p class="ua-text-small">
-                “En 5 años ha evitado amistades, trabajos y oportunidades.”
+                Es lo que la persona hace, incluyendo acción verbal. No es “tiene miedo”, sino
+                cómo actúa ante esa situación:
               </p>
+              <p class="ua-text-small ua-hint">
+                “Mariana baja la mirada, responde con frases muy breves, evita dar detalles y
+                cambia de tema tan pronto como puede.”
+              </p>
+            </div>
+
+            <div id="abc-C" class="ua-context-box ua-abc-detail ua-abc-hidden">
+              <h4 class="ua-abc-title">🟡 Consecuencia · Lo que mantiene el patrón</h4>
               <p class="ua-text-small">
-                Útil para ver repercusiones amplias y continuidad funcional.
+                Es el efecto inmediato que hace más probable que la conducta se repita.
+                Puede ser algo que se obtiene o algo que se evita.
+              </p>
+              <p class="ua-text-small ua-hint">
+                “Siente alivio momentáneo al salir del foco del cliente y evita la
+                posibilidad de equivocarse en público, aunque a largo plazo se queda con
+                la sensación de no haber mostrado su verdadero trabajo.”
               </p>
             </div>
 
           </div>
+        </section>
 
-        </div>
+        <!-- ======================
+             2. FUNCIÓN, NO FORMA
+        ======================= -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="funcion">
+            <span>2 · Función, no forma: lo que realmente organiza la conducta</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Dos conductas que se ven diferentes pueden cumplir exactamente la misma
+              función. Como plantea Törneke, <strong>“la conducta se organiza por su
+              función, no por su forma”</strong>. Lo relevante no es si alguien mira al
+              suelo o al techo, sino qué efecto tiene eso en el contexto.
+            </p>
 
-        <!-- ===============================
-             CIERRE
-        =============================== -->
-        <h3 class="ua-subtitle">Cierre de la lección</h3>
+            <p class="ua-text">
+              Desde ACT, intervenir sobre la función permite dejar de luchar con el
+              contenido verbal (“me voy a equivocar”, “no soy suficiente”) y centrarse
+              en lo que la persona hace cuando esos contenidos aparecen. Villatte
+              subraya que esto vuelve la intervención <strong>operativa y contextual</strong>,
+              no mentalista.
+            </p>
 
-        <p class="ua-text">
-          • Un ABC es una unidad puntual.<br>
-          • Varios ABC con la misma función → clase funcional.<br>
-          • Muchas clases repetidas en el tiempo → patrón.<br><br>
-          El análisis contextual trabaja donde sea más útil: segundos, días o años.
-        </p>
+            <p class="ua-text">
+              Veamos un mini experimento con Mariana:
+            </p>
 
-        <div class="ua-btn-row">
-          <a href="p4.html" class="ua-btn-primary">Continuar a Lección 4 →</a>
-          <a href="index.html" class="ua-btn-ghost">Volver al mapa del módulo</a>
-        </div>
+            <div class="ua-example-block">
+              <div class="ua-example-label">Mini experimento · Misma función, distinta forma</div>
+              <p class="ua-text-small">
+                Imagina que Mariana está con un cliente importante. Cuando siente que puede
+                equivocarse, podría hacer varias cosas. ¿Cuál de estas opciones crees que
+                cumple <strong>la misma función de evitar el posible error en público</strong>?
+              </p>
+
+              <div class="ua-func-options">
+                <button class="ua-btn-ghost ua-func-option" data-correct="yes">
+                  “Le pasa rápidamente la palabra a otra persona del equipo.”
+                </button>
+                <button class="ua-btn-ghost ua-func-option" data-correct="no">
+                  “Pide un momento para revisar y luego explica con calma los detalles.”
+                </button>
+                <button class="ua-btn-ghost ua-func-option" data-correct="no">
+                  “Reconoce en voz alta que está nerviosa y continúa explicando.”
+                </button>
+              </div>
+
+              <p id="ua-func-feedback" class="ua-text-small ua-hint">
+                Haz clic en una opción para ver el análisis funcional.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ======================
+             3. DE EPISODIOS A PATRÓN
+        ======================= -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="patron">
+            <span>3 · De un ABC a un patrón: Mariana en el tiempo</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Un solo ABC describe un episodio. Pero en clínica rara vez trabajamos con
+              un episodio aislado. Lo que encontramos son <strong>patrones</strong>:
+              múltiples ABC que, en contextos diferentes, comparten consecuencias
+              similares (escapar, aliviar, buscar aprobación, acercarse a algo valioso).
+            </p>
+
+            <p class="ua-text">
+              Con Mariana, podríamos encontrar varios momentos en los que aparece la
+              misma lógica funcional de evitar equivocarse frente a otros. Observa estas
+              escenas y, por ahora, solo nota las similitudes:
+            </p>
+
+            <ul class="ua-list ua-list-tight">
+              <li>
+                En una reunión interna, evita proponer una idea por miedo a “decir una tontería”.
+              </li>
+              <li>
+                En un correo importante, escribe una respuesta muy breve para no “meter la pata”.
+              </li>
+              <li>
+                En una presentación virtual, apaga la cámara cuando sospecha que puede equivocarse.
+              </li>
+            </ul>
+
+            <p class="ua-text-small">
+              A simple vista parecen tres situaciones distintas. Funcionalmente, podrían
+              estar organizadas por el mismo tipo de consecuencia.
+            </p>
+
+            <button id="ua-pattern-reveal" class="ua-btn-ghost">
+              Ver el patrón funcional de Mariana
+            </button>
+
+            <div id="ua-pattern-box" class="ua-context-box ua-pattern-box">
+              <p class="ua-text-small">
+                Haz clic en el botón para revelar el patrón que organiza estos episodios.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ======================
+             4. ACTIVIDAD INTEGRADORA ABC
+        ======================= -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="actividad-abc">
+            <span>4 · Actividad integradora: construye un ABC funcional</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Vamos a practicar con una versión condensada del caso de Mariana. Lee la
+              descripción y elige un <strong>Antecedente (🅰️)</strong>, una
+              <strong>Conducta (🔵)</strong> y una <strong>Consecuencia (🟡)</strong> que
+              formen un ABC funcional coherente.
+            </p>
+
+            <p class="ua-text ua-hint">
+              “Mariana comenta: <em>‘Cuando tengo que explicar mi propuesta frente a un
+              cliente importante, siento que me voy a equivocar y termino diciendo lo mínimo.’</em>”
+            </p>
+
+            <div class="ua-abc-builder">
+
+              <div class="ua-abc-column">
+                <h4>🅰️ Antecedente · ¿Qué abre la escena?</h4>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="A" data-correct="yes">
+                  El cliente le pide que explique en detalle su propuesta frente a otras personas.
+                </button>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="A" data-correct="no">
+                  Está sola en casa planificando la semana siguiente.
+                </button>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="A" data-correct="no">
+                  Recibe un elogio general sobre su trabajo.
+                </button>
+              </div>
+
+              <div class="ua-abc-column">
+                <h4>🔵 Conducta (B) · ¿Qué hace?</h4>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="B" data-correct="yes">
+                  Responde con frases muy breves, evita dar ejemplos y cambia rápido de tema.
+                </button>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="B" data-correct="no">
+                  Pide unos segundos, organiza sus ideas y explica con claridad los pasos.
+                </button>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="B" data-correct="no">
+                  Expone con detalle, aunque nota que está nerviosa.
+                </button>
+              </div>
+
+              <div class="ua-abc-column">
+                <h4>🟡 Consecuencia · ¿Qué obtiene o evita?</h4>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="C" data-correct="yes">
+                  Siente alivio inmediato al salir del foco y evita la posibilidad de equivocarse en público.
+                </button>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="C" data-correct="no">
+                  Se siente orgullosa de haber defendido su propuesta, aunque estuvo nerviosa.
+                </button>
+                <button class="ua-btn-ghost ua-abc-choice" data-role="C" data-correct="no">
+                  El cliente le pide aún más detalles porque quiere entender mejor.
+                </button>
+              </div>
+
+            </div>
+
+            <button id="ua-abc-check" class="ua-btn-primary">
+              Comprobar mi ABC
+            </button>
+
+            <p id="ua-abc-feedback" class="ua-text-small ua-hint">
+              Elige una opción en cada columna y luego haz clic en “Comprobar mi ABC”.
+            </p>
+
+          </div>
+        </section>
+
+        <!-- ======================
+             5. CIERRE Y TRANSFERENCIA
+        ======================= -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="cierre">
+            <span>5 · Cierre de la lección y pregunta de transferencia</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              En esta lección has usado el Modelo ABC como una cámara lenta funcional:
+              <strong>antecedentes, conducta y consecuencias</strong> ya no son partes
+              sueltas, sino un mapa para entender qué mantiene vivo un patrón.
+            </p>
+
+            <p class="ua-text">
+              Al dejar de explicar a la persona con rasgos (“es insegura”) y empezar a
+              describir episodios, se vuelve posible intervenir en puntos concretos del
+              episodio: preparar nuevos antecedentes, flexibilizar conductas, promover
+              consecuencias distintas.
+            </p>
+
+            <div class="ua-context-box ua-reflection-box">
+              <h4 class="ua-reflection-title">Pregunta de transferencia</h4>
+              <p class="ua-text-small">
+                Piensa en un caso clínico real (o en tu propia experiencia) donde la
+                conducta parece repetirse una y otra vez. ¿Qué parte del ABC suele pasar
+                más desapercibida para ti: el antecedente, la conducta o la consecuencia?
+                ¿Qué cambiaría en tu análisis si la observaras con más detalle?
+              </p>
+            </div>
+
+            <div class="ua-btn-row">
+              <a href="p4.html" class="ua-btn-primary">
+                Continuar a Lección 3: Patrones y clases funcionales →
+              </a>
+              <a href="index.html" class="ua-btn-ghost">
+                Volver al mapa del módulo
+              </a>
+            </div>
+          </div>
+        </section>
 
       </section>
+
+      <!-- NAV INFERIOR -->
+      <div class="ua-footer-nav">
+        <a href="index.html" class="ua-btn-ghost">← Volver al inicio de la unidad</a>
+        <a href="p4.html" class="ua-btn-primary">Siguiente · Lección 3 →</a>
+      </div>
+
     </div>
   </main>
 
