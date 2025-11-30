@@ -1,104 +1,365 @@
-<!DOCTYPE html>
-<html lang="es">
+/* ============================================================
+   UNIDAD DE ANÁLISIS · ESTILO PREMIUM
+   Parte 1/5 — Variables, Reset, Fondo Cinematográfico
+============================================================ */
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unidad de Análisis · RFT · ACT</title>
+/* PALETA */
+:root {
+  --ua-azul-1: #0A2A5C;
+  --ua-azul-2: #132F66;
+  --ua-azul-soft: #E9EFF8;
+  --ua-azul-bg: #F4F7FC;
 
-    <!-- Estilos globales -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/animations.css">
+  --ua-blanco: #FFFFFF;
+  --ua-dorado: #FDBF12;
+  --ua-dorado-soft: #FFE39A;
 
-    <!-- Estilo exclusivo del módulo -->
-    <link rel="stylesheet" href="style-unidad-analisis.css">
-</head>
+  --ua-texto-main: #0A2340;
+  --ua-texto-soft: rgba(10, 35, 64, 0.78);
 
-<body class="ua-body">
+  --ua-shadow-soft: 0 8px 28px rgba(10, 35, 64, 0.08);
+  --ua-shadow-card: 0 12px 40px rgba(10, 35, 64, 0.12);
+}
 
-    <!-- CAPA DE NODOS Y LÍNEAS -->
-    <div class="ua-bg-layer">
-        <span class="ua-bg-node n1"></span>
-        <span class="ua-bg-node n2"></span>
-        <span class="ua-bg-node n3"></span>
-        <span class="ua-bg-node n4"></span>
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-        <span class="ua-bg-line l1"></span>
-        <span class="ua-bg-line l2"></span>
-        <span class="ua-bg-line l3"></span>
-    </div>
+body.ua-body {
+  font-family: "Noto Sans", sans-serif;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 50%, #ffffff 100%);
+  color: var(--ua-texto-main);
+  position: relative;
+  overflow-x: hidden;
+}
 
-    <!-- CONTENIDO CENTRAL -->
-    <main class="ua-page">
+/* ===========================================
+   CAPA DE FONDO — NODOS / LÍNEAS / GLOW
+=========================================== */
 
-        <div class="ua-inner ua-fade-in">
+.ua-bg-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background-image: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.8),
+      rgba(240, 243, 250, 0.5),
+      transparent 80%
+  );
+}
 
-            <!-- Breadcrumb -->
-            <div class="ua-breadcrumb">
-                <span class="ua-breadcrumb-dot"></span>
-                PANTALLA 1 · UNIDAD DE ANÁLISIS
-            </div>
+/* NODOS */
+.ua-bg-node {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ua-dorado);
+  box-shadow: 0 0 14px rgba(253, 191, 18, 0.55);
+  opacity: 0.8;
+}
 
-            <!-- Título principal -->
-            <h1 class="ua-title-main">Unidad de Análisis: conducta-en-contexto</h1>
+.ua-bg-node.n1 { top: 22%; left: 12%; }
+.ua-bg-node.n2 { top: 38%; right: 18%; }
+.ua-bg-node.n3 { bottom: 26%; left: 30%; }
+.ua-bg-node.n4 { bottom: 18%; right: 25%; }
 
-            <!-- Subtítulo -->
-            <p class="ua-subtitle-main">
-                El contextualismo funcional sostiene que lo que analizamos no son “síntomas” ni “rasgos internos”,
-                sino acciones situadas: lo que una persona hace en un contexto específico y las consecuencias
-                que mantienen ese patrón. Esta pantalla presenta el mapa general del módulo y sus cuatro lecciones.
-            </p>
+/* LÍNEAS */
+.ua-bg-line {
+  position: absolute;
+  width: 160px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ua-dorado-soft), transparent);
+  opacity: 0.6;
+}
 
-            <!-- SUPER-CARD PREMIUM -->
-            <section class="ua-main-card">
+.ua-bg-line.l1 { top: 30%; left: 45%; transform: rotate(12deg); }
+.ua-bg-line.l2 { top: 58%; left: 20%; transform: rotate(-14deg); }
+.ua-bg-line.l3 { top: 72%; right: 22%; transform: rotate(9deg); }
 
-                <div class="ua-section-label">Contenido del módulo</div>
-                <div class="ua-section-title">Mapa general</div>
+/* EFECTO DE ENTRADA SUAVE */
+.ua-fade-in {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: all 0.8s ease;
+}
 
-                <p class="ua-text">
-                    Este módulo responde una pregunta central: <strong>¿qué exactamente analizamos cuando
-                    hacemos ciencia conductual contextual?</strong> Verás que la unidad de análisis no es un
-                    pensamiento aislado ni una etiqueta diagnóstica, sino un episodio funcional compuesto por:
-                </p>
+.ua-fade-in.ua-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ============================================================
+   Parte 2/5 — HERO PREMIUM Y TIPOGRAFÍA
+============================================================ */
 
-                <ul class="ua-list">
-                    <li>Condiciones antecedentes relevantes (A)</li>
-                    <li>Acciones observables y verbales en contexto (B)</li>
-                    <li>Consecuencias inmediatas y a largo plazo (C)</li>
-                </ul>
+.ua-hero {
+  padding: 140px 0 60px 0;
+  text-align: center;
+  position: relative;
+}
 
-                <p class="ua-text">
-                    Desde esta base, avanzaremos hacia clases funcionales, patrones conductuales y cómo el
-                    lenguaje —desde RFT— entra dentro del ABC para transformar la conducta humana.
-                </p>
+.ua-breadcrumb {
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  color: var(--ua-texto-soft);
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 
-                <div class="ua-btn-row">
-                    <a href="p2.html" class="ua-btn-primary">Comenzar lección 1</a>
-                    <a href="../contextualismo/index.html" class="ua-btn-ghost">Volver a contextualismo</a>
-                </div>
+.ua-breadcrumb-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ua-dorado);
+  box-shadow: 0 0 8px rgba(253, 191, 18, 0.7);
+}
 
-            </section>
+.ua-title-main {
+  font-family: "Coco Gothic", sans-serif;
+  font-size: 52px;
+  letter-spacing: -1px;
+  color: var(--ua-azul-1);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
 
-            <!-- Navegación inferior -->
-            <div class="ua-footer-nav">
-                <span></span>
-                <a href="p2.html" class="ua-btn-primary">Siguiente →</a>
-            </div>
+.ua-title-main span {
+  display: block;
+  font-size: 22px;
+  color: var(--ua-dorado);
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
 
-        </div>
+.ua-subtitle-main {
+  max-width: 880px;
+  margin: 0 auto;
+  font-size: 18px;
+  color: var(--ua-texto-soft);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
 
-    </main>
+.ua-continuidad {
+  background: var(--ua-blanco);
+  display: inline-block;
+  margin-top: 20px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  box-shadow: var(--ua-shadow-soft);
+  font-size: 15px;
+  color: var(--ua-texto-main);
+  line-height: 1.5;
+}
 
-    <!-- Script para animación de entrada -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                document.querySelector(".ua-fade-in").classList.add("ua-visible");
-            }, 120);
-        });
-    </script>
+.ua-continuidad-pregunta {
+  color: var(--ua-azul-1);
+  font-weight: 700;
+}
+/* ============================================================
+   Parte 3/5 — TARJETAS ANTES / DESPUÉS
+============================================================ */
 
-</body>
+.ua-antes-despues {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  padding: 40px 0 80px;
+  flex-wrap: wrap;
+}
 
-</html>
+.ua-ad-card {
+  background: var(--ua-blanco);
+  padding: 32px;
+  border-radius: 18px;
+  width: 420px;
+  box-shadow: var(--ua-shadow-card);
+  transition: transform 0.25s ease;
+}
+
+.ua-ad-card:hover {
+  transform: translateY(-6px);
+}
+
+.ua-ad-label {
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--ua-dorado);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.ua-ad-text {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ua-texto-main);
+}
+/* ============================================================
+   Parte 4/5 — TARJETA PRINCIPAL + GRID DE MÓDULO
+============================================================ */
+
+.ua-page {
+  padding: 0 22px 80px;
+}
+
+.ua-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.ua-main-card {
+  background: var(--ua-blanco);
+  padding: 48px;
+  border-radius: 28px;
+  box-shadow: var(--ua-shadow-card);
+}
+
+.ua-section-label {
+  font-size: 14px;
+  color: var(--ua-dorado);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ua-section-title {
+  font-size: 28px;
+  font-family: "Coco Gothic", sans-serif;
+  color: var(--ua-azul-1);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.ua-text {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ua-texto-main);
+  margin-bottom: 35px;
+}
+
+/* GRID */
+.ua-mod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px;
+  margin-bottom: 42px;
+}
+
+.ua-mod-card {
+  background: var(--ua-azul-bg);
+  padding: 26px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
+}
+
+.ua-mod-card:hover {
+  border-color: var(--ua-dorado);
+  box-shadow: 0 8px 24px rgba(10, 35, 64, 0.1);
+  transform: translateY(-4px);
+}
+
+.ua-mod-icon {
+  font-size: 24px;
+  color: var(--ua-dorado);
+  margin-bottom: 12px;
+}
+
+.ua-mod-card h3 {
+  font-family: "Coco Gothic", sans-serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: var(--ua-azul-1);
+}
+
+.ua-mod-card h3 span {
+  display: block;
+  color: var(--ua-texto-soft);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.ua-mod-card p {
+  font-size: 15px;
+  color: var(--ua-texto-soft);
+  line-height: 1.45;
+}
+/* ============================================================
+   Parte 5/5 — BOTONES + FOOTER + RESPONSIVE
+============================================================ */
+
+.ua-btn-row {
+  display: flex;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.ua-btn-primary {
+  background: var(--ua-azul-1);
+  color: white;
+  padding: 14px 26px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+
+.ua-btn-primary:hover {
+  background: var(--ua-azul-2);
+}
+
+.ua-btn-ghost {
+  background: transparent;
+  border: 2px solid var(--ua-azul-1);
+  color: var(--ua-azul-1);
+  padding: 12px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.ua-btn-ghost:hover {
+  background: var(--ua-azul-1);
+  color: white;
+}
+
+.ua-footer-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+
+  .ua-title-main {
+    font-size: 38px;
+  }
+
+  .ua-antes-despues {
+    padding: 30px 0 60px;
+  }
+
+  .ua-ad-card {
+    width: 100%;
+  }
+
+  .ua-main-card {
+    padding: 32px;
+  }
+
+  .ua-btn-row {
+    flex-direction: column;
+  }
+}
