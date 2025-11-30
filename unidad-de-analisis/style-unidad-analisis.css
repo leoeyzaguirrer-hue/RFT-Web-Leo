@@ -1,334 +1,330 @@
 /* ============================================================
    MÓDULO · UNIDAD DE ANÁLISIS
-   Estilo cinematográfico · nodos dorados · patrón premium
+   Diseño premium limpio · académico · profesional
+   Autor: Leo Eyzaguirre · 2025
 ============================================================ */
 
-/* --------------------------------------------
-   PALETA ESPECÍFICA
--------------------------------------------- */
+/* Paleta premium */
 :root {
-    --ua-azul-1: #0A2A5C;
-    --ua-azul-2: #132F66;
-    --ua-azul-soft: #E9EFF8;
-    --ua-azul-bg: #F4F7FC;
+  --ua-primary-dark: #0A2A5C;
+  --ua-primary-mid: #132F66;
+  --ua-primary-light: #E9EFF8;
 
-    --ua-blanco: #FFFFFF;
-    --ua-negro: #0A0A0A;
+  --ua-bg-light: #FAFBFD;
+  --ua-card-bg: #FFFFFF;
 
-    --ua-dorado: #FDBF12;
-    --ua-dorado-soft: #FFE39A;
+  --ua-accent: #FDBF12;
+  --ua-accent-soft: #FFF4D3;
 
-    --ua-texto-main: #0A2340;
-    --ua-texto-soft: rgba(10, 35, 64, 0.78);
+  --ua-text-main: #0A1C33;
+  --ua-text-muted: #4B5568;
+
+  --ua-border-soft: rgba(10, 35, 64, 0.12);
+
+  --ua-radius-sm: 10px;
+  --ua-radius-md: 16px;
+  --ua-radius-lg: 22px;
+
+  --ua-shadow-soft: 0 4px 12px rgba(0,0,0,0.06);
+  --ua-shadow-mid: 0 10px 24px rgba(0,0,0,0.10);
+  --ua-shadow-strong: 0 12px 32px rgba(0,0,0,0.18);
 }
 
-/* --------------------------------------------
-   RESET BÁSICO
--------------------------------------------- */
+/* ============================================================
+   RESET GLOBAL
+============================================================ */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .ua-body {
-    font-family: "Noto Sans", system-ui, sans-serif;
-    background: linear-gradient(180deg, #f1f4fb 0%, #ffffff 45%, #f5f7fc 100%);
-    color: var(--ua-texto-main);
-    overflow-x: hidden;
-    position: relative;
+  font-family: "Noto Sans", system-ui, sans-serif;
+  background: var(--ua-bg-light);
+  color: var(--ua-text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Contenedor estándar */
+.ua-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 16px;
 }
 
 /* ============================================================
-   CAPA CINEMATOGRÁFICA — NODOS + LÍNEAS + CÍRCULO
-============================================================ */
-.ua-bg-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-/* Círculo de enfoque */
-.ua-focus-circle {
-    position: absolute;
-    top: 20%;
-    left: 12%;
-    width: 520px;
-    height: 520px;
-    background: radial-gradient(circle, rgba(253,191,18,0.18) 0%, rgba(253,191,18,0) 70%);
-    border-radius: 50%;
-    filter: blur(40px);
-}
-
-/* Nodos dorados */
-.ua-bg-node {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    background: var(--ua-dorado);
-    border-radius: 50%;
-    box-shadow: 0 0 12px rgba(253,191,18,0.7);
-    opacity: 0.82;
-}
-
-.n1 { top: 10%; left: 72%; }
-.n2 { top: 32%; left: 18%; }
-.n3 { top: 60%; left: 82%; }
-.n4 { top: 78%; left: 48%; }
-
-/* Líneas */
-.ua-bg-line {
-    position: absolute;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--ua-dorado), transparent);
-    opacity: 0.45;
-}
-
-.l1 { top: 28%; left: 10%; width: 80%; }
-.l2 { top: 55%; left: 0%; width: 100%; }
-.l3 { top: 80%; left: 5%; width: 90%; }
-
-/* ============================================================
-   HERO CINEMATOGRÁFICO
+   HERO PREMIUM
 ============================================================ */
 .ua-hero {
-    padding: 120px 12% 80px;
-    position: relative;
-    z-index: 5;
+  padding: 90px 0 70px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    var(--ua-primary-mid),
+    var(--ua-primary-dark)
+  );
+  color: #fff;
+  border-radius: var(--ua-radius-lg);
+  margin: 20px 16px 40px;
+  box-shadow: var(--ua-shadow-mid);
 }
 
+/* Breadcrumb */
 .ua-breadcrumb {
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--ua-texto-soft);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 22px;
+  font-size: 0.9rem;
+  letter-spacing: 1.2px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
-
 .ua-breadcrumb-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--ua-dorado);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ua-accent);
 }
 
+/* Título principal */
 .ua-title-main {
-    font-size: 3.1rem;
-    line-height: 1.1;
-    font-weight: 700;
-    color: var(--ua-azul-1);
-    margin-bottom: 20px;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 14px;
 }
-
 .ua-title-main span {
-    display: block;
-    font-size: 1.4rem;
-    color: var(--ua-dorado);
-    margin-top: 6px;
+  display: block;
+  margin-top: 6px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ua-accent);
 }
 
+/* Subtítulo */
 .ua-subtitle-main {
-    font-size: 1.25rem;
-    color: var(--ua-texto-soft);
-    max-width: 720px;
-    margin-bottom: 25px;
+  margin: 0 auto;
+  max-width: 740px;
+  font-size: 1.15rem;
+  opacity: 0.9;
 }
 
 /* Bloque continuidad */
 .ua-continuidad {
-    margin-top: 18px;
-    font-size: 1.05rem;
-    background: var(--ua-azul-soft);
-    padding: 18px 24px;
-    border-left: 4px solid var(--ua-dorado);
-    border-radius: 8px;
-    color: var(--ua-texto-main);
+  margin: 26px auto 0;
+  max-width: 700px;
+  background: var(--ua-accent-soft);
+  padding: 18px 22px;
+  border-left: 4px solid var(--ua-accent);
+  border-radius: var(--ua-radius-sm);
+  color: var(--ua-text-main);
+  font-size: 1rem;
+  box-shadow: var(--ua-shadow-soft);
 }
-
 .ua-continuidad-pregunta {
-    font-weight: 700;
-    color: var(--ua-azul-1);
+  font-weight: 700;
+  color: var(--ua-primary-mid);
 }
 
 /* ============================================================
    BLOQUE ANTES / DESPUÉS
 ============================================================ */
 .ua-antes-despues {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 40px 8%;
-    z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 26px;
+  margin: 40px 0 60px;
+  padding: 0 16px;
 }
 
 .ua-ad-card {
-    background: var(--ua-blanco);
-    border: 2px solid var(--ua-dorado);
-    border-radius: 20px;
-    padding: 28px 32px;
-    width: 300px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  background: var(--ua-card-bg);
+  border: 2px solid var(--ua-accent);
+  border-radius: var(--ua-radius-md);
+  padding: 26px;
+  width: 300px;
+  box-shadow: var(--ua-shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.ua-ad-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ua-shadow-mid);
 }
 
 .ua-ad-label {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--ua-dorado);
-    margin-bottom: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ua-accent);
+  margin-bottom: 12px;
 }
-
 .ua-ad-text {
-    font-size: 1.05rem;
-    line-height: 1.45;
+  font-size: 1.05rem;
+  color: var(--ua-text-muted);
+  line-height: 1.45;
 }
 
 /* ============================================================
-   TARJETAS PREMIUM · MAPA GENERAL
+   SECCIÓN CENTRAL · TARJETA PREMIUM
 ============================================================ */
 .ua-main-card {
-    background: var(--ua-blanco);
-    padding: 50px;
-    border-radius: 28px;
-    border: 3px solid var(--ua-dorado-soft);
-    box-shadow:
-        0 8px 24px rgba(0,0,0,0.12),
-        0 0 12px rgba(253,191,18,0.35);
+  background: var(--ua-card-bg);
+  padding: 50px;
+  border-radius: var(--ua-radius-lg);
+  border: 3px solid rgba(253, 191, 18, 0.23);
+  margin: 0 16px 40px;
+  box-shadow: var(--ua-shadow-mid);
 }
 
 .ua-section-label {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    color: var(--ua-texto-soft);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-size: 0.9rem;
+  color: var(--ua-text-muted);
 }
-
 .ua-section-title {
-    font-size: 2rem;
-    margin: 12px 0 18px;
-    color: var(--ua-azul-1);
+  font-size: 2.2rem;
+  margin: 12px 0 18px;
+  color: var(--ua-primary-dark);
 }
-
 .ua-text {
-    font-size: 1.1rem;
-    color: var(--ua-texto-soft);
-    margin-bottom: 40px;
-    max-width: 760px;
-}
-
-/* GRID DE TARJETAS */
-.ua-mod-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
-    gap: 32px;
-    margin-bottom: 40px;
-}
-
-.ua-mod-card {
-    background: linear-gradient(145deg, #0A2A5C, #132F66, #000C1A);
-    border-radius: 22px;
-    padding: 24px 26px;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.4s ease;
-    position: relative;
-}
-
-.ua-mod-icon {
-    font-size: 2rem;
-    margin-bottom: 12px;
-    color: var(--ua-dorado);
-}
-
-.ua-mod-card h3 {
-    margin-bottom: 10px;
-    font-size: 1.35rem;
-    line-height: 1.2;
-}
-
-.ua-mod-card p {
-    font-size: 0.95rem;
-    color: #eaeaea;
-}
-
-.ua-mod-card:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.45),
-        0 0 16px rgba(253,191,18,0.35);
+  font-size: 1.1rem;
+  color: var(--ua-text-muted);
+  max-width: 760px;
+  margin-bottom: 38px;
 }
 
 /* ============================================================
-   BOTONES
+   GRID DE LECCIONES
 ============================================================ */
-.ua-btn-primary {
-    background: var(--ua-dorado);
-    color: #000;
-    text-decoration: none;
-    padding: 14px 22px;
-    border-radius: 14px;
-    font-weight: 600;
-    transition: background 0.3s ease;
+.ua-mod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+  margin-bottom: 40px;
 }
 
-.ua-btn-primary:hover {
-    background: #ffca3d;
+.ua-mod-card {
+  background: #ffffff;
+  border: 2px solid var(--ua-border-soft);
+  border-radius: var(--ua-radius-md);
+  padding: 26px;
+  cursor: pointer;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  box-shadow: var(--ua-shadow-soft);
+}
+.ua-mod-card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--ua-shadow-strong);
 }
 
+.ua-mod-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: var(--ua-accent);
+}
+.ua-mod-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: var(--ua-primary-dark);
+}
+.ua-mod-card h3 span {
+  display: block;
+  font-size: 1rem;
+  color: var(--ua-primary-mid);
+}
+.ua-mod-card p {
+  font-size: 0.95rem;
+  color: var(--ua-text-muted);
+}
+
+/* ============================================================
+   BOTONES PREMIUM
+============================================================ */
+.ua-btn-row {
+  margin-top: 26px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ua-btn-primary,
 .ua-btn-ghost {
-    border: 2px solid var(--ua-dorado);
-    padding: 12px 20px;
-    border-radius: 14px;
-    color: var(--ua-dorado);
-    text-decoration: none;
-    transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: var(--ua-radius-md);
+  font-weight: 600;
+  transition: 0.25s ease;
 }
 
+/* Primario */
+.ua-btn-primary {
+  background: var(--ua-accent);
+  color: var(--ua-primary-dark);
+  border: none;
+}
+.ua-btn-primary:hover {
+  background: #ffcf47;
+}
+
+/* Ghost */
+.ua-btn-ghost {
+  border: 2px solid var(--ua-accent);
+  color: var(--ua-accent);
+}
 .ua-btn-ghost:hover {
-    background: var(--ua-dorado);
-    color: #000;
+  background: var(--ua-accent);
+  color: var(--ua-primary-dark);
 }
 
-/* Footer navegación */
+/* Footer nav */
 .ua-footer-nav {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin: 40px 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* ============================================================
    ANIMACIONES
 ============================================================ */
 .ua-fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .ua-visible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ============================================================
    RESPONSIVE
 ============================================================ */
-@media (max-width: 900px) {
-    .ua-antes-despues {
-        flex-direction: column;
-        align-items: center;
-    }
+@media (max-width: 850px) {
+  .ua-title-main {
+    font-size: 2.3rem;
+  }
+  .ua-main-card {
+    padding: 36px 24px;
+  }
+}
 
-    .ua-hero {
-        padding: 100px 8% 60px;
-    }
-
-    .ua-title-main {
-        font-size: 2.2rem;
-    }
+@media (max-width: 600px) {
+  .ua-hero {
+    padding: 60px 0 50px;
+  }
+  .ua-title-main {
+    font-size: 2rem;
+  }
+  .ua-subtitle-main {
+    font-size: 1rem;
+  }
+  .ua-ad-card {
+    width: 100%;
+  }
 }
