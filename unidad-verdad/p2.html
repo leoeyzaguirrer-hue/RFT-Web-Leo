@@ -6,16 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lección 1 · ¿Por qué necesitamos un criterio de verdad?</title>
 
-  <!-- SOLO EL ESTILO DEL MÓDULO 3 -->
   <link rel="stylesheet" href="style-verdad.css" />
-
-  <!-- Script de interacciones -->
   <script defer src="p2.js"></script>
 </head>
 
 <body class="v-body">
 
-  <!-- Fondo cinematográfico -->
+  <!-- Fondo -->
   <div class="v-bg-layer">
     <span class="v-node n1"></span>
     <span class="v-node n2"></span>
@@ -26,52 +23,64 @@
 
   <main class="v-container">
 
-    <!-- TÍTULO -->
-    <header class="v-header">
-      <h1 class="v-title">
-        ¿Por qué necesitamos un criterio de verdad?
-      </h1>
-      <p class="v-subtitle">
-        Una ciencia sin criterio de verdad no puede discriminar entre relatos útiles y ruido conceptual.
-      </p>
-    </header>
+    <!-- HERO -->
+    <section class="v-hero">
+      <h1 class="v-title">¿Por qué necesitamos un criterio de verdad?</h1>
+      <p class="v-subtitle">Una ciencia sin criterio funcional no puede distinguir entre explicaciones útiles y ruido conceptual.</p>
+      <div class="v-golden-line"></div>
+    </section>
 
-    <!-- ENTRADA PROVOCADORA -->
-    <section class="v-section fade-in">
+    <!-- TARJETA INTRODUCTORIA -->
+    <section class="v-card v-intro-card">
+      <div class="v-icon">🧭</div>
       <p class="v-text">
-        Imagina que dos terapeutas ofrecen explicaciones muy distintas para un mismo problema. Uno habla de esquemas;
-        otro de energías internas; un tercero propone ciclos de evitación. Todas suenan plausibles. Pero ¿cómo
-        podríamos decidir cuál guía mejor la acción clínica? Sin un criterio, cualquier teoría parece válida… y
-        ninguna lo es realmente.
+        Imagina que dos terapeutas explican el mismo problema con teorías opuestas. Uno habla de esquemas, otro de
+        “energías internas”, otro de ciclos de evitación. Todas suenan plausibles. Sin un criterio de verdad, ¿cómo
+        distinguimos entre relatos que realmente orientan la acción y los que solo parecen profundos?
+      </p>
+      <p class="v-text">
+        La experiencia humana está llena de relatos posibles. El desafío es identificar qué explicación sirve mejor para
+        intervenir con precisión, alcance y profundidad.
       </p>
     </section>
 
-    <!-- TEORÍA 1 -->
-    <section class="v-section fade-in">
+    <!-- FUNDAMENTO TEÓRICO A -->
+    <section class="v-card v-theory-card">
+      <h3 class="v-microtitle">Fundamentos del contextualismo funcional</h3>
+
+      <div class="v-icon-row">
+        <div class="v-icon-item">
+          <span class="i">🔍</span>
+          <p>No existe una perspectiva absolutamente neutra.</p>
+        </div>
+
+        <div class="v-icon-item">
+          <span class="i">🎯</span>
+          <p>Analizamos desde un organismo-en-contexto, nunca desde “fuera”.</p>
+        </div>
+
+        <div class="v-icon-item">
+          <span class="i">🔄</span>
+          <p>Lo verdadero es aquello que funciona para el objetivo definido.</p>
+        </div>
+      </div>
+
       <p class="v-text">
-        La Ciencia Conductual Contextual parte de un hecho central: no existe una perspectiva absolutamente neutra.
-        Como advierte Törneke, quien analiza es también un organismo en contexto, influido por historia y ambiente.
-        Esto no elimina el conocimiento, pero obliga a renunciar a la idea de una verdad absoluta fuera de toda
-        perspectiva.
+        Según Törneke, toda descripción surge desde una historia de aprendizaje y un contexto. No evaluamos teorías
+        por su correspondencia con una realidad absoluta, sino por su capacidad para guiar acciones eficaces.
       </p>
       <p class="v-text">
-        Por eso, el problema no es descubrir “la esencia verdadera” de los fenómenos, sino identificar qué tipo de
-        análisis permite influir la conducta de manera más precisa, amplia y profunda. La utilidad funcional se
-        convierte en el punto de apoyo para diferenciar explicaciones competentes de explicaciones estéticamente
-        atractivas pero ineficaces.
-      </p>
-      <p class="v-text">
-        En este enfoque, la verdad es aquello que facilita acción eficaz en un propósito definido: aliviar sufrimiento
-        y promover bienestar mediante predicción e influencia conductual adecuada.
+        Este criterio evita debates estériles sobre cuál narrativa “describe mejor” el mundo y se centra en lo que
+        realmente importa: predicción e influencia de la conducta relevante.
       </p>
     </section>
 
-    <!-- EJERCICIO 1 -->
-    <section class="v-interaction fade-in">
-      <h3 class="v-interaction-title">Ejercicio rápido</h3>
-      <p class="v-text-center">Si deseas llegar a una calle pequeña, ¿qué mapa es más "verdadero"?</p>
+    <!-- ACTIVIDAD 1 -->
+    <section class="v-activity-block">
+      <h3 class="v-activity-title">Ejercicio rápido</h3>
+      <p class="v-text-center">Si quieres llegar a una calle pequeña, ¿qué mapa es más "verdadero"?</p>
 
-      <div class="v-options">
+      <div class="v-activity-options">
         <button class="v-option" data-correct="false">🗺️ El más bonito</button>
         <button class="v-option" data-correct="true">🗺️ El que te permite llegar</button>
       </div>
@@ -79,28 +88,27 @@
       <p id="v-feedback" class="v-feedback"></p>
     </section>
 
-    <!-- TEORÍA 2 -->
-    <section class="v-section fade-in">
+    <!-- FUNDAMENTO TEÓRICO B -->
+    <section class="v-card v-theory2-card">
+      <h3 class="v-microtitle">Utilidad funcionante como criterio de verdad</h3>
+
       <p class="v-text">
-        Desde esta perspectiva pragmática, la calidad de una explicación no depende de su coherencia interna ni de su
-        elegancia retórica, sino de su capacidad para generar cambio conductual significativo. Como plantean Villatte
-        y Hayes, una formulación clínica puede sonar correcta y, aun así, no producir ningún ajuste funcional en la
-        vida del consultante.
+        Una explicación puede sonar correcta, coherente y teóricamente elegante, pero si no genera cambio conductual
+        relevante, no es útil en el sentido contextual-funcional.
       </p>
       <p class="v-text">
-        Este criterio evita que quedemos atrapados en debates interminables sobre narrativas que no llevan a acción y
-        permite comparar teorías por su poder para orientar intervenciones concretas. No se trata de tener razón, sino
-        de que el análisis funcione.
+        Villatte y Hayes señalan que las formulaciones clínicas no deben medirse por cuán bien describen la experiencia,
+        sino por su capacidad para producir acciones más ajustadas, valiosas y eficaces.
       </p>
       <p class="v-text">
-        Dicho de otro modo: en contextualismo funcional, la verdad no es una propiedad de las palabras, sino una
-        propiedad de las consecuencias que producen cuando se usan como guía para la acción.
+        La verdad es una propiedad de las consecuencias de usar una explicación, no una propiedad intrínseca del
+        enunciado mismo.
       </p>
     </section>
 
-    <!-- ACTIVIDAD 2 -->
-    <section class="v-interaction fade-in">
-      <h3 class="v-interaction-title">Actividad: Arrastrar y Soltar</h3>
+    <!-- ACTIVIDAD 2 — DRAG & DROP -->
+    <section class="v-activity-block">
+      <h3 class="v-activity-title">Actividad: Clasifica cada elemento</h3>
 
       <p class="v-text-center">Arrastra cada elemento donde corresponda.</p>
 
@@ -124,33 +132,26 @@
       <p id="v-drag-feedback" class="v-feedback"></p>
     </section>
 
-    <!-- TEORÍA FINAL -->
-    <section class="v-section fade-in">
-      <p class="v-text">
-        El objetivo de esta lección es dejar claro que un análisis psicológico no se mide por su capacidad de describir
-        el mundo, sino por su capacidad de transformarlo en acciones más ajustadas. Esta distinción es fundamental
-        para comprender la filosofía que sostiene ACT y RFT.
-      </p>
-      <p class="v-text">
-        Cuando decimos “verdad como lo que funciona”, no estamos relativizando todo. Estamos haciendo explícito que la
-        validez depende del propósito: si una descripción permite intervenir de manera más eficaz, entonces es más
-        verdadera en el sentido contextual-funcional.
-      </p>
-      <p class="v-text">
-        Con este marco conceptual en mente, podemos avanzar hacia la pregunta siguiente: ¿qué otros criterios de verdad
-        han existido históricamente y por qué no son suficientes para una ciencia conductual contextual?
-      </p>
-    </section>
+    <!-- CIERRE -->
+    <section class="v-card v-final-card">
+      <div class="v-icon">✔️</div>
 
-    <!-- EJERCICIO DE CIERRE -->
-    <section class="v-interaction fade-in">
-      <h3 class="v-interaction-title">Cierre</h3>
-      <p class="v-text-center">En una frase: ¿Qué significa “verdad” desde el contextualismo funcional?</p>
+      <ul class="v-bullets">
+        <li>La verdad pragmática depende del propósito definido.</li>
+        <li>Una explicación vale por lo que permite hacer.</li>
+        <li>En contextualismo funcional, “verdadero” = “funciona”.</li>
+      </ul>
 
-      <textarea class="v-textarea" placeholder="Escribe tu respuesta aquí…"></textarea>
+      <p class="v-text">
+        Con este criterio claro, ya podemos analizar otros criterios históricos de verdad y por qué no funcionan para
+        una ciencia conductual contextual moderna.
+      </p>
+
+      <a href="p3.html" class="v-btn-primary">Continuar</a>
     </section>
 
   </main>
+
 </body>
 
 </html>
