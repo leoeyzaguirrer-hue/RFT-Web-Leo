@@ -1,465 +1,104 @@
-/* ============================================================
-   MÓDULO: UNIDAD DE ANÁLISIS
-   Estilo blanco técnico + nodos dorados + layout editorial
-   (Este CSS se carga SOLO en las páginas del módulo)
-============================================================ */
+<!DOCTYPE html>
+<html lang="es">
 
-/* Paleta específica del módulo (reutiliza nombres globales) */
-:root {
-  --ua-azul-1: #0A2A5C;
-  --ua-azul-2: #132F66;
-  --ua-azul-soft: #E9EFF8;
-  --ua-azul-bg: #F4F7FC;
-  --ua-blanco: #FFFFFF;
-  --ua-dorado: #FDBF12;
-  --ua-dorado-soft: #FFE39A;
-  --ua-texto-main: #0A2340;
-  --ua-texto-soft: rgba(10, 35, 64, 0.78);
-}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unidad de Análisis · RFT · ACT</title>
 
-/* ============================================================
-   FONDO GLOBAL DEL MÓDULO
-   (usa la clase ua-body para no afectar otros módulos)
-============================================================ */
+    <!-- Estilos globales -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/animations.css">
 
-.ua-body {
-  margin: 0;
-  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif;
-  color: var(--ua-texto-main);
-  background: linear-gradient(
-    180deg,
-    #f1f4fb 0%,
-    #ffffff 45%,
-    var(--ua-azul-bg) 100%
-  );
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
-}
+    <!-- Estilo exclusivo del módulo -->
+    <link rel="stylesheet" href="style-unidad-analisis.css">
+</head>
 
-/* Patrón geométrico muy suave */
-.ua-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(135deg, rgba(10, 42, 92, 0.06) 1px, transparent 1px),
-    radial-gradient(circle at 10% 20%, rgba(253, 191, 18, 0.14), transparent 55%);
-  background-size: 42px 42px, 260px 260px;
-  opacity: 0.4;
-  z-index: -3;
-}
+<body class="ua-body">
 
-/* ============================================================
-   NODOS Y LÍNEAS DE FONDO
-============================================================ */
+    <!-- CAPA DE NODOS Y LÍNEAS -->
+    <div class="ua-bg-layer">
+        <span class="ua-bg-node n1"></span>
+        <span class="ua-bg-node n2"></span>
+        <span class="ua-bg-node n3"></span>
+        <span class="ua-bg-node n4"></span>
 
-.ua-bg-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -2;
-}
+        <span class="ua-bg-line l1"></span>
+        <span class="ua-bg-line l2"></span>
+        <span class="ua-bg-line l3"></span>
+    </div>
 
-/* Nodos dorados suaves */
-.ua-bg-node {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  border: 2px solid rgba(253, 191, 18, 0.9);
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow:
-    0 0 12px rgba(253, 191, 18, 0.65),
-    0 0 22px rgba(253, 191, 18, 0.32);
-  animation: uaFloatNode 16s ease-in-out infinite;
-  opacity: 0.8;
-}
+    <!-- CONTENIDO CENTRAL -->
+    <main class="ua-page">
 
-.ua-bg-node.n1 { top: 12%; left: 18%; animation-delay: 0s; }
-.ua-bg-node.n2 { top: 26%; right: 20%; animation-delay: 4s; }
-.ua-bg-node.n3 { bottom: 30%; left: 24%; animation-delay: 8s; }
-.ua-bg-node.n4 { bottom: 18%; right: 22%; animation-delay: 12s; }
+        <div class="ua-inner ua-fade-in">
 
-@keyframes uaFloatNode {
-  0%   { transform: translate(0, 0); opacity: 0.6; }
-  50%  { transform: translate(12px, -16px); opacity: 1; }
-  100% { transform: translate(0, 0); opacity: 0.6; }
-}
+            <!-- Breadcrumb -->
+            <div class="ua-breadcrumb">
+                <span class="ua-breadcrumb-dot"></span>
+                PANTALLA 1 · UNIDAD DE ANÁLISIS
+            </div>
 
-/* Líneas relacionales muy sutiles */
-.ua-bg-line {
-  position: absolute;
-  height: 2px;
-  width: 180px;
-  background: linear-gradient(
-    90deg,
-    rgba(253, 191, 18, 0),
-    rgba(253, 191, 18, 0.65),
-    rgba(253, 191, 18, 0)
-  );
-  opacity: 0.35;
-  filter: drop-shadow(0 0 10px rgba(253, 191, 18, 0.3));
-  animation: uaLinePulse 12s ease-in-out infinite;
-}
+            <!-- Título principal -->
+            <h1 class="ua-title-main">Unidad de Análisis: conducta-en-contexto</h1>
 
-.ua-bg-line.l1 { top: 20%; left: 20%; transform: rotate(12deg); }
-.ua-bg-line.l2 { top: 34%; right: 18%; transform: rotate(-18deg); }
-.ua-bg-line.l3 { bottom: 26%; left: 22%; transform: rotate(18deg); }
+            <!-- Subtítulo -->
+            <p class="ua-subtitle-main">
+                El contextualismo funcional sostiene que lo que analizamos no son “síntomas” ni “rasgos internos”,
+                sino acciones situadas: lo que una persona hace en un contexto específico y las consecuencias
+                que mantienen ese patrón. Esta pantalla presenta el mapa general del módulo y sus cuatro lecciones.
+            </p>
 
-@keyframes uaLinePulse {
-  0%   { opacity: 0.18; }
-  50%  { opacity: 0.8; }
-  100% { opacity: 0.18; }
-}
+            <!-- SUPER-CARD PREMIUM -->
+            <section class="ua-main-card">
 
-/* ============================================================
-   LAYOUT EDITORIAL CENTRADO
-============================================================ */
+                <div class="ua-section-label">Contenido del módulo</div>
+                <div class="ua-section-title">Mapa general</div>
 
-.ua-page {
-  min-height: 100vh;
-  padding: 40px 18px 60px;
-  display: flex;
-  justify-content: center;
-}
+                <p class="ua-text">
+                    Este módulo responde una pregunta central: <strong>¿qué exactamente analizamos cuando
+                    hacemos ciencia conductual contextual?</strong> Verás que la unidad de análisis no es un
+                    pensamiento aislado ni una etiqueta diagnóstica, sino un episodio funcional compuesto por:
+                </p>
 
-.ua-inner {
-  width: 100%;
-  max-width: 1200px;
-}
+                <ul class="ua-list">
+                    <li>Condiciones antecedentes relevantes (A)</li>
+                    <li>Acciones observables y verbales en contexto (B)</li>
+                    <li>Consecuencias inmediatas y a largo plazo (C)</li>
+                </ul>
 
-/* Encabezado superior (breadcrumb + título + subtítulo) */
-.ua-breadcrumb {
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(10, 42, 92, 0.65);
-  margin-bottom: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
+                <p class="ua-text">
+                    Desde esta base, avanzaremos hacia clases funcionales, patrones conductuales y cómo el
+                    lenguaje —desde RFT— entra dentro del ABC para transformar la conducta humana.
+                </p>
 
-.ua-breadcrumb-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--ua-dorado);
-  box-shadow: 0 0 10px rgba(253, 191, 18, 0.65);
-}
+                <div class="ua-btn-row">
+                    <a href="p2.html" class="ua-btn-primary">Comenzar lección 1</a>
+                    <a href="../contextualismo/index.html" class="ua-btn-ghost">Volver a contextualismo</a>
+                </div>
 
-.ua-title-main {
-  font-family: "Coco Gothic", system-ui, sans-serif;
-  font-size: 34px; /* tamaño que pediste */
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ua-azul-1);
-  margin: 6px 0 8px;
-}
+            </section>
 
-.ua-subtitle-main {
-  font-size: 18px;
-  color: var(--ua-texto-soft);
-  max-width: 820px;
-  line-height: 1.6;
-  margin-bottom: 26px;
-}
+            <!-- Navegación inferior -->
+            <div class="ua-footer-nav">
+                <span></span>
+                <a href="p2.html" class="ua-btn-primary">Siguiente →</a>
+            </div>
 
-/* ============================================================
-   SUPER-CARD AMPLIA (HOJA ACADÉMICA)
-============================================================ */
+        </div>
 
-.ua-main-card {
-  position: relative;
-  margin-top: 8px;
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 26px;
-  border: 1px solid rgba(10, 42, 92, 0.08);
-  box-shadow:
-    0 24px 60px rgba(4, 24, 60, 0.16),
-    0 0 0 1px rgba(255, 255, 255, 0.9);
-  padding: 26px 30px 24px;
-  overflow: hidden;
-}
+    </main>
 
-/* Barra lateral dorada sutil (estilo editorial) */
-.ua-main-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 18px;
-  bottom: 18px;
-  width: 3px;
-  border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    rgba(253, 191, 18, 0),
-    rgba(253, 191, 18, 0.85),
-    rgba(253, 191, 18, 0)
-  );
-  opacity: 0.8;
-}
+    <!-- Script para animación de entrada -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                document.querySelector(".ua-fade-in").classList.add("ua-visible");
+            }, 120);
+        });
+    </script>
 
-/* Encabezado de sección dentro de la card */
-.ua-section-label {
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(10, 42, 92, 0.7);
-  margin-bottom: 4px;
-}
+</body>
 
-.ua-section-title {
-  font-family: "Coco Gothic", system-ui, sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ua-azul-2);
-  margin-bottom: 10px;
-}
-
-/* Texto dentro de la card */
-.ua-text {
-  font-size: 16px;
-  line-height: 1.7;
-  color: rgba(10, 35, 64, 0.92);
-  margin-bottom: 12px;
-}
-
-.ua-text-small {
-  font-size: 14px;
-  line-height: 1.7;
-  color: rgba(10, 35, 64, 0.8);
-}
-
-/* Listas estilizadas */
-.ua-list {
-  margin: 10px 0 8px 20px;
-  font-size: 15px;
-  color: rgba(10, 35, 64, 0.92);
-}
-
-.ua-list li {
-  margin-bottom: 4px;
-}
-
-/* ============================================================
-   BOTONES Y NAVEGACIÓN INFERIOR
-============================================================ */
-
-.ua-btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.ua-btn-primary {
-  padding: 11px 24px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--ua-azul-1), var(--ua-azul-2));
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 2px solid var(--ua-dorado);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 16px 32px rgba(10, 42, 92, 0.32);
-  transition: transform 0.18s ease, box-shadow 0.22s ease, background 0.2s ease;
-}
-
-.ua-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(10, 42, 92, 0.42);
-  background: linear-gradient(135deg, var(--ua-azul-2), var(--ua-azul-1));
-}
-
-.ua-btn-ghost {
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(10, 42, 92, 0.2);
-  background: rgba(255, 255, 255, 0.78);
-  color: var(--ua-azul-1);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.16s ease;
-}
-
-.ua-btn-ghost:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(253, 191, 18, 0.7);
-  transform: translateY(-1px);
-}
-
-/* Navegación pie de página del módulo */
-.ua-footer-nav {
-  margin-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* ============================================================
-   ELEMENTOS PARA INTERACCIONES
-============================================================ */
-
-/* Opciones tipo botón (selección múltiple, etc.) */
-.ua-option-grid {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 10px;
-}
-
-.ua-option {
-  background: rgba(255, 255, 255, 0.96);
-  border-radius: 18px;
-  border: 1px solid rgba(10, 42, 92, 0.12);
-  padding: 10px 12px 9px;
-  font-size: 14px;
-  cursor: pointer;
-  text-align: left;
-  transition: border 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease,
-    background 0.18s ease;
-}
-
-.ua-option:hover {
-  border-color: rgba(253, 191, 18, 0.75);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.06);
-  transform: translateY(-1px);
-}
-
-.ua-option.ua-selected {
-  border-color: rgba(253, 191, 18, 0.9);
-  background: linear-gradient(
-    135deg,
-    rgba(253, 191, 18, 0.12),
-    rgba(255, 255, 255, 1)
-  );
-}
-
-/* Feedback técnico */
-.ua-feedback {
-  margin-top: 12px;
-  padding: 10px 12px;
-  border-radius: 16px;
-  font-size: 14px;
-  background: rgba(253, 191, 18, 0.12);
-  border: 1px solid rgba(253, 191, 18, 0.7);
-  color: #6a4c00;
-  display: none; /* se mostrará vía JS */
-}
-
-/* Zonas de drag & drop (para ejercicios de arrastrar) */
-.ua-drag-row {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-}
-
-.ua-drag-item {
-  padding: 8px 10px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px dashed rgba(10, 42, 92, 0.3);
-  font-size: 14px;
-  cursor: grab;
-}
-
-.ua-drop-zone {
-  margin-top: 10px;
-  padding: 10px 12px;
-  min-height: 60px;
-  border-radius: 16px;
-  border: 2px dashed rgba(10, 42, 92, 0.18);
-  background: rgba(244, 247, 252, 0.9);
-  font-size: 14px;
-}
-
-/* Pequeño diagrama ABC / nodos clicables */
-.ua-diagram {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
-}
-
-.ua-node {
-  border-radius: 18px;
-  padding: 10px 12px;
-  border: 1px solid rgba(10, 42, 92, 0.14);
-  background: rgba(255, 255, 255, 0.98);
-  font-size: 14px;
-  cursor: pointer;
-  transition: border 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
-}
-
-.ua-node span {
-  display: block;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(10, 42, 92, 0.7);
-  margin-bottom: 2px;
-}
-
-.ua-node:hover {
-  border-color: rgba(253, 191, 18, 0.9);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
-  transform: translateY(-1px);
-}
-
-/* ============================================================
-   ANIMACIÓN DE ENTRADA SUAVE
-============================================================ */
-
-.ua-fade-in {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.ua-fade-in.ua-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================================
-   RESPONSIVE
-============================================================ */
-
-@media (max-width: 900px) {
-  .ua-page {
-    padding: 26px 12px 40px;
-  }
-
-  .ua-title-main {
-    font-size: 26px;
-  }
-
-  .ua-subtitle-main {
-    font-size: 16px;
-  }
-
-  .ua-main-card {
-    padding: 20px 18px 18px;
-    border-radius: 22px;
-  }
-}
+</html>
