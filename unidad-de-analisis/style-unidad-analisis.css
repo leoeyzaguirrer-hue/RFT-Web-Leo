@@ -374,3 +374,104 @@ body.ua-body {
     flex-direction: column;
   }
 }
+/* ============================================================
+   ACORDEÓN PREMIUM — AZUL + DORADO
+============================================================ */
+
+.ua-accordion {
+  margin-bottom: 28px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f0f4ff, #ffffff);
+  border: 2px solid var(--ua-dorado-soft);
+  box-shadow: 0 4px 18px rgba(10, 35, 64, 0.08);
+}
+
+/* HEADER */
+.ua-acc-header {
+  width: 100%;
+  background: #f4f7fc;
+  padding: 20px 22px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  text-align: left;
+  font-size: 17px;
+  color: var(--ua-azul-1);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: background 0.25s ease;
+}
+
+.ua-acc-header:hover {
+  background: #eaf0ff;
+}
+
+/* ICONO */
+.ua-acc-icon {
+  font-size: 24px;
+  color: var(--ua-dorado);
+  display: inline-block;
+  transition: transform 0.35s ease;
+}
+
+.ua-acc-icon.rotated {
+  transform: rotate(90deg);
+}
+
+/* PANEL */
+.ua-acc-panel {
+  max-height: 0;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 0 22px;
+  transition: max-height 0.45s ease;
+}
+
+.ua-acc-panel.open {
+  padding: 22px;
+}
+
+/* LISTAS */
+.ua-list li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* EJEMPLOS (niveles) */
+.ua-example-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ua-example-block {
+  background: #f4f7ff;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border-left: 4px solid var(--ua-dorado-soft);
+  box-shadow: 0 4px 16px rgba(10, 35, 64, 0.06);
+}
+
+.ua-example-block.ua-example-good {
+  background: #ffffff;
+  border-left-color: var(--ua-dorado);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.ua-example-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ua-azul-1);
+  margin-bottom: 6px;
+}
+
+/* Texto centrado suave */
+.ua-hint-center {
+  text-align: center;
+  font-size: 17px;
+  margin: 16px 0;
+}
