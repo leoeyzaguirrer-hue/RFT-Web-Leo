@@ -3,294 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P6 · Caso de Laura · Construye la unidad de análisis</title>
+  <title>P6 · Ejercicio integrador · Unidad de Análisis</title>
 
+  <!-- Solo el CSS del módulo -->
   <link rel="stylesheet" href="style-unidad-analisis.css" />
-  <script defer src="p6.js"></script>
 </head>
 
 <body class="ua-body">
 
-  <!-- FONDO -->
+  <!-- FONDO PREMIUM (sin JS, solo decorativo) -->
   <div class="ua-bg-layer">
     <div class="ua-focus-circle"></div>
+
     <span class="ua-bg-node n1"></span>
     <span class="ua-bg-node n2"></span>
     <span class="ua-bg-node n3"></span>
     <span class="ua-bg-node n4"></span>
+
     <span class="ua-bg-line l1"></span>
     <span class="ua-bg-line l2"></span>
     <span class="ua-bg-line l3"></span>
   </div>
 
-  <!-- HERO -->
-  <header class="ua-hero ua-fade-in">
+  <!-- HERO SIN EFECTO FADE (ya visible) -->
+  <header class="ua-hero ua-visible">
     <div class="ua-hero-text">
 
       <div class="ua-breadcrumb">
         <span class="ua-breadcrumb-dot"></span>
-        LECCIÓN 4 · EJERCICIO INTEGRADOR
+        PANTALLA 6 · EJERCICIO INTEGRADOR
       </div>
 
       <h1 class="ua-title-main">
-        Caso de Laura: del diagnóstico al análisis funcional
-        <span>Construye la unidad de análisis paso a paso</span>
+        Caso de Laura · Ejercicio integrador
+        <span>Versión de prueba sin interactividad</span>
       </h1>
 
       <p class="ua-subtitle-main">
-        En esta pantalla vas a trabajar con un caso clínico breve. El objetivo es pasar de
-        una etiqueta global como “fobia social” a una <strong>unidad de análisis funcional</strong>,
-        organizada en antecedentes, conductas y consecuencias, incorporando el papel del lenguaje
-        según la RFT.
+        Esta es una versión mínima de la Pantalla 6, sin ningún script y sin
+        componentes interactivos. Solo queremos comprobar que el diseño base
+        se ve correctamente en tu sitio antes de volver a añadir ejercicios
+        y lógica con JavaScript.
       </p>
-
-      <div class="ua-continuidad">
-        <strong>Venimos de las lecciones previas:</strong> definiste qué es una unidad de análisis,
-        revisaste el ABC, las clases funcionales y los patrones en el tiempo.<br />
-        Ahora pondrás todo en juego en un caso único:
-        <span class="ua-continuidad-pregunta">
-          ¿qué cambia cuando describimos la conducta de Laura como patrón funcional y no solo como diagnóstico?
-        </span>
-      </div>
 
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="ua-page ua-fade-in">
+  <!-- CONTENIDO PRINCIPAL SIN JS -->
+  <main class="ua-page ua-visible">
     <div class="ua-inner">
 
       <section class="ua-main-card">
 
-        <div class="ua-section-label">Pantalla 6 · Ejercicio integrador</div>
-        <div class="ua-section-title">Construye la unidad de análisis</div>
+        <div class="ua-section-label">Prueba de visualización</div>
+        <div class="ua-section-title">Pantalla 6 básica</div>
 
         <p class="ua-text">
-          A continuación trabajarás con el caso de Laura en ocho pasos articulados:
-          apertura provocadora, marco teórico, ejercicio ABC, zoom técnico sobre lenguaje,
-          mini experimento, cierre conceptual, actividad reflexiva e integración final.
+          Si estás viendo este texto con el diseño premium del módulo
+          (fondo azul claro, tarjeta blanca, tipografías correctas),
+          significa que <strong>el HTML base y el CSS del archivo
+          style-unidad-analisis.css se están cargando bien</strong> y
+          que el problema previo no está en la estructura general de
+          la página, sino probablemente en algún detalle de JavaScript
+          o en contenido copiado con caracteres especiales.
         </p>
 
-        <p class="ua-hint ua-hint-center">
-          Haz clic en cada bloque para desplegar su contenido.
+        <p class="ua-text">
+          En el siguiente paso podremos ir añadiendo, uno por uno, los
+          bloques del caso de Laura (texto, tarjetas, contenedores) y
+          después la interactividad con JavaScript, comprobando en cada
+          etapa que la página sigue cargando sin quedar en blanco.
         </p>
 
-        <!-- 1. APERTURA -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="apertura">
-            <span>1 · Apertura provocadora: “Tengo fobia social”</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-
-            <p class="ua-text">
-              Laura suele decir: “Tengo fobia social. Siempre he sido así. Cuando hay reuniones, me siento mal y prefiero no ir”. 
-              Esta forma de hablar organiza su experiencia en torno a un <strong>diagnóstico global</strong>. 
-              Desde un enfoque contextual, nos interesa otra pregunta: 
-              <strong>¿qué está haciendo Laura, en qué contexto y con qué consecuencias?</strong>
-            </p>
-
-            <p class="ua-text">
-              El mismo episodio puede describirse como rasgo, etiqueta nosológica o estilo personal; aquí lo veremos como 
-              unidad de análisis funcional, útil para <strong>predecir e influir</strong> la conducta.
-            </p>
-
-          </div>
-        </section>
-
-        <!-- 2. MARCO TEÓRICO -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="teoria">
-            <span>2 · Marco teórico: diagnóstico, función y lenguaje</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-
-            <p class="ua-text">
-              Una <strong>unidad de análisis</strong> es un recorte pragmático que nos ayuda a intervenir. 
-              Un diagnóstico como “fobia social” rara vez especifica <strong>qué hace la persona</strong>, 
-              ante qué estímulos y qué consecuencias mantienen el patrón.
-            </p>
-
-            <p class="ua-text">
-              Desde RFT, el lenguaje no solo describe: <strong>transforma funciones</strong>. 
-              Pensamientos como “soy aburrida” alteran la función de “reunión del equipo”, convirtiéndola en una amenaza.
-            </p>
-
-            <p class="ua-text">
-              Pensamientos, imágenes y recuerdos funcionan como <strong>eventos verbales</strong> que actúan como 
-              antecedentes, consecuencias o parte de la conducta. Esto guía decisiones clínicas posteriores en ACT.
-            </p>
-
-          </div>
-        </section>
-
-        <!-- 3. ABC -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="abc">
-            <span>3 · Organiza el episodio: arrastra las tarjetas</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-
-            <p class="ua-text">
-              Arrastra los elementos al contenedor correspondiente: antecedentes, conducta, consecuencias inmediatas y a largo plazo.
-            </p>
-
-            <div class="ua-tag-panel" id="ua-tags-laura">
-              <button class="ua-tag" data-id="msg">📩 Recibe mensaje: “Mañana reunión de equipo a las 9:00”.</button>
-              <button class="ua-tag" data-id="img">🧑‍🤝‍🧑 Imágenes de compañeros riendo.</button>
-              <button class="ua-tag" data-id="pens">💭 Pensamiento: “Se van a dar cuenta de que soy aburrida”.</button>
-              <button class="ua-tag" data-id="sens">😓 Sensaciones: calor en la cara, sudor.</button>
-              <button class="ua-tag" data-id="accion">🚫 Respuesta: “No podré, tengo médico”.</button>
-              <button class="ua-tag" data-id="alivio">😮‍💨 Consecuencia inmediata: alivio.</button>
-              <button class="ua-tag" data-id="largo">
-                ⏳ A largo plazo: cada vez le cuesta más hablar en público y se siente aislada.
-              </button>
-            </div>
-
-            <div class="ua-containers-grid">
-
-              <div class="ua-container-box" data-box="antecedentes">
-                <h4>🅰️ Antecedentes</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-              <div class="ua-container-box" data-box="conducta">
-                <h4>🔵 Conducta</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-              <div class="ua-container-box" data-box="ci">
-                <h4>🟡 Consecuencias inmediatas</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-              <div class="ua-container-box" data-box="clp">
-                <h4>⏳ Consecuencias a largo plazo</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-            </div>
-
-          </div>
-        </section>
-
-        <!-- 4. ZOOM -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="zoom">
-            <span>4 · Zoom técnico: pensamiento como antecedente verbal</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-
-            <p class="ua-text">
-              “Se van a dar cuenta de que soy aburrida” funciona como antecedente verbal que amplifica riesgo y amenaza,
-              transformando la función de la reunión.
-            </p>
-
-            <p class="ua-text">
-              El lenguaje organiza marcos como “yo/otros”, “valioso/no valioso”, alterando la probabilidad funcional de evitar.
-            </p>
-
-          </div>
-        </section>
-
-        <!-- 5. EXPERIMENTO -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="experimento">
-            <span>5 · Mini experimento: cambiando el antecedente verbal</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-            <p class="ua-text">Selecciona una opción para ver cómo podría transformarse la función.</p>
-
-            <div class="ua-context-buttons">
-              <button class="ua-btn-ghost ua-exp-btn" data-exp="sin-pensamiento">Quitar pensamiento anticipatorio</button>
-              <button class="ua-btn-ghost ua-exp-btn" data-exp="corto">“Voy solo 10 minutos”</button>
-              <button class="ua-btn-ghost ua-exp-btn" data-exp="herramientas">“No necesito brillar”</button>
-            </div>
-
-            <div id="ua-exp-output" class="ua-info-box ua-text-small ua-hint">
-              Elige una opción para ver el efecto funcional.
-            </div>
-
-          </div>
-        </section>
-
-        <!-- 6. CIERRE -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="cierre">
-            <span>6 · Cierre conceptual</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-            <p class="ua-text">
-              La unidad ya no es “fobia social”, sino un patrón funcional: señales sociales → marcos verbales → evitación → alivio inmediato → aislamiento.
-            </p>
-          </div>
-        </section>
-
-        <!-- 7. REFLEXIÓN -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="reflexion">
-            <span>7 · Actividad reflexiva</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-
-            <p class="ua-text">¿Qué sostiene más el patrón de Laura?</p>
-
-            <div class="ua-context-buttons">
-              <button class="ua-btn-ghost ua-ref-btn" data-ref="pensamiento">Pensamiento anticipatorio</button>
-              <button class="ua-btn-ghost ua-ref-btn" data-ref="sensaciones">Sensaciones corporales</button>
-              <button class="ua-btn-ghost ua-ref-btn" data-ref="alivio">Alivio inmediato</button>
-            </div>
-
-            <div id="ua-ref-output" class="ua-info-box ua-text-small ua-hint">
-              Selecciona una opción para ver un comentario posible.
-            </div>
-
-          </div>
-        </section>
-
-        <!-- 8. INTEGRACIÓN FINAL -->
-        <section class="ua-accordion">
-          <button class="ua-acc-header" data-acc="integracion">
-            <span>8 · Integración final</span>
-            <span class="ua-acc-icon">›</span>
-          </button>
-          <div class="ua-acc-panel">
-
-            <p class="ua-text">
-              Elige el nombre que mejor capture la función compartida.
-            </p>
-
-            <div class="ua-choice-flex">
-              <button class="ua-btn-ghost ua-class-choice" data-choice="ansioso">Síntoma ansioso</button>
-              <button class="ua-btn-ghost ua-class-choice" data-choice="tp">Trastorno de personalidad</button>
-              <button class="ua-btn-ghost ua-class-choice" data-choice="evitacion">Evitación de interacción social</button>
-            </div>
-
-            <div id="ua-class-feedback" class="ua-hint ua-hint-center">
-              ¿Cuál te ayuda más a decidir qué hacer en sesiones iniciales?
-            </div>
-
-          </div>
-        </section>
-
-        <!-- NAV LOCAL -->
         <div class="ua-btn-row">
-          <a href="p5.html" class="ua-btn-ghost">← Volver</a>
-          <a href="p7.html" class="ua-btn-primary">Continuar →</a>
+          <a href="index.html" class="ua-btn-ghost">← Volver al mapa del módulo</a>
+          <a href="p7.html" class="ua-btn-primary">Ir a la lección final →</a>
         </div>
 
       </section>
-
-      <div class="ua-footer-nav">
-        <a href="index.html" class="ua-btn-ghost">Volver al mapa</a>
-        <a href="p7.html" class="ua-btn-primary">Ir a la lección final →</a>
-      </div>
 
     </div>
   </main>
