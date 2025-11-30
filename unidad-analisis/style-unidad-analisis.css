@@ -1543,3 +1543,144 @@
     width: 100%;
   }
 }
+/* ============================================================
+   P6 — EJERCICIO INTEGRADOR: CONSTRUYE LA UNIDAD DE ANÁLISIS
+   Diseño premium coherente con todo el módulo · Leo RFT Web
+============================================================ */
+
+/* ---------- Contenedor general ---------- */
+.ua-p6-case {
+  margin-top: 28px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 26px;
+  padding: 26px 28px;
+  border: 1px solid rgba(10,42,92,0.12);
+  box-shadow: 0 20px 48px rgba(4,24,60,0.12);
+}
+
+/* ---------- Título del caso ---------- */
+.ua-p6-title {
+  font-family: "Coco Gothic", sans-serif;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: var(--ua-azul-2);
+  margin-bottom: 12px;
+}
+
+/* ---------- Texto del caso ---------- */
+.ua-p6-text {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: rgba(10,35,64,0.9);
+}
+
+/* ---------- Tarjetas movibles ---------- */
+.ua-p6-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.ua-p6-tag {
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 2px solid rgba(10,42,92,0.22);
+  cursor: grab;
+  font-size: 15px;
+  line-height: 1.45;
+  max-width: 260px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.ua-p6-tag:hover {
+  transform: translateY(-3px);
+  border-color: rgba(253,191,18,0.85);
+  box-shadow: 0 12px 28px rgba(253,191,18,0.18);
+}
+
+.ua-p6-tag.ua-tag-placed {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* ---------- Cuadrantes ABC ---------- */
+.ua-p6-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.ua-p6-box {
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
+  padding: 18px 20px;
+  border: 2px dashed rgba(10,42,92,0.25);
+  min-height: 140px;
+  transition: 0.22s ease;
+}
+
+.ua-p6-box:hover {
+  border-color: rgba(253,191,18,0.85);
+  background: rgba(253,191,18,0.12);
+  box-shadow: 0 12px 26px rgba(253,191,18,0.16);
+}
+
+.ua-p6-box-title {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ua-azul-1);
+  margin-bottom: 10px;
+}
+
+/* ---------- Elección de clase funcional ---------- */
+.ua-p6-choice-grid {
+  margin-top: 26px;
+  display: grid;
+  gap: 12px;
+}
+
+.ua-p6-choice {
+  padding: 12px;
+  background: white;
+  border-radius: 14px;
+  border: 1.5px solid rgba(10,42,92,0.22);
+  cursor: pointer;
+  transition: 0.22s ease;
+  font-size: 15px;
+}
+
+.ua-p6-choice:hover {
+  background: rgba(253,191,18,0.08);
+  border-color: rgba(253,191,18,0.85);
+}
+
+.ua-p6-choice-active {
+  background: linear-gradient(135deg, var(--ua-azul-1), var(--ua-azul-2));
+  color: white;
+  border-color: var(--ua-dorado);
+  box-shadow: 0 8px 20px rgba(10,42,92,0.35);
+}
+
+/* ---------- Feedback ---------- */
+.ua-p6-feedback {
+  margin-top: 14px;
+  min-height: 20px;
+  font-size: 15px;
+  color: rgba(10,35,64,0.85);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .ua-p6-case {
+    padding: 20px;
+  }
+  .ua-p6-tag {
+    max-width: 100%;
+  }
+}
