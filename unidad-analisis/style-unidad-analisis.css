@@ -1289,3 +1289,155 @@
   margin: 12px 0 22px;
   font-style: italic;
 }
+/* ================================
+   P5 — ESTILOS ESPECÍFICOS
+================================ */
+
+/* Bloques de ejemplo (si no existen ya en tu CSS) */
+.ua-example-block {
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
+  border: 1px solid rgba(10,42,92,0.10);
+  padding: 18px 20px;
+  margin: 18px 0;
+}
+
+.ua-example-label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(10,42,92,0.7);
+  margin-bottom: 8px;
+}
+
+/* Lista más compacta para ejemplos */
+.ua-list-small {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Hint centrado (ya lo usas, por si falta) */
+.ua-hint-center {
+  text-align: center;
+}
+
+/* Estímulos (perro, palabra, icono, noticia) */
+.ua-stimulus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.ua-stimulus {
+  border-radius: 16px;
+  border: 1px solid rgba(10,42,92,0.16);
+  background: rgba(255,255,255,0.96);
+  padding: 12px 14px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.4;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.ua-stimulus:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+  border-color: rgba(253,191,18,0.7);
+}
+
+.ua-stimulus-active {
+  border-color: rgba(253,191,18,0.95);
+  box-shadow: 0 16px 32px rgba(4,24,60,0.18);
+  background: linear-gradient(135deg, #ffffff, #fff8e8);
+}
+
+.ua-stimulus-note {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(10,35,64,0.7);
+}
+
+/* Caja de relaciones verbales */
+.ua-relations-box {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(253,191,18,0.12);
+  border: 1px solid rgba(253,191,18,0.6);
+}
+
+.ua-relations-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ua-azul-1);
+  margin: 0 0 6px;
+}
+
+/* Bloques de pregunta del mini-experimento */
+.ua-question {
+  margin: 18px 0;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(10,42,92,0.10);
+}
+
+.ua-question-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.ua-answer-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(10,42,92,0.25);
+  background: rgba(255,255,255,0.92);
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.ua-answer-btn:hover {
+  background: rgba(255,255,255,1);
+  border-color: rgba(253,191,18,0.8);
+  transform: translateY(-1px);
+}
+
+.ua-answer-selected {
+  background: linear-gradient(135deg, var(--ua-azul-1), var(--ua-azul-2));
+  color: #ffffff;
+  border-color: var(--ua-dorado);
+  box-shadow: 0 10px 24px rgba(10,42,92,0.35);
+}
+
+.ua-question-note {
+  margin-top: 8px;
+  color: rgba(10,35,64,0.78);
+}
+
+/* Responsive suave para móviles */
+@media (max-width: 768px) {
+  .ua-example-block {
+    padding: 14px 14px;
+  }
+
+  .ua-stimulus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-question-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ua-answer-btn {
+    width: 100%;
+    text-align: left;
+  }
+}
