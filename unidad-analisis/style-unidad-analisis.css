@@ -1,0 +1,306 @@
+/* ============================================================
+   MÓDULO: UNIDAD DE ANÁLISIS
+   Estilo blanco técnico + nodos dorados + layout editorial
+============================================================ */
+
+/* Paleta específica */
+:root {
+  --ua-azul-1: #0A2A5C;
+  --ua-azul-2: #132F66;
+  --ua-azul-soft: #E9EFF8;
+  --ua-azul-bg: #F4F7FC;
+  --ua-blanco: #FFFFFF;
+  --ua-dorado: #FDBF12;
+  --ua-dorado-soft: #FFE39A;
+  --ua-texto-main: #0A2340;
+  --ua-texto-soft: rgba(10, 35, 64, 0.78);
+}
+
+/* ============================================================
+   FONDO GENERAL
+============================================================ */
+.ua-body {
+  margin: 0;
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ua-texto-main);
+  background: linear-gradient(180deg, #f1f4fb 0%, #ffffff 45%, var(--ua-azul-bg) 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-size: 20px;  /* ⭐ NUEVO tamaño base mayor */
+}
+
+/* Patrón geométrico */
+.ua-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(135deg, rgba(10, 42, 92, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 10% 20%, rgba(253, 191, 18, 0.14), transparent 55%);
+  background-size: 42px 42px, 260px 260px;
+  opacity: 0.4;
+  z-index: -3;
+}
+
+/* ============================================================
+   NODOS + LÍNEAS
+============================================================ */
+.ua-bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
+
+.ua-bg-node {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid rgba(253, 191, 18, 0.9);
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 14px rgba(253,191,18,0.7);
+  animation: uaFloatNode 16s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+.ua-bg-node.n1 { top: 12%; left: 18%; animation-delay: 0s; }
+.ua-bg-node.n2 { top: 26%; right: 20%; animation-delay: 4s; }
+.ua-bg-node.n3 { bottom: 30%; left: 24%; animation-delay: 8s; }
+.ua-bg-node.n4 { bottom: 18%; right: 22%; animation-delay: 12s; }
+
+@keyframes uaFloatNode {
+  0% { transform: translate(0,0); opacity: 0.6; }
+  50% { transform: translate(14px,-16px); opacity: 1; }
+  100% { transform: translate(0,0); opacity: 0.6; }
+}
+
+.ua-bg-line {
+  position: absolute;
+  height: 2px;
+  width: 200px;
+  background: linear-gradient(90deg, transparent, rgba(253,191,18,0.6), transparent);
+  opacity: 0.35;
+  animation: uaLinePulse 12s ease-in-out infinite;
+}
+
+.ua-bg-line.l1 { top: 20%; left: 20%; transform: rotate(12deg); }
+.ua-bg-line.l2 { top: 34%; right: 18%; transform: rotate(-18deg); }
+.ua-bg-line.l3 { bottom: 26%; left: 22%; transform: rotate(18deg); }
+
+@keyframes uaLinePulse {
+  0% { opacity: 0.18; }
+  50% { opacity: 0.75; }
+  100% { opacity: 0.18; }
+}
+
+/* ============================================================
+   LAYOUT CENTRAL
+============================================================ */
+.ua-page {
+  min-height: 100vh;
+  padding: 40px 20px 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.ua-inner {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ============================================================
+   ENCABEZADO
+============================================================ */
+
+.ua-breadcrumb {
+  font-size: 14px;  /* ⭐ más grande */
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(10,42,92,0.65);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ua-breadcrumb-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--ua-dorado);
+  box-shadow: 0 0 10px rgba(253,191,18,0.65);
+}
+
+/* Título */
+.ua-title-main {
+  font-family: "Coco Gothic", system-ui, sans-serif;
+  font-size: 42px;     /* ⭐ MUCHO MÁS GRANDE */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 6px 0 16px;
+  color: var(--ua-azul-1);
+}
+
+/* Subtítulo */
+.ua-subtitle-main {
+  font-size: 
+/* ============================================================
+   HERO CINEMATOGRÁFICO + ENFOQUE
+============================================================ */
+
+.ua-hero {
+  padding: 70px 20px 40px;
+  max-width: 1100px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.ua-hero-text {
+  max-width: 900px;
+}
+
+.ua-title-main span {
+  display: block;
+  font-size: 22px;
+  color: var(--ua-dorado);
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+}
+
+.ua-focus-circle {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+      circle,
+      rgba(255,255,255,0.6) 0%,
+      rgba(255,255,255,0.2) 40%,
+      rgba(255,255,255,0) 70%
+  );
+  filter: blur(32px);
+  opacity: 0.4;
+  pointer-events: none;
+  animation: uaFocusPulse 8s ease-in-out infinite;
+}
+
+@keyframes uaFocusPulse {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.35; }
+  50% { transform: translateX(-50%) scale(1.18); opacity: 0.55; }
+  100% { transform: translateX(-50%) scale(1); opacity: 0.35; }
+}
+
+/* Continuidad epistemológica */
+.ua-continuidad {
+  margin-top: 18px;
+  padding-left: 10px;
+  border-left: 3px solid var(--ua-dorado);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(10,35,64,0.86);
+}
+
+.ua-continuidad-pregunta {
+  font-size: 18px;
+  color: var(--ua-azul-1);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   BLOQUE ANTES / DESPUÉS
+============================================================ */
+
+.ua-antes-despues {
+  max-width: 1050px;
+  margin: 0 auto 40px;
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.ua-ad-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 22px;
+  padding: 18px 20px 16px;
+  border: 1px solid rgba(10,42,92,0.1);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ua-ad-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 40px rgba(0,0,0,0.10);
+}
+
+.ua-ad-label {
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--ua-dorado);
+  margin-bottom: 6px;
+}
+
+.ua-ad-text {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ua-texto-main);
+}
+
+
+/* ============================================================
+   TARJETAS PREMIUM DEL MÓDULO
+============================================================ */
+
+.ua-mod-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.ua-mod-card {
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(10,42,92,0.1);
+  border-radius: 22px;
+  padding: 18px 20px 16px;
+  cursor: pointer;
+  transition: border 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ua-mod-card:hover {
+  border-color: rgba(253,191,18,0.8);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+}
+
+.ua-mod-icon {
+  font-size: 32px;
+  color: var(--ua-dorado);
+  margin-bottom: 8px;
+}
+
+.ua-mod-card h3 {
+  font-family: "Coco Gothic", sans-serif;
+  font-size: 18px;
+  color: var(--ua-azul-1);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.ua-mod-card h3 span {
+  display: block;
+  font-size: 14px;
+  color: var(--ua-azul-2);
+  letter-spacing: 0.06em;
+}
+
+.ua-mod-card p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(10,35,64,0.85);
+}
