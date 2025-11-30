@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P6 · Ejercicio integrador · Unidad de Análisis</title>
+  <title>P6 · Caso de Laura · Construye la unidad de análisis</title>
 
-  <!-- Solo el CSS del módulo -->
+  <!-- STYLE ESPECÍFICO DEL MÓDULO -->
   <link rel="stylesheet" href="style-unidad-analisis.css" />
+
+  <!-- JS ESPECÍFICO DE ESTA PANTALLA -->
+  <script defer src="p6.js"></script>
 </head>
 
 <body class="ua-body">
 
-  <!-- FONDO PREMIUM (sin JS, solo decorativo) -->
+  <!-- CAPA DE FONDO PREMIUM -->
   <div class="ua-bg-layer">
     <div class="ua-focus-circle"></div>
-
+</div>
     <span class="ua-bg-node n1"></span>
     <span class="ua-bg-node n2"></span>
     <span class="ua-bg-node n3"></span>
@@ -25,62 +28,387 @@
     <span class="ua-bg-line l3"></span>
   </div>
 
-  <!-- HERO SIN EFECTO FADE (ya visible) -->
-  <header class="ua-hero ua-visible">
+  <!-- ===========================
+       HERO · EJERCICIO INTEGRADOR
+  ============================ -->
+  <header class="ua-hero ua-fade-in">
     <div class="ua-hero-text">
 
       <div class="ua-breadcrumb">
         <span class="ua-breadcrumb-dot"></span>
-        PANTALLA 6 · EJERCICIO INTEGRADOR
+        LECCIÓN 4 · EJERCICIO INTEGRADOR
       </div>
 
       <h1 class="ua-title-main">
-        Caso de Laura · Ejercicio integrador
-        <span>Versión de prueba sin interactividad</span>
+        Caso de Laura: del diagnóstico al análisis funcional
+        <span>Construye la unidad de análisis paso a paso</span>
       </h1>
 
       <p class="ua-subtitle-main">
-        Esta es una versión mínima de la Pantalla 6, sin ningún script y sin
-        componentes interactivos. Solo queremos comprobar que el diseño base
-        se ve correctamente en tu sitio antes de volver a añadir ejercicios
-        y lógica con JavaScript.
+        En esta pantalla vas a trabajar con un caso clínico breve. El objetivo es pasar de
+        una etiqueta global como “fobia social” a una <strong>unidad de análisis funcional</strong>,
+        organizada en antecedentes, conductas y consecuencias, incorporando el papel del lenguaje
+        según la RFT.
       </p>
+
+      <div class="ua-continuidad">
+        <strong>Venimos de las lecciones previas:</strong> definiste qué es una unidad de análisis,
+        revisaste el ABC, las clases funcionales y los patrones en el tiempo.
+        <br />
+        Ahora pondrás todo en juego en un caso único:
+        <span class="ua-continuidad-pregunta">
+          ¿qué cambia cuando describimos la conducta de Laura como patrón funcional y no sólo como diagnóstico?
+        </span>
+      </div>
 
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL SIN JS -->
-  <main class="ua-page ua-visible">
+  <!-- ===========================
+       MAIN
+  ============================ -->
+  <main class="ua-page ua-fade-in">
     <div class="ua-inner">
 
       <section class="ua-main-card">
 
-        <div class="ua-section-label">Prueba de visualización</div>
-        <div class="ua-section-title">Pantalla 6 básica</div>
+        <div class="ua-section-label">Pantalla 6 · Ejercicio integrador</div>
+        <div class="ua-section-title">Construye la unidad de análisis</div>
 
         <p class="ua-text">
-          Si estás viendo este texto con el diseño premium del módulo
-          (fondo azul claro, tarjeta blanca, tipografías correctas),
-          significa que <strong>el HTML base y el CSS del archivo
-          style-unidad-analisis.css se están cargando bien</strong> y
-          que el problema previo no está en la estructura general de
-          la página, sino probablemente en algún detalle de JavaScript
-          o en contenido copiado con caracteres especiales.
+          A continuación trabajarás con el caso de Laura en ocho pasos articulados:
+          apertura provocadora, marco teórico, primer ejercicio de organización ABC,
+          un zoom técnico sobre el lenguaje, un mini experimento manipulable, un
+          cierre conceptual, una actividad reflexiva y una integración final sobre
+          la clase funcional de evitación de interacción social.
         </p>
 
-        <p class="ua-text">
-          En el siguiente paso podremos ir añadiendo, uno por uno, los
-          bloques del caso de Laura (texto, tarjetas, contenedores) y
-          después la interactividad con JavaScript, comprobando en cada
-          etapa que la página sigue cargando sin quedar en blanco.
+        <p class="ua-hint ua-hint-center">
+          Haz clic en cada bloque para desplegar su contenido.  
+          No hay respuestas “perfectas”: el objetivo es ver cómo se organiza el caso
+          dentro de una lógica funcional y relacional.
         </p>
 
+        <!-- 1 · APERTURA PROVOCADORA -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="apertura">
+            <span>1 · Apertura provocadora: “Tengo fobia social”</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              Laura suele decir: “<em>Tengo fobia social. Siempre he sido así. Cuando hay
+              reuniones, me siento mal y prefiero no ir</em>”. Esta forma de hablar organiza
+              su experiencia en torno a un <strong>diagnóstico global</strong>, como si hubiera
+              “algo dentro” que explica todo lo que hace. Desde un enfoque contextual, sin embargo,
+              nos interesa otra pregunta: <strong>¿qué está haciendo Laura, en qué contexto y con
+              qué consecuencias?</strong>.
+            </p>
+
+            <p class="ua-text">
+              El mismo episodio puede describirse de muchas maneras: como rasgo, como etiqueta
+              nosológica, como estilo de personalidad o como unidad de análisis funcional.
+              En esta pantalla pondrás el foco en esta última opción: describir un fragmento
+              de conducta-en-contexto de forma tal que resulte útil para <strong>predecir e
+              influir</strong> la acción de Laura, no sólo para nombrarla.
+            </p>
+
+          </div>
+        </section>
+
+        <!-- 2 · MARCO TEÓRICO -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="teoria">
+            <span>2 · Marco teórico: diagnóstico, función y lenguaje</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              Desde el contextualismo funcional, una <strong>unidad de análisis</strong> es un
+              recorte pragmático del flujo de acción y contexto que elegimos porque nos ayuda
+              a intervenir. Un diagnóstico como “fobia social” puede ser clínicamente útil en
+              ciertos niveles, pero rara vez especifica <strong>qué hace la persona, ante qué
+              estímulos y qué consecuencias mantienen el patrón</strong>.
+            </p>
+
+            <p class="ua-text">
+              La Teoría del Marco Relacional (RFT) añade que el <strong>lenguaje</strong> de Laura
+              no es sólo una descripción pasiva, sino una fuente de <strong>funciones psicológicas</strong>.
+              Frases como “soy aburrida” o “si voy, se darán cuenta de que no tengo nada que aportar”
+              transforman la función de estímulos como “reunión de equipo”: dejan de ser sólo eventos
+              laborales y pasan a funcionar como amenazas a un yo construido verbalmente.
+            </p>
+
+            <p class="ua-text">
+              En ese sentido, pensamientos, recuerdos e imágenes no son entidades internas separadas
+              del comportamiento, sino <strong>eventos verbales</strong> que pueden actuar como
+              antecedentes, consecuencias o parte de la propia respuesta. Entender qué función tienen
+              en el episodio de Laura es esencial para luego decidir cómo trabajar desde ACT: exposición,
+              defusión, contacto con valores y acciones comprometidas.
+            </p>
+
+            <p class="ua-text">
+              En lo que sigue, usarás el caso de Laura para organizar un episodio ABC extendido, identificar
+              una <strong>clase funcional</strong> de evitación y explorar cómo pequeños cambios en los
+              antecedentes verbales podrían modificar el patrón, sin dejar de reconocer las contingencias
+              que lo mantienen.
+            </p>
+
+          </div>
+        </section>
+
+        <!-- 3 · PRIMER EJERCICIO: ORGANIZA EL ABC -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="abc">
+            <span>3 · Organiza el episodio: arrastra las tarjetas al ABC</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              A continuación tienes elementos del episodio de Laura. Tu tarea es ubicarlos en las
+              zonas de <strong>antecedentes, conducta, consecuencias inmediatas</strong> y
+              <strong>consecuencias a largo plazo</strong>. No necesitas buscar la clasificación
+              “correcta”, sino explorar cómo se organiza el episodio cuando piensas en función.
+            </p>
+
+            <!-- Tarjetas -->
+            <div class="ua-tag-panel" id="ua-tags-laura">
+              <button class="ua-tag" data-id="msg">
+                📩 Recibe mensaje: “Mañana reunión de equipo a las 9:00”.
+              </button>
+              <button class="ua-tag" data-id="img">
+                🧑‍🤝‍🧑 Imágenes de sus compañeros riendo en otras reuniones.
+              </button>
+              <button class="ua-tag" data-id="pens">
+                💭 Pensamiento: “Se van a dar cuenta de que soy aburrida”.
+              </button>
+              <button class="ua-tag" data-id="sens">
+                😓 Sensaciones: calor en la cara, manos sudorosas.
+              </button>
+              <button class="ua-tag" data-id="accion">
+                🚫 Respuesta: “No podré, tengo médico”.
+              </button>
+              <button class="ua-tag" data-id="alivio">
+                😮‍💨 Consecuencia inmediata: siente alivio.
+              </button>
+              <button class="ua-tag" data-id="largo">
+                ⏳ A largo plazo: cada vez le cuesta más hablar en público; se siente aislada.
+              </button>
+            </div>
+
+            <!-- Contenedores -->
+            <div class="ua-containers-grid">
+              <div class="ua-container-box" data-box="antecedentes">
+                <h4>🅰️ Antecedentes</h4>
+                <div class="ua-box-body"></div>
+              </div>
+
+              <div class="ua-container-box" data-box="conducta">
+                <h4>🔵 Conducta</h4>
+                <div class="ua-box-body"></div>
+              </div>
+
+              <div class="ua-container-box" data-box="ci">
+                <h4>🟡 Consecuencias inmediatas</h4>
+                <div class="ua-box-body"></div>
+              </div>
+
+              <div class="ua-container-box" data-box="clp">
+                <h4>⏳ Consecuencias a largo plazo</h4>
+                <div class="ua-box-body"></div>
+              </div>
+            </div>
+
+            <p class="ua-hint">
+              Haz clic en una tarjeta para seleccionarla y luego en una caja para colocar una copia.
+              La tarjeta original se atenuará para indicar que ya fue utilizada.
+            </p>
+
+          </div>
+        </section>
+
+        <!-- 4 · TEORÍA CON ZOOM -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="zoom">
+            <span>4 · Zoom técnico: el pensamiento como antecedente verbal</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              Observa qué ocurre con el episodio cuando consideras el pensamiento
+              “<em>se van a dar cuenta de que soy aburrida</em>” como parte de los
+              <strong>antecedentes</strong>. Desde la RFT, ese evento verbal no es simplemente
+              “una idea en la cabeza”, sino un estímulo que, en virtud de una historia
+              relacional, <strong>transforma la función</strong> de la situación “reunión de equipo”.
+            </p>
+
+            <p class="ua-text">
+              La reunión deja de ser sólo un contexto laboral y pasa a ser un campo de prueba para
+              marcos como <em>“yo / otros”, “valioso / no valioso”, “interesante / aburrido”</em>.
+              De este modo, el lenguaje amplifica el alcance de las contingencias: Laura responde no
+              sólo al aquí y ahora, sino a toda una red de relaciones verbales que otorgan significado
+              a lo que podría ocurrir si asiste.
+            </p>
+
+            <p class="ua-text">
+              Este “zoom” es relevante clínicamente porque la intervención no se limita a exponer
+              a Laura a la reunión, sino a trabajar también con las <strong>funciones verbales</strong>
+              que hacen que la reunión sea temida: defusión, construcción de nuevas redes en torno
+              a valores y promoción de patrones de acción que puedan competir con la evitación.
+            </p>
+
+          </div>
+        </section>
+
+        <!-- 5 · EXPERIMENTO MANIPULABLE -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="experimento">
+            <span>5 · Mini experimento: cambiando el antecedente verbal</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              Imagina que el contexto externo es el mismo (reunión de equipo, compañeros, mismo lugar),
+              pero cambian algunos elementos verbales. El siguiente experimento no busca ofrecer “frases
+              correctas”, sino mostrar cómo pequeñas variaciones en el lenguaje pueden modificar la
+              <strong>probabilidad funcional</strong> de ciertas conductas.
+            </p>
+
+            <div class="ua-context-buttons">
+              <button class="ua-btn-ghost ua-exp-btn" data-exp="sin-pensamiento">
+                Quitar el pensamiento anticipatorio
+              </button>
+              <button class="ua-btn-ghost ua-exp-btn" data-exp="corto">
+                “Voy solo 10 minutos y luego decido”
+              </button>
+              <button class="ua-btn-ghost ua-exp-btn" data-exp="herramientas">
+                “No necesito brillar, sólo participar un poco”
+              </button>
+            </div>
+
+            <div id="ua-exp-output" class="ua-info-box ua-text-small ua-hint">
+              Elige una de las opciones para ver cómo podría cambiar la función de la reunión y la
+              probabilidad de que Laura actúe de otra manera.
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 6 · CIERRE CONCEPTUAL -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="cierre">
+            <span>6 · Cierre conceptual: ¿qué unidad de análisis has construido?</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              Si reúnes lo que has organizado hasta ahora, la unidad de análisis ya no es simplemente
+              “fobia social”, sino un patrón recurrente: ante señales de interacción social y marcos
+              verbales de posible evaluación negativa, Laura se retira o evita, obtiene alivio inmediato
+              y, a largo plazo, restringe sus oportunidades de conexión y práctica.
+            </p>
+
+            <p class="ua-text">
+              Esta descripción funcional es mucho más precisa para guiar la intervención: permite
+              formular hipótesis sobre <strong>dónde intervenir</strong> (antecedentes, funciones
+              verbales, consecuencias), qué tipo de ejercicios de exposición y defusión plantear,
+              y cómo articular todo esto con valores personales relacionados con la pertenencia,
+              la contribución y la competencia profesional.
+            </p>
+
+          </div>
+        </section>
+
+        <!-- 7 · ACTIVIDAD REFLEXIVA -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="reflexion">
+            <span>7 · Actividad reflexiva: ¿qué es más decisivo en el patrón?</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              A continuación encontrarás una pregunta reflexiva. Elige la opción que te parezca
+              más relevante en el caso de Laura y lee el comentario asociado. No hay una única
+              respuesta correcta: se trata de afinar tu sensibilidad funcional.
+            </p>
+
+            <p class="ua-text">
+              En el caso de Laura, ¿qué elemento consideras que sostiene más fuertemente el patrón de evitación?
+            </p>
+
+            <div class="ua-context-buttons">
+              <button class="ua-btn-ghost ua-ref-btn" data-ref="pensamiento">
+                El pensamiento anticipatorio
+              </button>
+              <button class="ua-btn-ghost ua-ref-btn" data-ref="sensaciones">
+                Las sensaciones corporales
+              </button>
+              <button class="ua-btn-ghost ua-ref-btn" data-ref="alivio">
+                El alivio inmediato
+              </button>
+            </div>
+
+            <div id="ua-ref-output" class="ua-info-box ua-text-small ua-hint">
+              Elige una opción para ver un comentario clínico posible sobre ese foco.
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 8 · ACTIVIDAD INTEGRADORA FINAL -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="integracion">
+            <span>8 · Integración final: nombra la clase funcional</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              Por último, elige el nombre que mejor capture la <strong>función compartida</strong>
+              de las conductas de Laura en este episodio. Tu elección no es un diagnóstico, sino
+              una forma de resumir la unidad de análisis que has construido.
+            </p>
+
+            <div class="ua-choice-flex">
+              <button class="ua-btn-ghost ua-class-choice" data-choice="ansioso">
+                Síntoma ansioso
+              </button>
+              <button class="ua-btn-ghost ua-class-choice" data-choice="tp">
+                Trastorno de personalidad
+              </button>
+              <button class="ua-btn-ghost ua-class-choice" data-choice="evitacion">
+                Evitación de interacción social
+              </button>
+            </div>
+
+            <div id="ua-class-feedback" class="ua-hint ua-hint-center">
+              Elige una opción pensando: <strong>¿cuál me ayuda más a decidir qué hacer
+              en las primeras sesiones?</strong>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- NAV LOCAL -->
         <div class="ua-btn-row">
-          <a href="index.html" class="ua-btn-ghost">← Volver al mapa del módulo</a>
-          <a href="p7.html" class="ua-btn-primary">Ir a la lección final →</a>
+          <a href="p5.html" class="ua-btn-ghost">← Volver a la pantalla anterior</a>
+          <a href="p7.html" class="ua-btn-primary">Continuar a la lección final de integración →</a>
         </div>
 
       </section>
+
+      <!-- NAV INFERIOR GENERAL -->
+      <div class="ua-footer-nav">
+        <a href="index.html" class="ua-btn-ghost">Volver al mapa de la unidad</a>
+        <a href="p7.html" class="ua-btn-primary">Ir a la lección final →</a>
+      </div>
 
     </div>
   </main>
