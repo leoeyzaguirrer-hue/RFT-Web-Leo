@@ -131,4 +131,135 @@
               Bloque 3 — “Tener razón” no siempre ayuda a cambiar la conducta
             </button>
 
-            <div class
+            <div class="uv-accordion-body">
+
+              <p>
+                Muchos criterios clásicos de verdad pueden ser útiles para filosofía,
+                pero son insuficientes cuando analizamos <strong>conducta en contexto</strong>.
+              </p>
+
+              <p>
+                Ejemplos clínicos y educativos muestran que tener razón no garantiza cambio conductual.
+              </p>
+
+              <p>
+                Lo importante no es sólo si la descripción es correcta, sino si <strong>funciona</strong>.
+              </p>
+
+              <div class="uv-exercise">
+                <h3 class="uv-exercise-title">Ejercicio 2 · “Tener razón” vs “que funcione”</h3>
+
+                <ul>
+                  <li>“El folleto explica bien la fisiología”.</li>
+                  <li>“El consultante duerme 30 minutos antes”.</li>
+                  <li>“El padre repite la regla de tres”.</li>
+                  <li>“El niño resuelve ejercicios solo”.</li>
+                </ul>
+
+                <p class="uv-exercise-feedback">
+                  Las frases que implican cambio conductual real pertenecen a la categoría “Funciona”.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BLOQUE 4 -->
+          <div class="uv-accordion-item">
+            <button class="uv-accordion-header">
+              Bloque 4 — Verdad pragmática y análisis funcional del lenguaje
+            </button>
+
+            <div class="uv-accordion-body">
+
+              <p>
+                Con RFT, el criterio pragmático de verdad se vuelve aún más potente: importa qué
+                <strong>funciones conductuales</strong> adquieren los eventos al ser organizados por
+                el lenguaje.
+              </p>
+
+              <p>
+                Una misma descripción puede fomentar rigidez o flexibilidad dependiendo del marco
+                relacional.
+              </p>
+
+              <p>
+                Evaluamos como “más verdaderas” aquellas formulaciones verbales que amplían
+                repertorios y facilitan acción efectiva.
+              </p>
+
+              <div class="uv-exercise">
+                <h3 class="uv-exercise-title">Ejercicio 3 · ¿Qué explicación es más útil?</h3>
+                <p>Comparar dos explicaciones clínicas: una describe, la otra orienta acción.</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BLOQUE 5 -->
+          <div class="uv-accordion-item">
+            <button class="uv-accordion-header">
+              Bloque 5 — Cierre: de “tener razón” a “que funcione”
+            </button>
+
+            <div class="uv-accordion-body">
+
+              <p>
+                El criterio pragmático nos libera de buscar “la explicación más correcta”
+                y nos orienta a buscar la más útil para la acción.
+              </p>
+
+              <p>
+                El terapeuta contextual evalúa teorías por el tipo de acciones que habilitan.
+              </p>
+
+              <p>
+                La “verdad” contextual es aquella que aumenta flexibilidad psicológica
+                y guía hacia los valores.
+              </p>
+
+              <div class="uv-exercise">
+                <h3 class="uv-exercise-title">Ejercicio 4 · Reformulando descripciones</h3>
+                <p>Convertir frases cotidianas en descripciones funcionales que orienten acción.</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </section>
+
+    <!-- NAVEGACIÓN INFERIOR -->
+    <div class="uv-actions">
+      <a href="index.html" class="uv-btn uv-btn-ghost">Volver a la portada</a>
+      <a href="p3.html" class="uv-btn uv-btn-primary">Siguiente lección</a>
+    </div>
+
+  </div>
+
+  <!-- JS acordeón -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".uv-accordion-item");
+
+      items.forEach((item) => {
+        const header = item.querySelector(".uv-accordion-header");
+        const body = item.querySelector(".uv-accordion-body");
+
+        header.addEventListener("click", () => {
+          const open = item.classList.contains("is-open");
+          if (open) {
+            item.classList.remove("is-open");
+            body.style.maxHeight = null;
+          } else {
+            item.classList.add("is-open");
+            body.style.maxHeight = body.scrollHeight + "px";
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
