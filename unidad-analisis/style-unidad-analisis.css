@@ -626,3 +626,152 @@
     font-size: 18px;
   }
 }
+/* ============================================================
+   BREADCRUMB / ENCABEZADO
+============================================================ */
+.ua-breadcrumb {
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(10,42,92,0.65);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ua-breadcrumb-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--ua-dorado);
+  box-shadow: 0 0 10px rgba(253,191,18,0.65);
+}
+
+/* ============================================================
+   TÍTULO PRINCIPAL
+============================================================ */
+.ua-title-main {
+  font-family: "Coco Gothic", system-ui, sans-serif;
+  font-size: 42px;   /* seguro */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 10px 0 20px;
+  color: var(--ua-azul-1);
+  line-height: 1.2;
+}
+
+.ua-title-main span {
+  display: block;
+  font-size: 24px; /* seguro */
+  color: var(--ua-dorado);
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+}
+
+.ua-subtitle-main {
+  font-size: 20px;  
+  line-height: 1.6;
+  color: rgba(10,35,64,0.86);
+  max-width: 860px;
+}
+
+/* ============================================================
+   HERO CINEMATOGRÁFICO
+============================================================ */
+.ua-hero {
+  padding: 70px 20px 40px;
+  max-width: 1100px;   /* seguro: NO invade el layout */
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.ua-hero-text {
+  max-width: 880px;   /* ajustado para no colapsar */
+}
+
+.ua-focus-circle {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  width: 430px;
+  height: 430px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+      circle,
+      rgba(255,255,255,0.5) 0%,
+      rgba(255,255,255,0.15) 40%,
+      rgba(255,255,255,0) 70%
+  );
+  filter: blur(34px);
+  opacity: 0.45;
+  pointer-events: none;
+  animation: uaFocusPulse 8s ease-in-out infinite;
+}
+
+/* ============================================================
+   TEXTO DE CONTINUIDAD
+============================================================ */
+.ua-continuidad {
+  margin-top: 22px;
+  padding-left: 14px;
+  border-left: 3px solid var(--ua-dorado);
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(10,35,64,0.86);
+}
+
+.ua-continuidad-pregunta {
+  font-size: 20px;
+  color: var(--ua-azul-1);
+  font-weight: 600;
+}
+
+/* ============================================================
+   BLOQUE ANTES / DESPUÉS
+============================================================ */
+.ua-antes-despues {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* restaurado */
+  gap: 20px;
+}
+
+.ua-ad-card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 22px;
+  padding: 20px 22px;
+  border: 1px solid rgba(10,42,92,0.1);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+}
+
+.ua-ad-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ua-texto-main);
+}
+
+/* ============================================================
+   TARJETAS PREMIUM DEL MÓDULO
+============================================================ */
+.ua-mod-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Este era el causante */
+  gap: 18px;
+}
+
+.ua-mod-card {
+  background: rgba(255,255,255,0.97);
+  border-radius: 22px;
+  padding: 20px 22px;
+}
+
+.ua-mod-card p {
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(10,35,64,0.88);
+}
