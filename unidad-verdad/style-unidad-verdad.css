@@ -271,6 +271,135 @@ body { font-family: "Noto Sans", sans-serif; }
 
 @media (max-width: 600px) {
   .uv-lessons-grid {
+     /* ============================================================
+   TARJETA GRANDE PARA LECCIONES + VARIANTE BLANCA
+============================================================ */
+
+.uv-lesson-section {
+  max-width: 980px;
+  width: 100%;
+}
+
+.uv-card-large {
+  border-radius: var(--uv-radius-xl);
+  border: 1px solid rgba(248, 194, 70, 0.55);
+  padding: 2.4rem 2.8rem;
+  box-shadow: var(--uv-shadow-card);
+  max-width: 980px;
+  width: 100%;
+  background: #ffffff;
+}
+
+.uv-card-white {
+  background: linear-gradient(180deg, #fffdfa 0%, #fff3d4 100%);
+}
+
+.uv-lesson-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
+}
+
+.uv-lesson-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--uv-azul-main);
+  margin: 0 0 1.2rem;
+}
+
+/* texto dentro de la tarjeta */
+.uv-card-large p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+/* ============================================================
+   ACORDEÓN / PESTAÑAS DESPLEGABLES
+============================================================ */
+
+.uv-accordion {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(10, 35, 64, 0.12);
+}
+
+.uv-accordion-item {
+  border-bottom: 1px solid rgba(10, 35, 64, 0.12);
+  padding: 0.8rem 0;
+}
+
+.uv-accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.6rem 0;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--uv-azul-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uv-accordion-header::after {
+  content: "+";
+  font-size: 1.2rem;
+  transition: transform 0.25s ease;
+}
+
+.uv-accordion-item.is-open .uv-accordion-header::after {
+  transform: rotate(45deg);
+}
+
+.uv-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  padding-right: 0.4rem;
+}
+
+.uv-accordion-item.is-open .uv-accordion-body {
+  /* el max-height real se setea vía JS para un despliegue suave */
+}
+
+/* ============================================================
+   ESTILO DE EJERCICIOS DENTRO DE LA TARJETA
+============================================================ */
+
+.uv-exercise {
+  margin-top: 1.6rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: var(--uv-radius-lg);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(248, 194, 70, 0.5);
+}
+
+.uv-exercise-title {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--uv-azul-main);
+}
+
+.uv-exercise-feedback {
+  margin-top: 0.8rem;
+  font-size: 0.98rem;
+  font-style: italic;
+  color: rgba(10, 35, 64, 0.9);
+}
+
+/* responsive ajuste leve */
+@media (max-width: 780px) {
+  .uv-card-large {
+    padding: 1.8rem 1.5rem;
+  }
+}
+
     grid-template-columns: 1fr;
   }
 }
