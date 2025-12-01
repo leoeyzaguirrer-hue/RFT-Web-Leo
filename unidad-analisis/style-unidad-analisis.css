@@ -1,3 +1,13 @@
+* {
+  position: relative;
+  z-index: 1;
+}
+
+.ua-bg-layer,
+.ua-body::before {
+  z-index: -999 !important;
+}
+
 /* ============================================================
    MÓDULO UNIDAD DE ANÁLISIS
    Estilo cinematográfico · nodos dorados · diseño editorial premium
