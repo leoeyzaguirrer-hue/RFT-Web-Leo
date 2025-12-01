@@ -271,7 +271,8 @@ body { font-family: "Noto Sans", sans-serif; }
 
 @media (max-width: 600px) {
   .uv-lessons-grid {
-     /* ============================================================
+     
+    /* ============================================================
    TARJETA GRANDE PARA LECCIONES + VARIANTE BLANCA
 ============================================================ */
 
@@ -284,7 +285,7 @@ body { font-family: "Noto Sans", sans-serif; }
   border-radius: var(--uv-radius-xl);
   border: 1px solid rgba(248, 194, 70, 0.55);
   padding: 2.4rem 2.8rem;
-  box-shadow: var(--uv-shadow-card);
+  box-shadow: var(--uv-shadow-soft);
   max-width: 980px;
   width: 100%;
   background: #ffffff;
@@ -309,7 +310,6 @@ body { font-family: "Noto Sans", sans-serif; }
   margin: 0 0 1.2rem;
 }
 
-/* texto dentro de la tarjeta */
 .uv-card-large p {
   font-size: 1.05rem;
   line-height: 1.7;
@@ -317,7 +317,7 @@ body { font-family: "Noto Sans", sans-serif; }
 }
 
 /* ============================================================
-   ACORDEÓN / PESTAÑAS DESPLEGABLES
+   ACORDEÓN PREMIUM
 ============================================================ */
 
 .uv-accordion {
@@ -363,7 +363,44 @@ body { font-family: "Noto Sans", sans-serif; }
 }
 
 .uv-accordion-item.is-open .uv-accordion-body {
-  /* el max-height real se setea vía JS para un despliegue suave */
+  /* El max-height dinámico lo añade JS */
+}
+
+/* ============================================================
+   EJERCICIOS DENTRO DEL BLOQUE
+============================================================ */
+
+.uv-exercise {
+  margin-top: 1.6rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: var(--uv-radius-lg);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(248, 194, 70, 0.5);
+}
+
+.uv-exercise-title {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--uv-azul-main);
+}
+
+.uv-exercise-feedback {
+  margin-top: 0.8rem;
+  font-size: 0.98rem;
+  font-style: italic;
+  color: rgba(10, 35, 64, 0.9);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 780px) {
+  .uv-card-large {
+    padding: 1.8rem 1.5rem;
+  }
 }
 
 /* ============================================================
