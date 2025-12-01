@@ -1,203 +1,115 @@
 /* ============================================================
-   BREADCRUMB / ENCABEZADO
+   PALETA + BASE GLOBAL
 ============================================================ */
 
-.ua-breadcrumb {
-  font-size: 15px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(10,42,92,0.65);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ua-breadcrumb-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  background: var(--ua-dorado);
-  box-shadow: 0 0 10px rgba(253,191,18,0.65);
+:root {
+  --ua-azul-1: #0A2A5C;
+  --ua-azul-2: #132F66;
+  --ua-azul-soft: #E9EFF8;
+  --ua-azul-bg: #F4F7FC;
+  --ua-blanco: #FFFFFF;
+  --ua-dorado: #FDBF12;
+  --ua-dorado-soft: #FFE39A;
+  --ua-texto-main: #0A2340;
+  --ua-texto-soft: rgba(10,35,64,0.78);
 }
 
 /* ============================================================
-   TÍTULO PRINCIPAL
+   CUERPO Y FONDO GENERAL
 ============================================================ */
 
-.ua-title-main {
-  font-family: "Coco Gothic", system-ui, sans-serif;
-  font-size: 46px; /* aumentado */
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 10px 0 20px;
-  color: var(--ua-azul-1);
-  line-height: 1.2;
-}
-
-.ua-title-main span {
-  display: block;
-  font-size: 26px; /* aumentado */
-  color: var(--ua-dorado);
-  letter-spacing: 0.04em;
-  margin-top: 6px;
-}
-
-.ua-subtitle-main {
-  font-size: 22px;  /* aumentado */
-  line-height: 1.6;
-  color: rgba(10,35,64,0.86);
-  max-width: 900px;
-}
-
-/* ============================================================
-   HERO CINEMATOGRÁFICO
-============================================================ */
-
-.ua-hero {
-  padding: 80px 20px 50px;
-  max-width: 1200px;
-  margin: 0 auto 40px;
-  position: relative;
-}
-
-.ua-hero-text {
-  max-width: 960px;
-}
-
-.ua-focus-circle {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  width: 480px;
-  height: 480px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: radial-gradient(
-      circle,
-      rgba(255,255,255,0.5) 0%,
-      rgba(255,255,255,0.15) 40%,
-      rgba(255,255,255,0) 70%
-  );
-  filter: blur(38px);
-  opacity: 0.45;
-  pointer-events: none;
-  animation: uaFocusPulse 8s ease-in-out infinite;
-}
-
-/* ============================================================
-   TEXTO DE CONTINUIDAD
-============================================================ */
-
-.ua-continuidad {
-  margin-top: 22px;
-  padding-left: 14px;
-  border-left: 3px solid var(--ua-dorado);
-  font-size: 20px; /* aumentado */
-  line-height: 1.7;
-  color: rgba(10,35,64,0.86);
-}
-
-.ua-continuidad-pregunta {
-  font-size: 22px;
-  color: var(--ua-azul-1);
-  font-weight: 600;
-}
-
-/* ============================================================
-   BLOQUE ANTES / DESPUÉS
-============================================================ */
-
-.ua-antes-despues {
-  max-width: 1150px;
-  margin: 0 auto 50px;
-  padding: 10px 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 24px;
-}
-
-.ua-ad-card {
-  background: rgba(255,255,255,0.96);
-  border-radius: 24px;
-  padding: 22px 24px 20px;
-  border: 1px solid rgba(10,42,92,0.1);
-  box-shadow: 0 18px 36px rgba(0,0,0,0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.ua-ad-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 26px 44px rgba(0,0,0,0.10);
-}
-
-.ua-ad-label {
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 0.14em;
-  color: var(--ua-dorado);
-  margin-bottom: 6px;
-}
-
-.ua-ad-text {
-  font-size: 20px; /* aumentado */
-  line-height: 1.55;
+.ua-body {
+  margin: 0;
+  font-family: "Noto Sans", sans-serif;
   color: var(--ua-texto-main);
+  background: linear-gradient(180deg, #f1f4fb 0%, #ffffff 45%, var(--ua-azul-bg) 100%);
+  min-height: 100vh;
+  font-size: 22px; /* tamaño base aumentado */
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Patrón geométrico */
+.ua-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+      linear-gradient(135deg, rgba(10,42,92,0.06) 1px, transparent 1px),
+      radial-gradient(circle at 10% 20%, rgba(253,191,18,0.14), transparent 55%);
+  background-size: 42px 42px, 260px 260px;
+  opacity: 0.4;
+  z-index: -3;
 }
 
 /* ============================================================
-   TARJETAS PREMIUM DEL MÓDULO
+   CAPA DE NODOS Y LÍNEAS
 ============================================================ */
 
-.ua-mod-grid {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 22px;
+.ua-bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
 }
 
-.ua-mod-card {
-  background: rgba(255,255,255,0.97);
-  border: 1px solid rgba(10,42,92,0.1);
-  border-radius: 22px;
-  padding: 22px 24px;
-  cursor: pointer;
-  transition: border 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease;
-  position: relative;
-  overflow: hidden;
+.ua-bg-node {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid rgba(253,191,18,0.9);
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 14px rgba(253,191,18,0.7);
+  animation: uaFloatNode 16s ease-in-out infinite;
+  opacity: 0.85;
 }
 
-.ua-mod-card:hover {
-  border-color: rgba(253,191,18,0.8);
-  transform: translateY(-4px);
-  box-shadow: 0 22px 44px rgba(0,0,0,0.08);
+.ua-bg-node.n1 { top: 12%; left: 18%; animation-delay: 0s; }
+.ua-bg-node.n2 { top: 26%; right: 20%; animation-delay: 4s; }
+.ua-bg-node.n3 { bottom: 30%; left: 24%; animation-delay: 8s; }
+.ua-bg-node.n4 { bottom: 18%; right: 22%; animation-delay: 12s; }
+
+@keyframes uaFloatNode {
+  0% { transform: translate(0,0); opacity: 0.6; }
+  50% { transform: translate(14px,-16px); opacity: 1; }
+  100% { transform: translate(0,0); opacity: 0.6; }
 }
 
-.ua-mod-icon {
-  font-size: 36px;
-  color: var(--ua-dorado);
-  margin-bottom: 10px;
+.ua-bg-line {
+  position: absolute;
+  height: 2px;
+  width: 200px;
+  background: linear-gradient(90deg, transparent, rgba(253,191,18,0.6), transparent);
+  opacity: 0.35;
+  animation: uaLinePulse 12s ease-in-out infinite;
 }
 
-.ua-mod-card h3 {
-  font-family: "Coco Gothic", sans-serif;
-  font-size: 20px;
-  color: var(--ua-azul-1);
-  text-transform: uppercase;
-  margin-bottom: 6px;
+.ua-bg-line.l1 { top: 20%; left: 20%; transform: rotate(12deg); }
+.ua-bg-line.l2 { top: 34%; right: 18%; transform: rotate(-18deg); }
+.ua-bg-line.l3 { bottom: 26%; left: 22%; transform: rotate(18deg); }
+
+@keyframes uaLinePulse {
+  0% { opacity: 0.18; }
+  50% { opacity: 0.75; }
+  100% { opacity: 0.18; }
 }
 
-.ua-mod-card h3 span {
-  display: block;
-  font-size: 14px;
-  color: var(--ua-azul-2);
-  letter-spacing: 0.06em;
+/* ============================================================
+   LAYOUT GENERAL
+============================================================ */
+
+.ua-page {
+  min-height: 100vh;
+  padding: 40px 20px 70px;
+  display: flex;
+  justify-content: center;
 }
 
-.ua-mod-card p {
-  font-size: 17px;
-  line-height: 1.55;
-  color: rgba(10,35,64,0.88);
+.ua-inner {
+  width: 100%;
+  max-width: 1280px; /* aumentado */
 }
 /* ============================================================
    SUPER-CARD GENERAL (CONTENEDOR PRINCIPAL GRANDE)
