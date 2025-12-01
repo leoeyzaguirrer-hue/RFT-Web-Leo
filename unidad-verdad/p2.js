@@ -1,16 +1,20 @@
 /* ============================================================
-   p2.js · LECCIÓN 1 · Unidad de Verdad
-   Control de acordeones (múltiples abiertos permitidos)
-   Diseño premium compatible con style-unidad-verdad.css
+   MÓDULO UNIDAD DE VERDAD · P2.js
+   Acordeón premium + microinteracciones suaves
+   Compatible 100% con HTML y CSS actual
 ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("P2.js cargado correctamente — Unidad de Verdad");
+
   initAccordion();
+  initExerciseHover();
 });
 
-/* ------------------------------------------------------------
-   FUNCIÓN PRINCIPAL: INICIALIZAR ACORDEONES
------------------------------------------------------------- */
+/* ============================================================
+   ACORDEÓN PREMIUM
+============================================================ */
+
 function initAccordion() {
   const items = document.querySelectorAll(".uv-accordion-item");
 
@@ -19,37 +23,47 @@ function initAccordion() {
     const body = item.querySelector(".uv-accordion-body");
 
     header.addEventListener("click", () => {
-      toggleAccordion(item, body);
+      const isOpen = item.classList.contains("is-open");
+
+      // Cierra todos los demás
+      document.querySelectorAll(".uv-accordion-item.is-open").forEach((openItem) => {
+        if (openItem !== item) {
+          const openBody = openItem.querySelector(".uv-accordion-body");
+          openBody.style.maxHeight = null;
+          openItem.classList.remove("is-open");
+        }
+      });
+
+      // Alterna el item actual
+      if (isOpen) {
+        body.style.maxHeight = null;
+        item.classList.remove("is-open");
+      } else {
+        body.style.maxHeight = body.scrollHeight + "px";
+        item.classList.add("is-open");
+      }
     });
   });
 }
 
-/* ------------------------------------------------------------
-   ABRIR / CERRAR ACORDEÓN INDIVIDUAL
-   (permite múltiples abiertos simultáneamente)
------------------------------------------------------------- */
-function toggleAccordion(item, body) {
-  const isOpen = item.classList.contains("is-open");
+/* ============================================================
+   MICROINTERACCIONES PARA EJERCICIOS
+   (Iconos + feedback suave en hover)
+============================================================ */
 
-  if (isOpen) {
-    closeAccordion(item, body);
-  } else {
-    openAccordion(item, body);
-  }
-}
+function initExerciseHover() {
+  const exercises = document.querySelectorAll(".uv-exercise");
 
-/* ------------------------------------------------------------
-   ABRIR UN ACORDEÓN
------------------------------------------------------------- */
-function openAccordion(item, body) {
-  item.classList.add("is-open");
-  body.style.maxHeight = body.scrollHeight + "px";
-}
+  exercises.forEach((ex) => {
+    ex.addEventListener("mouseenter", () => {
+      ex.style.transform = "translateY(-3px)";
+      ex.style.transition = "0.25s ease";
+      ex.style.boxShadow = "0 12px 26px rgba(10, 35, 64, 0.18)";
+    });
 
-/* ------------------------------------------------------------
-   CERRAR UN ACORDEÓN
------------------------------------------------------------- */
-function closeAccordion(item, body) {
-  item.classList.remove("is-open");
-  body.style.maxHeight = null;
+    ex.addEventListener("mouseleave", () => {
+      ex.style.transform = "translateY(0)";
+      ex.style.boxShadow = "none";
+    });
+  });
 }
