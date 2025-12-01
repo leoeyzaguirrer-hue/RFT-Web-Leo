@@ -282,6 +282,27 @@ body { font-family: "Noto Sans", sans-serif; }
   font-style: italic;
   color: rgba(10, 35, 64, 0.9);
 }
+/* ============================================================
+   TARJETAS SUPERIORES (Breadcrumb + Héroe)
+============================================================ */
+
+.uv-top-card,
+.uv-hero-card {
+  width: 95%;
+  max-width: 1080px;
+  background: #ffffffaa;
+  backdrop-filter: blur(6px);
+  border-radius: var(--uv-radius-xl);
+  border: 2px solid rgba(253, 191, 18, 0.35);
+  box-shadow: var(--uv-shadow-soft);
+  padding: 1.6rem 2rem;
+  margin-bottom: 1.2rem;
+}
+
+/* ajuste para el héroe (más grande) */
+.uv-hero-card {
+  padding: 2.4rem 2.6rem;
+}
 
 /* ============================================================
    RESPONSIVE
