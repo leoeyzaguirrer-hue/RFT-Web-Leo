@@ -93,3 +93,134 @@
   50% { opacity: 0.75; }
   100% { opacity: 0.2; }
 }
+/* ============================================================
+   LAYOUT CENTRAL
+============================================================ */
+.ua-page {
+  display: flex;
+  justify-content: center;
+  padding: 60px 16px;
+  position: relative;
+  z-index: 1; /* por encima del fondo */
+}
+
+.ua-inner {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* TARJETA PRINCIPAL */
+.ua-main-card {
+  background: var(--ua-blanco);
+  border-radius: 22px;
+  padding: 48px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.08),
+    0 0 8px rgba(10, 42, 92, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   HERO — ENCABEZADO
+============================================================ */
+.ua-hero {
+  position: relative;
+  padding: 90px 24px 40px;
+  text-align: left;
+  z-index: 1;
+}
+
+.ua-hero-text {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Breadcrumb */
+.ua-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--ua-texto-soft);
+  margin-bottom: 12px;
+}
+
+.ua-breadcrumb-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--ua-dorado);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(253,191,18,0.6);
+}
+
+/* ============================================================
+   TITULOS Y SUBTITULOS
+============================================================ */
+.ua-title-main {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--ua-azul-1);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.ua-title-main span {
+  display: block;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ua-azul-2);
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.ua-subtitle-main {
+  font-size: 18px;
+  color: var(--ua-texto-soft);
+  max-width: 720px;
+  line-height: 1.55;
+  margin: 16px 0 0;
+}
+
+/* Etiquetas internas */
+.ua-section-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ua-dorado);
+  margin-bottom: 8px;
+}
+
+.ua-section-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--ua-azul-1);
+}
+
+/* Texto general */
+.ua-text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ua-texto-main);
+  margin-bottom: 18px;
+}
+
+.ua-hint {
+  font-size: 15px;
+  color: var(--ua-texto-soft);
+  padding-left: 6px;
+  border-left: 3px solid var(--ua-dorado);
+  margin-top: 10px;
+}
+
+/* Animaciones */
+.ua-fade-in {
+  opacity: 0;
+  animation: uaFadeIn 1s ease forwards;
+}
+
+@keyframes uaFadeIn {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
