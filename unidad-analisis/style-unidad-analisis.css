@@ -55,10 +55,18 @@
 }
 
 /* ============================================================
-   NODOS + LÍNEAS
+   NODOS + LÍNEAS (CORREGIDO Y BLINDADO)
 ============================================================ */
-.ua-bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
 
+/* Capa completa del fondo: SIEMPRE por detrás */
+.ua-bg-layer { 
+  position: fixed; 
+  inset: 0; 
+  pointer-events: none; 
+  z-index: -1000 !important; 
+}
+
+/* Nodos animados dorados */
 .ua-bg-node {
   position: absolute;
   width: 14px;
@@ -69,8 +77,10 @@
   box-shadow: 0 0 14px rgba(253,191,18,0.7);
   animation: uaFloatNode 16s ease-in-out infinite;
   opacity: 0.85;
+  z-index: -1001 !important; /* aún más atrás */
 }
 
+/* Posiciones */
 .ua-bg-node.n1 { top: 12%; left: 18%; animation-delay: 0s; }
 .ua-bg-node.n2 { top: 26%; right: 20%; animation-delay: 4s; }
 .ua-bg-node.n3 { bottom: 30%; left: 24%; animation-delay: 8s; }
@@ -82,6 +92,7 @@
   100% { transform: translate(0,0); opacity: 0.6; }
 }
 
+/* Líneas doradas */
 .ua-bg-line {
   position: absolute;
   height: 2px;
@@ -89,8 +100,10 @@
   background: linear-gradient(90deg, transparent, rgba(253,191,18,0.6), transparent);
   opacity: 0.35;
   animation: uaLinePulse 12s ease-in-out infinite;
+  z-index: -1001 !important; /* igual de profundo que los nodos */
 }
 
+/* Posiciones de líneas */
 .ua-bg-line.l1 { top: 20%; left: 20%; transform: rotate(12deg); }
 .ua-bg-line.l2 { top: 34%; right: 18%; transform: rotate(-18deg); }
 .ua-bg-line.l3 { bottom: 26%; left: 22%; transform: rotate(18deg); }
@@ -101,8 +114,6 @@
   100% { opacity: 0.18; }
 }
 
-/* ============================================================
-   LAYOUT CENTRAL
 ============================================================ */
 .ua-page {
   min-height: 100vh;
