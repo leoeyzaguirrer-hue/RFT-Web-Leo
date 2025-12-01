@@ -1,82 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unidad 3 · Verdad como lo que Funciona</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unidad de Verdad · RFT · ACT</title>
 
-    <!-- STYLE DEL MÓDULO -->
-    <link rel="stylesheet" href="style-verdad.css" />
-    <script defer src="p1.js"></script>
+  <!-- Tipografía base -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- SOLO EL STYLE DEL MÓDULO VERDAD -->
+  <link rel="stylesheet" href="style-unidad-verdad.css" />
 </head>
 
-<body class="v-body">
+<body class="uv-body">
+  <!-- CAPA DE FONDO DECORATIVA -->
+  <div class="uv-bg-layer">
+    <span class="uv-bg-node n1"></span>
+    <span class="uv-bg-node n2"></span>
+    <span class="uv-bg-node n3"></span>
+    <span class="uv-bg-node n4"></span>
 
-    <!-- Fondo Cinematográfico -->
-    <div class="v-bg">
-        <span class="v-node n1"></span>
-        <span class="v-node n2"></span>
-        <span class="v-node n3"></span>
-        <span class="v-line l1"></span>
-        <span class="v-line l2"></span>
-    </div>
+    <span class="uv-bg-ring r1"></span>
+    <span class="uv-bg-ring r2"></span>
+    <span class="uv-bg-ring r3"></span>
 
-    <main class="v-container">
+    <span class="uv-bg-curve c1"></span>
+    <span class="uv-bg-curve c2"></span>
+  </div>
 
-        <!-- TITULAR PRINCIPAL -->
-        <header class="v-header">
-            <h1 class="v-title">
-                Verdad como lo que Funciona
-            </h1>
-            <h2 class="v-subtitle">
-                El criterio pragmático del contextualismo funcional
-            </h2>
-        </header>
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="uv-page">
+    <header class="uv-hero">
+      <p class="uv-module-label">Módulo · Unidad de Verdad</p>
+      <h1 class="uv-title">
+        Verdad como lo que funciona en el Contextualismo Funcional
+      </h1>
+      <p class="uv-subtitle">
+        En el contextualismo funcional, la verdad no se define por correspondencia
+        con una realidad objetiva, sino por su eficacia pragmática: aquello que
+        permite predecir e influir en los eventos en un contexto dado.
+      </p>
+    </header>
 
-        <!-- OBJETIVO NARRATIVO -->
-        <section class="v-narrativa">
-            <p>
-                En la unidad anterior exploraste la conducta-en-contexto como unidad de análisis.
-                Ahora toca responder una pregunta fundamental: ¿cómo evaluamos si una descripción,
-                un modelo o una teoría es “verdadera” dentro de una ciencia conductual contextual?
-                Aquí trabajamos con un criterio pragmático: lo verdadero es lo que funciona para
-                predecir e influir en la conducta relevante, orientado a reducir sufrimiento y
-                promover una vida valiosa. Basado en Törneke (Learning RFT) y MatrixACT.
-            </p>
+    <main class="uv-main">
+      <section class="uv-intro">
+        <article class="uv-card uv-card-main">
+          <h2 class="uv-card-title">¿De qué trata este módulo?</h2>
+          <p>
+            La unidad de Verdad introduce uno de los pilares filosóficos de ACT y RFT:
+            la verdad entendida como <em>lo que funciona</em>. Desde esta perspectiva,
+            las afirmaciones, pensamientos o reglas se evalúan por su capacidad de
+            generar consecuencias útiles en un contexto específico, y no por su ajuste
+            a una realidad absoluta.
+          </p>
+          <p>
+            Este módulo analiza cómo los criterios tradicionales de verdad pueden
+            fallar al explicar la conducta humana, y cómo el criterio pragmático
+            permite comprender con mayor precisión la función de nuestras formulaciones
+            verbales. A lo largo del módulo exploraremos aplicaciones clínicas, formas
+            de evaluar reglas y ejercicios prácticos que entrenan la discriminación
+            funcional necesaria para intervenir de manera efectiva.
+          </p>
+        </article>
+
+        <section id="mapa-modulo" class="uv-module-map">
+          <h3 class="uv-section-title">Mapa del módulo</h3>
+          <p class="uv-map-intro">
+            A continuación encontrarás las pantallas que componen la Unidad de Verdad.
+          </p>
+          <ol class="uv-map-list">
+            <li>Pantalla 1 — Bienvenida y mapa del módulo</li>
+            <li>Pantalla 2 — Lección 1: ¿Por qué necesitamos un criterio de verdad?</li>
+            <li>Pantalla 3 — Lección 2: Otros criterios de verdad</li>
+            <li>Pantalla 4 — Lección 3: La verdad pragmática en el contextualismo funcional</li>
+            <li>Pantalla 5 — Lección 4: Aplicación clínica (ACT / RFT)</li>
+            <li>Pantalla 6 — Ejercicio interactivo: Evaluando formulaciones y reglas</li>
+            <li>Pantalla 7 — Integración + devolución de respuestas</li>
+            <li>Pantalla 8 — Cierre del módulo</li>
+          </ol>
         </section>
 
-        <!-- MAPA DEL MÓDULO -->
-        <section class="v-grid">
-
-            <div class="v-card" data-tooltip="Aquí comprenderás por qué toda ciencia necesita un criterio de verdad.">
-                <h3>Lección 1</h3>
-                <p>¿Por qué necesitamos un criterio de verdad?</p>
-            </div>
-
-            <div class="v-card" data-tooltip="Contraste entre correspondencia, coherencia y modelos mecanicistas.">
-                <h3>Lección 2</h3>
-                <p>Otros criterios: correspondencia, coherencia, mecanicismo</p>
-            </div>
-
-            <div class="v-card" data-tooltip="El corazón del contextualismo funcional.">
-                <h3>Lección 3</h3>
-                <p>Verdad pragmática en el contextualismo funcional</p>
-            </div>
-
-            <div class="v-card" data-tooltip="Reglas, ACT, RFT, y qué significa realmente que algo 'funcione' clínicamente.">
-                <h3>Lección 4</h3>
-                <p>Aplicación clínica: ¿qué 'funciona' en ACT/RFT?</p>
-            </div>
-
-        </section>
-
-        <!-- BOTONES -->
-        <div class="v-buttons">
-            <a href="p1.html" class="v-btn-primary">Comenzar Lección 1</a>
-            <a href="../index.html" class="v-btn-secondary">Volver a Unidad de Análisis</a>
+        <div class="uv-actions">
+          <a href="p2.html" class="uv-btn uv-btn-primary">Comenzar lección</a>
+          <a href="#mapa-modulo" class="uv-btn uv-btn-secondary">Ver mapa del módulo</a>
+          <a href="../index.html" class="uv-btn uv-btn-ghost">Volver al menú RFT</a>
         </div>
-
+      </section>
     </main>
-
+  </div>
 </body>
 </html>
