@@ -1,38 +1,40 @@
 /* ============================================================
    MÓDULO · UNIDAD DE VERDAD
-   Fondo azul editorial · mandalas suaves · diseño premium
+   Fondo azul más intenso · mandalas suaves · editorial premium
 ============================================================ */
 
+/* Paleta específica */
 :root {
-  --uv-bg-1: #e9f0fb;
-  --uv-bg-2: #f6f9ff;
-  --uv-bg-3: #eef4fc;
+  --uv-azul-fondo-1: #c8d9f3;
+  --uv-azul-fondo-2: #dbe7fb;
+  --uv-azul-fondo-3: #f0f4ff;
 
-  --uv-blue-main: #0a2a5c;
-  --uv-blue-text: #0a2340;
-  --uv-blue-soft: #7aa4c8;
+  --uv-azul-main: #0a2a5c;
+  --uv-azul-texto: #0a2340;
+  --uv-azul-soft: #8eb6d9;
 
-  --uv-gold: #fdbf12;
-  --uv-gold-soft: #ffe39a;
+  --uv-dorado: #fdbf12;
+  --uv-dorado-soft: #ffe39a;
 
-  --uv-white: #ffffff;
+  --uv-blanco: #ffffff;
+
+  --uv-shadow-soft: 0 18px 40px rgba(5, 22, 46, 0.25);
 
   --uv-radius-xl: 32px;
-  --uv-radius-lg: 26px;
+  --uv-radius-lg: 24px;
 
-  --uv-shadow-soft: 0 18px 40px rgba(5, 22, 46, 0.18);
-
-  --uv-space-xs: 0.45rem;
+  --uv-space-xs: 0.5rem;
   --uv-space-sm: 0.75rem;
   --uv-space-md: 1.25rem;
   --uv-space-lg: 2rem;
   --uv-space-xl: 3rem;
 
-  --uv-max-width: 1280px;
+  /* Más ancho para usar mejor la pantalla */
+  --uv-max-width: 1240px;
 }
 
 /* ============================================================
-   BASE / RESET
+   RESETEO BÁSICO
 ============================================================ */
 
 *,
@@ -47,22 +49,29 @@ body {
   padding: 0;
 }
 
-.uv-body {
-  min-height: 100vh;
-  font-family: "Noto Sans", sans-serif;
-  color: var(--uv-blue-text);
-  background:
-    radial-gradient(circle at top left, #ffffff 0%, transparent 60%),
-    radial-gradient(circle at bottom right, #f3f6ff 0%, transparent 55%),
-    linear-gradient(180deg, var(--uv-bg-1), var(--uv-bg-2), var(--uv-bg-3));
-  overflow-x: hidden;
-  position: relative;
-}
-
 /* ============================================================
-   FONDO DECORATIVO (mandalas + nodos + líneas suaves)
+   FONDO GENERAL + CAPAS
 ============================================================ */
 
+.uv-body {
+  min-height: 100vh;
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  color: var(--uv-azul-texto);
+  background:
+    radial-gradient(circle at top left, #f5f8ff 0, transparent 55%),
+    radial-gradient(circle at bottom right, #d0defb 0, transparent 55%),
+    linear-gradient(
+      180deg,
+      var(--uv-azul-fondo-1) 0%,
+      var(--uv-azul-fondo-2) 42%,
+      var(--uv-azul-fondo-3) 100%
+    );
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Capa de nodos y mandalas */
 .uv-bg-layer {
   position: fixed;
   inset: 0;
@@ -70,229 +79,366 @@ body {
   z-index: -2;
 }
 
+/* Nodos circulares (azules suaves) */
 .uv-bg-node {
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 999px;
-  border: 2px solid rgba(122, 164, 200, 0.6);
-  background: radial-gradient(circle at 40% 40%, #fff, transparent 70%);
-  opacity: 0.75;
+  border: 2px solid rgba(142, 182, 217, 0.9);
+  background: radial-gradient(circle at 30% 30%, #ffffff, transparent 65%);
+  box-shadow: 0 0 16px rgba(142, 182, 217, 0.7);
 }
 
-.uv-bg-node.n1 { top: 14%; left: 8%; }
-.uv-bg-node.n2 { top: 38%; right: 12%; }
-.uv-bg-node.n3 { bottom: 22%; left: 14%; }
-.uv-bg-node.n4 { bottom: 10%; right: 6%; }
+/* Posiciones específicas de nodos */
+.uv-bg-node.n1 {
+  top: 12%;
+  left: 6%;
+}
 
-/* Mandalas */
+.uv-bg-node.n2 {
+  top: 32%;
+  right: 12%;
+}
+
+.uv-bg-node.n3 {
+  bottom: 20%;
+  left: 14%;
+}
+
+.uv-bg-node.n4 {
+  bottom: 10%;
+  right: 6%;
+}
+
+/* Anillos tipo mandala (azules + un toque dorado) */
 .uv-bg-ring {
   position: absolute;
   border-radius: 999px;
-  border: 1px solid rgba(180, 208, 236, 0.45);
-  filter: blur(0.3px);
-  opacity: 0.35;
+  border: 1px solid rgba(187, 212, 238, 0.65);
 }
 
-.uv-bg-ring.r1 { width: 520px; height: 520px; top: -140px; right: -180px; }
-.uv-bg-ring.r2 { width: 360px; height: 360px; top: 30%; left: -200px; }
-.uv-bg-ring.r3 { width: 440px; height: 440px; bottom: -160px; right: 8%; }
+.uv-bg-ring.r1 {
+  width: 440px;
+  height: 440px;
+  top: -80px;
+  right: -140px;
+  box-shadow: 0 0 40px rgba(253, 191, 18, 0.15);
+}
 
-/* Líneas curvas */
+.uv-bg-ring.r2 {
+  width: 300px;
+  height: 300px;
+  top: 38%;
+  left: -140px;
+}
+
+.uv-bg-ring.r3 {
+  width: 380px;
+  height: 380px;
+  bottom: -140px;
+  right: 8%;
+}
+
+/* Curvas suaves (pseudo líneas redondeadas) */
 .uv-bg-curve {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 55%;
-  border: 1px solid rgba(180, 208, 236, 0.45);
+  width: 580px;
+  height: 580px;
+  border-radius: 60%;
+  border: 1px solid rgba(187, 212, 238, 0.55);
+  transform-origin: center;
 }
 
-.uv-bg-curve.c1 { top: -210px; left: 18%; transform: rotate(16deg); }
-.uv-bg-curve.c2 { bottom: -200px; right: 6%; transform: rotate(-14deg); }
+.uv-bg-curve.c1 {
+  top: -180px;
+  left: 18%;
+  transform: rotate(18deg);
+}
+
+.uv-bg-curve.c2 {
+  bottom: -220px;
+  right: 2%;
+  transform: rotate(-12deg);
+}
+
+/* Aseguramos que el contenido esté por encima del fondo */
+.uv-page {
+  position: relative;
+  z-index: 0;
+}
 
 /* ============================================================
-   PAGE LAYOUT — alineado a la izquierda completamente
+   LAYOUT PRINCIPAL
 ============================================================ */
 
 .uv-page {
   max-width: var(--uv-max-width);
   margin: 0 auto;
-  padding: var(--uv-space-xl) var(--uv-space-lg) 4rem;
+  padding: var(--uv-space-xl) var(--uv-space-lg) 3.5rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--uv-space-xl);
+  align-items: flex-start; /* Todo cargado hacia la izquierda */
+  row-gap: var(--uv-space-lg);
 }
 
-/* ============================================================
-   BREADCRUMB + MICROINTRODUCCIÓN
-============================================================ */
+/* Hero alineado a la izquierda, ancho amplio */
+.uv-hero {
+  max-width: 880px;
+  text-align: left;
+}
 
-.uv-breadcrumb {
-  font-size: 0.85rem;
-  color: rgba(10, 35, 64, 0.55);
+/* Microintroducción / etiqueta de módulo */
+.uv-module-label {
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(10, 35, 64, 0.75);
   margin-bottom: var(--uv-space-xs);
 }
 
-.uv-microintro {
-  font-size: 0.95rem;
-  color: rgba(10, 35, 64, 0.65);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: var(--uv-space-sm);
-}
-
-/* ============================================================
-   TITULOS — hero left-aligned
-============================================================ */
-
+/* Título principal amplio */
 .uv-title {
-  font-family: "Coco Gothic";
+  font-family: "Coco Gothic", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
   font-weight: 700;
-  font-size: clamp(2.4rem, 3.2vw + 1rem, 3.4rem);
-  color: var(--uv-blue-main);
-  line-height: 1.17;
+  font-size: clamp(2.5rem, 3.2vw + 1.1rem, 3.3rem);
+  line-height: 1.16;
+  color: var(--uv-azul-main);
   margin: 0 0 var(--uv-space-sm);
-  position: relative;
 }
 
-/* ✨ Icono premium animado */
-.uv-title::after {
-  content: "✨";
-  position: absolute;
-  right: -34px;
-  top: 6px;
-  font-size: 1.3rem;
-  opacity: 0;
-  animation: sparkle 14s infinite ease-in-out;
-}
-
-@keyframes sparkle {
-  0%, 88%, 100% { opacity: 0; transform: scale(0.8); }
-  90% { opacity: 1; transform: scale(1.1); }
-  92% { opacity: 0.8; transform: scale(1); }
-}
-
-/* ============================================================
-   SUBTÍTULO — más pequeño, editorial
-============================================================ */
-
+/* Subtítulo con buena legibilidad */
 .uv-subtitle {
-  font-size: 1.05rem;
-  max-width: 640px;
-  color: rgba(10, 35, 64, 0.85);
-  margin: 0;
-}
-
-/* ============================================================
-   TARJETA EDITORIAL — reducida y premium
-============================================================ */
-
-.uv-card-main {
-  background: linear-gradient(180deg, #ffffff, #fdf7e3);
-  border-radius: var(--uv-radius-xl);
-  border: 2px solid rgba(253, 191, 18, 0.35);
-  padding: 1.6rem 2rem;
+  font-size: 1.06rem;
+  line-height: 1.7;
   max-width: 720px;
-  box-shadow: var(--uv-shadow-soft);
+  margin: 0;
+  color: rgba(10, 35, 64, 0.94);
 }
 
-.uv-card-main p {
-  margin: 0 0 0.8rem;
-  font-size: 1.02rem;
-  line-height: 1.65;
-}
-
-/* ============================================================
-   TEXTO DEL MAPA (narrativa)
-============================================================ */
-
-.uv-map-narrativa {
-  max-width: 680px;
-  font-size: 1rem;
-  line-height: 1.65;
-  color: rgba(10, 35, 64, 0.85);
-}
-
-/* ============================================================
-   TARJETAS DEL MAPA — PREMIUM
-============================================================ */
-
-.uv-map-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.1rem;
-  margin-top: 1rem;
+/* Contenido principal */
+.uv-main {
   width: 100%;
 }
 
-.uv-card-item {
-  background: #ffffff;
-  border: 2px solid rgba(253, 191, 18, 0.4);
-  border-radius: var(--uv-radius-lg);
-  padding: 1.2rem 1.4rem;
-  box-shadow: 0 10px 22px rgba(5, 22, 46, 0.15);
-  transition: 0.2s ease;
-}
-
-.uv-card-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 28px rgba(5, 22, 46, 0.22);
-}
-
-.uv-card-item-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--uv-blue-main);
-  margin-bottom: 0.3rem;
-}
-
-.uv-card-item-desc {
-  font-size: 0.93rem;
-  color: rgba(10, 35, 64, 0.78);
-  line-height: 1.45;
+.uv-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--uv-space-lg);
 }
 
 /* ============================================================
-   BOTONES
+   TARJETA PRINCIPAL (¿De qué trata este módulo?)
+============================================================ */
+
+.uv-card {
+  background: radial-gradient(circle at top left, #ffffff, #fdf7e3);
+  border-radius: var(--uv-radius-xl);
+  border: 2px solid rgba(253, 191, 18, 0.45);
+  box-shadow: var(--uv-shadow-soft);
+  padding: 1.5rem 2rem 1.8rem;
+  max-width: 760px; /* Más controlada, editorial */
+}
+
+.uv-card-main {
+  align-self: flex-start;
+}
+
+.uv-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--uv-azul-main);
+  margin: 0 0 var(--uv-space-sm);
+}
+
+.uv-card p {
+  margin: 0 0 0.9rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--uv-azul-texto);
+}
+
+.uv-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   MAPA DEL MÓDULO · VERSIÓN TARJETAS
+============================================================ */
+
+.uv-module-map {
+  width: 100%;
+  max-width: 960px;
+}
+
+.uv-section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--uv-azul-main);
+  margin: 0 0 0.4rem;
+}
+
+.uv-map-intro {
+  margin: 0 0 0.8rem;
+  font-size: 0.98rem;
+  color: rgba(10, 35, 64, 0.9);
+}
+
+/* Lista como grid de tarjetas */
+.uv-map-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.9rem 1.1rem;
+}
+
+/* Cada tarjeta del mapa */
+.uv-map-list li {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
+  border: 1px solid rgba(253, 191, 18, 0.24);
+  padding: 0.9rem 1.1rem 1rem 1.1rem;
+  box-shadow: 0 10px 24px rgba(5, 22, 46, 0.12);
+  position: relative;
+  overflow: hidden;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  color: rgba(10, 35, 64, 0.96);
+}
+
+/* Pequeño detalle dorado tipo ícono/mandala en cada tarjeta */
+.uv-map-list li::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 2px solid rgba(253, 191, 18, 0.5);
+  box-shadow: 0 0 22px rgba(253, 191, 18, 0.35);
+  opacity: 0.8;
+}
+
+/* Pequeña jerarquía tipográfica dentro del texto:
+   se asume que escribirás algo tipo "Lección 1: ..." al inicio */
+.uv-map-list li strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+  color: var(--uv-azul-main);
+}
+
+.uv-map-list li span {
+  display: block;
+  font-size: 0.9rem;
+  color: rgba(10, 35, 64, 0.7);
+}
+
+/* ============================================================
+   BOTONES / ACCIONES
 ============================================================ */
 
 .uv-actions {
   display: flex;
-  gap: 0.8rem;
-  margin-top: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
 }
 
 .uv-btn {
-  padding: 0.85rem 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.6rem;
   border-radius: 999px;
+  border: none;
+  font-size: 0.98rem;
   font-weight: 600;
   text-decoration: none;
-  font-size: 0.96rem;
   cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
 }
 
+/* Botón principal dorado */
 .uv-btn-primary {
-  background: linear-gradient(135deg, #fdbf12, #ffd76a);
-  color: #1e2230;
+  background: linear-gradient(135deg, #fdbf12, #ffcc4a);
+  color: #1c2333;
+  box-shadow: 0 10px 24px rgba(253, 191, 18, 0.5);
 }
 
+.uv-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(253, 191, 18, 0.6);
+}
+
+/* Botón secundario azul */
 .uv-btn-secondary {
-  background: var(--uv-blue-main);
-  color: white;
+  background: var(--uv-azul-main);
+  color: var(--uv-blanco);
+  box-shadow: 0 10px 24px rgba(10, 42, 92, 0.4);
 }
 
+.uv-btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(10, 42, 92, 0.5);
+}
+
+/* Botón fantasma para volver al menú */
 .uv-btn-ghost {
-  background: rgba(255, 255, 255, 0.7);
-  color: var(--uv-blue-main);
-  border: 1px solid rgba(10, 42, 92, 0.12);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--uv-azul-main);
+  border: 1px solid rgba(10, 42, 92, 0.16);
+  box-shadow: 0 8px 18px rgba(5, 22, 46, 0.18);
+}
+
+.uv-btn-ghost:hover {
+  background: #ffffff;
 }
 
 /* ============================================================
    RESPONSIVE
 ============================================================ */
 
-@media (max-width: 780px) {
-  .uv-card-main { max-width: 90%; }
-  .uv-map-narrativa { max-width: 90%; }
+@media (max-width: 900px) {
+  .uv-page {
+    padding: 2.2rem 1.4rem 3rem;
+  }
+
+  .uv-card {
+    padding: 1.4rem 1.4rem 1.6rem;
+    border-radius: var(--uv-radius-lg);
+  }
+
+  .uv-module-map {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .uv-title {
+    font-size: 2.1rem;
+  }
+
+  .uv-subtitle {
+    font-size: 0.98rem;
+  }
+
+  .uv-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .uv-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
