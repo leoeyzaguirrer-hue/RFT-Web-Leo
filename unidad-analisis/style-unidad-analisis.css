@@ -346,3 +346,84 @@
   align-items: center;
   gap: 6px;
 }
+/* ============================================================
+   ACORDEONES — BOTONES
+============================================================ */
+.ua-accordion {
+  margin: 28px 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Botón que abre/cierra */
+.ua-acc-header {
+  width: 100%;
+  text-align: left;
+  padding: 16px 20px;
+  background: var(--ua-azul-soft);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ua-texto-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.ua-acc-header:hover {
+  background: #dfe8f5;
+}
+
+/* Icono › */
+.ua-acc-icon {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+/* Cuando el acordeón está abierto */
+.ua-acc-header.active .ua-acc-icon {
+  transform: rotate(90deg);
+}
+
+/* ============================================================
+   PANEL INTERNO DEL ACORDEÓN
+============================================================ */
+.ua-acc-panel {
+  max-height: 0;
+  overflow: hidden;
+  background: white;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding: 0 20px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Cuando está abierto */
+.ua-acc-panel.open {
+  padding: 20px 20px 24px;
+  max-height: 800px; /* suficiente para cualquier contenido */
+}
+
+/* Textos dentro del panel */
+.ua-acc-panel p,
+.ua-acc-panel ul,
+.ua-acc-panel li {
+  margin: 12px 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ua-texto-main);
+}
+
+/* ============================================================
+   CLASES AUXILIARES
+============================================================ */
+.ua-hint {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--ua-texto-soft);
+  font-style: italic;
+}
