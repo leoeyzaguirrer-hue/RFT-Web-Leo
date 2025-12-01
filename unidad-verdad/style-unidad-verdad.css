@@ -1,154 +1,303 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unidad de Verdad · RFT · ACT</title>
+/* ============================================================
+   MÓDULO · UNIDAD DE VERDAD
+   Fondo azul editorial · mandalas dorados · layout ancho
+============================================================ */
 
-  <!-- Tipografía base -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+/* Paleta específica */
+:root {
+  --uv-azul-1: #c9daf2;
+  --uv-azul-2: #b3cae8;
+  --uv-azul-3: #a5c0e4;
+  --uv-azul-4: #8fb0d9;
 
-  <!-- SOLO EL STYLE DEL MÓDULO VERDAD -->
-  <link rel="stylesheet" href="style-unidad-verdad.css" />
-</head>
+  --uv-azul-texto: #0a2340;
+  --uv-azul-main: #062346;
 
-<body class="uv-body">
+  --uv-dorado: #f8c246;
+  --uv-dorado-soft: #ffe8b3;
 
-  <!-- CAPA DE FONDO DECORATIVA -->
-  <div class="uv-bg-layer">
-    <span class="uv-bg-node n1"></span>
-    <span class="uv-bg-node n2"></span>
-    <span class="uv-bg-node n3"></span>
-    <span class="uv-bg-node n4"></span>
+  --uv-blanco: #ffffff;
 
-    <span class="uv-bg-ring r1"></span>
-    <span class="uv-bg-ring r2"></span>
-    <span class="uv-bg-ring r3"></span>
+  --uv-shadow-card: 0 14px 38px rgba(8, 33, 62, 0.18);
 
-    <span class="uv-bg-curve c1"></span>
-    <span class="uv-bg-curve c2"></span>
-  </div>
+  --uv-radius-lg: 28px;
+  --uv-radius-xl: 38px;
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <div class="uv-page">
+  --uv-space-xs: 0.45rem;
+  --uv-space-sm: 0.8rem;
+  --uv-space-md: 1.45rem;
+  --uv-space-lg: 2.2rem;
+  --uv-space-xl: 3rem;
 
-    <!-- Breadcrumb -->
-    <nav class="uv-breadcrumb">
-      <a href="../index.html">Inicio</a> › 
-      <span>Unidad de Verdad</span>
-    </nav>
+  --uv-max-width: 1480px;
+}
 
-    <!-- Microintroducción -->
-    <p class="uv-microintro">MÓDULO 2 · UNIDAD DE VERDAD  
-      <span class="uv-microintro-sub">Fundamentos filosóficos desde ACT y RFT</span>
-    </p>
+/* ============================================================
+   RESET
+============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-    <!-- HERO -->
-    <header class="uv-hero">
-      <h1 class="uv-title">
-        Verdad como lo que funciona en el Contextualismo Funcional
-        <span class="uv-title-sparkle">✨</span>
-      </h1>
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
-      <p class="uv-subtitle">
-        En el contextualismo funcional, la verdad no se define por correspondencia con una realidad objetiva, 
-        sino por su eficacia pragmática: aquello que permite predecir e influir en los eventos en un contexto dado.
-      </p>
-    </header>
+/* ============================================================
+   FONDO GENERAL + TEXTURA AZUL PREMIUM
+============================================================ */
+.uv-body {
+  min-height: 100vh;
+  font-family: "Noto Sans", sans-serif;
+  color: var(--uv-azul-texto);
+  background:
+    linear-gradient(180deg, var(--uv-azul-1) 0%, var(--uv-azul-2) 40%, var(--uv-azul-3) 100%);
+  position: relative;
+  overflow-x: hidden;
+}
 
-    <!-- CUADRO PRINCIPAL -->
-    <main class="uv-main">
+/* Capas decorativas */
+.uv-bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+}
 
-      <section class="uv-intro">
+/* Nodos dorados */
+.uv-bg-node {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid rgba(248, 194, 70, 0.65);
+  background: radial-gradient(circle at 30% 30%, #fff5d7, transparent 60%);
+  box-shadow: 0 0 18px rgba(248, 194, 70, 0.45);
+}
 
-        <!-- Tarjeta principal MÁS ANCHA y más estilizada -->
-        <article class="uv-card uv-card-main">
-          <h2 class="uv-card-title">¿De qué trata este módulo?</h2>
+.uv-bg-node.n1 { top: 10%; left: 8%; }
+.uv-bg-node.n2 { top: 45%; right: 12%; }
+.uv-bg-node.n3 { bottom: 26%; left: 16%; }
+.uv-bg-node.n4 { bottom: 12%; right: 6%; }
 
-          <p>
-            La Unidad de Verdad introduce uno de los pilares filosóficos de ACT y RFT: la verdad entendida como 
-            <em>lo que funciona</em>. Desde esta perspectiva, las afirmaciones, pensamientos o reglas se evalúan 
-            por su capacidad de generar consecuencias útiles en un contexto específico.
-          </p>
+/* Anillos mandala */
+.uv-bg-ring {
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 194, 70, 0.35);
+}
 
-          <p>
-            Aquí examinaremos por qué los criterios clásicos de verdad (correspondencia, coherencia o consenso) 
-            pueden fallar al explicar la conducta humana, y cómo la verdad pragmática permite una lectura más precisa 
-            de los procesos verbales que sostienen problemas psicológicos.
-          </p>
+.uv-bg-ring.r1 { width: 520px; height: 520px; top: -120px; right: -180px; }
+.uv-bg-ring.r2 { width: 340px; height: 340px; top: 35%; left: -150px; }
+.uv-bg-ring.r3 { width: 440px; height: 440px; bottom: -150px; right: 12%; }
 
-          <p>
-            También aprenderás a discriminar la función real de reglas, pensamientos y formulaciones clínicas, 
-            y cómo aprovechar esta discriminación para intervenir de forma más precisa en ACT y RFT.
-          </p>
-        </article>
+/* Líneas curvas */
+.uv-bg-curve {
+  position: absolute;
+  width: 680px;
+  height: 680px;
+  border-radius: 60%;
+  border: 1px solid rgba(248, 194, 70, 0.22);
+}
 
-        <!-- NARRATIVA DEL MÓDULO -->
-        <section class="uv-narrativa">
-          <h3 class="uv-narrativa-title">El viaje de este módulo</h3>
-          <p class="uv-narrativa-text">
-            Avanzarás desde las limitaciones de los criterios tradicionales de verdad,
-            hacia la comprensión profunda del criterio pragmático y su aplicación clínica.
-            Cada sección está diseñada para entrenar la discriminación funcional aplicada 
-            a reglas, pensamientos y comportamiento verbal clínicamente relevante.
-          </p>
-        </section>
+.uv-bg-curve.c1 { top: -200px; left: 22%; transform: rotate(25deg); }
+.uv-bg-curve.c2 { bottom: -220px; right: 15%; transform: rotate(-16deg); }
 
-        <!-- TARJETAS PREMIUM DEL MAPA -->
-        <section class="uv-module-map">
-          <h3 class="uv-section-title">Mapa del módulo</h3>
+/* ============================================================
+   LAYOUT PRINCIPAL · ANCHO REAL
+============================================================ */
 
-          <div class="uv-map-grid">
+.uv-page {
+  max-width: var(--uv-max-width);
+  margin: 0 auto;
+  padding: var(--uv-space-xl) var(--uv-space-lg) 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--uv-space-xl);
+}
 
-            <div class="uv-map-card">
-              <h4>Lección 1</h4>
-              <p class="uv-map-card-title">¿Por qué necesitamos un criterio de verdad?</p>
-              <p class="uv-map-card-desc">Limitaciones del criterio de correspondencia.</p>
-            </div>
+/* BREADCRUMB */
+.uv-breadcrumb {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: var(--uv-space-xs);
+}
 
-            <div class="uv-map-card">
-              <h4>Lección 2</h4>
-              <p class="uv-map-card-title">Otros criterios de verdad</p>
-              <p class="uv-map-card-desc">Coherencia, consenso y utilidad práctica.</p>
-            </div>
+/* ============================================================
+   HERO · TITULAR ANCHO ALINEADO A IZQUIERDA
+============================================================ */
 
-            <div class="uv-map-card">
-              <h4>Lección 3</h4>
-              <p class="uv-map-card-title">La verdad pragmática</p>
-              <p class="uv-map-card-desc">El criterio central del contextualismo funcional.</p>
-            </div>
+.uv-hero {
+  max-width: 980px;
+  text-align: left;
+}
 
-            <div class="uv-map-card">
-              <h4>Aplicación Clínica</h4>
-              <p class="uv-map-card-title">Uso en ACT/RFT</p>
-              <p class="uv-map-card-desc">Evaluar la función de reglas y verbalizaciones.</p>
-            </div>
+.uv-module-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.85;
+  margin-bottom: var(--uv-space-xs);
+}
 
-            <div class="uv-map-card">
-              <h4>Ejercicio Interactivo</h4>
-              <p class="uv-map-card-title">Discriminación funcional</p>
-              <p class="uv-map-card-desc">Aplicación directa en casos y ejemplos.</p>
-            </div>
+.uv-title {
+  font-family: "Coco Gothic", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 3.5vw + 1rem, 4rem);
+  line-height: 1.16;
+  margin: 0 0 var(--uv-space-sm);
+  color: var(--uv-azul-main);
+  position: relative;
+}
 
-            <div class="uv-map-card">
-              <h4>Cierre del módulo</h4>
-              <p class="uv-map-card-title">Integración y síntesis</p>
-              <p class="uv-map-card-desc">Comprender y aplicar la verdad pragmática.</p>
-            </div>
+/* Mini destello dorado */
+.uv-title::after {
+  content: "✨";
+  position: absolute;
+  right: -38px;
+  top: -12px;
+  font-size: 1.6rem;
+  opacity: 0.55;
+  animation: sparkle 12s infinite ease-in-out;
+}
 
-          </div>
-        </section>
+@keyframes sparkle {
+  0% { opacity: 0.2; transform: scale(0.6); }
+  6% { opacity: 0.85; transform: scale(1.15); }
+  12% { opacity: 0.2; transform: scale(0.6); }
+  100% { opacity: 0.2; }
+}
 
-        <!-- ACCIONES -->
-        <div class="uv-actions">
-          <a href="p2.html" class="uv-btn uv-btn-primary">Comenzar lección</a>
-          <a href="../index.html" class="uv-btn uv-btn-ghost">Volver al menú RFT</a>
-        </div>
+.uv-subtitle {
+  max-width: 820px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  opacity: 0.95;
+}
 
-      </section>
+/* ============================================================
+   TARJETA PRINCIPAL · HERO CARD
+============================================================ */
 
-    </main>
-  </div>
+.uv-card {
+  background: linear-gradient(180deg, #fffdfa 0%, #fff3d4 100%);
+  border-radius: var(--uv-radius-xl);
+  border: 1px solid rgba(248, 194, 70, 0.55);
+  padding: 1.6rem 2rem;
+  box-shadow: var(--uv-shadow-card);
+  max-width: 760px;
+  width: 100%;
+}
 
-</body>
-</html>
+.uv-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: var(--uv-space-sm);
+  color: var(--uv-azul-main);
+}
+
+/* ============================================================
+   TARJETAS DEL MAPA DEL MÓDULO
+============================================================ */
+
+.uv-module-map {
+  max-width: 1000px;
+}
+
+.uv-map-intro {
+  max-width: 720px;
+  font-size: 1.05rem;
+  opacity: 0.92;
+  margin-bottom: 1rem;
+}
+
+.uv-map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.4rem;
+  width: 100%;
+}
+
+/* Tarjeta individual */
+.uv-map-card {
+  background: var(--uv-blanco);
+  border: 1px solid rgba(248, 194, 70, 0.35);
+  border-radius: var(--uv-radius-lg);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--uv-shadow-card);
+}
+
+.uv-map-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--uv-azul-main);
+  margin-bottom: 0.35rem;
+}
+
+.uv-map-desc {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   BOTONES
+============================================================ */
+
+.uv-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.uv-btn {
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* Dorado */
+.uv-btn-primary {
+  background: linear-gradient(135deg, #f8c246, #ffd57a);
+  color: #1b2433;
+  box-shadow: 0 10px 24px rgba(248,194,70,0.45);
+}
+
+.uv-btn-primary:hover { transform: translateY(-2px); }
+
+/* Secundario */
+.uv-btn-secondary {
+  background: var(--uv-azul-main);
+  color: var(--uv-blanco);
+  box-shadow: 0 10px 24px rgba(10, 42, 92, 0.35);
+}
+
+.uv-btn-secondary:hover { transform: translateY(-2px); }
+
+/* Fantasma */
+.uv-btn-ghost {
+  background: rgba(255,255,255,0.75);
+  color: var(--uv-azul-main);
+  border: 1px solid rgba(10,42,92,0.18);
+}
+
+.uv-btn-ghost:hover { background: #ffffff; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 780px) {
+  .uv-title { font-size: 2.2rem; }
+  .uv-page { padding: 2rem 1.3rem; }
+  .uv-map-grid { grid-template-columns: 1fr; }
+}
