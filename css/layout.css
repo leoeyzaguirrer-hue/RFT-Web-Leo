@@ -1,20 +1,27 @@
 /* ============================
    GRID PREMIUM PARA PANTALLAS
-   ============================ */
+============================ */
 
 .premium-screen {
     padding: 40px;
+    min-height: 100vh;          /* PANTALLA COMPLETA */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .screen-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+    width: 90%;
+    max-width: 1600px;
 }
 
-.screen-left, .screen-right {
+.screen-left,
+.screen-right {
     background: rgba(255, 255, 255, 0.07);
-    padding: 20px;
+    padding: 40px;
     border-radius: 24px;
     border: 1px solid rgba(253, 191, 18, 0.4);
     box-shadow: var(--shadow-soft);
@@ -32,29 +39,14 @@
     border: 1px dashed rgba(253, 191, 18, 0.5);
     border-radius: 16px;
 }
+
+/* ============================
+   NAVEGACIÓN PREMIUM
+============================ */
+
 .nav-buttons {
     width: 100%;
     display: flex;
-   /* ===========================================
-   HACER QUE CADA PANTALLA USE TODA LA ALTURA
-   =========================================== */
-
-.premium-screen {
-    min-height: 100vh;  /* ALTURA COMPLETA */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.screen-grid {
-    width: 90%;
-    max-width: 1600px;   /* MÁS ANCHO, MÁS ELEGANTE */
-}
-
     justify-content: space-between;
-}
-
-.screen-left, 
-.screen-right {
-    padding: 40px !important;
+    margin-top: 40px;
 }
