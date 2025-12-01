@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lección 4 · Ejercicio Integrador · Unidad de Análisis</title>
+  <title>Lección 4 · Unidad Integrada · Unidad de Análisis</title>
 
   <!-- STYLE DEL MÓDULO -->
   <link rel="stylesheet" href="style-unidad-analisis.css" />
@@ -14,10 +14,9 @@
 
 <body class="ua-body">
 
-  <!-- CAPAS DE FONDO (NODOS, LÍNEAS, ENFOQUE) -->
+  <!-- CAPAS DE FONDO -->
   <div class="ua-bg-layer">
     <div class="ua-focus-circle"></div>
-
     <span class="ua-bg-node n1"></span>
     <span class="ua-bg-node n2"></span>
     <span class="ua-bg-node n3"></span>
@@ -34,223 +33,124 @@
 
       <div class="ua-breadcrumb">
         <span class="ua-breadcrumb-dot"></span>
-        LECCIÓN 4 · EJERCICIO INTEGRADOR
+        LECCIÓN 4 · UNIDAD INTEGRADA
       </div>
 
       <h1 class="ua-title-main">
         Construye la unidad de análisis
-        <span>Un caso clínico, paso a paso</span>
+        <span>Del caso clínico a la función</span>
       </h1>
 
       <p class="ua-subtitle-main">
-        Pasar del diagnóstico a la función es uno de los movimientos más potentes 
-        del análisis conductual contextual. En esta pantalla trabajarás con un caso 
-        realista para organizar antecedentes, acciones y consecuencias en una unidad 
-        funcional clara y útil.
+        Observa cómo un caso aparentemente “diagnóstico-centrado” se transforma 
+        en una unidad funcional clara y orientada a la intervención.
       </p>
 
     </div>
   </header>
 
-  <!-- ===========================
-       MAIN
-  ============================ -->
+  <!-- MAIN -->
   <main class="ua-page ua-fade-in">
     <div class="ua-inner">
 
-      <!-- CARD PRINCIPAL -->
       <section class="ua-main-card">
 
         <div class="ua-section-label">Lección 4</div>
-        <div class="ua-section-title">Caso de Laura · Un análisis funcional vivo</div>
+        <div class="ua-section-title">Caso de Laura · Un análisis funcional breve</div>
 
-        <!-- PROVOCACIÓN -->
         <p class="ua-text">
-          A veces parece que una persona “tiene ansiedad”, pero cuando observamos lo que 
-          <strong>hace en concreto</strong>, descubrimos que múltiples conductas sirven para 
-          la misma función. Aquí verás cómo un caso clínico se transforma en una unidad 
-          de análisis clara.
+          Laura comenta: “Tengo fobia social, siempre he sido así”. Sin embargo, desde 
+          el contextualismo funcional, la pregunta relevante no es <em>qué tiene</em> sino 
+          <strong>qué hace y para qué sirve eso que hace</strong>. Este enfoque permite ver 
+          patrones funcionales y guiar intervenciones más precisas.
         </p>
 
-        <!-- ======================
-             SUBPANTALLA 6A — CASO
-        ======================= -->
-
+        <!-- 1. CASO CLÍNICO (SIN EJERCICIOS) -->
         <section class="ua-accordion">
           <button class="ua-acc-header" data-acc="caso">
-            <span>1 · El caso de Laura: del diagnóstico a la función</span>
+            <span>1 · El caso de Laura: observando el episodio</span>
             <span class="ua-acc-icon">›</span>
           </button>
 
           <div class="ua-acc-panel">
-
             <p class="ua-text">
-              Laura suele decir cosas como: “Tengo fobia social. Siempre he sido así”.  
-              Sin embargo, para intervenir necesitamos ver episodios concretos.
+              Frente a una reunión laboral, Laura experimenta pensamientos, sensaciones 
+              corporales y emociones que la llevan a evitar asistir. La evitación le da 
+              alivio inmediato, pero también contribuye a un aislamiento progresivo.
             </p>
 
             <p class="ua-text">
-              Elige las tarjetas y colócalas en los contenedores para visualizar el 
-              episodio funcional. No hay respuestas correctas: solo estás explorando.
+              Este patrón revela cómo distintas acciones (inventar una excusa, no responder, 
+              retrasar tareas) pueden cumplir <strong>la misma función</strong>: reducir 
+              malestar interpersonal a corto plazo, aun cuando mantiene el problema a largo plazo.
             </p>
-
-            <!-- TARJETAS -->
-            <div class="ua-tag-panel" id="ua-tags-laura">
-
-              <div class="ua-tag" data-id="msg">📩 “Mañana reunión a las 9:00”.</div>
-              <div class="ua-tag" data-id="foto">🧑‍🤝‍🧑 Imagen: compañeros riendo.</div>
-              <div class="ua-tag" data-id="pens">💭 “Se van a dar cuenta de que soy aburrida”.</div>
-              <div class="ua-tag" data-id="sens">😓 Sensaciones: calor, sudor.</div>
-              <div class="ua-tag" data-id="accion">🚫 Responde: “No podré, tengo médico”.</div>
-              <div class="ua-tag" data-id="alivio">😮‍💨 Siente alivio inmediato.</div>
-              <div class="ua-tag" data-id="aisla">⏳ Cada vez está más aislada.</div>
-
-            </div>
-
-            <!-- CONTENEDORES -->
-            <div class="ua-containers-grid">
-
-              <div class="ua-container-box" data-box="antecedentes">
-                <h4>🅰️ Antecedentes</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-              <div class="ua-container-box" data-box="conductas">
-                <h4>🔵 Conductas</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-              <div class="ua-container-box" data-box="ci">
-                <h4>🟡 Consecuencias inmediatas</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-              <div class="ua-container-box" data-box="clp">
-                <h4>⏳ Consecuencias a largo plazo</h4>
-                <div class="ua-box-body"></div>
-              </div>
-
-            </div>
-
           </div>
         </section>
 
-        <!-- ======================
-             NOMBRE DE CLASE FUNCIONAL
-        ======================= -->
-
+        <!-- 2. CLASE FUNCIONAL -->
         <section class="ua-accordion">
           <button class="ua-acc-header" data-acc="clase">
-            <span>2 · Nombrar la clase funcional</span>
+            <span>2 · Identificando la clase funcional</span>
             <span class="ua-acc-icon">›</span>
           </button>
 
           <div class="ua-acc-panel">
-
             <p class="ua-text">
-              Una vez que vemos varios ABC organizados, podemos preguntarnos: 
-              ¿qué función comparten estas conductas?
+              Una clase funcional describe un conjunto de conductas distintas que comparten 
+              una misma consecuencia reforzante. En este caso, el patrón de Laura se organiza 
+              alrededor de una función clara: <strong>evitación de interacción social</strong>.
             </p>
-
             <p class="ua-text">
-              Elige el nombre que mejor captura la función:
+              Esta denominación no es un diagnóstico, sino una descripción funcional que permite 
+              orientar las intervenciones hacia alternativas más flexibles.
             </p>
-
-            <div class="ua-choice-flex">
-
-              <button class="ua-btn-ghost ua-choice" data-choice="evitacion">
-                Evitación de interacción social
-              </button>
-
-              <button class="ua-btn-ghost ua-choice" data-choice="ansioso">
-                Síntoma ansioso
-              </button>
-
-              <button class="ua-btn-ghost ua-choice" data-choice="tp">
-                Trastorno de personalidad
-              </button>
-
-            </div>
-
-            <div id="ua-choice-feedback" class="ua-hint ua-hint-center">
-              Toca una opción para continuar.
-            </div>
-
           </div>
         </section>
 
-        <!-- ======================
-             SUBPANTALLA 6B — AJUSTE DE UNIDAD
-        ======================= -->
-
+        <!-- 3. AJUSTANDO LA UNIDAD -->
         <section class="ua-accordion">
           <button class="ua-acc-header" data-acc="ajuste">
-            <span>3 · ¿Es suficiente esta unidad?</span>
+            <span>3 · ¿Es suficiente esta unidad para intervenir?</span>
             <span class="ua-acc-icon">›</span>
           </button>
 
           <div class="ua-acc-panel">
-
             <p class="ua-text">
-              Una unidad de análisis es útil cuando es lo bastante rica para guiar una 
-              intervención, pero no tan grande que se vuelve confusa.
+              Una unidad funcional es útil si permite responder a la pregunta: 
+              <strong>“¿Qué tendría que cambiar en el ambiente para que cambie la conducta?”</strong>
             </p>
 
             <p class="ua-text">
-              Marca los elementos que considerarías agregar para hacer la unidad más 
-              precisa y funcional:
+              Para enriquecerla, podría añadirse información sobre:
             </p>
 
-            <div class="ua-checklist">
-
-              <label class="ua-check">
-                <input type="checkbox" /> Situaciones en las que sí interactúa sin evitar.
-              </label>
-
-              <label class="ua-check">
-                <input type="checkbox" /> Valores importantes para ella.
-              </label>
-
-              <label class="ua-check">
-                <input type="checkbox" /> Reglas verbales sobre “cómo hay que comportarse”.
-              </label>
-
-              <label class="ua-check">
-                <input type="checkbox" /> Historia de aprendizaje interpersonal.
-              </label>
-
-              <label class="ua-check">
-                <input type="checkbox" /> Consecuencias que se repiten en distintos contextos.
-              </label>
-
-            </div>
+            <ul class="ua-text">
+              <li>Situaciones donde Laura sí interactúa sin evitar.</li>
+              <li>Valores o metas que la mueven a exponerse.</li>
+              <li>Reglas verbales que sostienen la evitación.</li>
+              <li>Historia interpersonal relevante.</li>
+            </ul>
 
             <p class="ua-hint">
-              La unidad crece solo hasta donde mejora la claridad para intervenir.
+              La unidad debe crecer solo hasta donde mejore la claridad funcional.
             </p>
-
           </div>
         </section>
 
-        <!-- ======================
-             ACTIVIDAD FINAL
-        ======================= -->
-
+        <!-- 4. MINI SÍNTESIS PERSONAL -->
         <section class="ua-accordion">
           <button class="ua-acc-header" data-acc="final">
-            <span>4 · Construye tu unidad final</span>
+            <span>4 · Tu síntesis final</span>
             <span class="ua-acc-icon">›</span>
           </button>
 
           <div class="ua-acc-panel">
-
             <p class="ua-text">
-              Resume el episodio funcional de Laura en tres líneas. No hay respuestas
-              correctas: es una síntesis personal para integrar lo aprendido.
+              Resume en tres líneas el episodio funcional de Laura. Esta síntesis es solo 
+              una reflexión personal para consolidar lo aprendido.
             </p>
 
             <div class="ua-final-grid">
-
               <div class="ua-final-block">
                 <h4>🅰️ Antecedente clave</h4>
                 <textarea class="ua-final-input"></textarea>
@@ -265,13 +165,7 @@
                 <h4>🟡 Consecuencia inmediata</h4>
                 <textarea class="ua-final-input"></textarea>
               </div>
-
             </div>
-
-            <p class="ua-hint ua-hint-center">
-              Este mini resumen será útil en la Pantalla de Integración.
-            </p>
-
           </div>
         </section>
 
@@ -282,7 +176,6 @@
         </div>
 
       </section>
-
     </div>
   </main>
 
