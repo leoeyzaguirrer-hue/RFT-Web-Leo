@@ -705,10 +705,12 @@
     padding: 12px;
   }
 
-  .ua-btn-mini {
+   .ua-btn-mini {
     width: 48%;
   }
-}
+
+} /* cierre del @media */
+
 /* ================================
    P3 — TIMELINE ABC Y ACTIVIDADES
 ================================ */
