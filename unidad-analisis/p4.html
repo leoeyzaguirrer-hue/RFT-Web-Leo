@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lección 3 · Clases funcionales y patrones · Unidad de Análisis</title>
+
+  <!-- SOLO EL STYLE DEL MÓDULO -->
+  <link rel="stylesheet" href="style-unidad-analisis.css" />
+
+  <!-- JS ESPECÍFICO DE ESTA PANTALLA -->
+  <script defer src="p4.js"></script>
+</head>
+
+<body class="ua-body">
+
+  <!-- CAPA DE NODOS / LÍNEAS / ENFOQUE (MISMA QUE EN index.html) -->
+  <div class="ua-bg-layer">
+    <div class="ua-focus-circle"></div>
+
+    <span class="ua-bg-node n1"></span>
+    <span class="ua-bg-node n2"></span>
+    <span class="ua-bg-node n3"></span>
+    <span class="ua-bg-node n4"></span>
+
+    <span class="ua-bg-line l1"></span>
+    <span class="ua-bg-line l2"></span>
+    <span class="ua-bg-line l3"></span>
+  </div>
+
+  <!-- ===========================
+       HERO LECCIÓN 3
+  ============================ -->
+  <header class="ua-hero ua-fade-in">
+    <div class="ua-hero-text">
+
+      <div class="ua-breadcrumb">
+        <span class="ua-breadcrumb-dot"></span>
+        LECCIÓN 3 · CLASES FUNCIONALES Y PATRONES
+      </div>
+
+      <h1 class="ua-title-main">
+        De un episodio a un patrón
+        <span>Cuando distintas formas sirven para lo mismo</span>
+      </h1>
+
+      <p class="ua-subtitle-main">
+        Hasta ahora miraste <strong>un episodio de acción-en-contexto</strong> (un ABC).
+        En esta lección vas a dar un paso más: ver cómo <strong>muchos episodios
+        se organizan en clases funcionales y patrones</strong>, de forma que el problema
+        ya no es “un evento aislado”, sino <em>un modo de relacionarse con el mundo</em>.
+      </p>
+
+      <div class="ua-continuidad">
+        <strong>Recordatorio:</strong> ya sabes describir un ABC.  
+        Ahora la pregunta es:
+        <span class="ua-continuidad-pregunta">
+          ¿qué pasa cuando muchas conductas distintas cumplen la misma función?
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===========================
+       MAIN · ACORDEÓN DE LA LECCIÓN
+  ============================ -->
+  <main class="ua-page ua-fade-in">
+    <div class="ua-inner">
+
+      <section class="ua-main-card">
+
+        <div class="ua-section-label">Lección 3</div>
+        <div class="ua-section-title">Clases funcionales y patrones</div>
+
+        <p class="ua-text">
+          En esta pantalla explorarás cómo <strong>pasamos de un ABC puntual a clases
+          funcionales y patrones</strong>. Verás que lo que organiza la conducta no es
+          la forma visible (topografía), sino la <strong>función</strong>: qué hace
+          esa conducta en el contexto.  
+          Abre cada sección del acordeón para avanzar paso a paso.
+        </p>
+
+        <!-- ===================================
+             1. INICIO PROVOCADOR
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="inicio">
+            <span>1 · Inicio provocador: diferentes conductas, mismo problema</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+
+            <p class="ua-text">
+              Imagina a una persona que, frente a situaciones sociales, hace cosas muy distintas:
+              a veces dice que está cansada, a veces mira el celular, a veces llega tarde, a veces
+              sale al baño. Si miras solo la forma, parece un conjunto de conductas desconectadas.
+            </p>
+
+            <p class="ua-text">
+              Desde el análisis funcional contextual y RFT, la pregunta central cambia a:
+              <strong>“¿para qué sirve todo eso?”</strong>. Si varias conductas diferentes
+              producen la misma consecuencia clave (por ejemplo, evitar contacto interpersonal
+              incómodo), entonces empiezan a organizarse como una <strong>clase funcional</strong>.
+            </p>
+
+            <div id="ua-mini-clase" class="ua-mini-item"
+                 data-correct="yes"
+                 data-correct-msg="✔ Correcto: conductas distintas pueden formar una misma clase funcional si comparten función."
+                 data-error-msg="✖ Fíjate en la función: si todas alivian el mismo tipo de malestar, probablemente pertenecen a una misma clase.">
+              <p class="ua-text-small">
+                Tres conductas diferentes (decir “no voy”, mirar el celular compulsivamente,
+                salir al baño) aparecen siempre cuando hay mucha gente alrededor y alivian
+                el malestar social.  
+                <strong>¿Podrían pertenecer a la misma clase funcional?</strong>
+              </p>
+              <div class="ua-mini-buttons">
+                <button class="ua-btn-mini" data-answer="yes">Sí</button>
+                <button class="ua-btn-mini" data-answer="no">No</button>
+              </div>
+              <div class="ua-mini-feedback"></div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================
+             2. TEORÍA CENTRAL: CLASE FUNCIONAL
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="teoria-clase">
+            <span>2 · La función organiza el comportamiento</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              En términos de Törneke, una <strong>clase funcional</strong> es un conjunto
+              de conductas distintas que comparten la misma función en un contexto dado,
+              aunque sus formas visibles sean diferentes. La topografía es
+              <em>cómo se ve</em> la conducta; la función es <em>qué hace</em> esa conducta
+              en relación con el ambiente (qué consecuencias produce o evita).
+            </p>
+
+            <p class="ua-text">
+              En ACT y en el análisis funcional contextual, esta distinción es crucial.
+              Al intervenir sobre una clase funcional, dejamos de pelear con el contenido
+              verbal (“estoy cansado”, “no me gusta la gente”, “soy raro”) y pasamos a
+              trabajar con <strong>patrones de acción</strong> que se repiten porque
+              funcionan para algo: evitar, escapar, buscar alivio, obtener atención,
+              conectar, etc.
+            </p>
+
+            <div class="ua-context-box ua-info-box">
+              <div class="ua-icon-block">
+                <span class="ua-icon">📘</span>
+                <span class="ua-icon-label">Törneke</span>
+              </div>
+              <p class="ua-text-small">
+                “La función, no la forma, organiza el comportamiento.”  
+                Lo que importa no es solo qué hace la persona, sino
+                <strong>qué efecto tiene eso en su contexto</strong>.
+              </p>
+            </div>
+
+            <div class="ua-context-box ua-info-box">
+              <div class="ua-icon-block">
+                <span class="ua-icon">📙</span>
+                <span class="ua-icon-label">Villatte & Hayes</span>
+              </div>
+              <p class="ua-text-small">
+                Comprender la función permite intervenir sin quedar atrapado en el
+                contenido literal de lo que la persona dice. Trabajamos con patrones
+                de acción-en-contexto, no con rasgos fijos.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================
+             3. DE ABC A CLASE FUNCIONAL
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="abc-clase">
+            <span>3 · De un ABC puntual a una clase funcional</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Un solo ABC describe un <strong>episodio puntual</strong> de acción-en-contexto.
+              Pero cuando varios ABC comparten consecuencias similares (por ejemplo,
+              reducir malestar, escapar de una situación, conseguir aprobación), entonces
+              podemos agruparlos en una <strong>clase funcional</strong>.
+            </p>
+
+            <p class="ua-text">
+              Imagina varios ABC alrededor de eventos sociales: decir que estás cansado,
+              mirar el celular, llegar tarde, salir al baño. La forma cambia, pero si
+              en todos los casos la consecuencia es <strong>aliviar el malestar social
+              y alejarte del contacto inmediato</strong>, entonces todos esos episodios
+              pertenecen a la misma clase funcional de <em>evitación interpersonal</em>.
+            </p>
+
+            <p class="ua-text">
+              Esta forma de organizar la conducta permite entender por qué un cliente
+              puede decir “hago mil cosas diferentes y ninguna funciona” mientras,
+              funcionalmente, está repitiendo el mismo patrón: <strong>elegir alivio
+              inmediato</strong> a costa de la vida que quiere construir.
+            </p>
+          </div>
+        </section>
+
+        <!-- ===================================
+             4. EXPERIMENTO: CLASE EVITACIÓN SOCIAL
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="evitacion">
+            <span>4 · Experimento: clase funcional de evitación social</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Explora estas conductas. Haz clic en cada una para ver cómo, a pesar de
+              tener formas distintas, pueden compartir la misma función de evitar
+              el contacto interpersonal inmediato.
+            </p>
+
+            <div class="ua-context-buttons ua-func-buttons">
+              <button class="ua-btn-ghost ua-func-btn" data-case="c1">📩 “No voy, estoy cansado.”</button>
+              <button class="ua-btn-ghost ua-func-btn" data-case="c2">📱 Revisar compulsivamente el celular</button>
+              <button class="ua-btn-ghost ua-func-btn" data-case="c3">🚶‍♂️ Llegar tarde para no saludar</button>
+              <button class="ua-btn-ghost ua-func-btn" data-case="c4">🚪 Salir al baño cuando toca hablar</button>
+            </div>
+
+            <div id="ua-func-output" class="ua-context-box">
+              <p class="ua-text-small">
+                Haz clic en cada conducta para ver cómo encaja en la clase funcional
+                de <strong>evitación social</strong>.
+              </p>
+            </div>
+
+            <div class="ua-context-box ua-info-box">
+              <p class="ua-text-small">
+                Al observarlas juntas, puedes notar la <strong>función compartida</strong>:
+                reducir el malestar interpersonal y alejarse del contacto social directo.
+                La consecuencia común es un <strong>alivio momentáneo 😮‍💨</strong>, que
+                refuerza el patrón a largo plazo.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================
+             5. MINI-SEÑALIZADOR PEDAGÓGICO
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="senalizador">
+            <span>5 · Señales para detectar una clase funcional</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Algunas pistas prácticas para identificar una clase funcional en la consulta
+              o en tu propia vida:
+            </p>
+
+            <ul class="ua-list">
+              <li>
+                Varias conductas distintas parecen “resolver” lo mismo:
+                <strong>aliviar un tipo de malestar, escapar de algo, conseguir algo</strong>.
+              </li>
+              <li>
+                La persona dice “no sé por qué hago esto” pero, al analizar, ves siempre
+                el mismo tipo de escape, evitación o aproximación.
+              </li>
+              <li>
+                Las conductas ocurren en contextos diferentes, pero la
+                <strong>función se mantiene</strong>.
+              </li>
+              <li>
+                Cambiar solo la topografía (dejar el celular pero empezar a llegar tarde)
+                no cambia el problema de fondo.
+              </li>
+            </ul>
+
+            <p class="ua-text-small ua-hint">
+              En ACT, el trabajo clínico se potencia cuando ves más allá de la forma
+              y empiezas a mapear <strong>clases funcionales</strong> y no solo eventos aislados.
+            </p>
+          </div>
+        </section>
+
+        <!-- ===================================
+             6. TEORÍA: NIVELES TEMPORALES
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="niveles-tiempo">
+            <span>6 · Micro-unidades y macro-patrones en el tiempo</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Törneke señala que el tamaño de la unidad de análisis es pragmático:
+              depende de <strong>qué tan grande o pequeño necesitas recortar el episodio</strong>
+              para predecir e influir la conducta de forma útil. A veces basta con segundos
+              o minutos; otras veces necesitas mirar meses o años.
+            </p>
+
+            <p class="ua-text">
+              Un <strong>micro-episodio</strong> puede ser un solo ABC en una interacción breve.
+              Un <strong>macro-patrón</strong> es la organización de muchos ABC repetidos a lo largo
+              del tiempo, formando una clase funcional amplia que impacta proyectos, relaciones
+              y calidad de vida. La clave no es la duración, sino la <strong>utilidad funcional
+              de ese recorte</strong>.
+            </p>
+
+            <div class="ua-example-block">
+              <div class="ua-example-label">Micro-episodio (segundos-minutos)</div>
+              <p class="ua-text-small">
+                ⏱️ “Ante una invitación, dice ‘mejor no, estoy cansado’ y siente alivio.”
+              </p>
+              <ul class="ua-list">
+                <li>Útil para identificar el ABC puntual.</li>
+                <li>Permite detectar funciones inmediatas.</li>
+                <li>Ayuda a encontrar un punto exacto de intervención.</li>
+              </ul>
+            </div>
+
+            <div class="ua-example-block">
+              <div class="ua-example-label">Macro-patrón (meses-años)</div>
+              <p class="ua-text-small">
+                🗺️ “En los últimos 5 años ha evitado amistades, trabajos y oportunidades
+                donde habría más contacto social.”
+              </p>
+              <ul class="ua-list">
+                <li>Útil para ver cómo varios ABC se organizan en una clase funcional amplia.</li>
+                <li>Permite entender repercusiones vitales (relaciones, proyectos, salud).</li>
+                <li>Conecta conducta con valores y dirección vital (sin intervenir todavía).</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================
+             7. ACTIVIDAD: MICRO VS MACRO
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="actividad-tiempo">
+            <span>7 · Actividad: ¿micro-episodio o macro-patrón?</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Lee cada frase y decide si describe un <strong>micro-episodio</strong>
+              (unidad breve) o un <strong>macro-patrón</strong> (patrón extendido en el tiempo).
+            </p>
+
+            <div class="ua-mini-list">
+
+              <div class="ua-mini-item" data-kind="tiempo" data-correct="micro">
+                <p class="ua-text-small">
+                  “Cuando le escriben ‘¿Vienes hoy?’, responde ‘mejor no, estoy cansado’ y siente alivio 😮‍💨.”
+                </p>
+                <div class="ua-mini-buttons">
+                  <button class="ua-btn-mini" data-answer="micro">Micro-episodio</button>
+                  <button class="ua-btn-mini" data-answer="macro">Macro-patrón</button>
+                </div>
+                <div class="ua-mini-feedback"></div>
+              </div>
+
+              <div class="ua-mini-item" data-kind="tiempo" data-correct="macro">
+                <p class="ua-text-small">
+                  “En los últimos 4 años ha evitado casi todos los eventos sociales importantes.”
+                </p>
+                <div class="ua-mini-buttons">
+                  <button class="ua-btn-mini" data-answer="micro">Micro-episodio</button>
+                  <button class="ua-btn-mini" data-answer="macro">Macro-patrón</button>
+                </div>
+                <div class="ua-mini-feedback"></div>
+              </div>
+
+              <div class="ua-mini-item" data-kind="tiempo" data-correct="macro">
+                <p class="ua-text-small">
+                  “Su vida social se ha vuelto más reducida y frágil, con pocos vínculos nuevos en varios años.”
+                </p>
+                <div class="ua-mini-buttons">
+                  <button class="ua-btn-mini" data-answer="micro">Micro-episodio</button>
+                  <button class="ua-btn-mini" data-answer="macro">Macro-patrón</button>
+                </div>
+                <div class="ua-mini-feedback"></div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================
+             8. EJEMPLO INTEGRADOR
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="integrador">
+            <span>8 · Ejemplo integrador: del ABC al patrón vital</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Mira cómo se articulan un micro-ABC, una clase funcional y un patrón de vida:
+            </p>
+
+            <div class="ua-example-steps">
+
+              <div class="ua-example-block">
+                <div class="ua-example-label">Micro-ABC</div>
+                <p class="ua-text-small">
+                  🅰️ <strong>Antecedente:</strong> le escriben “¿Vienes hoy?”.<br />
+                  🔵 <strong>Acción:</strong> responde “mejor no, estoy cansado”.<br />
+                  🟡 <strong>Consecuencia:</strong> siente alivio 😮‍💨 y evita el contacto social inmediato.
+                </p>
+              </div>
+
+              <div class="ua-example-block">
+                <div class="ua-example-label">Clase funcional</div>
+                <p class="ua-text-small">
+                  Responder con excusas, mirar el celular, llegar tarde, salir al baño…
+                  todas estas conductas diferentes comparten la función de
+                  <strong>evitar situaciones sociales tensas</strong>.
+                </p>
+              </div>
+
+              <div class="ua-example-block ua-example-good">
+                <div class="ua-example-label">Macro-patrón</div>
+                <p class="ua-text-small">
+                  A lo largo de varios años, este conjunto de episodios se organiza en un patrón vital:
+                  pocas relaciones nuevas, proyectos postergados, mayor ansiedad en contactos breves.
+                </p>
+                <p class="ua-text-small ua-hint">
+                  El análisis funcional contextual permite intervenir donde sea más útil:
+                  en un ABC concreto, en una clase funcional o en un patrón amplio ligado a valores.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================
+             9. CIERRE
+        ==================================== -->
+        <section class="ua-accordion">
+          <button class="ua-acc-header" data-acc="cierre">
+            <span>9 · Cierre de la lección: ver patrones, no solo eventos</span>
+            <span class="ua-acc-icon">›</span>
+          </button>
+          <div class="ua-acc-panel">
+            <p class="ua-text">
+              Un ABC es una <strong>unidad puntual</strong>. Varios ABC con la misma
+              función se organizan en una <strong>clase funcional</strong>. Cuando esas
+              clases se repiten en el tiempo y atraviesan dominios vitales, hablamos de
+              <strong>patrones</strong>.
+            </p>
+            <p class="ua-text">
+              El análisis funcional contextual trabaja donde sea más útil: segundos,
+              días o años. Lo importante es que puedas ver cómo una misma función
+              (por ejemplo, evitar malestar) organiza formas muy distintas de actuar.
+              Esa mirada será clave para las lecciones siguientes.
+            </p>
+
+            <div class="ua-btn-row">
+              <a href="p5.html" class="ua-btn-primary">
+                Continuar a Lección 4 → Lenguaje dentro del ABC
+              </a>
+              <a href="index.html" class="ua-btn-ghost">
+                Volver al mapa del módulo
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- NAV INFERIOR -->
+      <div class="ua-footer-nav">
+        <a href="p3.html" class="ua-btn-ghost">← Volver a Lección 2</a>
+        <a href="p5.html" class="ua-btn-primary">Siguiente · Lección 4 →</a>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+
+</html>
