@@ -572,3 +572,140 @@
     text-align: left;
   }
 }
+/* ============================================================
+   RESPONSIVE · OPTIMIZACIÓN PARA CELULAR
+   (Pantallas menores a 768px)
+============================================================ */
+@media (max-width: 768px) {
+
+  /* ---------- Layout general ---------- */
+  .ua-page {
+    padding: 20px 14px 50px;
+  }
+
+  .ua-inner {
+    max-width: 100%;
+  }
+
+  body.ua-body {
+    font-size: 18px;
+  }
+
+  /* ---------- Hero ---------- */
+  .ua-hero {
+    padding: 40px 10px 20px;
+    text-align: left;
+  }
+
+  .ua-title-main {
+    font-size: 30px;
+  }
+
+  .ua-title-main span {
+    font-size: 16px;
+  }
+
+  .ua-subtitle-main {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Icon legend ---------- */
+  .ua-icons-legend {
+    padding: 16px;
+  }
+
+  .ua-legend-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .ua-icon-label {
+    font-size: 13px;
+  }
+
+  /* ---------- Acordeones ---------- */
+  .ua-acc-header {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+
+  .ua-acc-icon {
+    font-size: 18px;
+  }
+
+  .ua-acc-panel {
+    padding: 14px 10px;
+  }
+
+  /* ---------- Textos ---------- */
+  .ua-text {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .ua-text-small {
+    font-size: 14px;
+  }
+
+  .ua-list {
+    font-size: 18px;
+  }
+
+  /* ---------- Grids y tarjetas ---------- */
+  .ua-mod-grid,
+  .ua-legend-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-drag-grid {
+    flex-direction: column;
+  }
+
+  .ua-drag-grid-columns {
+    flex-direction: column;
+  }
+
+  .ua-drag-column h4 {
+    font-size: 16px;
+  }
+
+  .ua-drop-zone {
+    min-height: 80px;
+  }
+
+  /* ---------- Botones ---------- */
+  .ua-btn-primary,
+  .ua-btn-ghost {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  .ua-context-buttons {
+    flex-direction: column;
+  }
+
+  .ua-context-btn {
+    width: 100%;
+  }
+
+  /* ---------- Ejemplos ---------- */
+  .ua-example-block {
+    padding: 14px;
+  }
+
+  .ua-example-label {
+    font-size: 16px;
+  }
+
+  /* ---------- Mini práctica ---------- */
+  .ua-mini-item {
+    padding: 12px;
+  }
+
+  .ua-btn-mini {
+    width: 48%;
+  }
+}
