@@ -238,28 +238,8 @@
 
   </div>
 
-  <!-- JS acordeón -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".uv-accordion-item");
-
-      items.forEach((item) => {
-        const header = item.querySelector(".uv-accordion-header");
-        const body = item.querySelector(".uv-accordion-body");
-
-        header.addEventListener("click", () => {
-          const open = item.classList.contains("is-open");
-          if (open) {
-            item.classList.remove("is-open");
-            body.style.maxHeight = null;
-          } else {
-            item.classList.add("is-open");
-            body.style.maxHeight = body.scrollHeight + "px";
-          }
-        });
-      });
-    });
-  </script>
+  <!-- JS externo de esta página -->
+  <script src="p2.js"></script>
 
 </body>
 </html>
