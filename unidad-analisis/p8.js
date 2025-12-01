@@ -50,3 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+document.querySelectorAll(".ua-acc-header").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const panel = btn.nextElementSibling;
+        btn.classList.toggle("active");
+        panel.classList.toggle("open");
+    });
+});
