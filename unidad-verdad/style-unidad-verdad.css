@@ -193,6 +193,13 @@ body { font-family: "Noto Sans", sans-serif; }
   margin-bottom: 0.4rem;
 }
 
+.uv-lesson-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 1.6rem;
+}
+
 .uv-lesson-title {
   font-size: 1.7rem;
   font-weight: 700;
