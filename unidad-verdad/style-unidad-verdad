@@ -1,21 +1,24 @@
 /* ============================================================
-   CAPA BASE · SIN ERRORES · z-index CORREGIDO
+   CAPA BASE · FONDO GENERAL · SIN ERRORES DE Z-INDEX
 ============================================================ */
 .uv-body {
   margin: 0;
   font-family: "Noto Sans", sans-serif;
   background: linear-gradient(180deg, #DFF1FF 0%, #F7FBFF 100%);
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* Fondo y decoraciones */
+/* ============================================================
+   CAPA DECORATIVA (MANDALAS · CAPA NEGATIVA SEGURA)
+============================================================ */
 .uv-bg-layer {
   position: absolute;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  z-index: -2;
+  z-index: -3;                /* AÚN MÁS SEGURO PARA EVITAR BLOQUEOS */
   pointer-events: none;
 }
 
@@ -23,107 +26,133 @@
   position: absolute;
   opacity: 0.16;
   width: 420px;
-  z-index: -1;
+  z-index: -2;                /* SOBRE EL FONDO PERO BAJO EL CONTENIDO */
 }
 
+/* Ajustes de posición */
 .m1 { top: -60px; left: -40px; }
 .m2 { bottom: -40px; right: -50px; }
 
 /* ============================================================
-   CONTENIDO PRINCIPAL
+   CONTENIDO PRINCIPAL · LAYOUT PREMIUM
 ============================================================ */
 .uv-page {
   position: relative;
   z-index: 1;
-  padding: 60px 80px;
-  max-width: 760px;
+  padding: 60px 40px;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ============================================================
-   TARJETAS PREMIUM SUAVES
+   TARJETAS PREMIUM
 ============================================================ */
 .uv-card {
   background: #F0F8FF;
-  padding: 26px 30px;
-  border-radius: 18px;
-  margin-bottom: 22px;
+  padding: 28px 32px;
+  border-radius: 20px;
+  margin-bottom: 26px;
   border: 1px solid rgba(10, 42, 92, 0.18);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09);
-  backdrop-filter: blur(2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(3px);
 }
 
+/* ------------------------------------------------------------
+   TÍTULO Y SUBTÍTULO
+------------------------------------------------------------ */
 .uv-title h1 {
   margin: 0;
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   color: #0A2A5C;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 .uv-title .uv-sub {
-  margin: 8px 0 0 0;
+  margin: 10px 0 0 0;
   font-size: 1.2rem;
   color: #132F66;
   font-weight: 600;
+  opacity: 0.9;
 }
 
+/* ------------------------------------------------------------
+   MICRO-HERO Y RESUMEN
+------------------------------------------------------------ */
 .uv-microhero p {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: #0A2340;
   font-weight: 600;
+  line-height: 1.55;
 }
 
 .uv-resumen p {
-  margin: 0;
+  margin: 0 0 16px 0;
   font-size: 1rem;
   color: #1A2C40;
+  line-height: 1.6;
+}
+
+.uv-resumen p:last-child {
+  margin-bottom: 0;
 }
 
 /* ============================================================
-   LECCIONES
+   SECCIÓN DE LECCIONES
 ============================================================ */
 .uv-seccion-lecciones {
-  margin-top: 40px;
-  font-size: 1.4rem;
+  margin-top: 50px;
+  margin-bottom: 18px;
+  font-size: 1.5rem;
   color: #0A2A5C;
+  font-weight: 700;
 }
 
+/* Grid mejorado */
 .uv-lecciones-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 22px;
+  gap: 24px;
 }
 
+/* Tarjetas de lección */
 .uv-leccion {
   display: flex;
+  align-items: center;
   background: #FFFFFF;
   text-decoration: none;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 18px;
   border: 1px solid rgba(10, 42, 92, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: 0.28s ease;
 }
 
 .uv-leccion:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.13);
 }
 
+/* Icono numérico */
 .lec-num {
   background: #FDBF12;
   color: #0A2A5C;
-  font-weight: 700;
-  padding: 10px 14px;
-  border-radius: 12px;
+  font-weight: 800;
+  padding: 10px 16px;
+  border-radius: 14px;
   font-size: 1rem;
-  margin-right: 12px;
-  min-width: 48px;
+  margin-right: 14px;
+  min-width: 50px;
   text-align: center;
 }
 
+/* Textos */
 .lec-info h4 {
   margin: 0;
   font-size: 1.1rem;
+  font-weight: 700;
   color: #0A2A5C;
 }
 
@@ -131,13 +160,14 @@
   margin: 4px 0 0;
   font-size: 0.9rem;
   color: #1A2C40;
+  line-height: 1.4;
 }
 
 /* ============================================================
-   PROGRESO
+   INDICADOR DE PROGRESO
 ============================================================ */
 .uv-progreso {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .punto {
@@ -147,6 +177,7 @@
   margin-right: 8px;
   background: #BFD4E4;
   border-radius: 50%;
+  transition: background 0.3s ease;
 }
 
 .punto.activo {
