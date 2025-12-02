@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="style-unidad-verdad.css" />
 
   <!-- JS DE LA PÁGINA -->
-  <script defer src="js/p2.js"></script>
+  <script defer src="p2.js"></script>
 </head>
 
 <body class="uv-body">
 
   <!-- FIGURA DECORATIVA DERECHA -->
-  <img src="/assets/icons/hex-blue.png" class="uv-hex-decoration" alt="decoración">
+  <img src="../../assets/icons/hex-blue.png" class="uv-hex-decoration" alt="decoración">
 
   <!-- SELLITO DE UBICACIÓN -->
   <div class="uv-sello">Unidad: Verdad · Lección 1 · El problema de la verdad</div>
@@ -35,7 +35,7 @@
     <!-- ================================================ -->
     <button class="uv-accordion" data-bloque="1">
       <div class="uv-accordion-left">
-        <span class="uv-accordion-tag">Bloque 1</span>
+        <span class="uv-accordion-tag">BLOQUE 1</span>
         <span class="uv-accordion-title">Introducción al problema de la verdad</span>
       </div>
       <span class="uv-accordion-icon">▶</span>
@@ -43,18 +43,15 @@
 
     <div class="uv-accordion-panel" data-bloque="1">
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-teoria">
         <h3>Teoría · Bloque 1 (pendiente)</h3>
         <p>[Aquí irán los 2 párrafos de teoría del Bloque 1.]</p>
         <p>[Espacio reservado para contenido técnico basado en ACT / RFT.]</p>
       </section>
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-actividad">
         <h3>Actividad interactiva · Bloque 1 (pendiente)</h3>
-        <p>[Aquí diseñaremos la actividad del Bloque 1.]</p>
-        <div id="zona-interactiva-1" class="uv-interactiva">
-          <!-- JS añadirá contenido aquí -->
-        </div>
+        <div id="zona-interactiva-1" class="uv-interactiva"></div>
       </section>
 
     </div>
@@ -64,7 +61,7 @@
     <!-- ================================================ -->
     <button class="uv-accordion" data-bloque="2">
       <div class="uv-accordion-left">
-        <span class="uv-accordion-tag">Bloque 2</span>
+        <span class="uv-accordion-tag">BLOQUE 2</span>
         <span class="uv-accordion-title">Criterios tradicionales y sus limitaciones</span>
       </div>
       <span class="uv-accordion-icon">▶</span>
@@ -72,15 +69,13 @@
 
     <div class="uv-accordion-panel" data-bloque="2">
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-teoria">
         <h3>Teoría · Bloque 2 (pendiente)</h3>
         <p>[Aquí irán los 2 párrafos de teoría del Bloque 2.]</p>
-        <p>[Contenido técnico sobre criterios de verdad.]</p>
       </section>
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-actividad">
         <h3>Actividad interactiva · Bloque 2 (pendiente)</h3>
-        <p>[Aquí irá la actividad del Bloque 2.]</p>
         <div id="zona-interactiva-2" class="uv-interactiva"></div>
       </section>
 
@@ -91,7 +86,7 @@
     <!-- ================================================ -->
     <button class="uv-accordion" data-bloque="3">
       <div class="uv-accordion-left">
-        <span class="uv-accordion-tag">Bloque 3</span>
+        <span class="uv-accordion-tag">BLOQUE 3</span>
         <span class="uv-accordion-title">La propuesta pragmática</span>
       </div>
       <span class="uv-accordion-icon">▶</span>
@@ -99,14 +94,13 @@
 
     <div class="uv-accordion-panel" data-bloque="3">
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-teoria">
         <h3>Teoría · Bloque 3 (pendiente)</h3>
         <p>[Aquí irán los 2 párrafos del Bloque 3.]</p>
       </section>
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-actividad">
         <h3>Actividad interactiva · Bloque 3 (pendiente)</h3>
-        <p>[Aquí irá la actividad interactiva del Bloque 3.]</p>
         <div id="zona-interactiva-3" class="uv-interactiva"></div>
       </section>
 
@@ -117,7 +111,7 @@
     <!-- ================================================ -->
     <button class="uv-accordion" data-bloque="4">
       <div class="uv-accordion-left">
-        <span class="uv-accordion-tag">Bloque 4</span>
+        <span class="uv-accordion-tag">BLOQUE 4</span>
         <span class="uv-accordion-title">Consecuencias clínicas</span>
       </div>
       <span class="uv-accordion-icon">▶</span>
@@ -125,25 +119,27 @@
 
     <div class="uv-accordion-panel" data-bloque="4">
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-teoria">
         <h3>Teoría · Bloque 4 (pendiente)</h3>
         <p>[Aquí irán los 2 párrafos del Bloque 4.]</p>
       </section>
 
-      <section class="uv-card uv-bloque">
+      <section class="uv-card uv-bloque-actividad">
         <h3>Actividad interactiva · Bloque 4 (pendiente)</h3>
-        <p>[Actividad final del Bloque 4.]</p>
         <div id="zona-interactiva-4" class="uv-interactiva"></div>
       </section>
 
     </div>
 
-    <!-- NAVEGACIÓN -->
-    <div class="uv-nav">
-      <a href="index.html" class="uv-btn-nav">◀ Volver</a>
-      <a href="p3.html" class="uv-btn-nav uv-next">Siguiente ▶</a>
+    <!-- ================================================ -->
+    <!-- NAVEGACIÓN INFERIOR                              -->
+    <!-- ================================================ -->
+    <div class="uv-nav-modulo">
+      <a href="index.html" class="uv-btn-nav-sec">◀ Volver</a>
+      <a href="p3.html" class="uv-btn-nav-main">Siguiente ▶</a>
     </div>
 
   </main>
+
 </body>
 </html>
