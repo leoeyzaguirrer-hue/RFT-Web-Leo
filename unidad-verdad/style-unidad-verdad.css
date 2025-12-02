@@ -272,3 +272,116 @@
   background: linear-gradient(180deg, transparent, #FFFFFFDD);
   pointer-events: none;
 }
+/* ============================================================
+   RESPONSIVE · ADAPTACIÓN A CELULAR (≤ 768px)
+============================================================ */
+@media (max-width: 768px) {
+
+  /* Fondo */
+  .uv-mandala {
+    width: 380px;
+    opacity: 0.18;
+  }
+
+  .m1 { top: -90px; left: -50px; }
+  .m2 { bottom: -110px; right: -60px; }
+
+  .uv-figura {
+    width: 160px;
+    right: 20px;
+    top: 140px;
+    opacity: 0.18;
+  }
+
+  /* Página */
+  .uv-page {
+    padding: 40px 22px;
+    max-width: 100%;
+  }
+
+  /* Tarjetas */
+  .uv-card {
+    padding: 20px 22px;
+    margin-bottom: 22px;
+  }
+
+  /* Títulos */
+  .uv-title h1 {
+    font-size: 1.65rem;
+    line-height: 1.25;
+  }
+
+  .uv-sub {
+    font-size: 1rem;
+  }
+
+  .uv-line {
+    width: 90px;
+    height: 3px;
+  }
+
+  /* Microhero y resumen */
+  .uv-microhero p {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .uv-resumen p {
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  /* Botón comenzar */
+  .uv-btn-start {
+    font-size: 1rem;
+    padding: 12px 18px;
+    margin-bottom: 32px;
+  }
+
+  /* GRID DE LECCIONES → UNA COLUMNA */
+  .uv-lecciones-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .uv-btn-leccion {
+    padding: 14px 16px;
+  }
+
+  .uv-btn-num {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+  }
+
+  .uv-btn-text {
+    font-size: 0.95rem;
+  }
+
+  /* Sello superior */
+  .uv-sello {
+    top: 16px;
+    right: 16px;
+    font-size: 0.78rem;
+    padding: 4px 10px;
+  }
+
+  /* Progreso */
+  .punto {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE ESPECIAL · CENTRALIZAR FIGURA EN PANTALLAS MUY PEQUEÑAS
+============================================================ */
+@media (max-width: 480px) {
+  .uv-figura {
+    top: auto;
+    bottom: 40px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 120px;
+    opacity: 0.16;
+  }
+}
