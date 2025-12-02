@@ -1,301 +1,147 @@
-/* ============================================================
-   PALETA Y VARIABLES GLOBALES
-============================================================ */
-:root {
-  --uv-azul-1: #0A2A5C;
-  --uv-azul-2: #132F66;
-  --uv-azul-oscuro: #000C1A;
-
-  --uv-bg-1: #F1F4FB;
-  --uv-bg-2: #FFFFFF;
-  --uv-bg-3: #F6F8FC;
-
-  --uv-dorado: #FDBF12;
-  --uv-dorado-soft: #FFE39A;
-
-  --uv-texto-main: #0A2340;
-  --uv-texto-soft: rgba(10, 35, 64, 0.75);
-
-  --uv-sombra: rgba(0,0,0,0.25);
-
-  --uv-radius: 28px;
-  --uv-padding: 24px;
-}
-
-
-/* ============================================================
-   BODY GENERAL DEL MÓDULO
-============================================================ */
-body.portada-body {
+/* =============================
+   FONDO GENERAL
+============================= */
+.portada-body {
   margin: 0;
   padding: 0;
-  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  color: var(--uv-texto-main);
-  background: linear-gradient(180deg, var(--uv-bg-1), var(--uv-bg-2), var(--uv-bg-3));
-  overflow-x: hidden;
+  font-family: "Noto Sans", sans-serif;
+  background: linear-gradient(180deg, #DFF1FF, #F7FBFF);
   position: relative;
+  overflow: hidden;
 }
 
-
-/* ============================================================
-   DECORACIONES DE FONDO
-============================================================ */
-.decoraciones {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
+/* Mandalas decorativas */
+.mandala {
+  position: absolute;
+  opacity: 0.18;
+  width: 420px;
   z-index: 0;
 }
 
-.mandala {
-  position: absolute;
-  opacity: 0.13;
-  filter: blur(1px);
-}
+.m1 { top: -60px; left: -40px; }
+.m2 { bottom: -40px; right: -50px; }
 
-.m1 {
-  width: 420px;
-  top: -40px;
-  left: -60px;
-}
-
-.m2 {
-  width: 380px;
-  bottom: -20px;
-  right: -40px;
-}
-
-
-/* ============================================================
-   CONTENIDO PRINCIPAL (SECCIÓN INTERNA)
-============================================================ */
+/* =============================
+   CONTENEDOR PRINCIPAL
+============================= */
 .contenido {
   position: relative;
   z-index: 2;
-  width: min(850px, 90%);
-  margin: auto;
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  padding: 60px 80px;
+  text-align: left;
+  max-width: 720px;
 }
 
-
-/* ============================================================
-   TARJETAS PREMIUM
-============================================================ */
+/* =============================
+   TARJETAS
+============================= */
 .tarjeta {
-  background: var(--uv-bg-3);
-  padding: var(--uv-padding);
-  border-radius: var(--uv-radius);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.04);
+  background: #F0F8FF;
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(10, 42, 92, 0.18);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  backdrop-filter: blur(2px);
 }
 
-.tarjeta.titulo {
-  background: linear-gradient(135deg, var(--uv-azul-1), var(--uv-azul-2));
-  color: white;
-  text-align: center;
-  padding: 32px;
-}
-
-.tarjeta.subtitulo {
-  background: white;
-  border-left: 4px solid var(--uv-dorado);
-  color: var(--uv-texto-main);
-}
-
-.tarjeta.microhero {
-  background: linear-gradient(135deg, #FFFFFF, #F7FAFF);
-  border-left: 4px solid var(--uv-azul-1);
-}
-
-.tarjeta.resumen {
-  background: white;
-}
-
-
-/* ============================================================
-   TIPOGRAFÍA
-============================================================ */
-h1, h2, h3, h4 {
+.titulo h1 {
   margin: 0;
-  font-weight: 700;
+  font-size: 2.6rem;
+  color: #0A2A5C;
 }
 
-h1 { font-size: 2rem; }
-h2 { font-size: 1.4rem; }
-h3 { font-size: 1.2rem; }
+.subtitulo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #132F66;
+}
 
-p {
-  line-height: 1.55;
+.microhero p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #0A2340;
+  font-weight: 600;
+}
+
+.resumen p {
+  margin: 0;
   font-size: 1rem;
-  color: var(--uv-texto-soft);
+  color: #1A2C40;
 }
 
+/* =============================
+   SECCIÓN DE LECCIONES
+============================= */
+.seccion-lecciones {
+  margin-top: 40px;
+  color: #0A2A5C;
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+}
 
-/* ============================================================
-   NAVEGACIÓN ENTRE LECCIONES
-============================================================ */
-.btn-volver {
-  display: inline-block;
-  padding: 12px 20px;
-  background: var(--uv-azul-1);
-  color: white;
-  border-radius: var(--uv-radius);
+.lista-lecciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card-leccion {
+  display: flex;
+  background: #FFFFFF;
   text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: 0.25s ease;
-}
-
-.btn-volver:hover {
-  transform: translateY(-3px);
-  background: var(--uv-azul-2);
-}
-
-
-/* ============================================================
-   ELEMENTOS INTERACTIVOS — REVEAL
-============================================================ */
-.reveal-grid {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.reveal-card {
-  flex: 1;
-  min-width: 150px;
-  background: var(--uv-azul-1);
-  color: white;
-  padding: 14px;
-  border-radius: var(--uv-radius);
-  text-align: center;
-  cursor: pointer;
-  transition: 0.25s;
-  font-weight: 600;
-}
-
-.reveal-card:hover {
-  background: var(--uv-azul-2);
-  transform: scale(1.03);
-}
-
-.reveal-output {
-  margin-top: 14px;
-  background: #f0f4ff;
-  padding: 16px;
-  border-radius: var(--uv-radius);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.reveal-output.visible {
-  opacity: 1;
-}
-
-
-/* ============================================================
-   ELEMENTOS INTERACTIVOS — DRAG & DROP
-============================================================ */
-.drag-container {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.drag-col {
-  flex: 1;
-  min-width: 240px;
-}
-
-.drop-zone {
-  min-height: 110px;
-  padding: 14px;
-  border-radius: var(--uv-radius);
-  border: 2px dashed #b8c4d8;
-  background: #f7f9ff;
-}
-
-.drag-items {
-  margin-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.drag-item {
-  padding: 10px 14px;
-  background: var(--uv-azul-1);
-  color: white;
-  border-radius: var(--uv-radius);
-  cursor: grab;
-  font-size: 0.9rem;
-  transition: 0.2s;
-}
-
-.drag-item:hover {
-  background: var(--uv-azul-2);
-}
-
-.drop-item {
-  padding: 8px 12px;
-  margin-top: 8px;
-  border-radius: var(--uv-radius);
-  font-size: 0.85rem;
-}
-
-.drop-item.correcto {
-  background: #d9ffe0;
-  border: 1px solid #29a746;
-}
-
-.drop-item.incorrecto {
-  background: #ffe5e2;
-  border: 1px solid #cd3b20;
-}
-
-
-/* ============================================================
-   QUIZ — BOTONES Y RESULTADOS
-============================================================ */
-.quiz-opciones {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.quiz-btn {
-  background: var(--uv-azul-oscuro);
-  color: white;
-  padding: 12px;
-  border-radius: var(--uv-radius);
-  border: none;
-  cursor: pointer;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(10,42,92, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: 0.3s;
-  font-size: 0.95rem;
 }
 
-.quiz-btn:hover {
-  background: var(--uv-azul-1);
+.card-leccion:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-.quiz-resultado {
-  margin-top: 12px;
+.lec-num {
+  background: #FDBF12;
+  color: #0A2A5C;
   font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 12px;
   font-size: 1rem;
+  margin-right: 12px;
+  min-width: 48px;
+  text-align: center;
 }
 
+.lec-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #0A2A5C;
+}
 
-/* ============================================================
-   RESPONSIVE
-============================================================ */
-@media (max-width: 600px) {
-  .reveal-grid {
-    flex-direction: column;
-  }
-  .drag-container {
-    flex-direction: column;
-  }
+.lec-info p {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: #1A2C40;
+}
+
+/* =============================
+   PROGRESO
+============================= */
+.progreso {
+  margin-top: 50px;
+}
+
+.punto {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  background: #BFD4E4;
+  border-radius: 50%;
+}
+
+.punto.activo {
+  background: #0A2A5C;
 }
