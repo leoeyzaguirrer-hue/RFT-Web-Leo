@@ -385,3 +385,65 @@
     opacity: 0.16;
   }
 }
+/* ============================================================
+   FONDO PREMIUM DEFINITIVO · FILIGRANA + MANDALA CENTRAL
+   (Opción D: curvas + mandala grande)
+============================================================ */
+
+.uv-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -5;
+
+  background-image:
+
+    /* --------------------------- */
+    /* 1) MANDALA CENTRAL GIGANTE */
+    /* --------------------------- */
+    radial-gradient(circle at 50% 40%,
+      rgba(253,191,18,0.35) 0%,
+      rgba(253,191,18,0.15) 18%,
+      transparent 40%
+    ),
+
+    /* --------------------------- */
+    /* 2) PÉTALOS / CURVAS LATERALES */
+    /* --------------------------- */
+    radial-gradient(circle at 15% 85%,
+      rgba(253,191,18,0.22) 0%,
+      transparent 55%
+    ),
+    radial-gradient(circle at 85% 20%,
+      rgba(253,191,18,0.22) 0%,
+      transparent 55%
+    ),
+
+    /* --------------------------- */
+    /* 3) PATRÓN FILIGRANA REPETIDA */
+    /* --------------------------- */
+    conic-gradient(
+      from 0deg,
+      rgba(253,191,18,0.28) 0deg,
+      transparent 8deg,
+      rgba(253,191,18,0.20) 16deg,
+      transparent 24deg,
+      rgba(253,191,18,0.25) 32deg,
+      transparent 40deg
+    );
+
+  background-size:
+    1200px 1200px,   /* mandala central */
+    520px 520px,     /* pétalo inferior */
+    520px 520px,     /* pétalo superior */
+    180px 180px;     /* filigrana repetida */
+
+  background-position:
+    center,
+    left bottom,
+    right top,
+    center;
+
+  opacity: 0.55;  /* 🔥 mayor visibilidad pero sin excesos */
+  mix-blend-mode: soft-light;
+}
