@@ -688,3 +688,83 @@
     width: 100%;
   }
 }
+/* ============================================================
+   FIGURA DECORATIVA — HEXÁGONO
+============================================================ */
+.uv-hex-decoration {
+  position: fixed;
+  right: 40px;
+  top: 180px;
+  width: 180px;
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   ACCORDION PREMIUM
+============================================================ */
+.uv-accordion {
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid rgba(253,191,18,0.55);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 20px 0 6px 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  text-align: left;
+  transition: 0.25s ease;
+}
+
+.uv-accordion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.uv-accordion-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.uv-accordion-tag {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #FDBF12;
+}
+
+.uv-accordion-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0A2A5C;
+}
+
+.uv-accordion-icon {
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+
+.uv-accordion-icon.rot {
+  transform: rotate(90deg);
+}
+
+/* PANEL */
+.uv-accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.uv-accordion-panel.open {
+  max-height: 2000px; /* suficiente para cualquier contenido */
+}
+
+/* Tarjetas dentro del panel */
+.uv-bloque {
+  background: #fffdf7;
+  border: 1px solid rgba(253,191,18,0.45);
+}
