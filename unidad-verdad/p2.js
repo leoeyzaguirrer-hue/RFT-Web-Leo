@@ -1,43 +1,20 @@
-// p2.js · Unidad Verdad · Lección 1
-// Control básico de acordeones y progreso por bloque
-
 document.addEventListener("DOMContentLoaded", () => {
   const accordions = document.querySelectorAll(".uv-accordion");
-  const panels = document.querySelectorAll(".uv-accordion-panel");
-  const icons = document.querySelectorAll(".uv-accordion-icon");
-  const dots = document.querySelectorAll(".uv-bloque-dot");
 
-  if (!accordions.length) return;
+  accordions.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const bloque = btn.dataset.bloque;
+      const panel = document.getElementById(`panel-${bloque}`);
+      const icon = btn.querySelector(".uv-accordion-icon");
 
-  accordions.forEach((accordion) => {
-    accordion.addEventListener("click", () => {
-      const bloque = accordion.getAttribute("data-bloque");
-      const panel = document.querySelector(
-        `.uv-accordion-panel[data-bloque="${bloque}"]`
-      );
-      const icon = accordion.querySelector(".uv-accordion-icon");
+      const isOpen = panel.classList.contains("open");
 
-      const estabaAbierto = panel.classList.contains("abierto");
+      document.querySelectorAll(".uv-accordion-panel").forEach(p => p.classList.remove("open"));
+      document.querySelectorAll(".uv-accordion-icon").forEach(i => i.classList.remove("rot"));
 
-      // Cerrar todo
-      panels.forEach((p) => p.classList.remove("abierto"));
-      accordions.forEach((a) => a.classList.remove("abierto"));
-      icons.forEach((i) => i.classList.remove("rotado"));
-
-      if (!estabaAbierto) {
-        // Abrir solo el bloque clicado
-        panel.classList.add("abierto");
-        accordion.classList.add("abierto");
-        if (icon) icon.classList.add("rotado");
-
-        // Actualizar puntos de progreso
-        dots.forEach((d) => {
-          const n = d.getAttribute("data-bloque");
-          d.classList.toggle("activo", n === bloque);
-        });
-      } else {
-        // Si se vuelve a hacer clic en el mismo, lo cerramos todo
-        // y dejamos el punto de progreso como estaba (no lo apagamos)
+      if (!isOpen) {
+        panel.classList.add("open");
+        icon.classList.add("rot");
       }
     });
   });
