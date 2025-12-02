@@ -4,54 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unidad Verdad · RFT · ACT</title>
+
+  <!-- ESTILO PROPIO DEL MÓDULO -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
 </head>
 
-<body class="portada-body">
+<body class="uv-body">
 
-  <!-- DECORACIONES DE FONDO -->
-  <div class="decoraciones">
-    <img src="/assets/mandala-1.png" class="mandala m1">
-    <img src="/assets/mandala-2.png" class="mandala m2">
+  <!-- CAPA DE FONDO (SEGURO · SIN BUGS · z-index NEGATIVO) -->
+  <div class="uv-bg-layer">
+    <img src="/assets/mandala-1.png" class="uv-mandala m1" alt="">
+    <img src="/assets/mandala-2.png" class="uv-mandala m2" alt="">
   </div>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <section class="contenido">
+  <main class="uv-page">
 
     <!-- TARJETA DE TÍTULO -->
-    <div class="tarjeta titulo">
+    <section class="uv-card uv-title">
       <h1>Verdad como lo que Funciona</h1>
-    </div>
+      <p class="uv-sub">El criterio pragmático del contextualismo funcional</p>
+    </section>
 
-    <!-- TARJETA DE SUBTÍTULO -->
-    <div class="tarjeta subtitulo">
-      <h2>El criterio pragmático del contextualismo funcional</h2>
-    </div>
-
-    <!-- MICRO-HERO PEDAGÓGICO (TEXTO PENDIENTE DE LIBROS) -->
-    <div class="tarjeta microhero">
+    <!-- MICRO HERO -->
+    <section class="uv-card uv-microhero">
       <p>
         [Aquí irá el micro-hero sobre el criterio de verdad en contextualismo
-        funcional, redactado más adelante a partir de los textos que tú me
-        indiques.]
+        funcional, redactado después a partir de los textos que tú indiques.]
       </p>
-    </div>
+    </section>
 
-    <!-- RESUMEN TEÓRICO (TEXTO PENDIENTE DE LIBROS) -->
-    <div class="tarjeta resumen">
+    <!-- RESUMEN TEÓRICO -->
+    <section class="uv-card uv-resumen">
       <p>
         [Aquí irá el resumen teórico de la unidad “Verdad como lo que Funciona”,
-        en 2–3 párrafos, basado estrictamente en los libros que tú me pases.
-        Por ahora lo dejamos como marcador de lugar.]
+        en 2–3 párrafos estrictamente basados en los libros que envíes.]
       </p>
-    </div>
+    </section>
 
-    <!-- TARJETAS DE LECCIONES -->
-    <h3 class="seccion-lecciones">Lecciones del módulo</h3>
+    <!-- LECCIONES -->
+    <h3 class="uv-seccion-lecciones">Lecciones del módulo</h3>
 
-    <div class="lista-lecciones">
+    <div class="uv-lecciones-grid">
 
-      <a href="p2.html" class="card-leccion">
+      <a href="p2.html" class="uv-leccion">
         <div class="lec-num">P2</div>
         <div class="lec-info">
           <h4>Lección P2</h4>
@@ -59,7 +55,7 @@
         </div>
       </a>
 
-      <a href="p3.html" class="card-leccion">
+      <a href="p3.html" class="uv-leccion">
         <div class="lec-num">P3</div>
         <div class="lec-info">
           <h4>Lección P3</h4>
@@ -67,7 +63,7 @@
         </div>
       </a>
 
-      <a href="p4.html" class="card-leccion">
+      <a href="p4.html" class="uv-leccion">
         <div class="lec-num">P4</div>
         <div class="lec-info">
           <h4>Lección P4</h4>
@@ -75,7 +71,7 @@
         </div>
       </a>
 
-      <a href="p5.html" class="card-leccion">
+      <a href="p5.html" class="uv-leccion">
         <div class="lec-num">P5</div>
         <div class="lec-info">
           <h4>Lección P5</h4>
@@ -83,7 +79,7 @@
         </div>
       </a>
 
-      <a href="p6.html" class="card-leccion">
+      <a href="p6.html" class="uv-leccion">
         <div class="lec-num">P6</div>
         <div class="lec-info">
           <h4>Lección P6</h4>
@@ -91,7 +87,7 @@
         </div>
       </a>
 
-      <a href="p7.html" class="card-leccion">
+      <a href="p7.html" class="uv-leccion">
         <div class="lec-num">P7</div>
         <div class="lec-info">
           <h4>Lección P7</h4>
@@ -101,8 +97,8 @@
 
     </div>
 
-    <!-- INDICADOR ESTÁTICO DE PROGRESO -->
-    <div class="progreso">
+    <!-- PROGRESO -->
+    <div class="uv-progreso">
       <span class="punto activo"></span>
       <span class="punto"></span>
       <span class="punto"></span>
@@ -111,7 +107,6 @@
       <span class="punto"></span>
     </div>
 
-  </section>
-
+  </main>
 </body>
 </html>
