@@ -1,0 +1,147 @@
+/* =============================
+   FONDO GENERAL
+============================= */
+.portada-body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans", sans-serif;
+  background: linear-gradient(180deg, #DFF1FF, #F7FBFF);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mandalas decorativas */
+.mandala {
+  position: absolute;
+  opacity: 0.18;
+  width: 420px;
+  z-index: 0;
+}
+
+.m1 { top: -60px; left: -40px; }
+.m2 { bottom: -40px; right: -50px; }
+
+/* =============================
+   CONTENEDOR PRINCIPAL
+============================= */
+.contenido {
+  position: relative;
+  z-index: 2;
+  padding: 60px 80px;
+  text-align: left;
+  max-width: 720px;
+}
+
+/* =============================
+   TARJETAS
+============================= */
+.tarjeta {
+  background: #F0F8FF;
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(10, 42, 92, 0.18);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  backdrop-filter: blur(2px);
+}
+
+.titulo h1 {
+  margin: 0;
+  font-size: 2.6rem;
+  color: #0A2A5C;
+}
+
+.subtitulo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #132F66;
+}
+
+.microhero p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #0A2340;
+  font-weight: 600;
+}
+
+.resumen p {
+  margin: 0;
+  font-size: 1rem;
+  color: #1A2C40;
+}
+
+/* =============================
+   SECCIÓN DE LECCIONES
+============================= */
+.seccion-lecciones {
+  margin-top: 40px;
+  color: #0A2A5C;
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+}
+
+.lista-lecciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card-leccion {
+  display: flex;
+  background: #FFFFFF;
+  text-decoration: none;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(10,42,92, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.card-leccion:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.lec-num {
+  background: #FDBF12;
+  color: #0A2A5C;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  margin-right: 12px;
+  min-width: 48px;
+  text-align: center;
+}
+
+.lec-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #0A2A5C;
+}
+
+.lec-info p {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: #1A2C40;
+}
+
+/* =============================
+   PROGRESO
+============================= */
+.progreso {
+  margin-top: 50px;
+}
+
+.punto {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  background: #BFD4E4;
+  border-radius: 50%;
+}
+
+.punto.activo {
+  background: #0A2A5C;
+}
