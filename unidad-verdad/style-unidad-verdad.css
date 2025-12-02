@@ -11,24 +11,24 @@
 }
 
 /* ============================================================
-   PATRÓN GEOMÉTRICO PREMIUM (muy sutil)
+   PATRÓN GEOMÉTRICO PREMIUM (oro suave)
 ============================================================ */
 .uv-pattern {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background-image:
-    radial-gradient(rgba(255, 215, 150, 0.12) 1px, transparent 1px),
-    radial-gradient(rgba(255, 215, 150, 0.1) 1px, transparent 1px);
-  background-size: 60px 60px, 90px 90px;
+    radial-gradient(rgba(253,191,18,0.14) 1px, transparent 1px),
+    radial-gradient(rgba(253,191,18,0.10) 1px, transparent 1px);
+  background-size: 55px 55px, 95px 95px;
   background-position: 0 0, 30px 30px;
   z-index: -4;
+  opacity: 0.35;
   pointer-events: none;
-  opacity: 0.25;
 }
 
 /* ============================================================
-   MANDALAS PREMIUM
+   MANDALAS DECORATIVAS FONDO
 ============================================================ */
 .uv-bg-layer {
   position: absolute;
@@ -40,41 +40,54 @@
 
 .uv-mandala {
   position: absolute;
-  width: 560px;
-  opacity: 0.25;
-  filter: hue-rotate(25deg) brightness(1.12) saturate(1.1);
+  width: 650px;
+  opacity: 0.26;
+  filter: hue-rotate(20deg) brightness(1.1) saturate(1.15);
   z-index: -2;
 }
 
-.m1 { top: -130px; left: -90px; }
-.m2 { bottom: -150px; right: -110px; }
+.m1 { top: -160px; left: -110px; }
+.m2 { bottom: -180px; right: -130px; }
 
 /* ============================================================
-   SELLO DEL MÓDULO
+   FIGURA HEXÁGONO LATERAL
+============================================================ */
+.uv-figura {
+  position: absolute;
+  right: 80px;
+  top: 180px;
+  width: 280px;
+  opacity: 0.22;
+  z-index: -1;
+  filter: drop-shadow(0px 6px 14px rgba(0,0,0,0.18));
+}
+
+/* ============================================================
+   SELLO SUPERIOR
 ============================================================ */
 .uv-sello {
   position: absolute;
-  top: 24px; right: 38px;
-  font-size: 0.9rem;
+  top: 26px; right: 40px;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #0A2A5CCC;
+  color: #0A2A5CEE;
   letter-spacing: 0.6px;
-  background: rgba(255,255,255,0.45);
-  padding: 6px 12px;
+  background: rgba(255,255,255,0.55);
+  padding: 6px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(253,191,18,0.45);
-  backdrop-filter: blur(6px);
+  border: 1px solid rgba(253,191,18,0.55);
+  backdrop-filter: blur(5px);
   z-index: 10;
 }
 
 /* ============================================================
-   CONTENIDO · LAYOUT EDITORIAL IZQUIERDO
+   CONTENIDO PRINCIPAL · LAYOUT IZQUIERDO
 ============================================================ */
 .uv-page {
   position: relative;
   z-index: 1;
   padding: 80px 60px;
-  max-width: 860px;
+  max-width: 1200px;   /* EXPANDIDO */
   text-align: left;
 }
 
@@ -83,41 +96,39 @@
 ============================================================ */
 .uv-card {
   background: linear-gradient(135deg, #FFFFFF 0%, #FFF9EC 100%);
-  padding: 24px 34px;
-  border-radius: 16px;
-  margin-bottom: 28px;
-  border: 1.5px solid rgba(253,191,18,0.45);
-  box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+  padding: 26px 34px;
+  border-radius: 18px;
+  margin-bottom: 32px;
+  border: 1.5px solid rgba(253,191,18,0.50);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
   backdrop-filter: blur(3px);
   animation: fadeUp 0.6s ease;
 }
 
-/* Animación suave */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* ============================================================
-   TÍTULO + LÍNEA DORADA
+   TÍTULO Y SUBTÍTULO
 ============================================================ */
 .uv-title h1 {
   margin: 0;
-  font-size: 2.6rem;
+  font-size: 2.25rem;  /* ≈ 36px */
   font-weight: 800;
   color: #0A2A5C;
 }
 
 .uv-sub {
   margin: 6px 0 0 0;
-  font-size: 1.2rem;
-  color: #132F66;
-  opacity: 0.9;
+  font-size: 1.25rem;
+  color: #12315F;
   font-weight: 600;
 }
 
 .uv-line {
-  width: 120px;
+  width: 140px;
   height: 3px;
   background: linear-gradient(90deg, #FDBF12, #FFD980);
   margin-top: 14px;
@@ -127,7 +138,7 @@
 
 @keyframes lineGrow {
   from { width: 0; opacity: 0; }
-  to { width: 120px; opacity: 1; }
+  to { width: 140px; opacity: 1; }
 }
 
 /* ============================================================
@@ -135,17 +146,17 @@
 ============================================================ */
 .uv-microhero p {
   margin: 0;
-  font-size: 1.08rem;
+  font-size: 1.15rem;
   font-weight: 500;
+  line-height: 1.62;
   color: #0A2340;
-  line-height: 1.58;
 }
 
 .uv-resumen p {
-  margin: 0 0 18px 0;
-  font-size: 1rem;
-  line-height: 1.62;
-  color: #132A40;
+  margin: 0 0 20px 0;
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: #12283F;
 }
 
 .uv-resumen p:last-child {
@@ -153,42 +164,67 @@
 }
 
 /* ============================================================
-   SECCIÓN DE LECCIONES
+   BOTÓN COMENZAR
+============================================================ */
+.uv-btn-start {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  background: #FDBF12;
+  color: #0A2A5C;
+  padding: 14px 26px;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(253,191,18,0.65);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: 0.25s ease;
+}
+
+.uv-btn-start:hover {
+  background: #FFD980;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}
+
+/* ============================================================
+   LECCIONES DEL MÓDULO
 ============================================================ */
 .uv-seccion-lecciones {
   margin-top: 48px;
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-weight: 700;
   color: #0A2A5C;
   margin-bottom: 20px;
 }
 
-/* ------------------------------------------------------------
-   BOTONES PREMIUM (no tarjetas)
------------------------------------------------------------- */
+/* GRILLA 3 COLUMNAS */
 .uv-lecciones-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
 
+/* BOTONES DE LECCIÓN */
 .uv-btn-leccion {
   display: flex;
   align-items: center;
   gap: 14px;
   background: #FFE8B6;
-  padding: 14px 20px;
+  padding: 16px 20px;
   border-radius: 14px;
   text-decoration: none;
-  border: 1.4px solid rgba(253,191,18,0.65);
+  border: 1.5px solid rgba(253,191,18,0.65);
   transition: 0.25s ease;
-  box-shadow: 0 5px 14px rgba(0,0,0,0.06);
+  color: #0A2340;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
 .uv-btn-leccion:hover {
   background: #FFF1CC;
   transform: translateY(-3px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
 }
 
 .uv-btn-num {
@@ -203,8 +239,7 @@
 }
 
 .uv-btn-text {
-  color: #0A2340;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   line-height: 1.4;
 }
@@ -222,19 +257,18 @@
   background: #D2DEEA;
   border-radius: 50%;
   margin-right: 10px;
-  transition: background 0.25s ease;
 }
 
 .punto.activo {
   background: #0A2A5C;
 }
 
-/* Fade final (opcional pero premiunísimo) */
+/* Fade inferior */
 .uv-page::after {
   content: "";
   position: absolute;
   bottom: 0; left: 0;
-  width: 100%; height: 90px;
+  width: 100%; height: 100px;
   background: linear-gradient(180deg, transparent, #FFFFFFDD);
   pointer-events: none;
 }
