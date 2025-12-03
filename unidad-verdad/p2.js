@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const dots = document.querySelectorAll(".uv-bloque-dot");
 
   if (!accordions.length) return;
-
+  
+initEjercicioBloque1UV();  
+  
   accordions.forEach((accordion) => {
     accordion.addEventListener("click", () => {
       const bloque = accordion.getAttribute("data-bloque");
