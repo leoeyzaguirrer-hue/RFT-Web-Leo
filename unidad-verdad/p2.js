@@ -12,6 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
   //
 initEjercicioBloque1UV();  
   
+  // Activar ejercicio del Bloque 2 cuando se abra el acordeón
+const bloque2 = document.querySelector('[data-bloque="2"]');
+bloque2.addEventListener("click", () => {
+  if (typeof initEjercicioBloque2UV === "function") {
+      initEjercicioBloque2UV();
+  }
+});
+  
   accordions.forEach((accordion) => {
     accordion.addEventListener("click", () => {
       const bloque = accordion.getAttribute("data-bloque");
