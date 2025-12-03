@@ -2034,3 +2034,21 @@
 .uv-ej-b2-feedback-strong {
   font-weight: 700;
 }
+/* ============================================================
+   FIX FINAL DEFINITIVO · ACORDEONES SIEMPRE FUNCIONAN
+   ============================================================ */
+
+.uv-accordion-panel.abierto {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  margin-top: 12px !important;
+}
+
+.uv-accordion-panel:not(.abierto) {
+  max-height: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
