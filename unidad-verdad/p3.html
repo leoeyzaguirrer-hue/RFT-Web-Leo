@@ -18,6 +18,9 @@
   <!-- BLOQUE 3 -->
   <link rel="stylesheet" href="css/ejercicios/p3/ejercicio-b3.css" />
 <script defer src="js/ejercicios/p3/ejercicio-b3.js"></script>
+   <!-- BLOQUE 4 -->
+  <link rel="stylesheet" href="css/ejercicios/p3/ejercicio-b4.css" />
+<script defer src="js/ejercicios/p3/ejercicio-b4.js"></script>
 </head>
 
 <body class="uv-body">
@@ -359,8 +362,51 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 4</h3>
-            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
-          </section>
+            <section class="uv-card uv-bloque-actividad">
+  <h3>Actividad interactiva · Bloque 4 · “El Mapa de Criterios de Verdad”</h3>
+
+  <p class="mapa-instruccion">
+    Explora los tres criterios clásicos de verdad haciendo clic en cada región del mapa.  
+    Cuando hayas visitado las tres zonas, se desbloqueará el panel central que introduce  
+    el criterio pragmático: <strong>la verdad como lo que funciona</strong>.
+  </p>
+
+  <div id="ej-p3-b4" class="mapa-container">
+
+    <!-- MAPA GENERAL -->
+    <div class="mapa-zonas">
+      <div class="zona zona-corresp" data-zona="corresp">🏛️ Correspondencia</div>
+      <div class="zona zona-coher" data-zona="coher">📚 Coherencia</div>
+      <div class="zona zona-mec" data-zona="mec">⚙️ Mecanicismo</div>
+    </div>
+
+    <!-- PANEL CENTRAL (bloqueado al inicio) -->
+    <div id="mapa-panel-central" class="panel-central oculto">
+      <h4>✨ Transición al criterio pragmático</h4>
+      <p>
+        Ningún criterio clásico garantiza acción eficaz.  
+        El contextualismo funcional propone:  
+        <strong>verdad = lo que funciona en el contexto.</strong>
+      </p>
+      <div class="portal">🌀</div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="mapa-modal" class="modal oculto">
+      <div class="modal-content">
+        <span id="modal-close" class="modal-close">✖</span>
+        <h4 id="modal-titulo"></h4>
+        <p id="modal-ejemplo"></p>
+        <p id="modal-supuesto"></p>
+        <p id="modal-limitacion"></p>
+      </div>
+    </div>
+
+    <!-- BOTÓN DE REINICIO -->
+    <button id="mapa-reiniciar" class="mapa-restart-btn">🔄 Reiniciar mapa</button>
+
+  </div>
+</section>
 
         </div>
       </article>
