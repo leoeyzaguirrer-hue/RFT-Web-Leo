@@ -80,3 +80,13 @@
   font-weight: 600;
   color: #0A2A5C;
 }
+.uv-instruccion-ejercicio {
+  font-size: 0.95rem;
+  color: #0A2340;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.6);
+  padding: 8px 12px;
+  border-left: 4px solid #FDBF12;
+  border-radius: 6px;
+}
+
