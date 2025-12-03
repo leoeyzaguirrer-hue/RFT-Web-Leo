@@ -1,0 +1,82 @@
+/* ============================================================
+   EJERCICIO P3 · BLOQUE 1 · LABORATORIO DE CORRESPONDENCIA
+   Estilo autónomo y encapsulado
+============================================================ */
+
+#ej-p3-b1 {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(10, 42, 92, 0.15);
+}
+
+.ej-lab-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.ej-tarjetas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ej-tarjeta {
+  padding: 12px 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(10, 42, 92, 0.25);
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.ej-tarjeta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(10, 42, 92, 0.15);
+}
+
+.ej-destinos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ej-dropzone {
+  padding: 16px;
+  min-height: 70px;
+  border-radius: 12px;
+  border: 2px dashed rgba(10, 42, 92, 0.3);
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.ej-dropzone.activo {
+  border-color: #FDBF12;
+  background: rgba(253, 191, 18, 0.12);
+}
+
+.ej-evaluar-btn {
+  margin-top: 18px;
+  padding: 12px 20px;
+  background: #0A2A5C;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.ej-evaluar-btn:hover {
+  background: #16407A;
+}
+
+.ej-feedback {
+  margin-top: 14px;
+  font-weight: 600;
+  color: #0A2A5C;
+}
