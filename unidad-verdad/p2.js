@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const accordions = document.querySelectorAll(".uv-accordion");
 
   accordions.forEach((btn) => {
@@ -9,12 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const isOpen = panel.classList.contains("open");
 
-      // Cerrar todos
+      // Cerrar todos los acordeones
       document.querySelectorAll(".uv-accordion-panel").forEach(p => p.classList.remove("open"));
       document.querySelectorAll(".uv-accordion-icon").forEach(i => i.classList.remove("rot"));
       document.querySelectorAll(".uv-accordion").forEach(a => a.classList.remove("open"));
 
-      // Abrir el que corresponde
+      // Abrir el correspondiente
       if (!isOpen) {
         panel.classList.add("open");
         icon.classList.add("rot");
@@ -22,4 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
 });
