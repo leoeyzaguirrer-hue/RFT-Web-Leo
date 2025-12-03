@@ -1619,16 +1619,22 @@
 .uv-ej-b1-feedback-strong {
   font-weight: 600;
 }
-/* EXPANSIÓN SEGURA DEL BLOQUE 1 – SOLO APLICA AL EJERCICIO */
-.uv-accordion-panel[data-bloque="1"] {
+/* FIX REAL: el panel crece solo cuando está abierto */
+.uv-accordion-panel.abierto[data-bloque="1"] {
   overflow: visible !important;
   max-height: none !important;
   height: auto !important;
 }
 
-/* Asegura que el contenedor del ejercicio se expanda */
+/* Dejar normal los paneles cerrados (evita el espacio gigante) */
+.uv-accordion-panel[data-bloque="1"]:not(.abierto) {
+  overflow: hidden !important;
+  max-height: 0 !important;
+  height: 0 !important;
+}
+
+/* El ejercicio en sí puede crecer libremente */
 .uv-ej-b1 {
   height: auto !important;
-  min-height: 600px;
-  padding-bottom: 60px;
+  padding-bottom: 40px;
 }
