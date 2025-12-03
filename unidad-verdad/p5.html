@@ -3,85 +3,245 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P5 · El Criterio Funcional en Acción · Unidad de Verdad</title>
+  <title>P5 · Verdad en ACT · Unidad de Verdad</title>
 
-  <!-- Estilos globales -->
+  <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
 
   <!-- JS específico de esta pantalla -->
-  <script defer src="js/p5.js"></script>
+  <script defer src="p5.js"></script>
 </head>
 
-<body class="portada-body">
+<body class="uv-body">
 
-  <!-- DECORACIONES -->
-  <div class="decoraciones">
-    <img src="assets/mandalas/mandala-1.png" class="mandala m1" alt="">
-    <img src="assets/mandalas/mandala-2.png" class="mandala m2" alt="">
+  <!-- FONDO DECORATIVO -->
+  <div class="uv-bg-layer">
+    <img src="/assets/mandala-1.png" class="uv-mandala m1" alt="">
+    <img src="/assets/mandala-2.png" class="uv-mandala m2" alt="">
+    <div class="uv-pattern"></div>
+    <img src="/assets/icons/hex-blue.png" class="uv-figura" alt="">
   </div>
 
-  <!-- CONTENIDO DEL MÓDULO -->
-  <section class="contenido">
+  <!-- SELLO DEL MÓDULO -->
+  <div class="uv-sello">Unidad · Verdad</div>
 
-    <!-- TÍTULO -->
-    <div class="tarjeta titulo">
-      <h1>Lección 4 · El Criterio Funcional en Acción</h1>
-    </div>
+  <main class="uv-page">
 
-    <!-- SUBTÍTULO -->
-    <div class="tarjeta subtitulo">
-      <h2>Cómo el criterio pragmático guía decisiones clínicas reales</h2>
-    </div>
-
-    <!-- BLOQUE TEÓRICO -->
-    <div class="tarjeta microhero">
-      <p>
-        Esta lección profundiza en cómo aplicar el criterio funcional en
-        situaciones concretas. Veremos cómo distinguir entre explicaciones
-        útiles e inútiles según su capacidad para producir predicción e
-        influencia conductual.
-      </p>
-    </div>
-
-    <!-- BLOQUE TÉCNICO -->
-    <div class="tarjeta resumen">
-      <p>
-        Aquí podrás colocar desarrollo técnico: análisis de casos, cómo comparar
-        hipótesis funcionales, cómo descartar explicaciones atractivas pero
-        inútiles y cómo diferenciar modelos que realmente guían intervención.
-      </p>
-    </div>
-
-    <!-- INTERACTIVO P5 -->
-    <div class="tarjeta interaccion">
-      <h3>Actividad Interactiva</h3>
-      <p>Aplica el criterio funcional a distintos escenarios clínicos.</p>
-
-      <div id="zona-interactiva">
-        <!-- Se inyecta desde p5.js -->
+    <!-- ENCABEZADO CONTEXTUAL -->
+    <header class="uv-lesson-header">
+      <div class="uv-lesson-info">
+        <span class="uv-lesson-unit">Unidad: Verdad</span>
+        <span class="uv-lesson-sep">·</span>
+        <span class="uv-lesson-name">Lección 4 · La verdad clínica en ACT</span>
       </div>
-    </div>
 
-    <!-- CIERRE DE LECCIÓN -->
-    <div class="tarjeta resumen">
-      <h3>Resumen de la Lección</h3>
-      <p>
-        Aquí irá la síntesis: qué decisiones cambian cuando se adopta un criterio
-        funcional, cuáles hipótesis ganan poder explicativo y cómo se orienta la
-        práctica clínica hacia lo que funciona realmente.
+      <div class="uv-bloques-progreso">
+        <span class="uv-bloque-dot activo" data-bloque="1"></span>
+        <span class="uv-bloque-dot" data-bloque="2"></span>
+        <span class="uv-bloque-dot" data-bloque="3"></span>
+        <span class="uv-bloque-dot" data-bloque="4"></span>
+      </div>
+    </header>
+
+    <!-- TÍTULO + RESUMEN -->
+    <section class="uv-card uv-title uv-title-leccion">
+      <h1>Lección 4: Qué significa “verdadero” en una sesión ACT</h1>
+      <p class="uv-sub">¿Qué es “verdadero”?</p>
+      <div class="uv-line"></div>
+
+      <p class="uv-resumen">
+        En psicoterapia contextual, la verdad de una formulación no se mide por cuán fielmente representa
+        causas internas, sino por su capacidad para orientar acciones clínicas que generen flexibilidad psicológica
+        y conducta valiosa. ACT y RFT adoptan explícitamente este criterio: una descripción es más “verdadera” cuando
+        ayuda al consultante a avanzar hacia una vida más significativa. Esta lección explora cómo se evalúa y utiliza
+        la verdad pragmática dentro del trabajo clínico.
       </p>
-    </div>
+    </section>
+
+    <!-- BLOQUES -->
+    <section class="uv-bloques">
+
+      <!-- BLOQUE 1 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="1">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 1</span>
+            <span class="uv-accordion-title">La formulación clínica como herramienta funcional</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="1">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 1 · Formulación clínica como herramienta funcional</h3>
+
+            <p>
+              En ACT, una formulación clínica no busca descubrir mecanismos ocultos, sino identificar patrones
+              conductuales que permitan intervenir con eficacia. Una hipótesis es más “verdadera” cuando facilita
+              al terapeuta y al consultante comprender cómo opera el patrón problemático y qué alternativas están
+              disponibles. El objetivo es producir comprensión que guíe acción, no explicaciones que cierren
+              la conversación.
+            </p>
+
+            <p>
+              Esta perspectiva implica dejar atrás la idea de que el éxito depende de describir correctamente
+              la estructura interna del consultante. En su lugar, la formulación se evalúa por su efecto:
+              ¿ayuda a elegir intervenciones que modifiquen la función del comportamiento? Si sí, es más verdadera
+              en sentido contextual.
+            </p>
+
+            <p>
+              De este modo, la formulación se vuelve dinámica y flexible. No se trata de defender teorías,
+              sino de ajustarlas según los cambios observados y las consecuencias clínicas. La conceptualización
+              es una herramienta viva.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactivas · Bloque 1</h3>
+            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 2 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="2">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 2</span>
+            <span class="uv-accordion-title">Lo que funciona en ACT</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="2">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 2 · Precisión, valores y flexibilidad</h3>
+
+            <p>
+              Una formulación ACT es más poderosa cuando identifica antecedentes, patrones verbales, conductas
+              evitativas y consecuencias que mantienen el ciclo. Esta precisión permite intervenir sobre funciones,
+              no solo sobre formas, abriendo espacio para estrategias como defusión, exposición o metáforas orientadas
+              a valores.
+            </p>
+
+            <p>
+              El criterio pragmático exige que las intervenciones generen flexibilidad psicológica: capacidad
+              de avanzar hacia valores a pesar de eventos internos difíciles. Si una conceptualización facilita
+              este movimiento, es más verdadera.
+            </p>
+
+            <p>
+              Además, la verdad clínica incluye la dimensión de valores: intervenir es verdadero cuando ayuda
+              al consultante a construir una vida que valga la pena, más allá de la simple reducción de síntomas.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 2</h3>
+            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 3 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="3">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 3</span>
+            <span class="uv-accordion-title">Metáforas, reglas y lenguaje</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="3">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 3 · Lenguaje y verdad en RFT</h3>
+
+            <p>
+              Desde RFT, el lenguaje siempre transforma funciones. Una metáfora o regla es “verdadera” en la
+              medida en que reorganiza redes relacionales que permitan actuar de forma más flexible. La verdad
+              no depende de si la metáfora es literal, sino de si cambia la conducta.
+            </p>
+
+            <p>
+              Una metáfora bonita puede reforzar la evitación; otra más simple puede promover acción valiosa.
+              La verdad es función: lo que produce en el consultante al reorganizar significados.
+            </p>
+
+            <p>
+              Así, la práctica clínica se convierte en un proceso de modelar significados. El terapeuta selecciona
+              intervenciones no por su belleza conceptual, sino por su capacidad de transformar funciones verbales.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 3</h3>
+            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 4 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="4">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 4</span>
+            <span class="uv-accordion-title">La verdad funcional en la práctica clínica</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="4">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 4 · La verdad funcional como guía</h3>
+
+            <p>
+              Adoptar el criterio pragmático significa evaluar cada paso clínico por su utilidad: conceptualizar,
+              intervenir, preguntar, retroceder o avanzar son conductas del terapeuta sometidas a consecuencias.
+            </p>
+
+            <p>
+              El terapeuta deja de ser un “descubridor de verdades internas” y se convierte en un ingeniero del
+              contexto: selecciona descripciones que funcionen para orientar acción valiosa.
+            </p>
+
+            <p>
+              Esta postura prepara la siguiente lección: aprender a evaluar opciones clínicas según lo que hacen,
+              no según cómo suenan.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 4</h3>
+            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+    </section>
 
     <!-- NAVEGACIÓN -->
-    <div class="nav-modulo" style="display:flex; gap:20px; justify-content:center; margin-top:20px;">
-      <a href="p4.html" class="btn-volver">◀ Anterior</a>
-      <a href="p6.html" class="btn-volver" style="background:var(--uv-dorado); color:var(--uv-azul-1);">
-        Siguiente ▶
-      </a>
-    </div>
+    <nav class="uv-nav-modulo">
+      <a href="p4.html" class="uv-btn-nav uv-btn-nav-sec">◀ Volver a la lección anterior</a>
+      <a href="p6.html" class="uv-btn-nav uv-btn-nav-main">Siguiente lección ▶</a>
+    </nav>
 
-  </section>
+  </main>
 
 </body>
 </html>
-
