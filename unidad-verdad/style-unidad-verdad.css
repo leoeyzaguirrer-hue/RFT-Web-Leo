@@ -486,113 +486,70 @@
 }
 
 /* ============================================================
-   BLOQUES EN ACORDEÓN
+   ACCORDION PREMIUM
 ============================================================ */
-
-.uv-bloques {
-  margin-top: 10px;
-}
-
-.uv-bloque {
-  margin-bottom: 12px;
-}
-
 .uv-accordion {
   width: 100%;
-  border: 1px solid rgba(10, 42, 92, 0.15);
-  border-radius: 14px;
+  background: #fff;
+  border: 1.5px solid rgba(253,191,18,0.55);
+  border-radius: 12px;
   padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.94);
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  align-items: center;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
-  transition: background 0.25s ease, transform 0.18s ease, box-shadow 0.25s ease;
+  margin: 20px 0 6px 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  text-align: left;
+  transition: 0.25s ease;
 }
 
 .uv-accordion:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
-}
-
-.uv-accordion.abierto {
-  background: linear-gradient(135deg, #fffdf6, #fff5dc);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
 .uv-accordion-left {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
 }
 
 .uv-accordion-tag {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(10, 42, 92, 0.55);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #FDBF12;
 }
 
 .uv-accordion-title {
   font-size: 1.05rem;
-  font-weight: 600;
-  color: #0a2340;
+  font-weight: 700;
+  color: #0A2A5C;
 }
 
 .uv-accordion-icon {
   font-size: 1.1rem;
-  color: #0a2a5c;
-  transition: transform 0.25s ease, color 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
-.uv-accordion-icon.rotado {
+.uv-accordion-icon.rot {
   transform: rotate(90deg);
-  color: #fdbf12;
 }
 
+/* PANEL */
 .uv-accordion-panel {
   max-height: 0;
   overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.35s ease, margin-top 0.25s ease;
+  transition: max-height 0.35s ease;
 }
 
-.uv-accordion-panel.abierto {
-  max-height: 900px; /* suficiente para los 2 párrafos + actividad */
-  opacity: 1;
-  margin-top: 12px;
+.uv-accordion-panel.open {
+  max-height: 2000px; /* suficiente para cualquier contenido */
 }
 
-/* Tarjetas internas de cada bloque */
-.uv-bloque-teoria,
-.uv-bloque-actividad {
-  margin-bottom: 14px;
-}
-
-.uv-bloque-teoria h3,
-.uv-bloque-actividad h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 1rem;
-  color: #0a2a5c;
-}
-
-.uv-actividad-placeholder {
-  font-size: 0.95rem;
-  color: #28374f;
-  line-height: 1.5;
-}
-
-/* Separador editorial entre bloques */
-.uv-separador-bloque {
-  text-align: center;
-  margin: 14px 0 18px;
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(10, 42, 92, 0.38);
+/* Tarjetas dentro del panel */
+.uv-bloque {
+  background: #fffdf7;
+  border: 1px solid rgba(253,191,18,0.45);
 }
 
 /* ============================================================
