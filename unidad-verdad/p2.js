@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const dots = document.querySelectorAll(".uv-bloque-dot");
 
   if (!accordions.length) return;
-  
+
+  //
 initEjercicioBloque1UV();  
   
   accordions.forEach((accordion) => {
@@ -43,7 +44,7 @@ initEjercicioBloque1UV();
       }
     });
   });
-});
+});//
 /* ============================================================
    EJERCICIO BLOQUE 1 · "COHERENTE O ÚTIL"
    Se inyecta dentro de #bloque-1-actividad
