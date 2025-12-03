@@ -75,3 +75,35 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+// ========================
+// BOTÓN REINTENTAR EJERCICIO
+// ========================
+document.getElementById("btn-reintentar-b2").addEventListener("click", () => {
+
+  // Reset de barras
+  claridad = 0;
+  utilidad = 0;
+  claridadBar.style.width = "0%";
+  utilidadBar.style.width = "0%";
+
+  // Reset visual
+  document.querySelectorAll(".slot").forEach(slot => {
+    slot.innerHTML = "";
+  });
+
+  // Devolver tarjetas a su contenedor
+  cohTarjetas.innerHTML = "";
+  tarjetas.forEach(t => {
+    t.style.opacity = "1";
+    t.style.pointerEvents = "auto";
+    cohTarjetas.appendChild(t);
+  });
+
+  // Reset feedback
+  document.getElementById("coh-feedback").innerHTML = "";
+
+  // Reset máquina
+  document.querySelectorAll(".eng").forEach(e => {
+    e.style.transform = "rotate(0deg)";
+  });
+});
