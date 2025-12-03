@@ -3,83 +3,245 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P3 · Sin criterio de verdad · Unidad de Verdad</title>
+  <title>P3 · Otros criterios de verdad · Unidad de Verdad</title>
 
   <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
 
-  <!-- JS de esta pantalla -->
-  <script defer src="js/p3.js"></script>
+  <!-- JS específico de esta pantalla -->
+  <script defer src="p3.js"></script>
 </head>
 
-<body class="portada-body">
+<body class="uv-body">
 
-  <!-- DECORACIÓN DE FONDO -->
-  <div class="decoraciones">
-    <img src="assets/mandalas/mandala-1.png" class="mandala m1" alt="">
-    <img src="assets/mandalas/mandala-2.png" class="mandala m2" alt="">
+  <!-- FONDO DECORATIVO -->
+  <div class="uv-bg-layer">
+    <img src="/assets/mandala-1.png" class="uv-mandala m1" alt="">
+    <img src="/assets/mandala-2.png" class="uv-mandala m2" alt="">
+    <div class="uv-pattern"></div>
+    <img src="/assets/icons/hex-blue.png" class="uv-figura" alt="">
   </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <section class="contenido">
+  <!-- SELLO DEL MÓDULO -->
+  <div class="uv-sello">Unidad · Verdad</div>
 
-    <!-- TÍTULO -->
-    <div class="tarjeta titulo">
-      <h1>Lección 2 · Sin Criterio de Verdad</h1>
-    </div>
+  <main class="uv-page">
 
-    <!-- SUBTÍTULO -->
-    <div class="tarjeta subtitulo">
-      <h2>Cuando todo es verdad… nada funciona clínicamente</h2>
-    </div>
-
-    <!-- BLOQUE TEÓRICO 1 -->
-    <div class="tarjeta microhero">
-      <p>
-        Esta pantalla desarrolla la idea central: sin un criterio funcional para
-        evaluar afirmaciones, cualquier modelo puede parecer válido. En ciencia
-        contextual, la utilidad para predecir e influir conducta define qué vale la pena conservar.
-      </p>
-    </div>
-
-    <!-- BLOQUE TÉCNICO 2 -->
-    <div class="tarjeta resumen">
-      <p>
-        Aquí colocarás desarrollo técnico: por qué la correspondencia mentalista
-        falla, cómo la coherencia interna no garantiza efectividad y cómo modelos
-        incompatibles pueden coexistir si no hay un criterio funcional claro.
-      </p>
-    </div>
-
-    <!-- BLOQUE INTERACTIVO -->
-    <div class="tarjeta interaccion">
-      <h3>Actividad Interactiva</h3>
-      <p>Contrasta modelos: haz clic o arrastra para analizar su utilidad.</p>
-
-      <div id="zona-interactiva">
-        <!-- Se llena desde p3.js -->
+    <!-- ENCABEZADO CONTEXTUAL -->
+    <header class="uv-lesson-header">
+      <div class="uv-lesson-info">
+        <span class="uv-lesson-unit">Unidad: Verdad</span>
+        <span class="uv-lesson-sep">·</span>
+        <span class="uv-lesson-name">Lección 2 · Otros criterios de verdad</span>
       </div>
-    </div>
 
-    <!-- BLOQUE RESUMEN -->
-    <div class="tarjeta resumen">
-      <h3>Resumen de la Lección</h3>
-      <p>
-        Aquí se resumirá por qué sin un criterio pragmático no se puede distinguir
-        entre modelos útiles e inútiles, y cómo esto afecta el trabajo clínico real.
+      <div class="uv-bloques-progreso">
+        <span class="uv-bloque-dot activo" data-bloque="1"></span>
+        <span class="uv-bloque-dot" data-bloque="2"></span>
+        <span class="uv-bloque-dot" data-bloque="3"></span>
+        <span class="uv-bloque-dot" data-bloque="4"></span>
+      </div>
+    </header>
+
+    <!-- TÍTULO + RESUMEN -->
+    <section class="uv-card uv-title uv-title-leccion">
+      <h1>Lección 2: Tres maneras de decidir qué es “verdadero”</h1>
+      <p class="uv-sub">OTROS CRITERIOS DE VERDAD</p>
+      <div class="uv-line"></div>
+
+      <p class="uv-resumen">
+        A lo largo de la historia de la psicología, distintos criterios de verdad han guiado la forma de explicar
+        y tratar la conducta humana. Antes de adoptar la perspectiva pragmática del contextualismo funcional, es
+        necesario comprender cómo han operado otros enfoques: la correspondencia, que busca que las teorías reflejen
+        fielmente la realidad; la coherencia, que evalúa la verdad por integración lógica interna; y el mecanicismo,
+        que ve el comportamiento como resultado de procesos internos causales. Estos criterios han modelado la
+        práctica clínica tradicional y permiten entender por contraste la propuesta contextualista.
       </p>
-    </div>
+    </section>
+
+    <!-- BLOQUES -->
+    <section class="uv-bloques">
+
+      <!-- BLOQUE 1 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="1">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 1</span>
+            <span class="uv-accordion-title">La verdad como correspondencia</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="1">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 1 · La verdad como correspondencia</h3>
+
+            <p>
+              El criterio de correspondencia sostiene que una descripción es verdadera si coincide con un hecho o
+              entidad real. Esta idea es intuitiva y ha sido fundamental en el desarrollo de gran parte de las
+              ciencias naturales. En psicología, se expresa en modelos que asumen que existe un conjunto de estados
+              internos (creencias, rasgos, estructuras, fallas biológicas) que pueden describirse adecuadamente mediante
+              conceptos diagnósticos o constructos teóricos.
+            </p>
+
+            <p>
+              Desde esta perspectiva, la calidad de una explicación clínica depende de su capacidad para “ajustarse”
+              a lo que supuestamente ocurre dentro del individuo. Esta lógica sustenta clasificaciones diagnósticas,
+              teorías de rasgos y aproximaciones basadas en “déficits cognitivos”.
+            </p>
+
+            <p>
+              Aunque este enfoque puede generar orden conceptual, su utilidad depende de que dichas correspondencias
+              tengan consecuencias prácticas claras. En muchos casos, la descripción interna no indica qué hacer en
+              terapia, dejando una brecha entre el modelo y la intervención.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 1</h3>
+            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 2 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="2">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 2</span>
+            <span class="uv-accordion-title">La verdad como coherencia</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="2">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 2 · La verdad como coherencia</h3>
+
+            <p>
+              El criterio de coherencia propone que una teoría es verdadera cuando encaja lógicamente dentro de un
+              sistema conceptual mayor. Históricamente, este enfoque ha influido en modelos evolutivos y narrativos,
+              donde la verdad depende de su congruencia con la estructura general del sistema teórico.
+            </p>
+
+            <p>
+              La explicación puede ser elegante y convincente, pero no necesariamente ofrece criterios operativos
+              para modificar patrones conductuales específicos. Sin un anclaje funcional, la coherencia puede producir
+              narrativas impecables pero clínicamente estériles.
+            </p>
+
+            <p>
+              La pregunta crucial sigue siendo operativa: ¿esta explicación ayuda a decidir qué hacer ahora con el consultante?
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 2</h3>
+            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 3 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="3">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 3</span>
+            <span class="uv-accordion-title">El mecanicismo</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="3">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 3 · El mecanicismo</h3>
+
+            <p>
+              El criterio mecanicista se apoya en la metáfora del organismo como máquina. La conducta se explica por
+              mecanismos internos —biológicos, cognitivos o neuroquímicos— que funcionan como engranajes. En clínica,
+              se expresa en la búsqueda de “causas internas”: sesgos cognitivos, esquemas profundos, disfunciones
+              biológicas.
+            </p>
+
+            <p>
+              Este enfoque ha generado avances relevantes, pero sus límites aparecen cuando el terapeuta debe trabajar
+              con patrones complejos moldeados por historia y contexto. La explicación puede ser precisa conceptualmente,
+              pero insuficiente para guiar decisiones en tiempo real.
+            </p>
+
+            <p>
+              La clave está en reconocer cuándo una explicación mecanicista deja de ser una guía de acción eficaz.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 3</h3>
+            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 4 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="4">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 4</span>
+            <span class="uv-accordion-title">Hacia un criterio pragmático</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="4">
+
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 4 · Por qué avanzar hacia un criterio pragmático</h3>
+
+            <p>
+              Los criterios tradicionales —correspondencia, coherencia y mecanicismo— comparten un límite central:
+              ninguno garantiza que la explicación elegida mejore la capacidad del terapeuta para intervenir.
+            </p>
+
+            <p>
+              El contextualismo funcional propone un cambio de eje: la verdad se evalúa por su utilidad para predecir
+              e influir la conducta de forma eficaz y con sentido clínico. El analista forma parte del contexto, y sus
+              descripciones son conductas sujetas a consecuencias.
+            </p>
+
+            <p>
+              Este enfoque sostiene la base filosófica que permitirá, en la siguiente lección, comprender la “verdad
+              como lo que funciona”.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 4</h3>
+            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+    </section>
 
     <!-- NAVEGACIÓN -->
-    <div class="nav-modulo" style="display:flex; gap:20px; justify-content:center; margin-top:20px;">
-      <a href="p2.html" class="btn-volver">◀ Anterior</a>
-      <a href="p4.html" class="btn-volver" style="background:var(--uv-dorado); color:var(--uv-azul-1);">
-        Siguiente ▶
-      </a>
-    </div>
+    <nav class="uv-nav-modulo">
+      <a href="p2.html" class="uv-btn-nav uv-btn-nav-sec">◀ Volver a la lección anterior</a>
+      <a href="p4.html" class="uv-btn-nav uv-btn-nav-main">Siguiente lección ▶</a>
+    </nav>
 
-  </section>
+  </main>
 
 </body>
 </html>
-
