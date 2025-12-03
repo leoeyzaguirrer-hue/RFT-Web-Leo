@@ -639,3 +639,15 @@
     width: 100%;
   }
 }
+/* ============================================================
+   FIGURA DECORATIVA — HEXÁGONO
+============================================================ */
+.uv-hex-decoration {
+  position: fixed;
+  right: 40px;
+  top: 180px;
+  width: 180px;
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+}
