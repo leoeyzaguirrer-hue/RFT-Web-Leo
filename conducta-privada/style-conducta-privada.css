@@ -1,4 +1,22 @@
 /* ============================================================
+   TIPOGRAFÍA GLOBAL · COCO GOTHIC
+============================================================ */
+
+@font-face {
+  font-family: "Coco Gothic";
+  src: url("assets/fonts/CocoGothic-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Coco Gothic";
+  src: url("assets/fonts/CocoGothic-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ============================================================
    NUEVO FONDO DECORATIVO · HEXÁGONOS + ONDA
 ============================================================ */
 
