@@ -3,92 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P7 · Cierre del Módulo · Unidad de Verdad</title>
+  <title>P7 · Cierre del módulo · Unidad de Verdad</title>
 
   <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
 
-  <!-- JS de interacción final -->
-  <script defer src="js/p7.js"></script>
+  <!-- JS específico -->
+  <script defer src="p7.js"></script>
 </head>
 
-<body class="portada-body">
+<body class="uv-body">
 
-  <!-- DECORACIÓN -->
-  <div class="decoraciones">
-    <img src="assets/mandalas/mandala-1.png" class="mandala m1" alt="">
-    <img src="assets/mandalas/mandala-2.png" class="mandala m2" alt="">
+  <!-- FONDO DECORATIVO -->
+  <div class="uv-bg-layer">
+    <img src="/assets/mandala-1.png" class="uv-mandala m1" alt="">
+    <img src="/assets/mandala-2.png" class="uv-mandala m2" alt="">
+    <div class="uv-pattern"></div>
+    <img src="/assets/icons/hex-blue.png" class="uv-figura" alt="">
   </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <section class="contenido">
+  <!-- SELLO -->
+  <div class="uv-sello">Unidad · Verdad</div>
 
-    <!-- TÍTULO PRINCIPAL -->
-    <div class="tarjeta titulo">
-      <h1>Lección Final · Cierre del Módulo</h1>
-    </div>
+  <main class="uv-page">
 
-    <!-- SUBTÍTULO -->
-    <div class="tarjeta subtitulo">
-      <h2>Integración del criterio funcional de verdad</h2>
-    </div>
-
-    <!-- SÍNTESIS CONCEPTUAL -->
-    <div class="tarjeta microhero">
-      <p>
-        Aquí se resume lo aprendido: el problema del criterio, la diferencia entre
-        correspondencia/coherencia y funcionalidad, la competencia de explicaciones
-        y cómo el criterio pragmático orienta decisiones clínicas y epistemológicas.
-      </p>
-    </div>
-
-    <!-- RESUMEN TÉCNICO -->
-    <div class="tarjeta resumen">
-      <p>
-        Este bloque contendrá tu síntesis técnica completa: qué información es central,
-        qué conceptos sostienen al contextualismo funcional y cómo se articula
-        la noción de verdad con el análisis funcional y los procesos de intervención.
-      </p>
-    </div>
-
-    <!-- ACTIVIDAD FINAL -->
-    <div class="tarjeta interaccion">
-      <h3>Actividad Final de Integración</h3>
-      <p>
-        Selecciona cuál de las siguientes afirmaciones resume mejor el criterio
-        funcional de verdad. Después, recibirás un mensaje personalizado final.
-      </p>
-
-      <div id="zona-interactiva">
-        <!-- Se llenará desde p7.js -->
+    <!-- ENCABEZADO -->
+    <header class="uv-lesson-header">
+      <div class="uv-lesson-info">
+        <span class="uv-lesson-unit">Unidad: Verdad</span>
+        <span class="uv-lesson-sep">·</span>
+        <span class="uv-lesson-name">Lección 7 · Cierre del módulo</span>
       </div>
-    </div>
 
-    <!-- BLOQUE DE TRANSICIÓN -->
-    <div class="tarjeta resumen">
-      <h3>Puente al siguiente módulo</h3>
-      <p>
-        En el próximo módulo explorarás la **Unidad de Análisis**, la herramienta
-        fundamental para observar, describir y predecir la conducta sin recurrir
-        a explicaciones mentalistas. Este paso es crucial para continuar la transición
-        hacia el estudio del lenguaje, equivalencia de estímulos y marcos relacionales.
+      <div class="uv-bloques-progreso">
+        <span class="uv-bloque-dot activo" data-bloque="1"></span>
+        <span class="uv-bloque-dot" data-bloque="2"></span>
+        <span class="uv-bloque-dot" data-bloque="3"></span>
+        <span class="uv-bloque-dot" data-bloque="4"></span>
+      </div>
+    </header>
+
+    <!-- TÍTULO + RESUMEN -->
+    <section class="uv-card uv-title uv-title-leccion">
+      <h1>LECCIÓN 7: Cierre · Hacia una práctica guiada por la utilidad</h1>
+      <p class="uv-sub">Integrar la verdad funcional en la práctica clínica</p>
+      <div class="uv-line"></div>
+
+      <p class="uv-resumen">
+        Concluimos este módulo integrando todo lo aprendido: la verdad, desde el contextualismo
+        funcional, no es una propiedad interna de las teorías, sino su capacidad para orientar
+        acción eficaz y valiosa. Este criterio permite construir análisis más precisos, seleccionar
+        intervenciones más coherentes y sostener una práctica clínica alineada con la Ciencia
+        Conductual Contextual. La transición hacia el siguiente módulo —“Conducta privada ≠ mente”—
+        llevará esta comprensión al terreno de los eventos internos y su función en la vida del
+        consultante.
       </p>
-    </div>
+    </section>
 
-    <!-- NAVEGACIÓN FINAL -->
-    <div class="nav-modulo" style="display:flex; flex-direction:column; gap:18px; justify-content:center; align-items:center; margin-top:20px;">
+    <!-- BLOQUES -->
+    <section class="uv-bloques">
 
-      <a href="p6.html" class="btn-volver">◀ Volver a Lección 6</a>
+      <!-- BLOQUE 1 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" data-bloque="1">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 1</span>
+            <span class="uv-accordion-title">Lo que aprendimos: una nueva forma de entender la verdad</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
 
-      <a href="../unidad-de-analisis/index.html"
-         class="btn-volver"
-         style="background:var(--uv-dorado); color:var(--uv-azul-1); font-weight:700;">
-        Ir al siguiente módulo ▶  
-      </a>
+        <div class="uv-accordion-panel" data-bloque="1">
+          <section class="uv-card uv-bloque-teoria">
 
-    </div>
+            <h3>Teoría · Bloque 1</h3>
 
-  </section>
-</body>
-</html>
+            <p>
+              Este módulo mostró que las ciencias del comportamiento necesitan criterios claros
+              para evaluar la calidad de sus descripciones. Revisamos cómo los enfoques clásicos —
+              correspondencia, coherencia y mecanicismo— han orientado históricamente la psicología,
+              y observamos sus limitaciones cuando se aplican directamente a la práctica clínica.
+            </p>
 
+            <p>
+              El contextualismo funcional propone un cambio fundamentado: una descripción es más 
+              verdadera cuando mejora nuestra capacidad para predecir e influir la conducta. Esta visión 
+              evita la trampa de explicaciones elegantes que no generan movimiento.
+            </p>
+
+            <p>
+              Adoptar este criterio permite evaluar nuestras propias explicaciones por su impacto,
+              no por su belleza teórica, desarrollando un estilo terapéutico flexible y efectivo.
+            </p>
+
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 1</h3>
+            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 2 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" data-bloque="2">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 2</span>
+            <span class="uv-accordion-title">El criterio pragmático como brújula clínica</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="2">
+          <section class="uv-card uv-bloque-teoria">
+
+            <h3>Teoría · Bloque 2</h3>
+
+            <p>
+              El criterio pragmático actúa como brújula en la toma de decisiones clínicas.
+              Descripciones, hipótesis, metáforas y ejercicios se evalúan por lo que hacen en la vida
+              del consultante. Si facilitan acción valiosa o amplían flexibilidad psicológica, son
+              más verdaderas.
+            </p>
+
+            <p>
+              Cuando múltiples explicaciones compiten, el terapeuta vuelve a la pregunta central:
+              “¿esto me ayuda a intervenir mejor?”. Este enfoque ofrece claridad y fortalece la 
+              coherencia metodológica.
+            </p>
+
+            <p>
+              Esta postura también facilita supervisión funcional: se analizan consecuencias reales y
+              se ajusta el análisis con base en resultados observados.
+            </p>
+
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 2</h3>
+            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 3 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" data-bloque="3">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 3</span>
+            <span class="uv-accordion-title">Qué cambia en el terapeuta al adoptar este criterio</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="3">
+          <section class="uv-card uv-bloque-teoria">
+
+            <h3>Teoría · Bloque 3</h3>
+
+            <p>
+              Integrar la verdad pragmática transforma la identidad profesional del terapeuta:
+              abandona la búsqueda de causas internas y se orienta hacia las funciones del comportamiento
+              y el impacto de sus intervenciones.
+            </p>
+
+            <p>
+              El lenguaje se convierte en herramienta para modificar funciones —no para describir realidad—,
+              permitiendo trabajar con fusión, evitación y autocrítica de manera más efectiva.
+            </p>
+
+            <p>
+              Esta postura también sustenta una práctica ética: orientada a valores y al alivio del
+              sufrimiento.
+            </p>
+
+          </section>
+
+          <sect
