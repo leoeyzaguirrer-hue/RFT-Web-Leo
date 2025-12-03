@@ -3,85 +3,254 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P6 · Aplicación Clínica · Unidad de Verdad</title>
+  <title>P6 · Evaluar formulaciones y reglas · Unidad de Verdad</title>
 
-  <!-- Estilos globales -->
+  <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
 
-  <!-- JS específico -->
-  <script defer src="js/p6.js"></script>
+  <!-- JS específico de esta pantalla -->
+  <script defer src="p6.js"></script>
 </head>
 
-<body class="portada-body">
+<body class="uv-body">
 
-  <!-- DECORACIONES -->
-  <div class="decoraciones">
-    <img src="assets/mandalas/mandala-1.png" class="mandala m1" alt="">
-    <img src="assets/mandalas/mandala-2.png" class="mandala m2" alt="">
+  <!-- FONDO DECORATIVO -->
+  <div class="uv-bg-layer">
+    <img src="/assets/mandala-1.png" class="uv-mandala m1" alt="">
+    <img src="/assets/mandala-2.png" class="uv-mandala m2" alt="">
+    <div class="uv-pattern"></div>
+    <img src="/assets/icons/hex-blue.png" class="uv-figura" alt="">
   </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <section class="contenido">
+  <!-- SELLO DEL MÓDULO -->
+  <div class="uv-sello">Unidad · Verdad</div>
 
-    <!-- TÍTULO -->
-    <div class="tarjeta titulo">
-      <h1>Lección 5 · Aplicación Clínica</h1>
-    </div>
+  <main class="uv-page">
 
-    <!-- SUBTÍTULO -->
-    <div class="tarjeta subtitulo">
-      <h2>Cómo usar el criterio funcional en casos reales</h2>
-    </div>
-
-    <!-- BLOQUE TEÓRICO -->
-    <div class="tarjeta microhero">
-      <p>
-        Esta lección muestra cómo aplicar el criterio funcional para formular
-        hipótesis clínicas, discriminar explicaciones inútiles y generar
-        intervenciones orientadas a la función de la conducta del cliente.
-      </p>
-    </div>
-
-    <!-- DESARROLLO TÉCNICO -->
-    <div class="tarjeta resumen">
-      <p>
-        Aquí irá el desarrollo técnico: análisis ABC, clases funcionales como
-        hipótesis, patrones mantenidos por evitación o reforzamiento, criterios
-        para seleccionar intervenciones con base en sus efectos funcionales y
-        ejemplos de formulación contextual.
-      </p>
-    </div>
-
-    <!-- BLOQUE INTERACTIVO -->
-    <div class="tarjeta interaccion">
-      <h3>Actividad Interactiva Clínica</h3>
-      <p>Aplica el criterio funcional a mini-casos clínicos.</p>
-
-      <div id="zona-interactiva">
-        <!-- Se llena desde p6.js -->
+    <!-- ENCABEZADO CONTEXTUAL -->
+    <header class="uv-lesson-header">
+      <div class="uv-lesson-info">
+        <span class="uv-lesson-unit">Unidad: Verdad</span>
+        <span class="uv-lesson-sep">·</span>
+        <span class="uv-lesson-name">Lección 6 · Evaluar formulaciones y reglas desde lo que funciona</span>
       </div>
-    </div>
 
-    <!-- RESUMEN -->
-    <div class="tarjeta resumen">
-      <h3>Resumen de la Lección</h3>
-      <p>
-        Este cierre resume cómo el criterio funcional guía hipótesis y decisiones
-        clínicas, diferenciando intervenciones útiles de explicaciones mentalistas
-        que no generan cambio.
+      <div class="uv-bloques-progreso">
+        <span class="uv-bloque-dot activo" data-bloque="1"></span>
+        <span class="uv-bloque-dot" data-bloque="2"></span>
+        <span class="uv-bloque-dot" data-bloque="3"></span>
+        <span class="uv-bloque-dot" data-bloque="4"></span>
+      </div>
+    </header>
+
+    <!-- TÍTULO + RESUMEN -->
+    <section class="uv-card uv-title uv-title-leccion">
+      <h1>LECCIÓN 6: Evaluar formulaciones y reglas desde lo que funciona</h1>
+      <p class="uv-sub">Cómo decidir qué análisis y qué reglas realmente ayudan</p>
+      <div class="uv-line"></div>
+
+      <p class="uv-resumen">
+        El criterio pragmático no solo orienta la teoría: también guía la selección de formulaciones,
+        hipótesis clínicas y reglas verbales. Evaluar descripciones según su utilidad permite distinguir
+        entre explicaciones que iluminan el camino terapéutico y aquellas que, aunque suenen correctas,
+        perpetúan la evitación o la confusión conceptual. Esta lección enseña cómo aplicar la verdad
+        funcional para analizar casos, decidir entre alternativas y elegir reglas que orienten acción
+        valiosa en lugar de reforzar patrones problemáticos.
       </p>
-    </div>
+    </section>
+
+    <!-- BLOQUES -->
+    <section class="uv-bloques">
+
+      <!-- BLOQUE 1 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="1">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 1</span>
+            <span class="uv-accordion-title">¿Qué hace que una formulación clínica sea útil?</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="1">
+
+          <!-- TEORÍA BLOQUE 1 -->
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 1 · ¿Qué hace que una formulación clínica sea útil?</h3>
+
+            <p>
+              Una formulación clínica es útil cuando organiza la información del caso de modo que permita predecir
+              e influir la conducta. Si la conceptualización identifica antecedentes, respuestas verbales y conductas
+              problemáticas, y muestra cómo estas se mantienen por consecuencias, el terapeuta puede intervenir con mayor
+              precisión. La verdad pragmática evalúa la capacidad de la formulación para generar acciones terapéuticas claras.
+            </p>
+
+            <p>
+              El peligro de muchas conceptualizaciones tradicionales es que describen demasiado y orientan poco. Etiquetas,
+              narrativas o supuestas causas internas pueden sonar coherentes, pero no guían decisiones clínicas específicas.
+              Desde un criterio funcional, estas explicaciones pierden valor porque no permiten modificar el patrón.
+            </p>
+
+            <p>
+              En ACT y RFT, una formulación más verdadera es aquella que ilumina qué hace la conducta, no solo cómo se ve.
+              Esta comprensión funcional se convierte en brújula para seleccionar ejercicios, metáforas o intervenciones que
+              transformen funciones del comportamiento verbal y no verbal del consultante.
+            </p>
+          </section>
+
+          <!-- ACTIVIDAD BLOQUE 1 -->
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 1</h3>
+            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 2 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="2">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 2</span>
+            <span class="uv-accordion-title">Elegir entre formulaciones</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="2">
+
+          <!-- TEORÍA BLOQUE 2 -->
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 2 · Elegir entre formulaciones: la utilidad como estándar</h3>
+
+            <p>
+              Cuando se presentan varias explicaciones posibles, el criterio pragmático permite compararlas sin debates
+              abstractos. La pregunta es: ¿cuál me orienta mejor para intervenir? Una hipótesis que conecta antecedentes,
+              respuestas emocionales, reglas verbales, conductas de evitación y consecuencias ofrece más información operativa
+              que explicaciones basadas en rasgos, déficits o narrativas globales.
+            </p>
+
+            <p>
+              El criterio funcional también evita la rigidez teórica. En lugar de defender una conceptualización inicial,
+              esta se revisa según sus efectos: si deja de generar movimiento valioso, se ajusta. El estándar es la eficacia
+              clínica, no la fidelidad conceptual.
+            </p>
+
+            <p>
+              Evaluar desde la utilidad enseña a detectar descripciones que generan estancamiento: etiquetas, adjetivos,
+              explicaciones circulares o frases sin función. Su valor disminuye al observarlas desde el prisma del cambio posible.
+            </p>
+          </section>
+
+          <!-- ACTIVIDAD BLOQUE 2 -->
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 2</h3>
+            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 3 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="3">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 3</span>
+            <span class="uv-accordion-title">Reglas verbales: cuáles ayudan</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="3">
+
+          <!-- TEORÍA BLOQUE 3 -->
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 3 · Reglas verbales: cómo distinguir las que ayudan</h3>
+
+            <p>
+              Las reglas orientan la conducta. Su impacto no depende de su contenido literal, sino de las funciones que establecen.
+              Una regla es más verdadera si facilita acción valiosa y permite responder con flexibilidad al contexto. Una regla
+              problemática tiende a rigidizar patrones y reforzar evitación.
+            </p>
+
+            <p>
+              Ejemplo: “si no me siento seguro, no debo avanzar” suena protectora, pero mantiene la evitación. En cambio, reglas
+              que coordinan malestar con compromiso (“puedo avanzar incluso con miedo”) transforman funciones y amplían acción.
+            </p>
+
+            <p>
+              El objetivo clínico no es refutar la regla, sino modificar su operación dentro de la red relacional que sostiene
+              el patrón. El terapeuta selecciona, modela o altera reglas para producir nuevas funciones conductuales.
+            </p>
+          </section>
+
+          <!-- ACTIVIDAD BLOQUE 3 -->
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 3</h3>
+            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 4 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="4">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 4</span>
+            <span class="uv-accordion-title">Decidir desde lo que funciona</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="4">
+
+          <!-- TEORÍA BLOQUE 4 -->
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 4 · Cómo usar este criterio para tomar decisiones clínicas</h3>
+
+            <p>
+              Aplicar la verdad funcional convierte la sesión en un espacio de experimentación: cada descripción, ejercicio
+              o metáfora es un acto con consecuencias. El terapeuta observa si sus intervenciones producen acercamiento a
+              valores, flexibilidad o cambios en funciones del comportamiento verbal.
+            </p>
+
+            <p>
+              Este enfoque fortalece la supervisión clínica. Evaluar si una formulación funciona permite un feedback operativo
+              y centrado en impacto, en lugar de debates teóricos. Supervisores y terapeutas examinan qué análisis generó
+              movimiento y por qué.
+            </p>
+
+            <p>
+              Esta lección prepara la integración del módulo: aquí el alumno aprende a usar activamente la verdad funcional
+              para razonar clínicamente y construir decisiones basadas en utilidad, no en apariencia conceptual.
+            </p>
+          </section>
+
+          <!-- ACTIVIDAD BLOQUE 4 -->
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 4</h3>
+            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+
+        </div>
+      </article>
+
+    </section>
 
     <!-- NAVEGACIÓN -->
-    <div class="nav-modulo" style="display:flex; gap:20px; justify-content:center; margin-top:20px;">
-      <a href="p5.html" class="btn-volver">◀ Anterior</a>
-      <a href="p7.html" class="btn-volver" style="background:var(--uv-dorado); color:var(--uv-azul-1);">
-        Siguiente ▶
-      </a>
-    </div>
+    <nav class="uv-nav-modulo">
+      <a href="p5.html" class="uv-btn-nav uv-btn-nav-sec">◀ Volver a la lección anterior</a>
+      <a href="p7.html" class="uv-btn-nav uv-btn-nav-main">Siguiente lección ▶</a>
+    </nav>
 
-  </section>
+  </main>
 
 </body>
 </html>
-
