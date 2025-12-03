@@ -21,58 +21,6 @@
 }
 
 /* ============================================================
-   NUEVO PATRÓN CURVO DORADO CON BOLITAS (hecho para este módulo)
-============================================================ */
-.uv-pattern {
-  position: absolute;
-  inset: 0;
-  z-index: -4;
-  pointer-events: none;
-
-  background-image:
-    /* CURVA PRINCIPAL */
-    radial-gradient(circle at 20% 30%,
-      rgba(255,215,120,0.42) 0%,
-      transparent 55%
-    ),
-
-    /* ARCO DORADO */
-    conic-gradient(
-      from 160deg,
-      transparent 0deg 120deg,
-      rgba(253,191,18,0.45) 140deg 200deg,
-      transparent 220deg 360deg
-    ),
-
-    /* BOLITA SUPERIOR */
-    radial-gradient(circle at 70% 22%,
-      rgba(253,191,18,0.75) 0%,
-      transparent 45%
-    ),
-
-    /* BOLITA INFERIOR */
-    radial-gradient(circle at 82% 78%,
-      rgba(253,191,18,0.65) 0%,
-      transparent 50%
-    );
-
-  background-size:
-    900px 900px,
-    1000px 1000px,
-    140px 140px,
-    160px 160px;
-
-  background-position:
-    left top,
-    center,
-    right top,
-    right bottom;
-
-  opacity: 0.55;
-  mix-blend-mode: soft-light;
-}
-
-/* ============================================================
    SELLO PREMIUM
 ============================================================ */
 .uv-sello {
