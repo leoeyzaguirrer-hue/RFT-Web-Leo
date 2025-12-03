@@ -3,84 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P4 · Competencia de Explicaciones · Unidad de Verdad</title>
+  <title>P4 · Criterio pragmático · Unidad de Verdad</title>
 
-  <!-- Estilos globales del módulo -->
+  <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
 
-  <!-- Script específico de la pantalla -->
-  <script defer src="js/p4.js"></script>
+  <!-- JS específico de esta pantalla -->
+  <script defer src="p4.js"></script>
 </head>
 
-<body class="portada-body">
+<body class="uv-body">
 
-  <!-- DECORACIÓN DE FONDO -->
-  <div class="decoraciones">
-    <img src="assets/mandalas/mandala-1.png" class="mandala m1" alt="">
-    <img src="assets/mandalas/mandala-2.png" class="mandala m2" alt="">
+  <!-- FONDO DECORATIVO -->
+  <div class="uv-bg-layer">
+    <img src="/assets/mandala-1.png" class="uv-mandala m1" alt="">
+    <img src="/assets/mandala-2.png" class="uv-mandala m2" alt="">
+    <div class="uv-pattern"></div>
+    <img src="/assets/icons/hex-blue.png" class="uv-figura" alt="">
   </div>
 
-  <!-- CONTENIDO -->
-  <section class="contenido">
+  <!-- SELLO DEL MÓDULO -->
+  <div class="uv-sello">Unidad · Verdad</div>
 
-    <!-- TÍTULO -->
-    <div class="tarjeta titulo">
-      <h1>Lección 3 · Competencia de Explicaciones</h1>
-    </div>
+  <main class="uv-page">
 
-    <!-- SUBTÍTULO -->
-    <div class="tarjeta subtitulo">
-      <h2>Cuando varias teorías parecen válidas pero ninguna guía acción efectiva</h2>
-    </div>
-
-    <!-- BLOQUE TEÓRICO PRINCIPAL -->
-    <div class="tarjeta microhero">
-      <p>
-        En esta lección se desarrolla el problema clásico: cuando no existe un criterio
-        funcional, múltiples explicaciones pueden coexistir sin resolver los desafíos
-        clínicos ni orientar intervenciones útiles.
-      </p>
-    </div>
-
-    <!-- BLOQUE TÉCNICO -->
-    <div class="tarjeta resumen">
-      <p>
-        Aquí colocarás el texto técnico: cómo las explicaciones mentalistas compiten
-        entre sí, por qué la coherencia interna puede sostener teorías inútiles y cómo
-        el criterio pragmático resuelve esta competencia al centrarse en la eficacia
-        funcional.
-      </p>
-    </div>
-
-    <!-- ZONA INTERACTIVA -->
-    <div class="tarjeta interaccion">
-      <h3>Actividad Interactiva</h3>
-      <p>Analiza la competencia entre explicaciones y selecciona cuál funciona clínicamente.</p>
-
-      <div id="zona-interactiva">
-        <!-- Se carga desde p4.js -->
+    <!-- ENCABEZADO CONTEXTUAL -->
+    <header class="uv-lesson-header">
+      <div class="uv-lesson-info">
+        <span class="uv-lesson-unit">Unidad: Verdad</span>
+        <span class="uv-lesson-sep">·</span>
+        <span class="uv-lesson-name">Lección 3 · El criterio pragmático</span>
       </div>
-    </div>
 
-    <!-- BLOQUE DE CIERRE -->
-    <div class="tarjeta resumen">
-      <h3>Resumen de la Lección</h3>
-      <p>
-        Aquí se resumirá por qué las explicaciones deben evaluarse en términos de
-        función y no de correspondencia o coherencia para tener impacto clínico real.
+      <div class="uv-bloques-progreso">
+        <span class="uv-bloque-dot activo" data-bloque="1"></span>
+        <span class="uv-bloque-dot" data-bloque="2"></span>
+        <span class="uv-bloque-dot" data-bloque="3"></span>
+        <span class="uv-bloque-dot" data-bloque="4"></span>
+      </div>
+    </header>
+
+    <!-- TÍTULO + RESUMEN -->
+    <section class="uv-card uv-title uv-title-leccion">
+      <h1>LECCIÓN 3: El criterio pragmático del Contextualismo funcional</h1>
+      <p class="uv-sub">LA VERDAD PRAGMÁTICA EN EL CONTEXTUALISMO FUNCIONAL</p>
+      <div class="uv-line"></div>
+
+      <p class="uv-resumen">
+        Una vez revisados los criterios tradicionales de verdad, el contextualismo funcional propone un giro decisivo: 
+        una descripción es “verdadera” en la medida en que funciona para los fines definidos de la ciencia. 
+        En la Ciencia Conductual Contextual, ese fin es predecir e influir la conducta con precisión, alcance y profundidad. 
+        Este criterio pragmático no rechaza la existencia del mundo, sino que reconoce que nuestras descripciones son formas 
+        de actuar en él. Su valor radica en lo que permiten hacer, no en cuánto representan supuestas entidades internas.
       </p>
-    </div>
+    </section>
+
+    <!-- BLOQUES -->
+    <section class="uv-bloques">
+
+      <!-- BLOQUE 1 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="1">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 1</span>
+            <span class="uv-accordion-title">La verdad como función</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="1">
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 1 · La verdad como función</h3>
+
+            <p>
+              El contextualismo funcional parte de un principio básico: describir la conducta y sus determinantes 
+              es una forma de actuar del propio analista. Si describimos, clasificamos o conceptualizamos, estamos 
+              emitiendo conductas que tienen consecuencias en la práctica clínica. Desde esta perspectiva, la verdad 
+              no se concibe como una correspondencia entre teoría y realidad interna, sino como una relación entre 
+              el análisis y sus efectos prácticos.
+            </p>
+
+            <p>
+              Esta postura se aleja de modelos que buscan descubrir causas ocultas en el interior del individuo. 
+              El contextualismo no niega la existencia de procesos biológicos o cognitivos, pero entiende que 
+              cualquier explicación debe evaluarse por su utilidad para orientar acción clínica. Si una descripción 
+              produce una intervención más eficaz, más precisa o más coherente con los valores del consultante, 
+              entonces es más “verdadera” en sentido pragmático.
+            </p>
+
+            <p>
+              El criterio funcional permite integrar múltiples niveles de análisis sin someterse a debates estériles 
+              sobre qué modelo “representa mejor” la realidad. Lo importante es el impacto en la conducta y en los 
+              resultados clínicos, no la fidelidad metafísica.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 1</h3>
+            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 2 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="2">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 2</span>
+            <span class="uv-accordion-title">Precisión, alcance y profundidad</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="2">
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 2 · Los estándares de utilidad</h3>
+
+            <p>
+              El contextualismo funcional propone tres dimensiones para evaluar la calidad de un análisis: precisión, 
+              alcance y profundidad. Una descripción precisa utiliza pocos conceptos bien definidos y permite identificar 
+              relaciones funcionales claras. Una explicación con alcance puede aplicarse a una amplia variedad de situaciones 
+              y patrones conductuales. Finalmente, la profundidad se refiere a la cohesión con otros niveles de análisis, 
+              como la evolución, la biología y los principios del aprendizaje.
+            </p>
+
+            <p>
+              Evaluar la verdad desde estas dimensiones evita caer en explicaciones excesivamente generales o meramente 
+              intuitivas. Por ejemplo, decir que un consultante “tiene baja autoestima” posee escasa precisión y poca 
+              utilidad para decidir qué hacer en la sesión. En cambio, analizar qué antecedentes evocan autocrítica, 
+              qué funciones cumple esa autocrítica y qué consecuencias mantienen el patrón ofrece un marco más robusto.
+            </p>
+
+            <p>
+              Este enfoque coloca al terapeuta en una posición activa: debe elegir descripciones que amplíen su capacidad 
+              para intervenir. Así, una conceptualización “verdadera” es aquella que facilita cambios concretos y sostenibles, 
+              no la que resulte más elegante o más familiar.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 2</h3>
+            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 3 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="3">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 3</span>
+            <span class="uv-accordion-title">Ciencia gobernada por consecuencias</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="3">
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 3 · Ciencia como conducta</h3>
+
+            <p>
+              Törneke plantea que desarrollar teorías y seleccionar modelos clínicos también son formas de conducta. 
+              El lenguaje y el pensamiento del terapeuta están sujetos a contingencias: ciertas conceptualizaciones 
+              son reforzadas por su eficacia terapéutica, otras por reconocimiento académico, tradición profesional 
+              o incluso comodidad explicativa.
+            </p>
+
+            <p>
+              El criterio pragmático explicita este proceso. En lugar de asumir que nuestras teorías descubren realidades 
+              internas, reconoce que adoptamos modelos porque generan consecuencias. Un enfoque resulta más “verdadero” 
+              no porque represente mejor una supuesta estructura interna, sino porque produce mejores resultados clínicos 
+              y científicos.
+            </p>
+
+            <p>
+              Esta concepción libera al terapeuta del imperativo de encontrar “la causa real” detrás de un problema y 
+              lo invita a examinar continuamente el impacto de sus análisis. Tal actitud promueve flexibilidad profesional, 
+              sensibilidad al contexto y una práctica más coherente con los principios conductuales.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 3</h3>
+            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+        </div>
+      </article>
+
+      <div class="uv-separador-bloque">✦</div>
+
+      <!-- BLOQUE 4 -->
+      <article class="uv-bloque">
+        <button class="uv-accordion" type="button" data-bloque="4">
+          <div class="uv-accordion-left">
+            <span class="uv-accordion-tag">Bloque 4</span>
+            <span class="uv-accordion-title">Por qué importa en clínica</span>
+          </div>
+          <span class="uv-accordion-icon">▶</span>
+        </button>
+
+        <div class="uv-accordion-panel" data-bloque="4">
+          <section class="uv-card uv-bloque-teoria">
+            <h3>Teoría · Bloque 4 · De la teoría a la práctica</h3>
+
+            <p>
+              El criterio pragmático transforma la forma de trabajar con consultantes. Una descripción útil permite 
+              identificar patrones funcionales, seleccionar intervenciones con mayor probabilidad de éxito y guiar el proceso 
+              terapéutico hacia valores significativos. Bajo esta lógica, la pregunta relevante no es “¿qué tiene la persona?”, 
+              sino “¿qué hace esta explicación para avanzar el trabajo?”
+            </p>
+
+            <p>
+              Este enfoque es especialmente potente en terapias como ACT y RFT, donde el objetivo es ampliar la flexibilidad 
+              psicológica y modificar las funciones del lenguaje. Si una metáfora, una regla o una conceptualización facilitan 
+              ese proceso, se consideran más verdaderas que aquellas que explican mucho pero cambian poco. La verdad, entonces, 
+              se convierte en una herramienta clínica, no en una abstracción filosófica.
+            </p>
+
+            <p>
+              En la siguiente pantalla, exploraremos cómo se traduce este criterio en decisiones concretas dentro de una sesión 
+              ACT: desde la conceptualización hasta el uso de metáforas, ejercicios, reglas y análisis funcionales orientados a 
+              promover acción valiosa.
+            </p>
+          </section>
+
+          <section class="uv-card uv-bloque-actividad">
+            <h3>Actividad interactiva · Bloque 4</h3>
+            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+          </section>
+        </div>
+      </article>
+
+    </section>
 
     <!-- NAVEGACIÓN -->
-    <div class="nav-modulo" style="display:flex; gap:20px; justify-content:center; margin-top:20px;">
-      <a href="p3.html" class="btn-volver">◀ Anterior</a>
-      <a href="p5.html" class="btn-volver" style="background:var(--uv-dorado); color:var(--uv-azul-1);">
-        Siguiente ▶
-      </a>
-    </div>
+    <nav class="uv-nav-modulo">
+      <a href="p3.html" class="uv-btn-nav uv-btn-nav-sec">◀ Volver a la lección anterior</a>
+      <a href="p5.html" class="uv-btn-nav uv-btn-nav-main">Siguiente lección ▶</a>
+    </nav>
 
-  </section>
+  </main>
 
 </body>
 </html>
-
