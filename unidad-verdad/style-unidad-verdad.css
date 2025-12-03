@@ -1619,3 +1619,41 @@
 .uv-ej-b1-feedback-strong {
   font-weight: 600;
 }
+/* ============================================================
+   FIX · El panel del acordeón debe crecer con el contenido
+============================================================ */
+
+/* El panel debe permitir altura automática real */
+.uv-accordion-panel {
+  height: auto !important;
+  overflow: visible !important;
+  display: block;
+}
+
+/* El contenedor principal del ejercicio debe expandirse */
+.uv-ej-b1 {
+  padding-bottom: 40px; /* deja espacio cómodo para botones */
+  min-height: 520px; /* ajusta según tu diseño */
+}
+
+/* Asegurar que las columnas se adapten al contenido */
+.uv-ej-b1-main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Las columnas deben permitir crecimiento vertical */
+.uv-ej-b1-col,
+.uv-ej-b1-dropzone {
+  height: auto !important;
+  min-height: 280px; /* evita recortes */
+}
+
+/* Footer siempre visible dentro del panel */
+.uv-ej-b1-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(10,10,10,0.08);
+}
