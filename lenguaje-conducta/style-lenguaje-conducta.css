@@ -1,0 +1,306 @@
+/* ============================================================
+   BASE GENERAL · FONDO TURQUESA PROFUNDO + DORADO
+============================================================ */
+.uv-body {
+  margin: 0;
+  font-family: "Noto Sans", sans-serif;
+  background: linear-gradient(180deg, #0f4c5c 0%, #1ca3b3 45%, #d8fffa 100%);
+  position: relative;
+  overflow-x: hidden;
+  color: #08323a;
+}
+
+/* ============================================================
+   FONDO DECORATIVO AVANZADO
+   Líneas doradas + red conceptual + puntos
+============================================================ */
+
+.uv-bg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -3;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   LÍNEAS FLUIDAS DORADAS (alta opacidad)
+------------------------------------------------------------ */
+.uv-bg-layer::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 140%;
+  height: 160%;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(253, 191, 18, 0.55) 0px,
+    rgba(253, 191, 18, 0.55) 3px,
+    transparent 3px,
+    transparent 28px
+  );
+  opacity: 0.55;
+  transform: rotate(8deg);
+  filter: blur(3px);
+  z-index: -2;
+}
+
+/* ------------------------------------------------------------
+   RED CONCEPTUAL DORADA (opacidad media-alta)
+------------------------------------------------------------ */
+.uv-bg-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(253,191,18,0.45) 1px, transparent 1px),
+    linear-gradient(rgba(253,191,18,0.45) 1px, transparent 1px);
+  background-size: 120px 120px;
+  opacity: 0.45;
+  z-index: -3;
+}
+
+/* ------------------------------------------------------------
+   CAPA DE PUNTOS DORADOS (acción simbólica)
+------------------------------------------------------------ */
+.uv-bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(253, 191, 18, 0.55) 2px, transparent 2px);
+  background-size: 48px 48px;
+  opacity: 0.50;
+  z-index: -1;
+}
+
+/* bruma suave */
+.uv-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.13) 0%,
+    rgba(255,255,255,0.0) 50%,
+    rgba(255,240,200,0.18) 100%
+  );
+  z-index: -2;
+}
+
+
+
+/* ============================================================
+   SELLITO PREMIUM
+============================================================ */
+.uv-sello {
+  position: absolute;
+  top: 24px; right: 32px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.60);
+  padding: 6px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(253,191,18,0.55);
+  backdrop-filter: blur(6px);
+  color: #5a3b00;
+  z-index: 10;
+}
+
+
+/* ============================================================
+   CONTENIDO GENERAL
+============================================================ */
+.uv-page {
+  position: relative;
+  padding: 80px 60px;
+  max-width: 1100px;
+}
+
+
+/* ============================================================
+   TARJETAS PREMIUM
+============================================================ */
+.uv-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8E8 100%);
+  padding: 26px 34px;
+  border-radius: 18px;
+  margin-bottom: 28px;
+  border: 1.5px solid rgba(253,191,18,0.55);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  backdrop-filter: blur(4px);
+  animation: fadeUp 0.6s ease;
+}
+
+
+/* Animación de tarjetas */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================
+   TÍTULOS
+============================================================ */
+.uv-title h1 {
+  margin: 0;
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #05363a;
+}
+
+.uv-sub {
+  margin: 8px 0 0 0;
+  font-size: 1.22rem;
+  color: #08484d;
+  font-weight: 600;
+}
+
+.uv-line {
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, #FDBF12, #ffd46f);
+  margin-top: 16px;
+  border-radius: 4px;
+}
+
+
+/* ============================================================
+   MICRO-HERO
+============================================================ */
+.uv-microhero p {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: #073538;
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   RESUMEN
+============================================================ */
+.uv-resumen p {
+  margin: 0 0 16px 0;
+  font-size: 1rem;
+  line-height: 1.62;
+  color: #0a3e42;
+}
+
+
+
+/* ============================================================
+   BOTÓN INICIAR
+============================================================ */
+.uv-btn-start {
+  display: inline-block;
+  background: #0b5962;
+  color: white;
+  text-decoration: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  transition: 0.25s ease;
+}
+
+.uv-btn-start:hover {
+  background: #0f6c77;
+  transform: translateY(-3px);
+}
+
+
+
+/* ============================================================
+   LECCIONES
+============================================================ */
+.uv-seccion-lecciones {
+  margin-top: 48px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #08484d;
+  margin-bottom: 20px;
+}
+
+.uv-lecciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.uv-btn-leccion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #ffe5b5;
+  padding: 14px 20px;
+  border-radius: 14px;
+  text-decoration: none;
+  border: 1.4px solid rgba(253,191,18,0.65);
+  transition: 0.25s ease;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.06);
+}
+
+.uv-btn-leccion:hover {
+  background: #ffeecf;
+  transform: translateY(-3px);
+}
+
+.uv-btn-num {
+  background: #FDBF12;
+  color: #05363a;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  min-width: 48px;
+  text-align: center;
+}
+
+.uv-btn-text {
+  color: #05363a;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   PROGRESO
+============================================================ */
+.uv-progreso {
+  margin-top: 40px;
+}
+
+.punto {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #cfdce0;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.punto.activo {
+  background: #0b5962;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .uv-page { padding: 40px 24px; }
+
+  .uv-card { padding: 20px 22px; }
+
+  .uv-title h1 { font-size: 1.8rem; }
+
+  .uv-sub { font-size: 1.05rem; }
+
+  .uv-line { width: 100px; }
+
+  .uv-microhero p { font-size: 1rem; }
+
+  .uv-btn-start { width: 100%; text-align: center; }
+}
