@@ -1287,3 +1287,335 @@
   background-repeat: no-repeat;
 
 }
+/* ============================================================
+   EJERCICIO BLOQUE 1 · "COHERENTE O ÚTIL" · DRAG & DROP
+   ============================================================ */
+
+.uv-bloque-actividad {
+  position: relative;
+}
+
+.uv-ej-b1 {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 6px;
+}
+
+.uv-ej-b1-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.uv-ej-b1-header-title {
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+
+.uv-ej-b1-header-text {
+  color: rgba(7, 27, 60, 0.86);
+}
+
+.uv-ej-b1-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(7, 27, 60, 0.78);
+}
+
+.uv-ej-b1-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(253, 191, 18, 0.5);
+}
+
+/* GRID GENERAL: COLUMNAS + BANCO DE TARJETAS */
+
+.uv-ej-b1-main {
+  display: grid;
+  grid-template-columns: 3fr 2.2fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .uv-ej-b1-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* COLUMNAS DE CLASIFICACIÓN */
+
+.uv-ej-b1-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .uv-ej-b1-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+.uv-ej-b1-col {
+  background: linear-gradient(160deg, #f6f7ff 0%, #ffffff 65%);
+  border-radius: 18px;
+  padding: 10px 10px 12px;
+  border: 1px solid rgba(10, 42, 92, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.uv-ej-b1-col-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.uv-ej-b1-col-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0a2a5c;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.uv-ej-b1-col-tag span.emoji {
+  font-size: 1.2rem;
+}
+
+.uv-ej-b1-col-sub {
+  font-size: 0.85rem;
+  color: rgba(7, 27, 60, 0.75);
+}
+
+/* ZONA DE DROP */
+
+.uv-ej-b1-dropzone {
+  margin-top: 6px;
+  min-height: 130px;
+  border-radius: 14px;
+  border: 1px dashed rgba(10, 42, 92, 0.25);
+  background: rgba(255, 255, 255, 0.82);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease, transform 0.2s ease;
+}
+
+.uv-ej-b1-dropzone-empty-hint {
+  font-size: 0.75rem;
+  color: rgba(7, 27, 60, 0.6);
+}
+
+/* HIGHLIGHT AL ARRASTRAR ENCIMA */
+
+.uv-ej-b1-col--highlight .uv-ej-b1-dropzone {
+  border-color: rgba(253, 191, 18, 0.9);
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.6), 0 8px 18px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fff8e6 100%);
+  transform: translateY(-2px);
+}
+
+/* BANCO DE TARJETAS */
+
+.uv-ej-b1-bank {
+  background: linear-gradient(145deg, #0a2a5c, #132f66, #000c1a);
+  border-radius: 20px;
+  padding: 10px 12px 12px;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.uv-ej-b1-bank::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(253, 191, 18, 0.4) 0, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(253, 191, 18, 0.25) 0, transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.uv-ej-b1-bank-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uv-ej-b1-bank-header {
+  font-size: 0.9rem;
+}
+
+.uv-ej-b1-bank-header strong {
+  font-weight: 600;
+}
+
+.uv-ej-b1-bank-sub {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.uv-ej-b1-bank-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+/* TARJETAS */
+
+.uv-ej-b1-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a2340;
+  font-size: 0.85rem;
+  border: 1px solid rgba(10, 42, 92, 0.18);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease, background 0.18s ease;
+}
+
+.uv-ej-b1-card:active {
+  cursor: grabbing;
+}
+
+.uv-ej-b1-card-emoji {
+  font-size: 1rem;
+}
+
+.uv-ej-b1-card-text {
+  white-space: normal;
+}
+
+/* ESCALA AL ARRASTRAR */
+
+.uv-ej-b1-card--dragging {
+  transform: scale(1.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* ESTADOS DE CORRECCIÓN */
+
+.uv-ej-b1-card--correct {
+  border-color: #2ea44f;
+  box-shadow: 0 0 0 1px rgba(46, 164, 79, 0.7),
+    0 8px 20px rgba(0, 0, 0, 0.24);
+}
+
+.uv-ej-b1-card--incorrect {
+  border-color: #e55353;
+  box-shadow: 0 0 0 1px rgba(229, 83, 83, 0.8),
+    0 10px 22px rgba(0, 0, 0, 0.32);
+}
+
+/* SHAKE SUAVE PARA TARJETAS INCORRECTAS */
+
+@keyframes uv-ej-b1-shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+.uv-ej-b1-card--shake {
+  animation: uv-ej-b1-shake 0.22s ease-out;
+}
+
+/* ÁREA INFERIOR: BOTONES Y FEEDBACK */
+
+.uv-ej-b1-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.uv-ej-b1-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.uv-ej-b1-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 7px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    background 0.18s ease, opacity 0.18s ease;
+}
+
+.uv-ej-b1-btn-main {
+  background: linear-gradient(135deg, #fdbf12, #ffe08a);
+  color: #1a1a1a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.uv-ej-b1-btn-main:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.uv-ej-b1-btn-main:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+
+.uv-ej-b1-btn-reset {
+  background: transparent;
+  border: 1px solid rgba(10, 42, 92, 0.35);
+  color: #0a2340;
+}
+
+.uv-ej-b1-btn-reset:hover {
+  background: rgba(10, 42, 92, 0.06);
+  transform: translateY(-1px);
+}
+
+.uv-ej-b1-feedback {
+  font-size: 0.85rem;
+  color: rgba(7, 27, 60, 0.86);
+}
+
+.uv-ej-b1-feedback-strong {
+  font-weight: 600;
+}
