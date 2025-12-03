@@ -1619,18 +1619,18 @@
 .uv-ej-b1-feedback-strong {
   font-weight: 600;
 }
-/* FIX REAL: el panel crece solo cuando está abierto */
-.uv-accordion-panel.abierto[data-bloque="1"] {
-  overflow: visible !important;
+/* FIX GENERAL: todos los paneles pueden crecer al abrirse */
+.uv-accordion-panel.abierto {
   max-height: none !important;
   height: auto !important;
+  overflow: visible !important;
 }
 
-/* Dejar normal los paneles cerrados (evita el espacio gigante) */
-.uv-accordion-panel[data-bloque="1"]:not(.abierto) {
-  overflow: hidden !important;
+/* Panel cerrado correctamente */
+.uv-accordion-panel:not(.abierto) {
   max-height: 0 !important;
   height: 0 !important;
+  overflow: hidden !important;
 }
 
 /* El ejercicio en sí puede crecer libremente */
