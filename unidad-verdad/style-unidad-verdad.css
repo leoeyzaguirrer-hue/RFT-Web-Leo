@@ -1619,14 +1619,16 @@
 .uv-ej-b1-feedback-strong {
   font-weight: 600;
 }
-/* Ajuste seguro del contenedor azul de tarjetas */
-.uv-ej-b1-bank {
-  max-height: 480px;       /* controla la altura visible */
-  overflow-y: auto;        /* permite hacer scroll si hay muchas tarjetas */
-  padding-bottom: 20px;    /* deja espacio sin cortar nada */
+/* EXPANSIÓN SEGURA DEL BLOQUE 1 – SOLO APLICA AL EJERCICIO */
+.uv-accordion-panel[data-bloque="1"] {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
 }
 
-/* Evita que el footer quede fuera del panel */
+/* Asegura que el contenedor del ejercicio se expanda */
 .uv-ej-b1 {
-  padding-bottom: 40px;
+  height: auto !important;
+  min-height: 600px;
+  padding-bottom: 60px;
 }
