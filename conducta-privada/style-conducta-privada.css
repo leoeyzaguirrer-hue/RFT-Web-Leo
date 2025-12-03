@@ -315,3 +315,19 @@
     height: 10px;
   }
 }
+/* ============================================================
+   BRUMA DIAGONAL SUAVE
+============================================================ */
+.uv-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(200, 255, 250, 0.12) 100%
+  );
+  z-index: -1;
+}
