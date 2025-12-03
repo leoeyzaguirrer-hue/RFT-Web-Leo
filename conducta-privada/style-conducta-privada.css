@@ -174,3 +174,106 @@
     font-size: 1rem;
   }
 }
+/* ============================================================
+   SECCIÓN DE LECCIONES
+============================================================ */
+.uv-seccion-lecciones {
+  margin-top: 48px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0A2A5C;
+  margin-bottom: 20px;
+}
+
+/* GRID DE LECCIONES */
+.uv-lecciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.uv-btn-leccion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #FFE8B6;
+  padding: 14px 20px;
+  border-radius: 14px;
+  text-decoration: none;
+  border: 1.4px solid rgba(253,191,18,0.65);
+  transition: 0.25s ease;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.06);
+}
+
+.uv-btn-leccion:hover {
+  background: #FFF1CC;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+}
+
+.uv-btn-num {
+  background: #FDBF12;
+  color: #0A2A5C;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  min-width: 48px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.uv-btn-text {
+  color: #0A2340;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   INDICADOR DE PROGRESO
+============================================================ */
+.uv-progreso {
+  margin-top: 40px;
+}
+
+.punto {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #D2DEEA;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: background 0.25s ease;
+}
+
+.punto.activo {
+  background: #0A2A5C;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .uv-lecciones-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .uv-btn-leccion {
+    padding: 14px 16px;
+  }
+
+  .uv-btn-num {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+  }
+
+  .uv-btn-text {
+    font-size: 0.95rem;
+  }
+
+  .punto {
+    width: 10px;
+    height: 10px;
+  }
+}
