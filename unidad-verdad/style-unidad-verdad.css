@@ -1619,33 +1619,14 @@
 .uv-ej-b1-feedback-strong {
   font-weight: 600;
 }
-/* ============================================================
-   FIX SEGURO PARA ALTURA DE EJERCICIO · NO AFECTA OTROS BLOQUES
-============================================================ */
-
-.uv-bloque-actividad {
-  overflow: visible !important;
-}
-
-#bloque-1-actividad {
-  overflow: visible !important;
-}
-
-.uv-ej-b1 {
-  display: block;
-  width: 100%;
-  height: auto !important;
-}
-
-.uv-ej-b1-main {
-  overflow: visible !important;
-}
-
-.uv-ej-b1-cols,
+/* Ajuste seguro del contenedor azul de tarjetas */
 .uv-ej-b1-bank {
-  height: auto !important;
+  max-height: 480px;       /* controla la altura visible */
+  overflow-y: auto;        /* permite hacer scroll si hay muchas tarjetas */
+  padding-bottom: 20px;    /* deja espacio sin cortar nada */
 }
 
-.uv-ej-b1-footer {
-  margin-top: 32px;
+/* Evita que el footer quede fuera del panel */
+.uv-ej-b1 {
+  padding-bottom: 40px;
 }
