@@ -261,8 +261,61 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 3</h3>
-            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
-          </section>
+            <section class="uv-card uv-bloque-actividad">
+  <h3>Actividad interactiva · Bloque 3 · “El Motor Mecanicista”</h3>
+
+  <p class="mec-instruccion">
+    Activa diferentes <strong>mecanismos internos</strong> y observa cómo el Motor Mecanicista intenta explicar la conducta.  
+    Después de cada activación, responde:  
+    <em>“¿Qué intervención concreta puedes aplicar ahora?”</em><br>
+    Si activas tres mecanismos distintos, aparecerá una opción funcional oculta.  
+    <strong>Tu tarea es descubrir por qué el mecanicismo no guía la acción clínica.</strong>
+  </p>
+
+  <div id="ej-p3-b3" class="mec-container">
+    <div class="mec-panel">
+
+      <!-- IZQUIERDA: BOTONES DE MECANISMOS -->
+      <div class="mec-botones">
+        <button class="mec-btn" data-mech="dopamina">🧬 Disfunción dopaminérgica causa la conducta.</button>
+        <button class="mec-btn" data-mech="sesgo">🧠 Sesgo atencional automático genera ansiedad.</button>
+        <button class="mec-btn" data-mech="procesamiento">🧪 Procesamiento defectuoso del estímulo.</button>
+        <button class="mec-btn" data-mech="inhibicion">🔌 Mecanismo inhibitorio fallido.</button>
+        <button class="mec-btn" data-mech="circuito">🩻 Circuito neural hiperactivo.</button>
+      </div>
+
+      <!-- CENTRO: AVATAR + MODULOS -->
+      <div class="mec-modulos">
+        <div class="modulo bio">🧬</div>
+        <div class="modulo cog">🧠</div>
+        <div class="modulo neuro">🧪</div>
+
+        <div id="mec-avatar" class="avatar">🙂</div>
+      </div>
+
+      <!-- DERECHA: RESPUESTA -->
+      <div class="mec-respuesta">
+        <p class="pregunta">¿Qué intervención concreta puedes aplicar ahora?</p>
+
+        <div class="mec-opciones">
+          <button class="opc opc-incorrecta">Modificar el circuito</button>
+          <button class="opc opc-incorrecta">Normalizar dopamina</button>
+          <button class="opc opc-incorrecta">Reducir hiperactividad neural</button>
+          <button class="opc opc-parcial">No puedo intervenir con esta explicación</button>
+        </div>
+
+        <!-- OPCIÓN OCULTA (se desbloquea con 3 activaciones) -->
+        <button id="opc-funcional" class="opc-funcional oculto">🎯 Analizar función actual</button>
+
+        <div id="mec-feedback"></div>
+      </div>
+
+    </div>
+
+    <button id="mec-reiniciar" class="mec-btn-restart">🔄 Reiniciar Motor</button>
+  </div>
+</section>
+
 
         </div>
       </article>
