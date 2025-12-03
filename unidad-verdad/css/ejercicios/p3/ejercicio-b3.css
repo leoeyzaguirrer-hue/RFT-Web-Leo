@@ -1,0 +1,134 @@
+.mec-container {
+  padding: 20px;
+  border: 2px solid #d6e2ff;
+  background: #f7faff;
+  border-radius: 14px;
+}
+
+/* instrucciones */
+.mec-instruccion {
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  color: #0A2340;
+}
+
+.mec-panel {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* botones de mecanismos */
+.mec-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mec-btn {
+  background: #ffffff;
+  border: 2px solid #b2c9ff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.mec-btn:hover {
+  background: #e9f1ff;
+  border-color: #7aa2ff;
+}
+
+/* módulos + avatar */
+.mec-modulos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.modulo {
+  font-size: 2rem;
+  opacity: 0.3;
+  transition: 0.3s;
+}
+
+.modulo.activo {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.avatar {
+  font-size: 3rem;
+  margin-top: 10px;
+}
+
+/* respuestas */
+.mec-respuesta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pregunta {
+  font-size: 0.9rem;
+}
+
+.mec-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.opc {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.opc:hover {
+  background: #f0f0f0;
+}
+
+.opc-incorrecta {
+  border-color: #d77;
+}
+
+.opc-parcial {
+  border-color: #c9a100;
+}
+
+/* opción funcional oculta */
+.oculto {
+  display: none;
+}
+
+#opc-funcional {
+  padding: 10px;
+  background: #e8f8e8;
+  border: 2px solid #58b858;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* feedback */
+#mec-feedback {
+  margin-top: 10px;
+  font-weight: bold;
+  min-height: 24px;
+}
+
+/* reiniciar */
+.mec-btn-restart {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: #fff6d1;
+  border: 2px solid #dba600;
+  border-radius: 8px;
+  cursor: pointer;
+}
