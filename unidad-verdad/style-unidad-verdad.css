@@ -640,14 +640,22 @@
   border: 1.5px solid rgba(253,191,18,0.48) !important;
 }
 
-/* 3) Texto editorial grande (20px) */
+/* ============================================================
+   TEXTO EDITORIAL GRANDE (20px) · APLICADO GLOBALMENTE
+============================================================ */
+
+.uv-card p,
 .uv-resumen p,
-.uv-bloque-texto p {
-  font-size: 1.25rem !important;
+.uv-bloque-texto p,
+.uv-bloque-teoria p,
+.uv-bloque-actividad p,
+.uv-microhero p {
+  font-size: 1.25rem !important;  /* ~20px */
   line-height: 1.7 !important;
   font-weight: 500;
   color: #083A40 !important;
 }
+
 /* ============================================================
    EJERCICIO BLOQUE 1 · "COHERENTE O ÚTIL" · DRAG & DROP
 ============================================================ */
