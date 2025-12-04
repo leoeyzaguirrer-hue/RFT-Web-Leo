@@ -1,0 +1,317 @@
+/* ============================================================
+   EJERCICIO P4 · Evaluando el impacto clínico de tus descripciones
+   Estilo encapsulado para no interferir con el resto del módulo
+   ============================================================ */
+
+.p4-activity {
+  margin-top: 32px;
+  padding: 24px 24px 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(253, 191, 18, 0.45);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+}
+
+.p4-activity-header {
+  margin-bottom: 20px;
+}
+
+.p4-activity-title {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.p4-activity-instructions {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Layout de columnas */
+
+.p4-activity-layout {
+  display: flex;
+  gap: 24px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.p4-column {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.p4-column-left {
+  border-right: 1px dashed rgba(10, 35, 64, 0.16);
+  padding-right: 16px;
+}
+
+.p4-column-right {
+  padding-left: 8px;
+}
+
+@media (max-width: 800px) {
+  .p4-column-left {
+    border-right: none;
+    border-bottom: 1px dashed rgba(10, 35, 64, 0.16);
+    padding-right: 0;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .p4-column-right {
+    padding-left: 0;
+  }
+}
+
+.p4-column-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.p4-column-subtitle {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Tarjetas */
+
+.p4-card-pool {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.p4-card {
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(10, 35, 64, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(230, 240, 255, 0.95)
+  );
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.04);
+  cursor: grab;
+  transition: transform 0.14s ease, box-shadow 0.14s ease,
+    border-color 0.14s ease;
+}
+
+.p4-card:focus-visible {
+  outline: 2px solid rgba(253, 191, 18, 0.9);
+  outline-offset: 2px;
+}
+
+.p4-card:active {
+  cursor: grabbing;
+}
+
+.p4-card.p4-card-dragging {
+  transform: scale(1.04) translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  border-color: rgba(253, 191, 18, 0.85);
+}
+
+.p4-card.p4-card-locked {
+  opacity: 0.75;
+  cursor: default;
+}
+
+/* Colores por clasificación al final */
+
+.p4-card-good {
+  border-color: rgba(33, 150, 83, 0.9);
+  box-shadow: 0 0 0 1px rgba(33, 150, 83, 0.45);
+}
+
+.p4-card-bad {
+  border-color: rgba(198, 40, 40, 0.9);
+  box-shadow: 0 0 0 1px rgba(198, 40, 40, 0.45);
+}
+
+.p4-card-star {
+  border-color: rgba(253, 191, 18, 0.95);
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.65);
+}
+
+/* Dropzone */
+
+.p4-dropzone {
+  margin-top: 4px;
+  padding: 16px 14px;
+  border-radius: 18px;
+  border: 2px dashed rgba(10, 35, 64, 0.25);
+  min-height: 110px;
+  background: linear-gradient(
+      120deg,
+      rgba(253, 191, 18, 0.06),
+      rgba(10, 35, 64, 0.03)
+    ),
+    rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.p4-dropzone-active {
+  border-color: rgba(253, 191, 18, 0.9);
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.4);
+}
+
+.p4-drop-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Medidores */
+
+.p4-meters {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.p4-meter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.p4-meter-label {
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+}
+
+.p4-meter-bar {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(232, 238, 252, 1),
+    rgba(214, 224, 244, 1)
+  );
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(10, 35, 64, 0.08);
+}
+
+.p4-meter-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50%;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(253, 191, 18, 0.1),
+    rgba(253, 191, 18, 0.85)
+  );
+  transition: height 0.3s ease;
+}
+
+/* Avatar */
+
+.p4-avatar-area {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.p4-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(253, 191, 18, 0.5),
+    rgba(255, 255, 255, 0.9)
+  );
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.p4-avatar-text {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Acciones */
+
+.p4-actions {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.p4-btn {
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.p4-btn-primary {
+  background: linear-gradient(
+    135deg,
+    rgba(253, 191, 18, 1),
+    rgba(255, 215, 125, 1)
+  );
+  color: #0a2340;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(253, 191, 18, 0.4);
+  border-color: rgba(253, 191, 18, 0.95);
+}
+
+.p4-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 11px 24px rgba(253, 191, 18, 0.55);
+}
+
+.p4-btn-ghost {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0a2340;
+  border-color: rgba(10, 35, 64, 0.22);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.p4-btn-ghost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 9px 20px rgba(0, 0, 0, 0.08);
+}
+
+.p4-feedback-final {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Mensajes finales */
+
+.p4-feedback-success {
+  color: #1b5e20;
+  font-weight: 600;
+}
+
+.p4-feedback-error {
+  color: #b71c1c;
+  font-weight: 600;
+}
