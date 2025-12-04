@@ -20,12 +20,12 @@ const mapaCorrecto = {
 
 const mapaParcial = {
   c1: ["i4"],   // exposición a veces es útil
-  c2: ["i4"],   // exposición ayuda, pero no es la base
-  c3: ["i5"]    // registro ayuda pero es complemento
+  c2: ["i4"],   // exposición ayuda pero no es la base
+  c3: ["i5"]    // registro ayuda pero no cambia función
 };
 
-/* Conectar ítems */
-document.querySelectorAll(".concepto").forEach(c => {
+/* Selección de conceptualización */
+document.querySelectorAll(".p7-item.concepto").forEach(c => {
   c.addEventListener("click", () => {
     c.classList.toggle("p7-select");
     if (document.querySelectorAll(".p7-select").length > 1) {
@@ -34,7 +34,8 @@ document.querySelectorAll(".concepto").forEach(c => {
   });
 });
 
-document.querySelectorAll(".intervencion").forEach(i => {
+/* Click en intervenciones */
+document.querySelectorAll(".p7-item.intervencion").forEach(i => {
   i.addEventListener("click", () => {
     const seleccionado = document.querySelector(".p7-select");
     if (!seleccionado) return;
@@ -44,7 +45,7 @@ document.querySelectorAll(".intervencion").forEach(i => {
   });
 });
 
-/* Dibujar conexión */
+/* Dibujar línea */
 function conectar(c, i) {
   const cRect = c.getBoundingClientRect();
   const iRect = i.getBoundingClientRect();
@@ -56,12 +57,10 @@ function conectar(c, i) {
   const x2 = iRect.left - container.left;
   const y2 = iRect.top + iRect.height / 2 - container.top;
 
-  // determinar tipo de conexión
   let tipo = "incorrecta";
   if (mapaCorrecto[c.dataset.id] === i.dataset.id) tipo = "correcta";
   else if (mapaParcial[c.dataset.id]?.includes(i.dataset.id)) tipo = "parcial";
 
-  // Dibujar línea
   const linea = document.createElementNS("http://www.w3.org/2000/svg", "line");
   linea.setAttribute("x1", x1);
   linea.setAttribute("y1", y1);
@@ -73,7 +72,6 @@ function conectar(c, i) {
   else linea.setAttribute("stroke", "red");
 
   linea.setAttribute("stroke-width", 4);
-  linea.classList.add("conexion");
   svg.appendChild(linea);
 
   conexiones.push({ c: c.dataset.id, i: i.dataset.id, tipo });
@@ -81,7 +79,7 @@ function conectar(c, i) {
   actualizarMedidor();
 }
 
-/* Medidor dinámico */
+/* Medidor */
 function actualizarMedidor() {
   let score = 0;
 
@@ -96,7 +94,7 @@ function actualizarMedidor() {
   medidorValor.innerText = score + "%";
 }
 
-/* Evaluación final */
+/* Evaluación */
 btnEval.addEventListener("click", () => {
   feedbackFinal.style.display = "block";
 
@@ -105,17 +103,18 @@ btnEval.addEventListener("click", () => {
   let w = conexiones.filter(x => x.tipo === "incorrecta").length;
 
   if (c >= 2 && w === 0) {
-    feedbackFinal.innerHTML = "<strong>Excelente.</strong> Transformaste teoría en acción útil. ✨";
+    feedbackFinal.innerHTML =
+      "<strong>Excelente.</strong> Transformaste teoría en acción útil. ✨";
   } else if (c >= 1 || p >= 1) {
     feedbackFinal.innerHTML =
       "Varias conexiones fueron útiles, pero podés afinar la relación entre conceptualización e intervención.";
   } else {
     feedbackFinal.innerHTML =
-      "Varias conceptualizaciones no guiaron acciones funcionales. Recordá: la utilidad clínica determina la verdad pragmática.";
+      "Varias conceptualizaciones no guiaron acciones funcionales. Recordá que la utilidad clínica determina la verdad pragmática.";
   }
 });
 
-/* Reiniciar */
+/* Reinicio */
 btnReset.addEventListener("click", () => {
   conexiones = [];
   svg.innerHTML = "";
