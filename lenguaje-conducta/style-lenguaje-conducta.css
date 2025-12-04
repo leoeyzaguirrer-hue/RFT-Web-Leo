@@ -338,15 +338,17 @@ body.uv-body {
 }
 
 /* ============================================================
-   TEXTO DE BLOQUES EN 20PX
+   TEXTO GRANDE (20px) PARA RESUMEN + BLOQUES
 ============================================================ */
+
+.uv-resumen p,
 .uv-bloque-texto p {
-  font-size: 1.25rem !important;
+  font-size: 1.25rem !important;   /* =20px */
+  line-height: 1.7 !important;
+  font-weight: 500;
+  color: #083A40 !important;
 }
 
-details.uv-accordion summary {
-  font-size: 1.25rem !important;
-}
 /* ============================================================
    MEJORA VISUAL LIGERA DE BLOQUES (PREMIUM)
 ============================================================ */
