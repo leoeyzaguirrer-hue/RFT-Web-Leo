@@ -9,10 +9,12 @@
   <link rel="stylesheet" href="style-unidad-verdad.css" />
   <link rel="stylesheet" href="css/ejercicios/p4/p4-ejercicio.css" />
   <link rel="stylesheet" href="css/ejercicios/p5/p5-ejercicio.css" />
+  <link rel="stylesheet" href="css/ejercicios/p6/p6-ejercicio.css" />
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p4.js"></script>
   <script defer src="js/ejercicios/p5/p5-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p6/p6-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -595,10 +597,202 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 3</h3>
-            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
-          </section>
+            <!-- =========================================================
+     EJERCICIO P6 · El Juego de Contingencias del Terapeuta
+     ========================================================= -->
+<section class="p6-activity">
+  <header class="p6-activity-header">
+    <h3 class="p6-activity-title">
+      Ejercicio · El Juego de Contingencias del Terapeuta
+    </h3>
+    <p class="p6-activity-instructions">
+      Tus teorías y modelos clínicos también son conductas seleccionadas por
+      consecuencias. En este ejercicio tomarás decisiones en tres rondas
+      clínicas. Cada vez que elijas una opción, estarás seleccionando qué tipo
+      de reforzamiento guía tu práctica: reconocimiento académico,
+      coherencia conceptual o eficacia clínica.
+    </p>
+    <p class="p6-activity-instructions">
+      En cada ronda, lee el caso y elige <strong>una sola opción</strong>:
+      una maximiza el reforzamiento académico (<strong>🎓</strong>), otra la
+      coherencia conceptual (<strong>🧠</strong>) y otra la eficacia clínica
+      (<strong>🎯</strong>). Observa cómo cambian el ambiente, el terapeuta y
+      el consultante según las consecuencias de tu elección.
+    </p>
+    <p class="p6-activity-instructions">
+      Tu meta es notar qué tipo de reforzamiento suele guiar tus
+      conceptualizaciones: ¿buscas sobre todo prestigio, orden teórico o
+      impacto clínico? Al finalizar, pulsa
+      <strong>“Evaluar patrón de selección”</strong> para ver el resumen de tus
+      elecciones. Puedes usar el botón
+      <strong>“Reiniciar ejercicio”</strong> para comenzar de nuevo.
+    </p>
+  </header>
+
+  <div class="p6-activity-layout">
+    <!-- Columna izquierda: entorno y avatares -->
+    <div class="p6-column p6-column-left">
+      <div class="p6-env" id="p6-env">
+        <div class="p6-env-header">
+          <span class="p6-env-label" id="p6-env-label">
+            Ambiente neutro
+          </span>
+          <span class="p6-env-tagline" id="p6-env-tagline">
+            Aún no has tomado decisiones.
+          </span>
         </div>
-      </article>
+
+        <div class="p6-avatars">
+          <div class="p6-avatar-block">
+            <div class="p6-avatar p6-avatar-therapist" id="p6-avatar-therapist">
+              🧑‍⚕️
+            </div>
+            <p class="p6-avatar-text" id="p6-avatar-therapist-text">
+              Terapeuta en estado neutro, evaluando opciones.
+            </p>
+          </div>
+          <div class="p6-avatar-block">
+            <div class="p6-avatar p6-avatar-client" id="p6-avatar-client">
+              😐
+            </div>
+            <p class="p6-avatar-text" id="p6-avatar-client-text">
+              Consultante sin cambios clínicos aún visibles.
+            </p>
+          </div>
+        </div>
+
+        <div class="p6-impact">
+          <div class="p6-impact-header">
+            <span>Impacto clínico acumulado</span>
+          </div>
+          <div class="p6-impact-bar">
+            <div class="p6-impact-fill" id="p6-impact-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p6-score-summary">
+        <h4 class="p6-score-title">Contingencias que te están moldeando</h4>
+        <ul class="p6-score-list">
+          <li>
+            🎓 Reconocimiento académico:
+            <span id="p6-score-academia">0</span>
+          </li>
+          <li>
+            🧠 Coherencia conceptual:
+            <span id="p6-score-coherencia">0</span>
+          </li>
+          <li>
+            🎯 Eficacia clínica:
+            <span id="p6-score-clinico">0</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Columna derecha: rondas y decisiones -->
+    <div class="p6-column p6-column-right">
+      <section class="p6-round-section">
+        <header class="p6-round-header">
+          <h4 class="p6-round-title">
+            Ronda <span id="p6-round-number">1</span> de 3
+          </h4>
+          <p class="p6-round-progress" id="p6-round-progress">
+            Has respondido 0 de 3 rondas.
+          </p>
+        </header>
+
+        <article class="p6-case">
+          <h5 class="p6-case-title">Caso clínico</h5>
+          <p class="p6-case-text" id="p6-case-text">
+            <!-- Se rellena dinámicamente desde JS -->
+          </p>
+        </article>
+
+        <div class="p6-options">
+          <button
+            type="button"
+            class="p6-option"
+            id="p6-option-1"
+            data-choice-index="0"
+          ></button>
+          <button
+            type="button"
+            class="p6-option"
+            id="p6-option-2"
+            data-choice-index="1"
+          ></button>
+          <button
+            type="button"
+            class="p6-option"
+            id="p6-option-3"
+            data-choice-index="2"
+          ></button>
+        </div>
+
+        <p class="p6-round-feedback" id="p6-round-feedback">
+          Elige una opción para ver cómo cambia el ambiente y qué tipo de
+          reforzamiento recibe tu teoría.
+        </p>
+
+        <div class="p6-round-navigation">
+          <button
+            type="button"
+            class="p6-round-nav-btn"
+            id="p6-btn-prev-round"
+          >
+            ⬅ Ronda anterior
+          </button>
+          <button
+            type="button"
+            class="p6-round-nav-btn"
+            id="p6-btn-next-round"
+          >
+            Siguiente ronda ➝
+          </button>
+        </div>
+      </section>
+
+      <section class="p6-results-section">
+        <h4 class="p6-results-title">Patrón de selección de teorías</h4>
+        <div class="p6-results-grid">
+          <div class="p6-results-item">
+            <div class="p6-results-label">🎓 Academia</div>
+            <div class="p6-results-value" id="p6-pct-academia">0%</div>
+          </div>
+          <div class="p6-results-item">
+            <div class="p6-results-label">🧠 Coherencia</div>
+            <div class="p6-results-value" id="p6-pct-coherencia">0%</div>
+          </div>
+          <div class="p6-results-item">
+            <div class="p6-results-label">🎯 Eficacia clínica</div>
+            <div class="p6-results-value" id="p6-pct-clinico">0%</div>
+          </div>
+        </div>
+        <p class="p6-results-text" id="p6-results-text">
+          Cuando pulses <strong>“Evaluar patrón de selección”</strong>,
+          aparecerá aquí un análisis contextualista de tus elecciones.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <footer class="p6-actions">
+    <button id="p6-btn-evaluate" class="p6-btn p6-btn-primary">
+      Evaluar patrón de selección
+    </button>
+    <button id="p6-btn-reset" class="p6-btn p6-btn-ghost">
+      Reiniciar ejercicio
+    </button>
+    <p class="p6-feedback-final" id="p6-final-feedback"></p>
+  </footer>
+</section>
+<!-- =========================================================
+     FIN EJERCICIO P6
+     ========================================================= -->
+
+          </section>
+         </article>
 
       <div class="uv-separador-bloque">✦</div>
 
