@@ -10,12 +10,15 @@
   <link rel="stylesheet" href="css/ejercicios/p4/p4-ejercicio.css" />
   <link rel="stylesheet" href="css/ejercicios/p5/p5-ejercicio.css" />
   <link rel="stylesheet" href="css/ejercicios/p6/p6-ejercicio.css" />
+  <link rel="stylesheet" href="css/ejercicios/p7/p7-ejercicio.css" />
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p4.js"></script>
   <script defer src="js/ejercicios/p5/p5-ejercicio.js"></script>
   <script defer src="js/ejercicios/p6/p6-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p7/p7-ejercicio.js"></script>
 </head>
+  
 
 <body class="uv-body">
 
@@ -833,7 +836,108 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 4</h3>
-            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+            
+            <!-- ============================================================
+     EJERCICIO · BLOQUE 4 · TALLER DE INTERVENCIÓN PRAGMÁTICA
+=============================================================== -->
+<section class="p7-ejercicio-container">
+
+  <!-- Instrucciones -->
+  <div class="p7-instrucciones">
+    <h2>El Taller de Intervención Pragmática</h2>
+    <p>
+      Tu objetivo es transformar conceptualizaciones clínicas en intervenciones útiles,
+      aplicando el criterio pragmático: una descripción es más verdadera cuando orienta
+      una acción que aumenta la flexibilidad psicológica.
+    </p>
+    <p>
+      Conecta cada conceptualización (izquierda) con la intervención que mejor la operacionaliza (derecha).
+      Cada conexión afectará el Índice de Utilidad Clínica:
+      <br>
+      – Líneas doradas indican conexiones correctas.<br>
+      – Líneas amarillas indican conexiones parcialmente útiles.<br>
+      – Líneas rojas indican errores.
+    </p>
+    <p>
+      Cuando termines, pulsa <strong>“Evaluar ruta clínica”</strong>.
+      Podés usar <strong>“Reiniciar ejercicio”</strong> para comenzar otra vez.
+    </p>
+  </div>
+
+  <!-- Panel principal -->
+  <div class="p7-paneles">
+
+    <!-- Panel Izquierdo -->
+    <div class="p7-panel p7-panel-izq">
+      <h3>Conceptualizaciones</h3>
+
+      <div class="p7-item concepto" data-id="c1" data-type="funcion">
+        🎯 La conducta se mantiene por alivio inmediato.
+      </div>
+
+      <div class="p7-item concepto" data-id="c2" data-type="valores">
+        🌊 El patrón reduce contacto con valores.
+      </div>
+
+      <div class="p7-item concepto" data-id="c3" data-type="fusion">
+        🧠 Hay distorsión cognitiva profunda.
+      </div>
+
+      <div class="p7-item concepto distractor" data-id="c4" data-type="distractor">
+        🚫 Tiene baja autoestima.
+      </div>
+    </div>
+
+    <!-- Medidor central -->
+    <div class="p7-medidor-container">
+      <h3>Índice de Utilidad Clínica</h3>
+      <div class="p7-medidor-outer">
+        <div class="p7-medidor-inner" id="p7-medidor"></div>
+      </div>
+      <div id="p7-medidor-valor">0%</div>
+    </div>
+
+    <!-- Panel Derecho -->
+    <div class="p7-panel p7-panel-der">
+      <h3>Intervenciones</h3>
+
+      <div class="p7-item intervencion" data-id="i1" data-type="af">
+        🔍 Análisis funcional en vivo
+      </div>
+
+      <div class="p7-item intervencion" data-id="i2" data-type="valores">
+        ⭐ Clarificación de valores
+      </div>
+
+      <div class="p7-item intervencion" data-id="i3" data-type="defusion">
+        ✍️ Defusión cognitiva
+      </div>
+
+      <div class="p7-item intervencion" data-id="i4" data-type="exposicion">
+        🔧 Exposición encadenada
+      </div>
+
+      <div class="p7-item intervencion" data-id="i5" data-type="registro">
+        📒 Registro de pensamientos
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Conexiones visuales -->
+  <svg id="p7-svg-conexiones"></svg>
+
+  <!-- Botones -->
+  <div class="p7-botones">
+    <button id="p7-btn-evaluar" class="p7-btn">Evaluar ruta clínica</button>
+    <button id="p7-btn-reset" class="p7-btn p7-reset">Reiniciar ejercicio</button>
+  </div>
+
+  <!-- Feedback final -->
+  <div id="p7-feedback-final" class="p7-feedback-oculto"></div>
+
+</section>
+
           </section>
         </div>
       </article>
