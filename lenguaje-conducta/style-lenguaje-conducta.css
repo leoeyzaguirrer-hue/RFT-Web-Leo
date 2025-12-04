@@ -304,3 +304,35 @@
 
   .uv-btn-start { width: 100%; text-align: center; }
 }
+/* ============================================================
+   FONDO EXACTO DEL MÓDULO "LENGUAJE COMO CONDUCTA"
+   (ADAPTADO PARA ESTE P2 — SIN ROMPER NADA EXISTENTE)
+============================================================ */
+
+/* Gradiente del body — fuerza el fondo correcto */
+body.uv-body {
+  background: linear-gradient(180deg, #0f4c5c 0%, #1ca3b3 45%, #d8fffa 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Capa 1 — hexágonos (ya existen, solo aseguramos z-index correcto) */
+.uv-bg-layer {
+  z-index: -3 !important;
+}
+
+/* Capa 2 — puntos (no existía en tu módulo, necesaria para el efecto completo) */
+.uv-bg-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.20) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -2;
+}
+
+/* Capa 3 — onda (corrige línea rota, mantiene tu estilo) */
+.uv-bg-onda {
+  background: rgba(0, 105, 120, 0.08) !important;
+  z-index: -1 !important;
+}
