@@ -1934,3 +1934,18 @@
   overflow: hidden !important;
   opacity: 0 !important;
 }
+/* ============================================================
+   OVERRIDE FINAL · FIJA LA SANGRÍA Y EL TAMAÑO DE TEXTO
+   ============================================================ */
+
+.uv-bloque-texto {
+  padding: 26px !important;
+}
+
+.uv-bloque-texto p,
+.uv-resumen p {
+  font-size: 1.25rem !important;
+  line-height: 1.7 !important;
+  font-weight: 500 !important;
+  color: #083A40 !important;
+}
