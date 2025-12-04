@@ -1,0 +1,460 @@
+/* ============================================================
+   EJERCICIO P6 · El Juego de Contingencias del Terapeuta
+   Estilos encapsulados
+   ============================================================ */
+
+.p6-activity {
+  margin-top: 32px;
+  padding: 24px 24px 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(253, 191, 18, 0.5);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+}
+
+.p6-activity-header {
+  margin-bottom: 20px;
+}
+
+.p6-activity-title {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.p6-activity-instructions {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Layout general */
+
+.p6-activity-layout {
+  display: flex;
+  gap: 24px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.p6-column {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.p6-column-left {
+  max-width: 360px;
+  border-right: 1px dashed rgba(10, 35, 64, 0.16);
+  padding-right: 16px;
+}
+
+.p6-column-right {
+  padding-left: 8px;
+}
+
+@media (max-width: 900px) {
+  .p6-column-left {
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px dashed rgba(10, 35, 64, 0.16);
+    padding-right: 0;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .p6-column-right {
+    padding-left: 0;
+  }
+}
+
+/* Entorno y avatares */
+
+.p6-env {
+  border-radius: 22px;
+  padding: 12px 14px 14px;
+  background: radial-gradient(
+      circle at 15% 0%,
+      rgba(253, 191, 18, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 85% 100%,
+      rgba(10, 35, 64, 0.18),
+      transparent 55%
+    ),
+    rgba(247, 249, 254, 0.98);
+  border: 1px solid rgba(10, 35, 64, 0.12);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.p6-env-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.p6-env-label {
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+.p6-env-tagline {
+  font-size: 0.84rem;
+  opacity: 0.85;
+}
+
+.p6-avatars {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.p6-avatar-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.p6-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(253, 191, 18, 0.55),
+    rgba(255, 255, 255, 0.95)
+  );
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.p6-avatar-therapist {
+  background: radial-gradient(
+    circle at 30% 15%,
+    rgba(10, 35, 64, 0.35),
+    rgba(255, 255, 255, 0.95)
+  );
+}
+
+.p6-avatar-client {
+  background: radial-gradient(
+    circle at 30% 15%,
+    rgba(253, 191, 18, 0.5),
+    rgba(255, 255, 255, 0.95)
+  );
+}
+
+.p6-avatar-text {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+/* Impacto clínico */
+
+.p6-impact {
+  margin-top: 10px;
+}
+
+.p6-impact-header {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.p6-impact-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(226, 232, 247, 0.9);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(10, 35, 64, 0.08);
+}
+
+.p6-impact-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(253, 191, 18, 0.35),
+    rgba(253, 191, 18, 0.95)
+  );
+  transition: width 0.3s ease;
+}
+
+/* Resumen de contingencias */
+
+.p6-score-summary {
+  margin-top: 14px;
+}
+
+.p6-score-title {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.p6-score-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 0.86rem;
+}
+
+/* Estados de ambiente (clases que se aplican via JS) */
+
+.p6-env-academia {
+  background: radial-gradient(
+      circle at 10% 0%,
+      rgba(51, 102, 204, 0.25),
+      transparent 55%
+    ),
+    rgba(238, 244, 255, 0.98);
+}
+
+.p6-env-coherencia {
+  background: radial-gradient(
+      circle at 90% 10%,
+      rgba(130, 130, 130, 0.3),
+      transparent 55%
+    ),
+    rgba(248, 246, 244, 0.98);
+}
+
+.p6-env-clinico {
+  background: radial-gradient(
+      circle at 50% 0%,
+      rgba(253, 191, 18, 0.35),
+      transparent 60%
+    ),
+    rgba(255, 252, 242, 0.98);
+}
+
+/* Rondas y opciones */
+
+.p6-round-section {
+  margin-bottom: 18px;
+}
+
+.p6-round-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.p6-round-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.p6-round-progress {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.p6-case {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(247, 249, 255, 0.98);
+  border: 1px solid rgba(10, 35, 64, 0.08);
+}
+
+.p6-case-title {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.p6-case-text {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.p6-options {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.p6-option {
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 8px 11px;
+  border-radius: 16px;
+  border: 1px solid rgba(10, 35, 64, 0.12);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(232, 241, 255, 0.98)
+  );
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.p6-option:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 9px 18px rgba(0, 0, 0, 0.08);
+  border-color: rgba(253, 191, 18, 0.8);
+}
+
+.p6-option-selected {
+  border-color: rgba(253, 191, 18, 0.95);
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.55);
+  background: linear-gradient(
+    135deg,
+    rgba(253, 191, 18, 0.12),
+    rgba(255, 247, 220, 0.96)
+  );
+}
+
+.p6-round-feedback {
+  margin: 10px 0 8px;
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+/* Navegación de rondas */
+
+.p6-round-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.p6-round-nav-btn {
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(10, 35, 64, 0.18);
+  background: rgba(255, 255, 255, 0.98);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease,
+    border-color 0.1s ease;
+}
+
+.p6-round-nav-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.p6-round-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* Resultados */
+
+.p6-results-section {
+  margin-top: 10px;
+}
+
+.p6-results-title {
+  margin: 0 0 6px;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.p6-results-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 6px;
+}
+
+.p6-results-item {
+  flex: 1 1 90px;
+}
+
+.p6-results-label {
+  font-size: 0.84rem;
+  margin-bottom: 2px;
+}
+
+.p6-results-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.p6-results-text {
+  margin: 2px 0 0;
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+/* Acciones */
+
+.p6-actions {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.p6-btn {
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.p6-btn-primary {
+  background: linear-gradient(
+    135deg,
+    rgba(253, 191, 18, 1),
+    rgba(255, 215, 125, 1)
+  );
+  color: #0a2340;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(253, 191, 18, 0.4);
+  border-color: rgba(253, 191, 18, 0.95);
+}
+
+.p6-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 11px 24px rgba(253, 191, 18, 0.55);
+}
+
+.p6-btn-ghost {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a2340;
+  border-color: rgba(10, 35, 64, 0.22);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.p6-btn-ghost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 9px 20px rgba(0, 0, 0, 0.08);
+}
+
+.p6-feedback-final {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Estados de feedback final */
+
+.p6-feedback-success {
+  color: #1b5e20;
+  font-weight: 600;
+}
+
+.p6-feedback-error {
+  color: #b71c1c;
+  font-weight: 600;
+}
