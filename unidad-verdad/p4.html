@@ -7,6 +7,7 @@
 
   <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
+  <link rel="stylesheet" href="css/ejercicios/p4/p4-ejercicio.css" />
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p4.js"></script>
@@ -100,8 +101,186 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 1</h3>
-            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
-          </section>
+           <!-- =========================================================
+     EJERCICIO P4 · Evaluando el impacto clínico de tus descripciones
+     ========================================================= -->
+<div id="bloque-1-actividad" class="p4-activity">
+  <header class="p4-activity-header">
+    <h3 class="p4-activity-title">
+      Ejercicio · Evaluando el impacto clínico de tus descripciones
+    </h3>
+    <p class="p4-activity-instructions">
+      Arrastra cada tarjeta de descripción clínica hacia el área de evaluación.
+      Observa cómo cada descripción afecta la eficacia de la intervención,
+      la claridad funcional y la coherencia con los valores del consultante.
+      Tu meta es identificar qué descripciones son representacionales
+      (causas internas) y cuáles son funcionales-contextuales, es decir, útiles
+      para orientar la acción clínica.
+    </p>
+    <p class="p4-activity-instructions">
+      Si la descripción es representacional, los medidores bajarán y el avatar
+      mostrará confusión. Si es útil pero no del todo contextual, los medidores
+      subirán moderadamente y el avatar sonreirá. Si es funcional-contextual,
+      las tres barras subirán con fuerza y el avatar brillará. Al finalizar,
+      pulsa <strong>“Evaluar consecuencia clínica”</strong> para recibir una
+      retroalimentación global. Puedes usar el botón
+      <strong>“Reiniciar ejercicio”</strong> para empezar de nuevo.
+    </p>
+  </header>
+
+  <div class="p4-activity-layout">
+    <!-- Columna izquierda: tarjetas -->
+    <div class="p4-column p4-column-left">
+      <h4 class="p4-column-title">Tarjetas de descripción del terapeuta</h4>
+      <p class="p4-column-subtitle">
+        Arrastra cada tarjeta una vez hacia el área de evaluación para ver
+        sus consecuencias clínicas.
+      </p>
+      <div class="p4-card-pool" id="p4-card-pool">
+        <button
+          class="p4-card"
+          type="button"
+          draggable="true"
+          data-category="representacional"
+          data-card-id="esquema-negativo"
+        >
+          🧠 “Tiene un esquema negativo profundo.”
+        </button>
+
+        <button
+          class="p4-card"
+          type="button"
+          draggable="true"
+          data-category="representacional"
+          data-card-id="rasgo-estable"
+        >
+          🌀 “Es un rasgo de personalidad estable.”
+        </button>
+
+        <button
+          class="p4-card"
+          type="button"
+          draggable="true"
+          data-category="funcional"
+          data-card-id="alivio-inmediato"
+        >
+          🎯 “La conducta se mantiene por alivio inmediato.”
+        </button>
+
+        <button
+          class="p4-card"
+          type="button"
+          draggable="true"
+          data-category="representacional"
+          data-card-id="traumas-explican-todo"
+        >
+          🧩 “Su historia revela traumas que explican todo.”
+        </button>
+
+        <button
+          class="p4-card"
+          type="button"
+          draggable="true"
+          data-category="funcional"
+          data-card-id="intervencion-concreta"
+        >
+          🧭 “Esta descripción sugiere una intervención concreta.”
+        </button>
+
+        <button
+          class="p4-card"
+          type="button"
+          draggable="true"
+          data-category="contextual"
+          data-card-id="patron-contexto"
+        >
+          🔄 “El patrón se activa en función del contexto.”
+        </button>
+
+        <button
+          class="p4-card"
+          type="button"
+          draggable="true"
+          data-category="neutra"
+          data-card-id="impulsividad-test"
+        >
+          📊 “El consultante puntúa alto en impulsividad según el test.”
+        </button>
+      </div>
+    </div>
+
+    <!-- Columna derecha: evaluación -->
+    <div class="p4-column p4-column-right">
+      <h4 class="p4-column-title">Área de evaluación del impacto clínico</h4>
+      <p class="p4-column-subtitle">
+        Suelta aquí cada tarjeta para evaluar cómo esa forma de describir
+        influye en la práctica clínica.
+      </p>
+
+      <div class="p4-dropzone" id="p4-dropzone">
+        <p class="p4-drop-hint" id="p4-drop-hint">
+          Arrastra una tarjeta a esta área para comenzar la evaluación.
+        </p>
+      </div>
+
+      <div class="p4-meters">
+        <div class="p4-meter">
+          <div class="p4-meter-label">🎯 Eficacia de intervención</div>
+          <div class="p4-meter-bar">
+            <div
+              class="p4-meter-fill"
+              id="p4-meter-efficacy"
+              style="height: 50%;"
+            ></div>
+          </div>
+        </div>
+
+        <div class="p4-meter">
+          <div class="p4-meter-label">🔍 Claridad funcional</div>
+          <div class="p4-meter-bar">
+            <div
+              class="p4-meter-fill"
+              id="p4-meter-clarity"
+              style="height: 50%;"
+            ></div>
+          </div>
+        </div>
+
+        <div class="p4-meter">
+          <div class="p4-meter-label">❤️ Coherencia con valores</div>
+          <div class="p4-meter-bar">
+            <div
+              class="p4-meter-fill"
+              id="p4-meter-values"
+              style="height: 50%;"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p4-avatar-area">
+        <div class="p4-avatar" id="p4-avatar">😐</div>
+        <p class="p4-avatar-text" id="p4-avatar-text">
+          Estado neutro. Tus descripciones aún no han sido evaluadas.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="p4-actions">
+    <button id="p4-btn-evaluate" class="p4-btn p4-btn-primary">
+      Evaluar consecuencia clínica
+    </button>
+    <button id="p4-btn-reset" class="p4-btn p4-btn-ghost">
+      Reiniciar ejercicio
+    </button>
+    <p class="p4-feedback-final" id="p4-final-feedback"></p>
+  </footer>
+</section>
+<!-- =========================================================
+     FIN EJERCICIO P4
+     ========================================================= -->
+          </div>
         </div>
       </article>
 
@@ -247,6 +426,8 @@
     </nav>
 
   </main>
-
+<!-- JS del ejercicio P4 -->
+  <script defer src="js/ejercicios/p4/p4-ejercicio.js"></script>
+  
 </body>
 </html>
