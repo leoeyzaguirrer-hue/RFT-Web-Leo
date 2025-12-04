@@ -1,4 +1,6 @@
-/* ============================================================ BASE GENERAL · FONDO PREMIUM SUAVE ============================================================ */
+/* ============================================================
+   BASE GENERAL · FONDO PREMIUM SUAVE
+============================================================ */
 .uv-body {
   margin: 0;
   font-family: "Noto Sans", sans-serif;
@@ -8,25 +10,32 @@
   color: #0A2340;
 }
 
-/* ============================================================ FONDO PREMIUM DEFINITIVO · FILIGRANA + MANDALA CENTRAL (Opción D: curvas + mandala grande) ============================================================ */
+/* ============================================================
+   FONDO PREMIUM DEFINITIVO · FILIGRANA + MANDALA CENTRAL
+   (Opción D: curvas + mandala grande)
+============================================================ */
 .uv-pattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: -5;
+
   background-image:
-    /* --------------------------- */
-    /* 1) MANDALA CENTRAL GIGANTE */
-    /* --------------------------- */
-    radial-gradient(circle at 50% 40%, rgba(253,191,18,0.35) 0%, rgba(253,191,18,0.15) 18%, transparent 40%),
-    /* --------------------------- */
-    /* 2) PÉTALOS / CURVAS LATERALES */
-    /* --------------------------- */
-    radial-gradient(circle at 15% 85%, rgba(253,191,18,0.22) 0%, transparent 55%),
-    radial-gradient(circle at 85% 20%, rgba(253,191,18,0.22) 0%, transparent 55%),
-    /* --------------------------- */
-    /* 3) PATRÓN FILIGRANA REPETIDA */
-    /* --------------------------- */
+    radial-gradient(circle at 50% 40%,
+      rgba(253,191,18,0.35) 0%,
+      rgba(253,191,18,0.15) 18%,
+      transparent 40%
+    ),
+
+    radial-gradient(circle at 15% 85%,
+      rgba(253,191,18,0.22) 0%,
+      transparent 55%
+    ),
+    radial-gradient(circle at 85% 20%,
+      rgba(253,191,18,0.22) 0%,
+      transparent 55%
+    ),
+
     conic-gradient(
       from 0deg,
       rgba(253,191,18,0.28) 0deg,
@@ -36,27 +45,30 @@
       rgba(253,191,18,0.25) 32deg,
       transparent 40deg
     );
+
   background-size:
     1200px 1200px,
-    /* mandala central */
     520px 520px,
-    /* pétalo inferior */
     520px 520px,
-    /* pétalo superior */
     180px 180px;
-    /* filigrana repetida */
-  background-position: center, left bottom, right top, center;
+
+  background-position:
+    center,
+    left bottom,
+    right top,
+    center;
+
   opacity: 0.55;
   mix-blend-mode: soft-light;
 }
 
-/* ============================================================ MANDALAS PREMIUM ============================================================ */
+/* ============================================================
+   MANDALAS PREMIUM
+============================================================ */
 .uv-bg-layer {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   z-index: -3;
   pointer-events: none;
 }
@@ -72,11 +84,12 @@
 .m1 { top: -130px; left: -90px; }
 .m2 { bottom: -150px; right: -110px; }
 
-/* ============================================================ SELLO DEL MÓDULO ============================================================ */
+/* ============================================================
+   SELLO DEL MÓDULO
+============================================================ */
 .uv-sello {
   position: absolute;
-  top: 24px;
-  right: 38px;
+  top: 24px; right: 38px;
   font-size: 0.9rem;
   font-weight: 600;
   color: #0A2A5CCC;
@@ -89,35 +102,37 @@
   z-index: 10;
 }
 
-/* ============================================================ CONTENIDO · LAYOUT EDITORIAL IZQUIERDO ============================================================ */
+/* ============================================================
+   CONTENIDO · LAYOUT EDITORIAL IZQUIERDO
+============================================================ */
 .uv-page {
   position: relative;
   z-index: 1;
   padding: 80px 60px;
-  max-width: 1200px;
-  text-align: left;
+    text-align: left;
 }
 
-/* ============================================================ TARJETAS PREMIUM SUAVES ============================================================ */
+/* ============================================================
+   TARJETAS PREMIUM SUAVES
+============================================================ */
 .uv-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FFF9EC 100%);
-  padding: 24px 34px;
+    padding: 24px 34px;
   border-radius: 16px;
   margin-bottom: 28px;
-  border: 1.5px solid rgba(253,191,18,0.45);
-  box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+   box-shadow: 0 8px 26px rgba(0,0,0,0.06);
   backdrop-filter: blur(3px);
   animation: fadeUp 0.6s ease;
   max-width: 1150px;
 }
 
-/* Animación suave */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ============================================================ TÍTULO + LÍNEA DORADA ============================================================ */
+/* ============================================================
+   TÍTULO + LÍNEA DORADA
+============================================================ */
 .uv-title h1 {
   margin: 0;
   font-size: 2.6rem;
@@ -147,7 +162,9 @@
   to { width: 120px; opacity: 1; }
 }
 
-/* ============================================================ MICRO-HERO Y RESUMEN ============================================================ */
+/* ============================================================
+   MICRO-HERO Y RESUMEN
+============================================================ */
 .uv-microhero p {
   margin: 0;
   font-size: 1.08rem;
@@ -158,16 +175,15 @@
 
 .uv-resumen p {
   margin: 0 0 18px 0;
-  font-size: 1rem;
-  line-height: 1.62;
-  color: #132A40;
+  
 }
 
 .uv-resumen p:last-child {
   margin-bottom: 0;
 }
-
-/* ============================================================ SECCIÓN DE LECCIONES ============================================================ */
+/* ============================================================
+   SECCIÓN DE LECCIONES
+============================================================ */
 .uv-seccion-lecciones {
   margin-top: 48px;
   font-size: 1.4rem;
@@ -176,7 +192,9 @@
   margin-bottom: 20px;
 }
 
-/* ------------------------------------------------------------ BOTONES PREMIUM (no tarjetas) ------------------------------------------------------------ */
+/* ------------------------------------------------------------
+   BOTONES PREMIUM (no tarjetas)
+------------------------------------------------------------ */
 .uv-lecciones-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -220,15 +238,16 @@
   line-height: 1.4;
 }
 
-/* ============================================================ INDICADOR DE PROGRESO ============================================================ */
+/* ============================================================
+   INDICADOR DE PROGRESO
+============================================================ */
 .uv-progreso {
   margin-top: 60px;
 }
 
 .punto {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 12px; height: 12px;
   background: #D2DEEA;
   border-radius: 50%;
   margin-right: 10px;
@@ -239,21 +258,22 @@
   background: #0A2A5C;
 }
 
-/* Fade final */
+/* Fade final (opcional pero premiunísimo) */
 .uv-page::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 90px;
+  bottom: 0; left: 0;
+  width: 100%; height: 90px;
   background: linear-gradient(180deg, transparent, #FFFFFFDD);
   pointer-events: none;
 }
 
-/* ============================================================ RESPONSIVE ≤ 768px ============================================================ */
+/* ============================================================
+   RESPONSIVE · ADAPTACIÓN A CELULAR (≤ 768px)
+============================================================ */
 @media (max-width: 768px) {
 
+  /* Fondo */
   .uv-mandala {
     width: 380px;
     opacity: 0.18;
@@ -269,16 +289,19 @@
     opacity: 0.18;
   }
 
+  /* Página */
   .uv-page {
     padding: 40px 22px;
     max-width: 100%;
   }
 
+  /* Tarjetas */
   .uv-card {
     padding: 20px 22px;
     margin-bottom: 22px;
   }
 
+  /* Títulos */
   .uv-title h1 {
     font-size: 1.65rem;
     line-height: 1.25;
@@ -293,22 +316,24 @@
     height: 3px;
   }
 
+  /* Microhero y resumen */
   .uv-microhero p {
     font-size: 1rem;
     line-height: 1.55;
   }
 
   .uv-resumen p {
-    font-size: 0.96rem;
-    line-height: 1.55;
+    
   }
 
+  /* Botón comenzar */
   .uv-btn-start {
     font-size: 1rem;
     padding: 12px 18px;
     margin-bottom: 32px;
   }
 
+  /* GRID DE LECCIONES → UNA COLUMNA */
   .uv-lecciones-grid {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -327,6 +352,7 @@
     font-size: 0.95rem;
   }
 
+  /* Sello superior */
   .uv-sello {
     top: 16px;
     right: 16px;
@@ -334,13 +360,16 @@
     padding: 4px 10px;
   }
 
+  /* Progreso */
   .punto {
     width: 10px;
     height: 10px;
   }
 }
 
-/* ============================================================ RESPONSIVE ≤ 480px ============================================================ */
+/* ============================================================
+   RESPONSIVE ESPECIAL · CENTRALIZAR FIGURA EN PANTALLAS MUY PEQUEÑAS
+============================================================ */
 @media (max-width: 480px) {
   .uv-figura {
     top: auto;
@@ -351,8 +380,10 @@
     opacity: 0.16;
   }
 }
+/* ============================================================
+   LECCIÓN INTERNA · ENCABEZADO CONTEXTUAL Y PROGRESO
+============================================================ */
 
-/* ============================================================ LECCIÓN INTERNA · ENCABEZADO CONTEXTUAL ============================================================ */
 .uv-lesson-header {
   position: sticky;
   top: 18px;
@@ -366,7 +397,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(253, 191, 18, 0.55);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(8px);
 }
 
@@ -399,33 +430,40 @@
 
 .uv-bloque-dot.activo {
   background: #fdbf12;
-  box-shadow: 0 0 0 3px rgba(253,191,18,0.35);
+  box-shadow: 0 0 0 3px rgba(253, 191, 18, 0.35);
   transform: scale(1.05);
 }
 
-/* ============================================================ BLOQUES EN ACORDEÓN ============================================================ */
-.uv-bloques { margin-top: 10px; }
+/* ============================================================
+   BLOQUES EN ACORDEÓN
+============================================================ */
 
-.uv-bloque { margin-bottom: 12px; }
+.uv-bloques {
+  margin-top: 10px;
+}
+
+.uv-bloque {
+  margin-bottom: 12px;
+}
 
 .uv-accordion {
   width: 100%;
   border: 1px solid rgba(10, 42, 92, 0.15);
   border-radius: 14px;
   padding: 14px 18px;
-  background: rgba(255,255,255,0.94);
+  background: rgba(255, 255, 255, 0.94);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
   transition: background 0.25s ease, transform 0.18s ease, box-shadow 0.25s ease;
 }
 
 .uv-accordion:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
 }
 
 .uv-accordion.abierto {
@@ -443,7 +481,7 @@
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(10,42,92,0.55);
+  color: rgba(10, 42, 92, 0.55);
 }
 
 .uv-accordion-title {
@@ -476,7 +514,7 @@
   margin-top: 12px;
 }
 
-/* Tarjetas internas */
+/* Tarjetas internas de cada bloque */
 .uv-bloque-teoria,
 .uv-bloque-actividad {
   margin-bottom: 14px;
@@ -496,17 +534,20 @@
   line-height: 1.5;
 }
 
-/* Separador */
+/* Separador editorial entre bloques */
 .uv-separador-bloque {
   text-align: center;
   margin: 14px 0 18px;
   font-size: 0.8rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(10,42,92,0.38);
+  color: rgba(10, 42, 92, 0.38);
 }
 
-/* ============================================================ NAVEGACIÓN INFERIOR ============================================================ */
+/* ============================================================
+   NAVEGACIÓN INFERIOR DEL MÓDULO
+============================================================ */
+
 .uv-nav-modulo {
   margin-top: 30px;
   margin-bottom: 8px;
@@ -524,18 +565,19 @@
   font-weight: 600;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.18s ease, box-shadow 0.25s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.18s ease,
+    box-shadow 0.25s ease;
 }
 
 .uv-btn-nav-sec {
   background: transparent;
-  border-color: rgba(10,42,92,0.35);
+  border-color: rgba(10, 42, 92, 0.35);
   color: #0a2a5c;
 }
 
 .uv-btn-nav-sec:hover {
-  background: rgba(10,42,92,0.06);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  background: rgba(10, 42, 92, 0.06);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
 .uv-btn-nav-main {
@@ -546,12 +588,14 @@
 
 .uv-btn-nav-main:hover {
   background: #12315f;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
-/* ============================================================ RESPONSIVE PARA LECCIÓN ============================================================ */
-@media (max-width: 768px) {
+/* ============================================================
+   AJUSTES RESPONSIVE PARA ESTA LECCIÓN
+============================================================ */
 
+@media (max-width: 768px) {
   .uv-lesson-header {
     flex-direction: column;
     align-items: flex-start;
@@ -578,38 +622,831 @@
     width: 100%;
   }
 }
+/* ============================================================
+   EJERCICIO BLOQUE 1 · "COHERENTE O ÚTIL" · DRAG & DROP
+============================================================ */
 
-/* ============================================================ FIGURA DECORATIVA — HEXÁGONO ============================================================ */
-.uv-hex-decoration {
-  position: fixed;
-  right: 40px;
-  top: 180px;
-  width: 180px;
-  opacity: 0.18;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url("/assets/icons/hex-blue.png");
-  background-size: contain;
-  background-repeat: no-repeat;
+.uv-bloque-actividad {
+  position: relative;
 }
 
-/* ============================================================ EJERCICIO BLOQUE 1 · DRAG & DROP ============================================================ */
-.uv-bloque-actividad { position: relative; }
+.uv-ej-b1 {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 6px;
+}
 
-/* ... (todo el CSS continúa exactamente igual hasta el final) ... */
+.uv-ej-b1-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+}
 
-/* ============================================================ FIX FINAL DEFINITIVO · ACORDEONES SIEMPRE FUNCIONAN ============================================================ */
+.uv-ej-b1-header-title {
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+
+.uv-ej-b1-header-text {
+  color: rgba(7, 27, 60, 0.86);
+}
+
+.uv-ej-b1-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(7, 27, 60, 0.78);
+}
+
+.uv-ej-b1-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(253, 191, 18, 0.5);
+}
+
+/* GRID GENERAL: COLUMNAS + BANCO DE TARJETAS */
+.uv-ej-b1-main {
+  display: grid;
+  grid-template-columns: 3fr 2.2fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .uv-ej-b1-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* COLUMNAS DE CLASIFICACIÓN */
+.uv-ej-b1-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .uv-ej-b1-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+.uv-ej-b1-col {
+  background: linear-gradient(160deg, #f6f7ff 0%, #ffffff 65%);
+  border-radius: 18px;
+  padding: 10px 10px 12px;
+  border: 1px solid rgba(10, 42, 92, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.uv-ej-b1-col-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.uv-ej-b1-col-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0a2a5c;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.uv-ej-b1-col-tag span.emoji {
+  font-size: 1.2rem;
+}
+
+.uv-ej-b1-col-sub {
+  font-size: 0.85rem;
+  color: rgba(7, 27, 60, 0.75);
+}
+
+/* ZONA DE DROP */
+.uv-ej-b1-dropzone {
+  margin-top: 6px;
+  min-height: 130px;
+  border-radius: 14px;
+  border: 1px dashed rgba(10, 42, 92, 0.25);
+  background: rgba(255, 255, 255, 0.82);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.uv-ej-b1-dropzone-empty-hint {
+  font-size: 0.75rem;
+  color: rgba(7, 27, 60, 0.6);
+}
+
+/* HIGHLIGHT AL ARRASTRAR ENCIMA */
+.uv-ej-b1-col--highlight .uv-ej-b1-dropzone {
+  border-color: rgba(253, 191, 18, 0.9);
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.6),
+    0 8px 18px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fff8e6 100%);
+  transform: translateY(-2px);
+}
+
+/* BANCO DE TARJETAS */
+.uv-ej-b1-bank {
+  background: linear-gradient(145deg, #0a2a5c, #132f66, #000c1a);
+  border-radius: 20px;
+  padding: 10px 12px 12px;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.uv-ej-b1-bank::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0% 0%, rgba(253, 191, 18, 0.4) 0, transparent 50%),
+              radial-gradient(circle at 100% 100%, rgba(253, 191, 18, 0.25) 0, transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.uv-ej-b1-bank-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uv-ej-b1-bank-header {
+  font-size: 0.9rem;
+}
+
+.uv-ej-b1-bank-header strong {
+  font-weight: 600;
+}
+
+.uv-ej-b1-bank-sub {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.uv-ej-b1-bank-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+/* TARJETAS */
+.uv-ej-b1-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a2340;
+  font-size: 0.85rem;
+  border: 1px solid rgba(10, 42, 92, 0.18);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease,
+              background 0.18s ease;
+}
+
+.uv-ej-b1-card:active {
+  cursor: grabbing;
+}
+
+.uv-ej-b1-card-emoji {
+  font-size: 1rem;
+}
+
+.uv-ej-b1-card-text {
+  white-space: normal;
+}
+
+/* ESCALA AL ARRASTRAR */
+.uv-ej-b1-card--dragging {
+  transform: scale(1.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* ESTADOS DE CORRECCIÓN */
+.uv-ej-b1-card--correct {
+  border-color: #2ea44f;
+  box-shadow: 0 0 0 1px rgba(46, 164, 79, 0.7), 0 8px 20px rgba(0, 0, 0, 0.24);
+}
+
+.uv-ej-b1-card--incorrect {
+  border-color: #e55353;
+  box-shadow: 0 0 0 1px rgba(229, 83, 83, 0.8), 0 10px 22px rgba(0, 0, 0, 0.32);
+}
+
+/* SHAKE SUAVE PARA TARJETAS INCORRECTAS */
+@keyframes uv-ej-b1-shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+.uv-ej-b1-card--shake {
+  animation: uv-ej-b1-shake 0.22s ease-out;
+}
+
+/* ÁREA INFERIOR: BOTONES Y FEEDBACK */
+.uv-ej-b1-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.uv-ej-b1-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.uv-ej-b1-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 7px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease,
+              opacity 0.18s ease;
+}
+
+.uv-ej-b1-btn-main {
+  background: linear-gradient(135deg, #fdbf12, #ffe08a);
+  color: #1a1a1a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.uv-ej-b1-btn-main:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.uv-ej-b1-btn-main:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+
+.uv-ej-b1-btn-reset {
+  background: transparent;
+  border: 1px solid rgba(10, 42, 92, 0.35);
+  color: #0a2340;
+}
+
+.uv-ej-b1-btn-reset:hover {
+  background: rgba(10, 42, 92, 0.06);
+  transform: translateY(-1px);
+}
+
+.uv-ej-b1-feedback {
+  font-size: 0.85rem;
+  color: rgba(7, 27, 60, 0.86);
+}
+
+.uv-ej-b1-feedback-strong {
+  font-weight: 600;
+}
+
+/* FIX GENERAL: todos los paneles pueden crecer */
 .uv-accordion-panel.abierto {
   max-height: none !important;
   height: auto !important;
   overflow: visible !important;
-  opacity: 1 !important;
-  margin-top: 12px !important;
 }
 
 .uv-accordion-panel:not(.abierto) {
   max-height: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
-  opacity: 0 !important;
+}
+
+.uv-ej-b1 {
+  height: auto !important;
+  padding-bottom: 40px;
+}
+/* ============================================================
+   BLOQUE 2 · "MEDIDOR PRAGMATISTA DE VERDAD"
+   Estilos encapsulados (.uv-ej-b2-*)
+============================================================ */
+
+.uv-b2-actividad {
+  margin-top: 18px;
+}
+
+/* Contenedor general */
+.uv-ej-b2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header y medidor */
+.uv-ej-b2-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.uv-ej-b2-header-main {
+  flex: 2 1 260px;
+}
+
+.uv-ej-b2-title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0A2340;
+}
+
+.uv-ej-b2-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(10, 35, 64, 0.8);
+}
+
+.uv-ej-b2-meter {
+  flex: 1 1 220px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0A2A5C, #132F66);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uv-ej-b2-meter-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.uv-ej-b2-meter-label {
+  opacity: 0.9;
+}
+
+.uv-ej-b2-meter-value {
+  font-weight: 700;
+}
+
+.uv-ej-b2-meter-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.uv-ej-b2-meter-fill {
+  position: absolute;
+  inset: 0;
+  width: 50%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #FDBF12, #FFE39A);
+  box-shadow: 0 0 12px rgba(253, 191, 18, 0.7);
+  transition: width 0.4s ease, transform 0.25s ease;
+}
+
+.uv-ej-b2-meter-fill.up {
+  transform: scaleY(1.1);
+}
+
+.uv-ej-b2-meter-fill.down {
+  transform: scaleY(0.95);
+}
+
+/* Layout principal */
+.uv-ej-b2-main {
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) minmax(320px, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 900px) {
+  .uv-ej-b2-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Categorías laterales */
+.uv-ej-b2-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.uv-ej-b2-category {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(10, 35, 64, 0.05);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uv-ej-b2-category-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.uv-ej-b2-cat-emoji {
+  font-size: 1.3rem;
+}
+
+.uv-ej-b2-cat-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.uv-ej-b2-cat-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0A2340;
+}
+
+.uv-ej-b2-cat-sub {
+  font-size: 0.8rem;
+  color: rgba(10, 35, 64, 0.75);
+}
+
+/* Bordes de color por tipo */
+.uv-ej-b2-category-header.precision {
+  border-left: 3px solid #FDBF12;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-header.alcance {
+  border-left: 3px solid #2D9CDB;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-header.profundidad {
+  border-left: 3px solid #27AE60;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-header.noutil {
+  border-left: 3px solid #EB5757;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-body {
+  min-height: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* Tarjetas mini dentro de categorías */
+.uv-ej-b2-card--mini {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border-width: 1px;
+  display: inline-flex;
+}
+
+/* Parte derecha */
+.uv-ej-b2-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Banco de tarjetas */
+.uv-ej-b2-bank {
+  border-radius: 20px;
+  padding: 14px 16px;
+  background: linear-gradient(145deg, #0A2A5C, #000C1A);
+  color: #FFFFFF;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35),
+              0 0 14px rgba(253, 191, 18, 0.22);
+}
+
+.uv-ej-b2-bank-header {
+  margin-bottom: 10px;
+}
+
+.uv-ej-b2-bank-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.uv-ej-b2-bank-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  opacity: 0.9;
+}
+
+.uv-ej-b2-bank-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Tarjetas clicables */
+.uv-ej-b2-card {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease,
+              box-shadow 0.2s ease,
+              border-color 0.2s ease,
+              background 0.2s ease;
+}
+
+.uv-ej-b2-card:hover:not(.uv-ej-b2-card--locked) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  border-color: rgba(253, 191, 18, 0.7);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.uv-ej-b2-card-emoji {
+  font-size: 1.1rem;
+}
+
+.uv-ej-b2-card-text {
+  text-align: left;
+}
+
+/* Estados */
+.uv-ej-b2-card--active {
+  border-color: rgba(253, 191, 18, 0.9);
+  background: rgba(253, 191, 18, 0.14);
+}
+
+.uv-ej-b2-card--correct {
+  border-color: #27AE60;
+}
+
+.uv-ej-b2-card--incorrect {
+  border-color: #EB5757;
+}
+
+.uv-ej-b2-card--locked {
+  opacity: 0.8;
+  cursor: default;
+}
+
+/* Panel de elección */
+.uv-ej-b2-choice-panel {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.93);
+  border: 1px solid rgba(10, 35, 64, 0.08);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.uv-ej-b2-choice-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.uv-ej-b2-choice-title {
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  color: rgba(10, 35, 64, 0.9);
+}
+
+.uv-ej-b2-choice-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.uv-ej-b2-choice-btn {
+  flex: 1 1 120px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 6px 10px;
+  font-size: 0.84rem;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s ease,
+              box-shadow 0.2s ease,
+              border-color 0.2s ease,
+              background 0.2s ease;
+}
+
+/* Colores por tipo */
+.uv-ej-b2-choice-btn.precision {
+  background: rgba(253, 191, 18, 0.12);
+  border-color: rgba(253, 191, 18, 0.5);
+}
+
+.uv-ej-b2-choice-btn.alcance {
+  background: rgba(45, 156, 219, 0.12);
+  border-color: rgba(45, 156, 219, 0.5);
+}
+
+.uv-ej-b2-choice-btn.profundidad {
+  background: rgba(39, 174, 96, 0.12);
+  border-color: rgba(39, 174, 96, 0.5);
+}
+
+.uv-ej-b2-choice-btn.noutil {
+  background: rgba(235, 87, 87, 0.12);
+  border-color: rgba(235, 87, 87, 0.5);
+}
+
+.uv-ej-b2-choice-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Footer + feedback */
+.uv-ej-b2-footer {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.uv-ej-b2-btn-reset {
+  border-radius: 999px;
+  border: 1px solid rgba(10, 35, 64, 0.15);
+  background: #FFFFFF;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.uv-ej-b2-btn-reset:hover {
+  background: #F5F8FF;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.uv-ej-b2-feedback {
+  flex: 1;
+  font-size: 0.82rem;
+  color: rgba(10, 35, 64, 0.9);
+}
+
+.uv-ej-b2-feedback-strong {
+  font-weight: 700;
+}
+/* ============================================================
+   FIX UNIVERSAL PARA ACORDEONES
+   (Asegura que TODOS los acordeones funcionen en cualquier pX.html
+   sin depender del orden ni de la estructura interna)
+============================================================ */
+
+/* Estado cerrado (por defecto) */
+.uv-accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.35s ease,
+    margin-top 0.25s ease;
+}
+
+/* Estado abierto */
+.uv-accordion-panel.abierto {
+  max-height: 1200px; /* suficiente para casi cualquier bloque */
+  opacity: 1;
+  margin-top: 12px;
+}
+
+/* Botón del acordeón cuando está abierto */
+.uv-accordion.abierto {
+  background: linear-gradient(135deg, #FFFDF6, #FFF5DC);
+  border-color: rgba(253, 191, 18, 0.45);
+}
+
+/* Icono rotado */
+.uv-accordion-icon.rotado {
+  transform: rotate(90deg);
+  color: #FDBF12;
+}
+
+/* Transiciones suaves */
+.uv-accordion-icon {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+.uv-accordion {
+  transition: background 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+/* ============================================================
+   FIX DE COMPATIBILIDAD GLOBAL PARA TARJETAS INTERNAS
+============================================================ */
+
+.uv-bloque-teoria,
+.uv-bloque-actividad {
+  animation: fadeUp 0.4s ease;
+}
+
+/* ============================================================
+   FIX GENERAL PARA ZONAS INTERACTIVAS (asegura que no colapsen)
+============================================================ */
+
+.uv-interactiva,
+.uv-actividad-placeholder {
+  min-height: 40px;
+  padding: 4px 0;
+}
+
+/* ============================================================
+   CIERRE FINAL DEL CSS
+============================================================ */
+
+/* Nada más debajo de esta línea.
+   Este cierre garantiza que no haya estilos flotando y evita
+   que nuevas pantallas rompan el diseño. */
+/* ============================================================
+   OVERRIDES PREMIUM · TARJETAS MÁS ANCHAS + TEXTO EDITORIAL
+============================================================ */
+
+.uv-page {
+  max-width: 1280px !important;
+}
+
+.uv-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFCF2 100%) !important;
+  max-width: 1280px !important;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1.5px solid rgba(253,191,18,0.48) !important;
+}
+
+/* ============================================================
+   TEXTO EDITORIAL GRANDE (≈20px)
+============================================================ */
+
+.uv-resumen p,
+.uv-bloque-texto p {
+  font-size: 1.25rem !important;
+  line-height: 1.7 !important;
+  font-weight: 500;
+  color: #083A40 !important;
 }
