@@ -304,3 +304,64 @@
 
   .uv-btn-start { width: 100%; text-align: center; }
 }
+/* ============================================================
+   MÓDULO INTERNO · LENGUAJE COMO CONDUCTA · ESTILO P2
+============================================================ */
+
+/* FONDO INTERNO SUAVE PASTEL */
+body.uv-body.uv-interno {
+  background: linear-gradient(180deg, #E9F9FF 0%, #F7FEFF 100%) !important;
+}
+
+/* tarjetas internas más crema y contraste suave */
+.uv-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFDF4 100%) !important;
+  border: 1.6px solid rgba(253,191,18,0.50) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10) !important;
+}
+
+/* acordeones */
+details.uv-accordion {
+  background: #FFFFFF !important;
+  border: 1.6px solid rgba(253,191,18,0.50) !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.07) !important;
+}
+
+details.uv-accordion summary {
+  background: #FFF7E6 !important;
+  color: #0A2A5C !important;
+}
+
+details[open].uv-accordion summary {
+  background: #F5EAD0 !important;
+  border-bottom: 1px solid rgba(253,191,18,0.40) !important;
+}
+
+.uv-bloque-texto {
+  background: #FFFDF7 !important;
+  padding: 26px !important;
+  color: #083A40 !important;
+}
+
+/* texto grande */
+.uv-resumen p,
+.uv-bloque-texto p {
+  font-size: 1.23rem !important;
+  line-height: 1.7 !important;
+  color: #063B42 !important;
+}
+
+/* encabezado interno */
+.uv-lesson-header {
+  background: rgba(255,255,255,0.85) !important;
+  border: 1px solid rgba(253,191,18,0.45) !important;
+}
+
+/* botones nav */
+.uv-btn-nav {
+  border: 1.4px solid rgba(253,191,18,0.55);
+}
+
+.uv-btn-nav.primary {
+  background: #0C5A61;
+}
