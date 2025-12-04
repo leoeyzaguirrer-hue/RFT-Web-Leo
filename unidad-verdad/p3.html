@@ -366,49 +366,70 @@
           </section>
 
           <section class="uv-card uv-bloque-actividad">
-            <h3>Actividad interactiva · Bloque 4</h3>
-            <section class="uv-card uv-bloque-actividad">
+            
   <h3>Actividad interactiva · Bloque 4 · “El Mapa de Criterios de Verdad”</h3>
 
   <p class="mapa-instruccion">
-    Explora los tres criterios clásicos de verdad haciendo clic en cada región del mapa.  
-    Cuando hayas visitado las tres zonas, se desbloqueará el panel central que introduce  
-    el criterio pragmático: <strong>la verdad como lo que funciona</strong>.
+    Explora las tres regiones del mapa filosófico para comprender cómo distintos criterios 
+    han intentado definir qué cuenta como “verdadero”.  
+    Haz clic en cada zona para ver su explicación y limitaciones.  
+    Cuando completes las tres, se desbloqueará la transición hacia el criterio pragmático.
   </p>
 
-  <div id="ej-p3-b4" class="mapa-container">
+  <div id="mapa-criterios" class="mapa-container">
 
-    <!-- MAPA GENERAL -->
+    <!-- ZONAS -->
     <div class="mapa-zonas">
-      <div class="zona zona-corresp" data-zona="corresp">🏛️ Correspondencia</div>
-      <div class="zona zona-coher" data-zona="coher">📚 Coherencia</div>
-      <div class="zona zona-mec" data-zona="mec">⚙️ Mecanicismo</div>
+      <div class="zona" data-zona="corresp">
+        <span class="zona-icono">🏛️</span>
+        <span class="zona-titulo">Correspondencia</span>
+        <span class="zona-check">✔</span>
+      </div>
+
+      <div class="zona" data-zona="coher">
+        <span class="zona-icono">📚</span>
+        <span class="zona-titulo">Coherencia</span>
+        <span class="zona-check">✔</span>
+      </div>
+
+      <div class="zona" data-zona="mec">
+        <span class="zona-icono">⚙️</span>
+        <span class="zona-titulo">Mecanicismo</span>
+        <span class="zona-check">✔</span>
+      </div>
     </div>
 
-    <!-- PANEL CENTRAL (bloqueado al inicio) -->
-    <div id="mapa-panel-central" class="panel-central oculto">
+    <!-- PANEL CENTRAL -->
+    <div id="panel-pragmatismo" class="panel-central oculto">
       <h4>✨ Transición al criterio pragmático</h4>
       <p>
-        Ningún criterio clásico garantiza acción eficaz.  
-        El contextualismo funcional propone:  
-        <strong>verdad = lo que funciona en el contexto.</strong>
+        Ninguno de los tres criterios tradicionales garantiza acción eficaz.  
+        El contextualismo funcional propone una alternativa:  
+        <strong>la verdad como lo que funciona</strong>.
       </p>
       <div class="portal">🌀</div>
+
+      <p id="orden-exploracion" class="orden-exploracion"></p>
     </div>
 
     <!-- MODAL -->
-    <div id="mapa-modal" class="modal oculto">
+    <div id="modal-criterio" class="modal oculto">
       <div class="modal-content">
-        <span id="modal-close" class="modal-close">✖</span>
+        <span id="modal-cerrar" class="modal-close">✖</span>
         <h4 id="modal-titulo"></h4>
+        <p class="modal-label">Ejemplo clínico</p>
         <p id="modal-ejemplo"></p>
+        <p class="modal-label">Supuesto</p>
         <p id="modal-supuesto"></p>
+        <p class="modal-label">Limitación</p>
         <p id="modal-limitacion"></p>
       </div>
     </div>
 
     <!-- BOTÓN DE REINICIO -->
-    <button id="mapa-reiniciar" class="mapa-restart-btn">🔄 Reiniciar mapa</button>
+    <button id="btn-reiniciar-mapa" class="mapa-restart-btn">
+      🔄 Reiniciar Mapa
+    </button>
 
   </div>
 </section>
