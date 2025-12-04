@@ -336,3 +336,44 @@ body.uv-body {
   background: rgba(0, 105, 120, 0.08) !important;
   z-index: -1 !important;
 }
+/* ============================================================
+   FIX VISIBILIDAD — ENCABEZADO SOBRE FONDO OSCURO
+============================================================ */
+.uv-lesson-header {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(253, 191, 18, 0.55) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.uv-lesson-info span {
+  color: #062A30 !important;
+  font-weight: 700 !important;
+}
+/* ============================================================
+   TEXTO DE BLOQUES EN 20PX
+============================================================ */
+.uv-bloque-texto p {
+  font-size: 1.25rem !important;
+}
+
+details.uv-accordion summary {
+  font-size: 1.25rem !important;
+}
+/* ============================================================
+   MEJORA VISUAL LIGERA DE BLOQUES (PREMIUM)
+============================================================ */
+details.uv-accordion {
+  background: rgba(255, 255, 255, 0.80) !important;
+  border: 1.5px solid rgba(253, 191, 18, 0.45) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+  backdrop-filter: blur(6px);
+}
+
+details.uv-accordion summary {
+  background: rgba(255, 255, 255, 0.70) !important;
+}
+
+.uv-bloque-texto {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-radius: 0 0 16px 16px;
+}
