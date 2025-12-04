@@ -623,6 +623,32 @@
   }
 }
 /* ============================================================
+   OVERRIDES PREMIUM · ANCHO + TARJETAS CREMA · TEXTO EDITORIAL
+============================================================ */
+
+/* 1) Página más ancha */
+.uv-page {
+  max-width: 1280px !important;
+}
+
+/* 2) Tarjetas más anchas + fondo crema */
+.uv-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFCF2 100%) !important;
+  max-width: 1280px !important;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1.5px solid rgba(253,191,18,0.48) !important;
+}
+
+/* 3) Texto editorial grande (20px) */
+.uv-resumen p,
+.uv-bloque-texto p {
+  font-size: 1.25rem !important;
+  line-height: 1.7 !important;
+  font-weight: 500;
+  color: #083A40 !important;
+}
+/* ============================================================
    EJERCICIO BLOQUE 1 · "COHERENTE O ÚTIL" · DRAG & DROP
 ============================================================ */
 
@@ -1351,102 +1377,392 @@
   font-weight: 700;
 }
 /* ============================================================
-   FIX UNIVERSAL PARA ACORDEONES
-   (Asegura que TODOS los acordeones funcionen en cualquier pX.html
-   sin depender del orden ni de la estructura interna)
+   BLOQUE 2 · "MEDIDOR PRAGMATISTA DE VERDAD"
+   Estilos encapsulados (.uv-ej-b2-*)
 ============================================================ */
 
-/* Estado cerrado (por defecto) */
-.uv-accordion-panel {
-  max-height: 0;
+.uv-b2-actividad {
+  margin-top: 18px;
+}
+
+/* Contenedor general */
+.uv-ej-b2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header y medidor */
+.uv-ej-b2-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.uv-ej-b2-header-main {
+  flex: 2 1 260px;
+}
+
+.uv-ej-b2-title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0A2340;
+}
+
+.uv-ej-b2-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(10, 35, 64, 0.8);
+}
+
+.uv-ej-b2-meter {
+  flex: 1 1 220px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0A2A5C, #132F66);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uv-ej-b2-meter-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.uv-ej-b2-meter-label {
+  opacity: 0.9;
+}
+
+.uv-ej-b2-meter-value {
+  font-weight: 700;
+}
+
+.uv-ej-b2-meter-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
   overflow: hidden;
+}
+
+.uv-ej-b2-meter-fill {
+  position: absolute;
+  inset: 0;
+  width: 50%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #FDBF12, #FFE39A);
+  box-shadow: 0 0 12px rgba(253, 191, 18, 0.7);
+  transition: width 0.4s ease, transform 0.25s ease;
+}
+
+.uv-ej-b2-meter-fill.up {
+  transform: scaleY(1.1);
+}
+
+.uv-ej-b2-meter-fill.down {
+  transform: scaleY(0.95);
+}
+
+/* Layout principal */
+.uv-ej-b2-main {
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) minmax(320px, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 900px) {
+  .uv-ej-b2-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Categorías laterales */
+.uv-ej-b2-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.uv-ej-b2-category {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(10, 35, 64, 0.05);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uv-ej-b2-category-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.uv-ej-b2-cat-emoji {
+  font-size: 1.3rem;
+}
+
+.uv-ej-b2-cat-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.uv-ej-b2-cat-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0A2340;
+}
+
+.uv-ej-b2-cat-sub {
+  font-size: 0.8rem;
+  color: rgba(10, 35, 64, 0.75);
+}
+
+/* Bordes de color por tipo */
+.uv-ej-b2-category-header.precision {
+  border-left: 3px solid #FDBF12;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-header.alcance {
+  border-left: 3px solid #2D9CDB;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-header.profundidad {
+  border-left: 3px solid #27AE60;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-header.noutil {
+  border-left: 3px solid #EB5757;
+  padding-left: 8px;
+}
+
+.uv-ej-b2-category-body {
+  min-height: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* Tarjetas mini dentro de categorías */
+.uv-ej-b2-card--mini {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border-width: 1px;
+  display: inline-flex;
+}
+
+/* Parte derecha */
+.uv-ej-b2-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Banco de tarjetas */
+.uv-ej-b2-bank {
+  border-radius: 20px;
+  padding: 14px 16px;
+  background: linear-gradient(145deg, #0A2A5C, #000C1A);
+  color: #FFFFFF;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35),
+              0 0 14px rgba(253, 191, 18, 0.22);
+}
+
+.uv-ej-b2-bank-header {
+  margin-bottom: 10px;
+}
+
+.uv-ej-b2-bank-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.uv-ej-b2-bank-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  opacity: 0.9;
+}
+
+.uv-ej-b2-bank-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Tarjetas clicables */
+.uv-ej-b2-card {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease,
+              box-shadow 0.2s ease,
+              border-color 0.2s ease,
+              background 0.2s ease;
+}
+
+.uv-ej-b2-card:hover:not(.uv-ej-b2-card--locked) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  border-color: rgba(253, 191, 18, 0.7);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.uv-ej-b2-card-emoji {
+  font-size: 1.1rem;
+}
+
+.uv-ej-b2-card-text {
+  text-align: left;
+}
+
+/* Estados */
+.uv-ej-b2-card--active {
+  border-color: rgba(253, 191, 18, 0.9);
+  background: rgba(253, 191, 18, 0.14);
+}
+
+.uv-ej-b2-card--correct {
+  border-color: #27AE60;
+}
+
+.uv-ej-b2-card--incorrect {
+  border-color: #EB5757;
+}
+
+.uv-ej-b2-card--locked {
+  opacity: 0.8;
+  cursor: default;
+}
+
+/* Panel de elección */
+.uv-ej-b2-choice-panel {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.93);
+  border: 1px solid rgba(10, 35, 64, 0.08);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
   opacity: 0;
-  margin-top: 0;
-  transition:
-    max-height 0.35s ease,
-    opacity 0.35s ease,
-    margin-top 0.25s ease;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* Estado abierto */
-.uv-accordion-panel.abierto {
-  max-height: 1200px; /* suficiente para casi cualquier bloque */
+.uv-ej-b2-choice-panel.visible {
   opacity: 1;
-  margin-top: 12px;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-/* Botón del acordeón cuando está abierto */
-.uv-accordion.abierto {
-  background: linear-gradient(135deg, #FFFDF6, #FFF5DC);
-  border-color: rgba(253, 191, 18, 0.45);
+.uv-ej-b2-choice-title {
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  color: rgba(10, 35, 64, 0.9);
 }
 
-/* Icono rotado */
-.uv-accordion-icon.rotado {
-  transform: rotate(90deg);
-  color: #FDBF12;
+.uv-ej-b2-choice-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-/* Transiciones suaves */
-.uv-accordion-icon {
-  transition: transform 0.25s ease, color 0.25s ease;
-}
-.uv-accordion {
-  transition: background 0.25s ease,
-              border-color 0.25s ease,
-              box-shadow 0.25s ease;
-}
-
-/* ============================================================
-   FIX DE COMPATIBILIDAD GLOBAL PARA TARJETAS INTERNAS
-============================================================ */
-
-.uv-bloque-teoria,
-.uv-bloque-actividad {
-  animation: fadeUp 0.4s ease;
+.uv-ej-b2-choice-btn {
+  flex: 1 1 120px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 6px 10px;
+  font-size: 0.84rem;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s ease,
+              box-shadow 0.2s ease,
+              border-color 0.2s ease,
+              background 0.2s ease;
 }
 
-/* ============================================================
-   FIX GENERAL PARA ZONAS INTERACTIVAS (asegura que no colapsen)
-============================================================ */
-
-.uv-interactiva,
-.uv-actividad-placeholder {
-  min-height: 40px;
-  padding: 4px 0;
+/* Colores por tipo */
+.uv-ej-b2-choice-btn.precision {
+  background: rgba(253, 191, 18, 0.12);
+  border-color: rgba(253, 191, 18, 0.5);
 }
 
-/* ============================================================
-   CIERRE FINAL DEL CSS
-============================================================ */
-
-/* Nada más debajo de esta línea.
-   Este cierre garantiza que no haya estilos flotando y evita
-   que nuevas pantallas rompan el diseño. */
-/* ============================================================
-   OVERRIDES PREMIUM · TARJETAS MÁS ANCHAS + TEXTO EDITORIAL
-============================================================ */
-
-.uv-page {
-  max-width: 1280px !important;
+.uv-ej-b2-choice-btn.alcance {
+  background: rgba(45, 156, 219, 0.12);
+  border-color: rgba(45, 156, 219, 0.5);
 }
 
-.uv-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FFFCF2 100%) !important;
-  max-width: 1280px !important;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1.5px solid rgba(253,191,18,0.48) !important;
+.uv-ej-b2-choice-btn.profundidad {
+  background: rgba(39, 174, 96, 0.12);
+  border-color: rgba(39, 174, 96, 0.5);
 }
 
-/* ============================================================
-   TEXTO EDITORIAL GRANDE (≈20px)
-============================================================ */
+.uv-ej-b2-choice-btn.noutil {
+  background: rgba(235, 87, 87, 0.12);
+  border-color: rgba(235, 87, 87, 0.5);
+}
 
-.uv-resumen p,
-.uv-bloque-texto p {
-  font-size: 1.25rem !important;
-  line-height: 1.7 !important;
-  font-weight: 500;
-  color: #083A40 !important;
+.uv-ej-b2-choice-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Footer + feedback */
+.uv-ej-b2-footer {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.uv-ej-b2-btn-reset {
+  border-radius: 999px;
+  border: 1px solid rgba(10, 35, 64, 0.15);
+  background: #FFFFFF;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.uv-ej-b2-btn-reset:hover {
+  background: #F5F8FF;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.uv-ej-b2-feedback {
+  flex: 1;
+  font-size: 0.82rem;
+  color: rgba(10, 35, 64, 0.9);
+}
+
+.uv-ej-b2-feedback-strong {
+  font-weight: 700;
 }
