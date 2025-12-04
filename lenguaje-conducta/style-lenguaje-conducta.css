@@ -365,3 +365,120 @@ details[open].uv-accordion summary {
 .uv-btn-nav.primary {
   background: #0C5A61;
 }
+/* ============================================================
+   SISTEMA PREMIUM DE BLOQUES — LENGUAJE COMO CONDUCTA
+   (Seguro, aislado, no rompe portada)
+============================================================ */
+
+/* Contenedor general de bloques */
+.uv-bloques {
+  margin-top: 40px;
+}
+
+/* Separador visual entre bloques */
+.uv-separador-bloque {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 1.6rem;
+  color: rgba(253, 191, 18, 0.75);
+}
+
+
+/* ===========================
+   BOTÓN ACORDEÓN DEL BLOQUE
+=========================== */
+.uv-accordion {
+  width: 100%;
+  background: #ffffff;
+  border: 1.4px solid rgba(253, 191, 18, 0.55);
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #05363a;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  transition: background 0.25s, transform 0.25s;
+}
+
+.uv-accordion:hover {
+  background: #fff8e8;
+  transform: translateY(-2px);
+}
+
+.uv-accordion-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uv-accordion-tag {
+  background: #FDBF12;
+  color: #05363a;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.uv-accordion-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.uv-accordion-icon {
+  font-size: 1.2rem;
+  transition: transform 0.35s ease;
+}
+
+.uv-accordion.activo .uv-accordion-icon {
+  transform: rotate(90deg);
+}
+
+
+/* ===========================
+   PANEL DEL BLOQUE
+=========================== */
+.uv-accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+  margin-top: 10px;
+}
+
+.uv-accordion-panel.activo {
+  max-height: 2000px; /* auto animado */
+}
+
+
+/* ===========================
+   TARJETA DE TEORÍA
+=========================== */
+.uv-bloque-teoria {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7e6 100%);
+  border: 1.5px solid rgba(253, 191, 18, 0.55);
+  padding: 24px 26px;
+  border-radius: 16px;
+  margin-top: 14px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+}
+
+.uv-bloque-teoria h3 {
+  margin-top: 0;
+  color: #05363a;
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+}
+
+.uv-bloque-teoria p {
+  color: #05363a;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
