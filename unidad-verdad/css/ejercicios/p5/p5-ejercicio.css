@@ -1,0 +1,384 @@
+/* ============================================================
+   EJERCICIO P5 · El Constructor de Análisis Útiles
+   Estilos encapsulados
+   ============================================================ */
+
+.p5-activity {
+  margin-top: 32px;
+  padding: 24px 24px 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(253, 191, 18, 0.5);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+}
+
+.p5-activity-header {
+  margin-bottom: 20px;
+}
+
+.p5-activity-title {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.p5-activity-instructions {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Layout general */
+
+.p5-activity-layout {
+  display: flex;
+  gap: 24px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.p5-column {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.p5-column-left {
+  max-width: 360px;
+  border-right: 1px dashed rgba(10, 35, 64, 0.16);
+  padding-right: 16px;
+}
+
+.p5-column-right {
+  padding-left: 8px;
+}
+
+@media (max-width: 900px) {
+  .p5-column-left {
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px dashed rgba(10, 35, 64, 0.16);
+    padding-right: 0;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .p5-column-right {
+    padding-left: 0;
+  }
+}
+
+/* Zonas de origen */
+
+.p5-source-zone {
+  margin-bottom: 14px;
+}
+
+.p5-zone-title {
+  margin: 0 0 4px;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.p5-zone-subtitle {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.p5-card-pool {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+/* Tarjetas */
+
+.p5-card {
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 8px 11px;
+  border-radius: 16px;
+  border: 1px solid rgba(10, 35, 64, 0.12);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(232, 241, 255, 0.96)
+  );
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+  cursor: grab;
+  transition: transform 0.14s ease, box-shadow 0.14s ease,
+    border-color 0.14s ease, opacity 0.16s ease;
+}
+
+.p5-card:focus-visible {
+  outline: 2px solid rgba(253, 191, 18, 0.95);
+  outline-offset: 2px;
+}
+
+.p5-card:active {
+  cursor: grabbing;
+}
+
+.p5-card.p5-card-dragging {
+  transform: scale(1.04) translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  border-color: rgba(253, 191, 18, 0.85);
+}
+
+/* Estados finales de análisis */
+
+.p5-card-good {
+  border-color: rgba(33, 150, 83, 0.9);
+  box-shadow: 0 0 0 1px rgba(33, 150, 83, 0.45);
+}
+
+.p5-card-bad {
+  border-color: rgba(198, 40, 40, 0.95);
+  box-shadow: 0 0 0 1px rgba(198, 40, 40, 0.55);
+}
+
+.p5-card-star {
+  border-color: rgba(253, 191, 18, 0.95);
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.7);
+}
+
+/* Efecto “derretirse” para distractores */
+
+.p5-card-melt {
+  animation: p5-melt 0.6s forwards ease-in;
+}
+
+@keyframes p5-melt {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  60% {
+    opacity: 0.4;
+    transform: translateY(6px) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.95);
+  }
+}
+
+/* Marco conceptual */
+
+.p5-board-section {
+  margin-bottom: 18px;
+}
+
+.p5-board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.p5-board-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.p5-board-counter {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.p5-board-subtitle {
+  margin: 4px 0 10px;
+  font-size: 0.87rem;
+  opacity: 0.86;
+}
+
+.p5-board {
+  position: relative;
+  min-height: 130px;
+  border-radius: 22px;
+  border: 2px dashed rgba(10, 35, 64, 0.25);
+  background: radial-gradient(
+      circle at 20% 0%,
+      rgba(253, 191, 18, 0.12),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 100%,
+      rgba(10, 35, 64, 0.12),
+      transparent 52%
+    ),
+    rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.06);
+  padding: 12px 12px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.p5-board-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.p5-board-active {
+  border-color: rgba(253, 191, 18, 0.95);
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.5),
+    0 10px 22px rgba(253, 191, 18, 0.3);
+}
+
+.p5-board-error {
+  animation: p5-board-shake 0.35s ease-in-out;
+}
+
+@keyframes p5-board-shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Medalla / feedback breve */
+
+.p5-medal-area {
+  margin-top: 8px;
+  min-height: 22px;
+}
+
+.p5-medal {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(10, 35, 64, 0.12);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.p5-medal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Resultados */
+
+.p5-results-section {
+  margin-top: 10px;
+}
+
+.p5-results-title {
+  margin: 0 0 6px;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.p5-results-meters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 6px;
+}
+
+.p5-result-meter {
+  flex: 1 1 80px;
+}
+
+.p5-result-label {
+  font-size: 0.84rem;
+  margin-bottom: 2px;
+}
+
+.p5-result-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.p5-results-text {
+  margin: 2px 0 0;
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+/* Acciones */
+
+.p5-actions {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.p5-btn {
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.p5-btn-primary {
+  background: linear-gradient(
+    135deg,
+    rgba(253, 191, 18, 1),
+    rgba(255, 215, 125, 1)
+  );
+  color: #0a2340;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(253, 191, 18, 0.4);
+  border-color: rgba(253, 191, 18, 0.95);
+}
+
+.p5-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 11px 24px rgba(253, 191, 18, 0.55);
+}
+
+.p5-btn-ghost {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a2340;
+  border-color: rgba(10, 35, 64, 0.22);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.p5-btn-ghost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 9px 20px rgba(0, 0, 0, 0.08);
+}
+
+.p5-feedback-final {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Estados del mensaje final */
+
+.p5-feedback-success {
+  color: #1b5e20;
+  font-weight: 600;
+}
+
+.p5-feedback-error {
+  color: #b71c1c;
+  font-weight: 600;
+}
