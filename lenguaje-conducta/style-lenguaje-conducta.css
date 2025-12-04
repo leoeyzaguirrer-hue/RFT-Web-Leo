@@ -336,19 +336,7 @@ body.uv-body {
   background: rgba(0, 105, 120, 0.08) !important;
   z-index: -1 !important;
 }
-/* ============================================================
-   FIX VISIBILIDAD — ENCABEZADO SOBRE FONDO OSCURO
-============================================================ */
-.uv-lesson-header {
-  background: rgba(255, 255, 255, 0.92) !important;
-  border: 1px solid rgba(253, 191, 18, 0.55) !important;
-  backdrop-filter: blur(10px) !important;
-}
 
-.uv-lesson-info span {
-  color: #062A30 !important;
-  font-weight: 700 !important;
-}
 /* ============================================================
    TEXTO DE BLOQUES EN 20PX
 ============================================================ */
@@ -376,4 +364,84 @@ details.uv-accordion summary {
 .uv-bloque-texto {
   background: rgba(255, 255, 255, 0.85) !important;
   border-radius: 0 0 16px 16px;
+}
+/* ============================================================
+   ENCABEZADO INTERNO (mejor contraste sobre fondo oscuro)
+============================================================ */
+
+.uv-lesson-header {
+  background: rgba(255,255,255,0.80) !important;
+  border: 1px solid rgba(253,191,18,0.45) !important;
+  backdrop-filter: blur(8px);
+}
+
+.uv-lesson-info span {
+  color: #0A2F36 !important;
+}
+
+/* ============================================================
+   BOTONES NAVEGACIÓN INTERIOR
+============================================================ */
+.uv-btn-nav {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 14px;
+  background: #FFFFFF;
+  border: 1px solid rgba(253,191,18,0.55);
+  color: #0A2A5C;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.uv-btn-nav:hover {
+  background: #FFF7E0;
+  transform: translateY(-3px);
+}
+
+.uv-btn-nav.primary {
+  background: #0B5158;
+  color: white;
+}
+
+.uv-btn-nav.primary:hover {
+  background: #0D626A;
+}
+/* ============================================================
+   SELLO SUPERIOR (Unidad · Conducta Privada)
+============================================================ */
+.uv-sello {
+  position: absolute;
+  top: 22px;
+  right: 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.60);
+  padding: 6px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(253,191,18,0.55);
+  backdrop-filter: blur(6px);
+  color: #08454A;
+  z-index: 20;
+}
+
+/* ============================================================
+   PUNTITOS DE PROGRESO
+============================================================ */
+.uv-progress {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.uv-progress .dot {
+  width: 12px;
+  height: 12px;
+  background: #D2DEEA;
+  border-radius: 50%;
+  transition: background 0.25s ease;
+}
+
+.uv-progress .dot.active {
+  background: #0A2A5C;
 }
