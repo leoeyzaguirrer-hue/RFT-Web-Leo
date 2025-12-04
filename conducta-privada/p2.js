@@ -3,35 +3,25 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ============================================================
-     ACORDEONES <details> — Comportamiento suave y estable
+     ACORDEONES <details> con animación suave
   ============================================================ */
-  const accordions = document.querySelectorAll("details.uv-accordion");
+  document.querySelectorAll("details.uv-accordion").forEach((acc) => {
 
-  accordions.forEach((acc) => {
-    const summary = acc.querySelector("summary");
-
-    summary.addEventListener("click", (e) => {
+    acc.addEventListener("toggle", () => {
       if (acc.open) {
-        // cerrar con animación
-        acc.classList.add("closing");
-        e.preventDefault();
-
-        setTimeout(() => {
-          acc.removeAttribute("open");
-          acc.classList.remove("closing");
-        }, 200);
-
-      } else {
-        // abrir normal
-        acc.setAttribute("open", "");
+        // apertura → fade suave
+        const panel = acc.querySelector(".uv-bloque-texto");
+        panel.style.animation = "fadeDown 0.25s ease";
       }
     });
+
   });
 
   /* ============================================================
-     PROGRESO SUPERIOR
+     PROGRESO (puntitos)
   ============================================================ */
+
   const dots = document.querySelectorAll(".dot");
-  if (dots.length) dots[0].classList.add("active");
+  if (dots.length > 0) dots[0].classList.add("active");
 
 });
