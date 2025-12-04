@@ -196,33 +196,33 @@
         icono: "🏛️",
         titulo: "Correspondencia",
         ejemplo:
-          "“El diagnóstico es verdadero si refleja una entidad real interna que existe en el paciente.”",
+          "“La depresión se explica por un déficit serotoninérgico medible”",
         supuesto:
-          "Verdad como ajuste entre la teoría y una realidad interna preexistente.",
+          "La teoría es verdadera cuando describe con precisión una entidad interna real; el síntoma refleja un estado subyacente.",
         limitacion:
-          "Ofrece una sensación de precisión ontológica, pero dice poco sobre qué hacer en sesión."
+          "Aunque ofrece sensación de certeza ontológica, rara vez indica qué hacer con el consultante aquí-y-ahora; la correspondencia no garantiza una intervención funcional."
       },
       {
         id: "coherencia",
         icono: "📘",
         titulo: "Coherencia",
         ejemplo:
-          "“Una teoría es verdadera si encaja sin contradicciones con el resto del sistema teórico.”",
+          "“El comportamiento actual encaja con la etapa 3 del desarrollo socioemocional.”",
         supuesto:
-          "Verdad como armonía lógica entre ideas dentro de un mismo marco.",
+          "Una descripción es verdadera si se integra sin contradicciones dentro de un sistema conceptual previo.",
         limitacion:
-          "Organiza el discurso, pero puede mantener teorías elegantes que no mejoran la práctica clínica."
+          "Facilita narrativas ordenadas, pero puede producir explicaciones impecables sin impacto clínico directo; coherencia ≠ guía para intervenir."
       },
       {
         id: "causalidad",
         icono: "⚙️",
         titulo: "Causalidad mecanicista",
         ejemplo:
-          "“La conducta problemática tiene una causa interna fija (p.ej., un déficit, un módulo dañado).”",
+          "“La evitación surge por la activación de un sesgo cognitivo automático.”",
         supuesto:
-          "Verdad como identificación de causas internas estables que producen los síntomas.",
+          "La conducta se entiende como resultado de engranajes internos —módulos, mecanismos, circuitos— que producen efectos conductuales.",
         limitacion:
-          "No capta variaciones funcionales ni el papel del contexto en el mantenimiento del problema."
+          "Aísla causas internas, pero no capta la variabilidad funcional ni orienta decisiones en tiempo real; explica mucho, guía poco."
       },
       {
         id: "pragmatismo",
