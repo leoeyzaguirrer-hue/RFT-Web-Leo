@@ -2052,3 +2052,29 @@
   overflow: hidden !important;
   opacity: 0 !important;
 }
+/* ============================================================
+   TEXTO GRANDE (20px) PARA RESUMEN + BLOQUES
+============================================================ */
+
+.uv-resumen p,
+.uv-bloque-texto p {
+  font-size: 1.25rem !important;   /* =20px */
+  line-height: 1.7 !important;
+  font-weight: 500;
+  color: #083A40 !important;
+}
+/* ============================================================
+   TARJETAS INTERNAS (más anchas + crema premium)
+============================================================ */
+
+.uv-page {
+  max-width: 1280px !important;
+}
+
+.uv-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFCF2 100%) !important;
+  max-width: 1280px !important;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1.5px solid rgba(253,191,18,0.48) !important;
+}
