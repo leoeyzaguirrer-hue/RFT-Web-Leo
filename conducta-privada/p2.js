@@ -1,49 +1,37 @@
 // p2.js · Conducta Privada · Lección 1
-// Acordeones nativos + animación suave + sin dependencias del módulo Verdad
 
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ============================================================
-     ACORDEONES <details> — Comportamiento mejorado
-     ============================================================ */
+     ACORDEONES <details> — Comportamiento suave y estable
+  ============================================================ */
   const accordions = document.querySelectorAll("details.uv-accordion");
 
   accordions.forEach((acc) => {
     const summary = acc.querySelector("summary");
 
     summary.addEventListener("click", (e) => {
-      // si estaba abierto, agregamos la clase "closing" para animación suave
       if (acc.open) {
+        // cerrar con animación
         acc.classList.add("closing");
+        e.preventDefault();
+
         setTimeout(() => {
-          acc.open = false;
+          acc.removeAttribute("open");
           acc.classList.remove("closing");
-        }, 180);
-        e.preventDefault(); 
+        }, 200);
+
+      } else {
+        // abrir normal
+        acc.setAttribute("open", "");
       }
     });
   });
 
-
   /* ============================================================
-     NAV SUPERIOR (si se quiere resaltar el punto activo)
-     Se puede ampliar cuando haya progreso real entre pantallas.
-     ============================================================ */
-
+     PROGRESO SUPERIOR
+  ============================================================ */
   const dots = document.querySelectorAll(".dot");
-  if (dots.length) {
-    // Por ahora solo marcamos el primero como activo (p2)
-    dots[0].classList.add("active");
-  }
-
-  
-  /* ============================================================
-     PREPARACIÓN PARA FUTUROS EJERCICIOS
-     Esta función no hace nada en p2, pero permite que luego
-     podamos activar ejercicios igual que en el módulo Verdad.
-     ============================================================ */
-  if (typeof initEjercicioConductaPrivada === "function") {
-    initEjercicioConductaPrivada();
-  }
+  if (dots.length) dots[0].classList.add("active");
 
 });
