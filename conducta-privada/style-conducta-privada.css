@@ -643,3 +643,47 @@ details[open].uv-accordion summary {
 .uv-divider {
   opacity: 0.6;
 }
+/* ============================================================
+   TARJETAS DE ALTO CONTRASTE (versión fuerte y elegante)
+============================================================ */
+
+/* Tarjeta general */
+.uv-card {
+  background: #F3EAD2 !important; /* Crema profundo (NO blanco) */
+  border: 1.6px solid rgba(253,191,18,0.55) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.18) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Acordeones cerrados */
+details.uv-accordion {
+  background: #F5EFD9 !important; /* Más crema, menos blanco */
+  border: 1.6px solid rgba(253,191,18,0.55) !important;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.12) !important;
+}
+
+/* Título del acordeón */
+details.uv-accordion summary {
+  background: #F3EAD2 !important;
+  color: #0A2A5C !important;
+}
+
+/* Acordeón abierto (borde inferior) */
+details[open].uv-accordion summary {
+  background: #EFE3C8 !important;
+  border-bottom: 1px solid rgba(253,191,18,0.45) !important;
+}
+
+/* Contenido del acordeón */
+.uv-bloque-texto {
+  background: #EFE8D2 !important; /* Crema oscuro */
+  padding: 26px !important;
+  color: #083A40 !important;
+}
+
+/* Texto grande de los párrafos */
+.uv-resumen p,
+.uv-bloque-texto p {
+  color: #083A40 !important; /* Verde petróleo oscuro */
+  line-height: 1.75 !important;
+}
