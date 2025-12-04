@@ -324,9 +324,234 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 2</h3>
-            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
-          </section>
+          
+             <!-- =========================================================
+     EJERCICIO P5 · El Constructor de Análisis Útiles
+     ========================================================= -->
+              <div id="bloque-2-actividad" class="p5-activity">
+
+  <header class="p5-activity-header">
+    <h3 class="p5-activity-title">
+      Ejercicio · El Constructor de Análisis Útiles
+    </h3>
+    <p class="p5-activity-instructions">
+      Tu tarea es construir una conceptualización clínicamente útil utilizando
+      entre <strong>4 y 6 piezas</strong>. Arrastra las piezas hacia el
+      <strong>Marco Conceptual</strong> y observa cómo cada una contribuye a la
+      <strong>precisión</strong>, el <strong>alcance</strong> y la
+      <strong>profundidad</strong> de tu análisis.
+    </p>
+    <p class="p5-activity-instructions">
+      Las piezas <strong>🎯</strong> aumentan la precisión (relaciones
+      funcionales claras). Las piezas <strong>📡</strong> amplían el alcance
+      (contextos, episodios y variaciones). Las piezas <strong>🌊</strong>
+      incrementan la profundidad (historia, aprendizaje y evolución). Algunas
+      piezas <strong>🚫</strong> parecen técnicas, pero no orientan la acción
+      clínica: si las arrastras al marco, se “derriten” y no se incorporan al
+      análisis.
+    </p>
+    <p class="p5-activity-instructions">
+      Tu meta es <strong>maximizar precisión, alcance y profundidad</strong>,
+      construyendo una conceptualización que facilite intervenciones concretas
+      y sostenibles. Cuando completes tu modelo, pulsa
+      <strong>“Evaluar análisis”</strong> para ver tus puntuaciones. Puedes usar
+      el botón <strong>“Reiniciar ejercicio”</strong> para empezar de nuevo.
+    </p>
+  </header>
+
+  <div class="p5-activity-layout">
+    <!-- Columna izquierda: zonas con piezas -->
+    <div class="p5-column p5-column-left">
+      <!-- Precisión -->
+      <section class="p5-source-zone" id="p5-precision-zone">
+        <h4 class="p5-zone-title">🎯 Precisión</h4>
+        <p class="p5-zone-subtitle">
+          Piezas que clarifican antecedentes, consecuencias y relaciones
+          funcionales específicas.
+        </p>
+        <div class="p5-card-pool" id="p5-precision-pool">
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="precision"
+            data-card-id="antec-autocritica"
+          >
+            🎯 Antecedentes que evocan autocrítica.
+          </button>
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="precision"
+            data-card-id="cons-mantienen-patron"
+          >
+            🎯 Consecuencias que mantienen el patrón.
+          </button>
         </div>
+      </section>
+
+      <!-- Alcance -->
+      <section class="p5-source-zone" id="p5-alcance-zone">
+        <h4 class="p5-zone-title">📡 Alcance</h4>
+        <p class="p5-zone-subtitle">
+          Piezas que muestran en cuántos contextos aparece el patrón y cómo
+          varía.
+        </p>
+        <div class="p5-card-pool" id="p5-alcance-pool">
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="alcance"
+            data-card-id="patron-multiples-contextos"
+          >
+            📡 El patrón aparece en trabajo, pareja y familia.
+          </button>
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="alcance"
+            data-card-id="variaciones-contexto-social"
+          >
+            📡 Variaciones funcionales según contexto social.
+          </button>
+        </div>
+      </section>
+
+      <!-- Profundidad -->
+      <section class="p5-source-zone" id="p5-profundidad-zone">
+        <h4 class="p5-zone-title">🌊 Profundidad</h4>
+        <p class="p5-zone-subtitle">
+          Piezas que conectan el caso con historia de aprendizaje y niveles
+          evolutivos.
+        </p>
+        <div class="p5-card-pool" id="p5-profundidad-pool">
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="profundidad"
+            data-card-id="principios-evolutivos"
+          >
+            🌊 Conexión con principios evolutivos.
+          </button>
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="profundidad"
+            data-card-id="aprendizaje-historico"
+          >
+            🌊 Relación con aprendizaje histórico.
+          </button>
+        </div>
+      </section>
+
+      <!-- Distractores -->
+      <section class="p5-source-zone" id="p5-distractores-zone">
+        <h4 class="p5-zone-title">🚫 Piezas distractoras</h4>
+        <p class="p5-zone-subtitle">
+          Descripciones aparentemente técnicas, pero que no orientan la acción
+          clínica.
+        </p>
+        <div class="p5-card-pool" id="p5-distractores-pool">
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="distractor"
+            data-card-id="baja-autoestima"
+          >
+            🚫 Tiene baja autoestima.
+          </button>
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="distractor"
+            data-card-id="persona-sensible"
+          >
+            🚫 Es una persona muy sensible.
+          </button>
+          <button
+            class="p5-card"
+            type="button"
+            draggable="true"
+            data-dimension="distractor"
+            data-card-id="falta-resiliencia"
+          >
+            🚫 Su problema principal es la falta de resiliencia.
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Columna derecha: marco conceptual + resultados -->
+    <div class="p5-column p5-column-right">
+      <section class="p5-board-section">
+        <div class="p5-board-header">
+          <h4 class="p5-board-title">Marco Conceptual</h4>
+          <p class="p5-board-counter" id="p5-piece-counter">
+            0 / 6 piezas seleccionadas
+          </p>
+        </div>
+        <p class="p5-board-subtitle">
+          Arrastra entre 4 y 6 piezas hacia este marco. Puedes retirar una
+          pieza arrastrándola de nuevo a su zona de origen.
+        </p>
+
+        <div class="p5-board" id="p5-board">
+          <p class="p5-board-hint" id="p5-board-hint">
+            Aún no has añadido piezas. Comienza arrastrando una para construir
+            tu análisis.
+          </p>
+        </div>
+
+        <div class="p5-medal-area">
+          <div class="p5-medal" id="p5-medal"></div>
+        </div>
+      </section>
+
+      <section class="p5-results-section">
+        <h4 class="p5-results-title">Resultados de tu análisis</h4>
+        <div class="p5-results-meters">
+          <div class="p5-result-meter">
+            <div class="p5-result-label">🎯 Precisión</div>
+            <div class="p5-result-value" id="p5-precision-value">0%</div>
+          </div>
+          <div class="p5-result-meter">
+            <div class="p5-result-label">📡 Alcance</div>
+            <div class="p5-result-value" id="p5-alcance-value">0%</div>
+          </div>
+          <div class="p5-result-meter">
+            <div class="p5-result-label">🌊 Profundidad</div>
+            <div class="p5-result-value" id="p5-profundidad-value">0%</div>
+          </div>
+        </div>
+        <p class="p5-results-text" id="p5-results-text">
+          Cuando pulses <strong>“Evaluar análisis”</strong>, aquí aparecerá una
+          interpretación de tu modelo.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <footer class="p5-actions">
+    <button id="p5-btn-evaluate" class="p5-btn p5-btn-primary">
+      Evaluar análisis
+    </button>
+    <button id="p5-btn-reset" class="p5-btn p5-btn-ghost">
+      Reiniciar ejercicio
+    </button>
+    <p class="p5-feedback-final" id="p5-final-feedback"></p>
+  </footer>
+</div> 
+<!-- =========================================================
+     FIN EJERCICIO P5
+     ========================================================= -->
+</section>
       </article>
 
       <div class="uv-separador-bloque">✦</div>
