@@ -1,0 +1,151 @@
+/* ============================================================
+   EJERCICIO P10 · LABORATORIO DE TRANSFORMACIÓN DE FUNCIONES
+=============================================================== */
+
+.p10-ejercicio-container {
+  margin-top: 40px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(253,191,18,0.45);
+  background: linear-gradient(135deg, #ffffff 0%, #fffcf2 100%);
+}
+
+.p10-instrucciones h2 {
+  color: #08323a;
+  margin-bottom: 8px;
+}
+
+.p10-score-label {
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* GRID PRINCIPAL */
+
+.p10-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 0.9fr;
+  gap: 26px;
+  margin-top: 24px;
+}
+
+/* BANCO DE TARJETAS */
+
+.p10-banco-lista {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(253,191,18,0.45);
+  padding: 14px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.p10-card {
+  padding: 12px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.14);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  cursor: grab;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.p10-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* LABORATORIO CENTRAL */
+
+.p10-lab {
+  border-radius: 16px;
+  border: 1px solid rgba(253,191,18,0.45);
+  background: white;
+  padding: 16px;
+}
+
+.p10-lab-area {
+  position: relative;
+  height: 260px;
+  border-radius: 16px;
+  background: #f7fbff;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p10-avatar {
+  font-size: 70px;
+  z-index: 10;
+}
+
+.p10-red {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  opacity: 0.3;
+  transition: background .3s ease;
+}
+
+.p10-estado {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #08323a;
+}
+
+/* BOTONES */
+
+.p10-btn,
+.p10-btn-reset {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.p10-btn {
+  background: #08323a;
+  color: #fff;
+}
+
+.p10-btn:hover {
+  background: #0a4450;
+}
+
+.p10-btn-reset {
+  background: #d9d9d9;
+}
+
+.p10-btn-reset:hover {
+  background: #c1c1c1;
+}
+
+/* HISTORIAL */
+
+.p10-historial-lista {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(253,191,18,0.45);
+  padding: 14px;
+  max-height: 380px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+/* FEEDBACK */
+
+.p10-feedback {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.14);
+  font-size: 0.9rem;
+}
