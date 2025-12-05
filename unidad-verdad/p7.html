@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="css/ejercicios/p16/p16-ejercicio.css" />
   <link rel="stylesheet" href="css/ejercicios/p17/p17-ejercicio.css" />
   <link rel="stylesheet" href="css/ejercicios/p18/p18-ejercicio.css" />
+   <link rel="stylesheet" href="css/ejercicios/p19/p19-ejercicio.css" />
 
   <!-- JS específico -->
   <script defer src="p7.js"></script>
   <script defer src="js/ejercicios/p16/p16-ejercicio.js"></script>
   <script defer src="js/ejercicios/p17/p17-ejercicio.js"></script>
   <script defer src="js/ejercicios/p18/p18-ejercicio.js"></script>
+   <script defer src="js/ejercicios/p19/p19-ejercicio.js"></script>
 
 </head>
 
@@ -638,7 +640,102 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 4</h3>
-            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+     EJERCICIO · BLOQUE 4 · SIMULADOR DE EVENTOS PRIVADOS
+=============================================================== -->
+<section class="p19-ejercicio-container">
+
+  <div class="p19-header">
+    <h2>Simulador de Eventos Privados: Función vs. Contenido</h2>
+    <p>Arrastra un pensamiento al panel. Observa cómo cambia (o no) la conducta según la opción elegida.</p>
+  </div>
+
+  <!-- Overlay de verdad funcional -->
+  <div class="p19-overlay" id="p19-overlay">
+    <div class="p19-overlay-content">
+      <h3>Verdad Funcional</h3>
+      <p>La verdad de un evento privado está en lo que hace, no en lo que dice.</p>
+      <button class="p19-overlay-btn" id="p19-overlay-btn">Continuar</button>
+    </div>
+  </div>
+
+  <div class="p19-simulador">
+
+    <!-- Pensamiento flotante -->
+    <div class="p19-pensamiento" id="p19-pensamiento" draggable="true">
+      <span id="p19-pensamiento-texto">💭 ...</span>
+    </div>
+
+    <!-- Avatar + escenario -->
+    <div class="p19-escena">
+
+      <!-- Avatar -->
+      <div class="p19-avatar-container">
+        <svg class="p19-avatar" viewBox="0 0 120 240">
+          <!-- Cabeza -->
+          <circle cx="60" cy="40" r="22" stroke="#0F4C5C" stroke-width="3" fill="none"/>
+          <!-- Punto dorado interior -->
+          <circle cx="60" cy="40" r="6" fill="#FDBF12"/>
+
+          <!-- Cuerpo -->
+          <line x1="60" y1="62" x2="60" y2="140" stroke="#0F4C5C" stroke-width="3"/>
+
+          <!-- Brazos -->
+          <line x1="60" y1="85" x2="30" y2="120" stroke="#0F4C5C" stroke-width="3"/>
+          <line x1="60" y1="85" x2="90" y2="120" stroke="#0F4C5C" stroke-width="3"/>
+
+          <!-- Piernas (clases animables) -->
+          <line class="p19-leg-left"  x1="60" y1="140" x2="35" y2="200" stroke="#0F4C5C" stroke-width="3"/>
+          <line class="p19-leg-right" x1="60" y1="140" x2="85" y2="200" stroke="#0F4C5C" stroke-width="3"/>
+        </svg>
+        <div class="p19-shadow"></div>
+      </div>
+
+      <!-- Escenario -->
+      <div class="p19-escenario" id="p19-escenario">Hablar honestamente con la pareja</div>
+
+    </div>
+
+    <!-- Panel de decisiones -->
+    <div class="p19-panel">
+
+      <div class="p19-opcion p19-contenido" id="p19-contenido">
+        <h3>🔍 Analizar contenido</h3>
+        <p>Hablar del contenido no cambia la función del pensamiento.</p>
+      </div>
+
+      <div class="p19-opcion p19-funcion" id="p19-funcion">
+        <h3>🔄 Cambiar función</h3>
+        <p>Elige una intervención para transformar su impacto.</p>
+
+        <div class="p19-subopciones" id="p19-subopciones">
+          <button class="p19-sub-btn" data-accion="valores">🌱 Valores</button>
+          <button class="p19-sub-btn" data-accion="defusion">💬 Defusión</button>
+          <button class="p19-sub-btn" data-accion="exposicion">🔥 Exposición</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Mensaje dinámico -->
+    <div class="p19-mensaje" id="p19-mensaje"></div>
+
+    <!-- Panel final -->
+    <div class="p19-panel-final" id="p19-panel-final">
+      <h3>Has completado el simulador</h3>
+      <p>Has experimentado que los eventos privados son conducta: cambiar su función transforma la acción.</p>
+      <p>Estás listo para avanzar al siguiente módulo: Eventos Privados ≠ Mente → Equivalencia → RFT clínica.</p>
+    </div>
+
+    <!-- Reinicio -->
+    <div class="p19-reinicio">
+      <button id="p19-reiniciar" class="p19-btn">Reiniciar</button>
+    </div>
+
+  </div>
+</section>
+
           </section>
         </div>
       </article>
