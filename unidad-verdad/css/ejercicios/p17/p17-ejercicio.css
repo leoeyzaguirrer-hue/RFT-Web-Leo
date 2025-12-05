@@ -1,6 +1,6 @@
 /* ============================================================
    P17 · EJERCICIO · EL COMPÁS DE UTILIDAD
-   Estilo premium + drag & drop responsive
+   Estilo premium ampliado + drag & drop responsive
    ============================================================ */
 
 .p17-ejercicio-container {
@@ -116,15 +116,13 @@
   color: #0f4c5c;
 }
 
-/* layout principal */
-.p17-compas-section,
-.p17-tarjetas-section {
-  position: relative;
-  z-index: 1;
-}
+/* ============================================================
+   COMPÁS AMPLIADO
+   ============================================================ */
 
 .p17-compas-section {
-  margin-top: 14px;
+  margin-top: 24px;
+  text-align: center;
 }
 
 .p17-compas {
@@ -149,7 +147,8 @@
   gap: 6px;
 }
 
-/* zonas del compás */
+/* zonas */
+
 .p17-zona {
   flex: 1;
   min-height: 90px;
@@ -158,33 +157,30 @@
   justify-content: center;
   text-align: center;
   padding: 12px;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
+  color: #04252b;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .p17-zona + .p17-zona {
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .p17-zona-roja {
-  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(220,53,69,0.12));
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(220,53,69,0.14));
 }
 
 .p17-zona-amarilla {
-  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(253,193,7,0.15));
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(253,193,7,0.18));
 }
 
 .p17-zona-verde {
   background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(40,167,69,0.18));
 }
 
-.p17-zona-titulo {
-  font-weight: 600;
-}
-
-/* estados al recibir tarjeta correcta */
 .p17-zona-correcta {
-  box-shadow: inset 0 0 16px rgba(253,191,18,0.9);
+  box-shadow: inset 0 0 18px rgba(253,191,18,0.9);
 }
 
 /* aguja */
@@ -192,31 +188,33 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 4px;
+  width: 5px;
   height: 110px;
   background: linear-gradient(180deg, #fdfdfd, #fdbf12);
   transform-origin: bottom center;
   transform: translate(-50%, -100%) rotate(0deg);
   border-radius: 999px;
-  box-shadow: 0 0 10px rgba(253,191,18,0.7);
+  box-shadow: 0 0 12px rgba(253,191,18,0.7);
   transition: transform 0.35s ease-out;
 }
 
 .p17-compas-nota {
   margin-top: 10px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #345b63;
-  text-align: center;
 }
 
-/* vibración error */
+/* vibración */
 .p17-compas-error {
   animation: p17-shake 0.35s ease;
 }
 
-/* tarjetas */
+/* ============================================================
+   TARJETAS
+   ============================================================ */
+
 .p17-tarjetas-section {
-  margin-top: 20px;
+  margin-top: 28px;
 }
 
 .p17-tarjetas-titulo {
@@ -228,14 +226,13 @@
 .p17-tarjetas-contenedor {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .p17-tarjeta {
-  position: relative;
   background: #ffffff;
   border-radius: 16px;
-  padding: 8px 10px 10px;
+  padding: 10px 12px 12px;
   border: 1px solid rgba(8,58,64,0.14);
   box-shadow: 0 8px 14px rgba(0, 0, 0, 0.06);
   font-size: 0.9rem;
@@ -244,49 +241,38 @@
   display: flex;
   gap: 8px;
   align-items: flex-start;
-  transition: box-shadow 0.2s ease, transform 0.2s ease, border 0.2s ease, background 0.2s ease;
-}
-
-.p17-tarjeta:active {
-  cursor: grabbing;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .p17-tarjeta-icono {
-  font-size: 1.2rem;
-  margin-top: 2px;
+  font-size: 1.3rem;
 }
 
-.p17-tarjeta p {
-  margin: 0;
-}
-
-/* estados de arrastre */
 .p17-tarjeta-arrastrando {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: scale(1.03);
-  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.18);
-  z-index: 20;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.18);
+  z-index: 1000;
 }
 
 .p17-tarjeta-correcta {
-  border-color: rgba(40,167,69,0.7);
-  background: #f3fff6;
+  border-color: rgba(40,167,69,0.65);
+  background: #f1fff5;
 }
 
 .p17-tarjeta-fijada {
   cursor: default;
 }
 
-/* mensaje general y pistas */
 .p17-mensaje-general {
-  margin-top: 12px;
+  margin-top: 14px;
   font-size: 0.9rem;
   color: #0f4c5c;
   min-height: 1em;
 }
 
 .p17-pistas {
-  margin-top: 10px;
+  margin-top: 12px;
   min-height: 1.2em;
 }
 
@@ -295,11 +281,14 @@
   color: #a1332e;
 }
 
-/* panel final */
+/* ============================================================
+   PANEL FINAL
+   ============================================================ */
+
 .p17-panel-final {
-  margin-top: 20px;
-  padding: 14px 16px 16px;
-  border-radius: 20px;
+  margin-top: 26px;
+  padding: 16px 18px 18px;
+  border-radius: 22px;
   border: 1px solid rgba(15,76,92,0.32);
   background: linear-gradient(135deg, #0f4c5c, #1ca3b3);
   color: #ffffff;
@@ -309,7 +298,7 @@
   pointer-events: none;
 }
 
-.p17-panel-final.p17-panel-visible {
+.p17-panel-visible {
   animation: p17-fade-in-up 0.4s ease forwards;
   pointer-events: auto;
 }
@@ -317,14 +306,13 @@
 .p17-panel-final h3 {
   margin-top: 0;
   margin-bottom: 6px;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: #FDBF12;
 }
 
 .p17-panel-final p {
   margin: 4px 0;
-  font-size: 0.9rem;
-  color: #ffffff;
+  font-size: 0.92rem;
 }
 
 .p17-panel-nota {
@@ -333,53 +321,38 @@
   opacity: 0.95;
 }
 
-/* acciones finales */
+/* ============================================================
+   ACCIONES
+   ============================================================ */
+
 .p17-acciones-finales {
-  margin-top: 18px;
+  margin-top: 20px;
   display: flex;
   justify-content: flex-end;
 }
 
 .p17-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 7px 14px;
+  padding: 8px 16px;
   border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: none;
   background: linear-gradient(120deg, #0f4c5c, #1ca3b3);
-  color: #ffffff;
+  color: white;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.p17-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.p17-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
 }
 
 .p17-btn-secundario {
-  background: linear-gradient(120deg, #ffffff, #e7f7fb);
+  background: linear-gradient(120deg, #ffffff, #e9faff);
   color: #0f4c5c;
   border: 1px solid rgba(15,76,92,0.22);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.p17-btn-secundario:hover {
-  background: linear-gradient(120deg, #f9feff, #d9f3fa);
-}
+/* ============================================================
+   ANIMACIONES
+   ============================================================ */
 
-/* animaciones */
 @keyframes p17-shake {
   0% { transform: translateX(0); }
   20% { transform: translateX(-6px); }
@@ -400,41 +373,38 @@
   }
 }
 
-/* responsive */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
 @media (max-width: 900px) {
-  .p17-ejercicio-container {
-    padding: 16px 14px 18px;
-  }
 
   .p17-compas {
-    width: 220px;
-    height: 220px;
+    width: 270px;
+    height: 270px;
   }
 
-  .p17-tarjetas-contenedor {
-    grid-template-columns: 1fr;
+  .p17-aguja {
+    height: 90px;
   }
 
-  .p17-acciones-finales {
-    justify-content: center;
+  .p17-zona {
+    min-height: 70px;
   }
 }
 
 @media (max-width: 600px) {
-  .p17-header h2 {
-    font-size: 1.25rem;
+
+  .p17-compas {
+    width: 230px;
+    height: 230px;
   }
 
-  .p17-header p,
-  .p17-instrucciones {
-    font-size: 0.9rem;
+  .p17-aguja {
+    height: 75px;
   }
 
-  .p17-compas-nota {
-    font-size: 0.8rem;
-  }
-
-  .p17-tarjeta {
-    font-size: 0.88rem;
+  .p17-zona {
+    min-height: 60px;
   }
 }
