@@ -1,160 +1,97 @@
 /* ============================================================
-   EJERCICIO P8 · LABORATORIO DE FORMULACIÓN VIVA
-   Estilo premium azul–dorado
-============================================================ */
+   EJERCICIO P8 · ESTILOS GENERALES
+=============================================================== */
 
-/* CONTENEDOR GENERAL */
 .p8-ejercicio-container {
   margin-top: 40px;
   padding: 28px;
-  background: linear-gradient(145deg, #ffffff 0%, #f6f9ff 100%);
   border: 1.5px solid rgba(253, 191, 18, 0.45);
   border-radius: 22px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #ffffff 0%, #fffcf2 100%);
 }
 
-/* TÍTULO E INSTRUCCIONES */
 .p8-instrucciones h2 {
-  font-family: "Coco Gothic", sans-serif;
-  font-size: 1.7rem;
-  color: #083a40;
+  margin-bottom: 8px;
+  color: #08323a;
+}
+
+.p8-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 26px;
+  margin-top: 24px;
+}
+
+/* Tarjetas */
+
+.p8-tarjetas h3 {
   margin-bottom: 10px;
 }
 
-.p8-instrucciones p {
-  font-size: 1.15rem;
-  color: #083a40;
-  line-height: 1.6;
-}
-
-/* LAYOUT DE TRES COLUMNAS */
-.p8-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 22px;
-  margin-top: 30px;
-}
-
-/* ================================================
-   COLUMNA 1 — TARJETAS DE FORMULACIÓN
-================================================ */
-.p8-tarjetas {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
 .p8-tarjeta {
-  padding: 16px;
   background: #ffffff;
-  border: 1.4px solid rgba(253, 191, 18, 0.55);
-  border-radius: 16px;
+  border: 1px solid rgba(253,191,18,0.45);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
   cursor: grab;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #0a3c47;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform .2s, box-shadow .2s;
 }
 
 .p8-tarjeta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
-.p8-tarjeta:active {
-  cursor: grabbing;
-}
+/* Avatar */
 
-/* ================================================
-   COLUMNA 2 — AVATAR CENTRAL
-================================================ */
-.p8-avatar-area {
+.p8-avatar-zone {
+  background: #ffffff;
+  border: 1px solid rgba(253,191,18,0.45);
+  border-radius: 18px;
+  padding: 20px;
   text-align: center;
-  padding: 18px;
+  min-height: 260px;
 }
 
 .p8-avatar {
-  font-size: 4rem;
+  font-size: 70px;
   margin-bottom: 12px;
 }
 
 .p8-estado {
-  font-size: 1.2rem;
-  color: #083a40;
-  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 20px;
 }
 
-/* ================================================
-   COLUMNA 3 — PANEL DE INTERVENCIONES
-================================================ */
-.p8-panel {
-  padding: 18px;
-  background: #ffffff;
-  border: 1.4px solid rgba(253, 191, 18, 0.45);
-  border-radius: 16px;
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.05);
-  display: none;
-}
-
-.p8-panel h3 {
-  color: #0a3c47;
-  font-size: 1.3rem;
-  font-family: "Coco Gothic";
-  margin-bottom: 12px;
-}
-
-.p8-intervencion {
-  margin: 8px 0;
-  padding: 10px;
-  background: #f7fbff;
-  border-left: 4px solid #fdbf12;
-  border-radius: 8px;
-  font-size: 1.05rem;
-}
-
-/* ================================================
-   MENSAJE DE FEEDBACK
-================================================ */
-.p8-feedback {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  padding: 14px;
-  border-radius: 14px;
-  display: none;
-  font-weight: 600;
-}
-
-.p8-feedback.ok {
-  background: rgba(0, 180, 120, 0.12);
-  border: 1.5px solid #00a86b;
-  color: #007a52;
-}
-
-.p8-feedback.error {
-  background: rgba(255, 100, 100, 0.12);
-  border: 1.5px solid #cc3c3c;
-  color: #9b1c1c;
-}
-
-.p8-feedback.mid {
-  background: rgba(253, 191, 18, 0.12);
-  border: 1.5px solid #fdbf12;
-  color: #8a6505;
-}
-
-/* BOTÓN DE REINICIO */
-.p8-reiniciar {
-  margin-top: 24px;
-  padding: 12px 18px;
+.p8-reset {
+  background: #08323a;
+  color: #fff;
+  padding: 8px 14px;
   border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, #fdbf12, #ffcf4d);
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
-.p8-reiniciar:hover {
-  transform: scale(1.05);
+.p8-reset:hover {
+  background: #0a4450;
+}
+
+/* Panel acciones */
+
+.p8-acciones {
+  background: #ffffff;
+  border: 1px solid rgba(253,191,18,0.45);
+  border-radius: 18px;
+  padding: 20px;
+  display: none;
+}
+
+.p8-acciones ul {
+  margin-top: 12px;
+  padding-left: 20px;
+}
+
+.p8-acciones li {
+  margin-bottom: 6px;
 }
