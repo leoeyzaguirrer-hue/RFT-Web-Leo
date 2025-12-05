@@ -9,11 +9,13 @@
   <link rel="stylesheet" href="style-unidad-verdad.css" />
   <link rel="stylesheet" href="css/ejercicios/p12/p12-ejercicio.css">
   <link rel="stylesheet" href="css/ejercicios/p13/p13-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p14/p14-ejercicio.css">
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p6.js"></script>
   <script defer src="js/ejercicios/p12/p12-ejercicio.js"></script>
   <script defer src="js/ejercicios/p13/p13-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p14/p14-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -409,7 +411,114 @@
           <!-- ACTIVIDAD BLOQUE 3 -->
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 3</h3>
-            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+       EJERCICIO · BLOQUE 3 · DETECTOR DE REGLAS VIVAS
+  ================================================================ -->
+  <section class="p14-ejercicio-container">
+
+    <!-- INSTRUCCIONES -->
+    <div class="p14-instrucciones">
+      <h2>El Detector de Reglas Vivas</h2>
+      <p>
+        Arrastra una regla verbal hacia el avatar. Observa lo que produce:  
+        ¿evitación, exploración o avance hacia un valor?  
+        Una regla no se evalúa por su literalidad, sino por su efecto funcional.
+      </p>
+
+      <div class="p14-medidor">
+        <span class="p14-medidor-label">Flexibilidad generada:</span>
+        <div class="p14-medidor-bar">
+          <div id="p14-bar-inner" class="p14-medidor-bar-inner"></div>
+        </div>
+        <span id="p14-score" class="p14-medidor-score">0%</span>
+      </div>
+    </div>
+
+    <div class="p14-grid">
+
+      <!-- BANCO DE REGLAS -->
+      <div class="p14-banco" id="p14-banco">
+        <h3>Reglas disponibles</h3>
+
+        <!-- RÍGIDAS -->
+        <div class="p14-tarjeta" draggable="true" data-tipo="rigida">
+          🔒 “No avances si no te sientes seguro.”
+        </div>
+
+        <div class="p14-tarjeta" draggable="true" data-tipo="rigida">
+          🧊 “Primero resuelve tus emociones, luego actúa.”
+        </div>
+
+        <div class="p14-tarjeta" draggable="true" data-tipo="rigida">
+          🚫 “Si sientes ansiedad, algo malo está pasando.”
+        </div>
+
+        <div class="p14-tarjeta" draggable="true" data-tipo="rigida">
+          🪨 “Evitar es mejor que fallar.”
+        </div>
+
+        <!-- FLEXIBLES -->
+        <div class="p14-tarjeta" draggable="true" data-tipo="flexible">
+          🌿 “Puedo avanzar incluso con incomodidad.”
+        </div>
+
+        <div class="p14-tarjeta" draggable="true" data-tipo="flexible">
+          🔥 “El malestar es parte del movimiento valioso.”
+        </div>
+
+        <div class="p14-tarjeta" draggable="true" data-tipo="flexible">
+          🪶 “Puedo llevar mis pensamientos sin obedecerlos.”
+        </div>
+
+        <div class="p14-tarjeta" draggable="true" data-tipo="flexible">
+          🌟 “Mis acciones pueden guiar a mis emociones, no al revés.”
+        </div>
+
+      </div>
+
+      <!-- AVATAR + ESCENARIO -->
+      <div class="p14-escenario">
+        <h3>Escenario clínico</h3>
+
+        <div class="p14-avatar-zone" id="p14-avatar-zone">
+          <div id="p14-avatar" class="p14-avatar">🙂</div>
+        </div>
+
+        <div class="p14-acciones-label">
+          Acciones generadas por la regla aplicada
+        </div>
+
+        <div id="p14-accion" class="p14-accion">—</div>
+
+        <button id="p14-reset" class="p14-btn-reset">Reiniciar ejercicio</button>
+      </div>
+
+      <!-- MAPA CONCEPTUAL -->
+      <div class="p14-mapa">
+        <h3>Mapa de función</h3>
+        <div id="p14-mapa-zone" class="p14-mapa-zone">
+          <div class="p14-nodo"></div>
+          <div class="p14-nodo"></div>
+          <div class="p14-nodo"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MINI-HISTORIA -->
+    <section id="p14-historia" class="p14-historia oculto">
+      <h3>Resultado neto</h3>
+      <p id="p14-historia-texto">
+        —
+      </p>
+    </section>
+
+    <div id="p14-feedback" class="p14-feedback">
+      Aplica tres reglas para ver cómo evoluciona la conducta del avatar.
+    </div>
+
+  </section>
+</section>
           </section>
 
         </div>
