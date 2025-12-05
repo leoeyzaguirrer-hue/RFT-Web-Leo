@@ -1,0 +1,135 @@
+/* ============================================================
+   EJERCICIO P12 · DESARMADOR DE FORMULACIONES
+=============================================================== */
+
+.p12-ejercicio-container {
+  margin-top: 40px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(253,191,18,0.45);
+  background: linear-gradient(135deg, #ffffff 0%, #fffcf2 100%);
+}
+
+.p12-instrucciones h2 {
+  color: #08323a;
+  margin-bottom: 8px;
+}
+
+.p12-score-label {
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* GRID GENERAL */
+
+.p12-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  gap: 26px;
+  margin-top: 20px;
+}
+
+/* TARJETAS */
+
+.p12-banco {
+  background: #ffffff;
+  border: 1px solid rgba(253,191,18,0.45);
+  border-radius: 16px;
+  padding: 14px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.p12-tarjeta {
+  padding: 12px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.18);
+  margin-bottom: 10px;
+  cursor: grab;
+  transition: transform .2s, box-shadow .2s;
+  font-size: 0.95rem;
+}
+
+.p12-tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* MÁQUINA CENTRAL */
+
+.p12-panel-central {
+  text-align: center;
+}
+
+.p12-maquina {
+  height: 250px;
+  margin-top: 10px;
+  background: #f7fbff;
+  border-radius: 20px;
+  border: 1px solid rgba(253,191,18,0.45);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p12-engranaje {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(253,191,18,0.2);
+  animation: p12-rotar 3s linear infinite paused;
+}
+
+@keyframes p12-rotar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.p12-estado {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #08323a;
+}
+
+.p12-btn-reset {
+  margin-top: 16px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #d9d9d9;
+  border: none;
+  cursor: pointer;
+  width: 80%;
+}
+
+.p12-btn-reset:hover {
+  background: #c9c9c9;
+}
+
+/* CONTENEDORES */
+
+.p12-cont-drop {
+  height: 160px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  border: 2px dashed rgba(8,50,58,0.3);
+  padding: 16px;
+  font-size: 0.95rem;
+  background: #ffffff;
+  transition: background .2s;
+}
+
+.p12-cont-drop:hover {
+  background: #f3faff;
+}
+
+/* FEEDBACK */
+
+.p12-feedback {
+  margin-top: 20px;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(8,50,58,0.14);
+}
