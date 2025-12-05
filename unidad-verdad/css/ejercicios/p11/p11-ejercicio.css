@@ -1,0 +1,144 @@
+/* ============================================================
+   EJERCICIO P11 · EVALUADOR DE RUTAS CLÍNICAS
+=============================================================== */
+
+.p11-ejercicio-container {
+  margin-top: 40px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(253,191,18,0.45);
+  background: linear-gradient(135deg, #ffffff 0%, #fffcf2 100%);
+}
+
+/* INSTRUCCIONES */
+
+.p11-instrucciones h2 {
+  color: #08323a;
+  margin-bottom: 8px;
+}
+
+.p11-score-label {
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* GRID */
+
+.p11-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.2fr 0.8fr;
+  gap: 26px;
+  margin-top: 24px;
+}
+
+/* MAPA */
+
+.p11-mapa {
+  background: #ffffff;
+  border: 1px solid rgba(253,191,18,0.45);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.p11-ruta {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid rgba(8,50,58,0.18);
+}
+
+.p11-ruta-narrativa { background: rgba(0,102,255,0.08); }
+.p11-ruta-interna { background: rgba(128,0,128,0.08); }
+.p11-ruta-act { background: rgba(255,215,0,0.18); }
+
+/* AVATAR */
+
+.p11-avatar-area {
+  height: 220px;
+  background: #f7fbff;
+  border-radius: 16px;
+  margin-top: 14px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p11-avatar {
+  font-size: 70px;
+}
+
+.p11-estado {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #08323a;
+}
+
+/* PASOS CLÍNICOS */
+
+.p11-paso {
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.14);
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+.p11-opcion {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #e8edf1;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.p11-opcion:hover {
+  background: #d7e3ea;
+}
+
+/* BOTÓN RESET */
+
+.p11-btn-reset {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  background: #d9d9d9;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.p11-btn-reset:hover {
+  background: #c9c9c9;
+}
+
+/* HISTORIAL */
+
+.p11-historial-lista {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(253,191,18,0.45);
+  padding: 14px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+/* FEEDBACK */
+
+.p11-feedback {
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.14);
+  padding: 14px;
+  margin-top: 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
