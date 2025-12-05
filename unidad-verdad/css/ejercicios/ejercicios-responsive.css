@@ -1,0 +1,112 @@
+/* ============================================================
+   RESPONSIVE UNIVERSAL PARA EJERCICIOS · RFT-WEB-LEO
+   Opción C — Mixta: detecta automáticamente ejercicios existentes
+=============================================================== */
+
+@media (max-width: 768px) {
+
+  /* ============================================
+     1) Cualquier ejercicio dentro de un bloque
+  ============================================ */
+  .uv-bloque-actividad section,
+  .uv-bloque-actividad .ejercicio,
+  .uv-bloque-actividad .p8-ejercicio-container,
+  .uv-bloque-actividad .p9-ejercicio-container,
+  .uv-bloque-actividad .p10-ejercicio-container,
+  .uv-bloque-actividad .p11-ejercicio-container,
+  .uv-bloque-actividad .p12-ejercicio-container,
+  .uv-bloque-actividad .p13-ejercicio-container,
+  .uv-bloque-actividad .p14-ejercicio-container,
+  .uv-bloque-actividad .p15-ejercicio-container {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px !important;
+  }
+
+  /* ============================================
+     2) Forzar que cualquier GRID pase a 1 columna
+  ============================================ */
+  .uv-bloque-actividad .grid,
+  .uv-bloque-actividad [class*="grid"],
+  .uv-bloque-actividad .p8-grid,
+  .uv-bloque-actividad .p9-grid,
+  .uv-bloque-actividad .p10-grid,
+  .uv-bloque-actividad .p11-grid,
+  .uv-bloque-actividad .p12-grid,
+  .uv-bloque-actividad .p13-grid,
+  .uv-bloque-actividad .p14-grid,
+  .uv-bloque-actividad .p15-arbol-container {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* ============================================
+     3) Bancos de tarjetas y contenedores
+  ============================================ */
+  .uv-bloque-actividad [class*="banco"],
+  .uv-bloque-actividad [class*="panel"],
+  .uv-bloque-actividad [class*="drop"],
+  .uv-bloque-actividad [class*="zona"],
+  .uv-bloque-actividad .p12-banco,
+  .uv-bloque-actividad .p12-cont-drop,
+  .uv-bloque-actividad .p13-ciclo,
+  .uv-bloque-actividad .p14-avatar-zone,
+  .uv-bloque-actividad .p15-nodo {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* ============================================
+     4) Tarjetas universales más grandes
+  ============================================ */
+  .uv-bloque-actividad [class*="tarjeta"],
+  .uv-bloque-actividad .p8-tarjeta,
+  .uv-bloque-actividad .p12-tarjeta,
+  .uv-bloque-actividad .p13-tarjeta,
+  .uv-bloque-actividad .p14-regla,
+  .uv-bloque-actividad .p15-opcion {
+    font-size: 1rem !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
+  }
+
+  /* ============================================
+     5) Avatar universal (centrado y grande)
+  ============================================ */
+  .uv-bloque-actividad [class*="avatar"],
+  .uv-bloque-actividad .p14-avatar,
+  .uv-bloque-actividad .p15-avatar {
+    font-size: 3rem !important;
+    margin: 0 auto !important;
+    display: block !important;
+    text-align: center !important;
+  }
+
+  /* ============================================
+     6) Nodos del árbol ocupan toda la pantalla
+  ============================================ */
+  .uv-bloque-actividad .p15-nodo {
+    width: 100% !important;
+  }
+
+  /* ============================================
+     7) Botones reset a ancho completo
+  ============================================ */
+  .uv-bloque-actividad [class*="reset"],
+  .uv-bloque-actividad .p12-btn-reset,
+  .uv-bloque-actividad .p13-btn-reset,
+  .uv-bloque-actividad .p14-btn-reset,
+  .uv-bloque-actividad .p15-btn-reset {
+    width: 100% !important;
+  }
+
+  /* ============================================
+     8) Mejorar hitbox del drag & drop para celular
+  ============================================ */
+  .uv-bloque-actividad .p12-cont-drop,
+  .uv-bloque-actividad [class*="drop"] {
+    min-height: 160px !important;
+    padding: 18px !important;
+  }
+
+}
