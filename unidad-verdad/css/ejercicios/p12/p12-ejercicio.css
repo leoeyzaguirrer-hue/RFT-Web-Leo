@@ -133,29 +133,3 @@
   border-radius: 12px;
   border: 1px solid rgba(8,50,58,0.14);
 }
-/* Garantiza que el contenedor permita dropear tarjetas */
-.p12-cont-drop {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 120px;
-  position: relative;
-}
-
-/* Asegura que las tarjetas dropeadas no bloqueen la zona */
-.p12-cont-drop .p12-tarjeta {
-  width: 100%;
-  display: block;
-  margin: 0;
-}
-
-/* Evita que la tarjeta en hover bloquee eventos */
-.p12-tarjeta {
-  pointer-events: auto;
-}
-
-/* Corrige highlight del contenedor cuando está listo para recibir */
-.p12-cont-drop.hover {
-  background-color: rgba(253, 191, 18, 0.12);
-  border-color: #FDBF12;
-}
