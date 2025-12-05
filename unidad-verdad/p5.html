@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="css/ejercicios/p8/p8-ejercicio.css">
   <link rel="stylesheet" href="css/ejercicios/p9/p9-ejercicio.css">
   <link rel="stylesheet" href="css/ejercicios/p10/p10-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p11/p11-ejercicio.css">
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p5.js"></script>
   <script defer src="js/ejercicios/p8/p8-ejercicio.js"></script>
   <script defer src="js/ejercicios/p9/p9-ejercicio.js"></script>
   <script defer src="js/ejercicios/p10/p10-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p11/p11-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -548,7 +550,89 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 4</h3>
-            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+           <!-- ============================================================
+     EJERCICIO · BLOQUE 4 · EVALUADOR DE RUTAS CLÍNICAS
+=============================================================== -->
+<section class="p11-ejercicio-container">
+
+  <!-- Instrucciones -->
+  <div class="p11-instrucciones">
+    <h2>Evaluador de Rutas Clínicas</h2>
+    <p>
+      Selecciona una intervención en cada paso clínico. Observa cómo cambia el sistema 
+      terapéutico: ruta narrativa, explicación interna o ruta pragmática (ACT).
+      Tu objetivo es elegir intervenciones según sus consecuencias clínicas, no según cómo suenan.
+    </p>
+    <p class="p11-score-label">Índice de Verdad Funcional: <span id="p11-score">0</span>/100</p>
+  </div>
+
+  <div class="p11-grid">
+
+    <!-- Mapa de rutas -->
+    <div class="p11-col p11-mapa">
+      <h3>Rutas clínicas</h3>
+
+      <div class="p11-rutas">
+        <div id="ruta-narrativa" class="p11-ruta p11-ruta-narrativa">🔵 Ruta narrativa</div>
+        <div id="ruta-interna" class="p11-ruta p11-ruta-interna">🟣 Ruta explicativa interna</div>
+        <div id="ruta-act" class="p11-ruta p11-ruta-act">🟡 Ruta pragmática (ACT)</div>
+      </div>
+
+      <div id="p11-avatar-area" class="p11-avatar-area">
+        <div id="p11-avatar" class="p11-avatar">😐</div>
+        <p id="p11-estado" class="p11-estado">Selecciona una intervención clínica.</p>
+      </div>
+    </div>
+
+    <!-- PASOS CLÍNICOS -->
+    <div class="p11-col p11-pasos">
+      <h3>Pasos clínicos</h3>
+
+      <div class="p11-paso" data-paso="1">
+        <h4>1. El consultante evita una conversación importante.</h4>
+        <button class="p11-opcion" data-ruta="narrativa">📚 Explorar la narrativa del conflicto.</button>
+        <button class="p11-opcion" data-ruta="interna">🧠 Buscar la causa interna real.</button>
+        <button class="p11-opcion" data-ruta="act">🎯 Identificar función + conectar con valores.</button>
+      </div>
+
+      <div class="p11-paso" data-paso="2">
+        <h4>2. Postergación de búsqueda laboral.</h4>
+        <button class="p11-opcion" data-ruta="narrativa">📘 Revisar historia personal asociada al trabajo.</button>
+        <button class="p11-opcion" data-ruta="interna">🔍 Comprender la raíz emocional antes de actuar.</button>
+        <button class="p11-opcion" data-ruta="act">🌱 Analizar función + pequeñas acciones valiosas.</button>
+      </div>
+
+      <div class="p11-paso" data-paso="3">
+        <h4>3. Rumiar sobre errores pasados.</h4>
+        <button class="p11-opcion" data-ruta="narrativa">📝 Expandir la narrativa del pasado.</button>
+        <button class="p11-opcion" data-ruta="interna">🧩 Buscar el mecanismo psicológico exacto.</button>
+        <button class="p11-opcion" data-ruta="act">🔥 Defusión + volver al valor presente.</button>
+      </div>
+
+      <div class="p11-paso" data-paso="4">
+        <h4>4. Miedo previo a entrevistas.</h4>
+        <button class="p11-opcion" data-ruta="narrativa">📚 Explorar historia familiar del miedo.</button>
+        <button class="p11-opcion" data-ruta="interna">🧠 Controlar ansiedad → luego avanzar.</button>
+        <button class="p11-opcion" data-ruta="act">✨ Abrir espacio al malestar y avanzar hacia valor.</button>
+      </div>
+
+      <button id="p11-reset" class="p11-btn-reset">Reiniciar proceso</button>
+    </div>
+
+    <!-- HISTORIAL -->
+    <div class="p11-col p11-historial">
+      <h3>Historial</h3>
+      <div id="p11-historial" class="p11-historial-lista"></div>
+    </div>
+
+  </div>
+
+  <div id="p11-feedback" class="p11-feedback">
+    Selecciona una intervención para comenzar.
+  </div>
+
+</section>
+
           </section>
 
        </article>
