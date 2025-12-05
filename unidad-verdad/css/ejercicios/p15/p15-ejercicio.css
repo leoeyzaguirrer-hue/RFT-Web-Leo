@@ -1,0 +1,120 @@
+/* ============================================================
+   EJERCICIO P15 · ÁRBOL DE DECISIONES PRAGMÁTICAS
+=============================================================== */
+
+.p15-ejercicio-container {
+  margin-top: 40px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(253,191,18,0.45);
+  background: linear-gradient(135deg, #ffffff 0%, #fffcf2 100%);
+}
+
+/* Instrucciones */
+.p15-instrucciones h2 {
+  color: #08323a;
+  margin-bottom: 8px;
+}
+
+/* Microcaso */
+.p15-microcaso {
+  margin-top: 12px;
+  padding: 12px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(8,50,58,0.14);
+}
+
+/* Avatar */
+.p15-avatar-zone {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p15-avatar {
+  font-size: 3.4rem;
+  transition: transform .4s ease, opacity .4s ease;
+}
+
+/* Árbol */
+.p15-arbol-container {
+  margin-top: 28px;
+  border-radius: 14px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(253,191,18,0.4);
+}
+
+.p15-nodo {
+  padding: 16px;
+  margin-bottom: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(8,50,58,0.18);
+  background: #fafcff;
+  transition: background .4s ease, border-color .4s ease;
+}
+
+.p15-nodo.bueno {
+  background: #e8ffe9;
+  border-color: #72c77b;
+}
+
+.p15-nodo.malo {
+  background: #ffe9e9;
+  border-color: #d65a5a;
+}
+
+.p15-opcion {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #e2e8ef;
+  transition: background .2s;
+}
+
+.p15-opcion:hover {
+  background: #d6dde5;
+}
+
+/* Finals */
+.p15-final {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(253,191,18,0.5);
+}
+
+/* Feedback */
+.p15-feedback {
+  margin-top: 22px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.18);
+}
+
+/* Reset */
+.p15-btn-reset {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 12px;
+  width: 100%;
+  background: #d9d9d9;
+  border: none;
+  cursor: pointer;
+}
+
+.p15-btn-reset:hover {
+  background: #c9c9c9;
+}
+
+/* Oculto */
+.oculto {
+  display: none;
+}
