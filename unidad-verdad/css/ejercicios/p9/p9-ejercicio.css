@@ -1,0 +1,209 @@
+/* ============================================================
+   EJERCICIO P9 · MAPA CLÍNICO DE CICLOS Y VALORES
+=============================================================== */
+
+.p9-ejercicio-container {
+  margin-top: 40px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(253, 191, 18, 0.45);
+  background: linear-gradient(135deg, #ffffff 0%, #fffcf2 100%);
+}
+
+.p9-instrucciones h2 {
+  margin-bottom: 8px;
+  color: #08323a;
+}
+
+.p9-instrucciones p {
+  margin-bottom: 6px;
+}
+
+.p9-indicador {
+  font-weight: 600;
+  color: #08323a;
+}
+
+#p9-score {
+  font-weight: 700;
+}
+
+/* Grid general */
+
+.p9-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 26px;
+  margin-top: 24px;
+}
+
+.p9-col h3 {
+  margin-bottom: 8px;
+}
+
+.p9-sub {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #295057;
+}
+
+/* Banco de tarjetas */
+
+.p9-banco-lista {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(253,191,18,0.45);
+  padding: 12px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.p9-tarjeta,
+.p9-valor-tarjeta {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(8, 50, 58, 0.14);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  cursor: grab;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.p9-tarjeta:hover,
+.p9-valor-tarjeta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  border-color: rgba(253,191,18,0.75);
+}
+
+.p9-distractor {
+  opacity: 0.92;
+}
+
+/* Mapa de anillos */
+
+.p9-mapa {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(253,191,18,0.45);
+  padding: 16px 16px 18px;
+}
+
+.p9-anillos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 14px 0 18px;
+}
+
+.p9-anillo {
+  border-radius: 16px;
+  border: 1px dashed rgba(8, 50, 58, 0.35);
+  padding: 10px 12px;
+  min-height: 70px;
+  background: linear-gradient(135deg, #f7fbff 0%, #ffffff 100%);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.p9-anillo h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.p9-anillo h4 span {
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: #295057;
+}
+
+.p9-anillo-hint {
+  font-size: 0.8rem;
+  color: #557a80;
+}
+
+/* Estados visuales de drop */
+
+.p9-anillo.p9-over {
+  border-style: solid;
+  border-color: rgba(253,191,18,0.9);
+  box-shadow: 0 0 0 2px rgba(253,191,18,0.16);
+  background: linear-gradient(135deg, #fffdf4 0%, #ffffff 100%);
+}
+
+.p9-anillo .p9-tarjeta {
+  margin-bottom: 0;
+  cursor: grab;
+}
+
+/* Valores */
+
+.p9-banco-valores {
+  margin-bottom: 14px;
+}
+
+.p9-valor-drop {
+  border-radius: 16px;
+  border: 1px dashed rgba(8, 50, 58, 0.35);
+  padding: 10px 12px;
+  min-height: 80px;
+  background: linear-gradient(135deg, #f7fbff 0%, #ffffff 100%);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.p9-valor-drop h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+}
+
+.p9-valor-drop.p9-over {
+  border-style: solid;
+  border-color: rgba(253,191,18,0.9);
+  box-shadow: 0 0 0 2px rgba(253,191,18,0.16);
+  background: linear-gradient(135deg, #fffdf4 0%, #ffffff 100%);
+}
+
+.p9-valor-drop .p9-valor-tarjeta {
+  margin-bottom: 0;
+}
+
+/* Feedback y reset */
+
+.p9-feedback {
+  font-size: 0.9rem;
+  color: #08323a;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  padding: 8px 10px;
+  border: 1px solid rgba(8, 50, 58, 0.08);
+}
+
+.p9-reset {
+  margin-bottom: 12px;
+  background: #08323a;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 7px 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.p9-reset:hover {
+  background: #0a4450;
+}
+
+/* Responsivo simple */
+
+@media (max-width: 960px) {
+  .p9-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .p9-banco-lista {
+    max-height: 260px;
+  }
+}
