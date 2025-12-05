@@ -7,9 +7,11 @@
 
   <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
+  <link rel="stylesheet" href="css/ejercicios/p12/p12-ejercicio.css">
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p6.js"></script>
+  <script defer src="js/ejercicios/p12/p12-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -147,7 +149,108 @@
           <!-- ACTIVIDAD BLOQUE 2 -->
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 2</h3>
-            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+     EJERCICIO · BLOQUE 1 · DESARMADOR DE FORMULACIONES
+=============================================================== -->
+<section class="p12-ejercicio-container">
+
+  <!-- INSTRUCCIONES -->
+  <div class="p12-instrucciones">
+    <h2>El Desarmador de Formulaciones</h2>
+    <p>
+      Arrastra cada pieza de la formulación hacia el contenedor que corresponda.
+      Una pieza es útil cuando indica qué hace la conducta y cómo intervenir.
+      Una pieza no útil puede sonar profunda, pero no guía acción clínica.
+    </p>
+    <p class="p12-score-label">Precisión funcional: <span id="p12-score">0</span>%</p>
+  </div>
+
+  <div class="p12-grid">
+
+    <!-- PANEL IZQUIERDO: TARJETAS -->
+    <div class="p12-col p12-panel-izq">
+      <h3>Piezas de la formulación</h3>
+
+      <div id="p12-banco" class="p12-banco">
+
+        <!-- Tarjetas funcionales -->
+        <div class="p12-tarjeta" draggable="true" data-tipo="funcional">
+          🔍 Antes de las reuniones aparece autocrítica que dispara evitación.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="funcional">
+          ⏱ Evitar contacto le da alivio inmediato.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="funcional">
+          🌀 La regla “hazlo perfecto o no lo hagas” mantiene el patrón.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="funcional">
+          🔄 El comportamiento cambia según el contexto social.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="funcional">
+          🎯 La consecuencia principal es escape del malestar.
+        </div>
+
+        <!-- Tarjetas NO funcionales -->
+        <div class="p12-tarjeta" draggable="true" data-tipo="nofuncional">
+          🎭 Porque es una persona insegura.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="nofuncional">
+          🌧 Tiene baja autoestima.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="nofuncional">
+          🧬 Su cerebro está cableado así.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="nofuncional">
+          📖 Le pasó algo en la infancia.
+        </div>
+
+        <div class="p12-tarjeta" draggable="true" data-tipo="nofuncional">
+          🏷 Porque tiene ansiedad generalizada.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PANEL CENTRAL: MÁQUINA -->
+    <div class="p12-col p12-panel-central">
+      <h3>Motor de formulación</h3>
+
+      <div class="p12-maquina" id="p12-maquina">
+        <div class="p12-engranaje" id="p12-engranaje"></div>
+        <p id="p12-estado" class="p12-estado">Clasifica las piezas para optimizar el motor.</p>
+      </div>
+
+      <button id="p12-reset" class="p12-btn-reset">Reiniciar ejercicio</button>
+    </div>
+
+    <!-- PANEL DERECHO: CONTENEDORES -->
+    <div class="p12-col p12-panel-der">
+      <h3>Clasificación</h3>
+
+      <div class="p12-cont-drop" id="p12-sirve">
+        🟩 <strong>Sirve para intervenir</strong>
+      </div>
+
+      <div class="p12-cont-drop" id="p12-nosirve">
+        🟥 <strong>No dice qué hacer</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="p12-feedback" class="p12-feedback">
+    Arrastra una pieza hacia un contenedor para comenzar.
+  </div>
+
+</section>
           </section>
 
         </div>
