@@ -1,0 +1,194 @@
+/* ============================================================
+   EJERCICIO P14 · DETECTOR DE REGLAS VIVAS
+=============================================================== */
+
+.p14-ejercicio-container {
+  margin-top: 40px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(253,191,18,0.45);
+  background: linear-gradient(135deg, #ffffff 0%, #fffcf2 100%);
+}
+
+/* INSTRUCCIONES + MEDIDOR */
+
+.p14-instrucciones h2 {
+  color: #08323a;
+  margin-bottom: 8px;
+}
+
+.p14-medidor {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.p14-medidor-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.p14-medidor-bar {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: #e0e7ef;
+  overflow: hidden;
+}
+
+.p14-medidor-bar-inner {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: #d9534f;
+  transition: width .3s ease, background .3s ease;
+}
+
+.p14-medidor-score {
+  min-width: 40px;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* GRID */
+
+.p14-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  gap: 26px;
+  margin-top: 24px;
+}
+
+/* BANCO DE REGLAS */
+
+.p14-banco {
+  padding: 14px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(253,191,18,0.4);
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.p14-tarjeta {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.2);
+  cursor: grab;
+  transition: transform .2s, box-shadow .2s;
+  font-size: 0.95rem;
+}
+
+.p14-tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.p14-tarjeta.usada {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ESCENARIO + AVATAR */
+
+.p14-escenario {
+  text-align: center;
+}
+
+.p14-avatar-zone {
+  height: 200px;
+  background: #f7fbff;
+  border: 1px solid rgba(253,191,18,0.45);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p14-avatar {
+  font-size: 3.4rem;
+  transition: transform .4s ease, opacity .4s ease;
+}
+
+.p14-accion {
+  margin-top: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #08323a;
+  min-height: 24px;
+}
+
+.p14-btn-reset {
+  margin-top: 18px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #d9d9d9;
+  border: none;
+  cursor: pointer;
+}
+
+.p14-btn-reset:hover {
+  background: #c9c9c9;
+}
+
+/* MAPA CONCEPTUAL */
+
+.p14-mapa-zone {
+  height: 200px;
+  border-radius: 20px;
+  border: 1px solid rgba(253,191,18,0.45);
+  background: #fafcff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  transition: background .4s ease;
+}
+
+.p14-nodo {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #bfc7cd;
+  transition: transform .3s ease, background .3s ease;
+}
+
+.p14-mapa-zone.rigido {
+  background: #ffe9e9;
+}
+
+.p14-mapa-zone.flexible {
+  background: #e8ffe9;
+}
+
+.p14-mapa-zone.ambiguo {
+  background: #fffbe2;
+}
+
+/* MINI HISTORIA */
+
+.p14-historia {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(8,50,58,0.14);
+}
+
+.p14-feedback {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(8,50,58,0.18);
+  background: #ffffff;
+  font-size: 0.9rem;
+}
+
+/* OCULTO */
+
+.oculto {
+  display: none;
+}
