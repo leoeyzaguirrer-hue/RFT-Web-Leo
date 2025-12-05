@@ -1,0 +1,422 @@
+/* ============================================================
+   P16 · EJERCICIO · MUSEO DE LAS EXPLICACIONES ANTIGUAS
+   Estilo premium, vitrinas iluminadas + animaciones sutiles
+   ============================================================ */
+
+.p16-ejercicio-container {
+  margin-top: 24px;
+  padding: 20px 20px 24px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top left, #fffaf0 0%, #ffffff 45%, #f3fbff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brillos decorativos suaves */
+.p16-ejercicio-container::before,
+.p16-ejercicio-container::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(253,191,18,0.18), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.p16-ejercicio-container::before {
+  top: -80px;
+  left: -60px;
+}
+
+.p16-ejercicio-container::after {
+  bottom: -80px;
+  right: -60px;
+}
+
+.p16-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+}
+
+.p16-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+  color: #08323a;
+}
+
+.p16-header p {
+  margin: 0 0 10px;
+  color: #275059;
+}
+
+.p16-instrucciones {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(6, 95, 121, 0.14);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  font-size: 0.95rem;
+  color: #104757;
+}
+
+/* Progreso */
+.p16-progreso {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.p16-progreso-label {
+  font-size: 0.9rem;
+  color: #0b3b44;
+}
+
+.p16-progreso-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.p16-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(253,191,18,0.65);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 0 rgba(253,191,18,0.0);
+  transition: background 0.2s ease, box-shadow 0.4s ease, transform 0.25s ease;
+}
+
+.p16-dot.p16-dot-activo {
+  background: #fdbf12;
+  box-shadow: 0 0 12px rgba(253,191,18,0.8);
+  transform: scale(1.05);
+}
+
+/* Salas */
+.p16-salas-grid {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.p16-sala {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), #fff8e8);
+  border-radius: 20px;
+  padding: 14px 14px 16px;
+  border: 1px solid rgba(8,58,64,0.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border 0.28s ease;
+}
+
+.p16-sala::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(253,191,18,0.2), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.p16-sala:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.06);
+  border-color: rgba(253,191,18,0.35);
+}
+
+.p16-sala:hover::before {
+  opacity: 1;
+}
+
+.p16-sala-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.p16-sala-icono {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #fdbf12, #f7941d);
+  box-shadow: 0 0 12px rgba(247,148,29,0.7);
+  font-size: 1.1rem;
+}
+
+.p16-sala-header h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: #0b3b44;
+}
+
+.p16-sala-texto {
+  font-size: 0.95rem;
+  margin: 6px 0 10px;
+  color: #285059;
+}
+
+/* Avatar */
+.p16-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.p16-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 20%, #ffffff, #f0fbff);
+  border: 1px solid rgba(8,58,64,0.16);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  font-size: 1.4rem;
+  animation: p16-float 6s ease-in-out infinite;
+}
+
+.p16-avatar-label {
+  font-size: 0.8rem;
+  color: #395c63;
+}
+
+/* Botones */
+.p16-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: linear-gradient(120deg, #0f4c5c, #1ca3b3);
+  color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.p16-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.p16-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+}
+
+.p16-btn-secundario {
+  background: linear-gradient(120deg, #ffffff, #e7f7fb);
+  color: #0f4c5c;
+  border: 1px solid rgba(15,76,92,0.22);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.p16-btn-secundario:hover {
+  background: linear-gradient(120deg, #f9feff, #d9f3fa);
+}
+
+/* Menús de intervenciones */
+.p16-menu-intervenciones {
+  margin-top: 10px;
+  padding: 8px 10px 10px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(8,58,64,0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  animation: p16-fade-in-up 0.35s ease forwards;
+}
+
+.p16-menu-intro {
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+  color: #345b63;
+}
+
+.p16-opciones-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.p16-opcion {
+  border-radius: 999px;
+  border: 1px solid rgba(15,76,92,0.25);
+  background: #f5fcfd;
+  padding: 5px 8px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border 0.2s ease, transform 0.15s ease;
+}
+
+.p16-opcion:hover {
+  background: #e1f4f9;
+  transform: translateY(-1px);
+}
+
+.p16-opcion:active {
+  transform: translateY(0);
+}
+
+.p16-feedback {
+  font-size: 0.82rem;
+  color: #0f4c5c;
+}
+
+/* Estados de sala completada */
+.p16-sala.p16-sala-completada {
+  border-color: rgba(253,191,18,0.9);
+  box-shadow: 0 0 18px rgba(253,191,18,0.55);
+}
+
+.p16-sala.p16-sala-completada .p16-avatar {
+  animation: p16-glow 2.3s ease-in-out infinite;
+}
+
+/* Panel final */
+.p16-panel-final {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  padding: 14px 16px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(15,76,92,0.32);
+  background: linear-gradient(135deg, #0f4c5c, #1ca3b3);
+  color: #ffffff;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.p16-panel-final.p16-panel-visible {
+  animation: p16-fade-in-up-strong 0.4s ease forwards;
+  pointer-events: auto;
+}
+
+.p16-panel-final h3 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+}
+
+.p16-panel-final p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.p16-panel-nota {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.92;
+}
+
+.p16-acciones-finales {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Animaciones */
+@keyframes p16-float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes p16-glow {
+  0%   { box-shadow: 0 0 10px rgba(253,191,18,0.3); }
+  50%  { box-shadow: 0 0 20px rgba(253,191,18,0.9); }
+  100% { box-shadow: 0 0 10px rgba(253,191,18,0.3); }
+}
+
+@keyframes p16-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes p16-fade-in-up-strong {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   RESPONSIVE · MÓVIL / TABLET
+   ================================ */
+
+@media (max-width: 900px) {
+  .p16-salas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .p16-ejercicio-container {
+    padding: 16px 14px 18px;
+  }
+
+  .p16-acciones-finales {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .p16-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .p16-header p,
+  .p16-instrucciones {
+    font-size: 0.9rem;
+  }
+
+  .p16-sala-texto {
+    font-size: 0.9rem;
+  }
+
+  .p16-opciones-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .p16-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .p16-progreso {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
