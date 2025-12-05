@@ -211,7 +211,163 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 2</h3>
-            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+     EJERCICIO · BLOQUE 2 · MAPA CLÍNICO DE CICLOS Y VALORES
+=============================================================== -->
+<section class="p9-ejercicio-container">
+
+  <!-- Instrucciones -->
+  <div class="p9-instrucciones">
+    <h2>Mapa clínico de ciclos y valores</h2>
+    <p>
+      Organiza los elementos del caso en un ciclo funcional (antecedentes, conductas evitativas
+      y consecuencias) y luego conéctalos con un valor relevante. Una formulación es más “verdadera”
+      cuando identifica variables funcionales y orienta acciones hacia una vida valiosa.
+    </p>
+    <p class="p9-indicador">
+      Precisión clínica: <span id="p9-score">0%</span>
+    </p>
+  </div>
+
+  <div class="p9-grid">
+
+    <!-- Banco de tarjetas: análisis funcional -->
+    <div class="p9-col p9-banco">
+      <h3>Elementos del caso</h3>
+      <p class="p9-sub">
+        Arrastra cada tarjeta al anillo que corresponda (A, B o C).
+      </p>
+
+      <div id="p9-banco-analisis" class="p9-banco-lista">
+
+        <!-- Antecedentes -->
+        <div class="p9-tarjeta" draggable="true"
+             data-categoria="A" data-origen="analisis">
+          ⏱ Al recibir un correo del supervisor, surge autocrítica intensa.
+        </div>
+
+        <div class="p9-tarjeta" draggable="true"
+             data-categoria="A" data-origen="analisis">
+          🧩 Al exponerse a contextos sociales, anticipa evaluación negativa.
+        </div>
+
+        <!-- Conductas evitativas / patrones verbales -->
+        <div class="p9-tarjeta" draggable="true"
+             data-categoria="B" data-origen="analisis">
+          🗣 Regla interna: “soy un fracaso” dirige su atención.
+        </div>
+
+        <div class="p9-tarjeta" draggable="true"
+             data-categoria="B" data-origen="analisis">
+          🏃‍♂️ Evita responder llamadas laborales.
+        </div>
+
+        <div class="p9-tarjeta" draggable="true"
+             data-categoria="B" data-origen="analisis">
+          💤 Procrastina tareas que podrían implicar evaluación.
+        </div>
+
+        <!-- Consecuencias -->
+        <div class="p9-tarjeta" draggable="true"
+             data-categoria="C" data-origen="analisis">
+          😮‍💨 Obtiene alivio inmediato al postergar o evitar.
+        </div>
+
+        <div class="p9-tarjeta" draggable="true"
+             data-categoria="C" data-origen="analisis">
+          🔂 Refuerza el ciclo al reducir el contacto con demandas.
+        </div>
+
+        <!-- Distractores -->
+        <div class="p9-tarjeta p9-distractor" draggable="true"
+             data-categoria="X" data-origen="analisis">
+          🚫 Le falta motivación.
+        </div>
+
+        <div class="p9-tarjeta p9-distractor" draggable="true"
+             data-categoria="X" data-origen="analisis">
+          🚫 Tiene una personalidad nerviosa.
+        </div>
+
+        <div class="p9-tarjeta p9-distractor" draggable="true"
+             data-categoria="X" data-origen="analisis">
+          🚫 Baja autoestima.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mapa de anillos (A, B, C) -->
+    <div class="p9-col p9-mapa">
+      <h3>Mapa de ciclo funcional</h3>
+      <p class="p9-sub">
+        Completa el ciclo: primero antecedentes (A), luego conductas (B) y consecuencias (C).
+      </p>
+
+      <div class="p9-anillos">
+
+        <div class="p9-anillo" data-zona="A" id="p9-drop-A">
+          <h4>🔵 Anillo A <span>(Antecedentes)</span></h4>
+          <p class="p9-anillo-hint">¿Qué dispara el ciclo?</p>
+        </div>
+
+        <div class="p9-anillo" data-zona="B" id="p9-drop-B">
+          <h4>🟣 Anillo B <span>(Conductas evitativas / reglas)</span></h4>
+          <p class="p9-anillo-hint">¿Qué hace o piensa para alejarse?</p>
+        </div>
+
+        <div class="p9-anillo" data-zona="C" id="p9-drop-C">
+          <h4>🟡 Anillo C <span>(Consecuencias)</span></h4>
+          <p class="p9-anillo-hint">¿Qué obtiene a corto plazo?</p>
+        </div>
+
+      </div>
+
+      <button class="p9-reset" id="p9-reset">Reiniciar análisis clínico</button>
+
+      <div id="p9-feedback" class="p9-feedback">
+        Comienza ubicando los antecedentes (A), luego las conductas (B) y por último las consecuencias (C).
+      </div>
+    </div>
+
+    <!-- Panel de valores -->
+    <div class="p9-col p9-valores">
+      <h3>Valores del consultante</h3>
+      <p class="p9-sub">
+        Elige un valor que se vea directamente afectado por este ciclo.
+      </p>
+
+      <div id="p9-banco-valores" class="p9-banco-lista p9-banco-valores">
+
+        <div class="p9-valor-tarjeta" draggable="true"
+             data-valor="familia" data-origen="valores">
+          ❤️ Conexión con familia (tiempo de calidad, presencia en momentos importantes).
+        </div>
+
+        <div class="p9-valor-tarjeta" draggable="true"
+             data-valor="creatividad" data-origen="valores">
+          🎨 Creatividad / contribución (proyectos conjuntos, expresión personal compartida).
+        </div>
+
+        <div class="p9-valor-tarjeta" draggable="true"
+             data-valor="profesional" data-origen="valores">
+          🎯 Desarrollo profesional (asumir retos, responder a demandas laborales, aprender en el trabajo).
+        </div>
+
+      </div>
+
+      <div class="p9-valor-drop" id="p9-drop-valor">
+        <h4>Conexión con valores</h4>
+        <p class="p9-anillo-hint">
+          Arrastra aquí el valor que se ve más comprometido por este ciclo.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
           </section>
 
         </div>
