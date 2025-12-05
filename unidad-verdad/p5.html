@@ -103,7 +103,71 @@
           <!-- ACTIVIDAD BLOQUE 1 -->
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 1</h3>
-            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+     EJERCICIO · BLOQUE 1 · SIMULADOR DE FORMULACIÓN VIVA
+=============================================================== -->
+<section class="p8-ejercicio-container">
+
+  <!-- Instrucciones -->
+  <div class="p8-instrucciones">
+    <h2>Simulador de Formulación Viva</h2>
+    <p>
+      Arrastra una tarjeta al consultante para aplicar esa formulación clínicamente.
+      Observa cómo cambia su estado y si aparecen intervenciones disponibles. 
+      Una formulación es “verdadera” solo si permite actuar. Ajusta tu hipótesis
+      hasta que produzca una acción clínica clara.
+    </p>
+  </div>
+
+  <div class="p8-grid">
+
+    <!-- Banco de tarjetas -->
+    <div class="p8-tarjetas">
+      <h3>Formulaciones posibles</h3>
+
+      <div class="p8-tarjeta" draggable="true" data-tipo="representacional">
+        🎭 El problema es un defecto interno y estable.
+      </div>
+
+      <div class="p8-tarjeta" draggable="true" data-tipo="funcional-incompleta">
+        🪞 El comportamiento evita experiencias internas difíciles.
+      </div>
+
+      <div class="p8-tarjeta" draggable="true" data-tipo="funcional">
+        🎯 La conducta se mantiene por consecuencias inmediatas.
+      </div>
+
+      <div class="p8-tarjeta" draggable="true" data-tipo="funcional">
+        🔄 El patrón cambia según contingencias y contexto.
+      </div>
+
+      <div class="p8-tarjeta" draggable="true" data-tipo="estatica">
+        🧱 Es así porque siempre fue así.
+      </div>
+
+      <div class="p8-tarjeta" draggable="true" data-tipo="accionable">
+        🛠 Esta formulación indica una vía concreta de intervención.
+      </div>
+    </div>
+
+    <!-- Avatar y estado clínico -->
+    <div class="p8-avatar-zone" id="p8-avatar-zone">
+      <div class="p8-avatar" id="p8-avatar">😐</div>
+      <div class="p8-estado" id="p8-estado">
+        Arrastra una tarjeta al consultante para comenzar.
+      </div>
+      <button class="p8-reset" id="p8-reset">Reiniciar</button>
+    </div>
+
+    <!-- Panel de acciones clínicas -->
+    <div class="p8-acciones" id="p8-acciones">
+      <h3>Acciones clínicas disponibles</h3>
+      <ul id="p8-lista-acciones"></ul>
+    </div>
+
+  </div>
+
+</section>
           </section>
 
         </div>
