@@ -1,0 +1,239 @@
+/* ============================================================
+   P19 · SIMULADOR DE EVENTOS PRIVADOS
+   Estilo premium + avatar SVG + animaciones + responsive
+=============================================================== */
+
+.p19-ejercicio-container {
+  margin-top: 24px;
+  padding: 26px;
+  border-radius: 26px;
+  background: linear-gradient(135deg,#FFFFFF,#F8FDFF);
+  position: relative;
+  overflow: hidden;
+}
+
+/* HEADER */
+.p19-header h2 {
+  margin-bottom: 6px;
+  font-size: 1.6rem;
+  color: #08323a;
+}
+
+.p19-header p {
+  color: #275059;
+}
+
+/* SIMULADOR */
+.p19-simulador {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* PENSAMIENTO FLOTANTE */
+.p19-pensamiento {
+  font-size: 1.6rem;
+  background: white;
+  padding: 10px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(15, 76, 92, 0.22);
+  width: fit-content;
+  cursor: grab;
+  margin: 0 auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  user-select: none;
+}
+
+/* ESCENA */
+.p19-escena {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Avatar */
+.p19-avatar-container {
+  width: 180px;
+  height: 260px;
+  position: relative;
+}
+
+.p19-avatar {
+  width: 180px;
+  height: auto;
+  transform-origin: bottom center;
+}
+
+/* Sombra */
+.p19-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 35px;
+  width: 110px;
+  height: 22px;
+  background: radial-gradient(ellipse,#00000033,#0000);
+  border-radius: 50%;
+}
+
+/* Escenario */
+.p19-escenario {
+  flex: 1;
+  text-align: center;
+  padding: 18px;
+  border-radius: 22px;
+  background: #e8faff;
+  border: 1px solid rgba(15,76,92,0.22);
+  font-size: 1.1rem;
+  color: #08323a;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* Panel de decisiones */
+.p19-panel {
+  display: flex;
+  gap: 20px;
+}
+
+.p19-opcion {
+  flex: 1;
+  padding: 20px;
+  border-radius: 20px;
+  background: white;
+  border: 1px solid rgba(15,76,92,0.22);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.p19-opcion:hover {
+  transform: translateY(-4px);
+}
+
+/* Subopciones */
+.p19-subopciones {
+  display: none;
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.p19-sub-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,76,92,0.22);
+  background: #ffffff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.p19-sub-btn:hover {
+  background: #e8faff;
+}
+
+/* Mensaje */
+.p19-mensaje {
+  min-height: 28px;
+  text-align: center;
+  color: #08323a;
+  font-size: 1.1rem;
+}
+
+/* Panel Final */
+.p19-panel-final {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(135deg,#0f4c5c,#1ca3b3);
+  border: 1px solid rgba(253,191,18,0.45);
+  color: white;
+  display: none;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.22);
+}
+
+.p19-panel-final h3 {
+  color: #FDBF12;
+}
+
+/* Reinicio */
+.p19-reinicio {
+  margin-top: 14px;
+  text-align: right;
+}
+
+.p19-btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(120deg,#0f4c5c,#1ca3b3);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Overlay */
+.p19-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+.p19-overlay-content {
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  text-align: center;
+  width: 80%;
+  max-width: 420px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+}
+
+.p19-overlay-content h3 {
+  color: #0F4C5C;
+  margin-bottom: 12px;
+}
+
+.p19-overlay-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #0f4c5c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Animación de caminar */
+.p19-caminar .p19-leg-left {
+  animation: p19-leg-left 0.8s infinite ease-in-out;
+}
+
+.p19-caminar .p19-leg-right {
+  animation: p19-leg-right 0.8s infinite ease-in-out;
+}
+
+@keyframes p19-leg-left {
+  0% { transform: rotate(16deg); }
+  50% { transform: rotate(-10deg); }
+  100% { transform: rotate(16deg); }
+}
+
+@keyframes p19-leg-right {
+  0% { transform: rotate(-16deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(-16deg); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .p19-escena {
+    flex-direction: column;
+  }
+  .p19-panel {
+    flex-direction: column;
+  }
+}
