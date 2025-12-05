@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="css/ejercicios/p12/p12-ejercicio.css">
   <link rel="stylesheet" href="css/ejercicios/p13/p13-ejercicio.css">
   <link rel="stylesheet" href="css/ejercicios/p14/p14-ejercicio.css">
+   <link rel="stylesheet" href="css/ejercicios/p15/p15-ejercicio.css">
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p6.js"></script>
   <script defer src="js/ejercicios/p12/p12-ejercicio.js"></script>
   <script defer src="js/ejercicios/p13/p13-ejercicio.js"></script>
   <script defer src="js/ejercicios/p14/p14-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p15/p15-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -563,7 +565,119 @@
           <!-- ACTIVIDAD BLOQUE 4 -->
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 4</h3>
-            <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+       EJERCICIO · BLOQUE 4 · ÁRBOL DE DECISIONES PRAGMÁTICAS
+  ================================================================ -->
+  <section class="p15-ejercicio-container">
+
+    <!-- INSTRUCCIONES -->
+    <div class="p15-instrucciones">
+      <h2>El Árbol de Decisiones Pragmáticas</h2>
+      <p>
+        Elige una decisión clínica en cada nodo del árbol.  
+        Observa qué produce: ¿estancamiento o movimiento hacia valores?  
+        El terapeuta no busca “la mejor explicación”, sino la acción que transforma el patrón.
+      </p>
+    </div>
+
+    <!-- MICROCASO -->
+    <div class="p15-microcaso">
+      <strong>Microcaso:</strong>  
+      “La consultante evita conversaciones importantes por miedo al conflicto.”
+    </div>
+
+    <!-- AVATAR -->
+    <div class="p15-avatar-zone">
+      <div id="p15-avatar" class="p15-avatar">🙂</div>
+    </div>
+
+    <!-- ÁRBOL -->
+    <div class="p15-arbol-container">
+
+      <!-- NODO 1 -->
+      <div class="p15-nodo" id="p15-n1">
+        <h4>Nodo 1 · Conceptualización inicial</h4>
+        <p>¿Cómo comenzarías el análisis?</p>
+
+        <button class="p15-opcion" data-next="n1a" data-tipo="mala">🧠 Explicar la causa interna</button>
+        <button class="p15-opcion" data-next="n1b" data-tipo="mala">📚 Ampliar la narrativa</button>
+        <button class="p15-opcion" data-next="n1c" data-tipo="buena">🎯 Analizar función + valores</button>
+      </div>
+
+      <!-- NODO 2A — CAUSA INTERNA -->
+      <div class="p15-nodo oculto" id="p15-n1a">
+        <h4>Nodo 2A · Causa interna</h4>
+        <p>El análisis no orienta acción.</p>
+
+        <button class="p15-opcion" data-next="final-malo" data-tipo="mala">Continuar explicando</button>
+        <button class="p15-opcion" data-next="volver" data-tipo="volver">Reiniciar rama</button>
+      </div>
+
+      <!-- NODO 2B — NARRATIVA -->
+      <div class="p15-nodo oculto" id="p15-n1b">
+        <h4>Nodo 2B · Narrativa</h4>
+        <p>La historia es coherente, pero no cambia el patrón.</p>
+
+        <button class="p15-opcion" data-next="final-malo" data-tipo="mala">Profundizar narrativa</button>
+        <button class="p15-opcion" data-next="volver" data-tipo="volver">Reiniciar rama</button>
+      </div>
+
+      <!-- NODO 2C — FUNCIONAL -->
+      <div class="p15-nodo oculto" id="p15-n1c">
+        <h4>Nodo 2C · Función del comportamiento</h4>
+        <p>Identificas que evita por alivio inmediato.</p>
+
+        <button class="p15-opcion" data-next="n2c1" data-tipo="buena">Sugerir exposición gradual</button>
+        <button class="p15-opcion" data-next="n2c2" data-tipo="buena">Explorar valores relacionales</button>
+      </div>
+
+      <!-- NODO 3C1 — EXPOSICIÓN -->
+      <div class="p15-nodo oculto" id="p15-n2c1">
+        <h4>Nodo 3C1 · Exposición</h4>
+        <p>El patrón comienza a moverse.</p>
+
+        <button class="p15-opcion" data-next="n3c" data-tipo="buena">Seguir con intervención funcional</button>
+      </div>
+
+      <!-- NODO 3C2 — VALORES -->
+      <div class="p15-nodo oculto" id="p15-n2c2">
+        <h4>Nodo 3C2 · Valores</h4>
+        <p>La motivación aumenta, hay apertura al cambio.</p>
+
+        <button class="p15-opcion" data-next="n3c" data-tipo="buena">Conectar con acción valiosa</button>
+      </div>
+
+      <!-- NODO CENTRAL — AVANCE CLÍNICO -->
+      <div class="p15-nodo oculto" id="p15-n3c">
+        <h4>Nodo 4 · Avance clínico</h4>
+        <p>El análisis genera movimiento psicológico.</p>
+
+        <button class="p15-opcion" data-next="final-bueno" data-tipo="buena">Consolidar intervención</button>
+      </div>
+
+      <!-- FINAL MALO -->
+      <div class="p15-final oculto" id="p15-final-malo">
+        <h3>❌ Rama estancada</h3>
+        <p>Las decisiones no generaron movimiento psicológico.</p>
+      </div>
+
+      <!-- FINAL BUENO -->
+      <div class="p15-final oculto" id="p15-final-bueno">
+        <h3>✨ Avance valioso</h3>
+        <p>Has usado la verdad funcional para guiar decisiones clínicas.</p>
+      </div>
+
+    </div>
+
+    <!-- FEEDBACK -->
+    <div id="p15-feedback" class="p15-feedback">
+      Elige un camino clínico. Observa qué ramas florecen.
+    </div>
+
+    <button id="p15-reset" class="p15-btn-reset">Reiniciar ejercicio</button>
+
+  </section>
+</section>
           </section>
 
         </div>
