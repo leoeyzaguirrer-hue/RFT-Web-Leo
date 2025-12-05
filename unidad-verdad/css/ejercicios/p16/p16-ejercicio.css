@@ -297,14 +297,14 @@
 
 /* Panel final */
 .p16-panel-final {
-  position: relative;
+    position: relative;
   z-index: 1;
   margin-top: 22px;
   padding: 14px 16px 16px;
   border-radius: 20px;
   border: 1px solid rgba(15,76,92,0.32);
   background: linear-gradient(135deg, #0f4c5c, #1ca3b3);
-  color: #ffffff;
+  color: #ffffff !important;
   box-shadow: 0 14px 26px rgba(0, 0, 0, 0.22);
   opacity: 0;
   transform: translateY(10px);
@@ -312,17 +312,20 @@
 }
 
 .p16-panel-final.p16-panel-visible {
+   color: #ffffff !important;
   animation: p16-fade-in-up-strong 0.4s ease forwards;
   pointer-events: auto;
 }
 
 .p16-panel-final h3 {
+   color: #FDBF12 !important;
   margin-top: 0;
   margin-bottom: 6px;
   font-size: 1.1rem;
 }
 
 .p16-panel-final p {
+   color: #ffffff !important;
   margin: 4px 0;
   font-size: 0.9rem;
 }
