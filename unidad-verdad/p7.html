@@ -9,12 +9,13 @@
   <link rel="stylesheet" href="style-unidad-verdad.css" />
   <link rel="stylesheet" href="css/ejercicios/p16/p16-ejercicio.css" />
   <link rel="stylesheet" href="css/ejercicios/p17/p17-ejercicio.css" />
+  <link rel="stylesheet" href="css/ejercicios/p18/p18-ejercicio.css" />
 
   <!-- JS específico -->
   <script defer src="p7.js"></script>
   <script defer src="js/ejercicios/p16/p16-ejercicio.js"></script>
   <script defer src="js/ejercicios/p17/p17-ejercicio.js"></script>
-
+  <script defer src="js/ejercicios/p18/p18-ejercicio.js"></script>
 
 </head>
 
@@ -496,7 +497,105 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 3</h3>
-            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
+             <!-- ============================================================
+       EJERCICIO · BLOQUE 3 · EL ENTRENADOR DE DECISIONES TERAPÉUTICAS
+       ============================================================ -->
+
+  <section class="p18-ejercicio-container">
+
+    <!-- Instrucciones -->
+    <header class="p18-header">
+      <h2>El Entrenador de Decisiones Terapéuticas 🎯</h2>
+      <p>
+        El modo en que conceptualizas es una conducta: tiene consecuencias.
+        Elige un estilo de terapeuta y observa cómo cambia el caso clínico.
+      </p>
+
+      <div class="p18-instrucciones">
+        <p><strong>Instrucciones:</strong></p>
+        <ul>
+          <li>Selecciona uno de los tres estilos de terapeuta.</li>
+          <li>Observa cómo reacciona el consultante y cómo cambia el escenario.</li>
+          <li>Evalúa si tu elección produce <strong>movimiento</strong> o <strong>estancamiento</strong>.</li>
+        </ul>
+        <p>
+          Completa los tres estilos para activar el Panel del Terapeuta Pragmatista.
+        </p>
+      </div>
+    </header>
+
+    <!-- Estilos de terapeuta -->
+    <section class="p18-estilos">
+      <button class="p18-estilo-btn" data-estilo="teorico">
+        🎓 El Teórico<br><span>Busca causas internas</span>
+      </button>
+
+      <button class="p18-estilo-btn" data-estilo="narrativo">
+        🧠 El Narrativo<br><span>Ordena historias</span>
+      </button>
+
+      <button class="p18-estilo-btn" data-estilo="funcional">
+        🎯 El Funcional<br><span>Mira contingencias</span>
+      </button>
+    </section>
+
+    <!-- Mini caso clínico -->
+    <section class="p18-caso">
+      <div class="p18-escenario" id="p18-escenario">
+
+        <div class="p18-avatar" id="p18-avatar">
+          🙂
+        </div>
+
+        <div class="p18-caso-texto" id="p18-caso-texto">
+          “El consultante quiere mejorar su relación, pero evita conversaciones incómodas.”
+        </div>
+
+        <div class="p18-efectos" id="p18-efectos"></div>
+      </div>
+
+      <p class="p18-mensaje-estilo" id="p18-mensaje-estilo"></p>
+    </section>
+
+    <!-- Panel de progreso -->
+    <section class="p18-progreso">
+      <h4>Tu progreso</h4>
+      <ul>
+        <li>Teórico: <span id="p18-count-teorico">0</span></li>
+        <li>Narrativo: <span id="p18-count-narrativo">0</span></li>
+        <li>Funcional: <span id="p18-count-funcional">0</span></li>
+      </ul>
+    </section>
+
+    <!-- Panel final -->
+    <section class="p18-panel-final" id="p18-panel-final" hidden>
+      <h3>Integración pragmática ✨</h3>
+
+      <p>
+        Has experimentado cómo diferentes estilos producen distintos efectos.
+        La identidad del terapeuta no es una teoría que adoptas,
+        sino un patrón de elección mantenido por consecuencias.
+      </p>
+
+      <p>
+        En clínica, lo verdadero es lo que <strong>cambia funciones</strong>:
+        lo que ayuda al consultante a moverse hacia acciones valiosas.
+      </p>
+
+      <p class="p18-panel-nota">
+        Pregúntate siempre: “¿Esta elección generará movimiento real en la vida de esta persona?”.
+      </p>
+    </section>
+
+    <!-- Reinicio -->
+    <div class="p18-acciones-finales">
+      <button id="p18-restart-btn" class="p18-btn p18-btn-secundario">
+        Reiniciar ejercicio 🔄
+      </button>
+    </div>
+
+  </section>
+</section>
           </section>
         </div>
       </article>
