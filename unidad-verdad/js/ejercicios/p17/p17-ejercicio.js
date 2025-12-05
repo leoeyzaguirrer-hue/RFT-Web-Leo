@@ -1,6 +1,7 @@
 // ============================================================
-// P17 · EJERCICIO · EL COMPÁS DE UTILIDAD
-// Drag & drop (mouse + touch), autocorrección y reinicio
+// P17 · EJERCICIO · EL COMPÁS DE UTILIDAD — VERSIÓN OPTIMIZADA
+// Drag & drop profesional (desktop + móvil), colisiones exactas,
+// aguja animada y reinicio completo.
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let completadas = 0;
 
-  // Guardamos posición inicial de cada tarjeta (padre original)
+  // Guardamos posición inicial
   const posicionesIniciales = new Map();
   tarjetas.forEach((tarjeta) => {
     posicionesIniciales.set(tarjeta.dataset.id, {
@@ -25,198 +26,196 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Ángulos de la aguja según zona
+  // Ángulos de la aguja según respuesta
   const angulosZona = {
-    "no-accion": -60, // rojo
-    "parcial": 0,     // amarillo
-    "clara": 60       // verde
+    "no-accion": -60,
+    "parcial": 0,
+    "clara": 60
   };
 
-  // Pistas por tarjeta
+  // Pistas contextuales
   const pistasPorTarjeta = {
     insegura:
-      "“Insegura” es un rasgo general. No describe conducta concreta ni su función. No puedes intervenir sobre un rasgo.",
+      "“Insegura” es un rasgo general. No describe conducta concreta ni función. No puedes intervenir sobre un rasgo.",
     "baja-autoestima":
-      "“Baja autoestima” etiqueta la experiencia, pero no señala qué hace la persona, cuándo ni qué consecuencias mantienen el patrón.",
+      "“Baja autoestima” etiqueta la experiencia, pero no señala qué hace la persona ni qué la mantiene.",
     "pensamientos-automaticos":
-      "Los pensamientos negativos son relevantes, pero esta frase no indica qué hace la persona en respuesta ni qué los mantiene activos.",
+      "Describe un fenómeno, pero no indica conducta objetivo ni contingencia clara.",
     "evita-conversaciones":
-      "Aquí ya aparece conducta (evitar), contexto (conversaciones tensas) y consecuencia (alivio inmediato): esto orienta claramente la intervención.",
+      "Describe conducta + contexto + consecuencia. Muy funcional.",
     "autocritica-evitacion":
-      "Describe cuándo aparece la autocrítica, qué conducta sigue y qué función cumple (evitar conflicto): es una formulación muy funcional."
+      "Describe cuándo aparece, qué conducta sigue y qué función cumple. Orienta claramente la intervención."
   };
 
-  // Mensaje general según zona
   const mensajesZona = {
     "no-accion":
-      "Formulaciones basadas en rasgos o etiquetas suenan explicativas, pero no te dicen sobre qué conducta intervenir.",
+      "Explicaciones basadas en rasgos no orientan acción: no indican conducta, contexto ni función.",
     "parcial":
-      "Formulaciones parciales señalan fenómenos relevantes, pero aún no definen con precisión la conducta objetivo ni la contingencia.",
+      "Formulaciones parciales señalan algo relevante, pero no definen conducta ni contingencia concreta.",
     "clara":
-      "Las formulaciones funcionales describen conducta, contexto y consecuencias, por eso orientan con claridad qué hacer en terapia."
+      "Formulaciones funcionales describen conducta, contexto y función: permiten intervenir con claridad."
   };
 
-  // Utilidad: actualizar contador y mensajes
   function actualizarContador() {
-    if (contadorSpan) {
-      contadorSpan.textContent = completadas.toString();
-    }
+    contadorSpan.textContent = completadas.toString();
   }
 
   function mostrarMensajeZona(zonaClave) {
-    if (mensajeGeneral && mensajesZona[zonaClave]) {
+    if (mensajesZona[zonaClave]) {
       mensajeGeneral.textContent = mensajesZona[zonaClave];
     }
   }
 
-  function mostrarPista(tarjetaId) {
-    if (pistaTexto && pistasPorTarjeta[tarjetaId]) {
-      pistaTexto.textContent = pistasPorTarjeta[tarjetaId];
-    }
+  function mostrarPista(id) {
+    pistaTexto.textContent = pistasPorTarjeta[id] ?? "";
   }
 
   function limpiarPista() {
-    if (pistaTexto) {
-      pistaTexto.textContent = "";
-    }
+    pistaTexto.textContent = "";
   }
 
-  // Mover aguja hacia la zona correcta
   function girarAguja(zonaClave) {
-    if (!aguja) return;
-    const angulo = angulosZona[zonaClave] ?? 0;
-    aguja.style.transform = `translate(-50%, -100%) rotate(${angulo}deg)`;
+    const ang = angulosZona[zonaClave] ?? 0;
+    aguja.style.transform = `translate(-50%, -100%) rotate(${ang}deg)`;
   }
 
-  // Vibración del compás en caso de error
   function vibrarCompas() {
-    if (!compas) return;
     compas.classList.remove("p17-compas-error");
-    void compas.offsetWidth; // reflow para reiniciar animación
+    void compas.offsetWidth; // reinicia animación
     compas.classList.add("p17-compas-error");
   }
 
-  // Marcar zona como correcta al recibir al menos una tarjeta bien colocada
-  function marcarZonaCorrecta(zonaElemento) {
-    zonaElemento.classList.add("p17-zona-correcta");
+  function marcarZonaCorrecta(zonaElem) {
+    zonaElem.classList.add("p17-zona-correcta");
   }
 
-  // Comprobar si todas las tarjetas están correctas
   function revisarComplecionTotal() {
-    if (completadas === tarjetas.length && panelFinal) {
+    if (completadas === tarjetas.length) {
       panelFinal.hidden = false;
       panelFinal.classList.add("p17-panel-visible");
       panelFinal.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }
 
-  // =========================
-  // LÓGICA DE DRAG & DROP
-  // =========================
+  // ============================================================
+  // DRAG & DROP REAL · SISTEMA OPTIMIZADO
+  // ============================================================
 
-  let tarjetaEnMovimiento = null;
+  let tarjetaActiva = null;
+  let startX = 0;
+  let startY = 0;
   let offsetX = 0;
   let offsetY = 0;
 
-  function iniciarArrastre(tarjeta, inicioX, inicioY) {
+  function iniciarArrastre(tarjeta, x, y) {
     if (tarjeta.classList.contains("p17-tarjeta-fijada")) return;
 
-    tarjetaEnMovimiento = tarjeta;
+    tarjetaActiva = tarjeta;
+
     const rect = tarjeta.getBoundingClientRect();
 
-    offsetX = inicioX - rect.left;
-    offsetY = inicioY - rect.top;
+    offsetX = x - rect.left;
+    offsetY = y - rect.top;
 
     tarjeta.style.position = "fixed";
     tarjeta.style.left = `${rect.left}px`;
     tarjeta.style.top = `${rect.top}px`;
     tarjeta.style.width = `${rect.width}px`;
-    tarjeta.style.zIndex = "2000";
+    tarjeta.style.height = `${rect.height}px`;
+    tarjeta.style.transform = "none";
+    tarjeta.style.pointerEvents = "none";
+
     tarjeta.classList.add("p17-tarjeta-arrastrando");
+
     limpiarPista();
   }
 
   function moverTarjeta(x, y) {
-    if (!tarjetaEnMovimiento) return;
+    if (!tarjetaActiva) return;
 
-    tarjetaEnMovimiento.style.left = `${x - offsetX}px`;
-    tarjetaEnMovimiento.style.top = `${y - offsetY}px`;
+    const moveX = x - offsetX;
+    const moveY = y - offsetY;
+
+    tarjetaActiva.style.transform = `translate(${moveX - tarjetaActiva.getBoundingClientRect().left}px, 
+                                               ${moveY - tarjetaActiva.getBoundingClientRect().top}px)`;
   }
 
   function finalizarArrastre(x, y) {
-    if (!tarjetaEnMovimiento) return;
+    if (!tarjetaActiva) return;
 
-    const tarjeta = tarjetaEnMovimiento;
-    tarjetaEnMovimiento = null;
+    const tarjeta = tarjetaActiva;
+    tarjetaActiva = null;
 
-    // Detectar zona de caída
-    const centroX = x;
-    const centroY = y;
     let zonaDestino = null;
 
     zonas.forEach((zona) => {
       const rect = zona.getBoundingClientRect();
+
       if (
-        centroX >= rect.left &&
-        centroX <= rect.right &&
-        centroY >= rect.top &&
-        centroY <= rect.bottom
+        x >= rect.left &&
+        x <= rect.right &&
+        y >= rect.top &&
+        y <= rect.bottom
       ) {
         zonaDestino = zona;
       }
     });
 
-    const tarjetaId = tarjeta.dataset.id;
-    const respuestaCorrecta = tarjeta.dataset.respuesta;
+    const id = tarjeta.dataset.id;
+    const respuesta = tarjeta.dataset.respuesta;
 
-    if (zonaDestino) {
-      const zonaClave = zonaDestino.dataset.zona;
+    if (!zonaDestino) {
+      devolverAlOrigen(tarjeta);
+      return;
+    }
 
-      if (zonaClave === respuestaCorrecta) {
-        // Colocación correcta
-        zonaDestino.appendChild(tarjeta);
-        tarjeta.style.position = "relative";
-        tarjeta.style.left = "0";
-        tarjeta.style.top = "0";
-        tarjeta.style.width = "100%";
-        tarjeta.style.zIndex = "auto";
-        tarjeta.classList.remove("p17-tarjeta-arrastrando");
-        tarjeta.classList.add("p17-tarjeta-correcta", "p17-tarjeta-fijada");
+    const zonaClave = zonaDestino.dataset.zona;
 
-        completadas += 1;
-        actualizarContador();
-        marcarZonaCorrecta(zonaDestino);
-        girarAguja(zonaClave);
-        mostrarMensajeZona(zonaClave);
-        mostrarPista(tarjetaId);
-        revisarComplecionTotal();
-      } else {
-        // Colocación incorrecta: vuelve al origen
-        vibrarCompas();
-        mostrarPista(tarjetaId);
-        devolverTarjetaAlOrigen(tarjeta);
-      }
+    if (zonaClave === respuesta) {
+      // Correcto
+      zonaDestino.appendChild(tarjeta);
+
+      tarjeta.style.position = "relative";
+      tarjeta.style.left = "0";
+      tarjeta.style.top = "0";
+      tarjeta.style.width = "100%";
+      tarjeta.style.height = "auto";
+      tarjeta.style.transform = "none";
+      tarjeta.style.pointerEvents = "auto";
+
+      tarjeta.classList.remove("p17-tarjeta-arrastrando");
+      tarjeta.classList.add("p17-tarjeta-correcta", "p17-tarjeta-fijada");
+
+      completadas += 1;
+      actualizarContador();
+      marcarZonaCorrecta(zonaDestino);
+      girarAguja(zonaClave);
+      mostrarMensajeZona(zonaClave);
+      mostrarPista(id);
+      revisarComplecionTotal();
     } else {
-      // No se soltó sobre ninguna zona
-      devolverTarjetaAlOrigen(tarjeta);
+      vibrarCompas();
+      mostrarPista(id);
+      devolverAlOrigen(tarjeta);
     }
   }
 
-  function devolverTarjetaAlOrigen(tarjeta) {
-    const tarjetaId = tarjeta.dataset.id;
-    const info = posicionesIniciales.get(tarjetaId);
-    if (!info || !info.parent) return;
-
+  function devolverAlOrigen(tarjeta) {
+    const info = posicionesIniciales.get(tarjeta.dataset.id);
     info.parent.appendChild(tarjeta);
+
     tarjeta.style.position = "relative";
     tarjeta.style.left = "0";
     tarjeta.style.top = "0";
     tarjeta.style.width = "100%";
-    tarjeta.style.zIndex = "auto";
+    tarjeta.style.height = "auto";
+    tarjeta.style.transform = "none";
+    tarjeta.style.pointerEvents = "auto";
+
     tarjeta.classList.remove("p17-tarjeta-arrastrando");
   }
 
-  // Eventos de mouse
+  // Eventos mouse
   tarjetas.forEach((tarjeta) => {
     tarjeta.addEventListener("mousedown", (e) => {
       e.preventDefault();
@@ -225,13 +224,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("mousemove", (e) => {
-    if (!tarjetaEnMovimiento) return;
+    if (!tarjetaActiva) return;
     e.preventDefault();
     moverTarjeta(e.clientX, e.clientY);
   });
 
   document.addEventListener("mouseup", (e) => {
-    if (!tarjetaEnMovimiento) return;
+    if (!tarjetaActiva) return;
     e.preventDefault();
     finalizarArrastre(e.clientX, e.clientY);
   });
@@ -239,78 +238,59 @@ document.addEventListener("DOMContentLoaded", () => {
   // Eventos touch
   tarjetas.forEach((tarjeta) => {
     tarjeta.addEventListener("touchstart", (e) => {
-      const touch = e.touches[0];
-      if (!touch) return;
-      iniciarArrastre(tarjeta, touch.clientX, touch.clientY);
+      const t = e.touches[0];
+      iniciarArrastre(tarjeta, t.clientX, t.clientY);
     }, { passive: true });
   });
 
   document.addEventListener("touchmove", (e) => {
-    if (!tarjetaEnMovimiento) return;
-    const touch = e.touches[0];
-    if (!touch) return;
-    moverTarjeta(touch.clientX, touch.clientY);
+    if (!tarjetaActiva) return;
+    const t = e.touches[0];
+    moverTarjeta(t.clientX, t.clientY);
   }, { passive: true });
 
   document.addEventListener("touchend", (e) => {
-    if (!tarjetaEnMovimiento) return;
-    const touch = e.changedTouches[0];
-    if (!touch) return;
-    finalizarArrastre(touch.clientX, touch.clientY);
+    if (!tarjetaActiva) return;
+    const t = e.changedTouches[0];
+    finalizarArrastre(t.clientX, t.clientY);
   });
 
-  // =========================
-  // REINICIO COMPLETO
-  // =========================
+  // ============================================================
+  // REINICIO
+  // ============================================================
 
-  if (restartBtn) {
-    restartBtn.addEventListener("click", () => {
-      completadas = 0;
-      actualizarContador();
-      limpiarPista();
-      if (mensajeGeneral) mensajeGeneral.textContent = "";
+  restartBtn.addEventListener("click", () => {
+    completadas = 0;
+    actualizarContador();
+    limpiarPista();
+    mensajeGeneral.textContent = "";
 
-      // devolver tarjetas
-      tarjetas.forEach((tarjeta) => {
-        const tarjetaId = tarjeta.dataset.id;
-        const info = posicionesIniciales.get(tarjetaId);
-        if (info && info.parent) {
-          info.parent.appendChild(tarjeta);
-        }
-        tarjeta.style.position = "relative";
-        tarjeta.style.left = "0";
-        tarjeta.style.top = "0";
-        tarjeta.style.width = "100%";
-        tarjeta.style.zIndex = "auto";
-        tarjeta.classList.remove(
-          "p17-tarjeta-arrastrando",
-          "p17-tarjeta-correcta",
-          "p17-tarjeta-fijada"
-        );
-      });
+    tarjetas.forEach((tarjeta) => {
+      const info = posicionesIniciales.get(tarjeta.dataset.id);
+      info.parent.appendChild(tarjeta);
 
-      // reset zonas
-      zonas.forEach((zona) => zona.classList.remove("p17-zona-correcta"));
+      tarjeta.classList.remove(
+        "p17-tarjeta-arrastrando",
+        "p17-tarjeta-correcta",
+        "p17-tarjeta-fijada"
+      );
 
-      // reset compás
-      if (aguja) {
-        aguja.style.transform = "translate(-50%, -100%) rotate(0deg)";
-      }
-      if (compas) {
-        compas.classList.remove("p17-compas-error");
-      }
-
-      // ocultar panel final
-      if (panelFinal) {
-        panelFinal.hidden = true;
-        panelFinal.classList.remove("p17-panel-visible");
-      }
-
-      // scroll al inicio del ejercicio
-      const contenedor = document.querySelector(".p17-ejercicio-container");
-      if (contenedor) {
-        contenedor.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      tarjeta.style.position = "relative";
+      tarjeta.style.transform = "none";
+      tarjeta.style.left = "0";
+      tarjeta.style.top = "0";
+      tarjeta.style.pointerEvents = "auto";
     });
-  }
+
+    zonas.forEach((zona) => zona.classList.remove("p17-zona-correcta"));
+
+    aguja.style.transform = "translate(-50%, -100%) rotate(0deg)";
+    compas.classList.remove("p17-compas-error");
+
+    panelFinal.hidden = true;
+    panelFinal.classList.remove("p17-panel-visible");
+
+    const cont = document.querySelector(".p17-ejercicio-container");
+    cont.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 });
