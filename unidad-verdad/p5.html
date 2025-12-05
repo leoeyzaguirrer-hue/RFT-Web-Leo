@@ -9,11 +9,13 @@
   <link rel="stylesheet" href="style-unidad-verdad.css" />
   <link rel="stylesheet" href="css/ejercicios/p8/p8-ejercicio.css">
   <link rel="stylesheet" href="css/ejercicios/p9/p9-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p10/p10-ejercicio.css">
 
   <!-- JS específico de esta pantalla -->
   <script defer src="p5.js"></script>
   <script defer src="js/ejercicios/p8/p8-ejercicio.js"></script>
   <script defer src="js/ejercicios/p9/p9-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p10/p10-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -411,7 +413,101 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 3</h3>
-            <div id="bloque-3-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+     EJERCICIO · BLOQUE 3 · LABORATORIO DE TRANSFORMACIÓN
+=============================================================== -->
+<section class="p10-ejercicio-container">
+
+  <!-- Instrucciones -->
+  <div class="p10-instrucciones">
+    <h2>Laboratorio de Transformación de Funciones</h2>
+    <p>
+      Arrastra una intervención verbal hacia el consultante y observa cómo transforma
+      la función de su conducta: fusión, análisis improductivo, defusión o valores.
+      Una metáfora o regla es “verdadera” cuando reorganiza funciones y promueve acción valiosa.
+    </p>
+    <p class="p10-score-label">Índice de transformación funcional: <span id="p10-score">0</span>/100</p>
+  </div>
+
+  <div class="p10-grid">
+
+    <!-- Banco de intervenciones -->
+    <div class="p10-col p10-banco">
+      <h3>Intervenciones verbales</h3>
+      <p class="p10-sub">Arrastra una intervención hacia el consultante y luego presiona “Aplicar”.</p>
+
+      <div id="p10-banco" class="p10-banco-lista">
+
+        <!-- Fusión -->
+        <div class="p10-card" draggable="true" data-funcion="fusion">
+          🧠 “Debes sentirte listo antes de actuar.”
+        </div>
+
+        <div class="p10-card" draggable="true" data-funcion="fusion">
+          🩶 “Tus pensamientos son hechos.”
+        </div>
+
+        <!-- Análisis improductivo -->
+        <div class="p10-card" draggable="true" data-funcion="analisis">
+          🌫 “Si analizas más, encontrarás la causa real.”
+        </div>
+
+        <div class="p10-card" draggable="true" data-funcion="analisis">
+          🔍 “Primero resuelve lo que sientes; luego podrás avanzar.”
+        </div>
+
+        <!-- Defusión -->
+        <div class="p10-card" draggable="true" data-funcion="defusion">
+          🪶 “Lleva tu mente como un pasajero.”
+        </div>
+
+        <div class="p10-card" draggable="true" data-funcion="defusion">
+          🌀 “Observa tus pensamientos como eventos, no como órdenes.”
+        </div>
+
+        <!-- Valores -->
+        <div class="p10-card" draggable="true" data-funcion="valor">
+          🔥 “La incomodidad es el precio de la acción valiosa.”
+        </div>
+
+        <div class="p10-card" draggable="true" data-funcion="valor">
+          🌿 “Camina con el malestar hacia lo que importa.”
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Laboratorio: avatar + red relacional -->
+    <div class="p10-col p10-lab">
+      <h3>Laboratorio clínico</h3>
+
+      <div id="p10-lab-area" class="p10-lab-area">
+        <div id="p10-red" class="p10-red"></div>
+        <div id="p10-avatar" class="p10-avatar">😐</div>
+        <p id="p10-estado" class="p10-estado">Selecciona y aplica una intervención.</p>
+      </div>
+
+      <button id="p10-aplicar" class="p10-btn">Aplicar intervención</button>
+      <button id="p10-reset" class="p10-btn-reset">Reiniciar laboratorio</button>
+
+      <div id="p10-feedback" class="p10-feedback">
+        Arrastra una tarjeta hacia el consultante y luego presiona “Aplicar”.
+      </div>
+    </div>
+
+    <!-- Historial -->
+    <div class="p10-col p10-historial">
+      <h3>Historial de intervenciones</h3>
+
+      <div id="p10-historial" class="p10-historial-lista">
+        <!-- Se llenará automáticamente -->
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
           </section>
 
         </div>
