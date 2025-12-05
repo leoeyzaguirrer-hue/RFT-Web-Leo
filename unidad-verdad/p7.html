@@ -7,9 +7,12 @@
 
   <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
+  <link rel="stylesheet" href="css/ejercicios/p16/p16-ejercicio.css" />
 
   <!-- JS específico -->
   <script defer src="p7.js"></script>
+  <script defer src="js/ejercicios/p16/p16-ejercicio.js"></script>
+
 </head>
 
 <body class="uv-body">
@@ -100,7 +103,182 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 1</h3>
-            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+            <section class="uv-card uv-bloque-actividad">
+  <h3>Actividad interactiva · Bloque 1</h3>
+
+  <!-- ============================================================
+       EJERCICIO · BLOQUE 1 · MUSEO DE LAS EXPLICACIONES ANTIGUAS
+       ============================================================ -->
+  <section class="p16-ejercicio-container">
+
+    <header class="p16-header">
+      <h2>El Museo de las Explicaciones Antiguas 🏛</h2>
+      <p>
+        Recorre las tres salas del museo y explora cómo suenan “bien” las
+        explicaciones clásicas, pero no te dicen qué hacer como terapeuta.
+        Tu meta es comprobar por ti mismo por qué necesitamos un criterio
+        de verdad funcional.
+      </p>
+
+      <div class="p16-instrucciones">
+        <p>
+          1) Entra a cada sala.<br>
+          2) Haz clic en <strong>“Intentar intervenir”</strong> y luego elige
+          al menos una opción de intervención.<br>
+          3) Observa qué pasa con el avatar y el mensaje.<br>
+          Cuando completes las 3 salas, se desbloqueará el
+          <strong>Panel Pragmatista</strong>.
+        </p>
+      </div>
+
+      <div class="p16-progreso">
+        <span class="p16-progreso-label">Salas exploradas:</span>
+        <div class="p16-progreso-dots">
+          <span class="p16-dot" data-sala="correspondencia" aria-label="Sala Correspondencia"></span>
+          <span class="p16-dot" data-sala="coherencia" aria-label="Sala Coherencia"></span>
+          <span class="p16-dot" data-sala="mecanismo" aria-label="Sala Mecanismo interno"></span>
+        </div>
+      </div>
+    </header>
+
+    <div class="p16-salas-grid">
+
+      <!-- Sala 1 · Correspondencia -->
+      <article class="p16-sala" data-sala="correspondencia">
+        <div class="p16-sala-header">
+          <div class="p16-sala-icono">🏛</div>
+          <h3>Sala de Correspondencia</h3>
+        </div>
+
+        <p class="p16-sala-texto">
+          “La depresión es causada por una disfunción en los neurotransmisores.”
+        </p>
+
+        <div class="p16-avatar-wrapper">
+          <div class="p16-avatar" data-avatar="correspondencia" aria-label="Avatar consultante">😐</div>
+          <span class="p16-avatar-label">Estado del consultante</span>
+        </div>
+
+        <button class="p16-btn p16-btn-explorar" data-sala="correspondencia">
+          Intentar intervenir
+        </button>
+
+        <div class="p16-menu-intervenciones" data-menu="correspondencia" hidden>
+          <p class="p16-menu-intro">
+            Elige una intervención posible. Observa si la explicación
+            te indica con claridad qué hacer.
+          </p>
+          <div class="p16-opciones-grid">
+            <button class="p16-opcion" data-sala="correspondencia">Exposición</button>
+            <button class="p16-opcion" data-sala="correspondencia">Valores</button>
+            <button class="p16-opcion" data-sala="correspondencia">Defusión</button>
+            <button class="p16-opcion" data-sala="correspondencia">Reestructuración</button>
+          </div>
+          <p class="p16-feedback" data-feedback="correspondencia" aria-live="polite"></p>
+        </div>
+      </article>
+
+      <!-- Sala 2 · Coherencia -->
+      <article class="p16-sala" data-sala="coherencia">
+        <div class="p16-sala-header">
+          <div class="p16-sala-icono">📚</div>
+          <h3>Sala de Coherencia</h3>
+        </div>
+
+        <p class="p16-sala-texto">
+          “Su historia vital muestra un patrón que encaja con la etapa 3 del desarrollo.”
+        </p>
+
+        <div class="p16-avatar-wrapper">
+          <div class="p16-avatar" data-avatar="coherencia" aria-label="Avatar consultante">😕</div>
+          <span class="p16-avatar-label">Estado del consultante</span>
+        </div>
+
+        <button class="p16-btn p16-btn-explorar" data-sala="coherencia">
+          Intentar intervenir
+        </button>
+
+        <div class="p16-menu-intervenciones" data-menu="coherencia" hidden>
+          <p class="p16-menu-intro">
+            Elige una intervención y analiza si esta explicación narrativa
+            te orienta hacia una acción concreta en sesión.
+          </p>
+          <div class="p16-opciones-grid">
+            <button class="p16-opcion" data-sala="coherencia">Psicoeducación</button>
+            <button class="p16-opcion" data-sala="coherencia">Trabajo con experiencias tempranas</button>
+            <button class="p16-opcion" data-sala="coherencia">Entrenamiento en habilidades</button>
+            <button class="p16-opcion" data-sala="coherencia">Ejercicio experiencial</button>
+          </div>
+          <p class="p16-feedback" data-feedback="coherencia" aria-live="polite"></p>
+        </div>
+      </article>
+
+      <!-- Sala 3 · Mecanismo interno -->
+      <article class="p16-sala" data-sala="mecanismo">
+        <div class="p16-sala-header">
+          <div class="p16-sala-icono">⚙️</div>
+          <h3>Sala del Mecanismo Interno</h3>
+        </div>
+
+        <p class="p16-sala-texto">
+          “El sesgo cognitivo automático causa su evitación.”
+        </p>
+
+        <div class="p16-avatar-wrapper">
+          <div class="p16-avatar" data-avatar="mecanismo" aria-label="Avatar consultante">😟</div>
+          <span class="p16-avatar-label">Estado del consultante</span>
+        </div>
+
+        <button class="p16-btn p16-btn-explorar" data-sala="mecanismo">
+          Intentar intervenir
+        </button>
+
+        <div class="p16-menu-intervenciones" data-menu="mecanismo" hidden>
+          <p class="p16-menu-intro">
+            Selecciona una intervención. Observa si esta explicación interna
+            te ofrece una palanca conductual clara para modificar el patrón.
+          </p>
+          <div class="p16-opciones-grid">
+            <button class="p16-opcion" data-sala="mecanismo">Registro de pensamientos</button>
+            <button class="p16-opcion" data-sala="mecanismo">Reestructuración cognitiva</button>
+            <button class="p16-opcion" data-sala="mecanismo">Exposición con prevención de respuesta</button>
+            <button class="p16-opcion" data-sala="mecanismo">Ejercicio de atención plena</button>
+          </div>
+          <p class="p16-feedback" data-feedback="mecanismo" aria-live="polite"></p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Panel Pragmatista final -->
+    <section class="p16-panel-final" aria-live="polite" hidden>
+      <h3>Panel Pragmatista ✨</h3>
+      <p>
+        Has recorrido explicaciones que suenan sofisticadas: biológicas, narrativas
+        e internas. Todas ayudan a <strong>pensar</strong>, pero no te dicen con
+        precisión <strong>qué hacer</strong> en la sesión de mañana.
+      </p>
+      <p>
+        En ciencias del comportamiento, una explicación es más verdadera cuando
+        abre un camino claro para actuar: cuándo intervenir, sobre qué conducta
+        y en qué contexto. Ese es el corazón del
+        <strong>criterio funcional de verdad</strong>.
+      </p>
+      <p class="p16-panel-nota">
+        Pregúntate siempre: “¿Esta explicación me dice qué hacer con este
+        consultante, en este contexto, para mover su vida en una dirección valiosa?”.
+      </p>
+    </section>
+
+    <div class="p16-acciones-finales">
+      <button id="p16-restart-btn" class="p16-btn p16-btn-secundario">
+        Reiniciar el museo 🔄
+      </button>
+    </div>
+
+  </section>
+</section>
+
           </section>
         </div>
       </article>
