@@ -100,7 +100,56 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactivas · Bloque 1</h3>
-            <div id="bloque-1-actividad" class="uv-actividad-placeholder"></div>
+            <!-- ============================================================
+     EJERCICIO · BLOQUE 1 · LABORATORIO DE FORMULACIÓN VIVA
+============================================================ -->
+<section class="p8-ejercicio-container">
+
+  <div class="p8-instrucciones">
+    <h2>Laboratorio de Formulación Viva</h2>
+    <p>
+      Arrastra una tarjeta hacia el avatar para probar tu hipótesis clínica.
+      Observa qué formulaciones generan confusión, cuáles abren comprensión
+      y cuáles permiten intervenir. Ajusta hasta lograr una formulación viva.
+    </p>
+  </div>
+
+  <div class="p8-layout">
+
+    <!-- TARJETAS -->
+    <div class="p8-tarjetas">
+      <div class="p8-tarjeta" draggable="true" data-tipo="defecto">🎭 “La causa está dentro del consultante”</div>
+      <div class="p8-tarjeta" draggable="true" data-tipo="evitacion">🪞 “Evita experiencias internas difíciles”</div>
+      <div class="p8-tarjeta" draggable="true" data-tipo="alivio">🎯 “La conducta se mantiene por alivio inmediato”</div>
+      <div class="p8-tarjeta" draggable="true" data-tipo="contexto">🔄 “El patrón cambia según el contexto”</div>
+      <div class="p8-tarjeta" draggable="true" data-tipo="estatico">🧱 “Es así porque siempre fue así”</div>
+      <div class="p8-tarjeta" draggable="true" data-tipo="accion">🛠 “Esta formulación sugiere acción clara”</div>
+    </div>
+
+    <!-- AVATAR CENTRAL -->
+    <div class="p8-avatar-area">
+      <div id="p8-avatar-dropzone">
+        <div id="p8-avatar" class="p8-avatar">😐</div>
+        <div id="p8-estado" class="p8-estado">Arrastra una tarjeta para comenzar.</div>
+      </div>
+    </div>
+
+    <!-- PANEL DE INTERVENCIONES -->
+    <div id="p8-panel" class="p8-panel">
+      <h3>Intervenciones sugeridas</h3>
+      <div class="p8-intervencion">• Análisis funcional ABC</div>
+      <div class="p8-intervencion">• Trabajo con evitación y apertura</div>
+      <div class="p8-intervencion">• Exploración de alternativas basadas en valores</div>
+    </div>
+
+  </div>
+
+  <div id="p8-feedback" class="p8-feedback"></div>
+
+  <button id="p8-reiniciar" class="p8-reiniciar">Reiniciar</button>
+
+</section>
+
           </section>
 
         </div>
@@ -230,8 +279,7 @@
             <div id="bloque-4-actividad" class="uv-actividad-placeholder"></div>
           </section>
 
-        </div>
-      </article>
+       </article>
 
     </section>
 
