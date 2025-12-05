@@ -8,10 +8,13 @@
   <!-- Estilos del módulo -->
   <link rel="stylesheet" href="style-unidad-verdad.css" />
   <link rel="stylesheet" href="css/ejercicios/p16/p16-ejercicio.css" />
+  <link rel="stylesheet" href="css/ejercicios/p17/p17-ejercicio.css" />
 
   <!-- JS específico -->
   <script defer src="p7.js"></script>
   <script defer src="js/ejercicios/p16/p16-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p17/p17-ejercicio.js"></script>
+
 
 </head>
 
@@ -322,7 +325,136 @@
 
           <section class="uv-card uv-bloque-actividad">
             <h3>Actividad interactiva · Bloque 2</h3>
-            <div id="bloque-2-actividad" class="uv-actividad-placeholder"></div>
+           <!-- ============================================================
+       EJERCICIO · BLOQUE 2 · EL COMPÁS DE UTILIDAD
+       ============================================================ -->
+  <section class="p17-ejercicio-container">
+
+    <header class="p17-header">
+      <h2>El Compás de Utilidad 🧭</h2>
+      <p>
+        El criterio pragmático funciona como una brújula clínica: una
+        formulación es más verdadera cuando te ayuda a decidir qué hacer
+        con este consultante, en este contexto, para mover su vida en una
+        dirección valiosa.
+      </p>
+      <div class="p17-instrucciones">
+        <p>
+          Arrastra cada tarjeta de descripción clínica hacia la zona del
+          compás que creas correcta:
+        </p>
+        <ul>
+          <li><span class="p17-pill p17-pill-rojo">🟥 No orienta acción</span></li>
+          <li><span class="p17-pill p17-pill-amarillo">🟨 Orienta parcialmente</span></li>
+          <li><span class="p17-pill p17-pill-verde">🟩 Orienta claramente</span></li>
+        </ul>
+        <p>
+          Si la colocas bien, el compás se alineará y la tarjeta quedará
+          fijada. Si no, vibrará y aparecerá una pista. Completa las cinco
+          tarjetas para activar el Panel Pragmatista.
+        </p>
+      </div>
+
+      <div class="p17-progreso">
+        <span class="p17-progreso-label">Tarjetas clasificadas correctamente:</span>
+        <span class="p17-progreso-valor"><span id="p17-contador-correctas">0</span>/5</span>
+      </div>
+    </header>
+
+    <!-- Compás -->
+    <section class="p17-compas-section">
+      <div class="p17-compas">
+
+        <div class="p17-compas-anillo">
+          <div class="p17-zona p17-zona-roja" data-zona="no-accion">
+            <span class="p17-zona-titulo">🟥 No orienta acción</span>
+          </div>
+          <div class="p17-zona p17-zona-amarilla" data-zona="parcial">
+            <span class="p17-zona-titulo">🟨 Orienta parcialmente</span>
+          </div>
+          <div class="p17-zona p17-zona-verde" data-zona="clara">
+            <span class="p17-zona-titulo">🟩 Orienta claramente</span>
+          </div>
+        </div>
+
+        <div class="p17-aguja" aria-hidden="true"></div>
+      </div>
+
+      <p class="p17-compas-nota">
+        El compás gira y se ilumina cuando una formulación te permite
+        ver con claridad qué conducta, en qué contexto y con qué función
+        puede ser intervenida.
+      </p>
+    </section>
+
+    <!-- Tarjetas de descripciones -->
+    <section class="p17-tarjetas-section">
+      <h3 class="p17-tarjetas-titulo">Arrastra estas descripciones al compás</h3>
+
+      <div class="p17-tarjetas-contenedor" id="p17-pila-tarjetas">
+        <article class="p17-tarjeta" data-id="insegura" data-respuesta="no-accion">
+          <span class="p17-tarjeta-icono">🎭</span>
+          <p>“Es una persona insegura por su historia familiar.”</p>
+        </article>
+
+        <article class="p17-tarjeta" data-id="evita-conversaciones" data-respuesta="clara">
+          <span class="p17-tarjeta-icono">🔄</span>
+          <p>“Evita conversaciones tensas porque obtiene alivio inmediato.”</p>
+        </article>
+
+        <article class="p17-tarjeta" data-id="pensamientos-automaticos" data-respuesta="parcial">
+          <span class="p17-tarjeta-icono">🧠</span>
+          <p>“Tiene pensamientos automáticos negativos muy fuertes.”</p>
+        </article>
+
+        <article class="p17-tarjeta" data-id="autocritica-evitacion" data-respuesta="clara">
+          <span class="p17-tarjeta-icono">🎯</span>
+          <p>“Cuando aparece autocrítica, cambia su conducta para evitar conflicto.”</p>
+        </article>
+
+        <article class="p17-tarjeta" data-id="baja-autoestima" data-respuesta="no-accion">
+          <span class="p17-tarjeta-icono">🚫</span>
+          <p>“Tiene baja autoestima.”</p>
+        </article>
+      </div>
+
+      <p id="p17-mensaje-general" class="p17-mensaje-general" aria-live="polite"></p>
+    </section>
+
+    <!-- Panel de pistas -->
+    <section class="p17-pistas" aria-live="polite">
+      <p class="p17-pista-texto" id="p17-pista-texto"></p>
+    </section>
+
+    <!-- Panel Pragmatista final -->
+    <section class="p17-panel-final" aria-live="polite" hidden>
+      <h3>Brújula Funcional Activada ✨</h3>
+      <p>
+        Has clasificado las formulaciones según su capacidad para orientar
+        acción. Las explicaciones de rasgo o etiqueta pueden sonar convincentes,
+        pero no te dicen qué conducta, en qué contexto ni con qué función
+        intervenir.
+      </p>
+      <p>
+        Desde un criterio pragmático, una explicación es más verdadera cuando
+        mejora tu habilidad para decidir <strong>cuándo intervenir, sobre qué
+        conducta y con qué objetivo funcional</strong>.
+      </p>
+      <p class="p17-panel-nota">
+        En supervisión y en clínica, vuelve siempre a la misma pregunta:
+        “¿Esta descripción me ayuda a intervenir mejor con esta persona
+        en su contexto real?”.
+      </p>
+    </section>
+
+    <div class="p17-acciones-finales">
+      <button id="p17-restart-btn" class="p17-btn p17-btn-secundario">
+        Reiniciar el compás 🔄
+      </button>
+    </div>
+
+  </section>
+</section>
           </section>
         </div>
       </article>
