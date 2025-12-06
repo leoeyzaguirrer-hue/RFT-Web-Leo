@@ -9,10 +9,12 @@
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
   <link rel="stylesheet" href="css/ejercicios/p5/p5-ejercicio.css" />
 <link rel="stylesheet" href="css/ejercicios/p6/p6-ejercicio.css" />
+  <link rel="stylesheet" href="css/ejercicios/p7/p7-ejercicio.css" />
   <!-- JS propio -->
   <script defer src="p3.js"></script>
   <script defer src="js/ejercicios/p5/p5-ejercicio.js"></script>
   <script defer src="js/ejercicios/p6/p6-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p7/p7-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -292,7 +294,55 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 3 · CONSTRUCTOR DE CONFIGURACIONES RELACIONALES
+=============================================================== -->
+<section class="p7-ejercicio-container">
+
+  <header class="p7-header">
+    <h3>Actividad interactiva · “Constructor de Configuraciones Relacionales”</h3>
+    <p>
+      Responder al lenguaje es responder a relaciones. Identifica la relación activada,
+      selecciona el objeto que la cumple y luego la acción que deriva de esa configuración.
+    </p>
+  </header>
+
+  <!-- Panel de instrucción verbal -->
+  <div class="p7-instruccion">
+    Haz clic en “Iniciar ejercicio” para recibir la primera configuración relacional.
+  </div>
+
+  <button class="p7-btn-iniciar">Iniciar ejercicio</button>
+
+  <!-- Paneles dinámicos -->
+  <div class="p7-fase p7-fase-relacion" style="display:none;">
+    <h4>1. ¿Qué relación verbal está organizando esta instrucción?</h4>
+    <div class="p7-relaciones"></div>
+    <div class="p7-feedback-rel"></div>
+  </div>
+
+  <div class="p7-fase p7-fase-objeto" style="display:none;">
+    <h4>2. ¿Qué objeto cumple esa relación?</h4>
+    <div class="p7-objetos"></div>
+    <div class="p7-feedback-obj"></div>
+  </div>
+
+  <div class="p7-fase p7-fase-accion" style="display:none;">
+    <h4>3. ¿Qué acción tiene sentido según esa configuración?</h4>
+    <div class="p7-acciones"></div>
+    <div class="p7-feedback-accion"></div>
+  </div>
+
+  <!-- Mensaje final -->
+  <div class="p7-mensaje-final"></div>
+
+  <!-- Reinicio -->
+  <button class="p7-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
 
             <div id="zona-interactiva-1" class="uv-interactiva"></div>
