@@ -7,9 +7,11 @@
 
   <!-- Style exclusivo del módulo -->
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
+  <link rel="stylesheet" href="css/ejercicios/p5/p5-ejercicio.css" />
 
   <!-- JS propio -->
   <script defer src="p3.js"></script>
+  <script defer src="js/ejercicios/p5/p5-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -105,7 +107,40 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <!-- ============================================================
+     EJERCICIO · BLOQUE 1 · CONMUTADOR DE OPERANTES VERBALES
+=============================================================== -->
+<section class="p5-ejercicio-container">
+
+  <header class="p5-header">
+    <h3>Actividad interactiva · “El Conmutador de Operantes Verbales”</h3>
+    <p>
+      Alterna entre funciones de hablante y oyente. Observa cómo cambian los
+      controles, las respuestas esperadas y la conducta adecuada en cada caso.
+    </p>
+  </header>
+
+  <!-- Selector de modo -->
+  <div class="p5-modos">
+    <button class="p5-btn-modo" data-modo="hablante">🔴 Modo Hablante</button>
+    <button class="p5-btn-modo" data-modo="oyente">🔵 Modo Oyente</button>
+  </div>
+
+  <!-- Contenedor dinámico -->
+  <div id="p5-contenido-dinamico" class="p5-dinamico">
+    <p class="p5-instruccion">Selecciona un modo para comenzar…</p>
+  </div>
+
+  <!-- Mensaje final -->
+  <div class="p5-mensaje-final"></div>
+
+  <!-- Reiniciar -->
+  <button class="p5-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
             <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
