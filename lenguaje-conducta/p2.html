@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="css/ejercicios/p1/p1-ejercicio.css" />
   <link rel="stylesheet" href="css/ejercicios/p2/p2-ejercicio.css">
    <link rel="stylesheet" href="css/ejercicios/p3/p3-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p4/p4-ejercicio.css">
 
   <!-- JS propio -->
   <script defer src="p2.js"></script>
   <script defer src="js/ejercicios/p1/p1-ejercicio.js"></script>
   <script defer src="js/ejercicios/p2/p2-ejercicio.js"></script>
   <script defer src="js/ejercicios/p3/p3-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p4/p4-ejercicio.js"></script>
 
 </head>
 
@@ -528,63 +530,86 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-       <!-- ============================================================
-     EJERCICIO · BLOQUE 3 · GENERADOR DE RELACIONES ARBITRARIAS
+   <!-- ============================================================
+     EJERCICIO · BLOQUE 3 · CONSTRUCTOR DE RELACIONES
 =============================================================== -->
 <section class="p3-ejercicio-container">
 
   <header class="p3-header">
-    <h3>Actividad interactiva · “El Generador de Relaciones Arbitrarias”</h3>
+    <h3>Actividad interactiva · “El Constructor de Relaciones”</h3>
     <p>
-      Observa cómo las palabras (A) adquieren funciones al relacionarse con
-      emociones (B), y cómo estas relaciones derivan automáticamente conductas (C).
-      El lenguaje funciona construyendo vínculos, no describiendo objetos.
+      El lenguaje no describe objetos: establece relaciones que transforman
+      funciones. Construye cadenas A–B–C, observa la función derivada y decide si
+      mantenerla o reformularla.
     </p>
   </header>
 
-  <div class="p3-columns">
+  <!-- Zona de construcción -->
+  <div class="p3-constructor">
 
-    <!-- Columna A -->
-    <div class="p3-columna">
-      <h4>Palabras</h4>
-      <div class="p3-lista p3-lista-A">
-        <div class="p3-item-A" data-id="examen">EXAMEN</div>
-        <div class="p3-item-A" data-id="presentacion">PRESENTACIÓN</div>
-        <div class="p3-item-A" data-id="mama">MAMÁ</div>
-        <div class="p3-item-A" data-id="silencio">SILENCIO</div>
-      </div>
+    <div class="p3-slot">
+      <h4>1. Selecciona una palabra</h4>
+      <div class="p3-slot-box" id="slot-palabra">Arrastra una palabra aquí</div>
     </div>
 
-    <!-- Columna B -->
-    <div class="p3-columna">
-      <h4>Emociones</h4>
-      <div class="p3-lista p3-lista-B">
-        <div class="p3-item-B" data-id="estres">⚡ estrés</div>
-        <div class="p3-item-B" data-id="alivio">🌈 alivio</div>
-        <div class="p3-item-B" data-id="miedo">😱 miedo</div>
-        <div class="p3-item-B" data-id="logro">⭐ logro</div>
-      </div>
+    <div class="p3-slot">
+      <h4>2. Selecciona relación emocional</h4>
+      <div class="p3-slot-box" id="slot-emocion">Selecciona emoción</div>
     </div>
 
-    <!-- Columna C -->
-    <div class="p3-columna">
-      <h4>Conductas derivadas</h4>
-      <div class="p3-lista p3-lista-C">
-        <div class="p3-item-C" data-id="evitar">evitar</div>
-        <div class="p3-item-C" data-id="acercarse">acercarse</div>
-        <div class="p3-item-C" data-id="prepararse">prepararse</div>
-        <div class="p3-item-C" data-id="pedir">pedir ayuda</div>
-      </div>
+    <div class="p3-slot">
+      <h4>3. Conducta derivada</h4>
+      <div class="p3-slot-box" id="slot-conducta">Conducta sugerida…</div>
     </div>
 
   </div>
 
-  <!-- Espacio visual para líneas -->
-  <svg class="p3-svg"></svg>
-
-  <div class="p3-controles">
-    <button class="p3-btn-reset">Reiniciar ejercicio</button>
+  <!-- Palabras -->
+  <div class="p3-grupo">
+    <h4>Palabras</h4>
+    <div class="p3-items">
+      <div class="p3-item palabra" draggable="true" data-id="examen">EXAMEN</div>
+      <div class="p3-item palabra" draggable="true" data-id="presentacion">PRESENTACIÓN</div>
+      <div class="p3-item palabra" draggable="true" data-id="mama">MAMÁ</div>
+      <div class="p3-item palabra" draggable="true" data-id="silencio">SILENCIO</div>
+    </div>
   </div>
+
+  <!-- Emociones -->
+  <div class="p3-grupo">
+    <h4>Emociones</h4>
+    <div class="p3-emociones">
+      <div class="p3-emocion" data-id="estres">⚡ estrés</div>
+      <div class="p3-emocion" data-id="alivio">🌈 alivio</div>
+      <div class="p3-emocion" data-id="miedo">😱 miedo</div>
+      <div class="p3-emocion" data-id="logro">⭐ logro</div>
+    </div>
+  </div>
+
+  <!-- Panel de reformulación -->
+  <div class="p3-panel" id="panel-reformulacion">
+    <h4>¿Mantienes esta relación o la reformulas?</h4>
+    <button class="p3-btn p3-mantener">✔ Mantener</button>
+    <button class="p3-btn p3-reformular">✂ Reformular</button>
+  </div>
+
+  <!-- Panel de nueva relación -->
+  <div class="p3-panel" id="panel-nueva-relacion">
+    <h4>Selecciona nueva emoción y conducta</h4>
+
+    <div class="p3-opciones">
+      <div class="p3-emocion" data-id="estres">⚡ estrés</div>
+      <div class="p3-emocion" data-id="alivio">🌈 alivio</div>
+      <div class="p3-emocion" data-id="miedo">😱 miedo</div>
+      <div class="p3-emocion" data-id="logro">⭐ logro</div>
+    </div>
+  </div>
+
+  <!-- Registro -->
+  <div class="p3-registro"></div>
+
+  <!-- Reinicio -->
+  <button class="p3-btn-reset">Reiniciar ejercicio</button>
 
   <div class="p3-resultado"></div>
   </div>
@@ -595,7 +620,7 @@
 
 <div class="uv-separador-bloque">✦</div>
 
-      <!-- BLOQUE 4 -->
+       <!-- BLOQUE 4 -->
       <section class="uv-card uv-bloque">
         <details class="uv-accordion">
           <summary>
@@ -616,7 +641,77 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 4 · DESESTABILIZADOR DE LA CAJA MENTAL
+=============================================================== -->
+<section class="p4-ejercicio-container">
+
+  <header class="p4-header">
+    <h3>Actividad interactiva · “El Desestabilizador de la Caja Mental”</h3>
+    <p>
+      Clasifica las acciones lingüísticas y observa cómo la metáfora mentalista
+      se derrumba. El lenguaje no “vive dentro” de nada: es conducta abierta o
+      encubierta en interacción con antecedentes y consecuencias.
+    </p>
+  </header>
+
+  <!-- Caja mental -->
+  <div class="p4-caja-mental">
+    <p>MENTE: donde vive el lenguaje</p>
+  </div>
+
+  <!-- Zona de acción -->
+  <div class="p4-zona-accion">
+    <h4>🟩 Acción del organismo</h4>
+    <p>Coloca aquí si reconoces que es conducta (abierta o encubierta).</p>
+  </div>
+
+  <!-- Zona mentalista -->
+  <div class="p4-zona-mentalista">
+    <h4>🟥 Dentro de la caja</h4>
+    <p>Coloca aquí si crees que “vive en la mente”.</p>
+  </div>
+
+  <!-- Tarjetas -->
+  <div class="p4-tarjetas">
+
+    <div class="p4-card" draggable="true" data-id="miedo">
+      🗣 Decir “tengo miedo”.
+    </div>
+
+    <div class="p4-card" draggable="true" data-id="agresivo">
+      ✍️ Escribir un mensaje agresivo y borrarlo.
+    </div>
+
+    <div class="p4-card" draggable="true" data-id="murmurar">
+      🤐 Murmurar sin emitir sonido.
+    </div>
+
+    <div class="p4-card" draggable="true" data-id="nopuedo">
+      💭 Repetir mentalmente “no puedo más”.
+    </div>
+
+    <div class="p4-card" draggable="true" data-id="telefono">
+      📞 No contestar el teléfono al verlo sonar.
+    </div>
+
+    <div class="p4-card" draggable="true" data-id="reloj">
+      ⚠️ Mirar el reloj mientras surge la regla encubierta “me van a retar”.
+    </div>
+
+  </div>
+
+  <!-- Panel de A–C -->
+  <div class="p4-panel-funciones"></div>
+
+  <!-- Resultado -->
+  <div class="p4-mensaje-final"></div>
+
+  <!-- Reinicio -->
+  <button class="p4-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
       </p>
       <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
