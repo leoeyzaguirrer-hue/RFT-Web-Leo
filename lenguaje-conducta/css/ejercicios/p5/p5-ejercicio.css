@@ -1,0 +1,136 @@
+/* ============================================================
+   EJERCICIO P5 · CONMUTADOR DE OPERANTES VERBALES
+=============================================================== */
+
+.p5-ejercicio-container {
+  background: linear-gradient(135deg, #ffffff, #f6fbff, #fff4d8);
+  border: 1px solid rgba(253,191,18,0.45);
+  padding: 24px;
+  border-radius: 20px;
+  margin-top: 26px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+}
+
+.p5-header p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Selector de modo */
+
+.p5-modos {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.p5-btn-modo {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(12,58,96,0.22);
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.p5-btn-modo:hover {
+  transform: translateY(-2px);
+  background: #f7fcff;
+}
+
+/* Contenido dinámico */
+
+.p5-dinamico {
+  margin-top: 22px;
+  background: #ffffffdd;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(12,58,96,0.15);
+  min-height: 180px;
+}
+
+.p5-instruccion {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #08323a;
+}
+
+/* Tarjetas modo hablante */
+
+.p5-enunciado {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.p5-opciones {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.p5-opcion {
+  padding: 10px 12px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(12,58,96,0.16);
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.p5-opcion:hover {
+  transform: translateY(-2px);
+  background: #f2fbff;
+}
+
+/* Tarjetas modo oyente */
+
+.p5-escena-oyente {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.p5-objeto {
+  padding: 12px;
+  background: #ffffff;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(12,58,96,0.18);
+  cursor: pointer;
+}
+
+.p5-objeto:hover {
+  background: #f7fcff;
+}
+
+/* Feedback */
+
+.p5-feedback {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 24px;
+}
+
+/* Mensaje final */
+
+.p5-mensaje-final {
+  margin-top: 18px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Reinicio */
+
+.p5-btn-reset {
+  margin-top: 18px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg,#fff7e6,#fdbf12);
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  color: #08323a;
+}
