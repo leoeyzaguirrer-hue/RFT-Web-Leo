@@ -8,10 +8,12 @@
   <!-- Style exclusivo del módulo -->
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
   <link rel="stylesheet" href="css/ejercicios/p1/p1-ejercicio.css" />
+  <link rel="stylesheet" href="css/ejercicios/p2/p2-ejercicio.css">
 
   <!-- JS propio -->
   <script defer src="p2.js"></script>
   <script defer src="js/ejercicios/p1/p1-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p2/p2-ejercicio.js"></script>
 
 </head>
 
@@ -418,7 +420,84 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <!-- ============================================================
+     EJERCICIO · BLOQUE 2 · SIMULADOR DE FUNCIONES DEL ENUNCIADO
+=============================================================== -->
+<section class="p2-ejercicio-container">
+
+  <header class="p2-header">
+    <h3>Actividad interactiva · “El Simulador de Funciones del Enunciado”</h3>
+    <p>
+      Explora cómo un mismo enunciado (“No puedo.”) puede cumplir funciones
+      radicalmente distintas según el contexto (A) y las consecuencias (C).
+      El lenguaje no expresa un “estado interno”: opera como conducta.
+    </p>
+  </header>
+
+  <!-- Tarjeta del enunciado -->
+  <div class="p2-enunciado-box">
+    <p class="p2-enunciado">“No puedo.”</p>
+  </div>
+
+  <!-- Avatar y monitor -->
+  <div class="p2-avatar-monitor">
+    <div class="p2-avatar"></div>
+    <div class="p2-monitor">
+      <span class="p2-monitor-label">Función detectada</span>
+      <div class="p2-monitor-bar"></div>
+    </div>
+  </div>
+
+  <!-- Botones de escenarios -->
+  <div class="p2-contextos">
+    <button class="p2-btn-contexto" data-contexto="examen">🧪 Examen de la universidad</button>
+    <button class="p2-btn-contexto" data-contexto="sesion">💬 Sesión terapéutica</button>
+  </div>
+
+  <!-- Panel del escenario -->
+  <div class="p2-escenario p2-escenario-oculto">
+    <h4 class="p2-escenario-titulo"></h4>
+
+    <p class="p2-instruccion-funcion">
+      Selecciona qué función cumple el enunciado en este contexto:
+    </p>
+
+    <div class="p2-funciones-grid">
+
+      <div class="p2-funcion-card" data-funcion="evitacion">
+        🚫 Evitación
+      </div>
+
+      <div class="p2-funcion-card" data-funcion="ayuda">
+        🆘 Solicitar ayuda
+      </div>
+
+      <div class="p2-funcion-card" data-funcion="ajuste">
+        🎯 Ajuste de conducta
+      </div>
+
+      <div class="p2-funcion-card" data-funcion="rigidez">
+        🧱 Rigidez verbal
+      </div>
+
+      <div class="p2-funcion-card" data-funcion="apertura">
+        🌟 Apertura hacia solución
+      </div>
+
+    </div>
+
+    <div class="p2-feedback-funcion"></div>
+    <div class="p2-consecuencia"></div>
+  </div>
+
+  <!-- Mensaje final -->
+  <div class="p2-mensaje-final"></div>
+
+  <!-- Reiniciar -->
+  <button class="p2-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
       </p>
       <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
