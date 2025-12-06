@@ -90,7 +90,304 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 1 · ESCÁNER DE CONDUCTAS LINGÜÍSTICAS
+=============================================================== -->
+<section class="p1-ejercicio-container">
+
+  <!-- Instrucciones generales -->
+  <header class="p1-ejercicio-header">
+    <div class="p1-ejercicio-title">
+      <h3>Actividad interactiva · “El Escáner de Conductas Lingüísticas”</h3>
+      <p>
+        Clasifica cada ejemplo como conducta verbal <strong>abierta</strong> u
+        <strong>encubierta</strong>. Luego, identifica posibles antecedentes (A) y
+        consecuencias (C) que mantienen esas acciones. Recuerda: incluso cuando
+        nadie escucha, el lenguaje sigue siendo conducta del organismo-en-contexto.
+      </p>
+    </div>
+    <div class="p1-avatar-monitor">
+      <div class="p1-avatar"></div>
+      <div class="p1-monitor">
+        <span class="p1-monitor-label">Actividad verbal</span>
+        <div class="p1-monitor-bar"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fase 1 · Clasificación abierta vs encubierta -->
+  <section class="p1-fase p1-fase-topografias">
+    <h4>Fase 1 · ¿Conducta verbal abierta o encubierta?</h4>
+    <p class="p1-fase-instruccion">
+      Arrastra cada tarjeta hacia la categoría que corresponda. Si te equivocas,
+      la tarjeta vibra y vuelve a la zona inicial.
+    </p>
+
+    <div class="p1-tablero">
+      <!-- Columna de tarjetas iniciales -->
+      <div class="p1-columna p1-columna-inicial">
+        <h5>Conductas lingüísticas</h5>
+        <div class="p1-cards-pool">
+
+          <article class="p1-card" draggable="true"
+                   data-card-id="c1" data-tipo="abierta">
+            <span class="p1-card-icon">🗣</span>
+            <p>Decir en voz alta: “no puedo más”.</p>
+          </article>
+
+          <article class="p1-card" draggable="true"
+                   data-card-id="c2" data-tipo="abierta">
+            <span class="p1-card-icon">✍️</span>
+            <p>Escribir un mensaje pidiendo ayuda.</p>
+          </article>
+
+          <article class="p1-card" draggable="true"
+                   data-card-id="c3" data-tipo="abierta">
+            <span class="p1-card-icon">📓</span>
+            <p>Anotar una tarea en la agenda.</p>
+          </article>
+
+          <article class="p1-card" draggable="true"
+                   data-card-id="c4" data-tipo="encubierta">
+            <span class="p1-card-icon">🤐</span>
+            <p>Mover los labios sin emitir sonido.</p>
+          </article>
+
+          <article class="p1-card" draggable="true"
+                   data-card-id="c5" data-tipo="encubierta">
+            <span class="p1-card-icon">💭</span>
+            <p>Pensar: “soy un desastre”.</p>
+          </article>
+
+          <article class="p1-card" draggable="true"
+                   data-card-id="c6" data-tipo="abierta">
+            <span class="p1-card-icon">📱</span>
+            <p>Seleccionar un ícono de silencio para evitar notificaciones.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Zonas de clasificación -->
+      <div class="p1-columna p1-columna-zonas">
+        <div class="p1-drop-zone"
+             data-acepta="abierta">
+          <h5>🟩 Conducta verbal abierta (observable)</h5>
+          <p class="p1-drop-hint">
+            Ej.: hablar en voz alta, escribir, teclear, seleccionar íconos.
+          </p>
+          <div class="p1-drop-content"></div>
+        </div>
+
+        <div class="p1-drop-zone"
+             data-acepta="encubierta">
+          <h5>🟦 Conducta verbal encubierta (no observable)</h5>
+          <p class="p1-drop-hint">
+            Ej.: pensar en palabras, mover los labios sin sonido.
+          </p>
+          <div class="p1-drop-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p1-controles-fase1">
+      <button type="button" class="p1-btn p1-btn-check-clasificacion">
+        Comprobar clasificación
+      </button>
+      <button type="button" class="p1-btn p1-btn-reset">
+        Reiniciar ejercicio
+      </button>
+      <p class="p1-feedback-fase1"></p>
+    </div>
+  </section>
+
+  <!-- Fase 2 · Antecedentes y consecuencias -->
+  <section class="p1-fase p1-fase-funciones p1-fase-oculta">
+    <h4>Fase 2 · Función en el análisis A–B–C</h4>
+    <p class="p1-fase-instruccion">
+      Para cada conducta, elige un antecedente (A) probable y una consecuencia (C)
+      que podría estar manteniéndola. No buscamos “la verdad interna”, sino una
+      descripción funcional de la relación entre contexto y conducta verbal.
+    </p>
+
+    <div class="p1-funciones-grid">
+
+      <!-- Fila por conducta -->
+      <div class="p1-fila-funcion" data-card-id="c1">
+        <div class="p1-funcion-conducta">
+          <span class="p1-card-icon">🗣</span>
+          <p>Decir en voz alta: “no puedo más”.</p>
+        </div>
+        <div class="p1-funcion-selects">
+          <label>
+            A (antecedente):
+            <select class="p1-select-antecedente">
+              <option value="">Selecciona…</option>
+              <option value="presion">Presión académica</option>
+              <option value="evaluacion">Evaluación social</option>
+              <option value="recordatorio">Recordatorio de responsabilidad</option>
+            </select>
+          </label>
+          <label>
+            C (consecuencia):
+            <select class="p1-select-consecuencia">
+              <option value="">Selecciona…</option>
+              <option value="alivio">Alivio momentáneo</option>
+              <option value="evitacion">Evitación de contacto</option>
+              <option value="organizacion">Organización de la acción</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="p1-fila-funcion" data-card-id="c2">
+        <div class="p1-funcion-conducta">
+          <span class="p1-card-icon">✍️</span>
+          <p>Escribir un mensaje pidiendo ayuda.</p>
+        </div>
+        <div class="p1-funcion-selects">
+          <label>
+            A (antecedente):
+            <select class="p1-select-antecedente">
+              <option value="">Selecciona…</option>
+              <option value="presion">Presión académica</option>
+              <option value="evaluacion">Evaluación social</option>
+              <option value="recordatorio">Recordatorio de responsabilidad</option>
+            </select>
+          </label>
+          <label>
+            C (consecuencia):
+            <select class="p1-select-consecuencia">
+              <option value="">Selecciona…</option>
+              <option value="alivio">Alivio momentáneo</option>
+              <option value="evitacion">Evitación de contacto</option>
+              <option value="organizacion">Organización de la acción</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="p1-fila-funcion" data-card-id="c3">
+        <div class="p1-funcion-conducta">
+          <span class="p1-card-icon">📓</span>
+          <p>Anotar una tarea en la agenda.</p>
+        </div>
+        <div class="p1-funcion-selects">
+          <label>
+            A (antecedente):
+            <select class="p1-select-antecedente">
+              <option value="">Selecciona…</option>
+              <option value="presion">Presión académica</option>
+              <option value="evaluacion">Evaluación social</option>
+              <option value="recordatorio">Recordatorio de responsabilidad</option>
+            </select>
+          </label>
+          <label>
+            C (consecuencia):
+            <select class="p1-select-consecuencia">
+              <option value="">Selecciona…</option>
+              <option value="alivio">Alivio momentáneo</option>
+              <option value="evitacion">Evitación de contacto</option>
+              <option value="organizacion">Organización de la acción</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="p1-fila-funcion" data-card-id="c4">
+        <div class="p1-funcion-conducta">
+          <span class="p1-card-icon">🤐</span>
+          <p>Mover los labios sin emitir sonido.</p>
+        </div>
+        <div class="p1-funcion-selects">
+          <label>
+            A (antecedente):
+            <select class="p1-select-antecedente">
+              <option value="">Selecciona…</option>
+              <option value="presion">Presión académica</option>
+              <option value="evaluacion">Evaluación social</option>
+              <option value="recordatorio">Recordatorio de responsabilidad</option>
+            </select>
+          </label>
+          <label>
+            C (consecuencia):
+            <select class="p1-select-consecuencia">
+              <option value="">Selecciona…</option>
+              <option value="alivio">Alivio momentáneo</option>
+              <option value="evitacion">Evitación de contacto</option>
+              <option value="organizacion">Organización de la acción</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="p1-fila-funcion" data-card-id="c5">
+        <div class="p1-funcion-conducta">
+          <span class="p1-card-icon">💭</span>
+          <p>Pensar: “soy un desastre”.</p>
+        </div>
+        <div class="p1-funcion-selects">
+          <label>
+            A (antecedente):
+            <select class="p1-select-antecedente">
+              <option value="">Selecciona…</option>
+              <option value="presion">Presión académica</option>
+              <option value="evaluacion">Evaluación social</option>
+              <option value="recordatorio">Recordatorio de responsabilidad</option>
+            </select>
+          </label>
+          <label>
+            C (consecuencia):
+            <select class="p1-select-consecuencia">
+              <option value="">Selecciona…</option>
+              <option value="alivio">Alivio momentáneo</option>
+              <option value="evitacion">Evitación de contacto</option>
+              <option value="organizacion">Organización de la acción</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="p1-fila-funcion" data-card-id="c6">
+        <div class="p1-funcion-conducta">
+          <span class="p1-card-icon">📱</span>
+          <p>Seleccionar un ícono de silencio para evitar notificaciones.</p>
+        </div>
+        <div class="p1-funcion-selects">
+          <label>
+            A (antecedente):
+            <select class="p1-select-antecedente">
+              <option value="">Selecciona…</option>
+              <option value="presion">Presión académica</option>
+              <option value="evaluacion">Evaluación social</option>
+              <option value="recordatorio">Recordatorio de responsabilidad</option>
+            </select>
+          </label>
+          <label>
+            C (consecuencia):
+            <select class="p1-select-consecuencia">
+              <option value="">Selecciona…</option>
+              <option value="alivio">Alivio momentáneo</option>
+              <option value="evitacion">Evitación de contacto</option>
+              <option value="organizacion">Organización de la acción</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="p1-controles-fase2">
+      <button type="button" class="p1-btn p1-btn-check-funciones">
+        Revisar funciones A–C
+      </button>
+      <p class="p1-feedback-fase2"></p>
+      <p class="p1-mensaje-final"></p>
+    </div>
+  </section>
+
+</section>
+
       </p>
       <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
