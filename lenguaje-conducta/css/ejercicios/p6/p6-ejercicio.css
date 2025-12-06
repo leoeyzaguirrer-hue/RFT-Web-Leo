@@ -1,0 +1,131 @@
+/* ============================================================
+   EJERCICIO P6 · SIMULADOR DEL AUTODIÁLOGO
+=============================================================== */
+
+.p6-ejercicio-container {
+  background: linear-gradient(135deg, #ffffff, #f6fbff, #fff4d8);
+  border: 1px solid rgba(253,191,18,0.45);
+  padding: 26px;
+  border-radius: 20px;
+  margin-top: 26px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+}
+
+.p6-header p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Frases internas */
+
+.p6-frases {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.p6-frase {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(12,58,96,0.20);
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.p6-frase:hover {
+  background: #f2fbff;
+  transform: translateY(-2px);
+}
+
+/* Avatar */
+
+.p6-avatar-box {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0;
+}
+
+.p6-avatar {
+  position: relative;
+  width: 220px;
+}
+
+.p6-avatar-img {
+  width: 100%;
+}
+
+.p6-globo-externo,
+.p6-globo-interno {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid rgba(12,58,96,0.18);
+  min-height: 40px;
+  max-width: 180px;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.p6-globo-externo {
+  top: -10px;
+  left: -140px;
+}
+
+.p6-globo-interno {
+  top: -10px;
+  right: -140px;
+  background: #fff7e6;
+}
+
+/* Opciones relación */
+
+.p6-opciones-rel,
+.p6-opciones-accion {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.p6-rel,
+.p6-accion {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(12,58,96,0.18);
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.p6-rel:hover,
+.p6-accion:hover {
+  background: #f7fcff;
+  transform: translateY(-2px);
+}
+
+.p6-feedback-rel,
+.p6-feedback-accion {
+  margin-top: 10px;
+  font-weight: 600;
+  min-height: 26px;
+}
+
+.p6-mensaje-final {
+  margin-top: 18px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Reiniciar */
+
+.p6-btn-reset {
+  margin-top: 20px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#fff7e6,#fdbf12);
+  cursor: pointer;
+  color: #08323a;
+}
