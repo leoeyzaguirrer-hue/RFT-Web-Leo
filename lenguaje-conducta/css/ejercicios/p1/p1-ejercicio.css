@@ -1,0 +1,384 @@
+/* ============================================================
+   P1 · EJERCICIO BLOQUE 1 · ESCÁNER DE CONDUCTAS LINGÜÍSTICAS
+   Estilos locales, sin tocar el style general del módulo
+============================================================ */
+
+.p1-ejercicio-container {
+  margin-top: 24px;
+  padding: 20px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5fbff 40%, #fef9f0 100%);
+  border: 1px solid rgba(253, 191, 18, 0.5);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
+}
+
+/* Encabezado con avatar + monitor */
+
+.p1-ejercicio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.p1-ejercicio-title h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+
+.p1-ejercicio-title p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.p1-avatar-monitor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.p1-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffeec2, #fdbf12);
+  box-shadow: 0 0 0 3px rgba(253, 191, 18, 0.3);
+}
+
+.p1-monitor {
+  min-width: 130px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(12, 58, 96, 0.06);
+  border: 1px solid rgba(12, 58, 96, 0.16);
+}
+
+.p1-monitor-label {
+  display: block;
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+}
+
+.p1-monitor-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0f4c5c, #1ca3b3, #fdbf12);
+  position: relative;
+  overflow: hidden;
+}
+
+.p1-monitor-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    transparent 60%
+  );
+  animation: p1-pulso-monitor 2.2s infinite;
+}
+
+@keyframes p1-pulso-monitor {
+  0% {
+    transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Fases generales */
+
+.p1-fase {
+  margin-top: 18px;
+}
+
+.p1-fase h4 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.p1-fase-instruccion {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Tablero de clasificación */
+
+.p1-tablero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.p1-columna h5 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.p1-columna-inicial {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px dashed rgba(12, 58, 96, 0.18);
+}
+
+.p1-cards-pool {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p1-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(12, 58, 96, 0.14);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+  cursor: grab;
+  font-size: 0.9rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.p1-card:active {
+  cursor: grabbing;
+}
+
+.p1-card-icon {
+  font-size: 1.1rem;
+}
+
+.p1-card p {
+  margin: 0;
+}
+
+/* Zonas de drop */
+
+.p1-columna-zonas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.p1-drop-zone {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.5px solid rgba(12, 58, 96, 0.16);
+  min-height: 84px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.p1-drop-zone h5 {
+  margin: 0 0 4px;
+  font-size: 0.93rem;
+}
+
+.p1-drop-hint {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  color: rgba(8, 50, 58, 0.8);
+}
+
+.p1-drop-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Estados al arrastrar */
+
+.p1-drop-zone.p1-drop-over {
+  border-color: #fdbf12;
+  background: rgba(253, 191, 18, 0.06);
+}
+
+.p1-card.p1-card-correcta {
+  border-color: rgba(46, 160, 67, 0.9);
+  box-shadow: 0 8px 18px rgba(46, 160, 67, 0.18);
+}
+
+.p1-card.p1-card-error {
+  animation: p1-card-shake 0.25s;
+}
+
+@keyframes p1-card-shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Controles fase 1 */
+
+.p1-controles-fase1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.p1-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0f4c5c, #1ca3b3);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    filter 0.12s ease;
+}
+
+.p1-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.p1-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.p1-btn-reset {
+  background: linear-gradient(135deg, #fffbf2, #fdbf12);
+  color: #08323a;
+}
+
+.p1-feedback-fase1 {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* Fase 2 · tabla de funciones */
+
+.p1-fase-funciones {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(12, 58, 96, 0.18);
+}
+
+.p1-fase-oculta {
+  display: none;
+}
+
+.p1-funciones-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.p1-fila-funcion {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 2fr);
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(12, 58, 96, 0.12);
+}
+
+.p1-funcion-conducta p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.p1-funcion-selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.p1-funcion-selects label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+}
+
+.p1-funcion-selects select {
+  margin-top: 2px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(12, 58, 96, 0.26);
+  font-size: 0.8rem;
+  background: #ffffff;
+}
+
+/* Feedback funciones */
+
+.p1-controles-fase2 {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p1-feedback-fase2,
+.p1-mensaje-final {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.p1-fila-funcion.p1-ok {
+  border-color: rgba(46, 160, 67, 0.85);
+  box-shadow: 0 0 0 1px rgba(46, 160, 67, 0.2);
+}
+
+.p1-fila-funcion.p1-error {
+  border-color: rgba(200, 60, 60, 0.8);
+  box-shadow: 0 0 0 1px rgba(200, 60, 60, 0.2);
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .p1-ejercicio-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .p1-avatar-monitor {
+    justify-content: flex-start;
+  }
+
+  .p1-tablero {
+    grid-template-columns: 1fr;
+  }
+
+  .p1-fila-funcion {
+    grid-template-columns: 1fr;
+  }
+
+  .p1-funcion-selects {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
