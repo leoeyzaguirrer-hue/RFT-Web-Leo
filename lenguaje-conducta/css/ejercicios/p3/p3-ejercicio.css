@@ -1,113 +1,115 @@
 /* ============================================================
-   EJERCICIO P3 · GENERADOR DE RELACIONES ARBITRARIAS
-   Estilos premium compatibles con el módulo
+   EJERCICIO P3 · CONSTRUCTOR DE RELACIONES
 =============================================================== */
 
 .p3-ejercicio-container {
-  margin-top: 24px;
   padding: 24px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #ffffff, #f6fbff, #fff7e9);
-  border: 1px solid rgba(253, 191, 18, 0.5);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  margin-top: 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff, #f6fbff, #fff3d8);
+  border: 1px solid rgba(253,191,18,0.45);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.07);
 }
 
+/* Títulos */
 .p3-header p {
   font-size: 0.95rem;
   line-height: 1.6;
 }
 
-/* Columnas */
-
-.p3-columns {
+/* Constructor */
+.p3-constructor {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
   margin-top: 18px;
 }
 
-.p3-columna h4 {
-  margin: 0 0 8px;
+.p3-slot-box {
+  border: 2px dashed rgba(12,58,96,0.25);
+  background: #ffffffaa;
+  padding: 18px;
+  min-height: 70px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #08323a;
 }
 
-.p3-lista {
+/* Items básicos */
+.p3-grupo {
+  margin-top: 24px;
+}
+
+.p3-items {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.p3-item-A,
-.p3-item-B,
-.p3-item-C {
-  padding: 10px 12px;
+.p3-item,
+.p3-emocion,
+.p3-emocion-nueva {
+  padding: 10px 14px;
   background: #ffffff;
   border-radius: 12px;
-  border: 1px solid rgba(12, 58, 96, 0.14);
+  border: 1px solid rgba(12,58,96,0.15);
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-  font-size: 0.92rem;
+  transition: 0.15s ease;
 }
 
-.p3-item-A:hover,
-.p3-item-B:hover {
+.p3-item:hover,
+.p3-emocion:hover {
   transform: translateY(-2px);
   background: #f7fcff;
+  border-color: #1ca3b3;
 }
 
-/* Emoción seleccionada */
-.p3-item-B.p3-seleccionada {
-  border-color: #fdbf12;
-  background: #fff6da;
-}
-
-/* Capa SVG para líneas */
-.p3-svg {
-  width: 100%;
-  height: 260px;
+/* Panel reformulación */
+.p3-panel {
   margin-top: 22px;
-  overflow: visible;
+  padding: 14px;
+  background: #ffffffee;
+  border-radius: 16px;
+  border: 1px solid rgba(12,58,96,0.12);
+  display: none;
 }
 
-/* Líneas */
-.p3-linea-AB {
-  stroke: #fdbf12;
-  stroke-width: 3px;
-  stroke-linecap: round;
-}
-
-.p3-linea-BC {
-  stroke: #1ca3b3;
-  stroke-width: 3px;
-  stroke-linecap: round;
-  stroke-dasharray: 6 4;
-}
-
-/* Botón reinicio */
-
-.p3-btn-reset {
-  padding: 8px 16px;
-  border-radius: 999px;
+.p3-btn {
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #fdbf12;
+  color: #08323a;
   border: none;
   cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Registro */
+.p3-registro {
+  margin-top: 22px;
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(12,58,96,0.12);
   font-size: 0.9rem;
-  background: linear-gradient(135deg, #fffbf2, #fdbf12);
-  color: #08323a;
-  margin-top: 12px;
+  min-height: 60px;
 }
 
 /* Resultado final */
-
 .p3-resultado {
-  margin-top: 14px;
-  font-size: 1rem;
   font-weight: 600;
-  min-height: 28px;
+  font-size: 1rem;
+  margin-top: 16px;
 }
 
-/* Responsive */
-
-@media (max-width: 900px) {
-  .p3-columns {
-    grid-template-columns: 1fr;
-  }
+/* Reiniciar */
+.p3-btn-reset {
+  margin-top: 16px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #fff9e6, #fdbf12);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #08323a;
 }
