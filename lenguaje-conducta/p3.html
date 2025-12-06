@@ -8,10 +8,11 @@
   <!-- Style exclusivo del módulo -->
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
   <link rel="stylesheet" href="css/ejercicios/p5/p5-ejercicio.css" />
-
+<link rel="stylesheet" href="css/ejercicios/p6/p6-ejercicio.css" />
   <!-- JS propio -->
   <script defer src="p3.js"></script>
   <script defer src="js/ejercicios/p5/p5-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p6/p6-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -177,7 +178,82 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 2 · SIMULADOR DEL AUTODIÁLOGO
+=============================================================== -->
+<section class="p6-ejercicio-container">
+
+  <header class="p6-header">
+    <h3>Actividad interactiva · “El Simulador del Autodiálogo”</h3>
+    <p>
+      Observa cómo al producir un enunciado interno, el organismo responde como
+      hablante y oyente al mismo tiempo. Explora cómo las relaciones verbales
+      activadas transforman la conducta.
+    </p>
+  </header>
+
+  <!-- Selección de frase interna -->
+  <div class="p6-fase" id="p6-fase-frase">
+    <h4>1. Selecciona una frase interna</h4>
+    <div class="p6-frases">
+      <div class="p6-frase" data-id="no_puedo" data-rel="amenaza" data-accion="evitar">
+        “No voy a poder con esto.”
+      </div>
+      <div class="p6-frase" data-id="horrible" data-rel="fracaso" data-accion="postergar">
+        “Si me equivoco, será horrible.”
+      </div>
+      <div class="p6-frase" data-id="puedo" data-rel="posibilidad" data-accion="acercarse">
+        “Creo que puedo intentarlo.”
+      </div>
+      <div class="p6-frase" data-id="riesgo" data-rel="riesgo" data-accion="pedir">
+        “Es difícil, pero puedo manejarlo si pido apoyo.”
+      </div>
+    </div>
+  </div>
+
+  <!-- Reacción del avatar -->
+  <div class="p6-avatar-box">
+    <div class="p6-avatar">
+      <img src="assets/avatar.png" alt="avatar" class="p6-avatar-img" />
+      <div class="p6-globo-externo"></div>
+      <div class="p6-globo-interno"></div>
+    </div>
+  </div>
+
+  <!-- Selección de relación -->
+  <div class="p6-fase" id="p6-fase-relacion" style="display:none;">
+    <h4>2. ¿Qué relación verbal está activando esta frase?</h4>
+    <div class="p6-opciones-rel">
+      <div class="p6-rel" data-id="amenaza">amenaza</div>
+      <div class="p6-rel" data-id="fracaso">fracaso</div>
+      <div class="p6-rel" data-id="posibilidad">posibilidad</div>
+      <div class="p6-rel" data-id="riesgo">riesgo manejable</div>
+    </div>
+    <div class="p6-feedback-rel"></div>
+  </div>
+
+  <!-- Selección de acción derivada -->
+  <div class="p6-fase" id="p6-fase-accion" style="display:none;">
+    <h4>3. ¿Qué acción deriva probablemente de esa relación?</h4>
+    <div class="p6-opciones-accion">
+      <div class="p6-accion" data-id="evitar">Evitar</div>
+      <div class="p6-accion" data-id="postergar">Postergar</div>
+      <div class="p6-accion" data-id="acercarse">Acercarse</div>
+      <div class="p6-accion" data-id="pedir">Pedir ayuda</div>
+    </div>
+    <div class="p6-feedback-accion"></div>
+  </div>
+
+  <!-- Mensaje final -->
+  <div class="p6-mensaje-final"></div>
+
+  <!-- Reiniciar -->
+  <button class="p6-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
 
             <div id="zona-interactiva-1" class="uv-interactiva"></div>
