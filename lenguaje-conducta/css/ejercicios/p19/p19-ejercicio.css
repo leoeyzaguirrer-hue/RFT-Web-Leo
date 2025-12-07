@@ -86,3 +86,7 @@
     flex-direction: column;
   }
 }
+.p19-opciones button.p19-activa {
+  background: #e3f2ff;
+  border-color: #132f66;
+}
