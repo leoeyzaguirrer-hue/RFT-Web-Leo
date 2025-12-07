@@ -1,0 +1,88 @@
+.p19-ejercicio-container {
+  margin-top: 40px;
+}
+
+.p19-instrucciones {
+  margin-bottom: 24px;
+}
+
+.p19-frase-central {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 14px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  background: #132f66;
+  color: #ffffff;
+}
+
+.p19-contextos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.p19-contexto {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.p19-funciones,
+.p19-conductas,
+.p19-cadena {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #fffaf0;
+  border: 2px solid rgba(253,191,18,0.6);
+  font-size: 0.9rem;
+}
+
+.p19-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.p19-opciones button {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(19,47,102,0.6);
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.p19-feedback {
+  margin-top: 16px;
+  min-height: 30px;
+  font-weight: 600;
+}
+
+.p19-controles {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.p19-controles button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .p19-contextos {
+    flex-direction: column;
+  }
+}
