@@ -226,35 +226,48 @@
     <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 4 -->
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 2</h3>
-      <p>
-        <!-- ============================================================
+     <!-- ============================================================
      EJERCICIO · BLOQUE 2 · ENTRENADOR DE SÍMBOLOS ARTIFICIALES
 =============================================================== -->
 <section class="p14-ejercicio-container">
 
   <header class="p14-header">
     <h3>Actividad interactiva · “El Entrenador de Símbolos Artificiales”</h3>
-    <p>
-      Entrena relaciones entre palabras inventadas y figuras sin semejanza física.
-      Luego pon a prueba si el símbolo adquirió función sin recibir retroalimentación.
+    <p class="p14-intro">
+      Explora cómo palabras sin sentido (ZUG, MIP, TAV) pueden adquirir significado
+      al relacionarse con figuras. Primero entrenas las relaciones, luego las
+      pones a prueba sin retroalimentación, y finalmente observas la transferencia
+      de funciones.
     </p>
   </header>
 
-  <!-- Zona superior: símbolo -->
+  <!-- Indicador de fases -->
+  <div class="p14-fases-indicador">
+    <div class="p14-fase-pill p14-fase-1-pill p14-activa">Fase 1 · Entrenamiento directo</div>
+    <div class="p14-fase-pill p14-fase-2-pill">Fase 2 · Prueba sin feedback</div>
+    <div class="p14-fase-pill p14-fase-3-pill">Fase 3 · Transferencia de función</div>
+  </div>
+
+  <!-- Instrucción de la fase -->
+  <div class="p14-instruccion-fase" id="p14-instruccion-fase">
+    Fase 1: Aprende explícitamente qué figura corresponde a cada símbolo.
+    ZUG → círculo azul, MIP → triángulo rojo, TAV → cuadrado amarillo.
+    Selecciona la figura correcta para cada palabra.
+  </div>
+
+  <!-- Símbolo actual -->
   <div class="p14-simbolo">
     <span id="p14-palabra-actual">ZUG</span>
   </div>
 
-  <!-- Zona central: figuras -->
+  <!-- Figuras -->
   <div class="p14-figuras">
-
     <button class="p14-figura" data-id="azul">🔵 Círculo azul</button>
     <button class="p14-figura" data-id="rojo">🔺 Triángulo rojo</button>
     <button class="p14-figura" data-id="amarillo">🟨 Cuadrado amarillo</button>
-
   </div>
 
-  <!-- Medidor de historia -->
+  <!-- Medidor de historia de entrenamiento -->
   <div class="p14-historia">
     Historia de entrenamiento
     <div class="p14-barra">
@@ -262,23 +275,46 @@
     </div>
   </div>
 
-  <div class="p14-feedback"></div>
-
-  <button class="p14-btn-fase">Pasar a prueba sin retroalimentación</button>
-
-  <button class="p14-btn-reset">Reiniciar ejercicio</button>
-
-</section>
-
-      </p>
-
-           <div id="zona-interactiva-1" class="uv-interactiva"></div>
+  <!-- Panel de transferencia de función (Fase 3) -->
+  <section class="p14-transferencia" id="p14-transferencia" style="display:none;">
+    <h4>Nuevas funciones de las figuras</h4>
+    <div class="p14-mapeo-funciones">
+      <div class="p14-mapeo-card">🔵 Azul → ⚠️ Peligro</div>
+      <div class="p14-mapeo-card">🔺 Rojo → ✅ Seguro</div>
+      <div class="p14-mapeo-card">🟨 Amarillo → ➖ Neutro</div>
     </div>
 
-  </details>
+    <p class="p14-explicacion-transfer">
+      Ahora las figuras tienen una nueva función emocional. Sin entrenar nada
+      adicional con las palabras, indica qué función crees que evoca cada símbolo.
+    </p>
+
+    <div class="p14-funciones-botones">
+      <button class="p14-funcion-btn" data-func="peligro">⚠️ Peligro</button>
+      <button class="p14-funcion-btn" data-func="seguro">✅ Seguro</button>
+      <button class="p14-funcion-btn" data-func="neutro">➖ Neutro</button>
+    </div>
+  </section>
+
+  <!-- Feedback general -->
+  <div class="p14-feedback" id="p14-feedback"></div>
+
+  <!-- Botones de control -->
+  <div class="p14-controles">
+    <button class="p14-btn-fase2" id="p14-btn-fase2" disabled>
+      Pasar a Fase 2 · Prueba sin feedback
+    </button>
+    <button class="p14-btn-fase3" id="p14-btn-fase3" disabled>
+      Pasar a Fase 3 · Transferencia de función
+    </button>
+    <button class="p14-btn-reset" id="p14-btn-reset">
+      Reiniciar ejercicio completo
+    </button>
+  </div>
+
 </section>
 
-      <div class="uv-separador-bloque">✦</div>
+<div class="uv-separador-bloque">✦</div>
 
       <!-- BLOQUE 3 -->
       <section class="uv-card uv-bloque">
