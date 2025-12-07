@@ -9,12 +9,13 @@
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
   <link rel="stylesheet" href="css/ejercicios/p5/p5-ejercicio.css" />
 <link rel="stylesheet" href="css/ejercicios/p6/p6-ejercicio.css" />
-  <link rel="stylesheet" href="css/ejercicios/p7/p7-ejercicio.css" />
+  <link rel="stylesheet" href="css/ejercicios/p8/p8-ejercicio.css" />
   <!-- JS propio -->
   <script defer src="p3.js"></script>
   <script defer src="js/ejercicios/p5/p5-ejercicio.js"></script>
   <script defer src="js/ejercicios/p6/p6-ejercicio.js"></script>
   <script defer src="js/ejercicios/p7/p7-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p8/p8-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -380,7 +381,75 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 4 · MODULADOR DE INTERVENCIONES VERBALES
+=============================================================== -->
+<section class="p8-ejercicio-container">
+
+  <header class="p8-header">
+    <h3>Actividad interactiva · “El Modulador de Intervenciones Verbales”</h3>
+    <p>
+      Observa cómo una intervención verbal del terapeuta modifica simultáneamente
+      funciones del hablante y oyente, generando cambios en la acción futura.
+    </p>
+  </header>
+
+  <!-- Capa 1 — Intervención -->
+  <div class="p8-fase p8-fase-intervencion">
+    <h4>1. Selecciona una intervención del terapeuta</h4>
+    <div class="p8-intervenciones">
+      <div class="p8-inter" data-id="mochila" data-func="flexibilizacion" data-accion="avanzar">
+        “Lleva contigo el miedo como si fuera una mochila liviana.”
+      </div>
+      <div class="p8-inter" data-id="mente_miente" data-func="claridad" data-accion="acercarse">
+        “Tu mente a veces miente para protegerte.”
+      </div>
+      <div class="p8-inter" data-id="avanza_incomodo" data-func="acercamiento" data-accion="comprometerse">
+        “Puedes avanzar incluso con incomodidad.”
+      </div>
+      <div class="p8-inter" data-id="evitar_natural" data-func="evitacion" data-accion="evitar">
+        “Evitar es natural, pero limita tu vida.”
+      </div>
+    </div>
+  </div>
+
+  <!-- Capa 2 — Función derivada -->
+  <div class="p8-fase p8-fase-funcion" style="display:none;">
+    <h4>2. ¿Qué función verbal es más probable que genere?</h4>
+    <div class="p8-funciones">
+      <div class="p8-func" data-id="flexibilizacion">flexibilización</div>
+      <div class="p8-func" data-id="claridad">claridad</div>
+      <div class="p8-func" data-id="acercamiento">acercamiento</div>
+      <div class="p8-func" data-id="evitacion">evitación</div>
+      <div class="p8-func" data-id="culpa">culpa</div>
+      <div class="p8-func" data-id="amenaza">amenaza</div>
+    </div>
+    <div class="p8-feedback-func"></div>
+  </div>
+
+  <!-- Capa 3 — Acción -->
+  <div class="p8-fase p8-fase-accion" style="display:none;">
+    <h4>3. ¿Qué acción deriva de esa función?</h4>
+    <div class="p8-acciones">
+      <div class="p8-acc" data-id="avanzar">avanzar</div>
+      <div class="p8-acc" data-id="evitar">evitar</div>
+      <div class="p8-acc" data-id="pedir">pedir ayuda</div>
+      <div class="p8-acc" data-id="comprometerse">comprometerse</div>
+      <div class="p8-acc" data-id="rumiar">rumiar</div>
+    </div>
+    <div class="p8-feedback-accion"></div>
+  </div>
+
+  <!-- Cierre -->
+  <div class="p8-mensaje-final"></div>
+
+  <!-- Reinicio -->
+  <button class="p8-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
 
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
