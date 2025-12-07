@@ -239,3 +239,18 @@
     flex-direction: column;
   }
 }
+.p9-btn-no-es {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(12,58,96,0.25);
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+  color: #08323a;
+}
+
+.p9-btn-no-es:hover {
+  background: #fdeaea;
+  border-color: #b83232;
+}
