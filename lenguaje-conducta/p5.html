@@ -7,9 +7,11 @@
 
   <!-- Style exclusivo del módulo -->
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
+  <link rel="stylesheet" href="css/ejercicios/p13/p13-ejercicio.css" />
 
   <!-- JS propio -->
   <script defer src="p5.js"></script>
+  <script defer src="js/ejercicios/p13/p13-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -102,7 +104,87 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 1 · MEDIDOR DE IMPACTO VERBAL
+=============================================================== -->
+<section class="p13-ejercicio-container">
+
+  <header class="p13-header">
+    <h3>Actividad interactiva · “El Medidor de Impacto Verbal”</h3>
+    <p>
+      Arrastra una palabra al centro y observa cómo modifica la activación y
+      la tendencia conductual sin que exista un estímulo físico presente.
+    </p>
+  </header>
+
+  <div class="p13-paneles">
+
+    <!-- Panel izquierdo -->
+    <div class="p13-panel p13-palabras">
+      <h4>Palabras</h4>
+
+      <div class="p13-palabra" draggable="true" data-id="peligro">⚠️ PELIGRO</div>
+      <div class="p13-palabra" draggable="true" data-id="abrazo">💞 ABRAZO</div>
+      <div class="p13-palabra" draggable="true" data-id="examen">📚 EXAMEN SORPRESA</div>
+      <div class="p13-palabra" draggable="true" data-id="diagnostico">🩺 DIAGNÓSTICO</div>
+      <div class="p13-palabra" draggable="true" data-id="exito">🏆 ÉXITO</div>
+      <div class="p13-palabra" draggable="true" data-id="fracaso">❌ FRACASO</div>
+    </div>
+
+    <!-- Panel central -->
+    <div class="p13-panel p13-centro">
+      <h4>Organismo</h4>
+
+      <div class="p13-avatar">
+        <img src="/assets/avatar.png" alt="avatar" />
+      </div>
+
+      <div class="p13-barras">
+        <div>
+          Activación fisiológica
+          <div class="p13-barra">
+            <div class="p13-barra-fill" id="p13-barra-fisio"></div>
+          </div>
+        </div>
+
+        <div>
+          Impulso conductual
+          <div class="p13-impulso" id="p13-impulso">—</div>
+        </div>
+      </div>
+
+      <div class="p13-drop-zona">Suelta aquí la palabra</div>
+    </div>
+
+    <!-- Panel derecho -->
+    <div class="p13-panel p13-respuestas">
+      <h4>Respuesta probable</h4>
+
+      <div class="p13-opciones">
+        <button data-id="evitar">Evitar</button>
+        <button data-id="acercarse">Acercarse</button>
+        <button data-id="congelarse">Congelarse</button>
+        <button data-id="buscar">Buscar ayuda</button>
+      </div>
+
+      <h4>¿Estímulo físico presente?</h4>
+
+      <div class="p13-opciones">
+        <button data-estimulo="si">✅ Sí</button>
+        <button data-estimulo="no">❌ No</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="p13-feedback"></div>
+
+  <button class="p13-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
@@ -135,9 +217,9 @@
             </p>
              </div>
 
-    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 1 -->
+    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 2 -->
     <div class="uv-card uv-bloque-actividad">
-      <h3>Actividad interactiva · Bloque 1</h3>
+      <h3>Actividad interactiva · Bloque 2</h3>
       <p>
         [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
       </p>
@@ -173,9 +255,9 @@
             </p>
              </div>
 
-    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 1 -->
+    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 3 -->
     <div class="uv-card uv-bloque-actividad">
-      <h3>Actividad interactiva · Bloque 1</h3>
+      <h3>Actividad interactiva · Bloque 3</h3>
       <p>
         [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
       </p>
@@ -211,9 +293,9 @@
             </p>
              </div>
 
-    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 1 -->
+    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 4 -->
     <div class="uv-card uv-bloque-actividad">
-      <h3>Actividad interactiva · Bloque 1</h3>
+      <h3>Actividad interactiva · Bloque 4</h3>
       <p>
         [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
       </p>
