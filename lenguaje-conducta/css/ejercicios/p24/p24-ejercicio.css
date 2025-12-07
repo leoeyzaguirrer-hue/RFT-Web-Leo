@@ -1,0 +1,73 @@
+.p24-ejercicio-container {
+  margin-top: 40px;
+}
+
+.p24-instrucciones {
+  margin-bottom: 22px;
+}
+
+.p24-red {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 22px;
+}
+
+.p24-nodo {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: #132f66;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.p24-nodo.p24-activo {
+  background: #fdbf12;
+  color: #132f66;
+}
+
+.p24-entrenamiento,
+.p24-pruebas {
+  margin-bottom: 18px;
+}
+
+.p24-entrenamiento button,
+.p24-pruebas button {
+  margin: 6px 6px 0 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #132f66;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.p24-feedback {
+  margin-top: 16px;
+  min-height: 32px;
+  font-weight: 600;
+}
+
+.p24-cierre {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.p24-controles {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.p24-controles button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: white;
+  cursor: pointer;
+}
