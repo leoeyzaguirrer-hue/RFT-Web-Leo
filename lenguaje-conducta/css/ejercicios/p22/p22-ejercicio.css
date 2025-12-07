@@ -1,0 +1,87 @@
+.p22-ejercicio-container {
+  margin-top: 40px;
+}
+
+.p22-instrucciones {
+  margin-bottom: 22px;
+}
+
+.p22-familias {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.p22-familia {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.p22-red {
+  background: #fffaf0;
+  border: 2px solid rgba(253,191,18,0.6);
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 80px;
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+}
+
+.p22-item {
+  margin: 5px 0;
+}
+
+.p22-discriminacion {
+  margin-top: 12px;
+  padding: 16px;
+  border: 2px dashed rgba(19,47,102,0.5);
+  border-radius: 14px;
+}
+
+.p22-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.p22-opciones button {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(19,47,102,0.6);
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.p22-feedback {
+  margin-top: 16px;
+  min-height: 32px;
+  font-weight: 600;
+}
+
+.p22-controles {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.p22-controles button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .p22-familias {
+    flex-direction: column;
+  }
+}
