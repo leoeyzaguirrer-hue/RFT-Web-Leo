@@ -7,9 +7,17 @@
 
   <!-- Style exclusivo del módulo -->
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
+  <link rel="stylesheet" href="css/ejercicios/p9/p9-ejercicio.css" />
+   <link rel="stylesheet" href="css/ejercicios/p10/p10-ejercicio.css" />
+   <link rel="stylesheet" href="css/ejercicios/p11/p11-ejercicio.css" />
+   <link rel="stylesheet" href="css/ejercicios/p12/p12-ejercicio.css" />
 
   <!-- JS propio -->
   <script defer src="p4.js"></script>
+  <script defer src="js/ejercicios/p9/p9-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p10/p10-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p11/p11-ejercicio.js"></script>
+  <script defer src="js/ejercicios/p12/p12-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -102,7 +110,85 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 1 · LABORATORIO DE TACTS EXPANDIBLES
+=============================================================== -->
+<section class="p9-ejercicio-container">
+
+  <header class="p9-header">
+    <h3>Actividad interactiva · “El Laboratorio de Tacts Expandibles”</h3>
+    <p>
+      Explora cómo “silla” pasa de nombrar un solo objeto a convertirse en una
+      clase funcional ampliada mediante múltiples ejemplares y contexto.
+    </p>
+  </header>
+
+  <div class="p9-historia">
+    <span class="p9-historia-label">Historia de reforzamiento:</span>
+    <span class="p9-historia-nivel">Baja</span>
+  </div>
+
+  <!-- Fase 1 · Nombrar básico -->
+  <section class="p9-fase p9-fase-1">
+    <h4>Fase 1 · Nombrar básico</h4>
+    <p class="p9-texto-fase">
+      Arrastra la etiqueta “silla” sobre el objeto solo cuando consideres que
+      corresponde a tu historia de reforzamiento.
+    </p>
+
+    <div class="p9-f1-layout">
+      <div class="p9-objeto-f1">
+        <span class="p9-objeto-label">Objeto actual:</span>
+        <div class="p9-objeto-nombre"></div>
+      </div>
+
+      <div class="p9-etiqueta-area">
+        <div class="p9-etiqueta" draggable="true">silla</div>
+        <div class="p9-drop-zona">Suelta aquí si esto es “silla”</div>
+      </div>
+    </div>
+
+    <div class="p9-feedback-f1"></div>
+  </section>
+
+  <!-- Fase 2 · Múltiples ejemplares -->
+  <section class="p9-fase p9-fase-2" style="display:none;">
+    <h4>Fase 2 · Múltiples ejemplares</h4>
+    <p class="p9-texto-fase">
+      Selecciona todos los ejemplares que encajan en tu clase funcional de
+      “silla”. Luego evalúa tu selección.
+    </p>
+
+    <div class="p9-sillas-grid"></div>
+
+    <button class="p9-btn-evaluar-f2">Evaluar selección</button>
+    <div class="p9-feedback-f2"></div>
+  </section>
+
+  <!-- Fase 3 · Contextualización dinámica -->
+  <section class="p9-fase p9-fase-3" style="display:none;">
+    <h4>Fase 3 · Contextualización dinámica</h4>
+    <p class="p9-texto-fase p9-prompt-contexto">
+      Haz clic en “Nueva consigna” para recibir una situación contextual.
+    </p>
+
+    <button class="p9-btn-nueva-consigna">Nueva consigna</button>
+
+    <div class="p9-sillas-contexto"></div>
+
+    <div class="p9-feedback-f3"></div>
+  </section>
+
+  <!-- Mensaje final -->
+  <div class="p9-mensaje-final"></div>
+
+  <!-- Reinicio -->
+  <button class="p9-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
             <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
