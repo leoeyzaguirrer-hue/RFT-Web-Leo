@@ -266,11 +266,54 @@
             </p>
              </div>
 
-    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 1 -->
+    <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 3 -->
     <div class="uv-card uv-bloque-actividad">
-      <h3>Actividad interactiva · Bloque 1</h3>
+      <h3>Actividad interactiva · Bloque 3</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <section class="p23-ejercicio-container">
+
+  <div class="p23-instrucciones">
+    <h2>El Modificador de Funciones Verbales</h2>
+    <p>
+      En ACT y RFT no se busca cambiar el contenido literal de los pensamientos,
+      sino <strong>transformar su función mediante cambios en el contexto</strong>.
+    </p>
+    <p>
+      Arrastra la frase hacia un contexto y luego modifica ese contexto hasta que
+      la función cambie sin alterar las palabras.
+    </p>
+  </div>
+
+  <!-- FRASE CENTRAL -->
+  <div id="p23-frase" class="p23-frase" draggable="true">
+    “No voy a poder con esto.”
+  </div>
+
+  <!-- CONTEXTOS -->
+  <div class="p23-contextos">
+    <div class="p23-contexto" data-ctx="amenaza">🧪 Amenaza</div>
+    <div class="p23-contexto" data-ctx="valores">🧭 Valores</div>
+    <div class="p23-contexto" data-ctx="apoyo">🤝 Apoyo social</div>
+    <div class="p23-contexto" data-ctx="desafio">🎓 Desafío académico</div>
+  </div>
+
+  <!-- ZONA DE TRABAJO -->
+  <div id="p23-trabajo" class="p23-trabajo">
+
+    <div id="p23-sliders" class="p23-sliders"></div>
+
+    <div id="p23-resultado" class="p23-resultado"></div>
+
+    <div id="p23-feedback" class="p23-feedback"></div>
+
+    <div class="p23-controles">
+      <button id="p23-reiniciar">Reiniciar ejercicio</button>
+    </div>
+
+  </div>
+
+</section>
+
       </p>
 
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
@@ -308,7 +351,59 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 4</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <section class="p24-ejercicio-container">
+
+  <div class="p24-instrucciones">
+    <h2>El Constructor de Derivaciones</h2>
+    <p>
+      En equivalencia de estímulos, entrenar unas pocas relaciones produce muchas
+      <strong>relaciones nuevas sin práctica directa</strong>. Esto se explica por simetría,
+      transitividad y equivalencia.
+    </p>
+    <p>
+      Entrena primero las relaciones directas. Luego responde qué relaciones aparecen
+      sin haberlas entrenado.
+    </p>
+  </div>
+
+  <!-- NODOS -->
+  <div class="p24-red">
+    <div class="p24-nodo" id="nodoA">A</div>
+    <div class="p24-nodo" id="nodoB">B</div>
+    <div class="p24-nodo" id="nodoC">C</div>
+    <div class="p24-nodo" id="nodoD">D</div>
+  </div>
+
+  <!-- ENTRENAMIENTO -->
+  <div class="p24-entrenamiento">
+    <h3>Fase 1 · Entrenamiento</h3>
+    <button class="p24-train" data-rel="AB">Entrenar A → B</button>
+    <button class="p24-train" data-rel="BC">Entrenar B → C</button>
+    <button class="p24-train" data-rel="CD">Entrenar C → D</button>
+  </div>
+
+  <!-- PRUEBAS DERIVADAS -->
+  <div class="p24-pruebas">
+    <h3>Fase 2 · Relaciones derivadas</h3>
+    <button class="p24-test" data-test="AC">¿A → C?</button>
+    <button class="p24-test" data-test="BD">¿B → D?</button>
+    <button class="p24-test" data-test="AD">¿A → D?</button>
+    <button class="p24-test" data-test="DA">¿D → A?</button>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div id="p24-feedback" class="p24-feedback"></div>
+
+  <!-- CIERRE -->
+  <div id="p24-cierre" class="p24-cierre"></div>
+
+  <!-- CONTROLES -->
+  <div class="p24-controles">
+    <button id="p24-reiniciar">Reiniciar ejercicio</button>
+  </div>
+
+</section>
+
       </p>
 
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
@@ -322,7 +417,7 @@
 
     <!-- NAV -->
     <div class="uv-nav">
-      <a href=""p6.html" class="uv-btn-nav">← Volver</a>
+      <a href="p6.html" class="uv-btn-nav">← Volver</a>
       <a href="p8.html" class="uv-btn-nav primary">Siguiente módulo →</a>
     </div>
 
