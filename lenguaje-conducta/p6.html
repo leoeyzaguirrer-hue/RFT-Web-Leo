@@ -7,9 +7,17 @@
 
   <!-- Style exclusivo del módulo -->
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
+  <link rel="stylesheet" href="css/ejercicios/p17/p17-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p18/p18-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p19/p19-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p20/p20-ejercicio.css">
 
   <!-- JS propio -->
   <script defer src="p6.js"></script>
+  <script src="js/ejercicios/p17/p17-ejercicio.js"></script>
+  <script src="js/ejercicios/p18/p18-ejercicio.js"></script>
+  <script src="js/ejercicios/p19/p19-ejercicio.js"></script>
+  <script src="js/ejercicios/p20/p20-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -103,7 +111,56 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <section class="p17-ejercicio-container">
+
+  <div class="p17-instrucciones">
+    <h2>El Clasificador Multiformato</h2>
+    <p>
+      En este ejercicio vas a construir una <strong>clase funcional</strong> a partir de distintos formatos sensoriales.
+      No debes guiarte por la forma del estímulo, sino por la <strong>función que evoca</strong>.
+    </p>
+    <p>
+      El sistema te pedirá construir la clase <strong>MANZANA</strong>. Arrastra solo los estímulos que pertenecen funcionalmente a esa clase.
+      Cada acierto activará una respuesta del organismo. Si fallas, recibirás una pista.
+    </p>
+  </div>
+
+  <div class="p17-zonas">
+
+    <!-- ZONA CLASE OBJETIVO -->
+    <div class="p17-zona-meta">
+      <h3>Clase a construir</h3>
+      <div id="p17-meta" class="p17-meta-box">MANZANA</div>
+      <div id="p17-nube" class="p17-nube">Clase en formación...</div>
+    </div>
+
+    <!-- ZONA ESTÍMULOS -->
+    <div class="p17-zona-estimulos" id="p17-estimulos">
+      <div class="p17-card" draggable="true" data-clase="manzana">🍎 Emoji</div>
+      <div class="p17-card" draggable="true" data-clase="manzana">Dibujo de manzana</div>
+      <div class="p17-card" draggable="true" data-clase="manzana">Palabra "manzana"</div>
+      <div class="p17-card" draggable="true" data-clase="perro">🐶 Emoji</div>
+      <div class="p17-card" draggable="true" data-clase="silla">🪑 Emoji</div>
+      <div class="p17-card" draggable="true" data-clase="perro">Palabra "perro"</div>
+      <div class="p17-card" draggable="true" data-clase="silla">Palabra "silla"</div>
+    </div>
+
+    <!-- ZONA RESPUESTA DEL ORGANISMO -->
+    <div class="p17-zona-respuesta">
+      <h3>Respuesta del organismo</h3>
+      <div id="p17-respuesta">Esperando estímulos...</div>
+    </div>
+
+  </div>
+
+  <div id="p17-feedback" class="p17-feedback"></div>
+
+  <div class="p17-controles">
+    <button id="p17-reiniciar">Reiniciar ejercicio</button>
+  </div>
+
+</section>
+
       </p>
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
