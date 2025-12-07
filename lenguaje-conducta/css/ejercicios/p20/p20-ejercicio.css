@@ -1,0 +1,93 @@
+.p20-ejercicio-container {
+  margin-top: 40px;
+}
+
+.p20-instrucciones {
+  margin-bottom: 24px;
+}
+
+.p20-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.p20-col {
+  background: #fffaf0;
+  border: 2px solid rgba(253,191,18,0.6);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.p20-nodo {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background: #132f66;
+  color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.p20-funciones {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+.p20-estimulos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.p20-card {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff, #fff4d6);
+  border: 1.5px solid rgba(253,191,18,0.6);
+  cursor: grab;
+  font-size: 0.9rem;
+}
+
+.p20-dropzone {
+  border: 2px dashed rgba(19,47,102,0.5);
+  border-radius: 14px;
+  padding: 18px;
+  min-height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.p20-dropzone.p20-activa {
+  background: #e3f2ff;
+}
+
+.p20-herencia,
+.p20-pregunta,
+.p20-feedback {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.p20-controles {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.p20-controles button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .p20-layout {
+    grid-template-columns: 1fr;
+  }
+}
