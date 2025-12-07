@@ -1,0 +1,67 @@
+.p18-ejercicio-container {
+  margin-top: 40px;
+}
+
+.p18-instrucciones {
+  margin-bottom: 25px;
+}
+
+.p18-paquetes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.p18-paquete {
+  padding: 14px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.p18-descompresion {
+  background: #fffaf0;
+  border: 2px solid rgba(253,191,18,0.6);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  min-height: 80px;
+}
+
+.p18-item {
+  margin: 6px 0;
+}
+
+.p18-opciones button {
+  margin: 6px 6px 0 0;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #132f66;
+  background: white;
+  cursor: pointer;
+}
+
+.p18-feedback {
+  margin-top: 20px;
+  font-weight: bold;
+  min-height: 30px;
+}
+
+.p18-controles {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.p18-controles button {
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
