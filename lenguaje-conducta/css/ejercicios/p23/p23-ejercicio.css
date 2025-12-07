@@ -1,0 +1,79 @@
+.p23-ejercicio-container {
+  margin-top: 40px;
+}
+
+.p23-instrucciones {
+  margin-bottom: 22px;
+}
+
+.p23-frase {
+  padding: 14px;
+  text-align: center;
+  border-radius: 14px;
+  background: #132f66;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 18px;
+  cursor: grab;
+}
+
+.p23-contextos {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.p23-contexto {
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #fffaf0;
+  border: 2px solid rgba(253,191,18,0.6);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.p23-contexto.p23-activo {
+  background: #e3f2ff;
+}
+
+.p23-trabajo {
+  background: #fffaf0;
+  border: 2px solid rgba(253,191,18,0.6);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.p23-sliders label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.p23-sliders input {
+  width: 100%;
+}
+
+.p23-resultado {
+  margin-top: 16px;
+  font-size: 0.95rem;
+}
+
+.p23-feedback {
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+.p23-controles {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.p23-controles button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #132f66;
+  color: #fff;
+  cursor: pointer;
+}
