@@ -1,0 +1,139 @@
+/* ============================================================
+   P15 · TRADUCTOR DE ZUG A LA VIDA REAL
+=============================================================== */
+
+.p15-ejercicio-container {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff, #f6fbff, #fff6e5);
+  border: 1px solid rgba(253, 191, 18, 0.55);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  font-size: 0.95rem;
+}
+
+.p15-header p {
+  line-height: 1.6;
+}
+
+.p15-caso-indicador {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(12, 58, 96, 0.12);
+}
+
+.p15-simbolo-lab strong {
+  font-size: 1.2rem;
+}
+
+/* Pasos */
+
+.p15-paso {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border-left: 4px solid #1ca3b3;
+  border-right: 1px solid rgba(12, 58, 96, 0.08);
+  border-top: 1px solid rgba(12, 58, 96, 0.08);
+  border-bottom: 1px solid rgba(12, 58, 96, 0.08);
+}
+
+.p15-paso h4 {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+/* Opciones */
+
+.p15-opciones-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.p15-opciones-grid button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(12, 58, 96, 0.2);
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.p15-opciones-grid button:hover {
+  background: #f6fbff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.p15-opciones-grid button.p15-opcion-correcta {
+  border-color: #2a7c4f;
+  background: #e7f8ed;
+}
+
+.p15-opciones-grid button.p15-opcion-incorrecta {
+  border-color: #b83232;
+  background: #fdecec;
+}
+
+/* Feedback */
+
+.p15-feedback {
+  margin-top: 8px;
+  min-height: 22px;
+  font-weight: 600;
+}
+
+/* Resumen y controles */
+
+.p15-resumen {
+  margin-top: 16px;
+  min-height: 26px;
+  font-weight: 600;
+}
+
+.p15-controles {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.p15-btn-siguiente,
+.p15-btn-reset {
+  flex: 1 1 150px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #fff9ec, #fdbf12);
+}
+
+.p15-btn-siguiente:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .p15-opciones-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .p15-controles {
+    flex-direction: column;
+  }
+}
