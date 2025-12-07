@@ -1,0 +1,174 @@
+/* ============================================================
+   EJERCICIO P10 · ORQUESTADOR DE MANDOS SOCIALES
+=============================================================== */
+
+.p10-ejercicio-container {
+  background: linear-gradient(135deg,#ffffff,#f5fbff,#fff3d1);
+  padding: 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(253,191,18,0.45);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+  margin-top: 28px;
+}
+
+.p10-header p {
+  font-size: 0.95rem;
+  line-height:1.6;
+}
+
+.p10-fase {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #ffffffdd;
+  border: 1px solid rgba(12,58,96,0.14);
+}
+
+/* Intenciones */
+
+.p10-intenciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.p10-int-card {
+  flex: 1 1 180px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(12,58,96,0.18);
+  cursor: pointer;
+  transition: 0.15s ease;
+  text-align: center;
+}
+
+.p10-int-card:hover {
+  background: #f1faff;
+  transform: translateY(-2px);
+}
+
+.p10-int-card.p10-selected {
+  border-color: #1ca3b3;
+  background: #e6f8ff;
+}
+
+/* Construcción del mando */
+
+.p10-mando-layout {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.p10-tarjetas-col {
+  flex: 1 1 250px;
+}
+
+.p10-tarjeta {
+  padding: 8px 14px;
+  margin-bottom: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(12,58,96,0.18);
+  background: #ffffff;
+  cursor: grab;
+  font-size: 0.92rem;
+}
+
+.p10-drop-col {
+  flex: 1 1 250px;
+}
+
+.p10-drop-zone {
+  padding: 14px;
+  background: #fcfcfc;
+  border-radius: 12px;
+  border: 2px dashed rgba(12,58,96,0.22);
+  margin-bottom: 10px;
+  min-height: 46px;
+  text-align: center;
+}
+
+.p10-drop-ok {
+  border-color: #2a7c4f !important;
+  background: #e6f7ec !important;
+}
+
+.p10-drop-error {
+  border-color: #b83232 !important;
+  background: #fdeaea !important;
+}
+
+.p10-btn-evaluar-mando {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg,#fff7e6,#fdbf12);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Personajes */
+
+.p10-personajes {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.p10-p-card {
+  flex: 1 1 180px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(12,58,96,0.18);
+  cursor: pointer;
+  transition: 0.15s ease;
+  text-align: center;
+}
+
+.p10-p-card:hover {
+  background: #f1faff;
+  transform: translateY(-2px);
+}
+
+.p10-p-card.p10-active {
+  border-color: #1ca3b3;
+  background: #e6f8ff;
+}
+
+/* Feedback */
+
+.p10-feedback-int,
+.p10-feedback-mando,
+.p10-feedback-personaje {
+  margin-top: 10px;
+  font-weight: 600;
+  min-height: 24px;
+}
+
+.p10-mensaje-final {
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+.p10-btn-reset {
+  margin-top: 16px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#fff7e6,#fdbf12);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: #08323a;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .p10-mando-layout {
+    flex-direction: column;
+  }
+}
