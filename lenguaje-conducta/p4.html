@@ -226,7 +226,97 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+       <!-- ============================================================
+     EJERCICIO · BLOQUE 2 · ORQUESTADOR DE MANDOS SOCIALES
+=============================================================== -->
+<section class="p10-ejercicio-container">
+
+  <header class="p10-header">
+    <h3>Actividad interactiva · “El Orquestador de Mandos Sociales”</h3>
+    <p>
+      Construye un mando funcional coordinando intención, formulación verbal
+      y el estado motivacional del otro. Pedir es reorganizar la conducta de otro organismo.
+    </p>
+  </header>
+
+  <!-- INTENCIÓN -->
+  <section class="p10-fase p10-fase-intencion">
+    <h4>1. Selecciona la intención del mando</h4>
+    <div class="p10-intenciones">
+      <div class="p10-int-card" data-id="objeto">Obtener un objeto</div>
+      <div class="p10-int-card" data-id="ambiente">Modificar el ambiente</div>
+      <div class="p10-int-card" data-id="ayuda">Recibir ayuda</div>
+      <div class="p10-int-card" data-id="evitar">Evitar una tarea</div>
+    </div>
+    <div class="p10-feedback-int"></div>
+  </section>
+
+  <!-- CONSTRUCCIÓN DEL MANDO -->
+  <section class="p10-fase p10-fase-mando" style="display:none;">
+    <h4>2. Construye tu mando</h4>
+    <p class="p10-texto-fase">Arrastra un inicio verbal + un verbo + un objeto.</p>
+
+    <div class="p10-mando-layout">
+
+      <!-- Tarjetas disponibles -->
+      <div class="p10-tarjetas-col">
+        <h5>Inicios</h5>
+        <div class="p10-tarjeta" draggable="true" data-tipo="inicio">¿Podrías…?</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="inicio">Pásame…</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="inicio">Ayúdame a…</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="inicio">Necesito que…</div>
+
+        <h5>Acciones</h5>
+        <div class="p10-tarjeta" draggable="true" data-tipo="accion">traigas</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="accion">abras</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="accion">alcances</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="accion">ordenes</div>
+
+        <h5>Objetos</h5>
+        <div class="p10-tarjeta" draggable="true" data-tipo="objeto">la silla</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="objeto">la carpeta</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="objeto">la botella</div>
+        <div class="p10-tarjeta" draggable="true" data-tipo="objeto">el libro</div>
+      </div>
+
+      <!-- Zona de armado -->
+      <div class="p10-drop-col">
+        <h5>Construye aquí tu mando</h5>
+        <div class="p10-drop-zone" data-slot="inicio">Inicio verbal</div>
+        <div class="p10-drop-zone" data-slot="accion">Acción</div>
+        <div class="p10-drop-zone" data-slot="objeto">Objeto</div>
+      </div>
+
+    </div>
+
+    <button class="p10-btn-evaluar-mando">Evaluar mando</button>
+    <div class="p10-feedback-mando"></div>
+  </section>
+
+  <!-- RESPUESTA DEL PERSONAJE -->
+  <section class="p10-fase p10-fase-personaje" style="display:none;">
+    <h4>3. Selecciona el personaje</h4>
+
+    <div class="p10-personajes">
+      <div class="p10-p-card" data-estado="apurado">Persona apurada</div>
+      <div class="p10-p-card" data-estado="cansado">Persona cansada</div>
+      <div class="p10-p-card" data-estado="distraido">Persona distraída</div>
+      <div class="p10-p-card" data-estado="atento">Persona atenta</div>
+    </div>
+
+    <div class="p10-feedback-personaje"></div>
+  </section>
+
+  <!-- RESULTADO FINAL -->
+  <div class="p10-mensaje-final"></div>
+
+  <!-- Reinicio -->
+  <button class="p10-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
 
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
@@ -265,7 +355,95 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <!-- ============================================================
+     EJERCICIO · BLOQUE 3 · EL PROYECTOR DE FUTURO CONDUCTUAL
+=============================================================== -->
+<section class="p11-ejercicio-container">
+
+  <header class="p11-header">
+    <h3>Actividad interactiva · “El Proyector de Futuro Conductual”</h3>
+    <p>
+      Arrastra una regla a la línea temporal y observa cómo coordina tu conducta 
+      entre ayer, hoy y mañana. Luego identifica su función y transforma la regla 
+      en una alternativa flexible.
+    </p>
+  </header>
+
+  <!-- Línea del tiempo -->
+  <div class="p11-timeline">
+    <div class="p11-tiempo p11-ayer">⏳ Ayer<br><span>Historia</span></div>
+    <div class="p11-tiempo p11-hoy">📍 Hoy<br><span>Situación</span></div>
+    <div class="p11-tiempo p11-manana">➡️ Mañana<br><span>Consecuencia</span></div>
+  </div>
+
+  <!-- Reglas disponibles -->
+  <section class="p11-fase p11-fase-reglas">
+    <h4>1. Arrastra una regla a la línea temporal</h4>
+
+    <div class="p11-reglas">
+      <div class="p11-regla" draggable="true" data-id="estudio-malo">
+        “Si no estudio hoy, mañana estaré peor.”
+      </div>
+      <div class="p11-regla" draggable="true" data-id="rechazo">
+        “Si digo lo que siento, me van a rechazar.”
+      </div>
+      <div class="p11-regla" draggable="true" data-id="practica">
+        “Si practico 20 min diarios, mejoraré.”
+      </div>
+      <div class="p11-regla" draggable="true" data-id="no-error">
+        “No debo equivocarme.”
+      </div>
+    </div>
+
+    <div class="p11-drop-zone">Suelta aquí la regla</div>
+    <div class="p11-feedback-r1"></div>
+  </section>
+
+  <!-- Función de la regla -->
+  <section class="p11-fase p11-fase-funcion" style="display:none;">
+    <h4>2. ¿Qué función cumple esta regla?</h4>
+
+    <div class="p11-funciones">
+      <div class="p11-f-card" data-id="evitar-fracaso">Evitar fracaso</div>
+      <div class="p11-f-card" data-id="buscar-aprobacion">Buscar aprobación</div>
+      <div class="p11-f-card" data-id="acercarse-valores">Acercarse a valores</div>
+      <div class="p11-f-card" data-id="protegerse">Protegerse</div>
+      <div class="p11-f-card" data-id="mantener-identidad">Mantener identidad</div>
+    </div>
+
+    <div class="p11-feedback-r2"></div>
+  </section>
+
+  <!-- Alternativa flexible -->
+  <section class="p11-fase p11-fase-alternativa" style="display:none;">
+    <h4>3. Elige una alternativa flexible</h4>
+
+    <div class="p11-alternativas">
+      <div class="p11-a-card" data-id="avance-incomodo">
+        “Puedo avanzar incluso con incomodidad.”
+      </div>
+      <div class="p11-a-card" data-id="practica-progreso">
+        “Practicar un poco hoy aumenta mis chances mañana.”
+      </div>
+      <div class="p11-a-card" data-id="no-control-total">
+        “Puedo equivocarme y seguir adelante.”
+      </div>
+      <div class="p11-a-card" data-id="expresar-seguro">
+        “Puedo expresar lo que siento con apoyo.”
+      </div>
+    </div>
+
+    <div class="p11-feedback-r3"></div>
+  </section>
+
+  <div class="p11-mensaje-final"></div>
+
+  <button class="p11-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
 
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
@@ -303,7 +481,83 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <!-- ============================================================
+     EJERCICIO · BLOQUE 4 · MAPA EXPANDIBLE DE EPISODIOS VERBALES
+=============================================================== -->
+<section class="p12-ejercicio-container">
+
+  <header class="p12-header">
+    <h3>Actividad interactiva · “El Mapa Expandible de Episodios Verbales”</h3>
+    <p>
+      Selecciona cómo nombras, pides y qué regla aplicas en un escenario real.
+      Observa cómo se expande la red verbal y cómo cambia la acción futura.
+    </p>
+  </header>
+
+  <!-- Escenario -->
+  <section class="p12-escenario">
+    <h4>Escenario</h4>
+    <p class="p12-escenario-txt">
+      “Tienes un examen difícil mañana.”
+    </p>
+  </section>
+
+  <!-- Selecciones -->
+  <section class="p12-fase p12-fase-opciones">
+    <h4>1. Selecciona tus respuestas verbales</h4>
+
+    <div class="p12-categorias">
+
+      <!-- Nombrar -->
+      <div class="p12-cat">
+        <h5>🔵 Nombrar</h5>
+        <div class="p12-opcion p12-tact" data-id="dificil">“Examen difícil”</div>
+        <div class="p12-opcion p12-tact" data-id="importante">“Examen importante”</div>
+        <div class="p12-opcion p12-tact" data-id="imposible">“Examen imposible”</div>
+      </div>
+
+      <!-- Pedir -->
+      <div class="p12-cat">
+        <h5>🟠 Pedir</h5>
+        <div class="p12-opcion p12-mand" data-id="estudiar-juntos">“¿Estudiamos juntos?”</div>
+        <div class="p12-opcion p12-mand" data-id="explicar-tema">“¿Me explicas este tema?”</div>
+        <div class="p12-opcion p12-mand" data-id="solo">“Déjenme solo, no molesten.”</div>
+      </div>
+
+      <!-- Reglas -->
+      <div class="p12-cat">
+        <h5>🟣 Reglas</h5>
+        <div class="p12-opcion p12-regla" data-id="fracaso">“Si no rindo perfecto, soy un fracaso.”</div>
+        <div class="p12-opcion p12-regla" data-id="bloques">“Si me organizo por bloques, puedo avanzar.”</div>
+        <div class="p12-opcion p12-regla" data-id="inutil">“Estudiar poco es inútil.”</div>
+      </div>
+
+    </div>
+
+    <div class="p12-feedback-op"></div>
+    <button class="p12-btn-generar">Generar red</button>
+  </section>
+
+  <!-- Mapa verbal -->
+  <section class="p12-fase p12-fase-mapa" style="display:none;">
+    <h4>2. Mapa del episodio verbal</h4>
+
+    <div class="p12-mapa">
+      <!-- nodos dinámicos -->
+    </div>
+
+    <div class="p12-feedback-mapa"></div>
+  </section>
+
+  <!-- Resultado final -->
+  <div class="p12-mensaje-final"></div>
+
+  <button class="p12-btn-reset">Reiniciar ejercicio</button>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
 
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
