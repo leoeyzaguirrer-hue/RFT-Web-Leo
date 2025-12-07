@@ -137,28 +137,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
 
   function cargarObjetos() {
-    objCont.innerHTML = "";
+  objCont.innerHTML = "";
 
-    current.objects.forEach(o => {
-      const div = document.createElement("div");
-      div.classList.add("p7-obj");
-      div.textContent = o.txt;
-      div.dataset.ok = o.ok;
-      objCont.appendChild(div);
+  // Los objetos están en current.objetos (NO current.objects)
+  current.objetos.forEach(o => {
+    const div = document.createElement("div");
+    div.classList.add("p7-obj");
+    div.textContent = o.txt;
+    div.dataset.ok = o.ok;
+    objCont.appendChild(div);
 
-      div.addEventListener("click", () => {
-        if (div.dataset.ok === "true") {
-          fbObj.textContent = "Correcto: seleccionaste el objeto que cumple la relación.";
-          fbObj.style.color = "#2a7c4f";
-          faseAcc.style.display = "block";
-          cargarAcciones();
-        } else {
-          fbObj.textContent = "Ese objeto no cumple la relación indicada.";
-          fbObj.style.color = "#b83232";
-        }
-      });
+    div.addEventListener("click", () => {
+      if (div.dataset.ok === "true") {
+        fbObj.textContent = "Correcto: seleccionaste el objeto que cumple la relación.";
+        fbObj.style.color = "#2a7c4f";
+        faseAcc.style.display = "block";
+        cargarAcciones();
+      } else {
+        fbObj.textContent = "Ese objeto no cumple la relación indicada.";
+        fbObj.style.color = "#b83232";
+      }
     });
-  }
+  });
+}
 
   // ============================================
   // FASE 3 — ACCIÓN
