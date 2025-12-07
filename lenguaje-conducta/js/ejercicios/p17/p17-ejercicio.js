@@ -1,67 +1,116 @@
-const tarjetas = document.querySelectorAll(".p17-card");
-const respuesta = document.getElementById("p17-respuesta");
-const nube = document.getElementById("p17-nube");
-const feedback = document.getElementById("p17-feedback");
-const reiniciar = document.getElementById("p17-reiniciar");
+document.addEventListener("DOMContentLoaded", () => {
+  const tarjetas = document.querySelectorAll(".p17-card");
+  const dropzone = document.getElementById("p17-dropzone");
+  const nube = document.getElementById("p17-nube");
+  const feedback = document.getElementById("p17-feedback");
+  const respuesta = document.getElementById("p17-respuesta");
+  const reiniciar = document.getElementById("p17-reiniciar");
+  const claseActualLabel = document.getElementById("p17-clase-actual-label");
+  const claseActualBox = document.getElementById("p17-clase-actual");
+  const resumenFinal = document.getElementById("p17-resumen-final");
+  const zonaEstimulos = document.getElementById("p17-estimulos");
 
-let contadorCorrectos = 0;
-let tarjetaArrastrada = null;
+  const clases = [
+    { id: "manzana", nombre: "MANZANA", total: 3, funcion: "salivar / acercarse" },
+    { id: "silla", nombre: "SILLA", total: 3, funcion: "sentarse / adoptar postura de uso" },
+    { id: "perro", nombre: "PERRO", total: 3, funcion: "acercarse, acariciar o evitar" }
+  ];
 
-// DRAG START
-tarjetas.forEach(card => {
-  card.addEventListener("dragstart", e => {
-    tarjetaArrastrada = card;
-    e.dataTransfer.setData("clase", card.dataset.clase);
+  let indiceClase = 0;
+  let contadorCorrectos = 0;
+  let tarjetaArrastrada = null;
+
+  function actualizarUIClase() {
+    const clase = clases[indiceClase];
+    claseActualLabel.textContent = `Fase ${indiceClase + 1} de ${clases.length}`;
+    claseActualBox.textContent = clase.nombre;
+    contadorCorrectos = 0;
+    nube.textContent = `0 / ${clase.total} elementos integrados`;
+    feedback.textContent = "";
+    respuesta.textContent = "Esperando estímulos...";
+    dropzone.innerHTML = "Suelta aquí los estímulos de la clase";
+  }
+
+  // Inicializar texto
+  actualizarUIClase();
+
+  // DRAG START
+  tarjetas.forEach(card => {
+    card.addEventListener("dragstart", e => {
+      tarjetaArrastrada = card;
+      e.dataTransfer.effectAllowed = "move";
+    });
   });
-});
 
-// PERMITIR DROP EN "Respuesta del organismo"
-respuesta.addEventListener("dragover", e => e.preventDefault());
+  // Permitir drop
+  dropzone.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropzone.classList.add("p17-dropzone-activa");
+  });
 
-// DROP EN "Respuesta del organismo"
-respuesta.addEventListener("drop", e => {
-  e.preventDefault();
-  if (!tarjetaArrastrada) return;
+  dropzone.addEventListener("dragleave", () => {
+    dropzone.classList.remove("p17-dropzone-activa");
+  });
 
-  const clase = tarjetaArrastrada.dataset.clase;
+  dropzone.addEventListener("drop", e => {
+    e.preventDefault();
+    dropzone.classList.remove("p17-dropzone-activa");
+    if (!tarjetaArrastrada) return;
 
-  if (clase === "manzana" && !tarjetaArrastrada.classList.contains("p17-colocada")) {
-    contadorCorrectos++;
+    const clase = clases[indiceClase];
+    const claseTarjeta = tarjetaArrastrada.dataset.clase;
 
-    // Convertimos la caja en contenedor de tarjetas
-    if (contadorCorrectos === 1) {
-      respuesta.innerText = "";
+    if (claseTarjeta === clase.id && !tarjetaArrastrada.classList.contains("p17-colocada")) {
+      contadorCorrectos++;
+      tarjetaArrastrada.classList.add("p17-colocada");
+      tarjetaArrastrada.setAttribute("draggable", "false");
+      dropzone.appendChild(tarjetaArrastrada);
+
+      nube.textContent = `${contadorCorrectos} / ${clase.total} elementos integrados`;
+      respuesta.textContent = `Respuesta evocada típica: ${clase.funcion}`;
+      feedback.textContent = "✔ Estímulo funcionalmente correcto.";
+    } else {
+      feedback.textContent = "✘ Observa la función evocada, no la forma.";
     }
 
-    tarjetaArrastrada.classList.add("p17-colocada");
-    tarjetaArrastrada.setAttribute("draggable", "false");
-    respuesta.appendChild(tarjetaArrastrada);
+    if (contadorCorrectos === clase.total) {
+      feedback.textContent = "✅ Clase funcional completada. Pasarás a la siguiente clase.";
+      respuesta.textContent = "Clase establecida: distintos formatos → misma función.";
+      avanzarClase();
+    }
 
-    feedback.innerText = "✔ Estímulo funcionalmente correcto.";
-    nube.innerText = `Elementos integrados: ${contadorCorrectos}`;
-  } else {
-    feedback.innerText = "✘ Observa la función evocada, no la forma.";
+    tarjetaArrastrada = null;
+  });
+
+  function avanzarClase() {
+    if (indiceClase < clases.length - 1) {
+      // Espera breve para que el alumno vea el resultado antes de cambiar
+      setTimeout(() => {
+        indiceClase++;
+        actualizarUIClase();
+      }, 900);
+    } else {
+      // Todas las clases completadas
+      resumenFinal.textContent =
+        "Has construido tres clases funcionales (manzana, silla, perro). " +
+        "Cada clase integra múltiples formatos sensoriales que evocan funciones similares: " +
+        "este es el punto de partida para el análisis de equivalencia de estímulos.";
+    }
   }
 
-  if (contadorCorrectos === 3) {
-    feedback.innerText = "✅ Clase funcional MANZANA organizada correctamente.";
-  }
+  // REINICIAR
+  reiniciar.addEventListener("click", () => {
+    indiceClase = 0;
+    contadorCorrectos = 0;
+    resumenFinal.textContent = "";
 
-  tarjetaArrastrada = null;
-});
+    // Devolver todas las tarjetas a la zona de estímulos
+    tarjetas.forEach(card => {
+      card.classList.remove("p17-colocada");
+      card.setAttribute("draggable", "true");
+      zonaEstimulos.appendChild(card);
+    });
 
-// BOTÓN REINICIO
-reiniciar.addEventListener("click", () => {
-  contadorCorrectos = 0;
-  feedback.innerText = "";
-  nube.innerText = "Clase en formación...";
-  respuesta.innerText = "Esperando estímulos...";
-
-  // Devolver tarjetas a la zona de estímulos y reactivar drag
-  const zonaEstimulos = document.getElementById("p17-estimulos");
-  document.querySelectorAll(".p17-card").forEach(card => {
-    card.classList.remove("p17-colocada");
-    card.setAttribute("draggable", "true");
-    zonaEstimulos.appendChild(card);
+    actualizarUIClase();
   });
 });
