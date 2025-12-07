@@ -1,0 +1,241 @@
+/* ============================================================
+   EJERCICIO P9 · LABORATORIO DE TACTS EXPANDIBLES
+=============================================================== */
+
+.p9-ejercicio-container {
+  background: linear-gradient(135deg, #ffffff, #f6fbff, #fff4d8);
+  padding: 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(253,191,18,0.45);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+  margin-top: 28px;
+}
+
+.p9-header p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Historia de reforzamiento */
+
+.p9-historia {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #ffffffdd;
+  border: 1px solid rgba(12,58,96,0.12);
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.p9-historia-nivel {
+  font-weight: 600;
+  color: #b85c00;
+}
+
+/* Fases */
+
+.p9-fase {
+  margin-top: 20px;
+  background: #ffffffdd;
+  border-radius: 14px;
+  border: 1px solid rgba(12,58,96,0.12);
+  padding: 18px;
+}
+
+.p9-texto-fase {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+/* Fase 1 */
+
+.p9-f1-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.p9-objeto-f1 {
+  flex: 1 1 220px;
+}
+
+.p9-objeto-label {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.p9-objeto-nombre {
+  margin-top: 6px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #f7fbff;
+  border: 1px solid rgba(12,58,96,0.18);
+  font-weight: 500;
+}
+
+.p9-etiqueta-area {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.p9-etiqueta {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(12,58,96,0.22);
+  cursor: grab;
+  text-align: center;
+  font-weight: 600;
+}
+
+.p9-drop-zona {
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px dashed rgba(12,58,96,0.25);
+  text-align: center;
+  font-size: 0.9rem;
+  background: #ffffff;
+  min-height: 50px;
+}
+
+.p9-drop-zona.p9-drop-ok {
+  border-color: #2a7c4f;
+  background: #e6f7ec;
+}
+
+.p9-drop-zona.p9-drop-error {
+  border-color: #b83232;
+  background: #fdeaea;
+}
+
+.p9-feedback-f1 {
+  margin-top: 10px;
+  font-weight: 600;
+  min-height: 26px;
+}
+
+/* Fase 2 */
+
+.p9-sillas-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.p9-silla-card {
+  flex: 1 1 180px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(12,58,96,0.18);
+  cursor: pointer;
+  transition: 0.15s ease;
+  font-size: 0.9rem;
+}
+
+.p9-silla-card:hover {
+  background: #f7fcff;
+  transform: translateY(-2px);
+}
+
+.p9-silla-card.p9-seleccionada {
+  border-color: #1ca3b3;
+  background: #e6f8ff;
+}
+
+.p9-btn-evaluar-f2 {
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg,#fff7e6,#fdbf12);
+  cursor: pointer;
+  color: #08323a;
+  font-weight: 600;
+}
+
+.p9-feedback-f2 {
+  margin-top: 10px;
+  font-weight: 600;
+  min-height: 26px;
+}
+
+/* Fase 3 */
+
+.p9-btn-nueva-consigna {
+  margin-top: 6px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: none;
+  background: #ffffff;
+  border: 1px solid rgba(12,58,96,0.18);
+  cursor: pointer;
+}
+
+.p9-btn-nueva-consigna:hover {
+  background: #f7fcff;
+}
+
+.p9-sillas-contexto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.p9-silla-contexto {
+  flex: 1 1 180px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(12,58,96,0.18);
+  cursor: pointer;
+  transition: 0.15s ease;
+  font-size: 0.9rem;
+}
+
+.p9-silla-contexto:hover {
+  background: #f7fcff;
+  transform: translateY(-2px);
+}
+
+.p9-feedback-f3 {
+  margin-top: 10px;
+  font-weight: 600;
+  min-height: 26px;
+}
+
+/* Mensaje final + reset */
+
+.p9-mensaje-final {
+  margin-top: 18px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.p9-btn-reset {
+  margin-top: 16px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg,#fff7e6,#fdbf12);
+  cursor: pointer;
+  color: #08323a;
+  font-weight: 600;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .p9-f1-layout {
+    flex-direction: column;
+  }
+}
