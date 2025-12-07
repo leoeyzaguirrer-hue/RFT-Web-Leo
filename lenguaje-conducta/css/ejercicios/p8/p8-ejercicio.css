@@ -1,0 +1,78 @@
+/* ============================================================
+   EJERCICIO P8 · MODULADOR DE INTERVENCIONES VERBALES
+=============================================================== */
+
+.p8-ejercicio-container {
+  background: linear-gradient(135deg, #ffffff, #f6fbff, #fff4d8);
+  padding: 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(253,191,18,0.45);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+  margin-top: 28px;
+}
+
+.p8-header p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.p8-fase {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #ffffffdd;
+  border: 1px solid rgba(12,58,96,0.12);
+}
+
+.p8-intervenciones,
+.p8-funciones,
+.p8-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.p8-inter,
+.p8-func,
+.p8-acc {
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(12,58,96,0.20);
+  cursor: pointer;
+  transition: 0.15s ease;
+  min-width: 150px;
+  text-align: center;
+}
+
+.p8-inter:hover,
+.p8-func:hover,
+.p8-acc:hover {
+  background: #f7fcff;
+  transform: translateY(-2px);
+}
+
+.p8-feedback-func,
+.p8-feedback-accion {
+  margin-top: 10px;
+  font-weight: 600;
+  min-height: 28px;
+}
+
+.p8-mensaje-final {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.p8-btn-reset {
+  margin-top: 20px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#fff7e6,#fdbf12);
+  border: none;
+  cursor: pointer;
+  color: #08323a;
+  font-weight: 600;
+}
