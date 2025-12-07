@@ -116,53 +116,81 @@
   <div class="p17-instrucciones">
     <h2>El Clasificador Multiformato</h2>
     <p>
-      En este ejercicio vas a construir una <strong>clase funcional</strong> a partir de distintos formatos sensoriales.
+      En este ejercicio vas a construir <strong>clases funcionales</strong> a partir de distintos formatos sensoriales.
       No debes guiarte por la forma del estímulo, sino por la <strong>función que evoca</strong>.
     </p>
     <p>
-      El sistema te pedirá construir la clase <strong>MANZANA</strong>. Arrastra solo los estímulos que pertenecen funcionalmente a esa clase.
-      Cada acierto activará una respuesta del organismo. Si fallas, recibirás una pista.
+      Arrastra a la zona de clase solo los estímulos que pertenezcan funcionalmente a la clase objetivo.
+      Cuando completes una clase, pasarás a la siguiente.
     </p>
   </div>
 
-  <div class="p17-zonas">
-
-    <!-- ZONA CLASE OBJETIVO -->
-    <div class="p17-zona-meta">
+  <div class="p17-layout">
+    <!-- COLUMNA IZQUIERDA: CLASE OBJETIVO -->
+    <div class="p17-col p17-col-objetivo">
       <h3>Clase a construir</h3>
-      <div id="p17-meta" class="p17-meta-box">MANZANA</div>
-      <div id="p17-nube" class="p17-nube">Clase en formación...</div>
+      <p id="p17-clase-actual-label">Fase 1 de 3</p>
+      <div id="p17-clase-actual" class="p17-clase-actual">MANZANA</div>
+
+      <div id="p17-dropzone" class="p17-dropzone">
+        Suelta aquí los estímulos de la clase
+      </div>
+
+      <div class="p17-nube-wrapper">
+        <strong>Nube de clase:</strong>
+        <p id="p17-nube">0 / 3 elementos integrados</p>
+      </div>
     </div>
 
-    <!-- ZONA ESTÍMULOS -->
-    <div class="p17-zona-estimulos" id="p17-estimulos">
-      <div class="p17-card" draggable="true" data-clase="manzana">🍎 Emoji</div>
-      <div class="p17-card" draggable="true" data-clase="manzana">Dibujo de manzana</div>
-      <div class="p17-card" draggable="true" data-clase="manzana">Palabra "manzana"</div>
-      <div class="p17-card" draggable="true" data-clase="perro">🐶 Emoji</div>
-      <div class="p17-card" draggable="true" data-clase="silla">🪑 Emoji</div>
-      <div class="p17-card" draggable="true" data-clase="perro">Palabra "perro"</div>
-      <div class="p17-card" draggable="true" data-clase="silla">Palabra "silla"</div>
+    <!-- COLUMNA CENTRAL: ESTÍMULOS -->
+    <div class="p17-col p17-col-estimulos">
+      <h3>Estímulos disponibles</h3>
+      <p class="p17-nota">
+        Incluyen palabras, emojis y descripciones. Algunos <strong>no</strong> pertenecen a la clase actual.
+      </p>
+      <div id="p17-estimulos" class="p17-estimulos">
+        <!-- MANZANA (correctos para fase 1) -->
+        <div class="p17-card" draggable="true" data-clase="manzana">🍎 Emoji de manzana</div>
+        <div class="p17-card" draggable="true" data-clase="manzana">Palabra "manzana"</div>
+        <div class="p17-card" draggable="true" data-clase="manzana">Dibujo de manzana</div>
+
+        <!-- SILLA (correctos para fase 2) -->
+        <div class="p17-card" draggable="true" data-clase="silla">🪑 Emoji de silla</div>
+        <div class="p17-card" draggable="true" data-clase="silla">Palabra "silla"</div>
+        <div class="p17-card" draggable="true" data-clase="silla">Foto de una silla</div>
+
+        <!-- PERRO (correctos para fase 3) -->
+        <div class="p17-card" draggable="true" data-clase="perro">🐶 Emoji de perro</div>
+        <div class="p17-card" draggable="true" data-clase="perro">Palabra "perro"</div>
+        <div class="p17-card" draggable="true" data-clase="perro">Sonido de ladrido (descripción)</div>
+
+        <!-- ESTÍMULOS DISTRATORES -->
+        <div class="p17-card" draggable="true" data-clase="otro">Palabra "auto"</div>
+        <div class="p17-card" draggable="true" data-clase="otro">🏀 Emoji de balón</div>
+        <div class="p17-card" draggable="true" data-clase="otro">Foto de un árbol</div>
+      </div>
     </div>
 
-    <!-- ZONA RESPUESTA DEL ORGANISMO -->
-    <div class="p17-zona-respuesta">
+    <!-- COLUMNA DERECHA: RESPUESTA DEL ORGANISMO -->
+    <div class="p17-col p17-col-respuesta">
       <h3>Respuesta del organismo</h3>
-      <div id="p17-respuesta">Esperando estímulos...</div>
+      <p id="p17-respuesta">Esperando estímulos...</p>
+
+      <div class="p17-feedback" id="p17-feedback"></div>
+
+      <div class="p17-controles">
+        <button id="p17-reiniciar">Reiniciar ejercicio</button>
+      </div>
+
+      <div class="p17-resumen-final" id="p17-resumen-final"></div>
     </div>
-
-  </div>
-
-  <div id="p17-feedback" class="p17-feedback"></div>
-
-  <div class="p17-controles">
-    <button id="p17-reiniciar">Reiniciar ejercicio</button>
   </div>
 
 </section>
 
       </p>
-           <div id="zona-interactiva-1" class="uv-interactiva"></div>
+
+          <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
 
   </details>
@@ -191,48 +219,16 @@
               un aviso, sentir nostalgia por una canción asociada a un lugar, evitar situaciones por una etiqueta.
               Todo ello depende de paquetes lingüísticos que integran múltiples estímulos bajo funciones compartidas.
             </p>
-             </div>
+          </div>
 
     <!-- ACTIVIDAD INTERACTIVA DEL BLOQUE 1 -->
     <div class="uv-card uv-bloque-actividad">
-      <h3>Actividad interactiva · Bloque 2</h3>
+      <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-       <section class="p18-ejercicio-container">
-
-  <div class="p18-instrucciones">
-    <h2>El Compresor de Paquetes Lingüísticos</h2>
-    <p>
-      Cada palabra o símbolo puede funcionar como un <strong>paquete condensado de experiencias</strong>.
-      En este ejercicio observarás cómo un solo estímulo activa recuerdos, emociones, impulsos y conductas futuras.
-    </p>
-    <p>
-      Haz clic sobre un paquete, observa lo que se despliega y luego responde
-      qué respuestas <strong>no requieren que el estímulo esté presente</strong>.
-    </p>
-  </div>
-
-  <div class="p18-paquetes">
-    <button class="p18-paquete" data-paquete="manzana">🍎 MANZANA</button>
-    <button class="p18-paquete" data-paquete="perro">🐶 PERRO</button>
-    <button class="p18-paquete" data-paquete="examen">🎓 EXAMEN</button>
-    <button class="p18-paquete" data-paquete="fracaso">🏷 FRACASO</button>
-  </div>
-
-  <div class="p18-descompresion" id="p18-descompresion"></div>
-
-  <div class="p18-pregunta" id="p18-pregunta"></div>
-
-  <div class="p18-feedback" id="p18-feedback"></div>
-
-  <div class="p18-controles">
-    <button id="p18-reiniciar">Reiniciar ejercicio</button>
-  </div>
-
-</section>
-
+        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
       </p>
 
-           <div id="zona-interactiva-1" class="uv-interactiva"></div>
+          <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
 
   </details>
