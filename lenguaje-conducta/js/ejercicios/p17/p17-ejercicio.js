@@ -7,6 +7,7 @@ const reiniciar = document.getElementById("p17-reiniciar");
 
 let contadorCorrectos = 0;
 
+// DRAG START
 tarjetas.forEach(card => {
   card.addEventListener("dragstart", e => {
     e.dataTransfer.setData("clase", card.dataset.clase);
@@ -14,13 +15,26 @@ tarjetas.forEach(card => {
   });
 });
 
+// PERMITIR DROP EN MANZANA
 meta.addEventListener("dragover", e => e.preventDefault());
 
+// PERMITIR DROP EN RESPUESTA DEL ORGANISMO (ESTO FALTABA)
+respuesta.addEventListener("dragover", e => e.preventDefault());
+
+// DROP SOBRE MANZANA
 meta.addEventListener("drop", e => {
   e.preventDefault();
+  procesarDrop(e);
+});
 
+// DROP SOBRE RESPUESTA DEL ORGANISMO
+respuesta.addEventListener("drop", e => {
+  e.preventDefault();
+  procesarDrop(e);
+});
+
+function procesarDrop(e) {
   const clase = e.dataTransfer.getData("clase");
-  const texto = e.dataTransfer.getData("texto");
 
   if (clase === "manzana") {
     contadorCorrectos++;
@@ -29,16 +43,15 @@ meta.addEventListener("drop", e => {
     feedback.innerText = "✔ Estímulo funcionalmente correcto.";
   } else {
     feedback.innerText = "✘ Observa la función evocada, no la forma.";
-    meta.classList.add("p17-error");
-    setTimeout(() => meta.classList.remove("p17-error"), 300);
   }
 
   if (contadorCorrectos === 3) {
     feedback.innerText = "✅ Clase funcional MANZANA organizada correctamente.";
     respuesta.innerText = "Clase establecida: múltiples formatos → misma función";
   }
-});
+}
 
+// BOTÓN REINICIO
 reiniciar.addEventListener("click", () => {
   contadorCorrectos = 0;
   respuesta.innerText = "Esperando estímulos...";
