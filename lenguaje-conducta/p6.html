@@ -374,7 +374,76 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 4</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <section class="p20-ejercicio-container">
+
+  <div class="p20-instrucciones">
+    <h2>El Injertador de Funciones</h2>
+    <p>
+      Cuando un estímulo nuevo entra en una red ya cargada, puede <strong>heredar sus funciones</strong>.
+      A esto se le llama <strong>transformación de funciones</strong>.
+    </p>
+    <p>
+      Arrastra un estímulo nuevo hacia la red existente. Observa qué funciones hereda.
+      Luego responde por qué ocurre esa reacción.
+    </p>
+  </div>
+
+  <div class="p20-layout">
+
+    <!-- RED EXISTENTE -->
+    <div class="p20-col p20-red">
+      <h3>Red relacional cargada</h3>
+      <div class="p20-nodo">RECHAZO</div>
+      <div class="p20-nodo">DEFECTO</div>
+      <div class="p20-nodo">VERGÜENZA</div>
+
+      <div id="p20-funciones-heredadas" class="p20-funciones">
+        Funciones activas de la red:
+        <ul>
+          <li>Evitación</li>
+          <li>Retraimiento</li>
+          <li>Autocrítica</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ZONA DE ESTÍMULOS NUEVOS -->
+    <div class="p20-col p20-nuevos">
+      <h3>Estímulos nuevos</h3>
+      <div class="p20-estimulos" id="p20-estimulos">
+        <div class="p20-card" draggable="true" data-tipo="apellido">Un apellido</div>
+        <div class="p20-card" draggable="true" data-tipo="diagnostico">Un diagnóstico</div>
+        <div class="p20-card" draggable="true" data-tipo="etiqueta">Una etiqueta social</div>
+        <div class="p20-card" draggable="true" data-tipo="rol">Rol: “paciente”</div>
+        <div class="p20-card" draggable="true" data-tipo="rol">Rol: “fracasado”</div>
+        <div class="p20-card" draggable="true" data-tipo="rol">Rol: “genio”</div>
+      </div>
+    </div>
+
+    <!-- ZONA DE INJERTO -->
+    <div class="p20-col p20-injerto">
+      <h3>Zona de injerto</h3>
+
+      <div id="p20-dropzone" class="p20-dropzone">
+        Arrastra aquí un estímulo nuevo
+      </div>
+
+      <div id="p20-herencia" class="p20-herencia"></div>
+
+      <div id="p20-pregunta" class="p20-pregunta"></div>
+
+      <div id="p20-feedback" class="p20-feedback"></div>
+
+      <div class="p20-controles">
+        <button id="p20-reiniciar">Reiniciar ejercicio</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
       </p>
 
             <div id="zona-interactiva-1" class="uv-interactiva"></div>
