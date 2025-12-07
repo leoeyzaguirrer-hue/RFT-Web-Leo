@@ -489,7 +489,125 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 4</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <!-- ============================================================
+     EJERCICIO · BLOQUE 4 · DERIVADOR DE RELACIONES OCULTAS
+=============================================================== -->
+<section class="p16-ejercicio-container">
+
+  <header class="p16-header">
+    <h3>Actividad interactiva · “El Derivador de Relaciones Ocultas”</h3>
+    <p>
+      Entrena unas pocas relaciones y observa cómo el sistema deriva automáticamente
+      nuevas conexiones sin práctica directa. Este ejercicio prepara formalmente la
+      comprensión de la equivalencia de estímulos.
+    </p>
+  </header>
+
+  <!-- Indicador de fase -->
+  <div class="p16-fase-indicador">
+    <span id="p16-fase-texto">Fase 1 · Entrenamiento directo</span>
+  </div>
+
+  <!-- =========================
+       RED DE NODOS
+  ========================== -->
+  <div class="p16-red">
+
+    <div class="p16-nodo" id="nodo-A">A</div>
+    <div class="p16-nodo" id="nodo-B">B</div>
+    <div class="p16-nodo" id="nodo-C">C</div>
+
+    <div class="p16-linea p16-linea-AB" id="linea-AB"></div>
+    <div class="p16-linea p16-linea-BC" id="linea-BC"></div>
+    <div class="p16-linea p16-linea-AC" id="linea-AC"></div>
+
+  </div>
+
+  <!-- =========================
+       FASE 1 · ENTRENAMIENTO
+  ========================== -->
+  <section class="p16-fase p16-fase-1">
+
+    <h4>Fase 1 · Entrenamiento directo (A → B y B → C)</h4>
+    <p>
+      Selecciona las relaciones que deben ser entrenadas. Estas relaciones serán
+      reforzadas directamente.
+    </p>
+
+    <div class="p16-opciones-entrenamiento">
+      <button class="p16-btn-entreno" data-rela="AB">Entrenar A → B</button>
+      <button class="p16-btn-entreno" data-rela="BC">Entrenar B → C</button>
+    </div>
+
+    <div class="p16-feedback" id="p16-feedback-f1"></div>
+
+  </section>
+
+  <!-- =========================
+       FASE 2 · DERIVACIÓN
+  ========================== -->
+  <section class="p16-fase p16-fase-2">
+
+    <h4>Fase 2 · Derivación sin entrenamiento directo</h4>
+    <p>
+      Sin entrenar nuevas relaciones, indica si consideras que ahora también existe la relación:
+    </p>
+
+    <div class="p16-pregunta-derivada">
+      ¿A → C?
+    </div>
+
+    <div class="p16-opciones-derivacion">
+      <button class="p16-btn-deriva" data-respuesta="si">Sí, se deriva</button>
+      <button class="p16-btn-deriva" data-respuesta="no">No necesariamente</button>
+    </div>
+
+    <div class="p16-feedback" id="p16-feedback-f2"></div>
+
+  </section>
+
+  <!-- =========================
+       APLICACIÓN CLÍNICA
+  ========================== -->
+  <section class="p16-fase p16-fase-3">
+
+    <h4>Aplicación clínica inmediata</h4>
+    <p>
+      Observa ahora un ejemplo paralelo en la vida cotidiana y la clínica:
+    </p>
+
+    <div class="p16-clinica-red">
+      <div class="p16-clinica-nodo">“FRACASO”</div>
+      <div class="p16-clinica-nodo">“RECHAZO”</div>
+      <div class="p16-clinica-nodo">“EVITAR PERSONAS”</div>
+    </div>
+
+    <p class="p16-clinica-texto">
+      Si una persona ha aprendido:
+      <br>“Fracaso” → “Rechazo”
+      <br>y también:
+      <br>“Rechazo” → “Evitar personas”
+      <br><br>
+      El organismo puede comportarse como si ya existiera:
+      <br><strong>“Fracaso” → “Evitar personas”</strong>,
+      aun sin haber vivido directamente esa secuencia completa.
+    </p>
+
+    <div class="p16-feedback p16-feedback-final" id="p16-feedback-final"></div>
+
+  </section>
+
+  <!-- =========================
+       CONTROLES
+  ========================== -->
+  <div class="p16-controles">
+    <button id="p16-btn-reset" class="p16-btn-reset">Reiniciar ejercicio</button>
+  </div>
+
+</section>
+
+<div class="uv-separador-bloque">✦</div>
+
       </p>
 
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
