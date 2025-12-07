@@ -89,6 +89,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function manejarDropF1() {
+    const btnNoEs = document.querySelector(".p9-btn-no-es");
+
+btnNoEs.addEventListener("click", () => {
+  const actual = fase1Items[indiceF1];
+
+  if (!actual.esSilla) {
+    fbF1.textContent =
+      "Correcto: este objeto no entra en tu clase funcional de 'silla'. Aprendes también por exclusión.";
+    fbF1.style.color = "#2a7c4f";
+    avanzarFase1();
+  } else {
+    fbF1.textContent =
+      "Este objeto sí pertenece a la clase 'silla'. Aquí correspondía nombrar.";
+    fbF1.style.color = "#b83232";
+  }
+});
+
     const actual = fase1Items[indiceF1];
 
     if (actual.esSilla) {
