@@ -7,9 +7,17 @@
 
   <!-- Style exclusivo del módulo -->
   <link rel="stylesheet" href="style-lenguaje-conducta.css" />
+  <link rel="stylesheet" href="css/ejercicios/p21/p21-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p22/p22-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p23/p23-ejercicio.css">
+  <link rel="stylesheet" href="css/ejercicios/p24/p24-ejercicio.css">
 
   <!-- JS propio -->
   <script defer src="p7.js"></script>
+  <script src="js/ejercicios/p21/p21-ejercicio.js"></script>
+  <script src="js/ejercicios/p22/p22-ejercicio.js"></script>
+  <script src="js/ejercicios/p23/p23-ejercicio.js"></script>
+  <script src="js/ejercicios/p24/p24-ejercicio.js"></script>
 </head>
 
 <body class="uv-body">
@@ -185,7 +193,46 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <section class="p22-ejercicio-container">
+
+  <div class="p22-instrucciones">
+    <h2>El Activador de Redes</h2>
+    <p>
+      Un solo miembro de una clase funcional puede activar una <strong>red completa de respuestas</strong>.
+      En este ejercicio observarás cómo una palabra, un emoji o un sonido activan una historia entera
+      de contingencias.
+    </p>
+    <p>
+      Primero activa una red. Luego distingue qué reacciones dependen del estímulo físico
+      y cuáles son <strong>respuestas derivadas por la red lingüística</strong>.
+    </p>
+  </div>
+
+  <!-- FAMILIAS -->
+  <div class="p22-familias">
+    <button class="p22-familia" data-red="examen">📚 EXAMEN</button>
+    <button class="p22-familia" data-red="peligro">⚠️ PELIGRO</button>
+    <button class="p22-familia" data-red="apellido">🏷 APELLIDO</button>
+  </div>
+
+  <!-- DESPLIEGUE DE RED -->
+  <div id="p22-red" class="p22-red">
+    Selecciona un estímulo para activar la red.
+  </div>
+
+  <!-- FASE DE DISCRIMINACIÓN -->
+  <div id="p22-discriminacion" class="p22-discriminacion"></div>
+
+  <!-- FEEDBACK -->
+  <div id="p22-feedback" class="p22-feedback"></div>
+
+  <!-- CONTROLES -->
+  <div class="p22-controles">
+    <button id="p22-reiniciar">Reiniciar ejercicio</button>
+  </div>
+
+</section>
+
       </p>
 
             <div id="zona-interactiva-1" class="uv-interactiva"></div>
