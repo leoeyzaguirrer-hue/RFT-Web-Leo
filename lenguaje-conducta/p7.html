@@ -102,7 +102,54 @@
     <div class="uv-card uv-bloque-actividad">
       <h3>Actividad interactiva · Bloque 1</h3>
       <p>
-        [Aquí irá la actividad interactiva del bloque 1: zona de arrastre, botones, etc.]
+        <section class="p21-ejercicio-container">
+
+  <div class="p21-instrucciones">
+    <h2>El Laboratorio del Analista Invisible</h2>
+    <p>
+      En este ejercicio explorarás cómo <strong>todo lenguaje</strong> —hablar, escribir, pensar—
+      es conducta bajo control contextual dentro del esquema <strong>A–B–C</strong>.
+    </p>
+    <p>
+      Observa cómo una misma respuesta verbal cambia según el antecedente y la consecuencia.
+      Nada depende de un "mundo interno": solo de relaciones funcionales.
+    </p>
+  </div>
+
+  <!-- TARJETAS DE CONTEXTO -->
+  <div class="p21-contextos">
+    <button class="p21-contexto" data-ctx="publico">🎤 Hablar en público</button>
+    <button class="p21-contexto" data-ctx="mensaje">📝 Escribir un mensaje difícil</button>
+    <button class="p21-contexto" data-ctx="pensar">🤔 Pensar antes de actuar</button>
+  </div>
+
+  <!-- ÁREA DE TRABAJO -->
+  <div id="p21-area" class="p21-area">
+
+    <div id="p21-antecedentes" class="p21-box"></div>
+
+    <div id="p21-respuestas" class="p21-box"></div>
+
+    <div class="p21-box">
+      <h3>Arrastra la respuesta verbal hacia:</h3>
+      <div class="p21-drops">
+        <div id="p21-publica" class="p21-dropzone">💬 Conducta verbal pública</div>
+        <div id="p21-encubierta" class="p21-dropzone">💭 Conducta verbal encubierta</div>
+      </div>
+    </div>
+
+    <div id="p21-consecuencia" class="p21-box"></div>
+
+    <div id="p21-feedback" class="p21-feedback"></div>
+
+    <div class="p21-controles">
+      <button id="p21-reiniciar">Reiniciar ejercicio</button>
+    </div>
+
+  </div>
+
+</section>
+
       </p>
            <div id="zona-interactiva-1" class="uv-interactiva"></div>
     </div>
