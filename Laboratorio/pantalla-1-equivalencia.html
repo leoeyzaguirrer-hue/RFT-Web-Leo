@@ -79,71 +79,55 @@
 <script src="js/pantalla-1-equivalencia.js"></script>
 </body>
 </html>
-/* ============================
-   TRANSICIÓN AUTOMÁTICA A FASE 3
-============================ */
-function pasarAFase3() {
-  document.getElementById("fase2").classList.remove("activa");
-  document.getElementById("fase3").classList.add("activa");
+<!-- ===================== -->
+<!-- FASE 3 (OCULTA) -->
+<!-- ===================== -->
+<section class="fase-premium" id="fase3">
 
-  setTimeout(pasarAFase4, 3500);
-}
+  <h2 class="fase-titulo">Fase 3 · Entrenamiento B–C</h2>
 
-/* ============================
-   FASE 4 — SIMETRÍA B–C
-============================ */
-const ensayosF4 = [
-  { muestra: "UNO", correcto: "⭐", opciones: ["⭐", "🌙", "❤️"] },
-  { muestra: "DOS", correcto: "❤️", opciones: ["🌙", "❤️", "⭐"] },
-  { muestra: "TRES", correcto: "🌙", opciones: ["❤️", "⭐", "🌙"] },
+  <p class="fase-texto-grande">
+    Ahora se entrena una nueva relación arbitraria. Los estímulos del Conjunto B
+    se vinculan con un nuevo conjunto de estímulos C. Estas relaciones serán
+    necesarias para que, en la siguiente fase, puedan aparecer derivaciones sin
+    entrenamiento directo.
+  </p>
 
-  { muestra: "⭐", correcto: "UNO", opciones: ["DOS", "UNO", "TRES"] },
-  { muestra: "❤️", correcto: "DOS", opciones: ["UNO", "TRES", "DOS"] },
-  { muestra: "🌙", correcto: "TRES", opciones: ["TRES", "UNO", "DOS"] }
-];
+  <div class="conjuntos-grid-grande">
 
-let ensayoF4 = 0;
-const tarjetaF4 = document.getElementById("tarjetaF4");
-const comparacionesF4 = document.getElementById("comparacionesF4");
-const feedbackF4 = document.getElementById("feedbackF4");
+    <div class="conjunto-card-grande">
+      <h3>Conjunto B</h3>
+      <p>UNO</p>
+      <p>DOS</p>
+      <p>TRES</p>
+    </div>
 
-function pasarAFase4() {
-  document.getElementById("fase3").classList.remove("activa");
-  document.getElementById("fase4").classList.add("activa");
-  cargarEnsayoF4();
-}
+    <div class="conjunto-card-grande">
+      <h3>Conjunto C</h3>
+      <p>⭐ Estrella</p>
+      <p>❤️ Corazón</p>
+      <p>🌙 Luna</p>
+    </div>
 
-function cargarEnsayoF4() {
-  const ensayo = ensayosF4[ensayoF4];
-  tarjetaF4.textContent = ensayo.muestra;
-  comparacionesF4.innerHTML = "";
-  feedbackF4.textContent = "";
+  </div>
 
-  ensayo.opciones.forEach(opcion => {
-    const btn = document.createElement("button");
-    btn.className = "boton-comparacion";
-    btn.textContent = opcion;
-    btn.onclick = () => verificarF4(opcion, ensayo.correcto);
-    comparacionesF4.appendChild(btn);
-  });
-}
+  <div class="emparejamientos-grande">
+    UNO → ⭐ &nbsp;&nbsp;|&nbsp;&nbsp; DOS → ❤️ &nbsp;&nbsp;|&nbsp;&nbsp; TRES → 🌙
+  </div>
 
-function verificarF4(seleccion, correcto) {
-  contadorGlobal++;
-  contadorSpan.textContent = contadorGlobal;
+</section>
 
-  if (seleccion === correcto) {
-    feedbackF4.textContent = "✅ Correcto";
-    ensayoF4++;
+<!-- ===================== -->
+<!-- FASE 4 (OCULTA) -->
+<!-- ===================== -->
+<section class="fase-premium" id="fase4">
 
-    if (ensayoF4 < ensayosF4.length) {
-      setTimeout(cargarEnsayoF4, 1000);
-    } else {
-      feedbackF4.textContent = "🎉 Felicitaciones, esto es SIMETRÍA";
-       setTimeout(pasarAFase3, 1800);
-    }
+  <h2 class="fase-titulo">Fase 4 · Simetría B–C y C–B</h2>
 
-  } else {
-    feedbackF4.textContent = "❌ Incorrecto";
-  }
-}
+  <div class="tarjeta-central-grande" id="tarjetaF4">UNO</div>
+
+  <div class="comparaciones" id="comparacionesF4"></div>
+
+  <div class="feedback" id="feedbackF4"></div>
+
+</section>
