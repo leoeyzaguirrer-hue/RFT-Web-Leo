@@ -49,7 +49,7 @@ function verificarRespuesta(seleccion, correcto) {
       setTimeout(cargarEnsayo, 1000);
     } else {
       feedback.textContent = "🎉 Felicitaciones, esto es SIMETRÍA";
-      setTimeout(pasarAFase3, 1800);
+      
     }
 
   } else {
@@ -62,7 +62,7 @@ function verificarRespuesta(seleccion, correcto) {
 function pasarAFase3() {
   document.getElementById("fase2").classList.remove("activa");
   document.getElementById("fase3").classList.add("activa");
-
+setTimeout(pasarAFase4, 5500);
   }
 
 /* ============================
