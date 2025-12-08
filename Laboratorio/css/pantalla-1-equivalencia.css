@@ -1,1 +1,408 @@
+/* =========================================
+   FONDO Y LAYOUT GENERAL
+========================================= */
+
+.lab-body {
+  margin: 0;
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #0f3a5a 0%, #091d2e 60%, #060f18 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   CABECERA
+========================================= */
+
+.lab-header {
+  padding: 16px 24px 8px;
+}
+
+.lab-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.lab-micro-title {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9ecfe6;
+  margin-bottom: 4px;
+}
+
+.lab-header h1 {
+  font-size: 2.2rem;
+  margin: 0 0 4px;
+  letter-spacing: 1px;
+}
+
+.lab-subtitle {
+  font-size: 1rem;
+  color: #cfefff;
+  margin: 0;
+}
+
+/* =========================================
+   CONTENIDO CENTRAL
+========================================= */
+
+.lab-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* Tarjeta premium central */
+
+.lab-card {
+  max-width: 1100px;
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #fff9f0 100%);
+  border-radius: 24px;
+  border: 1.5px solid rgba(253, 191, 18, 0.7);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(253, 191, 18, 0.2);
+  padding: 24px 28px 20px;
+  box-sizing: border-box;
+  color: #08252f;
+}
+
+/* Indicador de fase */
+
+.lab-phase-indicator {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #a47500;
+  margin-bottom: 12px;
+}
+
+/* Cuerpo dinámico de la tarjeta */
+
+.lab-card-body {
+  min-height: 260px;
+}
+
+/* Feedback funcional */
+
+.lab-feedback {
+  margin-top: 16px;
+  min-height: 32px;
+  font-size: 0.95rem;
+  color: #0c3640;
+}
+
+/* Progreso */
+
+.lab-progress-container {
+  margin-top: 12px;
+}
+
+.lab-progress-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(8, 50, 64, 0.12);
+  overflow: hidden;
+}
+
+.lab-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #fdbf12, #f5a700);
+  transition: width 0.25s ease-out;
+}
+
+.lab-progress-text {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #355463;
+}
+
+/* =========================================
+   CONTROLES
+========================================= */
+
+.lab-controls {
+  max-width: 1100px;
+  width: 100%;
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lab-btn {
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.lab-btn-primary {
+  background: linear-gradient(135deg, #fdbf12, #f5a700);
+  color: #10242e;
+  box-shadow: 0 0 20px rgba(253, 191, 18, 0.5);
+}
+
+.lab-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(253, 191, 18, 0.75);
+}
+
+.lab-btn-secondary {
+  background: rgba(9, 29, 46, 0.9);
+  color: #e5f5ff;
+  border: 1px solid rgba(158, 207, 230, 0.5);
+}
+
+.lab-btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(16, 64, 94, 0.7);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.lab-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #a9d7ee;
+  padding: 10px 8px 14px;
+}
+
+/* =========================================
+   ELEMENTOS INTERNOS DE FASES
+========================================= */
+
+.lab-instructions {
+  font-size: 1rem;
+  color: #123947;
+  margin-bottom: 18px;
+}
+
+/* Layout estímulo + opciones */
+
+.lab-stimulus-layout {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+/* Tarjeta estímulo A */
+
+.lab-stimulus-card {
+  flex: 1 1 220px;
+  background: #f5fbff;
+  border-radius: 18px;
+  border: 1px solid rgba(8, 50, 64, 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.lab-stimulus-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #507284;
+  margin-bottom: 6px;
+}
+
+.lab-stimulus-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #143948;
+}
+
+/* Opciones */
+
+.lab-options {
+  flex: 2 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lab-option-card {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(8, 50, 64, 0.18);
+  background: #ffffff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.lab-option-card span {
+  font-weight: 600;
+  color: #08323a;
+}
+
+.lab-option-card small {
+  font-size: 0.8rem;
+  color: #567688;
+}
+
+.lab-option-card:hover {
+  background: #fff7e6;
+  box-shadow: 0 0 0 1px rgba(253, 191, 18, 0.7);
+  transform: translateY(-1px);
+}
+
+/* Estado desactivado (p.ej. tras terminar fase) */
+
+.lab-option-card.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* =========================================
+   FASE 3 – PRUEBAS DERIVADAS
+========================================= */
+
+.lab-test-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lab-test-stimulus {
+  background: #f5fbff;
+  border-radius: 16px;
+  border: 1px solid rgba(8, 50, 64, 0.16);
+  padding: 14px 16px;
+}
+
+.lab-test-stimulus-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #507284;
+  margin-bottom: 4px;
+}
+
+.lab-test-stimulus-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #143948;
+}
+
+.lab-test-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* =========================================
+   FASE 4 – VISUALIZACIÓN DE CLASES
+========================================= */
+
+.lab-classes-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: space-between;
+}
+
+.lab-class-card {
+  flex: 1 1 260px;
+  background: radial-gradient(circle at top, #fffdf6 0%, #fff8e6 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(253, 191, 18, 0.7);
+  padding: 12px 14px;
+  box-shadow: 0 0 14px rgba(253, 191, 18, 0.35);
+}
+
+.lab-class-title {
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #996300;
+  margin-bottom: 8px;
+}
+
+.lab-class-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #143948;
+}
+
+/* =========================================
+   FASE 5 – TRANSFERENCIA DE FUNCIÓN
+========================================= */
+
+.lab-function-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.lab-function-training {
+  flex: 1 1 260px;
+  background: #f5fbff;
+  border-radius: 18px;
+  border: 1px solid rgba(8, 50, 64, 0.16);
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: #143948;
+}
+
+.lab-function-test {
+  flex: 2 1 320px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .lab-header-inner {
+    text-align: center;
+  }
+
+  .lab-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .lab-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .lab-card {
+    padding: 20px 18px 18px;
+  }
+
+  .lab-stimulus-layout {
+    flex-direction: column;
+  }
+
+  .lab-controls {
+    justify-content: center;
+  }
+}
 
