@@ -1,154 +1,54 @@
-// =====================================
-// js/pantalla-1-equivalencia.js
-// =====================================
+let contadorGlobal = 0;
+const contadorSpan = document.getElementById("contadorGlobal");
 
-const intro = document.getElementById("intro");
-const trial = document.getElementById("trial");
-const faseDIntro = document.getElementById("faseDIntro");
-const trialD = document.getElementById("trialD");
-const finalScreen = document.getElementById("final");
+const ensayos = [
+  { muestra: "🔵", correcto: "UNO", opciones: ["UNO", "DOS", "TRES"] },
+  { muestra: "🟢", correcto: "TRES", opciones: ["DOS", "TRES", "UNO"] },
+  { muestra: "🔴", correcto: "DOS", opciones: ["TRES", "UNO", "DOS"] },
 
-const startBtn = document.getElementById("startBtn");
-const startD = document.getElementById("startD");
+  { muestra: "UNO", correcto: "🔵", opciones: ["🟢", "🔵", "🔴"] },
+  { muestra: "DOS", correcto: "🔴", opciones: ["🔴", "🟢", "🔵"] },
+  { muestra: "TRES", correcto: "🟢", opciones: ["🔵", "🟢", "🔴"] }
+];
 
-const sampleBox = document.getElementById("sample");
-const choicesGrid = document.getElementById("choices");
+let ensayoActual = 0;
+
+const tarjeta = document.getElementById("tarjetaMuestra");
+const comparacionesDiv = document.getElementById("comparaciones");
 const feedback = document.getElementById("feedback");
 
-const sampleD = document.getElementById("sampleD");
-const choicesD = document.getElementById("choicesD");
-const feedbackD = document.getElementById("feedbackD");
-
-const phaseLabel = document.getElementById("phaseLabel");
-const trialCounter = document.getElementById("trialCounter");
-const trialCounterD = document.getElementById("trialCounterD");
-
-const sim = document.getElementById("sim");
-const trans = document.getElementById("trans");
-const equiv = document.getElementById("equiv");
-
-const A = ["🔵", "🔴", "🟢"];
-const B = ["UNO", "DOS", "TRES"];
-const C = ["⭐", "❤️", "🌙"];
-const D = ["🔺", "🟧", "🟪"];
-
-const AB = { "🔵": "UNO", "🔴": "DOS", "🟢": "TRES" };
-const BC = { "UNO": "⭐", "DOS": "❤️", "TRES": "🌙" };
-
-let phase = "AB";
-let index = 0;
-
-startBtn.onclick = () => {
-  intro.classList.remove("active");
-  trial.classList.add("active");
-  runTrial();
-};
-
-function runTrial() {
-  let sample, correct, pool;
-
-  if (phase === "AB") {
-    phaseLabel.textContent = "Entrenamiento AB";
-    sample = A[index % 3];
-    correct = AB[sample];
-    pool = B;
-  } else {
-    phaseLabel.textContent = "Entrenamiento BC";
-    sample = B[index % 3];
-    correct = BC[sample];
-    pool = C;
-  }
-
-  sampleBox.textContent = sample;
-  trialCounter.textContent = `Ensayo ${index + 1}`;
+function cargarEnsayo() {
+  const ensayo = ensayos[ensayoActual];
+  tarjeta.textContent = ensayo.muestra;
+  comparacionesDiv.innerHTML = "";
   feedback.textContent = "";
 
-  renderChoices(pool, correct);
-}
-
-function renderChoices(pool, correct) {
-  choicesGrid.innerHTML = "";
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
-
-  shuffled.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "choice";
-    div.textContent = item;
-    div.onclick = () => evaluate(item, correct);
-    choicesGrid.appendChild(div);
+  ensayo.opciones.forEach(opcion => {
+    const btn = document.createElement("button");
+    btn.className = "boton-comparacion";
+    btn.textContent = opcion;
+    btn.onclick = () => verificarRespuesta(opcion, ensayo.correcto);
+    comparacionesDiv.appendChild(btn);
   });
 }
 
-function evaluate(selected, correct) {
-  if (selected === correct) {
-    index++;
-    feedback.textContent = "✅ Correcto";
+function verificarRespuesta(seleccion, correcto) {
+  contadorGlobal++;
+  contadorSpan.textContent = contadorGlobal;
 
-    if (index === 6 && phase === "AB") {
-      sim.textContent = "Simetría ✅";
-      phase = "BC";
-      index = 0;
-    } else if (index === 6 && phase === "BC") {
-      trans.textContent = "Transitividad ✅";
-      equiv.textContent = "Equivalencia ✅";
-      trial.classList.remove("active");
-      faseDIntro.classList.add("active");
-      return;
+  if (seleccion === correcto) {
+    feedback.textContent = "✅ Correcto";
+    ensayoActual++;
+
+    if (ensayoActual < ensayos.length) {
+      setTimeout(cargarEnsayo, 1000);
+    } else {
+      feedback.textContent = "🎉 Felicitaciones, esto es SIMETRÍA";
     }
 
-    setTimeout(runTrial, 600);
   } else {
     feedback.textContent = "❌ Incorrecto";
   }
 }
 
-startD.onclick = () => {
-  faseDIntro.classList.remove("active");
-  trialD.classList.add("active");
-  indexD = 0;
-  runTrialD();
-};
-
-let indexD = 0;
-
-const expansionPairs = [
-  ["🔺", "🔵"], ["🔵", "🔺"],
-  ["🟧", "UNO"], ["UNO", "🟧"],
-  ["🟪", "❤️"], ["❤️", "🟪"]
-];
-
-function runTrialD() {
-  const pair = expansionPairs[indexD];
-  sampleD.textContent = pair[0];
-  feedbackD.textContent = "";
-  trialCounterD.textContent = `Ensayo ${indexD + 1}`;
-
-  const pool = [...A, ...B, ...D];
-  choicesD.innerHTML = "";
-
-  const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, 3);
-  if (!shuffled.includes(pair[1])) shuffled[0] = pair[1];
-
-  shuffled.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "choice";
-    div.textContent = item;
-    div.onclick = () => {
-      if (item === pair[1]) {
-        indexD++;
-        feedbackD.textContent = "✅ Derivado correctamente";
-        setTimeout(() => {
-          if (indexD >= expansionPairs.length) {
-            trialD.classList.remove("active");
-            finalScreen.classList.add("active");
-          } else {
-            runTrialD();
-          }
-        }, 700);
-      } else {
-        feedbackD.textContent = "❌ Incorrecto";
-      }
-    };
-    choicesD.appendChild(div);
-  });
-}
+cargarEnsayo();
