@@ -139,50 +139,111 @@ function renderPhase() {
 }
 
 // ============================================
-// FASE 1 – ENTRENAMIENTO AB
+// FASE 1 – ENTRENAMIENTO AB (CON SUBFASE GUIADA)
 // ============================================
 
+let guidedDemoDone = false;
+let labeledTrialsRemaining = 3;
+
 function setupTrainingAB() {
-  // Prepara ensayos A–B (cada A aparece varias veces)
   trainingTrialsAB = [];
   correctCountCurrentPhase = 0;
   currentTrialIndex = 0;
+  guidedDemoDone = false;
+  labeledTrialsRemaining = 3;
 
-  // 3 repeticiones por clase → 9 ensayos
   const base = classesAB.flatMap(item => [item, item, item]);
   trainingTrialsAB = shuffle(base);
 
-  renderTrainingABTrial();
+  renderGuidedABDemo();
 }
 
-function renderTrainingABTrial() {
-  const trial = trainingTrialsAB[currentTrialIndex];
+// ------------------------------
+// SUBFASE 1.0 — DEMOSTRACIÓN GUIADA
+// ------------------------------
 
-  const allOptions = classesAB.map(c => c.B);
-  const shuffledOptions = shuffle(allOptions);
+function renderGuidedABDemo() {
+  const demo = classesAB[0]; // Primer par como ejemplo
 
   phaseContentEl.innerHTML = `
     <div class="lab-instructions">
-      Entrena relaciones arbitrarias entre palabras sin sentido (A) y figuras (B).
-      Responde por ensayo y error. Observa cómo tu historia de entrenamiento se acumula.
+      En este laboratorio aprenderás relaciones <strong>arbitrarias</strong> entre palabras sin sentido (A)
+      y figuras (B). No existe una relación “natural”: estas conexiones se construyen por entrenamiento.
     </div>
+
     <div class="lab-stimulus-layout">
       <div class="lab-stimulus-card">
-        <div class="lab-stimulus-label">Estímulo A</div>
+        <div class="lab-stimulus-label">Estímulo A (palabra)</div>
+        <div class="lab-stimulus-value">${demo.A}</div>
+      </div>
+
+      <div class="lab-stimulus-card">
+        <div class="lab-stimulus-label">Estímulo B (figura)</div>
+        <div class="lab-stimulus-value">${demo.B}</div>
+      </div>
+    </div>
+
+    <div class="lab-instructions" style="margin-top:16px;">
+      Primero observarás una relación correcta. Luego comenzarás a responder por ensayo y error.
+    </div>
+
+    <div style="margin-top:18px; text-align:right;">
+      <button class="lab-btn lab-btn-primary" id="btnStartGuidedAB">
+        Comenzar entrenamiento A–B
+      </button>
+    </div>
+  `;
+
+  feedbackEl.textContent =
+    "Esta es una relación A–B correcta presentada solo como modelo inicial.";
+
+  progressFillEl.style.width = "0%";
+  progressTextEl.textContent = "Aún no has iniciado el entrenamiento.";
+
+  document.getElementById("btnStartGuidedAB").addEventListener("click", () => {
+    guidedDemoDone = true;
+    renderTrainingABTrial();
+  });
+}
+
+// ------------------------------
+// SUBFASE 1.1 — ENSAYOS CON RÓTULOS A/B VISIBLES
+// ------------------------------
+
+function renderTrainingABTrial() {
+  const trial = trainingTrialsAB[currentTrialIndex];
+  const allOptions = classesAB.map(c => c.B);
+  const shuffledOptions = shuffle(allOptions);
+
+  const showLabels = labeledTrialsRemaining > 0;
+
+  phaseContentEl.innerHTML = `
+    <div class="lab-instructions">
+      Entrena relaciones arbitrarias entre palabras (A) y figuras (B).
+      Responde por ensayo y error.
+    </div>
+
+    <div class="lab-stimulus-layout">
+      <div class="lab-stimulus-card">
+        <div class="lab-stimulus-label">
+          ${showLabels ? "Estímulo A (palabra)" : "Estímulo"}
+        </div>
         <div class="lab-stimulus-value">${trial.A}</div>
       </div>
+
       <div class="lab-options">
         ${shuffledOptions.map(opt => `
           <button class="lab-option-card" data-option="${opt}">
             <span>${opt}</span>
-            <small>Selecciona la figura que “va con” esta palabra</small>
+            <small>
+              ${showLabels ? "Estímulo B (figura)" : "Selecciona la opción"}
+            </small>
           </button>
         `).join("")}
       </div>
     </div>
   `;
 
-  // Listeners
   const optionButtons = phaseContentEl.querySelectorAll(".lab-option-card");
   optionButtons.forEach(btn => {
     btn.addEventListener("click", () => handleTrainingABResponse(btn, trial));
@@ -191,6 +252,10 @@ function renderTrainingABTrial() {
   updateTrainingProgress(trainingTrialsAB, currentTrialIndex, correctCountCurrentPhase);
 }
 
+// ------------------------------
+// RESPUESTA DEL ESTUDIANTE
+// ------------------------------
+
 function handleTrainingABResponse(buttonEl, trial) {
   const chosen = buttonEl.getAttribute("data-option");
   const isCorrect = chosen === trial.B;
@@ -198,42 +263,36 @@ function handleTrainingABResponse(buttonEl, trial) {
   if (isCorrect) {
     correctCountCurrentPhase++;
     feedbackEl.textContent =
-      "Correcto: esta relación A–B está siendo entrenada directamente por contingencias.";
+      "Correcto: esta relación A–B se está fortaleciendo por tu historia de respuestas.";
   } else {
     feedbackEl.textContent =
-      "En este ensayo la relación no coincide. Sigue intentando: el criterio viene de la historia de refuerzo.";
+      "Esta no es la relación entrenada. Observa qué opción resulta consistente con tus aciertos previos.";
   }
 
   currentTrialIndex++;
+
+  if (labeledTrialsRemaining > 0) labeledTrialsRemaining--;
 
   if (currentTrialIndex < trainingTrialsAB.length) {
     setTimeout(() => {
       renderTrainingABTrial();
     }, 700);
   } else {
-    // Fase completada
     const total = trainingTrialsAB.length;
     const aciertos = correctCountCurrentPhase;
     const porcentaje = Math.round((aciertos / total) * 100);
+
     feedbackEl.textContent =
       `Fase 1 completada. Aciertos: ${aciertos} de ${total} (${porcentaje}%). ` +
-      `Ya dispones de una historia de entrenamiento A–B que luego permitirá relaciones derivadas.`;
+      `Has construido una historia de discriminación condicional A–B.`;
 
-    // Desactivar botones de respuesta
     const optionButtons = phaseContentEl.querySelectorAll(".lab-option-card");
     optionButtons.forEach(btn => btn.classList.add("disabled"));
+
     updateTrainingProgress(trainingTrialsAB, trainingTrialsAB.length, correctCountCurrentPhase);
   }
 }
 
-function updateTrainingProgress(trialsArray, index, correctCount) {
-  const total = trialsArray.length;
-  const completed = Math.min(index, total);
-  const progress = total > 0 ? (completed / total) * 100 : 0;
-  progressFillEl.style.width = `${progress}%`;
-  progressTextEl.textContent =
-    `Ensayos completados: ${completed} de ${total} · Respuestas correctas: ${correctCount}`;
-}
 
 // ============================================
 // FASE 2 – ENTRENAMIENTO AC
