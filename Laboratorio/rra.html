@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Respuesta Relacional</title>
+  <link rel="stylesheet" href="css/rra.css">
+</head>
+<body>
+
+<div class="lab-premium">
+
+  <h1 id="tituloFase">FASE 1 · COORDINACIÓN FUNCIONAL</h1>
+  <h2 id="subtituloFase">Antes del Lenguaje Relacional</h2>
+
+  <!-- PANEL CENTRAL -->
+  <div class="panel-central">
+    <div id="estimuloMuestra" class="estimulo-muestra">TA</div>
+  </div>
+
+  <!-- TARJETAS -->
+  <div class="tarjetas">
+    <div class="tarjeta grande" data-respuesta="CUADRADO">■</div>
+    <div class="tarjeta grande" data-respuesta="CIRCULO">●</div>
+    <div class="tarjeta grande oculto" data-respuesta="FIGURA-X">✧</div>
+  </div>
+
+  <!-- CONTROL -->
+  <div class="panel-control">
+    <div id="feedback" class="feedback">—</div>
+    <div class="contador">Correctas: <span id="contador">0</span></div>
+  </div>
+
+  <!-- TEORIA -->
+  <div id="teoria" class="teoria">
+    En esta fase no hay Respuesta Relacional Arbitrariamente Aplicable. 
+    La conducta está bajo control de contingencias directas. 
+    Esto corresponde a Coordinación Funcional (C. func).
+  </div>
+
+  <!-- BOTONES -->
+  <div class="botonera">
+    <button id="btnEnsayo" class="btn-premium">INICIAR ENSAYO</button>
+    <button id="btnContinuar" class="btn-premium oculto">CONTINUAR A FASE 2</button>
+  </div>
+
+</div>
+
+<script src="js/rra.js"></script>
+</body>
+</html>
