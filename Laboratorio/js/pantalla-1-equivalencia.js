@@ -158,53 +158,67 @@ function setupTrainingAB() {
   renderGuidedABDemo();
 }
 
-// ------------------------------
-// SUBFASE 1.0 — DEMOSTRACIÓN GUIADA
-// ------------------------------
-
 function renderGuidedABDemo() {
-  const demo = classesAB[0]; // Primer par como ejemplo
+  const demoPairs = [classesAB[0], classesAB[1]]; // TAV y MIP
+  let demoIndex = 0;
 
-  phaseContentEl.innerHTML = `
-    <div class="lab-instructions">
-      En este laboratorio aprenderás relaciones <strong>arbitrarias</strong> entre palabras sin sentido (A)
-      y figuras (B). No existe una relación “natural”: estas conexiones se construyen por entrenamiento.
-    </div>
+  function showDemoPair() {
+    const demo = demoPairs[demoIndex];
 
-    <div class="lab-stimulus-layout">
-      <div class="lab-stimulus-card">
-        <div class="lab-stimulus-label">Estímulo A (palabra)</div>
-        <div class="lab-stimulus-value">${demo.A}</div>
+    phaseContentEl.innerHTML = `
+      <div class="lab-instructions">
+        En este laboratorio aprenderás relaciones <strong>arbitrarias</strong> entre palabras sin sentido (A)
+        y figuras (B). Estas conexiones no son naturales: se construyen por entrenamiento.
       </div>
 
-      <div class="lab-stimulus-card">
-        <div class="lab-stimulus-label">Estímulo B (figura)</div>
-        <div class="lab-stimulus-value">${demo.B}</div>
+      <div class="lab-stimulus-layout">
+        <div class="lab-stimulus-card">
+          <div class="lab-stimulus-label">Estímulo A (palabra)</div>
+          <div class="lab-stimulus-value">${demo.A}</div>
+        </div>
+
+        <div class="lab-stimulus-card">
+          <div class="lab-stimulus-label">Estímulo B (figura)</div>
+          <div class="lab-stimulus-value">${demo.B}</div>
+        </div>
       </div>
-    </div>
 
-    <div class="lab-instructions" style="margin-top:16px;">
-      Primero observarás una relación correcta. Luego comenzarás a responder por ensayo y error.
-    </div>
+      <div class="lab-instructions" style="margin-top:16px;">
+        Observa esta relación correcta. No intentes memorizarla como un “dato”,
+        sino como una relación que se fortalece por contingencias.
+      </div>
 
-    <div style="margin-top:18px; text-align:right;">
-      <button class="lab-btn lab-btn-primary" id="btnStartGuidedAB">
-        Comenzar entrenamiento A–B
-      </button>
-    </div>
-  `;
+      <div style="margin-top:18px; text-align:right; display:flex; gap:10px; justify-content:flex-end;">
+        ${demoIndex < demoPairs.length - 1
+          ? `<button class="lab-btn lab-btn-secondary" id="btnNextDemo">Ver siguiente ejemplo</button>`
+          : `<button class="lab-btn lab-btn-primary" id="btnStartGuidedAB">Comenzar entrenamiento A–B</button>`
+        }
+      </div>
+    `;
 
-  feedbackEl.textContent =
-    "Esta es una relación A–B correcta presentada solo como modelo inicial.";
+    feedbackEl.textContent =
+      `Ejemplo guiado ${demoIndex + 1} de ${demoPairs.length}: esta es una relación A–B correcta presentada solo como modelo.`;
 
-  progressFillEl.style.width = "0%";
-  progressTextEl.textContent = "Aún no has iniciado el entrenamiento.";
+    progressFillEl.style.width = "0%";
+    progressTextEl.textContent =
+      `Demostración guiada: ${demoIndex + 1} de ${demoPairs.length}.`;
 
-  document.getElementById("btnStartGuidedAB").addEventListener("click", () => {
-    guidedDemoDone = true;
-    renderTrainingABTrial();
-  });
+    if (demoIndex < demoPairs.length - 1) {
+      document.getElementById("btnNextDemo").addEventListener("click", () => {
+        demoIndex++;
+        showDemoPair();
+      });
+    } else {
+      document.getElementById("btnStartGuidedAB").addEventListener("click", () => {
+        guidedDemoDone = true;
+        renderTrainingABTrial();
+      });
+    }
+  }
+
+  showDemoPair();
 }
+
 
 // ------------------------------
 // SUBFASE 1.1 — ENSAYOS CON RÓTULOS A/B VISIBLES
