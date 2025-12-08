@@ -1,57 +1,81 @@
-let contadorGlobal = 0;
-const contadorSpan = document.getElementById("contadorGlobal");
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio Experimental de Equivalencia</title>
+  <link rel="stylesheet" href="css/pantalla-1-equivalencia.css">
+</head>
+<body>
 
-function irAFase2() {
-  document.getElementById("fase1").classList.remove("activa");
-  document.getElementById("fase2").classList.add("activa");
-  cargarEnsayo();
-}
+<!-- FONDO DECORATIVO -->
+<div class="fondo-dorado"></div>
 
-const ensayos = [
-  { muestra: "🔵", correcto: "UNO", opciones: ["UNO", "DOS", "TRES"] },
-  { muestra: "🟢", correcto: "TRES", opciones: ["DOS", "TRES", "UNO"] },
-  { muestra: "🔴", correcto: "DOS", opciones: ["TRES", "UNO", "DOS"] },
-  { muestra: "UNO", correcto: "🔵", opciones: ["🟢", "🔵", "🔴"] },
-  { muestra: "DOS", correcto: "🔴", opciones: ["🔴", "🟢", "🔵"] },
-  { muestra: "TRES", correcto: "🟢", opciones: ["🔵", "🟢", "🔴"] }
-];
+<div class="lab-container">
 
-let ensayoActual = 0;
+  <h1 class="lab-title">Laboratorio Experimental de Equivalencia</h1>
 
-const tarjeta = document.getElementById("tarjetaMuestra");
-const comparacionesDiv = document.getElementById("comparaciones");
-const feedback = document.getElementById("feedback");
+  <!-- CONTADOR GLOBAL -->
+  <div class="contador-premium">
+    Ensayos acumulados: <span id="contadorGlobal">0</span>
+  </div>
 
-function cargarEnsayo() {
-  const ensayo = ensayos[ensayoActual];
-  tarjeta.textContent = ensayo.muestra;
-  comparacionesDiv.innerHTML = "";
-  feedback.textContent = "";
+  <!-- ===================== -->
+  <!-- FASE 1 (VISIBLE) -->
+  <!-- ===================== -->
 
-  ensayo.opciones.forEach(opcion => {
-    const btn = document.createElement("button");
-    btn.className = "boton-comparacion";
-    btn.textContent = opcion;
-    btn.onclick = () => verificarRespuesta(opcion, ensayo.correcto);
-    comparacionesDiv.appendChild(btn);
-  });
-}
+  <section class="fase-premium activa" id="fase1">
 
-function verificarRespuesta(seleccion, correcto) {
-  contadorGlobal++;
-  contadorSpan.textContent = contadorGlobal;
+    <h2 class="fase-titulo">Fase 1 · Entrenamiento A–B</h2>
 
-  if (seleccion === correcto) {
-    feedback.textContent = "✅ Correcto";
-    ensayoActual++;
+    <p class="fase-texto-grande">
+      En esta fase se establecen las relaciones arbitrarias iniciales entre dos conjuntos de estímulos,
+      que funcionarán como base para todas las relaciones derivadas posteriores.
+    </p>
 
-    if (ensayoActual < ensayos.length) {
-      setTimeout(cargarEnsayo, 1000);
-    } else {
-      feedback.textContent = "🎉 Felicitaciones, esto es SIMETRÍA";
-    }
+    <div class="conjuntos-grid-grande">
 
-  } else {
-    feedback.textContent = "❌ Incorrecto";
-  }
-}
+      <div class="conjunto-card-grande">
+        <h3>Conjunto A</h3>
+        <p>🔵 Círculo azul</p>
+        <p>🔴 Círculo rojo</p>
+        <p>🟢 Círculo verde</p>
+      </div>
+
+      <div class="conjunto-card-grande">
+        <h3>Conjunto B</h3>
+        <p>UNO</p>
+        <p>DOS</p>
+        <p>TRES</p>
+      </div>
+
+    </div>
+
+    <div class="emparejamientos-grande">
+      🔵 → UNO &nbsp;&nbsp;|&nbsp;&nbsp; 🔴 → DOS &nbsp;&nbsp;|&nbsp;&nbsp; 🟢 → TRES
+    </div>
+
+    <button class="boton-continuar" onclick="irAFase2()">CONTINUAR</button>
+
+  </section>
+
+  <!-- ===================== -->
+  <!-- FASE 2 (OCULTA) -->
+  <!-- ===================== -->
+
+  <section class="fase-premium" id="fase2">
+
+    <h2 class="fase-titulo">Fase 2 · Ensayos de Simetría A–B y B–A</h2>
+
+    <div class="tarjeta-central-grande" id="tarjetaMuestra">🔵</div>
+
+    <div class="comparaciones" id="comparaciones"></div>
+
+    <div class="feedback" id="feedback"></div>
+
+  </section>
+
+</div>
+
+<script src="js/pantalla-1-equivalencia.js"></script>
+</body>
+</html>
