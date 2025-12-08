@@ -1,3 +1,7 @@
+// =====================================
+// js/pantalla-1-equivalencia.js
+// =====================================
+
 const intro = document.getElementById("intro");
 const trial = document.getElementById("trial");
 const faseDIntro = document.getElementById("faseDIntro");
@@ -17,6 +21,7 @@ const feedbackD = document.getElementById("feedbackD");
 
 const phaseLabel = document.getElementById("phaseLabel");
 const trialCounter = document.getElementById("trialCounter");
+const trialCounterD = document.getElementById("trialCounterD");
 
 const sim = document.getElementById("sim");
 const trans = document.getElementById("trans");
@@ -100,37 +105,46 @@ function evaluate(selected, correct) {
 startD.onclick = () => {
   faseDIntro.classList.remove("active");
   trialD.classList.add("active");
+  indexD = 0;
   runTrialD();
 };
 
 let indexD = 0;
-const pairsD = [
+
+const expansionPairs = [
   ["🔺", "🔵"], ["🔵", "🔺"],
-  ["🟧", "UNO"], ["UNO", "🟧"]
+  ["🟧", "UNO"], ["UNO", "🟧"],
+  ["🟪", "❤️"], ["❤️", "🟪"]
 ];
 
 function runTrialD() {
-  const pair = pairsD[indexD % pairsD.length];
+  const pair = expansionPairs[indexD];
   sampleD.textContent = pair[0];
   feedbackD.textContent = "";
+  trialCounterD.textContent = `Ensayo ${indexD + 1}`;
+
+  const pool = [...A, ...B, ...D];
   choicesD.innerHTML = "";
 
-  let pool = [...A, ...B, ...D];
+  const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, 3);
+  if (!shuffled.includes(pair[1])) shuffled[0] = pair[1];
 
-  pool.sort(() => Math.random() - 0.5).slice(0, 3).forEach(item => {
+  shuffled.forEach(item => {
     const div = document.createElement("div");
     div.className = "choice";
     div.textContent = item;
     div.onclick = () => {
       if (item === pair[1]) {
-        feedbackD.textContent = "✅ Derivado correctamente";
         indexD++;
-        if (indexD === pairsD.length) {
-          trialD.classList.remove("active");
-          finalScreen.classList.add("active");
-        } else {
-          setTimeout(runTrialD, 700);
-        }
+        feedbackD.textContent = "✅ Derivado correctamente";
+        setTimeout(() => {
+          if (indexD >= expansionPairs.length) {
+            trialD.classList.remove("active");
+            finalScreen.classList.add("active");
+          } else {
+            runTrialD();
+          }
+        }, 700);
       } else {
         feedbackD.textContent = "❌ Incorrecto";
       }
