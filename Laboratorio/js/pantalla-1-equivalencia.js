@@ -464,4 +464,207 @@ function setupVisualization() {
   progressFillEl.style.width = "0%";
   progressTextEl.textContent = "";
 
-  // Construimos la rep
+  // Construimos la representación de clases
+  const classCardsHtml = classesAB.map(classItem => {
+    const A = classItem.A;
+    const B = classItem.B;
+    const C = classesAC.find(c => c.A === A).C;
+
+    return `
+      <div class="lab-class-card">
+        <div class="lab-class-title">Clase de equivalencia · A = ${A}</div>
+        <div class="lab-class-row">
+          <div><strong>A:</strong> ${A}</div>
+          <div><strong>B:</strong> ${B}</div>
+          <div><strong>C:</strong> ${C}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  phaseContentEl.innerHTML = `
+    <div class="lab-instructions">
+      Visualización de las <strong>clases de equivalencia</strong> formadas a partir de tu entrenamiento.
+      No se trata de asociaciones aisladas, sino de <strong>redes simbólicas</strong> en las que
+      los miembros de una misma clase se vuelven intercambiables a nivel funcional.
+    </div>
+    <div class="lab-classes-layout">
+      ${classCardsHtml}
+    </div>
+  `;
+
+  feedbackEl.textContent =
+    "Cada tarjeta muestra una clase: todos los estímulos A, B y C dentro de ella se comportan como equivalentes en tu repertorio.";
+}
+
+// ============================================
+// FASE 5 – TRANSFERENCIA DE FUNCIÓN
+// ============================================
+
+function setupTransfer() {
+  transferIndex = 0;
+  transferCorrect = 0;
+
+  // Preparamos los ensayos: uno por palabra A
+  transferTrials = classesAC.map(item => {
+    const A = item.A;
+    const C = item.C;
+    const func = functionsByC[C];
+    return {
+      A,
+      C,
+      func
+    };
+  });
+
+  renderTransferTrialIntro();
+}
+
+function renderTransferTrialIntro() {
+  // Entrenamiento explícito de funciones en C
+  const trainingListHtml = classesAC.map(item => {
+    const C = item.C;
+    const func = functionsByC[C];
+    return `<li><strong>${C}</strong> → ${func}</li>`;
+  }).join("");
+
+  phaseContentEl.innerHTML = `
+    <div class="lab-instructions">
+      Ahora asignaremos <strong>nuevas funciones</strong> a los estímulos C (imágenes).
+      Observa cómo esas funciones pueden transferirse a las palabras A por pertenecer a la misma clase.
+    </div>
+    <div class="lab-function-layout">
+      <div class="lab-function-training">
+        <p><strong>Entrenamiento de funciones en C:</strong></p>
+        <ul>
+          ${trainingListHtml}
+        </ul>
+        <p style="margin-top:8px;">
+          Primero se entrena la función en C. Luego probaremos qué ocurre cuando sólo aparece la palabra A.
+        </p>
+      </div>
+      <div class="lab-function-test" id="labTransferTestContainer">
+        <!-- Aquí cargaremos los ensayos de prueba uno por uno -->
+      </div>
+    </div>
+  `;
+
+  // Inicia primer ensayo de prueba
+  renderTransferTestTrial();
+}
+
+function renderTransferTestTrial() {
+  const container = document.getElementById("labTransferTestContainer");
+  const trial = transferTrials[transferIndex];
+
+  // Opciones: todas las funciones posibles
+  const allFunctions = Object.values(functionsByC);
+  const shuffled = shuffle(allFunctions);
+
+  container.innerHTML = `
+    <div class="lab-instructions">
+      Considera que ya entrenaste esas funciones en C.
+      Ahora sólo verás una <strong>palabra A</strong>. Elige qué función crees que evocará.
+    </div>
+    <div class="lab-stimulus-layout">
+      <div class="lab-stimulus-card">
+        <div class="lab-stimulus-label">Palabra A</div>
+        <div class="lab-stimulus-value">${trial.A}</div>
+      </div>
+      <div class="lab-options">
+        ${shuffled.map(fn => `
+          <button class="lab-option-card" data-option="${fn}">
+            <span>${fn}</span>
+            <small>Función que crees que evocará esta palabra</small>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `;
+
+  const optionButtons = container.querySelectorAll(".lab-option-card");
+  optionButtons.forEach(btn => {
+    btn.addEventListener("click", () => handleTransferResponse(btn, trial));
+  });
+
+  const total = transferTrials.length;
+  const completed = transferIndex;
+  const progress = total > 0 ? (completed / total) * 100 : 0;
+  progressFillEl.style.width = `${progress}%`;
+  progressTextEl.textContent =
+    `Ensayos de transferencia: ${completed} de ${total}.`;
+  feedbackEl.textContent =
+    "En esta fase sí hay feedback por ensayo, pero lo relevante es notar que la palabra nunca tuvo contacto directo con esa función.";
+}
+
+function handleTransferResponse(buttonEl, trial) {
+  const chosen = buttonEl.getAttribute("data-option");
+  const isCorrect = chosen === trial.func;
+
+  if (isCorrect) {
+    transferCorrect++;
+    feedbackEl.textContent =
+      "Correcto: la palabra A parece heredar la función que entrenaste en C dentro de la misma clase.";
+  } else {
+    feedbackEl.textContent =
+      "En este ensayo la elección no coincide con la función entrenada en C. Observa que, aun así, tu respuesta se guía por la red previa.";
+  }
+
+  transferIndex++;
+
+  if (transferIndex < transferTrials.length) {
+    setTimeout(() => {
+      renderTransferTestTrial();
+    }, 800);
+  } else {
+    const total = transferTrials.length;
+    const porcentaje = Math.round((transferCorrect / total) * 100);
+    phaseContentEl.innerHTML = `
+      <div class="lab-instructions">
+        Resultados de la fase de <strong>transferencia de función</strong>.
+      </div>
+      <p>
+        Has respondido correctamente <strong>${transferCorrect}</strong> de <strong>${total}</strong> ensayos
+        (${porcentaje}%). Aquí, las palabras A evocan funciones que nunca se entrenaron directamente con ellas,
+        sino con otros miembros de su clase.
+      </p>
+      <p>
+        Esto muestra cómo, una vez formadas las clases de equivalencia, las <strong>funciones psicológicas</strong>
+        pueden transferirse entre sus miembros sin nuevo contacto con la experiencia original.
+      </p>
+    `;
+    feedbackEl.textContent =
+      "Este es el puente final del laboratorio: desde equivalencia de estímulos hacia la comprensión de la transformación de funciones.";
+    progressFillEl.style.width = "100%";
+    progressTextEl.textContent =
+      `Transferencia de función completada. Ensayos realizados: ${total}.`;
+  }
+}
+
+// ============================================
+// CONTROLES DE FASE
+// ============================================
+
+btnResetPhase.addEventListener("click", () => {
+  renderPhase(); // vuelve a inicializar la fase actual
+});
+
+btnPrevPhase.addEventListener("click", () => {
+  if (currentPhaseIndex > 0) {
+    currentPhaseIndex--;
+    renderPhase();
+  }
+});
+
+btnNextPhase.addEventListener("click", () => {
+  if (currentPhaseIndex < phases.length - 1) {
+    currentPhaseIndex++;
+    renderPhase();
+  }
+});
+
+// ============================================
+// INICIO
+// ============================================
+
+renderPhase();
