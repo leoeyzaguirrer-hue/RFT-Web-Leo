@@ -1,0 +1,186 @@
+.crel-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Coco Gothic","Noto Sans",sans-serif;
+  background: radial-gradient(circle at top left,#0a2a5c 0%,#050b18 45%,#020510 100%);
+  color: #fdfaf3;
+  overflow: hidden;
+}
+
+.crel-bg-layer {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(253,191,18,.15), transparent 60%),
+    radial-gradient(circle at 85% 20%, rgba(0,194,203,.15), transparent 60%);
+  z-index: 0;
+}
+
+.crel-main {
+  position: relative;
+  z-index: 1;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 36px 26px;
+}
+
+.crel-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.crel-microtitle {
+  color: #fdbf12;
+  letter-spacing: .2em;
+  font-size: 1rem;
+}
+
+.crel-title {
+  font-size: 3rem;
+  margin: 10px 0;
+  letter-spacing: .1em;
+}
+
+.crel-subtitle {
+  font-size: 1.3rem;
+  opacity: .9;
+}
+
+.crel-card {
+  width: 95%;
+  min-height: 65vh;
+  margin: 0 auto;
+  background: linear-gradient(135deg,#050b18,#081e44);
+  border-radius: 32px;
+  border: 2px solid rgba(253,191,18,.7);
+  padding: 28px;
+  box-shadow: 0 40px 80px rgba(0,0,0,.9);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.crel-contexto-badge {
+  background: radial-gradient(circle,#fdbf12,#8a5c00);
+  color: #1b1200;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  width: fit-content;
+}
+
+.crel-card-inner {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 28px;
+}
+
+.crel-panel {
+  background: radial-gradient(circle at top, rgba(20,90,140,.3), rgba(0,0,0,.7));
+  border-radius: 26px;
+  padding: 26px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.9);
+}
+
+.crel-panel-title {
+  letter-spacing: .2em;
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+  opacity: .9;
+}
+
+.crel-sample-symbol {
+  font-size: 8rem;
+  text-align: center;
+  text-shadow: 0 0 30px rgba(0,194,203,.8);
+}
+
+.crel-choices-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.crel-choice {
+  background: radial-gradient(circle,#10607c,#020b15);
+  border-radius: 22px;
+  border: 2px solid rgba(253,191,18,.4);
+  padding: 26px;
+  cursor: pointer;
+}
+
+.crel-choice-symbol {
+  font-size: 4.6rem;
+}
+
+.crel-footer {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.crel-feedback {
+  font-size: 1.1rem;
+}
+
+.crel-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crel-btn {
+  border-radius: 999px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  letter-spacing: .16em;
+  cursor: pointer;
+}
+
+.crel-btn-primary {
+  background: linear-gradient(135deg,#fdbf12,#ffe18a);
+}
+
+.crel-btn-secondary {
+  background: linear-gradient(135deg,#167e9c,#041b2e);
+  color: white;
+  border: 1px solid rgba(0,194,203,.7);
+}
+
+.crel-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle,#000,#050b18);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.crel-overlay-card {
+  background: linear-gradient(135deg,#050b18,#081e44);
+  border-radius: 30px;
+  border: 2px solid #fdbf12;
+  padding: 36px;
+  text-align: center;
+  max-width: 800px;
+}
+
+.crel-map-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+.crel-map-col {
+  background: rgba(0,0,0,.6);
+  border-radius: 18px;
+  padding: 20px;
+  font-size: 2.8rem;
+  text-align: center;
+}
