@@ -141,8 +141,32 @@ const ensayosF5 = [
 let ensayoF5 = 0;
 
 function pasarAFase5() {
+  // Salir de la Fase 4 y entrar a la Fase 5
   document.getElementById("fase4").classList.remove("activa");
   document.getElementById("fase5").classList.add("activa");
+
+  // Mostrar micro-fase de predicción y ocultar ensayos
+  document.getElementById("prediccionF5").style.display = "block";
+
+  const bloque = document.getElementById("bloqueEnsayosF5");
+  bloque.classList.remove("bloque-ensayos-activo");
+  bloque.classList.add("bloque-ensayos-oculto");
+}
+
+function iniciarEnsayosF5(prediccion) {
+  // Aquí podrías guardar la predicción si luego quieres analizarla
+  // por ahora solo la podríamos registrar en consola:
+  console.log("Predicción del alumno F5:", prediccion);
+
+  // Ocultamos la tarjeta de predicción
+  document.getElementById("prediccionF5").style.display = "none";
+
+  // Mostramos el bloque de ensayos
+  const bloque = document.getElementById("bloqueEnsayosF5");
+  bloque.classList.remove("bloque-ensayos-oculto");
+  bloque.classList.add("bloque-ensayos-activo");
+
+  // Y lanzamos el primer ensayo exactamente igual que antes
   cargarEnsayoF5();
 }
 
@@ -343,4 +367,13 @@ function mostrarResultadosFinales() {
   document.getElementById("scoreSimetrias").textContent = 12;
   document.getElementById("scoreTransitividad").textContent = 6;
   document.getElementById("scoreCombinaciones").textContent = contadorGlobal;
+}
+function irAFaseFallo() {
+  document.getElementById("faseFinal").classList.remove("activa");
+  document.getElementById("faseFallo").classList.add("activa");
+}
+
+function volverAFinal() {
+  document.getElementById("faseFallo").classList.remove("activa");
+  document.getElementById("faseFinal").classList.add("activa");
 }
