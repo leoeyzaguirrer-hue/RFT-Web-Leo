@@ -1,34 +1,35 @@
 const intro = document.getElementById("intro");
 const trial = document.getElementById("trial");
-const btnStart = document.getElementById("btnStart");
+const faseD = document.getElementById("faseD");
+
+const startBtn = document.getElementById("startBtn");
+const startD = document.getElementById("startD");
 
 const sampleBox = document.getElementById("sample");
 const choicesGrid = document.getElementById("choices");
 const feedback = document.getElementById("feedback");
 
-const trialPhase = document.getElementById("trialPhase");
-const trialCount = document.getElementById("trialCount");
+const phaseLabel = document.getElementById("phaseLabel");
+const trialCounter = document.getElementById("trialCounter");
+
+const reflex = document.getElementById("reflex");
+const sim = document.getElementById("sim");
+const trans = document.getElementById("trans");
+const equiv = document.getElementById("equiv");
 
 const A = ["🔵", "🔴", "🟢"];
 const B = ["UNO", "DOS", "TRES"];
 const C = ["⭐", "❤️", "🌙"];
+const D = ["✴️", "🔺", "🟪"];
+
+const AB = { "🔵": "UNO", "🔴": "DOS", "🟢": "TRES" };
+const BC = { "UNO": "⭐", "DOS": "❤️", "TRES": "🌙" };
+const CD = { "⭐": "✴️", "❤️": "🔺", "🌙": "🟪" };
 
 let phase = "AB";
 let index = 0;
 
-const relationsAB = {
-  "🔵": "UNO",
-  "🔴": "DOS",
-  "🟢": "TRES"
-};
-
-const relationsBC = {
-  "UNO": "⭐",
-  "DOS": "❤️",
-  "TRES": "🌙"
-};
-
-btnStart.onclick = () => {
+startBtn.onclick = () => {
   intro.classList.remove("active");
   trial.classList.add("active");
   runTrial();
@@ -36,33 +37,37 @@ btnStart.onclick = () => {
 
 function runTrial() {
   feedback.textContent = "";
-  trialPhase.textContent = phase === "AB" ? "Entrenamiento AB" : phase === "BC" ? "Entrenamiento BC" : "Pruebas";
-  trialCount.textContent = `Ensayo ${index + 1}`;
+  phaseLabel.textContent = phase;
+  trialCounter.textContent = `Ensayo ${index + 1}`;
 
-  sampleBox.textContent = phase === "AB" ? A[index % 3] :
-                          phase === "BC" ? B[index % 3] :
-                          A[index % 3];
+  let sample, correct, pool;
 
-  let correct =
-    phase === "AB" ? relationsAB[sampleBox.textContent] :
-    phase === "BC" ? relationsBC[sampleBox.textContent] :
-    relationsBC[relationsAB[sampleBox.textContent]];
+  if (phase === "AB") {
+    sample = A[index % 3];
+    correct = AB[sample];
+    pool = B;
+  } else if (phase === "BC") {
+    sample = B[index % 3];
+    correct = BC[sample];
+    pool = C;
+  } else {
+    faseD.classList.add("active");
+    trial.classList.remove("active");
+    return;
+  }
 
-  let pool = phase === "AB" ? B : phase === "BC" ? C : C.slice();
-
+  sampleBox.textContent = sample;
   renderChoices(pool, correct);
 }
 
 function renderChoices(pool, correct) {
   choicesGrid.innerHTML = "";
-
-  let shuffled = [...pool].sort(() => Math.random() - 0.5);
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
 
   shuffled.forEach(item => {
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.className = "choice";
     div.textContent = item;
-
     div.onclick = () => evaluate(item, correct);
     choicesGrid.appendChild(div);
   });
@@ -74,16 +79,22 @@ function evaluate(selected, correct) {
     index++;
 
     if (index === 6 && phase === "AB") {
+      sim.textContent = "Simetría ✅";
       phase = "BC";
       index = 0;
-    }
+    } 
     else if (index === 6 && phase === "BC") {
-      phase = "TEST";
-      index = 0;
+      trans.textContent = "Transitividad ✅";
+      equiv.textContent = "Equivalencia ✅";
+      phase = "D";
     }
 
-    setTimeout(runTrial, 800);
+    setTimeout(runTrial, 600);
   } else {
-    feedback.textContent = "❌ Incorrecto, intenta nuevamente";
+    feedback.textContent = "❌ Incorrecto";
   }
 }
+
+startD.onclick = () => {
+  alert("Con una sola relación CD, toda la clase se amplía por transferencia de funciones.");
+};
