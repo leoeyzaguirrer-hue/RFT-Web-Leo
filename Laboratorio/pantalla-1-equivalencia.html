@@ -1,65 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pantalla 1 – Laboratorio de Equivalencia de Estímulos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Estilos específicos de esta pantalla -->
-  <link rel="stylesheet" href="css/pantalla-1-equivalencia.css" />
+  <meta charset="UTF-8">
+  <title>Laboratorio · Equivalencia de Estímulos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pantalla-1-equivalencia.css">
 </head>
-<body class="lab-body">
 
-  <header class="lab-header">
-    <div class="lab-header-inner">
-      <div class="lab-micro-title">Pantalla 1 · Laboratorio Experimental Interactivo</div>
-      <h1>LABORATORIO DE EQUIVALENCIA DE ESTÍMULOS</h1>
-      <p class="lab-subtitle">De relaciones entrenadas a clases simbólicas y transferencia de función</p>
-    </div>
-  </header>
+<body>
 
-  <main class="lab-main">
+  <div class="equiv-container">
 
-    <!-- Tarjeta central premium -->
-    <section class="lab-card">
+    <!-- TÍTULO -->
+    <header class="equiv-header">
+      <h1>Experimento Interactivo · Equivalencia de Estímulos</h1>
+      <p>Entrenamiento AB – BC con pruebas de relaciones emergentes</p>
+    </header>
 
-      <!-- Indicador de fase -->
-      <div class="lab-phase-indicator" id="labPhaseIndicator">
-        Fase 1 de 5 · Entrenamiento directo (A–B)
-      </div>
+    <!-- VISTA INICIAL CONJUNTOS -->
+    <section id="intro" class="equiv-card active">
+      <h2>Conjuntos de estímulos</h2>
 
-      <!-- Contenido dinámico de cada fase -->
-      <div class="lab-card-body" id="labPhaseContent">
-        <!-- Aquí se inyecta el contenido de cada fase por JS -->
-      </div>
+      <div class="equiv-sets">
 
-      <!-- Feedback funcional -->
-      <div class="lab-feedback" id="labFeedback"></div>
-
-      <!-- Progreso de la fase (solo para fases de ensayo) -->
-      <div class="lab-progress-container">
-        <div class="lab-progress-bar">
-          <div class="lab-progress-fill" id="labProgressFill"></div>
+        <div class="set">
+          <h3>Conjunto A</h3>
+          <div class="stim">🔵</div>
+          <div class="stim">🔴</div>
+          <div class="stim">🟢</div>
         </div>
-        <div class="lab-progress-text" id="labProgressText"></div>
+
+        <div class="set">
+          <h3>Conjunto B</h3>
+          <div class="stim word">UNO</div>
+          <div class="stim word">DOS</div>
+          <div class="stim word">TRES</div>
+        </div>
+
+        <div class="set">
+          <h3>Conjunto C</h3>
+          <div class="stim">⭐</div>
+          <div class="stim">❤️</div>
+          <div class="stim">🌙</div>
+        </div>
+
       </div>
+
+      <button id="btnStart">Comenzar experimento</button>
+    </section>
+
+
+    <!-- ZONA DE ENSAYOS -->
+    <section id="trial" class="equiv-card">
+
+      <div class="trial-info">
+        <span id="trialPhase">Entrenamiento AB</span>
+        <span id="trialCount">Ensayo 1</span>
+      </div>
+
+      <div class="sample-zone">
+        <h3>MUESTRA</h3>
+        <div id="sample" class="sample-box"></div>
+      </div>
+
+      <div class="choices-zone">
+        <h3>COMPARACIONES</h3>
+        <div id="choices" class="choices-grid"></div>
+      </div>
+
+      <div id="feedback" class="feedback"></div>
 
     </section>
 
-    <!-- Controles inferiores -->
-    <nav class="lab-controls">
-      <button class="lab-btn lab-btn-secondary" id="btnResetPhase">Reiniciar fase</button>
-      <button class="lab-btn lab-btn-secondary" id="btnPrevPhase">Fase anterior</button>
-      <button class="lab-btn lab-btn-primary" id="btnNextPhase">Siguiente fase</button>
-    </nav>
+  </div>
 
-  </main>
-
-  <footer class="lab-footer">
-    Esta simulación ilustra formación de clases de equivalencia a partir de un entrenamiento mínimo.
-  </footer>
-
-  <!-- Lógica de la pantalla -->
-  <script src="js/pantalla-1-equivalencia.js"></script>
+  <script src="pantalla-1-equivalencia.js"></script>
 </body>
 </html>
