@@ -61,3 +61,15 @@ btn.addEventListener("click", () => {
 
 // Inicializar
 secuenciaInicial();
+// ==============================
+// NAVEGACIÓN A LOS LABORATORIOS
+// ==============================
+
+document.querySelectorAll(".btn-start").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = btn.getAttribute("data-target");
+    if (target) {
+      window.location.href = target;
+    }
+  });
+});
