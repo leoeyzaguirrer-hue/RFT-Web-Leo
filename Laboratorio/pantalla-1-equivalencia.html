@@ -2,10 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Laboratorio de Equivalencia · Fase 1 y 2</title>
+  <title>Laboratorio Experimental de Equivalencia</title>
   <link rel="stylesheet" href="css/pantalla-1-equivalencia.css">
 </head>
 <body>
+
+<!-- FONDO DECORATIVO -->
+<div class="fondo-dorado"></div>
 
 <div class="lab-container">
 
@@ -13,59 +16,57 @@
 
   <!-- CONTADOR GLOBAL -->
   <div class="contador-premium">
-    Ensayos totales acumulados: <span id="contadorGlobal">0</span>
+    Ensayos acumulados: <span id="contadorGlobal">0</span>
   </div>
 
   <!-- ===================== -->
-  <!-- FASE 1 -->
+  <!-- FASE 1 (VISIBLE) -->
   <!-- ===================== -->
 
-  <section class="fase-premium">
-    <h2>Fase 1 · Establecimiento de Relaciones A–B</h2>
-    <p class="fase-texto">
-      En esta fase se establecen las relaciones arbitrarias iniciales entre dos conjuntos de estímulos.
-      Estas relaciones serán la base para todas las derivaciones posteriores.
+  <section class="fase-premium activa" id="fase1">
+
+    <h2 class="fase-titulo">Fase 1 · Entrenamiento A–B</h2>
+
+    <p class="fase-texto-grande">
+      En esta fase se establecen las relaciones arbitrarias iniciales entre dos conjuntos de estímulos,
+      que funcionarán como base para todas las relaciones derivadas posteriores.
     </p>
 
-    <div class="conjuntos-grid">
+    <div class="conjuntos-grid-grande">
 
-      <div class="conjunto-card">
-        <h3>Conjunto A (Formas)</h3>
-        <ul>
-          <li>🔵 Círculo azul</li>
-          <li>🔴 Círculo rojo</li>
-          <li>🟢 Círculo verde</li>
-        </ul>
+      <div class="conjunto-card-grande">
+        <h3>Conjunto A</h3>
+        <p>🔵 Círculo azul</p>
+        <p>🔴 Círculo rojo</p>
+        <p>🟢 Círculo verde</p>
       </div>
 
-      <div class="conjunto-card">
-        <h3>Conjunto B (Números)</h3>
-        <ul>
-          <li>UNO</li>
-          <li>DOS</li>
-          <li>TRES</li>
-        </ul>
+      <div class="conjunto-card-grande">
+        <h3>Conjunto B</h3>
+        <p>UNO</p>
+        <p>DOS</p>
+        <p>TRES</p>
       </div>
 
     </div>
 
-    <div class="emparejamientos">
+    <div class="emparejamientos-grande">
       🔵 → UNO &nbsp;&nbsp;|&nbsp;&nbsp; 🔴 → DOS &nbsp;&nbsp;|&nbsp;&nbsp; 🟢 → TRES
     </div>
+
+    <button class="boton-continuar" onclick="irAFase2()">CONTINUAR</button>
 
   </section>
 
   <!-- ===================== -->
-  <!-- FASE 2 -->
+  <!-- FASE 2 (OCULTA) -->
   <!-- ===================== -->
 
-  <section class="fase-premium">
+  <section class="fase-premium" id="fase2">
 
-    <h2>Fase 2 · Ensayos de Simetría A–B y B–A</h2>
+    <h2 class="fase-titulo">Fase 2 · Ensayos de Simetría A–B y B–A</h2>
 
-    <div class="tarjeta-central" id="tarjetaMuestra">
-      🔵
-    </div>
+    <div class="tarjeta-central-grande" id="tarjetaMuestra">🔵</div>
 
     <div class="comparaciones" id="comparaciones"></div>
 
