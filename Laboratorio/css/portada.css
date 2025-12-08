@@ -136,3 +136,9 @@ body {
   .hero h2 { font-size: 1rem; }
   .btn-start { font-size: 1rem; padding: 14px 32px; }
 }
+.lab-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 24px;
+}
