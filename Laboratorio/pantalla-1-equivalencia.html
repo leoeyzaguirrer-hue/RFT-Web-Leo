@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pantalla 1 – Laboratorio de Equivalencia de Estímulos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Estilos específicos de esta pantalla -->
+  <link rel="stylesheet" href="css/pantalla-1-equivalencia.css" />
+</head>
+<body class="lab-body">
+
+  <header class="lab-header">
+    <div class="lab-header-inner">
+      <div class="lab-micro-title">Pantalla 1 · Laboratorio Experimental Interactivo</div>
+      <h1>LABORATORIO DE EQUIVALENCIA DE ESTÍMULOS</h1>
+      <p class="lab-subtitle">De relaciones entrenadas a clases simbólicas y transferencia de función</p>
+    </div>
+  </header>
+
+  <main class="lab-main">
+
+    <!-- Tarjeta central premium -->
+    <section class="lab-card">
+
+      <!-- Indicador de fase -->
+      <div class="lab-phase-indicator" id="labPhaseIndicator">
+        Fase 1 de 5 · Entrenamiento directo (A–B)
+      </div>
+
+      <!-- Contenido dinámico de cada fase -->
+      <div class="lab-card-body" id="labPhaseContent">
+        <!-- Aquí se inyecta el contenido de cada fase por JS -->
+      </div>
+
+      <!-- Feedback funcional -->
+      <div class="lab-feedback" id="labFeedback"></div>
+
+      <!-- Progreso de la fase (solo para fases de ensayo) -->
+      <div class="lab-progress-container">
+        <div class="lab-progress-bar">
+          <div class="lab-progress-fill" id="labProgressFill"></div>
+        </div>
+        <div class="lab-progress-text" id="labProgressText"></div>
+      </div>
+
+    </section>
+
+    <!-- Controles inferiores -->
+    <nav class="lab-controls">
+      <button class="lab-btn lab-btn-secondary" id="btnResetPhase">Reiniciar fase</button>
+      <button class="lab-btn lab-btn-secondary" id="btnPrevPhase">Fase anterior</button>
+      <button class="lab-btn lab-btn-primary" id="btnNextPhase">Siguiente fase</button>
+    </nav>
+
+  </main>
+
+  <footer class="lab-footer">
+    Esta simulación ilustra formación de clases de equivalencia a partir de un entrenamiento mínimo.
+  </footer>
+
+  <!-- Lógica de la pantalla -->
+  <script src="js/pantalla-1-equivalencia.js"></script>
+</body>
+</html>
