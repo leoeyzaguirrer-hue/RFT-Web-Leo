@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  font-family: "Coco Gothic", "Noto Sans", sans-serif;
+  background: radial-gradient(circle at top, #0a2a5c, #020b18);
+  color: white;
+}
+
+.lab-premium {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+
+h1, h2 {
+  color: #FDBF12;
+  margin: 0;
+}
+
+.panel-central {
+  margin-top: 20px;
+}
+
+.estimulo-muestra {
+  width: 240px;
+  height: 240px;
+  background: #0a2a5c;
+  border: 3px solid #FDBF12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  border-radius: 24px;
+  box-shadow: 0 0 25px rgba(253,191,18,0.4);
+}
+
+.tarjetas {
+  display: flex;
+  gap: 60px;
+}
+
+.tarjeta.grande {
+  width: 280px;
+  height: 280px;
+  background: #061a36;
+  border: 3px solid #FDBF12;
+  border-radius: 28px;
+  font-size: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.tarjeta.grande:hover {
+  box-shadow: 0 0 30px rgba(253,191,18,0.9);
+  transform: scale(1.05);
+}
+
+.panel-control {
+  display: flex;
+  gap: 40px;
+  font-size: 1.4rem;
+}
+
+.feedback {
+  font-size: 2rem;
+}
+
+.teoria {
+  max-width: 980px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #e8e8e8;
+  opacity: 0.9;
+}
+
+.botonera {
+  display: flex;
+  gap: 40px;
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, #FDBF12, #ffd86b);
+  border: none;
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  border-radius: 18px;
+  cursor: pointer;
+  color: #021326;
+  font-weight: bold;
+  box-shadow: 0 0 18px rgba(253,191,18,0.5);
+}
+
+.btn-premium:hover {
+  transform: scale(1.05);
+}
+
+.oculto {
+  display: none;
+}
