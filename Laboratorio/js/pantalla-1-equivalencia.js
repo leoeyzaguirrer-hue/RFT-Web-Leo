@@ -1,11 +1,16 @@
 let contadorGlobal = 0;
 const contadorSpan = document.getElementById("contadorGlobal");
 
+function irAFase2() {
+  document.getElementById("fase1").classList.remove("activa");
+  document.getElementById("fase2").classList.add("activa");
+  cargarEnsayo();
+}
+
 const ensayos = [
   { muestra: "🔵", correcto: "UNO", opciones: ["UNO", "DOS", "TRES"] },
   { muestra: "🟢", correcto: "TRES", opciones: ["DOS", "TRES", "UNO"] },
   { muestra: "🔴", correcto: "DOS", opciones: ["TRES", "UNO", "DOS"] },
-
   { muestra: "UNO", correcto: "🔵", opciones: ["🟢", "🔵", "🔴"] },
   { muestra: "DOS", correcto: "🔴", opciones: ["🔴", "🟢", "🔵"] },
   { muestra: "TRES", correcto: "🟢", opciones: ["🔵", "🟢", "🔴"] }
@@ -50,5 +55,3 @@ function verificarRespuesta(seleccion, correcto) {
     feedback.textContent = "❌ Incorrecto";
   }
 }
-
-cargarEnsayo();
