@@ -66,19 +66,18 @@ body {
 ====================================== */
 
 .fase-premium {
-  display: block;
+  display: none;   /* SOLO las fases con .activa se ven */
   width: 92%;
   max-width: 1300px;
-
   background: linear-gradient(145deg, #143e7a, #081d3d);
   border: 2px solid gold;
   border-radius: 30px;
-
   padding: 40px;
   text-align: center;
-
-  /* ✅ CENTRADO REAL Y ESTABLE */
   margin: 0 auto;
+}
+.fase-premium.activa {
+  display: block;
 }
 /* ======================================
    TEXTOS DE FASE
