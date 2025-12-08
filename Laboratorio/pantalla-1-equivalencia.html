@@ -1,100 +1,74 @@
-const intro = document.getElementById("intro");
-const trial = document.getElementById("trial");
-const faseD = document.getElementById("faseD");
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio · Equivalencia de Estímulos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/pantalla-1-equivalencia.css">
+</head>
+<body>
 
-const startBtn = document.getElementById("startBtn");
-const startD = document.getElementById("startD");
+<div class="lab-container">
 
-const sampleBox = document.getElementById("sample");
-const choicesGrid = document.getElementById("choices");
-const feedback = document.getElementById("feedback");
+  <!-- TARJETÓN INICIAL -->
+  <section id="intro" class="card active">
+    <h1>Conjuntos de Estímulos</h1>
+    <p class="subtitle">En equivalencia, las clases se forman cuando distintos estímulos llegan a responderse como intercambiables.</p>
 
-const phaseLabel = document.getElementById("phaseLabel");
-const trialCounter = document.getElementById("trialCounter");
+    <div class="matrix">
+      <div>🔵</div><div class="word">UNO</div><div>⭐</div>
+      <div>🔴</div><div class="word">DOS</div><div>❤️</div>
+      <div>🟢</div><div class="word">TRES</div><div>🌙</div>
+    </div>
 
-const reflex = document.getElementById("reflex");
-const sim = document.getElementById("sim");
-const trans = document.getElementById("trans");
-const equiv = document.getElementById("equiv");
+    <button id="startBtn">Iniciar Entrenamiento</button>
+  </section>
 
-const A = ["🔵", "🔴", "🟢"];
-const B = ["UNO", "DOS", "TRES"];
-const C = ["⭐", "❤️", "🌙"];
-const D = ["✴️", "🔺", "🟪"];
+  <!-- ZONA DE ENSAYOS -->
+  <section id="trial" class="card">
+    <div class="top-bar">
+      <span id="phaseLabel">Entrenamiento AB</span>
+      <span id="trialCounter">Ensayo 1</span>
+    </div>
 
-const AB = { "🔵": "UNO", "🔴": "DOS", "🟢": "TRES" };
-const BC = { "UNO": "⭐", "DOS": "❤️", "TRES": "🌙" };
-const CD = { "⭐": "✴️", "❤️": "🔺", "🌙": "🟪" };
+    <div class="trial-card">
+      <div class="sample-area">
+        <h3>Muestra</h3>
+        <div id="sample" class="sample-box"></div>
+      </div>
 
-let phase = "AB";
-let index = 0;
+      <div class="choice-area">
+        <h3>Comparaciones</h3>
+        <div id="choices" class="choices-grid"></div>
+      </div>
+    </div>
 
-startBtn.onclick = () => {
-  intro.classList.remove("active");
-  trial.classList.add("active");
-  runTrial();
-};
+    <div id="feedback" class="feedback"></div>
 
-function runTrial() {
-  feedback.textContent = "";
-  phaseLabel.textContent = phase;
-  trialCounter.textContent = `Ensayo ${index + 1}`;
+    <div class="property-panel">
+      <span id="reflex">Reflexividad ❌</span>
+      <span id="sim">Simetría ❌</span>
+      <span id="trans">Transitividad ❌</span>
+      <span id="equiv">Equivalencia ❌</span>
+    </div>
+  </section>
 
-  let sample, correct, pool;
+  <!-- PRESENTACIÓN CONJUNTO D -->
+  <section id="faseD" class="card">
+    <h1>Expansión de las Clases</h1>
+    <p class="subtitle">Con un solo nuevo vínculo, las clases pueden crecer por transferencia de funciones.</p>
 
-  if (phase === "AB") {
-    sample = A[index % 3];
-    correct = AB[sample];
-    pool = B;
-  } else if (phase === "BC") {
-    sample = B[index % 3];
-    correct = BC[sample];
-    pool = C;
-  } else {
-    faseD.classList.add("active");
-    trial.classList.remove("active");
-    return;
-  }
+    <div class="matrix">
+      <div>⭐</div><div>✴️</div>
+      <div>❤️</div><div>🔺</div>
+      <div>🌙</div><div>🟪</div>
+    </div>
 
-  sampleBox.textContent = sample;
-  renderChoices(pool, correct);
-}
+    <button id="startD">Integrar Nuevo Conjunto</button>
+  </section>
 
-function renderChoices(pool, correct) {
-  choicesGrid.innerHTML = "";
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+</div>
 
-  shuffled.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "choice";
-    div.textContent = item;
-    div.onclick = () => evaluate(item, correct);
-    choicesGrid.appendChild(div);
-  });
-}
-
-function evaluate(selected, correct) {
-  if (selected === correct) {
-    feedback.textContent = "✅ Respuesta correcta";
-    index++;
-
-    if (index === 6 && phase === "AB") {
-      sim.textContent = "Simetría ✅";
-      phase = "BC";
-      index = 0;
-    } 
-    else if (index === 6 && phase === "BC") {
-      trans.textContent = "Transitividad ✅";
-      equiv.textContent = "Equivalencia ✅";
-      phase = "D";
-    }
-
-    setTimeout(runTrial, 600);
-  } else {
-    feedback.textContent = "❌ Incorrecto";
-  }
-}
-
-startD.onclick = () => {
-  alert("Con una sola relación CD, toda la clase se amplía por transferencia de funciones.");
-};
+<script src="js/pantalla-1-equivalencia.js"></script>
+</body>
+</html>
