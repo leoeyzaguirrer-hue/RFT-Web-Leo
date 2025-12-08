@@ -48,6 +48,12 @@ body {
   width: 92%;
   max-width: 1300px;
   text-align: center;
+
+  /* 🔧 CLAVE PARA QUE NO SE VAYA ABAJO */
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .fase-premium.activa {
