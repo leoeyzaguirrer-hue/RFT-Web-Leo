@@ -1,10 +1,18 @@
+/* ======================================
+   BASE GENERAL
+====================================== */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: radial-gradient(circle at top, #0b2e5c, #020b18);
   color: #ffffff;
- overflow-y: auto;
+  overflow-y: auto;
 }
+
+/* ======================================
+   FONDO DORADO SUTIL
+====================================== */
 
 .fondo-dorado {
   position: fixed;
@@ -14,20 +22,34 @@ body {
     linear-gradient(to right, rgba(255,215,100,0.04), transparent);
   background-size: 40px 40px, 100% 2px;
   pointer-events: none;
+  z-index: 0;
 }
 
+/* ======================================
+   CONTENEDOR PRINCIPAL
+====================================== */
+
 .lab-container {
+  position: relative;
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 25px;
+  padding: 40px 0;
+  z-index: 1;
 }
+
+/* ======================================
+   TÍTULO Y CONTADOR
+====================================== */
 
 .lab-title {
   font-size: 46px;
   font-weight: bold;
+  text-align: center;
 }
 
 .contador-premium {
@@ -39,26 +61,37 @@ body {
   font-size: 20px;
 }
 
+/* ======================================
+   SISTEMA DE FASES (PANTALLAS)
+====================================== */
+
 .fase-premium {
-  display: none;
+  display: none;                /* solo se ve la fase activa */
+  width: 92%;
+  max-width: 1300px;
+  min-height: 85vh;
+
   background: linear-gradient(145deg, #143e7a, #081d3d);
   border: 2px solid gold;
   border-radius: 30px;
+
   padding: 40px;
-  width: 92%;
-  max-width: 1300px;
   text-align: center;
 
-  /* 🔧 CLAVE PARA QUE NO SE VAYA ABAJO */
-  min-height: 85vh;
+  /* CENTRADO INTERNO CORRECTO */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .fase-premium.activa {
-  display: block;
+  display: flex;
 }
+
+/* ======================================
+   TEXTOS DE FASE
+====================================== */
 
 .fase-titulo {
   font-size: 36px;
@@ -68,12 +101,19 @@ body {
 .fase-texto-grande {
   font-size: 22px;
   margin-bottom: 35px;
+  max-width: 980px;
 }
 
+/* ======================================
+   BLOQUES DE CONJUNTOS
+====================================== */
+
 .conjuntos-grid-grande {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 100px;
+  margin-top: 20px;
 }
 
 .conjunto-card-grande {
@@ -85,12 +125,20 @@ body {
   font-size: 28px;
 }
 
+/* ======================================
+   EMPAREJAMIENTOS
+====================================== */
+
 .emparejamientos-grande {
   margin-top: 35px;
   font-size: 26px;
   color: gold;
   font-weight: bold;
 }
+
+/* ======================================
+   BOTÓN CONTINUAR
+====================================== */
 
 .boton-continuar {
   margin-top: 40px;
@@ -102,6 +150,10 @@ body {
   cursor: pointer;
 }
 
+/* ======================================
+   TARJETA CENTRAL DE ENSAYO
+====================================== */
+
 .tarjeta-central-grande {
   width: 260px;
   height: 260px;
@@ -109,17 +161,24 @@ body {
   border: 3px solid gold;
   background: linear-gradient(145deg, #ffffff, #f4f4f4);
   color: #0b2e5c;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 90px;
   margin: 30px auto;
 }
+
+/* ======================================
+   COMPARACIONES
+====================================== */
 
 .comparaciones {
   display: flex;
   justify-content: center;
   gap: 35px;
+  flex-wrap: wrap;
 }
 
 .boton-comparacion {
@@ -130,6 +189,10 @@ body {
   font-size: 24px;
   cursor: pointer;
 }
+
+/* ======================================
+   FEEDBACK
+====================================== */
 
 .feedback {
   margin-top: 20px;
