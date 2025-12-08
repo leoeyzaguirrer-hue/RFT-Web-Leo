@@ -63,8 +63,7 @@ function pasarAFase3() {
   document.getElementById("fase2").classList.remove("activa");
   document.getElementById("fase3").classList.add("activa");
 
-  setTimeout(pasarAFase4, 9500);
-}
+  }
 
 /* ============================
    FASE 4 — SIMETRÍA B–C
