@@ -63,7 +63,7 @@ function pasarAFase3() {
   document.getElementById("fase2").classList.remove("activa");
   document.getElementById("fase3").classList.add("activa");
 
-  setTimeout(pasarAFase4, 3500);
+  setTimeout(pasarAFase4, 9500);
 }
 
 /* ============================
@@ -237,4 +237,111 @@ function verificarF7(sel, correcto) {
   } else {
     document.getElementById("feedbackF7").textContent = "❌ Incorrecto";
   }
+}
+/* ============================
+   FASE 8 · DERIVACIÓN D–A y A–D
+============================ */
+const ensayosF8 = [
+  { muestra: "🔺", correcto: "🔵", opciones: ["🔵", "🟢", "🔴"] },
+  { muestra: "🟥", correcto: "🔴", opciones: ["🔵", "🔴", "🟢"] },
+  { muestra: "🟩", correcto: "🟢", opciones: ["🟢", "🔵", "🔴"] }
+];
+
+let ensayoF8 = 0;
+
+function cargarEnsayoF8() {
+  const e = ensayosF8[ensayoF8];
+  document.getElementById("tarjetaF8").textContent = e.muestra;
+  const cont = document.getElementById("comparacionesF8");
+  cont.innerHTML = "";
+  document.getElementById("feedbackF8").textContent = "";
+
+  e.opciones.forEach(op => {
+    const btn = document.createElement("button");
+    btn.className = "boton-comparacion";
+    btn.textContent = op;
+    btn.onclick = () => verificarF8(op, e.correcto);
+    cont.appendChild(btn);
+  });
+}
+
+function verificarF8(sel, correcto) {
+  contadorGlobal++;
+  contadorSpan.textContent = contadorGlobal;
+
+  if (sel === correcto) {
+    document.getElementById("feedbackF8").textContent = "✅ Correcto";
+    ensayoF8++;
+
+    if (ensayoF8 < ensayosF8.length) {
+      setTimeout(cargarEnsayoF8, 900);
+    } else {
+      document.getElementById("feedbackF8").textContent =
+        "🎉 Felicidades, has derivado sin entrenamiento directo";
+      setTimeout(() => {
+        document.getElementById("fase8").classList.remove("activa");
+        document.getElementById("fase9").classList.add("activa");
+        cargarEnsayoF9();
+      }, 1400);
+    }
+  } else {
+    document.getElementById("feedbackF8").textContent = "❌ Incorrecto";
+  }
+}
+
+/* ============================
+   FASE 9 · DERIVACIÓN D–B y B–D
+============================ */
+const ensayosF9 = [
+  { muestra: "🔺", correcto: "UNO", opciones: ["UNO", "DOS", "TRES"] },
+  { muestra: "🟧", correcto: "DOS", opciones: ["TRES", "DOS", "UNO"] },
+  { muestra: "🟪", correcto: "TRES", opciones: ["TRES", "UNO", "DOS"] }
+];
+
+let ensayoF9 = 0;
+
+function cargarEnsayoF9() {
+  const e = ensayosF9[ensayoF9];
+  document.getElementById("tarjetaF9").textContent = e.muestra;
+  const cont = document.getElementById("comparacionesF9");
+  cont.innerHTML = "";
+  document.getElementById("feedbackF9").textContent = "";
+
+  e.opciones.forEach(op => {
+    const btn = document.createElement("button");
+    btn.className = "boton-comparacion";
+    btn.textContent = op;
+    btn.onclick = () => verificarF9(op, e.correcto);
+    cont.appendChild(btn);
+  });
+}
+
+function verificarF9(sel, correcto) {
+  contadorGlobal++;
+  contadorSpan.textContent = contadorGlobal;
+
+  if (sel === correcto) {
+    document.getElementById("feedbackF9").textContent = "✅ Correcto";
+    ensayoF9++;
+
+    if (ensayoF9 < ensayosF9.length) {
+      setTimeout(cargarEnsayoF9, 900);
+    } else {
+      document.getElementById("fase9").classList.remove("activa");
+      document.getElementById("faseFinal").classList.add("activa");
+      mostrarResultadosFinales();
+    }
+  } else {
+    document.getElementById("feedbackF9").textContent = "❌ Incorrecto";
+  }
+}
+
+/* ============================
+   RESULTADOS FINALES
+============================ */
+function mostrarResultadosFinales() {
+  // Valores simbólicos basados en tu diseño experimental
+  document.getElementById("scoreSimetrias").textContent = 12;
+  document.getElementById("scoreTransitividad").textContent = 6;
+  document.getElementById("scoreCombinaciones").textContent = contadorGlobal;
 }
