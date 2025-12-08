@@ -1,117 +1,76 @@
-<!-- ============================= -->
-<!-- pantalla-1-equivalencia.html -->
-<!-- ============================= -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Laboratorio · Equivalencia y Expansión de Clases</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio de Equivalencia · Fase 1 y 2</title>
   <link rel="stylesheet" href="css/pantalla-1-equivalencia.css">
 </head>
 <body>
 
 <div class="lab-container">
 
-  <!-- ================= -->
-  <!-- PANTALLA 1 · ABC -->
-  <!-- ================= -->
-  <section id="intro" class="card active">
-    <h1>Conjuntos de Estímulos</h1>
-    <p class="subtitle">
-      Diferentes estímulos pueden llegar a funcionar como equivalentes cuando son parte de una misma historia relacional.
+  <h1 class="lab-title">Laboratorio Experimental de Equivalencia</h1>
+
+  <!-- CONTADOR GLOBAL -->
+  <div class="contador-premium">
+    Ensayos totales acumulados: <span id="contadorGlobal">0</span>
+  </div>
+
+  <!-- ===================== -->
+  <!-- FASE 1 -->
+  <!-- ===================== -->
+
+  <section class="fase-premium">
+    <h2>Fase 1 · Establecimiento de Relaciones A–B</h2>
+    <p class="fase-texto">
+      En esta fase se establecen las relaciones arbitrarias iniciales entre dos conjuntos de estímulos.
+      Estas relaciones serán la base para todas las derivaciones posteriores.
     </p>
 
-    <div class="matrix-abc">
-      <div>🔵</div><div class="word">UNO</div><div>⭐</div>
-      <div>🔴</div><div class="word">DOS</div><div>❤️</div>
-      <div>🟢</div><div class="word">TRES</div><div>🌙</div>
-    </div>
+    <div class="conjuntos-grid">
 
-    <button id="startBtn">Iniciar Entrenamiento</button>
-  </section>
-
-  <!-- ================= -->
-  <!-- PANTALLA 2 · AB-BC -->
-  <!-- ================= -->
-  <section id="trial" class="card">
-    <div class="top-bar">
-      <span id="phaseLabel">Entrenamiento</span>
-      <span id="trialCounter">Ensayo 1</span>
-    </div>
-
-    <div class="trial-card">
-      <div class="sample-area">
-        <h3>Muestra</h3>
-        <div id="sample" class="sample-box"></div>
+      <div class="conjunto-card">
+        <h3>Conjunto A (Formas)</h3>
+        <ul>
+          <li>🔵 Círculo azul</li>
+          <li>🔴 Círculo rojo</li>
+          <li>🟢 Círculo verde</li>
+        </ul>
       </div>
 
-      <div class="choice-area">
-        <h3>Comparaciones</h3>
-        <div id="choices" class="choices-grid"></div>
-      </div>
-    </div>
-
-    <div id="feedback" class="feedback"></div>
-
-    <div class="property-panel">
-      <span id="sim">Simetría ❌</span>
-      <span id="trans">Transitividad ❌</span>
-      <span id="equiv">Equivalencia ❌</span>
-    </div>
-  </section>
-
-  <!-- ========================== -->
-  <!-- PANTALLA 3 · PRESENTACIÓN D -->
-  <!-- ========================== -->
-  <section id="faseDIntro" class="card">
-    <h1>Expansión de Clases</h1>
-    <p class="subtitle">
-      Un solo nuevo vínculo puede reorganizar toda una red de relaciones previamente establecida.
-    </p>
-
-    <div class="matrix-cd">
-      <div>⭐</div><div>🔺</div>
-      <div>❤️</div><div>🟧</div>
-      <div>🌙</div><div>🟪</div>
-    </div>
-
-    <button id="startD">Iniciar integración</button>
-  </section>
-
-  <!-- =========================== -->
-  <!-- PANTALLA 4 · ENSAYOS D-A etc -->
-  <!-- =========================== -->
-  <section id="trialD" class="card">
-    <div class="top-bar">
-      <span>Expansión de clases</span>
-      <span id="trialCounterD">Ensayo 1</span>
-    </div>
-
-    <div class="trial-card">
-      <div class="sample-area">
-        <h3>Muestra</h3>
-        <div id="sampleD" class="sample-box"></div>
+      <div class="conjunto-card">
+        <h3>Conjunto B (Números)</h3>
+        <ul>
+          <li>UNO</li>
+          <li>DOS</li>
+          <li>TRES</li>
+        </ul>
       </div>
 
-      <div class="choice-area">
-        <h3>Comparaciones</h3>
-        <div id="choicesD" class="choices-grid"></div>
-      </div>
     </div>
 
-    <div id="feedbackD" class="feedback"></div>
+    <div class="emparejamientos">
+      🔵 → UNO &nbsp;&nbsp;|&nbsp;&nbsp; 🔴 → DOS &nbsp;&nbsp;|&nbsp;&nbsp; 🟢 → TRES
+    </div>
+
   </section>
 
-  <!-- ================= -->
-  <!-- PANTALLA FINAL -->
-  <!-- ================= -->
-  <section id="final" class="card">
-    <h1>Las clases se han expandido</h1>
-    <p class="final-text">
-      Al entrenar una sola relación adicional, los nuevos estímulos quedaron integrados a las clases ya existentes.
-      Este resultado muestra que las clases de equivalencia son redes abiertas que pueden seguir creciendo por derivación relacional.
-    </p>
+  <!-- ===================== -->
+  <!-- FASE 2 -->
+  <!-- ===================== -->
+
+  <section class="fase-premium">
+
+    <h2>Fase 2 · Ensayos de Simetría A–B y B–A</h2>
+
+    <div class="tarjeta-central" id="tarjetaMuestra">
+      🔵
+    </div>
+
+    <div class="comparaciones" id="comparaciones"></div>
+
+    <div class="feedback" id="feedback"></div>
+
   </section>
 
 </div>
