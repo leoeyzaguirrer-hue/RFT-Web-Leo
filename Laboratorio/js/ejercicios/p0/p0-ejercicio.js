@@ -1,8 +1,9 @@
 // ============================================================
 // FASE 0 · RESPUESTA RELACIONAL ARBITRARIA (RRAA)
-// Ensayos:
-//   - 3 con clave "ES IGUAL A"
-//   - 2 con clave "ES OPUESTO A"
+// Bloques:
+//   - Ensayos "ES IGUAL A" (3 ensayos)
+//   - Overlay de mapa de opuestos
+//   - Ensayos "ES OPUESTO A" (2 ensayos)
 // ============================================================
 
 (function () {
@@ -12,7 +13,7 @@
   const OPPOSITE_MAP = {
     0: 1, // ◎ ↔ ◇
     1: 0,
-    // 2 (▢) queda como neutro
+    2: 2, // ▢ se mantiene igual
   };
 
   // DOM
@@ -25,15 +26,20 @@
   const progressEl = document.getElementById("rraaProgress");
   const btnNext = document.getElementById("rraaBtnNext");
   const btnRestart = document.getElementById("rraaBtnRestart");
+
   const overlay = document.getElementById("rraaOverlay");
   const overlayText = document.getElementById("rraaOverlayText");
   const overlayBtn = document.getElementById("rraaOverlayBtn");
+
+  const oppositeMapOverlay = document.getElementById("rraaOppositeMap");
+  const mapContinueBtn = document.getElementById("rraaMapContinueBtn");
 
   // Estado
   let trials = [];
   let currentIndex = 0;
   let correctCount = 0;
   let answered = false;
+  let mapShown = false; // para mostrar el mapa justo después de los ensayos "igual"
 
   // ------------------------------------------------------------
   // Utilidades
@@ -82,7 +88,6 @@
           correctIndex,
         });
       } else if (t.context === "opuesto") {
-        // Aseguramos que la opción correcta (opuesto) esté presente
         const correctStim = OPPOSITE_MAP[t.sample];
         let options = shuffle([0, 1, 2]);
         if (!options.includes(correctStim)) {
@@ -160,7 +165,6 @@
     const clickedStimIndex = parseInt(btn.dataset.stimIndex, 10);
     const isCorrect = clickedStimIndex === trial.correctStim;
 
-    // Marcar correctos/incorrectos
     resetChoiceStyles();
 
     if (isCorrect) {
@@ -172,7 +176,7 @@
       feedbackEl.textContent = "✖ Respuesta incorrecta.";
     }
 
-    // Resaltar cuál era la opción correcta
+    // Resaltar opción correcta
     choiceButtons.forEach((choiceBtn) => {
       const stimIndex = parseInt(choiceBtn.dataset.stimIndex, 10);
       if (stimIndex === trial.correctStim) {
@@ -189,6 +193,13 @@
     if (!answered) {
       feedbackEl.textContent =
         "Primero selecciona una opción para este ensayo.";
+      return;
+    }
+
+    // Si acabamos de terminar el último ensayo de "igual" y aún no mostramos el mapa
+    if (currentIndex === 2 && !mapShown) {
+      mapShown = true;
+      showOppositeMap();
       return;
     }
 
@@ -220,6 +231,17 @@
     initPhase();
   }
 
+  function showOppositeMap() {
+    oppositeMapOverlay.classList.add("rraa-overlay--visible");
+  }
+
+  function hideOppositeMap() {
+    oppositeMapOverlay.classList.remove("rraa-overlay--visible");
+    // pasamos al primer ensayo "opuesto"
+    currentIndex = 3; // índices 0,1,2 = igual; 3,4 = opuesto
+    renderTrial();
+  }
+
   // ------------------------------------------------------------
   // Inicialización
   // ------------------------------------------------------------
@@ -229,6 +251,7 @@
     currentIndex = 0;
     correctCount = 0;
     answered = false;
+    mapShown = false;
     btnNext.disabled = true;
     resetChoiceStyles();
     renderTrial();
@@ -245,6 +268,7 @@
   btnNext.addEventListener("click", handleNext);
   btnRestart.addEventListener("click", handleRestart);
   overlayBtn.addEventListener("click", hideOverlay);
+  mapContinueBtn.addEventListener("click", hideOppositeMap);
 
   // Arranque
   initPhase();
