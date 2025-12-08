@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   background: radial-gradient(circle at top, #0b2e5c, #020b18);
   color: #ffffff;
-  overflow: hidden;
+ overflow-y: auto;
 }
 
 .fondo-dorado {
@@ -17,7 +17,7 @@ body {
 }
 
 .lab-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
