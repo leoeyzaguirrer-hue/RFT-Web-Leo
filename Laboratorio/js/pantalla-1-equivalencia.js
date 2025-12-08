@@ -124,3 +124,7 @@ function verificarF4(seleccion, correcto) {
     feedbackF4.textContent = "❌ Incorrecto";
   }
 }
+function irAFase4() {
+  document.getElementById("fase3").classList.remove("activa");
+  document.getElementById("fase4").classList.add("activa");
+}
