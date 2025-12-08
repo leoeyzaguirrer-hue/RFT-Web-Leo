@@ -62,7 +62,7 @@ function verificarRespuesta(seleccion, correcto) {
 function pasarAFase3() {
   document.getElementById("fase2").classList.remove("activa");
   document.getElementById("fase3").classList.add("activa");
-
+   cargarEnsayoF4();
   }
 
 /* ============================
