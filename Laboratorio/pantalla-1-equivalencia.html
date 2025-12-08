@@ -132,15 +132,51 @@
 <!-- ===================== -->
 <!-- FASE 5 · TRANSITIVIDAD A–C y C–A -->
 <!-- ===================== -->
+<!-- ===================== -->
+<!-- FASE 5 · TRANSITIVIDAD A–C y C–A -->
+<!-- ===================== -->
 <section class="fase-premium" id="fase5">
 
   <h2 class="fase-titulo">Fase 5 · Transitividad A–C y C–A</h2>
 
-  <div class="tarjeta-central-grande" id="tarjetaF5">🔵</div>
+  <!-- MICRO-FASE DE PREDICCIÓN -->
+  <div class="microfase-card" id="prediccionF5">
+    <p class="microfase-texto">
+      Hasta ahora solo has entrenado relaciones directas A–B y B–C.
+      La siguiente fase presentará relaciones A–C y C–A que no se han entrenado
+      explícitamente. Desde el punto de vista experimental, esto es una prueba
+      de <strong>transitividad</strong>.
+    </p>
+    <p class="microfase-pregunta">
+      ¿Qué crees que ocurrirá cuando se presenten estas relaciones nuevas?
+    </p>
+    <div class="microfase-botones">
+      <button class="boton-comparacion" onclick="iniciarEnsayosF5('no_sabe')">
+        No debería saber responder
+      </button>
+      <button class="boton-comparacion" onclick="iniciarEnsayosF5('si_sabe')">
+        Creo que sí responderá bien
+      </button>
+    </div>
+  </div>
 
-  <div class="comparaciones" id="comparacionesF5"></div>
+  <!-- BLOQUE DE ENSAYOS (OCULTO HASTA QUE RESPONDE LA PREDICCIÓN) -->
+  <div id="bloqueEnsayosF5" class="bloque-ensayos-oculto">
 
-  <div class="feedback" id="feedbackF5"></div>
+    <p class="fase-texto-grande">
+      En esta fase se evalúa si, tras entrenar A–B y B–C, el organismo responde
+      correctamente ante relaciones A–C y C–A que no han sido entrenadas de forma
+      directa. Si lo hace, decimos que hay <strong>transitividad</strong>:
+      la red relacional permite derivar nuevas respuestas.
+    </p>
+
+    <div class="tarjeta-central-grande" id="tarjetaF5">🔵</div>
+
+    <div class="comparaciones" id="comparacionesF5"></div>
+
+    <div class="feedback" id="feedbackF5"></div>
+
+  </div>
 
 </section>
 
