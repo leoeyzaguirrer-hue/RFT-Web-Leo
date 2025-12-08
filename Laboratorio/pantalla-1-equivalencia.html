@@ -268,10 +268,82 @@
   <div class="conjunto-card-grande">
     <p>✅ Simetrías logradas: <span id="scoreSimetrias">0</span></p>
     <p>✅ Transitivididades logradas: <span id="scoreTransitividad">0</span></p>
-    <p>✅ Combinaciones aprendidas: <span id="scoreCombinaciones">0</span></p>
+    <p>✅ Combinaciones aprendidas (ensayos totales): <span id="scoreCombinaciones">0</span></p>
   </div>
 
+  <div class="microfase-card">
+    <p class="microfase-texto">
+      Has construido una red de equivalencia donde cualquier estímulo de la clase
+      puede “representar” a los demás. Como señalan Sidman y colegas, este tipo
+      de redes funciona como un <strong>modelo funcional del significado
+      semántico</strong>: lo que ocurre con un miembro de la clase puede afectar
+      a todos los demás.
+    </p>
+    <p class="microfase-texto">
+      En términos educativos, esto permite <strong>acelerar el aprendizaje</strong>:
+      entrenar algunas discriminaciones condicionales puede producir la derivación
+      de muchas otras relaciones sin entrenamiento directo. En contextos clínicos,
+      este mismo proceso ayuda a entender cómo ciertas palabras o símbolos adquieren
+      funciones emocionales sin experiencia directa con todos sus referentes.
+    </p>
+  </div>
+
+  <button class="boton-continuar" onclick="irAFaseFallo()">
+    Explorar cuándo la equivalencia no emerge
+  </button>
+
 </section>
+<!-- ===================== -->
+<!-- FASE OPCIONAL · CUANDO LA EQUIVALENCIA NO EMERGE -->
+<!-- ===================== -->
+<section class="fase-premium" id="faseFallo">
+
+  <h2 class="fase-titulo">Cuando la equivalencia no emerge</h2>
+
+  <div class="microfase-card">
+    <p class="microfase-texto">
+      En muchos estudios, la equivalencia no aparece automáticamente.
+      Cuando falta parte de la historia de entrenamiento, o las discriminaciones
+      condicionales no están bien establecidas, las relaciones derivadas no se
+      observan. No es una “capacidad mágica” del organismo, sino el resultado
+      de una <strong>historia de aprendizaje específica</strong>.
+    </p>
+    <p class="microfase-texto">
+      Esto protege de explicaciones mentalistas: si no se cumplen reflexividad,
+      simetría y transitividad para un conjunto de estímulos, no podemos hablar
+      de clase de equivalencia. El analista de conducta debe mirar primero la
+      historia de entrenamiento y el control contextual antes de atribuir
+      “déficits internos”.
+    </p>
+  </div>
+
+  <div class="microfase-card">
+    <p class="microfase-pregunta">
+      Imagina que en tu propio desempeño hubieras fallado la transitividad A–C.
+      ¿Qué opciones explicativas encajan mejor con el análisis de conducta?
+    </p>
+    <div class="microfase-botones">
+      <button class="boton-comparacion" disabled>
+        “No tengo la capacidad de formar equivalencias”
+      </button>
+      <button class="boton-comparacion" disabled>
+        “Probablemente faltó entrenamiento o discriminación condicional”
+      </button>
+    </div>
+    <p class="microfase-texto">
+      La segunda opción es la coherente con el enfoque de Sidman y con la
+      literatura sobre equivalencia: mirar la <strong>historia de
+      entrenamiento</strong>, no inventar entidades internas para explicar la
+      conducta. 
+    </p>
+  </div>
+
+  <button class="boton-continuar" onclick="volverAFinal()">
+    Volver al resumen de resultados
+  </button>
+
+</section>
+
 
 </div> <!-- cierre .lab-container -->
 
