@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Laboratorio · Equivalencia de Estímulos</title>
+  <title>Laboratorio · Equivalencia y Expansión de Clases</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/pantalla-1-equivalencia.css">
 </head>
@@ -10,24 +10,26 @@
 
 <div class="lab-container">
 
-  <!-- TARJETÓN INICIAL -->
+  <!-- PANTALLA 1: CONJUNTOS A-B-C -->
   <section id="intro" class="card active">
     <h1>Conjuntos de Estímulos</h1>
-    <p class="subtitle">En equivalencia, las clases se forman cuando distintos estímulos llegan a responderse como intercambiables.</p>
+    <p class="subtitle">
+      En equivalencia de estímulos, distintos eventos llegan a funcionar como miembros de una misma clase relacional.
+    </p>
 
-    <div class="matrix">
+    <div class="matrix-abc">
       <div>🔵</div><div class="word">UNO</div><div>⭐</div>
       <div>🔴</div><div class="word">DOS</div><div>❤️</div>
       <div>🟢</div><div class="word">TRES</div><div>🌙</div>
     </div>
 
-    <button id="startBtn">Iniciar Entrenamiento</button>
+    <button id="startBtn">Iniciar entrenamiento</button>
   </section>
 
-  <!-- ZONA DE ENSAYOS -->
+  <!-- PANTALLA 2: ENSAYOS AB - BC -->
   <section id="trial" class="card">
     <div class="top-bar">
-      <span id="phaseLabel">Entrenamiento AB</span>
+      <span id="phaseLabel">Entrenamiento</span>
       <span id="trialCounter">Ensayo 1</span>
     </div>
 
@@ -46,25 +48,58 @@
     <div id="feedback" class="feedback"></div>
 
     <div class="property-panel">
-      <span id="reflex">Reflexividad ❌</span>
       <span id="sim">Simetría ❌</span>
       <span id="trans">Transitividad ❌</span>
       <span id="equiv">Equivalencia ❌</span>
     </div>
   </section>
 
-  <!-- PRESENTACIÓN CONJUNTO D -->
-  <section id="faseD" class="card">
-    <h1>Expansión de las Clases</h1>
-    <p class="subtitle">Con un solo nuevo vínculo, las clases pueden crecer por transferencia de funciones.</p>
+  <!-- PANTALLA 3: PRESENTACIÓN C - D -->
+  <section id="faseDIntro" class="card">
+    <h1>Expansión de Clases</h1>
+    <p class="subtitle">
+      Un solo nuevo vínculo puede reorganizar toda una red relacional.
+    </p>
 
-    <div class="matrix">
-      <div>⭐</div><div>✴️</div>
-      <div>❤️</div><div>🔺</div>
-      <div>🌙</div><div>🟪</div>
+    <div class="matrix-cd">
+      <div>⭐</div><div class="d1">🔺</div>
+      <div>❤️</div><div class="d2">🟧</div>
+      <div>🌙</div><div class="d3">🟪</div>
     </div>
 
-    <button id="startD">Integrar Nuevo Conjunto</button>
+    <button id="startD">Iniciar integración</button>
+  </section>
+
+  <!-- PANTALLA 4: ENSAYOS DE EXPANSIÓN -->
+  <section id="trialD" class="card">
+    <div class="top-bar">
+      <span id="phaseLabelD">Expansión de clases</span>
+      <span id="trialCounterD">Ensayo 1</span>
+    </div>
+
+    <div class="trial-card">
+      <div class="sample-area">
+        <h3>Muestra</h3>
+        <div id="sampleD" class="sample-box"></div>
+      </div>
+
+      <div class="choice-area">
+        <h3>Comparaciones</h3>
+        <div id="choicesD" class="choices-grid"></div>
+      </div>
+    </div>
+
+    <div id="feedbackD" class="feedback"></div>
+  </section>
+
+  <!-- PANTALLA FINAL -->
+  <section id="final" class="card">
+    <h1>Las clases se han expandido</h1>
+    <p class="final-text">
+      A partir de un único nuevo entrenamiento, los estímulos del conjunto D fueron incorporados a las clases ya existentes.
+      Esto muestra que las clases de equivalencia no son cadenas cerradas, sino redes relacionales abiertas que pueden seguir creciendo.
+      La conducta no responde a elementos aislados, sino a historias completas de relaciones simbólicas.
+    </p>
   </section>
 
 </div>
