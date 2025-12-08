@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Laboratorio Interactivo – Procesos Relacionales</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans", sans-serif;
+      background: radial-gradient(circle at top, #0f3a5a 0%, #091d2e 60%, #060f18 100%);
+      height: 100vh;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .bg-network {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .node {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #6bd6ff;
+      box-shadow: 0 0 12px rgba(253,191,18,0.8);
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(to right, rgba(253,191,18,0), rgba(253,191,18,0.9));
+      transform-origin: left center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #cfefff;
+      max-width: 640px;
+      margin-bottom: 40px;
+    }
+
+    .btn-start {
+      background: linear-gradient(135deg, #fdbf12, #f5a700);
+      color: #10242e;
+      border: none;
+      padding: 18px 42px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(253,191,18,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-start:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(253,191,18,0.75);
+    }
+
+    .footer-note {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #a9d7ee;
+      z-index: 2;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero h2 { font-size: 1rem; }
+      .btn-start { font-size: 1rem; padding: 14px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Red animada de fondo -->
+  <div class="bg-network" id="network"></div>
+
+  <!-- Contenido central -->
+  <div class="hero">
+    <h1>SIMULADOR DE PROCESOS RELACIONALES</h1>
+    <h2>Entrenamiento experimental en equivalencia de estímulos, marcos relacionales, reglas, valores y coherencia</h2>
+    <button class="btn-start" onclick="iniciar()">INICIAR SIMULACIÓN</button>
+  </div>
+
+  <div class="footer-note">
+    Cada pantalla reproduce principios básicos del aprendizaje simbólico humano.
+  </div>
+
+  <script>
+    const network = document.getElementById("network");
+    const nodes = [];
+
+    function crearNodo(x, y) {
+      const nodo = document.createElement("div");
+      nodo.classList.add("node");
+      nodo.style.left = x + "px";
+      nodo.style.top = y + "px";
+      network.appendChild(nodo);
+      setTimeout(() => nodo.style.opacity = 1, 100);
+      nodes.push({ el: nodo, x, y });
+      if (nodes.length > 1) conectarNodos(nodes[nodes.length - 2], nodes[nodes.length - 1]);
+    }
+
+    function conectarNodos(n1, n2) {
+      const dx = n2.x - n1.x;
+      const dy = n2.y - n1.y;
+      const distancia = Math.sqrt(dx*dx + dy*dy);
+      const angulo = Math.atan2(dy, dx) * 180 / Math.PI;
+
+      const linea = document.createElement("div");
+      linea.classList.add("line");
+      linea.style.width = distancia + "px";
+      linea.style.left = n1.x + "px";
+      linea.style.top = n1.y + "px";
+      linea.style.transform = `rotate(${angulo}deg)`;
+      network.appendChild(linea);
+      setTimeout(() => linea.style.opacity = 1, 200);
+    }
+
+    function secuenciaInicial() {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 3;
+
+      setTimeout(() => crearNodo(centerX, centerY), 300);
+      setTimeout(() => crearNodo(centerX - 80, centerY + 60), 900);
+      setTimeout(() => crearNodo(centerX + 90, centerY + 70), 1600);
+      setTimeout(() => crearNodo(centerX + 40, centerY - 90), 2300);
+      setTimeout(() => crearNodo(centerX - 120, centerY - 60), 3000);
+    }
+
+    function iniciar() {
+      // AQUÍ luego se redirigirá a: pantalla-1-equivalencia.html
+      alert("Aquí comenzará el Laboratorio de Equivalencia de Estímulos.");
+    }
+
+    secuenciaInicial();
+  </script>
+
+</body>
+</html>
 
