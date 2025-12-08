@@ -1,3 +1,7 @@
+/* ================================ */
+/* css/pantalla-1-equivalencia.css */
+/* ================================ */
+
 * {
   box-sizing: border-box;
   font-family: "Noto Sans", sans-serif;
@@ -51,7 +55,7 @@ h1 {
   opacity: 0.95;
 }
 
-.matrix-abc, .matrix-cd {
+.matrix-abc {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
@@ -60,7 +64,11 @@ h1 {
 }
 
 .matrix-cd {
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  font-size: 4.2rem;
+  margin-bottom: 40px;
 }
 
 .word {
