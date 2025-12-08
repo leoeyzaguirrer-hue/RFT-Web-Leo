@@ -1,0 +1,138 @@
+/* ==============================
+   FONDO GENERAL
+================================= */
+body {
+  margin: 0;
+  font-family: "Noto Sans", sans-serif;
+  background: radial-gradient(circle at top, #0f3a5a 0%, #091d2e 60%, #060f18 100%);
+  height: 100vh;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* ==============================
+   RED DE NODOS
+================================= */
+.bg-network {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #6bd6ff;
+  box-shadow: 0 0 12px rgba(253,191,18,0.7);
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease, background-color 0.8s ease;
+}
+
+.node.active {
+  background: #fdbf12;
+  transform: scale(1.4);
+}
+
+.line {
+  position: absolute;
+  height: 1.5px;
+  background: linear-gradient(to right, rgba(253,191,18,0), rgba(253,191,18,0.9));
+  transform-origin: left center;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* ==============================
+   BLOQUE CENTRAL
+================================= */
+.hero {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Nivel 0 */
+.micro-title {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9ecfe6;
+  margin-bottom: 10px;
+}
+
+/* Nivel 1 */
+.hero h1 {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* Nivel 2 */
+.hero h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #cfefff;
+  max-width: 640px;
+  margin-bottom: 12px;
+}
+
+/* Nivel 3 */
+.linea-descriptiva {
+  font-size: 0.9rem;
+  color: #a8d0e6;
+  margin-bottom: 30px;
+}
+
+/* Preparación */
+.pre-accion {
+  font-size: 0.95rem;
+  color: #f0f7fb;
+  opacity: 0.85;
+  margin-bottom: 18px;
+}
+
+/* Botón */
+.btn-start {
+  background: linear-gradient(135deg, #fdbf12, #f5a700);
+  color: #10242e;
+  border: none;
+  padding: 18px 42px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(253,191,18,0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-start:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(253,191,18,0.75);
+}
+
+/* Nota inferior */
+.footer-note {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #a9d7ee;
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .hero h2 { font-size: 1rem; }
+  .btn-start { font-size: 1rem; padding: 14px 32px; }
+}
