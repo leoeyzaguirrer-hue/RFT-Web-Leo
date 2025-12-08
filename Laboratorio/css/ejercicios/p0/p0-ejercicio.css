@@ -1,0 +1,432 @@
+/* ============================================================
+   BASE GENERAL · FONDO PREMIUM PANTALLA COMPLETA
+============================================================ */
+
+.rraa-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Coco Gothic", "Noto Sans", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #0a2a5c 0%, #050b18 45%, #020510 100%);
+  color: #fdfaf3;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa decorativa: red / puntos sutiles */
+.rraa-bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(253, 191, 18, 0.18) 0, transparent 55%),
+    radial-gradient(circle at 80% 10%, rgba(0, 194, 203, 0.16) 0, transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(10, 154, 120, 0.18) 0, transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0, transparent 45%, rgba(255, 255, 255, 0.02) 55%, transparent 100%);
+  opacity: 0.94;
+}
+
+/* ============================================================
+   LAYOUT PRINCIPAL
+============================================================ */
+
+.rraa-main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Encabezado */
+
+.rraa-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.rraa-microtitle {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(253, 191, 18, 0.8);
+  margin-bottom: 8px;
+}
+
+.rraa-title {
+  font-size: 2.4rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  text-shadow: 0 0 18px rgba(0, 0, 0, 0.6);
+}
+
+.rraa-subtitle {
+  margin: 0 auto;
+  max-width: 800px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #e8f3ff;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   TARJETA PRINCIPAL
+============================================================ */
+
+.rraa-card {
+  margin: 0 auto;
+  max-width: 1150px;
+  background: linear-gradient(
+    135deg,
+    rgba(5, 12, 26, 0.98) 0%,
+    rgba(8, 24, 62, 0.98) 40%,
+    rgba(6, 32, 55, 0.98) 100%
+  );
+  border-radius: 24px;
+  border: 1.8px solid rgba(253, 191, 18, 0.6);
+  box-shadow:
+    0 32px 70px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(0, 194, 203, 0.5);
+  padding: 24px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Badget de contexto relacional */
+
+.rraa-contexto-badge {
+  align-self: flex-start;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 0 0, #fdbf12 0, #b57a00 55%, #5c3a00 100%);
+  color: #120b02;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(253, 191, 18, 0.6);
+}
+
+/* Interior de la tarjeta */
+
+.rraa-card-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Paneles */
+
+.rraa-panel {
+  border-radius: 20px;
+  padding: 20px 18px;
+  position: relative;
+  background: radial-gradient(circle at top, rgba(15, 92, 140, 0.18), rgba(0, 0, 0, 0.7));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.rraa-panel::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid rgba(253, 191, 18, 0.15);
+  pointer-events: none;
+}
+
+.rraa-panel-title {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(241, 249, 255, 0.9);
+}
+
+/* Panel estímulo */
+
+.rraa-panel-sample {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.rraa-sample-symbol {
+  font-size: 5.5rem;
+  line-height: 1;
+  margin-top: 8px;
+  text-shadow:
+    0 0 24px rgba(0, 194, 203, 0.7),
+    0 0 40px rgba(253, 191, 18, 0.4);
+}
+
+/* Panel opciones */
+
+.rraa-panel-choices {
+  display: flex;
+  flex-direction: column;
+}
+
+.rraa-choices-grid {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Tarjetas de respuesta */
+
+.rraa-choice-card {
+  position: relative;
+  border-radius: 18px;
+  border: 1.4px solid rgba(253, 191, 18, 0.4);
+  background: radial-gradient(circle at top, rgba(31, 129, 167, 0.4), rgba(2, 7, 18, 0.95));
+  color: #fdfcf7;
+  cursor: pointer;
+  padding: 16px 8px;
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.85),
+    0 0 18px rgba(9, 182, 190, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    border-color 0.14s ease,
+    background 0.14s ease;
+}
+
+.rraa-choice-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 24px 52px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(253, 191, 18, 0.55);
+}
+
+.rraa-choice-symbol {
+  font-size: 3.4rem;
+  text-shadow:
+    0 0 16px rgba(0, 194, 203, 0.8),
+    0 0 28px rgba(253, 191, 18, 0.4);
+}
+
+/* Estados de corrección */
+
+.rraa-choice-card.rraa-correct {
+  border-color: rgba(144, 238, 144, 0.9);
+  background: radial-gradient(circle at top, rgba(10, 140, 90, 0.8), rgba(1, 35, 24, 0.98));
+  box-shadow:
+    0 24px 52px rgba(0, 0, 0, 0.9),
+    0 0 24px rgba(10, 200, 140, 0.7);
+}
+
+.rraa-choice-card.rraa-incorrect {
+  border-color: rgba(255, 80, 80, 0.9);
+  background: radial-gradient(circle at top, rgba(140, 30, 30, 0.85), rgba(20, 4, 4, 0.98));
+  box-shadow:
+    0 24px 52px rgba(0, 0, 0, 0.95),
+    0 0 24px rgba(255, 80, 80, 0.7);
+}
+
+/* ============================================================
+   BARRA INFERIOR
+============================================================ */
+
+.rraa-footer-bar {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rraa-feedback {
+  font-size: 1rem;
+  color: #f5f7ff;
+}
+
+.rraa-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rraa-progress {
+  font-size: 0.95rem;
+  color: rgba(214, 231, 255, 0.92);
+}
+
+/* Botones premium */
+
+.rraa-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.rraa-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    background 0.14s ease,
+    opacity 0.14s ease;
+}
+
+.rraa-btn-primary {
+  background: linear-gradient(135deg, #fdbf12, #ffde7a);
+  color: #221300;
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.7),
+    0 0 18px rgba(253, 191, 18, 0.7);
+}
+
+.rraa-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.85),
+    0 0 22px rgba(253, 191, 18, 0.9);
+}
+
+.rraa-btn-secondary {
+  background: radial-gradient(circle at top, rgba(0, 194, 203, 0.3), rgba(2, 8, 18, 0.98));
+  color: #f2fbff;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.7),
+    0 0 14px rgba(0, 194, 203, 0.5);
+  border: 1px solid rgba(0, 194, 203, 0.7);
+}
+
+.rraa-btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.85),
+    0 0 18px rgba(0, 194, 203, 0.8);
+}
+
+/* Botones deshabilitados */
+
+.rraa-btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ============================================================
+   OVERLAY FINAL
+============================================================ */
+
+.rraa-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.96));
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.rraa-overlay--visible {
+  display: flex;
+}
+
+.rraa-overlay-card {
+  max-width: 680px;
+  margin: 0 16px;
+  background: linear-gradient(145deg, #050b18, #07152e);
+  border-radius: 24px;
+  border: 1.5px solid rgba(253, 191, 18, 0.8);
+  padding: 28px 24px 22px;
+  text-align: center;
+  box-shadow:
+    0 32px 70px rgba(0, 0, 0, 0.9),
+    0 0 32px rgba(253, 191, 18, 0.7);
+}
+
+.rraa-overlay-card h2 {
+  margin: 0 0 12px;
+  font-size: 1.6rem;
+}
+
+.rraa-overlay-card p {
+  margin: 0 0 20px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #f7f3e8;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+  .rraa-card-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rraa-main {
+    padding: 20px 12px 28px;
+  }
+
+  .rraa-title {
+    font-size: 1.9rem;
+  }
+
+  .rraa-sample-symbol {
+    font-size: 4.3rem;
+  }
+
+  .rraa-choice-symbol {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .rraa-choices-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .rraa-card {
+    padding: 18px 14px 16px;
+  }
+
+  .rraa-footer-bar {
+    gap: 8px;
+  }
+
+  .rraa-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rraa-buttons {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .rraa-btn {
+    width: auto;
+  }
+}
