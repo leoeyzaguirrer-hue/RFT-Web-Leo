@@ -117,7 +117,7 @@ function verificarF4(seleccion, correcto) {
       setTimeout(cargarEnsayoF4, 1000);
     } else {
       feedbackF4.textContent = "🎉 Felicitaciones, esto es SIMETRÍA";
-      // AQUÍ luego continuará la Fase 5
+      setTimeout(pasarAFase5, 900);
     }
 
   } else {
@@ -127,4 +127,114 @@ function verificarF4(seleccion, correcto) {
 function irAFase4() {
   document.getElementById("fase3").classList.remove("activa");
   document.getElementById("fase4").classList.add("activa");
+}
+/* ============================
+   FASE 5 · TRANSITIVIDAD A–C
+============================ */
+const ensayosF5 = [
+  { muestra: "🔵", correcto: "⭐", opciones: ["⭐", "🌙", "❤️"] },
+  { muestra: "🟢", correcto: "🌙", opciones: ["❤️", "🌙", "⭐"] },
+  { muestra: "🔴", correcto: "❤️", opciones: ["🌙", "⭐", "❤️"] },
+
+  { muestra: "⭐", correcto: "🔵", opciones: ["🟢", "🔵", "🔴"] }
+];
+
+let ensayoF5 = 0;
+
+function pasarAFase5() {
+  document.getElementById("fase4").classList.remove("activa");
+  document.getElementById("fase5").classList.add("activa");
+  cargarEnsayoF5();
+}
+
+function cargarEnsayoF5() {
+  const ensayo = ensayosF5[ensayoF5];
+  document.getElementById("tarjetaF5").textContent = ensayo.muestra;
+  const cont = document.getElementById("comparacionesF5");
+  cont.innerHTML = "";
+  document.getElementById("feedbackF5").textContent = "";
+
+  ensayo.opciones.forEach(op => {
+    const btn = document.createElement("button");
+    btn.className = "boton-comparacion";
+    btn.textContent = op;
+    btn.onclick = () => verificarF5(op, ensayo.correcto);
+    cont.appendChild(btn);
+  });
+}
+
+function verificarF5(sel, correcto) {
+  contadorGlobal++;
+  contadorSpan.textContent = contadorGlobal;
+
+  if (sel === correcto) {
+    document.getElementById("feedbackF5").textContent = "✅ Correcto";
+    ensayoF5++;
+
+    if (ensayoF5 < ensayosF5.length) {
+      setTimeout(cargarEnsayoF5, 900);
+    } else {
+      document.getElementById("feedbackF5").textContent =
+        "🎉 Excelente, esto es TRANSITIVIDAD";
+      setTimeout(() => {
+        document.getElementById("fase5").classList.remove("activa");
+        document.getElementById("fase6").classList.add("activa");
+      }, 1200);
+    }
+  } else {
+    document.getElementById("feedbackF5").textContent = "❌ Incorrecto";
+  }
+}
+
+/* ============================
+   FASE 7 · SIMETRÍA C–D
+============================ */
+const ensayosF7 = [
+  { muestra: "⭐", correcto: "🔺", opciones: ["🔺", "🟪", "🟧"] },
+  { muestra: "❤️", correcto: "🟧", opciones: ["🟪", "🟧", "🔺"] },
+  { muestra: "🌙", correcto: "🟪", opciones: ["🟧", "🟪", "🔺"] }
+];
+
+let ensayoF7 = 0;
+
+function irAFase7() {
+  document.getElementById("fase6").classList.remove("activa");
+  document.getElementById("fase7").classList.add("activa");
+  cargarEnsayoF7();
+}
+
+function cargarEnsayoF7() {
+  const e = ensayosF7[ensayoF7];
+  document.getElementById("tarjetaF7").textContent = e.muestra;
+  const cont = document.getElementById("comparacionesF7");
+  cont.innerHTML = "";
+  document.getElementById("feedbackF7").textContent = "";
+
+  e.opciones.forEach(op => {
+    const btn = document.createElement("button");
+    btn.className = "boton-comparacion";
+    btn.textContent = op;
+    btn.onclick = () => verificarF7(op, e.correcto);
+    cont.appendChild(btn);
+  });
+}
+
+function verificarF7(sel, correcto) {
+  contadorGlobal++;
+  contadorSpan.textContent = contadorGlobal;
+
+  if (sel === correcto) {
+    document.getElementById("feedbackF7").textContent = "✅ Correcto";
+    ensayoF7++;
+
+    if (ensayoF7 < ensayosF7.length) {
+      setTimeout(cargarEnsayoF7, 900);
+    } else {
+      document.getElementById("fase7").classList.remove("activa");
+      document.getElementById("fase8").classList.add("activa");
+      cargarEnsayoF8();
+    }
+  } else {
+    document.getElementById("feedbackF7").textContent = "❌ Incorrecto";
+  }
 }
