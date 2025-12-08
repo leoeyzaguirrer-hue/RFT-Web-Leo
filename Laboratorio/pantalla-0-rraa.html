@@ -18,7 +18,7 @@
 
     <!-- ENCABEZADO -->
     <header class="rraa-header">
-      <div class="rraa-microtitle">Laboratorio RFT · Fase 0</div>
+      <div class="rraa-microtitle">LABORATORIO RFT · FASE 0</div>
       <h1 class="rraa-title">RESPUESTA RELACIONAL ARBITRARIA</h1>
       <p class="rraa-subtitle">
         Aquí no importa qué son los estímulos. Importa cómo aprendes a
@@ -36,7 +36,7 @@
       <div class="rraa-card-inner">
         <!-- PANEL DE ESTÍMULO MUESTRA -->
         <div class="rraa-panel rraa-panel-sample">
-          <h2 class="rraa-panel-title">Tarjeta estímulo</h2>
+          <h2 class="rraa-panel-title">TARJETA ESTÍMULO</h2>
           <div class="rraa-sample-symbol" id="rraaSampleSymbol">
             ◎
           </div>
@@ -44,7 +44,7 @@
 
         <!-- PANEL DE OPCIONES -->
         <div class="rraa-panel rraa-panel-choices">
-          <h2 class="rraa-panel-title">Elige la opción correcta</h2>
+          <h2 class="rraa-panel-title">ELIGE LA OPCIÓN CORRECTA</h2>
 
           <div class="rraa-choices-grid">
             <button class="rraa-choice-card" data-index="0">
@@ -75,10 +75,10 @@
 
           <div class="rraa-buttons">
             <button class="rraa-btn rraa-btn-secondary" id="rraaBtnRestart">
-              Reiniciar fase
+              REINICIAR FASE
             </button>
             <button class="rraa-btn rraa-btn-primary" id="rraaBtnNext" disabled>
-              Siguiente ensayo
+              SIGUIENTE ENSAYO
             </button>
           </div>
         </div>
@@ -86,6 +86,53 @@
     </section>
 
   </main>
+
+  <!-- OVERLAY MAPA DE OPUESTOS -->
+  <div class="rraa-overlay" id="rraaOppositeMap">
+    <div class="rraa-overlay-card rraa-overlay-map">
+      <h2>Mapa de relaciones bajo la clave “ES OPUESTO A”</h2>
+      <p>
+        Antes de responder, observa cómo se conectan los estímulos cuando
+        la clave dice <strong>“ES OPUESTO A”</strong>.
+      </p>
+
+      <div class="rraa-map-columns">
+        <div class="rraa-map-column">
+          <div class="rraa-map-column-title">COLUMNA A</div>
+          <div class="rraa-map-row">
+            <span class="rraa-map-symbol">◎</span>
+          </div>
+          <div class="rraa-map-row">
+            <span class="rraa-map-symbol">◇</span>
+          </div>
+          <div class="rraa-map-row">
+            <span class="rraa-map-symbol">▢</span>
+          </div>
+        </div>
+
+        <div class="rraa-map-column">
+          <div class="rraa-map-column-title">COLUMNA B (OPUESTO)</div>
+          <div class="rraa-map-row">
+            <span class="rraa-map-symbol">◇</span>
+          </div>
+          <div class="rraa-map-row">
+            <span class="rraa-map-symbol">◎</span>
+          </div>
+          <div class="rraa-map-row">
+            <span class="rraa-map-symbol">▢</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="rraa-map-note">
+        En esta fase: ◎ y ◇ son opuestos entre sí. ▢ se mantiene igual.
+      </p>
+
+      <button class="rraa-btn rraa-btn-primary" id="rraaMapContinueBtn">
+        COMPRENDIDO · COMENZAR ENSAYOS
+      </button>
+    </div>
+  </div>
 
   <!-- OVERLAY FINAL DE CIERRE TEÓRICO -->
   <div class="rraa-overlay" id="rraaOverlay">
@@ -96,7 +143,7 @@
         bajo claves arbitrarias.
       </p>
       <button class="rraa-btn rraa-btn-primary" id="rraaOverlayBtn">
-        Volver a empezar la fase
+        VOLVER A EMPEZAR LA FASE
       </button>
     </div>
   </div>
