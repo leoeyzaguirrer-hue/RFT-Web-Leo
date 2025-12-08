@@ -5,9 +5,9 @@ body {
   margin: 0;
   font-family: "Noto Sans", sans-serif;
   background: radial-gradient(circle at top, #0f3a5a 0%, #091d2e 60%, #060f18 100%);
-  min-height: 100vh;
+  height: 100vh;
   color: #ffffff;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 /* ==============================
