@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fase 1 · Contexto Relacional (Crel)</title>
+
+  <link rel="stylesheet" href="css/ejercicios/p1/p1-crel.css" />
+</head>
+<body class="crel-body">
+
+  <div class="crel-bg-layer"></div>
+
+  <main class="crel-main">
+
+    <!-- HEADER -->
+    <header class="crel-header">
+      <div class="crel-microtitle">LABORATORIO RFT · FASE 1</div>
+      <h1 class="crel-title">CONTEXTO RELACIONAL</h1>
+      <p class="crel-subtitle">
+        Los estímulos no cambian. Cambia la relación que el contexto activa.
+      </p>
+    </header>
+
+    <!-- TARJETA PRINCIPAL -->
+    <section class="crel-card">
+
+      <!-- CLAVE ACTUAL -->
+      <div class="crel-contexto-badge" id="crelContextLabel">
+        ES IGUAL A
+      </div>
+
+      <div class="crel-card-inner">
+
+        <!-- ESTÍMULO -->
+        <div class="crel-panel crel-sample-panel">
+          <h2 class="crel-panel-title">ESTÍMULO</h2>
+          <div class="crel-sample-symbol" id="crelSample">
+            ◎
+          </div>
+        </div>
+
+        <!-- OPCIONES -->
+        <div class="crel-panel crel-choices-panel">
+          <h2 class="crel-panel-title">RESPUESTA</h2>
+
+          <div class="crel-choices-grid">
+            <button class="crel-choice" data-index="0">
+              <span class="crel-choice-symbol"></span>
+            </button>
+            <button class="crel-choice" data-index="1">
+              <span class="crel-choice-symbol"></span>
+            </button>
+            <button class="crel-choice" data-index="2">
+              <span class="crel-choice-symbol"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="crel-footer">
+        <div class="crel-feedback" id="crelFeedback">
+          Observa primero la relación activa.
+        </div>
+
+        <div class="crel-controls">
+          <div class="crel-progress" id="crelProgress">
+            Bloque 1 · Ensayo 1
+          </div>
+
+          <div class="crel-buttons">
+            <button class="crel-btn crel-btn-secondary" id="crelRestart">
+              REINICIAR BLOQUE
+            </button>
+            <button class="crel-btn crel-btn-primary" id="crelNext" disabled>
+              SIGUIENTE
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- OVERLAY MAPA -->
+  <div class="crel-overlay" id="crelMapOverlay">
+    <div class="crel-overlay-card">
+      <h2 id="crelMapTitle">Mapa Relacional</h2>
+      <p id="crelMapText"></p>
+
+      <div class="crel-map-columns">
+        <div class="crel-map-col" id="crelColA"></div>
+        <div class="crel-map-col" id="crelColB"></div>
+      </div>
+
+      <button class="crel-btn crel-btn-primary" id="crelMapBtn">
+        COMENZAR ENSAYOS
+      </button>
+    </div>
+  </div>
+
+  <!-- OVERLAY FINAL -->
+  <div class="crel-overlay" id="crelEndOverlay">
+    <div class="crel-overlay-card">
+      <h2>Has completado la Fase 1 — Contexto Relacional</h2>
+      <p>
+        Los estímulos no cambiaron.  
+        Cambió la relación que gobernó tu respuesta.
+      </p>
+      <button class="crel-btn crel-btn-primary" id="crelToFase2">
+        CONTINUAR A FASE 2 — CONTEXTO FUNCIONAL
+      </button>
+    </div>
+  </div>
+
+  <script src="js/ejercicios/p1/p1-crel.js" defer></script>
+</body>
+</html>
