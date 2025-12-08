@@ -5,76 +5,70 @@
   <title>Laboratorio · Equivalencia de Estímulos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/pantalla-1-equivalencia.css">
-  
- </head>
-
+</head>
 <body>
 
-  <div class="equiv-container">
+<div class="lab-container">
 
-    <!-- TÍTULO -->
-    <header class="equiv-header">
-      <h1>Experimento Interactivo · Equivalencia de Estímulos</h1>
-      <p>Entrenamiento AB – BC con pruebas de relaciones emergentes</p>
-    </header>
+  <!-- TARJETÓN INICIAL -->
+  <section id="intro" class="card active">
+    <h1>Conjuntos de Estímulos</h1>
+    <p class="subtitle">En equivalencia, las clases se forman cuando distintos estímulos llegan a responderse como intercambiables.</p>
 
-    <!-- VISTA INICIAL CONJUNTOS -->
-    <section id="intro" class="equiv-card active">
-      <h2>Conjuntos de estímulos</h2>
+    <div class="matrix">
+      <div>🔵</div><div class="word">UNO</div><div>⭐</div>
+      <div>🔴</div><div class="word">DOS</div><div>❤️</div>
+      <div>🟢</div><div class="word">TRES</div><div>🌙</div>
+    </div>
 
-      <div class="equiv-sets">
+    <button id="startBtn">Iniciar Entrenamiento</button>
+  </section>
 
-        <div class="set">
-          <h3>Conjunto A</h3>
-          <div class="stim">🔵</div>
-          <div class="stim">🔴</div>
-          <div class="stim">🟢</div>
-        </div>
+  <!-- ZONA DE ENSAYOS -->
+  <section id="trial" class="card">
+    <div class="top-bar">
+      <span id="phaseLabel">Entrenamiento AB</span>
+      <span id="trialCounter">Ensayo 1</span>
+    </div>
 
-        <div class="set">
-          <h3>Conjunto B</h3>
-          <div class="stim word">UNO</div>
-          <div class="stim word">DOS</div>
-          <div class="stim word">TRES</div>
-        </div>
-
-        <div class="set">
-          <h3>Conjunto C</h3>
-          <div class="stim">⭐</div>
-          <div class="stim">❤️</div>
-          <div class="stim">🌙</div>
-        </div>
-
-      </div>
-
-      <button id="btnStart">Comenzar experimento</button>
-    </section>
-
-
-    <!-- ZONA DE ENSAYOS -->
-    <section id="trial" class="equiv-card">
-
-      <div class="trial-info">
-        <span id="trialPhase">Entrenamiento AB</span>
-        <span id="trialCount">Ensayo 1</span>
-      </div>
-
-      <div class="sample-zone">
-        <h3>MUESTRA</h3>
+    <div class="trial-card">
+      <div class="sample-area">
+        <h3>Muestra</h3>
         <div id="sample" class="sample-box"></div>
       </div>
 
-      <div class="choices-zone">
-        <h3>COMPARACIONES</h3>
+      <div class="choice-area">
+        <h3>Comparaciones</h3>
         <div id="choices" class="choices-grid"></div>
       </div>
+    </div>
 
-      <div id="feedback" class="feedback"></div>
+    <div id="feedback" class="feedback"></div>
 
-    </section>
+    <div class="property-panel">
+      <span id="reflex">Reflexividad ❌</span>
+      <span id="sim">Simetría ❌</span>
+      <span id="trans">Transitividad ❌</span>
+      <span id="equiv">Equivalencia ❌</span>
+    </div>
+  </section>
 
-  </div>
+  <!-- PRESENTACIÓN CONJUNTO D -->
+  <section id="faseD" class="card">
+    <h1>Expansión de las Clases</h1>
+    <p class="subtitle">Con un solo nuevo vínculo, las clases pueden crecer por transferencia de funciones.</p>
 
-  <script src="js/pantalla-1-equivalencia.js"></script>
+    <div class="matrix">
+      <div>⭐</div><div>✴️</div>
+      <div>❤️</div><div>🔺</div>
+      <div>🌙</div><div>🟪</div>
+    </div>
+
+    <button id="startD">Integrar Nuevo Conjunto</button>
+  </section>
+
+</div>
+
+<script src="js/pantalla-1-equivalencia.js"></script>
 </body>
 </html>
