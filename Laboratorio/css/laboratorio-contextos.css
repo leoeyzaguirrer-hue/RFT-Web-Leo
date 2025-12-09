@@ -1,0 +1,789 @@
+/* ============================================================
+   LABORATORIO RFT · CONTEXTOS RELACIONAL Y FUNCIONAL
+   Panel gigante, textos grandes, sin scroll global.
+============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #e6f2ff 0%, #fff7e3 45%, #e3f3f0 100%);
+  color: #102b3f;
+  overflow: hidden;
+}
+
+/* CONTENEDOR PRINCIPAL */
+
+.lab-shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.7rem 1.4rem;
+  position: relative;
+}
+
+/* Red de fondo sutil premium */
+.lab-shell::before,
+.lab-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(12, 70, 116, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(12, 70, 116, 0.06) 1px, transparent 1px);
+  background-size: 170px 170px;
+  mix-blend-mode: soft-light;
+  opacity: 0.65;
+}
+
+/* CABECERA */
+
+.lab-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.lab-subtitle {
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6c7a89;
+  margin-bottom: 0.2rem;
+}
+
+.lab-title {
+  font-size: 2.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0d2d4a;
+  margin-bottom: 0.45rem;
+}
+
+.lab-description {
+  font-size: 1.1rem;
+  max-width: 880px;
+  margin: 0 auto;
+  color: #3b546a;
+}
+
+/* CONTENEDOR MAIN */
+
+.lab-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* FASES */
+
+.lab-phase {
+  display: none;
+  width: 100%;
+  max-width: 1280px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(7, 40, 64, 0.26);
+  border: 1px solid rgba(7, 40, 64, 0.08);
+  padding: 1.8rem 1.9rem 1.5rem;
+  position: relative;
+}
+
+.lab-phase.active {
+  display: flex;
+}
+
+/* Panel interno con posible scroll propio */
+
+.phase-inner {
+  width: 100%;
+  max-height: calc(100vh - 185px);
+  overflow-y: auto;
+  padding-right: 0.7rem;
+}
+
+.phase-inner::-webkit-scrollbar {
+  width: 6px;
+}
+
+.phase-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.phase-inner::-webkit-scrollbar-thumb {
+  background: rgba(12, 70, 116, 0.35);
+  border-radius: 999px;
+}
+
+/* TITULOS Y TEXTOS */
+
+.phase-title {
+  font-size: 1.7rem;
+  color: #0d2d4a;
+  margin-bottom: 0.5rem;
+}
+
+.phase-text {
+  font-size: 1.15rem;
+  color: #4a5f73;
+  margin-bottom: 1.3rem;
+  max-width: 900px;
+}
+
+/* BOTONES GENERALES */
+
+.phase-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.btn-small {
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+  padding: 1rem 2.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffb327, #ffdf7e);
+  color: #3a2500;
+  box-shadow: 0 12px 30px rgba(177, 117, 0, 0.5);
+}
+
+.btn-primary:hover:enabled {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(177, 117, 0, 0.6);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #0f4975, #1b6b9e);
+  color: #f5fbff;
+  box-shadow: 0 10px 28px rgba(11, 59, 92, 0.5);
+}
+
+.btn-secondary:hover:enabled {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(11, 59, 92, 0.6);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px dashed rgba(13, 45, 74, 0.45);
+  color: #0d2d4a;
+}
+
+.btn-ghost:hover {
+  background: rgba(13, 45, 74, 0.05);
+}
+
+.btn-small {
+  font-size: 0.9rem;
+  padding: 0.7rem 1.4rem;
+}
+
+/* ============================================================
+   FASE 1 · FOBIA A LOS PERRITOS
+============================================================ */
+
+.f1-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+  gap: 1.6rem;
+  align-items: stretch;
+}
+
+/* Persona + perrito */
+
+.f1-persona-card {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f7fbff 45%, #fff5e4 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(13, 45, 74, 0.2);
+  box-shadow: 0 24px 60px rgba(13, 45, 74, 0.35);
+  padding: 2.4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  min-height: 320px;
+}
+
+.f1-persona-emoji {
+  font-size: 5.4rem;
+}
+
+.f1-perro-emoji {
+  font-size: 4.4rem;
+}
+
+.f1-caption {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #163652;
+  text-align: center;
+}
+
+/* Lista de reacciones */
+
+.f1-func-card {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f3f8ff 45%, #eef7ff 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(13, 45, 74, 0.2);
+  box-shadow: 0 22px 54px rgba(13, 45, 74, 0.3);
+  padding: 2.1rem 1.9rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.f1-func-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #12375d;
+  margin-bottom: 0.4rem;
+}
+
+.f1-func-subtitle {
+  font-size: 1.1rem;
+  color: #4f6478;
+  margin-bottom: 0.6rem;
+}
+
+.f1-func-list {
+  list-style: none;
+  margin-top: 0.3rem;
+  margin-bottom: 0.9rem;
+}
+
+.f1-func-list li {
+  font-size: 1.25rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(15, 73, 117, 0.05);
+  color: #163b58;
+  margin-bottom: 0.35rem;
+  border: 1px solid rgba(15, 73, 117, 0.18);
+}
+
+.f1-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.9rem;
+}
+
+/* ============================================================
+   FASE 2 · PUERTA Y SILAC
+============================================================ */
+
+.f2-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.f2-personas-card {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f7fbff 45%, #fef5eb 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(13, 45, 74, 0.16);
+  box-shadow: 0 20px 50px rgba(13, 45, 74, 0.28);
+  padding: 2.1rem 1.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.f2-personas-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.f2-persona-emoji,
+.f2-amigo-emoji {
+  font-size: 4.4rem;
+}
+
+.f2-caption {
+  font-size: 1.25rem;
+  text-align: center;
+  color: #234060;
+}
+
+.f2-puerta-card {
+  background: radial-gradient(circle at top left, #fffdf7 0%, #fff5e3 40%, #f9f3ff 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(183, 132, 25, 0.5);
+  box-shadow: 0 22px 58px rgba(167, 120, 23, 0.4);
+  padding: 2.1rem 1.8rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1.6fr);
+  gap: 1.3rem;
+  align-items: center;
+}
+
+.f2-door-emoji {
+  font-size: 5rem;
+}
+
+.f2-texto-dialogo {
+  font-size: 1.25rem;
+  color: #684115;
+  margin-bottom: 0.4rem;
+}
+
+.f2-cita {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.f2-texto-nota {
+  font-size: 1.1rem;
+  color: #7a5a2c;
+}
+
+.f2-emoji-duda {
+  font-size: 1.6rem;
+}
+
+/* ============================================================
+   FASE 3 · COORDINACIÓN SILAC–PERRO
+============================================================ */
+
+.f3-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.f3-dialogo-card {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f7fbff 45%, #eef9ff 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(13, 45, 74, 0.18);
+  box-shadow: 0 22px 56px rgba(13, 45, 74, 0.3);
+  padding: 2.1rem 1.8rem;
+}
+
+.f3-personas-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.f3-persona-emoji,
+.f3-amigo-emoji {
+  font-size: 4.2rem;
+}
+
+.f3-cita {
+  font-size: 1.2rem;
+  color: #234060;
+  margin-bottom: 0.6rem;
+}
+
+.f3-cita-frase {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #12375d;
+}
+
+.f3-texto-nota {
+  font-size: 1.15rem;
+  color: #4f6478;
+}
+
+/* Columnas perro / SILAC */
+
+.f3-funciones-card {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f6fbff 40%, #eef7ff 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(13, 45, 74, 0.2);
+  box-shadow: 0 22px 60px rgba(13, 45, 74, 0.32);
+  padding: 2rem 1.8rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.f3-col-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #12375d;
+  margin-bottom: 0.4rem;
+}
+
+.f3-col-sub {
+  font-size: 1rem;
+  color: #5a7187;
+}
+
+.f3-func-list {
+  list-style: none;
+}
+
+.f3-func-list li {
+  font-size: 1.25rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(15, 73, 117, 0.05);
+  border: 1px solid rgba(15, 73, 117, 0.2);
+  color: #163b58;
+  margin-bottom: 0.3rem;
+}
+
+/* ============================================================
+   FASE 4 · SILAC ADQUIERE FUNCIONES
+============================================================ */
+
+.f4-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
+  gap: 1.4rem;
+  align-items: stretch;
+}
+
+.f4-persona-puerta {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f7fbff 45%, #fff6e8 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(13, 45, 74, 0.18);
+  box-shadow: 0 22px 56px rgba(13, 45, 74, 0.32);
+  padding: 2.2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.f4-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 2.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.f4-persona-emoji,
+.f4-door-emoji {
+  font-size: 4.6rem;
+}
+
+.f4-caption {
+  font-size: 1.25rem;
+  text-align: center;
+  color: #234060;
+}
+
+.f4-silac-card {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f6fbff 40%, #eef7ff 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(13, 45, 74, 0.2);
+  box-shadow: 0 22px 60px rgba(13, 45, 74, 0.35);
+  padding: 2.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.f4-silac-word {
+  font-size: 3.3rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #11395a;
+  margin-bottom: 0.4rem;
+}
+
+.f4-silac-subtitle {
+  font-size: 1.25rem;
+  color: #425a70;
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+
+.f4-func-list {
+  list-style: none;
+  margin-bottom: 0.8rem;
+  width: 100%;
+}
+
+.f4-func-list li {
+  font-size: 1.25rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(17, 57, 90, 0.05);
+  border: 1px solid rgba(17, 57, 90, 0.26);
+  color: #163b58;
+  margin-bottom: 0.3rem;
+}
+
+.f4-explicacion {
+  font-size: 1.1rem;
+  color: #3f5569;
+  max-width: 780px;
+  text-align: center;
+}
+
+/* ============================================================
+   FASES 5–7 · A–B–C Y “MAYOR QUE”
+============================================================ */
+
+.abc-layout {
+  display: flex;
+  gap: 1.4rem;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 1.3rem;
+}
+
+.abc-card {
+  flex: 1;
+  background: radial-gradient(circle at top left, #ffffff 0%, #f7fbff 40%, #eef7ff 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(13, 45, 74, 0.18);
+  box-shadow: 0 20px 52px rgba(13, 45, 74, 0.28);
+  padding: 1.7rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.abc-label {
+  font-size: 1.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b7f94;
+}
+
+.abc-body {
+  font-size: 3.2rem;
+  color: #12375d;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.abc-body-empty {
+  color: rgba(18, 55, 93, 0.35);
+}
+
+.abc-instruction {
+  font-size: 1.15rem;
+  color: #4a5f73;
+}
+
+/* Clave relacional */
+
+.clave-card {
+  background: radial-gradient(circle at top left, #fff8e4 0%, #fffdf5 55%, #f9f2ff 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(183, 132, 25, 0.58);
+  box-shadow: 0 22px 58px rgba(167, 120, 23, 0.4);
+  padding: 1.9rem 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.clave-label {
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a37c17;
+  margin-bottom: 0.4rem;
+}
+
+.clave-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.clave-titulo {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #8a5200;
+}
+
+.clave-subtitulo {
+  font-size: 1.15rem;
+  color: #6f5a2a;
+}
+
+/* Orden A > B > C */
+
+.orden-card {
+  background: radial-gradient(circle at top left, #ffffff 0%, #f6fbff 45%, #eef7ff 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(13, 45, 74, 0.18);
+  box-shadow: 0 20px 52px rgba(13, 45, 74, 0.28);
+  padding: 1.8rem 1.6rem;
+  margin-top: 0.7rem;
+}
+
+.orden-texto {
+  font-size: 1.2rem;
+  color: #234060;
+  margin-bottom: 0.4rem;
+}
+
+.orden-expresion {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #12375d;
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+.orden-expresion span {
+  display: inline-block;
+  margin: 0 0.15rem;
+}
+
+.orden-nota {
+  font-size: 1.1rem;
+  color: #4f6478;
+}
+
+/* Fase 7: imagen aversiva en C */
+
+.abc-layout-final {
+  margin-bottom: 1rem;
+}
+
+#abcCBody img {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 14px 36px rgba(120, 15, 15, 0.45);
+}
+
+.f7-pregunta-card {
+  background: radial-gradient(circle at top left, #fffdf7 0%, #fff6e6 40%, #fff9ef 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(150, 96, 23, 0.44);
+  box-shadow: 0 22px 60px rgba(150, 96, 23, 0.36);
+  padding: 1.9rem 1.8rem;
+}
+
+.f7-pregunta-titulo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #8a5200;
+  margin-bottom: 0.5rem;
+}
+
+.f7-pregunta-texto {
+  font-size: 1.15rem;
+  color: #5a4b2a;
+  margin-bottom: 0.4rem;
+}
+
+.f7-points {
+  list-style: disc;
+  padding-left: 1.4rem;
+  font-size: 1.15rem;
+  color: #4e3e1f;
+  margin-bottom: 0.6rem;
+}
+
+.f7-explicacion {
+  font-size: 1.1rem;
+  color: #4a5f73;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1040px) {
+  .lab-shell {
+    padding: 1.2rem 0.9rem;
+  }
+
+  .lab-phase {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .f1-layout,
+  .f2-layout,
+  .f3-layout,
+  .f4-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .abc-layout {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .lab-title {
+    font-size: 1.6rem;
+  }
+
+  .phase-inner {
+    max-height: calc(100vh - 170px);
+  }
+
+  .f1-persona-card,
+  .f1-func-card,
+  .f2-personas-card,
+  .f2-puerta-card {
+    padding: 1.6rem 1.4rem;
+  }
+
+  .f4-silac-word {
+    font-size: 2.7rem;
+  }
+
+  .orden-expresion {
+    font-size: 1.8rem;
+  }
+}
