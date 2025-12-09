@@ -52,7 +52,7 @@ const claves = [
 ];
 
 let claveIndex = 0;
-let ensayoIndex = 0;
+let aciertos = 0;
 
 function irAClave() {
   pantallas.bloques.classList.remove("activa");
@@ -68,12 +68,15 @@ function mostrarClave() {
 function iniciarEnsayos() {
   pantallas.clave.classList.remove("activa");
   pantallas.ensayos.classList.add("activa");
+  aciertos = 0;
   cargarEnsayo();
 }
 
 function cargarEnsayo() {
-  const ensayo = claves[claveIndex].ensayos[ensayoIndex];
-  ensayoInfo.textContent = `Ensayo ${ensayoIndex + 1} de 3`;
+  const ensayos = claves[claveIndex].ensayos;
+  const ensayo = ensayos[Math.floor(Math.random() * ensayos.length)];
+
+  ensayoInfo.textContent = `Aciertos: ${aciertos} / 6`;
   muestra.textContent = ensayo.muestra;
   feedback.textContent = "—";
   opcionesDiv.innerHTML = "";
@@ -83,22 +86,23 @@ function cargarEnsayo() {
     const div = document.createElement("div");
     div.className = "opcion";
     div.textContent = op;
-    div.onclick = () => evaluar(op);
+    div.onclick = () => evaluar(op, ensayo);
     opcionesDiv.appendChild(div);
   });
 }
 
-function evaluar(opcion) {
-  const ensayo = claves[claveIndex].ensayos[ensayoIndex];
-
-  feedback.textContent = ensayo.correctos.includes(opcion) ? "✔" : "❌";
+function evaluar(opcion, ensayo) {
+  if (ensayo.correctos.includes(opcion)) {
+    feedback.textContent = "✔";
+    aciertos++;
+  } else {
+    feedback.textContent = "❌";
+  }
 
   setTimeout(() => {
-    ensayoIndex++;
-
-    if (ensayoIndex >= 3) {
+    if (aciertos >= 6) {
       claveIndex++;
-      ensayoIndex = 0;
+      aciertos = 0;
       pantallas.ensayos.classList.remove("activa");
 
       if (claveIndex >= claves.length) {
