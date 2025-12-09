@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nivel 2 · Aplicación Clínica del Control por Reglas</title>
+  <link rel="stylesheet" href="nivel2-clinico.css">
+</head>
+<body>
+
+<div class="lab-container">
+  <h1>🧠 Nivel 2 · Aplicación Clínica del Control por Reglas</h1>
+  <p class="subtitulo">Pliance · Tracking · Augmenting en práctica terapéutica</p>
+
+  <div class="tarjeta" id="casoTitulo"></div>
+
+  <div class="tarjeta grande" id="casoTexto"></div>
+
+  <div class="opciones">
+    <button onclick="responder(0)" id="op0"></button>
+    <button onclick="responder(1)" id="op1"></button>
+    <button onclick="responder(2)" id="op2"></button>
+  </div>
+
+  <div class="tarjeta feedback" id="feedback"></div>
+
+  <button class="btn-siguiente" onclick="siguiente()">Siguiente Ensayo</button>
+
+</div>
+
+<script src="nivel2-clinico.js"></script>
+</body>
+</html>
