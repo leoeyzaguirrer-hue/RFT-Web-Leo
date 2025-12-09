@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  font-family: "Coco Gothic", "Noto Sans", sans-serif;
+  background: radial-gradient(circle at top, #0a2a5c, #020b18);
+  color: white;
+}
+
+.lab-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pantalla {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  text-align: center;
+  padding: 40px;
+}
+
+.pantalla.activa {
+  display: flex;
+}
+
+h1, h2 {
+  color: #FDBF12;
+}
+
+.bloques-grid {
+  display: flex;
+  gap: 48px;
+}
+
+.bloque-card {
+  background: #061a36;
+  border: 3px solid #FDBF12;
+  border-radius: 28px;
+  padding: 32px;
+  width: 260px;
+  box-shadow: 0 0 26px rgba(253,191,18,0.35);
+}
+
+.bloque-card .item {
+  font-size: 2rem;
+  margin: 12px 0;
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, #FDBF12, #ffe08a);
+  border: none;
+  padding: 16px 52px;
+  font-size: 1.4rem;
+  border-radius: 22px;
+  cursor: pointer;
+  color: #021326;
+  font-weight: bold;
+  box-shadow: 0 0 22px rgba(253,191,18,0.5);
+}
+
+.clave-central {
+  background: #061a36;
+  border: 4px solid #FDBF12;
+  border-radius: 36px;
+  padding: 60px 90px;
+  box-shadow: 0 0 35px rgba(253,191,18,0.5);
+}
+
+.texto-clave {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+}
+
+.simbolo-clave {
+  font-size: 6rem;
+}
+
+.panel-muestra {
+  margin-top: 10px;
+}
+
+.tarjeta-muestra {
+  width: 300px;
+  height: 300px;
+  background: #0a2a5c;
+  border: 4px solid #FDBF12;
+  border-radius: 32px;
+  font-size: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(253,191,18,0.4);
+}
+
+.opciones-grid {
+  display: flex;
+  gap: 40px;
+}
+
+.opcion {
+  width: 220px;
+  height: 220px;
+  background: #061a36;
+  border: 3px solid #FDBF12;
+  border-radius: 26px;
+  font-size: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.feedback {
+  font-size: 2.6rem;
+}
+
+.cartel-final {
+  max-width: 960px;
+  font-size: 1.6rem;
+  line-height: 1.7;
+  background: #061a36;
+  border: 4px solid #FDBF12;
+  border-radius: 36px;
+  padding: 50px;
+  box-shadow: 0 0 40px rgba(253,191,18,0.5);
+}
