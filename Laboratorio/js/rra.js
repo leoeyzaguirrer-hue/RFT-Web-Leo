@@ -1,88 +1,91 @@
+const pantallas = {
+  bloques: document.getElementById("pantallaBloques"),
+  clave: document.getElementById("pantallaClave"),
+  ensayos: document.getElementById("pantallaEnsayos"),
+  final: document.getElementById("pantallaFinal")
+};
+
+const textoClave = document.getElementById("textoClave");
+const simboloClave = document.getElementById("simboloClave");
+const ensayoInfo = document.getElementById("ensayoInfo");
+const muestra = document.getElementById("muestra");
+const opcionesDiv = document.getElementById("opciones");
+const feedback = document.getElementById("feedback");
+
 const claves = [
-  {
-    nombre: "ES LO MISMO QUE",
-    ensayos: [
-      { muestra: "LUNA", correctos: ["LUNA"] },
-      { muestra: "PERRO", correctos: ["PERRO"] },
-      { muestra: "MANZANA", correctos: ["MANZANA"] }
-    ]
-  },
-  {
-    nombre: "ES OPUESTO A",
-    ensayos: [
-      { muestra: "LUNA", correctos: ["MANZANA"] },
-      { muestra: "MANZANA", correctos: ["LUNA"] },
-      { muestra: "PERRO", correctos: ["PERRO"] }
-    ]
-  },
-  {
-    nombre: "ES MÁS GRANDE QUE",
-    ensayos: [
-      { muestra: "MANZANA", correctos: ["PERRO", "LUNA"] },
-      { muestra: "PERRO", correctos: ["LUNA"] },
-      { muestra: "LUNA", correctos: [] }
-    ]
-  },
-  {
-    nombre: "VIENE ANTES QUE",
-    ensayos: [
-      { muestra: "PERRO", correctos: ["MANZANA"] },
-      { muestra: "LUNA", correctos: ["PERRO"] },
-      { muestra: "MANZANA", correctos: [] }
-    ]
-  }
+  { nombre: "ES LO MISMO QUE", simbolo: "=", ensayos: [
+    { muestra: "LUNA", correctos: ["🌙", "■"] },
+    { muestra: "PERRO", correctos: ["🐶", "▲"] },
+    { muestra: "MANZANA", correctos: ["🍎", "★"] }
+  ]},
+  { nombre: "ES OPUESTO A", simbolo: "⇄", ensayos: [
+    { muestra: "LUNA", correctos: ["🍎"] },
+    { muestra: "MANZANA", correctos: ["🌙"] },
+    { muestra: "PERRO", correctos: ["🐶"] }
+  ]},
+  { nombre: "ES MÁS GRANDE QUE", simbolo: ">", ensayos: [
+    { muestra: "MANZANA", correctos: ["🐶","🌙"] },
+    { muestra: "PERRO", correctos: ["🌙"] },
+    { muestra: "LUNA", correctos: [] }
+  ]}
 ];
 
 let claveIndex = 0;
 let ensayoIndex = 0;
 
-const titulo = document.getElementById("tituloClave");
-const ensayoInfo = document.getElementById("ensayoInfo");
-const muestra = document.getElementById("muestra");
-const feedback = document.getElementById("feedback");
-const tarjetas = document.querySelectorAll(".tarjeta");
-const teoriaFinal = document.getElementById("teoriaFinal");
-
-function cargarEnsayo() {
-  const clave = claves[claveIndex];
-  const ensayo = clave.ensayos[ensayoIndex];
-
-  titulo.textContent = "Clave Relacional: " + clave.nombre;
-  ensayoInfo.textContent = `Ensayo ${ensayoIndex + 1} de 3`;
-  muestra.textContent = ensayo.muestra;
-  feedback.textContent = "—";
+function irAClave() {
+  pantallas.bloques.classList.remove("activa");
+  mostrarClave();
 }
 
-tarjetas.forEach(tarjeta => {
-  tarjeta.addEventListener("click", () => {
-    const clave = claves[claveIndex];
-    const ensayo = clave.ensayos[ensayoIndex];
+function mostrarClave(){
+  textoClave.textContent = `AHORA APLICA LA CLAVE RELACIONAL "${claves[claveIndex].nombre}"`;
+  simboloClave.textContent = claves[claveIndex].simbolo;
+  pantallas.clave.classList.add("activa");
+}
 
-    if (ensayo.correctos.includes(tarjeta.dataset.id)) {
-      feedback.textContent = "✔";
-    } else {
-      feedback.textContent = "❌";
-    }
+function iniciarEnsayos(){
+  pantallas.clave.classList.remove("activa");
+  pantallas.ensayos.classList.add("activa");
+  cargarEnsayo();
+}
 
-    setTimeout(() => {
-      ensayoIndex++;
+function cargarEnsayo(){
+  const ensayo = claves[claveIndex].ensayos[ensayoIndex];
+  ensayoInfo.textContent = `Ensayo ${ensayoIndex+1} de 3`;
+  muestra.textContent = ensayo.muestra;
+  feedback.textContent = "—";
+  opcionesDiv.innerHTML = "";
 
-      if (ensayoIndex >= 3) {
-        claveIndex++;
-        ensayoIndex = 0;
-      }
+  const opciones = ["🌙","🐶","🍎","■","▲","★"];
+  opciones.sort(() => Math.random()-0.5).slice(0,3).forEach(op => {
+    const div = document.createElement("div");
+    div.className = "tarjeta";
+    div.textContent = op;
+    div.onclick = () => evaluar(op);
+    opcionesDiv.appendChild(div);
+  });
+}
+
+function evaluar(opcion){
+  const ensayo = claves[claveIndex].ensayos[ensayoIndex];
+  feedback.textContent = ensayo.correctos.includes(opcion) ? "✔" : "❌";
+
+  setTimeout(() => {
+    ensayoIndex++;
+    if (ensayoIndex >= 3) {
+      claveIndex++;
+      ensayoIndex = 0;
+      pantallas.ensayos.classList.remove("activa");
 
       if (claveIndex >= claves.length) {
-        titulo.textContent = "FASE FINALIZADA";
-        ensayoInfo.textContent = "";
-        muestra.style.display = "none";
-        document.querySelector(".tarjetas").style.display = "none";
-        teoriaFinal.classList.remove("oculto");
+        pantallas.final.classList.add("activa");
       } else {
-        cargarEnsayo();
+        pantallas.clave.classList.add("activa");
+        mostrarClave();
       }
-    }, 700);
-  });
-});
-
-cargarEnsayo();
+    } else {
+      cargarEnsayo();
+    }
+  }, 800);
+}
