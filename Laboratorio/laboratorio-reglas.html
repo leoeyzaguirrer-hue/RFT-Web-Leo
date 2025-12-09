@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · Pliance · Tracking · Augmenting</title>
+
+  <!-- Estilos del laboratorio -->
+  <link rel="stylesheet" href="css/laboratorio-reglas.css" />
+</head>
+<body>
+  <div class="lab-shell">
+    <!-- CABECERA -->
+    <header class="lab-header">
+      <div class="lab-subtitle">Laboratorio RFT · Control por reglas</div>
+      <h1 class="lab-title">Pliance · Tracking · Augmenting</h1>
+      <p class="lab-description">
+        Explora tres formas en que las reglas pueden controlar la conducta:
+        obediencia a la autoridad (pliance), seguimiento de las contingencias (tracking)
+        y aumento de valor (augmenting). Cada modo tiene sus propios ensayos y
+        una pregunta funcional al final.
+      </p>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="lab-main">
+
+      <!-- PANTALLA INICIAL -->
+      <section class="lab-panel active" id="panel-inicio">
+        <div class="panel-inner">
+          <h2 class="panel-title">Elige el modo de entrenamiento</h2>
+          <p class="panel-text">
+            Cada modo te permitirá experimentar un tipo distinto de control por reglas.
+            Primero juega con uno, luego compara tus decisiones entre modos.
+          </p>
+
+          <div class="modo-grid">
+            <button class="modo-card modo-pliance" id="btnModoPliance">
+              <div class="modo-label">🔵 PLIANCE</div>
+              <p>
+                Obedecer al instructor para obtener aprobación o evitar desaprobación,
+                aunque el camino no sea el mejor en el mundo real.
+              </p>
+            </button>
+
+            <button class="modo-card modo-tracking" id="btnModoTracking">
+              <div class="modo-label">🟢 TRACKING</div>
+              <p>
+                Ajustar tus elecciones a lo que realmente funciona, siguiendo reglas
+                que describen las contingencias del ambiente.
+              </p>
+            </button>
+
+            <button class="modo-card modo-augmenting" id="btnModoAugmenting">
+              <div class="modo-label">🟣 AUGMENTING</div>
+              <p>
+                Elegir caminos porque tienen un sentido valioso, incluso cuando
+                dan menos recompensa inmediata.
+              </p>
+            </button>
+          </div>
+
+          <p class="panel-text emphasis">
+            Recuerda: no se trata de “qué está bien o mal”, sino de <strong>qué controla la conducta</strong>.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- MODO PLIANCE                                          -->
+      <!-- ===================================================== -->
+      <section class="lab-panel" id="panel-pliance">
+        <div class="panel-inner">
+          <div class="panel-header-row">
+            <button class="btn-ghost small" id="volverInicioPliance">← Volver al menú</button>
+            <div class="modo-title-pill pliance-pill">🔵 Modo Pliance</div>
+          </div>
+
+          <h2 class="panel-title">Obedecer al instructor vs. resultados reales</h2>
+          <p class="panel-text">
+            En este modo, tus elecciones están bajo la presión de un instructor que
+            insiste en que sigas el <strong>Camino B</strong>. Observa si te dejas guiar
+            por la aprobación social o por lo que realmente funciona.
+          </p>
+
+          <div class="status-row">
+            <div class="status-pill">
+              Ensayo <span id="plianceEnsayoNum">1</span> de 8
+            </div>
+            <div class="status-pill">
+              Obediencias a B: <span id="plianceObediencias">0</span>
+            </div>
+          </div>
+
+          <div class="card-grid-2">
+            <!-- Instrucciones del instructor + contexto -->
+            <div class="big-card instructor-card">
+              <div class="card-heading">Instructor</div>
+              <p class="card-text" id="plianceMensajeInstructor">
+                “Debes elegir el Camino B.”
+              </p>
+              <p class="card-subtext" id="plianceContexto">
+                Por ahora no ves las recompensas reales. Solo sentirás aprobación o desaprobación.
+              </p>
+              <div class="aprobacion-display" id="plianceAprobacion">
+                <!-- Aquí se muestra ✔️ o ❌ y su significado -->
+              </div>
+            </div>
+
+            <!-- Opciones de caminos -->
+            <div class="big-card caminos-card">
+              <div class="card-heading">Elige tu camino</div>
+              <p class="card-text">
+                Haz clic en A, B o C para elegir tu camino en este ensayo.
+              </p>
+              <div class="caminos-row">
+                <button class="camino-btn" data-camino="A">Camino A</button>
+                <button class="camino-btn camino-B" data-camino="B">Camino B</button>
+                <button class="camino-btn" data-camino="C">Camino C</button>
+              </div>
+
+              <div class="resultado-real" id="plianceResultadoReal">
+                <!-- Aquí se mostrará el resultado real de los caminos en ciertas fases -->
+              </div>
+
+              <div class="phase-actions secondary-actions">
+                <button class="btn-primary" id="btnPlianceSiguiente" disabled>
+                  Siguiente ensayo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p class="panel-text emphasis" id="plianceMensajeFase">
+            En los primeros ensayos, se establece un historial de obediencia.
+          </p>
+
+          <!-- CIERRE PLIANCE -->
+          <div class="cierrefase-card" id="plianceCierre" style="display:none;">
+            <h3 class="cierrefase-title">Cierre del Modo Pliance</h3>
+            <p class="cierrefase-text">
+              Has completado los 8 ensayos. Ahora, reflexiona sobre qué controló tu conducta.
+            </p>
+
+            <div class="question-card">
+              <p class="question-title">
+                ¿Por qué seguiste eligiendo el Camino B la mayoría de las veces?
+              </p>
+              <div class="question-options">
+                <button class="question-option" data-correct="true" id="plianceResp1">
+                  Para obtener aprobación / evitar desaprobación
+                </button>
+                <button class="question-option" data-correct="false">
+                  Porque objetivamente era el mejor camino
+                </button>
+                <button class="question-option" data-correct="false">
+                  Porque tenía más valor personal para mí
+                </button>
+              </div>
+              <p class="question-feedback" id="plianceFeedback"></p>
+            </div>
+
+            <div class="teoria-card" id="plianceTeoria" style="display:none;">
+              <p>
+                El pliance es un tipo de control por reglas donde la conducta se guía
+                principalmente por la aprobación o desaprobación social, más que por
+                las consecuencias naturales del ambiente. Clínicamente, se ve en
+                consultantes que necesitan saber “qué quiere el otro” antes de actuar,
+                incluso cuando eso empeora sus resultados.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- MODO TRACKING                                         -->
+      <!-- ===================================================== -->
+      <section class="lab-panel" id="panel-tracking">
+        <div class="panel-inner">
+          <div class="panel-header-row">
+            <button class="btn-ghost small" id="volverInicioTracking">← Volver al menú</button>
+            <div class="modo-title-pill tracking-pill">🟢 Modo Tracking</div>
+          </div>
+
+          <h2 class="panel-title">Seguir lo que realmente funciona</h2>
+          <p class="panel-text">
+            En este modo no hay figura de autoridad que te ordene. Tu tarea es
+            descubrir, por ensayo y error, qué camino suele funcionar mejor y
+            ajustar tus decisiones a las contingencias reales.
+          </p>
+
+          <div class="status-row">
+            <div class="status-pill">
+              Ensayo <span id="trackingEnsayoNum">1</span> de 8
+            </div>
+            <div class="status-pill">
+              Puntos acumulados: <span id="trackingPuntos">0</span>
+            </div>
+          </div>
+
+          <div class="card-grid-2">
+            <div class="big-card instructor-card tracking-info">
+              <div class="card-heading">Información del ambiente</div>
+              <p class="card-text" id="trackingMensajeAmbiente">
+                Explora libremente: elige A, B o C y observa cuántos puntos obtienes.
+              </p>
+              <p class="card-subtext" id="trackingReglaVisible">
+                Más adelante aparecerá una regla descriptiva sobre cuál camino suele funcionar mejor.
+              </p>
+            </div>
+
+            <div class="big-card caminos-card">
+              <div class="card-heading">Elige tu camino</div>
+              <p class="card-text">
+                Haz clic en A, B o C para ver cuántos puntos obtienes en este ensayo.
+              </p>
+              <div class="caminos-row">
+                <button class="camino-btn" data-camino="A" data-modo="tracking">Camino A</button>
+                <button class="camino-btn" data-camino="B" data-modo="tracking">Camino B</button>
+                <button class="camino-btn" data-camino="C" data-modo="tracking">Camino C</button>
+              </div>
+
+              <div class="resultado-real" id="trackingResultado">
+                <!-- Mostrar puntos obtenidos y patrón -->
+              </div>
+
+              <div class="phase-actions secondary-actions">
+                <button class="btn-primary" id="btnTrackingSiguiente" disabled>
+                  Siguiente ensayo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p class="panel-text emphasis" id="trackingMensajeFase">
+            Al principio exploras; luego verás una regla que describe qué camino suele funcionar mejor.
+          </p>
+
+          <!-- CIERRE TRACKING -->
+          <div class="cierrefase-card" id="trackingCierre" style="display:none;">
+            <h3 class="cierrefase-title">Cierre del Modo Tracking</h3>
+            <p class="cierrefase-text">
+              Has completado los 8 ensayos. Observa qué guió realmente tus decisiones.
+            </p>
+
+            <div class="question-card">
+              <p class="question-title">
+                ¿Por qué elegiste mayormente el mismo camino cuando ya tenías información suficiente?
+              </p>
+              <div class="question-options">
+                <button class="question-option" data-correct="false">
+                  Porque alguien me lo ordenó explícitamente
+                </button>
+                <button class="question-option" data-correct="true" id="trackingResp1">
+                  Porque observé que solía funcionar mejor en el ambiente
+                </button>
+                <button class="question-option" data-correct="false">
+                  Porque era el más valioso emocionalmente para mí
+                </button>
+              </div>
+              <p class="question-feedback" id="trackingFeedback"></p>
+            </div>
+
+            <div class="teoria-card" id="trackingTeoria" style="display:none;">
+              <p>
+                El tracking ocurre cuando las reglas describen cómo funcionan las
+                contingencias y la conducta se ajusta a esa correspondencia. En clínica,
+                se observa cuando el consultante aprende de la experiencia y modifica
+                sus patrones al ver qué le acerca o aleja de resultados valiosos,
+                más allá de la aprobación de otros.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- MODO AUGMENTING                                       -->
+      <!-- ===================================================== -->
+      <section class="lab-panel" id="panel-augmenting">
+        <div class="panel-inner">
+          <div class="panel-header-row">
+            <button class="btn-ghost small" id="volverInicioAugmenting">← Volver al menú</button>
+            <div class="modo-title-pill augmenting-pill">🟣 Modo Augmenting</div>
+          </div>
+
+          <h2 class="panel-title">Cuando el valor pesa más que los puntos</h2>
+          <p class="panel-text">
+            En este modo, las reglas no solo describen lo que ocurre, sino que
+            cambian el valor de las consecuencias. Un camino puede volverse más
+            importante para ti, incluso si da menos puntos.
+          </p>
+
+          <div class="status-row">
+            <div class="status-pill">
+              Ensayo <span id="augmentingEnsayoNum">1</span> de 8
+            </div>
+            <div class="status-pill">
+              Puntos acumulados: <span id="augmentingPuntos">0</span>
+            </div>
+          </div>
+
+          <div class="card-grid-2">
+            <div class="big-card instructor-card augmenting-info">
+              <div class="card-heading">Sentido y valor</div>
+              <p class="card-text" id="augmentingMensaje">
+                Al principio, todos los caminos dan lo mismo. Luego, uno de ellos
+                adquiere un significado especial, aunque no dé más puntos.
+              </p>
+              <p class="card-subtext" id="augmentingValorVisible">
+                Observa cuándo empiezas a elegir por valor, no solo por ganancia inmediata.
+              </p>
+            </div>
+
+            <div class="big-card caminos-card">
+              <div class="card-heading">Elige tu camino</div>
+              <p class="card-text">
+                Haz clic en A, B o C para ver cuántos puntos obtienes y qué sentido
+                tiene tu elección.
+              </p>
+              <div class="caminos-row">
+                <button class="camino-btn" data-camino="A" data-modo="augmenting">Camino A</button>
+                <button class="camino-btn" data-camino="B" data-modo="augmenting">Camino B</button>
+                <button class="camino-btn" data-camino="C" data-modo="augmenting">Camino C</button>
+              </div>
+
+              <div class="resultado-real" id="augmentingResultado">
+                <!-- Mostrar puntos y sentido valioso -->
+              </div>
+
+              <div class="phase-actions secondary-actions">
+                <button class="btn-primary" id="btnAugmentingSiguiente" disabled>
+                  Siguiente ensayo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p class="panel-text emphasis" id="augmentingMensajeFase">
+            Más adelante, un camino tendrá menos puntos pero más sentido. Observa qué pesa más para ti.
+          </p>
+
+          <!-- CIERRE AUGMENTING -->
+          <div class="cierrefase-card" id="augmentingCierre" style="display:none;">
+            <h3 class="cierrefase-title">Cierre del Modo Augmenting</h3>
+            <p class="cierrefase-text">
+              Has completado los 8 ensayos. Algunas elecciones quizá te dieron menos
+              puntos, pero más coherencia con algo importante.
+            </p>
+
+            <div class="question-card">
+              <p class="question-title">
+                ¿Por qué elegiste ese camino aunque te diera menos puntos?
+              </p>
+              <div class="question-options">
+                <button class="question-option" data-correct="false">
+                  Porque alguien me obligó
+                </button>
+                <button class="question-option" data-correct="false">
+                  Porque era siempre el más efectivo en puntos
+                </button>
+                <button class="question-option" data-correct="true" id="augmentingResp1">
+                  Porque tenía más valor para mí
+                </button>
+              </div>
+              <p class="question-feedback" id="augmentingFeedback"></p>
+            </div>
+
+            <div class="teoria-card" id="augmentingTeoria" style="display:none;">
+              <p>
+                En el augmenting, las reglas alteran el valor motivacional de las
+                consecuencias: un camino se vuelve más importante porque conecta con
+                algo significativo, incluso cuando implica costo. En clínica, esto
+                está vinculado al trabajo con valores: conductas mantenidas por un
+                sentido elegido, no por comodidad inmediata.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- JS del laboratorio -->
+  <script defer src="js/laboratorio-reglas.js"></script>
+</body>
+</html>
