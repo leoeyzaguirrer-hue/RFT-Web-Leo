@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · Coherencia Niveles 1 y 2</title>
+
+  <!-- Estilos del laboratorio -->
+  <link rel="stylesheet" href="css/laboratorio-coherencia.css" />
+</head>
+<body>
+
+  <div class="lab-shell">
+    <!-- CABECERA -->
+    <header class="lab-header">
+      <div class="lab-subtitle">Laboratorio RFT · Coherencia Verbal</div>
+      <h1 class="lab-title">El Sistema de Coherencia · Niveles 1 y 2</h1>
+      <p class="lab-description">
+        Observa cómo una red verbal se protege a sí misma (Nivel 1) y cómo el yo narrativo
+        genera reglas para mantenerla (Nivel 2), incluso frente a experiencias que podrían
+        contradecirla.
+      </p>
+    </header>
+
+    <!-- CONTENEDOR GENERAL -->
+    <main class="lab-main">
+
+      <!-- ===================================================== -->
+      <!-- FASE 1 · RED CRISTALIZADA NIVEL 1                    -->
+      <!-- ===================================================== -->
+      <section class="lab-phase active" data-phase="1">
+        <div class="phase-inner">
+          <h2 class="phase-title">Nivel 1 · El Sistema de Coherencia</h2>
+          <p class="phase-text">
+            Empezamos con una red verbal ya cristalizada. No estamos analizando si es verdadera,
+            sino cómo se mantiene estable: todas las partes se confirman mutuamente.
+          </p>
+
+          <div class="network-wrapper">
+            <div class="network-card">
+              <div class="network-node node-top">
+                <div class="node-text">SOY INÚTIL</div>
+              </div>
+              <div class="network-node node-left">
+                <div class="node-text">SIEMPRE FALLO</div>
+              </div>
+              <div class="network-node node-right">
+                <div class="node-text">NADIE ME QUIERE</div>
+              </div>
+              <div class="network-center-label">
+                Red verbal coherente: todo se confirma.
+              </div>
+            </div>
+          </div>
+
+          <p class="phase-text emphasis">
+            Esta red es coherente: se sostiene sola, aunque destruya la vida del consultante.
+          </p>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF1Next">
+              Comenzar Nivel 1 · Nueva información
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- FASE 2 · ABSORCIÓN COHERENTE NIVEL 1                 -->
+      <!-- ===================================================== -->
+      <section class="lab-phase" data-phase="2">
+        <div class="phase-inner">
+          <h2 class="phase-title">Nivel 1 · La red absorbe la nueva información</h2>
+          <p class="phase-text">
+            Ahora vamos a introducir experiencias que parecen contradecir la red. Tu tarea es
+            enviar cada experiencia al sistema y observar cómo la red se defiende para seguir
+            siendo la misma.
+          </p>
+
+          <div class="coh-layout">
+            <!-- Red fija -->
+            <div class="coh-network-card">
+              <div class="network-card small">
+                <div class="network-node node-top">
+                  <div class="node-text">SOY INÚTIL</div>
+                </div>
+                <div class="network-node node-left">
+                  <div class="node-text">SIEMPRE FALLO</div>
+                </div>
+                <div class="network-node node-right">
+                  <div class="node-text">NADIE ME QUIERE</div>
+                </div>
+              </div>
+
+              <div class="coh-integrated">
+                <div class="coh-integrated-title">
+                  Experiencias que ya fueron absorbidas por la red:
+                </div>
+                <ul class="coh-integrated-list" id="listaIntegradas">
+                  <!-- Se añaden reinterpretaciones aquí -->
+                </ul>
+              </div>
+            </div>
+
+            <!-- Panel de nueva experiencia -->
+            <div class="coh-newinfo-card">
+              <div class="coh-new-title">
+                Nueva información que llega a la persona:
+              </div>
+              <div class="coh-new-experience" id="textoNuevaExperiencia">
+                <!-- Texto de experiencia positiva -->
+              </div>
+              <p class="coh-instruction">
+                1. Haz clic en “Nueva experiencia” para ver un evento. <br />
+                2. Luego haz clic en “Enviar a la red” para observar cómo se mantiene la coherencia.
+              </p>
+
+              <div class="coh-reinterpret-card" id="cohReinterpretCard">
+                <div class="coh-reinterp-label">Reinterpretación coherente:</div>
+                <div class="coh-reinterp-text" id="textoReinterpretacion"></div>
+              </div>
+
+              <div class="phase-actions secondary-actions">
+                <button class="btn-secondary" id="btnNuevaExperiencia">
+                  Nueva experiencia
+                </button>
+                <button class="btn-primary" id="btnEnviarRed" disabled>
+                  Enviar a la red
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p class="phase-text emphasis" id="cohNivel1Estado">
+            Observa cómo la red crece, pero no cambia.
+          </p>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF2Next" disabled>
+              Pasar a la pregunta funcional del Nivel 1
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- FASE 3 · PREGUNTA FUNCIONAL NIVEL 1                  -->
+      <!-- ===================================================== -->
+      <section class="lab-phase" data-phase="3">
+        <div class="phase-inner">
+          <h2 class="phase-title">Nivel 1 · ¿Qué hace realmente la coherencia?</h2>
+          <p class="phase-text">
+            Ya has visto que la red no se rompe cuando entra nueva información, sino que la
+            reacomoda para seguir siendo igual. Ahora responde:
+          </p>
+
+          <div class="question-card">
+            <p class="question-title">
+              ¿Qué ocurrió con la nueva información que entró en el sistema?
+            </p>
+            <div class="question-options">
+              <button class="question-option" data-correct="false">
+                La red cambió su contenido central
+              </button>
+              <button class="question-option" data-correct="false">
+                La red se amplió en direcciones contradictorias
+              </button>
+              <button class="question-option" data-correct="true" id="optNivel1Correcta">
+                La red se defendió para seguir siendo la misma
+              </button>
+            </div>
+            <p class="question-feedback" id="feedbackNivel1"></p>
+          </div>
+
+          <div class="teoria-card" id="teoriaNivel1" style="display:none;">
+            <p>
+              La coherencia es el proceso por el cual una red verbal mantiene su estabilidad
+              funcional reorganizando cualquier nueva información para que no contradiga su
+              estructura previa. No se trata de verdad lógica, sino de consistencia relacional.
+              En psicopatología, la coherencia permite que narrativas rígidas del yo se mantengan
+              incluso frente a evidencia contraria, sosteniendo el sufrimiento psicológico.
+            </p>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnIrNivel2" disabled>
+              Pasar al Nivel 2 · El Arquitecto de la Red
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- FASE 4 · REACTIVACIÓN + YO NARRATIVO (NIVEL 2)       -->
+      <!-- ===================================================== -->
+      <section class="lab-phase" data-phase="4">
+        <div class="phase-inner">
+          <h2 class="phase-title">Nivel 2 · El Arquitecto de la Red</h2>
+          <p class="phase-text">
+            Ahora la red coherente no solo se defiende reinterpretando experiencias. Entra en
+            juego un yo narrativo que observa, explica y genera reglas para mantener el sistema
+            estable a largo plazo.
+          </p>
+
+          <div class="network-wrapper">
+            <div class="network-card">
+              <div class="yo-node">
+                <div class="yo-label">YO OBSERVO<br />Y JUSTIFICO</div>
+              </div>
+              <div class="network-node node-top">
+                <div class="node-text">SOY INÚTIL</div>
+              </div>
+              <div class="network-node node-left">
+                <div class="node-text">SIEMPRE FALLO</div>
+              </div>
+              <div class="network-node node-right">
+                <div class="node-text">NADIE ME QUIERE</div>
+              </div>
+              <div class="network-center-label">
+                La red coherente ahora tiene un arquitecto: el yo narrativo.
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF4Next">
+              Continuar · Experiencia ambigua
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- FASE 5 · EXPERIENCIA AMBIGUA + ELECCIÓN DEL YO       -->
+      <!-- ===================================================== -->
+      <section class="lab-phase" data-phase="5">
+        <div class="phase-inner">
+          <h2 class="phase-title">Nivel 2 · El yo explica para mantener la coherencia</h2>
+          <p class="phase-text">
+            Esta vez no llega una experiencia claramente positiva, sino una situación ambigua.
+            El sistema necesita una explicación. El yo narrativo elegirá cómo interpretarla.
+          </p>
+
+          <div class="nivel2-layout">
+            <div class="coh-network-card">
+              <div class="network-card small">
+                <div class="yo-node small" id="yoNodeNivel2">
+                  <div class="yo-label">YO OBSERVO<br />Y JUSTIFICO</div>
+                </div>
+                <div class="network-node node-top">
+                  <div class="node-text">SOY INÚTIL</div>
+                </div>
+                <div class="network-node node-left">
+                  <div class="node-text">SIEMPRE FALLO</div>
+                </div>
+                <div class="network-node node-right">
+                  <div class="node-text">NADIE ME QUIERE</div>
+                </div>
+              </div>
+
+              <div class="regla-card" id="reglaNivel2" style="display:none;">
+                <div class="regla-label">Autorregla generada:</div>
+                <div class="regla-text" id="textoAutorregla">
+                  No hay que confiar cuando algo parece tranquilo.
+                </div>
+              </div>
+            </div>
+
+            <div class="nivel2-panel">
+              <div class="coh-new-title">
+                Experiencia ambigua:
+              </div>
+              <div class="coh-new-experience ambigua" id="textoExperienciaAmbigua">
+                Hoy no salió ni bien ni mal.
+              </div>
+
+              <div class="ventana-eleccion" id="ventanaEleccion">
+                <p class="ventana-texto">
+                  El sistema necesita una explicación para mantener la coherencia. <br />
+                  ¿Cómo va a interpretar el yo esta experiencia?
+                </p>
+                <div class="ventana-opciones">
+                  <button class="ventana-opcion" data-opcion="mejora">
+                    Esto demuestra que estoy mejorando
+                  </button>
+                  <button class="ventana-opcion" data-opcion="coherente" id="opcionCoherente">
+                    Esto confirma que en cualquier momento todo puede salir mal
+                  </button>
+                  <button class="ventana-opcion" data-opcion="irrelevante">
+                    Esto no tiene nada que ver conmigo
+                  </button>
+                </div>
+                <p class="ventana-feedback" id="feedbackEleccion"></p>
+                <div class="phase-actions secondary-actions">
+                  <button class="btn-primary" id="btnConfirmarEleccion">
+                    Confirmar interpretación
+                  </button>
+                </div>
+              </div>
+
+              <div class="coh-reinterpret-card ambigua" id="cohReinterpretNivel2" style="display:none;">
+                <div class="coh-reinterp-label">Interpretación elegida por el sistema:</div>
+                <div class="coh-reinterp-text" id="textoReinterpNivel2">
+                  Esto era solo una calma antes del fracaso.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF5Next" disabled>
+              Continuar · Pregunta funcional del Nivel 2
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- FASE 6 · PREGUNTA FUNCIONAL NIVEL 2                  -->
+      <!-- ===================================================== -->
+      <section class="lab-phase" data-phase="6">
+        <div class="phase-inner">
+          <h2 class="phase-title">Nivel 2 · ¿Qué está ocurriendo ahora en el sistema?</h2>
+          <p class="phase-text">
+            En este nivel, la red no solo se defiende pasivamente. Ahora el yo narrativo
+            organiza la experiencia mediante reglas que aseguran que nada rompa la coherencia.
+          </p>
+
+          <div class="question-card">
+            <p class="question-title">
+              ¿Qué está ocurriendo ahora en el sistema de coherencia?
+            </p>
+            <div class="question-options">
+              <button class="question-option" data-correct="false">
+                La red solo se defiende pasivamente
+              </button>
+              <button class="question-option" data-correct="true" id="optNivel2Correcta">
+                El propio sistema genera reglas para mantenerse
+              </button>
+              <button class="question-option" data-correct="false">
+                La experiencia está cambiando el sistema en profundidad
+              </button>
+            </div>
+            <p class="question-feedback" id="feedbackNivel2"></p>
+          </div>
+
+          <div class="teoria-card" id="teoriaNivel2" style="display:none;">
+            <p>
+              En el segundo nivel de coherencia, la red verbal ya no solo se protege
+              reinterpretando la información, sino que genera activamente autorreglas que
+              previenen futuras contradicciones. El yo narrativo funciona como un regulador
+              que organiza la experiencia en función de mantener la estabilidad del sistema.
+              Aquí se consolida la coherencia patológica como un patrón de control verbal
+              de largo plazo.
+            </p>
+          </div>
+
+          <div class="implicaciones-card" id="implicacionesNivel2" style="display:none;">
+            <ul>
+              <li>El sistema ya no depende solo de las experiencias.</li>
+              <li>El yo produce reglas para anticiparse al cambio.</li>
+              <li>La red se vuelve preventiva, no solo reactiva.</li>
+              <li>La flexibilidad psicológica queda aún más bloqueada.</li>
+              <li>Las autorreglas gobiernan la conducta a largo plazo.</li>
+            </ul>
+            <p class="implicaciones-cierre">
+              Aquí la coherencia deja de ser solo estabilidad: se convierte en gobierno del comportamiento.
+            </p>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-ghost" id="btnReiniciarCoherencia">
+              Reiniciar laboratorio
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- JS del laboratorio -->
+  <script defer src="js/laboratorio-coherencia.js"></script>
+</body>
+</html>
