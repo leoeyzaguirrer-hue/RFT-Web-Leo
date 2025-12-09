@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · Formación de Clases Relacionales</title>
+
+  <!-- Estilos del laboratorio -->
+  <link rel="stylesheet" href="css/laboratorio-rft.css" />
+</head>
+<body>
+
+  <div class="lab-shell">
+    <!-- CABECERA -->
+    <header class="lab-header">
+      <div class="lab-subtitle">Laboratorio RFT · Simulador visual</div>
+      <h1 class="lab-title">Formación de clases bajo distintas claves relacionales</h1>
+      <p class="lab-description">
+        Aquí no importa qué son los estímulos. Importa cómo aprendes a relacionarlos bajo contextos relacionales distintos.
+      </p>
+    </header>
+
+    <!-- CONTENEDOR GENERAL DE FASES -->
+    <main class="lab-main">
+
+      <!-- ========================= -->
+      <!-- FASE 1 · PRESENTACIÓN ABC -->
+      <!-- ========================= -->
+      <section class="lab-phase active" data-phase="1">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 1 · Presentación de estímulos</h2>
+          <p class="phase-text">
+            Primero observa simplemente los estímulos. No hay todavía una clave relacional: solo tres elementos que podrían
+            participar en muchas redes distintas.
+          </p>
+
+          <div class="stim-row">
+            <div class="stim-card">
+              <div class="stim-label">A</div>
+              <div class="stim-icon">🔶</div>
+            </div>
+            <div class="stim-card">
+              <div class="stim-label">B</div>
+              <div class="stim-icon">🟦</div>
+            </div>
+            <div class="stim-card">
+              <div class="stim-label">C</div>
+              <div class="stim-icon">🔴</div>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnFase1Continuar">
+              Continuar a vinculación mutua
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================== -->
+      <!-- FASE 2 · VINCULACIÓN MUTUA (=)     -->
+      <!-- =================================== -->
+      <section class="lab-phase" data-phase="2">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 2 · Coordinación: “Es igual que”</h2>
+          <p class="phase-text">
+            Ahora se introduce una clave relacional específica. No cambian los estímulos, cambia el contexto que indica
+            cómo deben ser relacionados.
+          </p>
+
+          <div class="clave-banner">
+            <div class="clave-label">Información clave</div>
+            <div class="clave-card clave-card-equal">
+              <span class="clave-title">Vinculación mutua</span>
+              <span class="clave-subtitle">Clave relacional: <strong>“Es igual que (=)”</strong></span>
+            </div>
+          </div>
+
+          <div class="mutual-grid">
+            <!-- BLOQUE A = B -->
+            <div class="rel-card" id="bloqueAB">
+              <div class="rel-header">Relación entrenada 1</div>
+              <div class="rel-content">
+                <div class="rel-line rel-letters">A = B</div>
+                <div class="rel-line rel-icons">🔶 = 🟦</div>
+              </div>
+              <button class="btn-secondary" id="btnABNext">Siguiente</button>
+            </div>
+
+            <!-- BLOQUE B = C (oculto al inicio) -->
+            <div class="rel-card rel-card-disabled" id="bloqueBC">
+              <div class="rel-header">Relación entrenada 2</div>
+              <div class="rel-content">
+                <div class="rel-line rel-letters">B = C</div>
+                <div class="rel-line rel-icons">🟦 = 🔴</div>
+              </div>
+              <button class="btn-secondary" id="btnBCNext" disabled>Siguiente</button>
+            </div>
+          </div>
+
+          <!-- VINCULACIÓN COMBINATORIA (oculta al inicio) -->
+          <div class="comb-section" id="combIgualdad">
+            <h3 class="comb-title">Vinculación combinatoria</h3>
+            <p class="comb-text">
+              A partir de haber aprendido que A = B y B = C, el organismo puede comportarse como si A = C, aun sin haber
+              sido entrenado directamente.
+            </p>
+            <div class="rel-card comb-card">
+              <div class="rel-header">Relación derivada</div>
+              <div class="rel-content">
+                <div class="rel-line rel-letters">A = C</div>
+                <div class="rel-line rel-icons">🔶 = 🔴</div>
+              </div>
+            </div>
+            <div class="phase-actions">
+              <button class="btn-primary" id="btnIrMenuClaves">
+                Mirar otras claves relacionales
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================== -->
+      <!-- FASE 3 · MENÚ DE CLAVES RELACIONALES -->
+      <!-- =================================== -->
+      <section class="lab-phase" data-phase="3">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 3 · Prueba otras claves relacionales</h2>
+          <p class="phase-text">
+            Mantendremos los mismos estímulos A, B y C, pero cambiaremos la clave relacional. Observa cómo una misma
+            tríada puede organizarse en redes muy diferentes según el contexto.
+          </p>
+
+          <div class="clave-menu">
+            <button class="menu-btn" data-clave="mayor">
+              1. Es mayor que / menor que
+            </button>
+            <button class="menu-btn" data-clave="temporal">
+              2. Temporal
+            </button>
+            <button class="menu-btn" data-clave="jerarquia">
+              3. Jerarquía
+            </button>
+            <button class="menu-btn" data-clave="comparacion">
+              4. Comparación
+            </button>
+            <button class="menu-btn" data-clave="causal">
+              5. Causal (causa – efecto)
+            </button>
+            <button class="menu-btn" data-clave="condicional">
+              6. Condicional (si – entonces)
+            </button>
+            <button class="menu-btn" data-clave="valorativo">
+              7. Valorativo (mejor que / peor que)
+            </button>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-ghost" id="btnVolverIgualdad">
+              Volver a la clave “Es igual que”
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================== -->
+      <!-- FASE 4 · DESPLIEGUE DE CADA CLAVE   -->
+      <!-- =================================== -->
+      <section class="lab-phase" data-phase="4">
+        <div class="phase-inner">
+          <h2 class="phase-title" id="fase4Titulo">
+            Fase 4 · Otras claves relacionales
+          </h2>
+          <p class="phase-text" id="fase4Intro">
+            Selecciona una clave relacional para ver cómo reorganiza la misma tríada A–B–C.
+          </p>
+
+          <!-- PASO 1 · INTRODUCCIÓN DE LA CLAVE -->
+          <div class="fase4-step" data-step="1">
+            <div class="clave-banner">
+              <div class="clave-label">Clave relacional activa</div>
+              <div class="clave-card" id="fase4ClaveCard">
+                <span class="clave-title" id="fase4ClaveNombre">Es mayor que / menor que</span>
+                <span class="clave-subtitle" id="fase4ClaveSubtitulo">
+                  Observa primero los estímulos sin relaciones explícitas.
+                </span>
+              </div>
+            </div>
+
+            <div class="stim-row stim-row-small">
+              <div class="stim-card">
+                <div class="stim-label">A</div>
+                <div class="stim-icon">🔶</div>
+              </div>
+              <div class="stim-card">
+                <div class="stim-label">B</div>
+                <div class="stim-icon">🟦</div>
+              </div>
+              <div class="stim-card">
+                <div class="stim-label">C</div>
+                <div class="stim-icon">🔴</div>
+              </div>
+            </div>
+
+            <div class="phase-actions">
+              <button class="btn-primary" id="btnFase4Comenzar">
+                Comenzar con esta clave
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 2 · RELACIÓN A–B -->
+          <div class="fase4-step" data-step="2">
+            <div class="rel-card">
+              <div class="rel-header" id="fase4ABHeader">Relación entrenada 1</div>
+              <div class="rel-content">
+                <div class="rel-line rel-letters" id="fase4ABLetras">A &gt; B</div>
+                <div class="rel-line rel-icons" id="fase4ABIconos">🔶 &gt; 🟦</div>
+              </div>
+            </div>
+            <div class="phase-actions">
+              <button class="btn-secondary" id="btnFase4ABNext">
+                Continuar
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 3 · RELACIÓN B–C -->
+          <div class="fase4-step" data-step="3">
+            <div class="rel-card">
+              <div class="rel-header" id="fase4BCHeader">Relación entrenada 2</div>
+              <div class="rel-content">
+                <div class="rel-line rel-letters" id="fase4BCLetras">B &gt; C</div>
+                <div class="rel-line rel-icons" id="fase4BCIconos">🟦 &gt; 🔴</div>
+              </div>
+            </div>
+            <div class="phase-actions">
+              <button class="btn-secondary" id="btnFase4BCNext">
+                Continuar
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 4 · COMBINATORIA A–C -->
+          <div class="fase4-step" data-step="4">
+            <div class="comb-section">
+              <h3 class="comb-title">Vinculación combinatoria</h3>
+              <p class="comb-text" id="fase4CombTexto">
+                Si se ha aprendido que A se relaciona con B y B con C bajo esta clave, el organismo puede derivar cómo
+                se relacionan A y C entre sí.
+              </p>
+              <div class="rel-card comb-card">
+                <div class="rel-header">Relación derivada bajo esta clave</div>
+                <div class="rel-content">
+                  <div class="rel-line rel-letters" id="fase4ACLetras">A &gt; C</div>
+                  <div class="rel-line rel-icons" id="fase4ACIconos">🔶 &gt; 🔴</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-actions phase-actions-multi">
+              <button class="btn-primary" id="btnElegirOtraClave">
+                Elegir otra clave relacional
+              </button>
+              <button class="btn-ghost" id="btnReiniciarLab">
+                Reiniciar laboratorio desde Fase 1
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Lógica del laboratorio -->
+  <script defer src="js/laboratorio-rft.js"></script>
+</body>
+</html>
