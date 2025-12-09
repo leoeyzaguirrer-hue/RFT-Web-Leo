@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Laboratorio · Contexto Relacional</title>
+  <link rel="stylesheet" href="css/contexto-relacional.css" />
+</head>
+<body>
+
+<div class="lab-root">
+
+  <!-- PANTALLA 1 · BLOQUES -->
+  <section id="pantallaBloques" class="pantalla activa">
+    <h1>Estos estímulos representan la MISMA dimensión en distintos formatos</h1>
+
+    <div class="bloques-grid">
+      <div class="bloque-card">
+        <h2>Bloque A · Palabras</h2>
+        <div class="item">PEQUEÑO</div>
+        <div class="item">MEDIANO</div>
+        <div class="item">GRANDE</div>
+      </div>
+
+      <div class="bloque-card">
+        <h2>Bloque B · Imágenes</h2>
+        <div class="item">🐭</div>
+        <div class="item">🐶</div>
+        <div class="item">🐘</div>
+      </div>
+
+      <div class="bloque-card">
+        <h2>Bloque C · Símbolos</h2>
+        <div class="item">●</div>
+        <div class="item">■</div>
+        <div class="item">★</div>
+      </div>
+    </div>
+
+    <button class="btn-premium" onclick="irAClave()">CONTINUAR</button>
+  </section>
+
+  <!-- PANTALLA 2 · CLAVE RELACIONAL -->
+  <section id="pantallaClave" class="pantalla">
+    <div class="clave-central">
+      <div id="textoClave" class="texto-clave"></div>
+      <div id="simboloClave" class="simbolo-clave"></div>
+    </div>
+    <button class="btn-premium" onclick="iniciarEnsayos()">INICIAR ENSAYOS</button>
+  </section>
+
+  <!-- PANTALLA 3 · ENSAYOS -->
+  <section id="pantallaEnsayos" class="pantalla">
+    <h2 id="ensayoInfo"></h2>
+
+    <div class="panel-muestra">
+      <div id="muestra" class="tarjeta-muestra"></div>
+    </div>
+
+    <div id="opciones" class="opciones-grid"></div>
+    <div id="feedback" class="feedback">—</div>
+  </section>
+
+  <!-- PANTALLA FINAL -->
+  <section id="pantallaFinal" class="pantalla">
+    <div class="cartel-final">
+      <strong>Contexto Relacional (C. Rel):</strong> es el conjunto de claves verbales o
+      situacionales que especifican qué tipo de relación debe establecer el organismo
+      entre estímulos (por ejemplo: “es igual que”, “más que”, “opuesto a”), determinando
+      cómo deben ser relacionados, independientemente de sus propiedades físicas.
+    </div>
+  </section>
+
+</div>
+
+<script src="js/contexto-relacional.js"></script>
+</body>
+</html>
