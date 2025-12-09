@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · Transformación de Funciones</title>
+
+  <!-- Estilos del laboratorio de transformación -->
+  <link rel="stylesheet" href="css/laboratorio-transformacion.css" />
+</head>
+<body>
+
+  <div class="lab-shell">
+    <!-- CABECERA -->
+    <header class="lab-header">
+      <div class="lab-subtitle">Laboratorio RFT · Transformación de funciones</div>
+      <h1 class="lab-title">Cómo ZATRAX adquiere las funciones de la naranja</h1>
+      <p class="lab-description">
+        Observa cómo un estímulo arbitrario, ZATRAX, termina evocando funciones sensoriales y motivacionales
+        sin contacto directo, solo por su relación con NARANJA.
+      </p>
+    </header>
+
+    <!-- CONTENEDOR GENERAL DE FASES -->
+    <main class="lab-main">
+
+      <!-- ========================= -->
+      <!-- FASE 1 · PENSAMIENTO INICIAL -->
+      <!-- ========================= -->
+      <section class="lab-phase active" data-phase="1">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 1 · Antecedente verbal</h2>
+          <p class="phase-text">
+            La persona del ejemplo ya sabe qué es un ZATRAX, pero tú aún no. Solo ves su conducta verbal:
+            un deseo que todavía no puedes interpretar del todo.
+          </p>
+
+          <div class="persona-wrapper">
+            <div class="persona-card">
+              <div class="persona-emoji">🧍‍♂️</div>
+              <div class="persona-thought">
+                <span class="thought-cloud">💭</span>
+                <span class="thought-text">“Quiero un ZATRAX.”</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF1Next">
+              Siguiente · Explorar funciones de NARANJA
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= -->
+      <!-- FASE 2 · FUNCIONES DE NARANJA -->
+      <!-- ========================= -->
+      <section class="lab-phase" data-phase="2">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 2 · ¿Qué hace una naranja?</h2>
+          <p class="phase-text">
+            Antes de hablar de ZATRAX, aclaremos las funciones de la NARANJA. Aquí se construye el
+            “paquete funcional” que después podrá ser transformado.
+          </p>
+
+          <div class="orange-layout">
+            <!-- NARANJA A LA IZQUIERDA -->
+            <div class="orange-card">
+              <div class="orange-label">Estímulo no arbitrario</div>
+              <div class="orange-emoji">🍊</div>
+              <div class="orange-caption">NARANJA</div>
+            </div>
+
+            <!-- TARJETA DE FUNCIONES A LA DERECHA -->
+            <div class="func-card">
+              <div class="func-header">
+                <div class="func-title">¿Qué funciones tiene una naranja?</div>
+                <div class="func-subtitle">
+                  Haz clic en <strong>“Añadir función”</strong> para desplegar su repertorio funcional.
+                </div>
+              </div>
+
+              <ul class="func-list" id="listaFunciones">
+                <!-- Se irán añadiendo funciones aquí -->
+              </ul>
+
+              <div class="func-actions">
+                <button class="btn-secondary" id="btnAgregarFuncion">
+                  Añadir función
+                </button>
+                <button class="btn-primary btn-next-phase" id="btnF2Next" disabled>
+                  Siguiente · Presentar ZATRAX
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= -->
+      <!-- FASE 3 · ZATRAX ES NARANJA -->
+      <!-- ========================= -->
+      <section class="lab-phase" data-phase="3">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 3 · Coordinación: “Un ZATRAX es una NARANJA”</h2>
+          <p class="phase-text">
+            Ahora se establece una relación de coordinación: ZATRAX se nombra como NARANJA. No cambian
+            las frutas ni las sensaciones, cambia el contexto verbal que las organiza.
+          </p>
+
+          <div class="relacion-row">
+            <div class="persona-card persona-small">
+              <div class="persona-emoji">🧍‍♂️</div>
+              <div class="persona-thought">
+                <span class="thought-cloud">💭</span>
+                <span class="thought-text">“Oh, mira… un ZATRAX.”</span>
+              </div>
+            </div>
+
+            <div class="orange-card orange-small">
+              <div class="orange-label">Estímulo observado</div>
+              <div class="orange-emoji">🍊</div>
+              <div class="orange-caption">NARANJA</div>
+            </div>
+          </div>
+
+          <div class="coordinacion-card">
+            <div class="coord-text">
+              <span class="coord-main">“Un ZATRAX es una NARANJA.”</span>
+              <span class="coord-sub">
+                Se establece una clave de coordinación: ZATRAX se relaciona como igual a NARANJA.
+              </span>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF3Next">
+              Siguiente · Ver qué hace ZATRAX
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= -->
+      <!-- FASE 4 · TRANSFORMACIÓN DE FUNCIONES -->
+      <!-- ========================= -->
+      <section class="lab-phase" data-phase="4">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 4 · Transformación de funciones en ZATRAX</h2>
+          <p class="phase-text">
+            Sin haber estado en contacto directo con ZATRAX, el organismo puede responder como si
+            tuviera las mismas funciones que la NARANJA, por la relación de coordinación establecida.
+          </p>
+
+          <div class="zatrax-card">
+            <div class="zatrax-word">ZATRAX</div>
+            <div class="zatrax-subtitle">
+              Ha adquirido funciones de NARANJA.
+            </div>
+
+            <ul class="efectos-list" id="listaEfectos">
+              <!-- Se irán añadiendo efectos aquí -->
+            </ul>
+
+            <p class="explicacion-final" id="textoExplicacion">
+              ZATRAX adquirió estas funciones sin contacto directo, solo por su relación con NARANJA.
+            </p>
+
+            <div class="phase-actions">
+              <button class="btn-secondary" id="btnMostrarEfecto">
+                Mostrar siguiente efecto
+              </button>
+              <button class="btn-ghost" id="btnReiniciar">
+                Reiniciar laboratorio
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Lógica del laboratorio -->
+  <script defer src="js/laboratorio-transformacion.js"></script>
+</body>
+</html>
