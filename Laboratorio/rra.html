@@ -9,33 +9,56 @@
 
 <div class="lab-premium">
 
-  <h1 id="tituloClave">Clave Relacional: ES LO MISMO QUE</h1>
-  <h2 id="ensayoInfo">Ensayo 1 de 3</h2>
+  <!-- PANTALLA 0 · BLOQUES -->
+  <section id="pantallaBloques" class="pantalla activa">
+    <h1>Estos estímulos simbolizan lo mismo en distintos formatos</h1>
 
-  <!-- MUESTRA -->
-  <div class="panel-central">
-    <div id="muestra" class="estimulo-muestra">LUNA</div>
-  </div>
+    <div class="bloques">
+      <div class="bloque">
+        <h3>Bloque A</h3>
+        <p>LUNA<br>PERRO<br>MANZANA</p>
+      </div>
+      <div class="bloque">
+        <h3>Bloque B</h3>
+        <p>🌙<br>🐶<br>🍎</p>
+      </div>
+      <div class="bloque">
+        <h3>Bloque C</h3>
+        <p>■<br>▲<br>★</p>
+      </div>
+    </div>
 
-  <!-- OPCIONES -->
-  <div class="tarjetas">
-    <div class="tarjeta grande" data-id="LUNA">🌙</div>
-    <div class="tarjeta grande" data-id="PERRO">🐶</div>
-    <div class="tarjeta grande" data-id="MANZANA">🍎</div>
-  </div>
+    <button class="btn-premium" onclick="irAClave()">CONTINUAR</button>
+  </section>
 
-  <!-- CONTROL -->
-  <div class="panel-control">
+  <!-- PANTALLA CLAVE -->
+  <section id="pantallaClave" class="pantalla">
+    <h1 id="textoClave"></h1>
+    <div id="simboloClave" class="simbolo-clave"></div>
+    <button class="btn-premium" onclick="iniciarEnsayos()">INICIAR ENSAYOS</button>
+  </section>
+
+  <!-- PANTALLA ENSAYOS -->
+  <section id="pantallaEnsayos" class="pantalla">
+    <h2 id="ensayoInfo"></h2>
+
+    <div class="panel-central">
+      <div id="muestra" class="estimulo-muestra"></div>
+    </div>
+
+    <div class="tarjetas" id="opciones"></div>
     <div id="feedback" class="feedback">—</div>
-  </div>
+  </section>
 
-  <!-- TEORIA FINAL -->
-  <div id="teoriaFinal" class="teoria oculto">
-    <strong>Contexto Relacional (C. Rel):</strong> es el conjunto de claves verbales o situacionales
-    que especifican qué tipo de relación debe establecer el organismo entre estímulos
-    (por ejemplo: “es igual que”, “más que”, “opuesto a”), determinando cómo deben ser relacionados,
-    independientemente de sus propiedades físicas.
-  </div>
+  <!-- PANTALLA FINAL -->
+  <section id="pantallaFinal" class="pantalla">
+    <div class="teoria-final">
+      Contexto Relacional (C. Rel): es el conjunto de claves verbales o situacionales
+      que especifican qué tipo de relación debe establecer el organismo entre estímulos
+      (por ejemplo: “es igual que”, “más que”, “opuesto a”), determinando cómo deben ser
+      relacionados, independientemente de sus propiedades físicas.
+    </div>
+  </section>
 
 </div>
 
