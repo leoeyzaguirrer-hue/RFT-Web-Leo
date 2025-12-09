@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · Contexto Relacional y Funcional</title>
+
+  <!-- Estilos del laboratorio -->
+  <link rel="stylesheet" href="css/laboratorio-contextos.css" />
+</head>
+<body>
+
+  <div class="lab-shell">
+    <!-- CABECERA -->
+    <header class="lab-header">
+      <div class="lab-subtitle">Laboratorio RFT · Contexto Relacional, Funcional y Transformación de Funciones</div>
+      <h1 class="lab-title">De la fobia a SILAC y de A–B–C a la aversión graduada</h1>
+      <p class="lab-description">
+        Explora cómo el lenguaje crea redes relacionales que transforman funciones emocionales:
+        primero en un caso clínico de fobia a perros (SILAC), y luego en un ejemplo abstracto
+        con A–B–C y la clave “mayor que”.
+      </p>
+    </header>
+
+    <!-- CONTENEDOR GENERAL -->
+    <main class="lab-main">
+
+      <!-- ======================================== -->
+      <!-- FASE 1 · FOBIA A PERRITOS (FUNCIONES)   -->
+      <!-- ======================================== -->
+      <section class="lab-phase active" data-phase="1">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 1 · Persona con fobia a los perritos</h2>
+          <p class="phase-text">
+            Empezamos con una persona que ya tiene una historia de fobia a los perritos. No hay
+            todavía palabras raras ni reglas complejas: simplemente, cuando ve un perrito, su
+            cuerpo responde con miedo intenso y múltiples sensaciones difíciles.
+          </p>
+
+          <div class="f1-layout">
+            <!-- PERSONA Y PERRITO -->
+            <div class="f1-persona-card">
+              <div class="f1-persona-emoji">🧍‍♂️</div>
+              <div class="f1-perro-emoji">🐶</div>
+              <div class="f1-caption">
+                Persona con fobia a los perritos
+              </div>
+            </div>
+
+            <!-- LISTA DE REACCIONES -->
+            <div class="f1-func-card">
+              <div class="f1-func-title">
+                ¿Qué ocurre en su cuerpo cuando ve un perrito?
+              </div>
+              <p class="f1-func-subtitle">
+                Haz clic en <strong>“Añadir reacción”</strong> para desplegar las respuestas
+                que forman parte de la fobia.
+              </p>
+
+              <ul class="f1-func-list" id="f1ListaReacciones">
+                <!-- Reacciones se añaden progresivamente -->
+              </ul>
+
+              <div class="f1-actions">
+                <button class="btn-secondary" id="btnF1AgregarReaccion">
+                  Añadir reacción
+                </button>
+                <button class="btn-primary" id="btnF1Next" disabled>
+                  Continuar · SILAC aparece en escena
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- FASE 2 · LA PUERTA Y EL ESTÍMULO SILAC  -->
+      <!-- ======================================== -->
+      <section class="lab-phase" data-phase="2">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 2 · Una puerta, un amigo y una palabra nueva: “SILAC”</h2>
+          <p class="phase-text">
+            Ahora la persona con fobia se encuentra con un amigo. Ambos están frente a una puerta.
+            El amigo menciona un estímulo verbal completamente nuevo: <strong>SILAC</strong>.
+            Para ti, como observador, esta palabra aún no tiene ningún significado funcional.
+          </p>
+
+          <div class="f2-layout">
+            <div class="f2-personas-card">
+              <div class="f2-personas-row">
+                <div class="f2-persona-emoji">🧍‍♂️</div>
+                <div class="f2-amigo-emoji">🧑‍🤝‍🧑</div>
+              </div>
+              <div class="f2-caption">
+                Persona con fobia y su amigo, frente a algo desconocido.
+              </div>
+            </div>
+
+            <div class="f2-puerta-card">
+              <div class="f2-door-emoji">🚪</div>
+              <div class="f2-dialogo">
+                <p class="f2-texto-dialogo">
+                  El amigo dice: <br />
+                  <span class="f2-cita">
+                    “Detrás de esta puerta hay un <strong>SILAC</strong>.”
+                  </span>
+                </p>
+                <p class="f2-texto-nota">
+                  Para el amigo, SILAC es solo una palabra. <br />
+                  <span class="f2-emoji-duda">🤔❓</span> Aún no sabe qué significa.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF2Next">
+              Continuar · Definir qué es un SILAC
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- FASE 3 · COORDINACIÓN “SILAC ES UN PERRO” -->
+      <!-- ======================================== -->
+      <section class="lab-phase" data-phase="3">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 3 · Coordinación: “Un SILAC es un tipo de perro”</h2>
+          <p class="phase-text">
+            El amigo ahora aclara el significado de la palabra. Introduce una relación de
+            coordinación: SILAC es descrito como un tipo de perro muy grande y muy feroz. No ha
+            cambiado nada en el mundo físico, pero el contexto relacional se ha modificado.
+          </p>
+
+          <div class="f3-layout">
+            <div class="f3-dialogo-card">
+              <div class="f3-personas-row">
+                <div class="f3-persona-emoji">🧍‍♂️</div>
+                <div class="f3-amigo-emoji">🧑‍🤝‍🧑</div>
+              </div>
+              <p class="f3-cita">
+                El amigo explica: <br />
+                <span class="f3-cita-frase">
+                  “Un <strong>SILAC</strong> es un tipo de perro muy grande y muy feroz.”
+                </span>
+              </p>
+              <p class="f3-texto-nota">
+                Aquí se establece una <strong>clave de coordinación</strong>:
+                SILAC se relaciona como “igual que” un perro.
+              </p>
+            </div>
+
+            <div class="f3-funciones-card">
+              <div class="f3-col f3-col-perro">
+                <div class="f3-col-title">Perro (para esta persona)</div>
+                <ul class="f3-func-list" id="f3ListaPerro">
+                  <!-- Se llenará con las reacciones de la Fase 1 -->
+                </ul>
+              </div>
+
+              <div class="f3-col f3-col-silac" id="f3ColSilac">
+                <div class="f3-col-title">
+                  SILAC <span class="f3-col-sub">(después de la coordinación)</span>
+                </div>
+                <ul class="f3-func-list" id="f3ListaSilac">
+                  <!-- Se llenará al hacer clic en “Mostrar coordinación” -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-secondary" id="btnF3MostrarCoordinacion">
+              Mostrar coordinación SILAC–PERRO
+            </button>
+            <button class="btn-primary" id="btnF3Next" disabled>
+              Continuar · Ver qué pasa con SILAC
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- FASE 4 · TRANSFORMACIÓN EN SILAC        -->
+      <!-- ======================================== -->
+      <section class="lab-phase" data-phase="4">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 4 · SILAC adquiere funciones fóbicas</h2>
+          <p class="phase-text">
+            Sin haber visto físicamente un SILAC, la persona ahora puede responder a esa palabra
+            como si fuera un perro peligroso. La coordinación verbal transforma las funciones:
+            SILAC evoca miedo, ansiedad y las mismas respuestas que el perrito fóbico.
+          </p>
+
+          <div class="f4-layout">
+            <div class="f4-persona-puerta">
+              <div class="f4-icons-row">
+                <div class="f4-persona-emoji">🧍‍♂️</div>
+                <div class="f4-door-emoji">🚪</div>
+              </div>
+              <div class="f4-caption">
+                La persona mira la puerta pensando en un SILAC detrás.
+              </div>
+            </div>
+
+            <div class="f4-silac-card">
+              <div class="f4-silac-word">SILAC</div>
+              <div class="f4-silac-subtitle">
+                Se comporta como si fuera el mismo perro fóbico.
+              </div>
+              <ul class="f4-func-list" id="f4ListaSilacFinal">
+                <!-- Se rellenará con las mismas funciones de la fobia -->
+              </ul>
+              <p class="f4-explicacion">
+                Sin contacto directo con SILAC, las funciones de miedo se han transformado por la
+                <strong>relación verbal de coordinación</strong> con “perro”. El estímulo verbal
+                adquiere funciones clínicas relevantes.
+              </p>
+            </div>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF4Next">
+              Pasar al experimento abstracto con A–B–C
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- FASE 5 · A–B–C NEUTROS                  -->
+      <!-- ======================================== -->
+      <section class="lab-phase" data-phase="5">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 5 · Tres estímulos neutros: A, B y C</h2>
+          <p class="phase-text">
+            Ahora dejamos el ejemplo clínico y pasamos a un escenario más abstracto. Aparecen
+            tres estímulos etiquetados como A, B y C. De momento no tienen valencia emocional:
+            no son agradables ni desagradables por sí mismos.
+          </p>
+
+          <div class="abc-layout">
+            <div class="abc-card">
+              <div class="abc-label">A</div>
+              <div class="abc-body">□</div>
+            </div>
+            <div class="abc-card">
+              <div class="abc-label">B</div>
+              <div class="abc-body">□</div>
+            </div>
+            <div class="abc-card">
+              <div class="abc-label">C</div>
+              <div class="abc-body">□</div>
+            </div>
+          </div>
+
+          <p class="abc-instruction">
+            Por ahora, solo observa A, B y C como estímulos neutros. A continuación activaremos
+            una <strong>clave relacional</strong> que organizará estas tres posiciones.
+          </p>
+
+          <div class="phase-actions">
+            <button class="btn-primary" id="btnF5Next">
+              Introducir la clave “mayor que”
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- FASE 6 · CLAVE “MAYOR QUE”              -->
+      <!-- ======================================== -->
+      <section class="lab-phase" data-phase="6">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 6 · Contexto relacional: “Mayor que”</h2>
+          <p class="phase-text">
+            Ahora activamos una clave relacional explícita. No cambiamos los estímulos físicos,
+            cambiamos el contexto que indica cómo deben relacionarse entre sí: un orden de “mayor
+            que” en alguna dimensión relevante.
+          </p>
+
+          <div class="clave-card">
+            <div class="clave-label">Clave relacional activa</div>
+            <div class="clave-body">
+              <span class="clave-titulo">MAYOR QUE</span>
+              <span class="clave-subtitulo">
+                Puedes leerlo como “más intenso”, “más fuerte” o “más desagradable”.
+              </span>
+            </div>
+          </div>
+
+          <div class="orden-card" id="ordenCard" style="display:none;">
+            <div class="orden-texto">
+              La regla establece el siguiente orden relacional:
+            </div>
+            <div class="orden-expresion">
+              <span>A</span> &gt; <span>B</span> &gt; <span>C</span>
+            </div>
+            <p class="orden-nota">
+              A es “mayor que” B, y B es “mayor que” C en la dimensión que definamos después.
+            </p>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-secondary" id="btnF6MostrarOrden">
+              Añadir regla relacional
+            </button>
+            <button class="btn-primary" id="btnF6Next" disabled>
+              Continuar · Asignar valor aversivo a C
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- FASE 7 · IMAGEN AVERSIVA EN C          -->
+      <!-- ======================================== -->
+      <section class="lab-phase" data-phase="7">
+        <div class="phase-inner">
+          <h2 class="phase-title">Fase 7 · Transformación de funciones bajo “mayor que”</h2>
+          <p class="phase-text">
+            Ahora vamos a dotar a C de una función claramente aversiva. La clave relacional
+            “mayor que” ya está activa, por lo que la nueva función de C puede extenderse a B y A
+            de manera derivada.
+          </p>
+
+          <div class="abc-layout abc-layout-final">
+            <div class="abc-card">
+              <div class="abc-label">A</div>
+              <div class="abc-body abc-body-empty">□</div>
+            </div>
+            <div class="abc-card">
+              <div class="abc-label">B</div>
+              <div class="abc-body abc-body-empty">□</div>
+            </div>
+            <div class="abc-card">
+              <div class="abc-label">C</div>
+              <div class="abc-body" id="abcCBody">
+                <button class="btn-secondary btn-small" id="btnF7MostrarImagen">
+                  Dar la vuelta a C
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="f7-pregunta-card" id="f7PreguntaCard" style="display:none;">
+            <p class="f7-pregunta-titulo">
+              Si C es así de desagradable, ¿qué ocurre con B y con A?
+            </p>
+            <p class="f7-pregunta-texto">
+              Bajo la regla A &gt; B &gt; C, si C se vuelve muy aversivo, es razonable
+              predecir que:
+            </p>
+            <ul class="f7-points">
+              <li><strong>B</strong> será también desagradable, pero menos que C.</li>
+              <li><strong>A</strong> será todavía más desagradable que B y C en esa misma dimensión.</li>
+            </ul>
+            <p class="f7-explicacion">
+              No hemos mostrado imágenes para A y B, pero la relación “mayor que” guía
+              expectativas y respuestas emocionales. La función aversiva se <strong>transforma</strong>
+              a través de la red relacional, no por contacto directo.
+            </p>
+          </div>
+
+          <div class="phase-actions">
+            <button class="btn-ghost" id="btnReiniciarContextos">
+              Reiniciar laboratorio
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Lógica del laboratorio -->
+  <script defer src="js/laboratorio-contextos.js"></script>
+</body>
+</html>
