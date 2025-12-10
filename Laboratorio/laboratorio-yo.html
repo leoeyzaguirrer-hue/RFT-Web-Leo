@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Fábrica del Yo · Laboratorio RFT</title>
+
+  <link rel="stylesheet" href="css/laboratorio-yo.css" />
+</head>
+<body>
+  <div class="lab-yo-bg"></div>
+
+  <main class="lab-yo-container">
+    <!-- CABECERA -->
+    <header class="lab-yo-header">
+      <div class="lab-yo-subtitle">LABORATORIO RFT · MARCOS DEÍCTICOS Y SELFING</div>
+      <h1 class="lab-yo-title">La Fábrica del Yo</h1>
+      <h2 class="lab-yo-subtitle-2">Cómo el lenguaje construye a quien dice “yo”</h2>
+
+      <p class="lab-yo-intro">
+        Avanza por las fases y observa cómo, paso a paso, se estabiliza un punto de
+        observación: el <strong>yo deíctico</strong>. No entrenamos identidades ni rasgos,
+        sino el lugar desde donde se responde a la experiencia.
+      </p>
+    </header>
+
+    <!-- LAYOUT PRINCIPAL: IZQUIERDA = YO CENTRAL · DERECHA = FASES -->
+    <section class="lab-yo-layout">
+      <!-- PANEL IZQUIERDO: CONTENEDOR DEL YO -->
+      <div class="yo-panel">
+        <h3 class="yo-panel-title">Punto de observación</h3>
+
+        <div class="yo-container nivel-0" id="yoContainer">
+          <div class="yo-aura"></div>
+          <div class="yo-figure">🧒</div>
+        </div>
+
+        <div class="yo-axes">
+          <div class="yo-axis-row">
+            <span>YO</span>
+            <span class="axis-dots">···</span>
+            <span>TÚ</span>
+          </div>
+          <div class="yo-axis-row">
+            <span>AQUÍ</span>
+            <span class="axis-dots">···</span>
+            <span>ALLÁ</span>
+          </div>
+          <div class="yo-axis-row">
+            <span>AHORA</span>
+            <span class="axis-dots">···</span>
+            <span>ANTES</span>
+          </div>
+        </div>
+
+        <p class="yo-panel-note">
+          El contorno se ilumina cuando las respuestas construyen un
+          <strong>punto de perspectiva estable</strong>, no una identidad fija.
+        </p>
+      </div>
+
+      <!-- PANEL DERECHO: FASES -->
+      <div class="fase-panel">
+
+        <!-- INDICADOR DE FASE -->
+        <div class="fase-indicador">
+          <span id="faseLabel">Fase 1 · Yo–Tú</span>
+          <span class="fase-progreso" id="faseProgress">1 / 6</span>
+        </div>
+
+        <!-- FASE 1 · YO–TÚ ARRASTRE -->
+        <section class="fase activa" id="fase1">
+          <h3 class="fase-titulo">Fase 1 · Diferenciar quién vive la experiencia</h3>
+          <p class="fase-texto">
+            Empieza distinguiendo <strong>quién</strong> vive la experiencia. Arrastra la frase
+            hacia la silueta correcta: <strong>YO</strong> o <strong>TÚ</strong>.
+          </p>
+
+          <div class="fase-grid">
+            <div class="card card-simple">
+              <div class="card-label">Regla clínica</div>
+              <p class="card-main">
+                El yo no es “ser la emoción”. Es la <strong>posición</strong> desde la que se
+                vive la emoción.
+              </p>
+            </div>
+
+            <div class="card card-droppable-zone">
+              <div class="card-question">¿Quién vive esta experiencia?</div>
+
+              <div class="drag-item" draggable="true" id="dragMiedo" data-etapa="1">
+                🟨 “Tengo miedo”
+              </div>
+
+              <div class="drop-row">
+                <div class="drop-target" data-role="yo">
+                  <div class="drop-label">YO</div>
+                  <div class="drop-slot">Arrastra aquí si es tu experiencia</div>
+                </div>
+                <div class="drop-target" data-role="tu">
+                  <div class="drop-label">TÚ</div>
+                  <div class="drop-slot">Arrastra aquí si es la experiencia de otro</div>
+                </div>
+              </div>
+
+              <p class="feedback" id="fase1Feedback"></p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-next" id="btnFase1Next" disabled>
+            Continuar · Segunda experiencia Yo–Tú
+          </button>
+        </section>
+
+        <!-- FASE 2 · YO–TÚ 2 + CONSTRUCCIÓN DEL PUNTO YO -->
+        <section class="fase" id="fase2">
+          <h3 class="fase-titulo">Fase 2 · Construcción del punto “Yo”</h3>
+          <p class="fase-texto">
+            Ahora responde a una serie de preguntas deícticas. Cada respuesta correcta
+            hace más nítido el contenedor del yo. No se “crea” un yo: se <strong>estabiliza
+            el punto de observación</strong>.
+          </p>
+
+          <div class="fase-grid">
+            <div class="card card-dialogo">
+              <div class="card-dialogo-header">
+                <span class="emoji-speaker">🧑‍🏫</span>
+                <span>Figura que pregunta</span>
+              </div>
+              <p class="card-question" id="preguntaTexto">
+                ¿Quién eres?
+              </p>
+              <p class="card-hint">
+                Responde desde el niño que está dentro del contenedor.
+              </p>
+            </div>
+
+            <div class="card card-respuesta">
+              <div class="card-dialogo-header">
+                <span class="emoji-speaker">🧒</span>
+                <span>Respuesta del punto Yo</span>
+              </div>
+
+              <p class="card-answer" id="respuestaTexto">
+                (Pulsa “Responder” para ver la respuesta)
+              </p>
+
+              <button class="btn btn-secondary" id="btnResponder">
+                Responder
+              </button>
+
+              <p class="feedback" id="fase2Feedback"></p>
+            </div>
+          </div>
+
+          <div class="fase-footer">
+            <div class="fase-contador">
+              Pregunta <span id="contadorPregunta">1</span> de <span id="totalPreguntas">8</span>
+            </div>
+            <button class="btn btn-primary btn-next" id="btnFase2Next" disabled>
+              Continuar · Perspectiva espacial aquí–allá
+            </button>
+          </div>
+        </section>
+
+        <!-- FASE 3 · AQUÍ–ALLÁ -->
+        <section class="fase" id="fase3">
+          <h3 class="fase-titulo">Fase 3 · Perspectiva espacial aquí–allá</h3>
+          <p class="fase-texto">
+            Ahora entrenamos el <strong>marco aquí–allá</strong>. Ubica correctamente dónde
+            estás tú y dónde está la otra persona.
+          </p>
+
+          <div class="fase-grid">
+            <div class="card card-escena">
+              <div class="escena-fila">
+                <div class="escena-persona">
+                  🧒<div class="escena-label">Tú</div>
+                </div>
+                <div class="escena-persona">
+                  🧑<div class="escena-label">Otra persona</div>
+                </div>
+              </div>
+
+              <div class="escena-lugares">
+                <div class="escena-lugar" data-lugar="aqui">
+                  📍 Aquí
+                </div>
+                <div class="escena-lugar" data-lugar="alla">
+                  🚪 Allá
+                </div>
+              </div>
+            </div>
+
+            <div class="card card-opciones">
+              <p class="card-question">Elige la afirmación que corresponde al punto Yo:</p>
+              <button class="btn-opcion" data-correcta="false">
+                “Estoy allá y tú estás aquí”
+              </button>
+              <button class="btn-opcion" data-correcta="true">
+                “Estoy aquí y tú estás allá”
+              </button>
+              <button class="btn-opcion" data-correcta="false">
+                “No hay diferencia entre aquí y allá”
+              </button>
+
+              <p class="feedback" id="fase3Feedback"></p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-next" id="btnFase3Next" disabled>
+            Continuar · Perspectiva temporal ahora–antes
+          </button>
+        </section>
+
+        <!-- FASE 4 · AHORA–ANTES -->
+        <section class="fase" id="fase4">
+          <h3 class="fase-titulo">Fase 4 · El yo a través del tiempo</h3>
+          <p class="fase-texto">
+            Sitúa experiencias en la línea temporal. Observa cómo el contenido cambia,
+            mientras el punto desde el que observas permanece.
+          </p>
+
+          <div class="fase-grid">
+            <div class="card card-timeline">
+              <div class="timeline">
+                <div class="timeline-point" data-tiempo="antes">
+                  <span class="timeline-dot"></span>
+                  <span class="timeline-label">ANTES</span>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-point" data-tiempo="ahora">
+                  <span class="timeline-dot"></span>
+                  <span class="timeline-label">AHORA</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card-opciones">
+              <p class="card-question">Ubica correctamente las frases:</p>
+
+              <div class="timeline-opcion" data-tiempo-correcto="antes">
+                🕓 “Ayer tuve miedo”
+              </div>
+              <div class="timeline-opcion" data-tiempo-correcto="ahora">
+                ⏰ “Ahora sigo aquí”
+              </div>
+
+              <button class="btn btn-secondary" id="btnVerificarTimeline">
+                Verificar ubicación
+              </button>
+
+              <p class="feedback" id="fase4Feedback"></p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-next" id="btnFase4Next" disabled>
+            Continuar · Selfing: notar que estoy respondiendo
+          </button>
+        </section>
+
+        <!-- FASE 5 · SELFING SANO VS PROBLEMÁTICO -->
+        <section class="fase" id="fase5">
+          <h3 class="fase-titulo">Fase 5 · Selfing sano vs selfing problemático</h3>
+          <p class="fase-texto">
+            Observa dos formas de hablar de ti mismo. Elige cuál mantiene el yo como
+            <strong>lugar de observación</strong> y cuál lo convierte en
+            <strong>contenido rígido</strong>.
+          </p>
+
+          <div class="fase-grid fase-dos-columnas">
+            <div class="card card-self">
+              <div class="self-header sano">Lado A · Selfing sano</div>
+              <ul class="self-lista">
+                <li>“Estoy notando que tengo ansiedad ahora”</li>
+                <li>“Esto es una sensación”</li>
+                <li>“Yo sigo aquí”</li>
+              </ul>
+              <button class="btn-self" data-tipo="sano">
+                Seleccionar este estilo
+              </button>
+            </div>
+
+            <div class="card card-self">
+              <div class="self-header problematico">Lado B · Selfing problemático</div>
+              <ul class="self-lista">
+                <li>“Yo soy ansioso”</li>
+                <li>“Siempre he sido así”</li>
+                <li>“Nada va a cambiar”</li>
+              </ul>
+
+              <div class="micro-card">
+                <p class="micro-title">Análisis funcional</p>
+                <p class="micro-text">
+                  Esta es una <strong>relación de coordinación aplicada al yo</strong>.
+                  El problema no es el contenido, sino que el yo queda atrapado como
+                  identidad fija.
+                </p>
+              </div>
+
+              <button class="btn-self" data-tipo="problematico">
+                Seleccionar este estilo
+              </button>
+            </div>
+          </div>
+
+          <p class="feedback" id="fase5Feedback"></p>
+
+          <button class="btn btn-primary btn-next" id="btnFase5Next" disabled>
+            Continuar · ¿Desde dónde respondes ahora?
+          </button>
+        </section>
+
+        <!-- FASE 6 · INTEGRACIÓN FINAL -->
+        <section class="fase" id="fase6">
+          <h3 class="fase-titulo">Fase 6 · Integración: ¿Desde dónde respondes?</h3>
+          <p class="fase-texto">
+            Vuelven a estar presentes reglas, emociones y cosas importantes para ti.
+            No preguntamos “quién eres”, sino <strong>desde dónde respondes</strong> cuando
+            todo esto aparece.
+          </p>
+
+          <div class="fase-grid">
+            <div class="card card-simple">
+              <div class="icon-row">
+                📜 🤯 ❤️ 😨
+              </div>
+              <p class="card-main">
+                Regla, autorrelato, algo valioso y una imagen aversiva pueden estar
+                presentes al mismo tiempo. El punto crítico es el <strong>lugar
+                relacional</strong> desde el cual respondes.
+              </p>
+            </div>
+
+            <div class="card card-opciones">
+              <p class="card-question">
+                ¿Desde qué lugar estás respondiendo a todo esto que está presente ahora?
+              </p>
+
+              <button class="btn-opcion-final" data-correcta="false">
+                Desde la coherencia como “tener razón” sobre mí
+              </button>
+              <button class="btn-opcion-final" data-correcta="false">
+                Desde el miedo que intenta controlar todo
+              </button>
+              <button class="btn-opcion-final" data-correcta="true">
+                ✅ Desde el yo que observa lo que aparece
+              </button>
+
+              <p class="feedback" id="fase6Feedback"></p>
+            </div>
+          </div>
+
+          <div class="fase-cierre">
+            <h4>Cierre clínico</h4>
+            <p id="textoCierre">
+              Cuando eliges responder desde el yo que observa, el miedo puede seguir aquí,
+              pero ya no manda. En sesión no trabajamos con “quién eres”, sino con
+              <strong>desde dónde respondes cuando hablas de ti mismo</strong>.
+            </p>
+          </div>
+
+          <button class="btn btn-secondary" id="btnReiniciar">
+            Reiniciar laboratorio · Volver a Fase 1
+          </button>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <script defer src="js/laboratorio-yo.js"></script>
+</body>
+</html>
