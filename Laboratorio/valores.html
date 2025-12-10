@@ -21,19 +21,23 @@
 
   <section class="lab-scene">
 
-    <!-- TRIÁNGULO REAL -->
-    <div class="piramide">
+    <!-- CONTENEDOR VISUAL DEL TRIÁNGULO -->
+    <div class="piramide-wrap">
 
-      <div class="nivel nivel-valor oculto" id="zonaValor" data-zone="valor">
-        <span>VALOR</span>
+      <!-- TRIÁNGULO DECORATIVO -->
+      <div class="piramide-deco"></div>
+
+      <!-- ZONAS REALES DE DROP -->
+      <div class="zona-drop zona-valor oculto" id="zonaValor" data-zone="valor">
+        Arrastra un VALOR aquí
       </div>
 
-      <div class="nivel nivel-direcciones oculto" id="zonaDirecciones" data-zone="direccion">
-        <span>DIRECCIONES</span>
+      <div class="zona-drop zona-direcciones oculto" id="zonaDirecciones" data-zone="direccion">
+        Arrastra DIRECCIONES aquí
       </div>
 
-      <div class="nivel nivel-acciones oculto" id="zonaAcciones" data-zone="accion">
-        <span>ACCIONES</span>
+      <div class="zona-drop zona-acciones oculto" id="zonaAcciones" data-zone="accion">
+        Arrastra ACCIONES aquí
       </div>
 
     </div>
@@ -42,8 +46,7 @@
     <aside class="panel">
 
       <div class="bloque activo" id="panelValores">
-        <h3>Activa un VALOR</h3>
-        <p>Arrastra un valor al vértice superior.</p>
+        <h3>1 · Activa un VALOR</h3>
         <div class="tarjetas">
           <div class="tarjeta" draggable="true">Estar presente</div>
           <div class="tarjeta" draggable="true">Cuidar</div>
@@ -53,8 +56,7 @@
       </div>
 
       <div class="bloque" id="panelDirecciones">
-        <h3>Elige DIRECCIONES</h3>
-        <p>Selecciona direcciones coherentes con el valor.</p>
+        <h3>2 · Organiza DIRECCIONES</h3>
         <div class="tarjetas">
           <div class="tarjeta" draggable="true">Escuchar</div>
           <div class="tarjeta" draggable="true">Acompañar</div>
@@ -65,8 +67,7 @@
       </div>
 
       <div class="bloque" id="panelAcciones">
-        <h3>Coloca ACCIONES</h3>
-        <p>Observa cómo cambian su función bajo el valor.</p>
+        <h3>3 · Coloca ACCIONES</h3>
         <div class="tarjetas">
           <div class="tarjeta" draggable="true">Apagar el celular</div>
           <div class="tarjeta" draggable="true">Escuchar sin interrumpir</div>
@@ -79,9 +80,7 @@
 
   </section>
 
-  <div class="mensaje" id="mensajeCentral">
-    Arrastra un valor para iniciar la jerarquía.
-  </div>
+  <div class="mensaje" id="mensajeCentral">Arrastra un valor para iniciar.</div>
 
   <footer class="lab-footer">
     <button id="btnReiniciar">Reiniciar</button>
@@ -95,14 +94,13 @@
   <div class="modal-box">
     <h2>¿Qué es un valor desde ACT y RFT?</h2>
     <p>
-      Un valor no es una meta ni un estado emocional. Funciona como un
-      <strong>marco jerárquico superior</strong> que organiza direcciones de vida
-      y transforma la función de múltiples acciones.
+      Un valor funciona como un <strong>marco jerárquico superior</strong> que
+      organiza direcciones de vida y transforma la función de las acciones.
     </p>
     <p>
-      En RFT, los valores operan como <strong>augmenting motivacional</strong>,
+      Desde RFT, los valores operan como <strong>augmenting motivacional</strong>,
       alterando la importancia psicológica de las consecuencias sin eliminar
-      el malestar. Orientan la conducta de manera sostenida.
+      el malestar.
     </p>
     <button id="cerrarModal">Cerrar</button>
   </div>
