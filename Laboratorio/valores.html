@@ -1,54 +1,296 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>El Motor de los Valores</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/valores.css">
+  <meta charset="UTF-8" />
+  <title>Laboratorio RFT · Mapa Jerárquico de Valores</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Estilos específicos del laboratorio de valores -->
+  <link rel="stylesheet" href="css/valores.css" />
 </head>
-
 <body>
-
-<div class="lab-bg">
-  <div class="lab-card">
-
-    <header class="lab-header">
-      <div class="lab-badge">LABORATORIO RFT · VALORES</div>
-      <h1>EL MOTOR DE LOS VALORES</h1>
-      <p class="lab-subtitle">Cómo un valor organiza direcciones de vida y acciones concretas.</p>
+  <div class="lab-valores-bg">
+    <header class="lab-valores-hero">
+      <div class="lab-pill">LABORATORIO RFT · VALORES JERÁRQUICOS</div>
+      <h1 class="lab-title">MAPA JERÁRQUICO DE VALORES</h1>
+      <p class="lab-subtitle">
+        Explora cómo un valor se organiza en direcciones amplias y cómo estas se
+        concretan en acciones específicas. Construirás una red jerárquica desde el valor
+        hacia las acciones y luego desde las acciones de vuelta al valor.
+      </p>
     </header>
 
-    <div class="lab-body">
-
-      <!-- COLUMNA PIRÁMIDE -->
-      <div class="piramide-columna">
-        <div id="piramideValor" class="triangulo valor">VALOR</div>
-
-        <div class="fila-direcciones">
-          <div class="triangulo direccion" id="dir1">—</div>
-          <div class="triangulo direccion" id="dir2">—</div>
-          <div class="triangulo direccion" id="dir3">—</div>
+    <main class="lab-shell">
+      <!-- Barra superior de estado -->
+      <section class="lab-status-bar">
+        <div class="lab-status-item">
+          <span class="lab-status-label">Fase actual</span>
+          <span class="lab-status-value" id="lab-fase-label">Fase 1 · Elegir un valor</span>
         </div>
+        <div class="lab-status-item">
+          <span class="lab-status-label">Progreso</span>
+          <div class="lab-progress">
+            <div class="lab-progress-fill" id="lab-progress-fill"></div>
+          </div>
+        </div>
+        <div class="lab-status-item lab-status-chip" id="lab-valor-chip">
+          <span class="lab-status-label">Valor seleccionado</span>
+          <span class="lab-status-value lab-status-value--muted">Ninguno aún</span>
+        </div>
+      </section>
 
-        <div class="fila-acciones" id="zonaAcciones"></div>
-      </div>
+      <!-- CONTENEDOR PRINCIPAL DE FASES -->
+      <section class="lab-card">
 
-      <!-- COLUMNA TARJETAS -->
-      <div class="tarjetas-columna">
-        <h2 id="tituloFase">FASE 1 · ELIGE UN VALOR</h2>
-        <div id="contenedorTarjetas" class="tarjetas"></div>
-      </div>
+        <!-- COLUMNA IZQUIERDA · PIRÁMIDE -->
+        <section class="lab-left">
+          <div class="lab-piramide-card">
+            <div class="lab-piramide-header">
+              <span class="lab-pill pill-soft">NÚCLEO DE LA RED</span>
+              <h2 class="lab-piramide-title" id="lab-piramide-valor">
+                Inserta un valor
+              </h2>
+              <p class="lab-piramide-sub">
+                Aquí verás el valor o la síntesis de lo que construyas. Todo lo demás
+                se organizará jerárquicamente alrededor de este punto.
+              </p>
+            </div>
 
-    </div>
+            <div class="lab-piramide-figure">
+              <div class="lab-triangle">
+                <div class="lab-triangle-inner">
+                  <span class="lab-triangle-label" id="lab-triangle-label">
+                    Elige un valor para comenzar ✨
+                  </span>
+                </div>
+              </div>
+            </div>
 
-    <footer class="lab-footer">
-      <button id="reiniciar">REINICIAR</button>
-      <button id="siguiente">SIGUIENTE</button>
-    </footer>
+            <div class="lab-piramide-footer">
+              <p class="lab-footnote" id="lab-footnote">
+                Paso 1: selecciona un valor principal en la columna derecha.
+              </p>
+            </div>
+          </div>
 
+          <!-- BLOQUE RESUMEN DINÁMICO -->
+          <div class="lab-resumen-card">
+            <h3 class="lab-resumen-title">Resumen de la red construida</h3>
+            <div class="lab-resumen-content" id="lab-resumen">
+              <p>
+                A medida que avances, aquí aparecerá un resumen visual de tu valor,
+                las direcciones elegidas y algunas de las acciones que lo concretan.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMNA DERECHA · FASES INTERACTIVAS -->
+        <section class="lab-right">
+
+          <!-- FASE 1 · Elegir valor -->
+          <section class="lab-fase is-active" id="fase-1" data-fase="1">
+            <header class="lab-fase-header">
+              <span class="lab-pill">FASE 1</span>
+              <h2>Elige el valor con el que quieres trabajar</h2>
+              <p>
+                Empieza seleccionando uno de los dos valores. Más adelante verás cómo
+                se organiza en direcciones y acciones. Puedes repetir el laboratorio
+                luego con el otro valor para comparar redes.
+              </p>
+            </header>
+
+            <div class="lab-grid-valores">
+              <button class="lab-valor-card" data-valor-id="contribuir">
+                <div class="lab-valor-icon lab-emoji">🤝</div>
+                <h3>Contribuir al bienestar de otros</h3>
+                <p>
+                  Orientar la vida a impactar positivamente en otras personas:
+                  acompañar, cuidar, colaborar y formar.
+                </p>
+              </button>
+
+              <button class="lab-valor-card" data-valor-id="honestidad">
+                <div class="lab-valor-icon lab-emoji">🧭</div>
+                <h3>Vivir con honestidad</h3>
+                <p>
+                  Vivir de manera congruente con lo que se considera verdadero,
+                  asumiendo responsabilidad y contacto con la propia experiencia.
+                </p>
+              </button>
+            </div>
+          </section>
+
+          <!-- FASE 2 · Elegir direcciones -->
+          <section class="lab-fase" id="fase-2" data-fase="2">
+            <header class="lab-fase-header">
+              <span class="lab-pill">FASE 2</span>
+              <h2>Elige las direcciones que organizan tu valor</h2>
+              <p>
+                De todas las direcciones disponibles para este valor, elige hasta
+                tres que te parezcan especialmente importantes. Funcionan como
+                grandes caminos por donde se despliega el valor.
+              </p>
+            </header>
+
+            <div class="lab-direcciones-layout">
+              <div class="lab-direcciones-slots" id="lab-direcciones-slots">
+                <!-- Se rellenan por JS -->
+              </div>
+              <div class="lab-direcciones-opciones">
+                <h3 class="lab-direcciones-title">Direcciones disponibles</h3>
+                <p class="lab-direcciones-help">
+                  Haz clic en una dirección para incorporarla debajo del valor. Puedes
+                  elegir hasta tres. Si te equivocas, puedes quitarla desde los
+                  recuadros de la izquierda.
+                </p>
+                <div class="lab-direcciones-list" id="lab-direcciones-opciones">
+                  <!-- Botones generados por JS -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FASE 3 · Elegir acciones -->
+          <section class="lab-fase" id="fase-3" data-fase="3">
+            <header class="lab-fase-header">
+              <span class="lab-pill">FASE 3</span>
+              <h2>Concreta el valor en acciones observables</h2>
+              <p>
+                Ahora, para cada dirección elegida, selecciona acciones concretas que
+                podrían realizarse en la vida diaria. Así se ve cómo el valor se
+                vuelve conducta.
+              </p>
+            </header>
+
+            <div class="lab-acciones-layout">
+              <div class="lab-acciones-cols" id="lab-acciones-cols">
+                <!-- Columnas por dirección (se llenan por JS) -->
+              </div>
+
+              <div class="lab-acciones-panel">
+                <div class="lab-acciones-tabs" id="lab-acciones-tabs">
+                  <!-- Botones de pestañas (direcciones) -->
+                </div>
+                <div class="lab-acciones-panel-body">
+                  <h3 id="lab-acciones-panel-title">
+                    Elige una dirección para comenzar
+                  </h3>
+                  <p id="lab-acciones-panel-help">
+                    Primero selecciona una de las pestañas de arriba. Luego podrás
+                    elegir acciones para esa dirección. Verás solo algunas acciones a
+                    la vez, para que el espacio se mantenga limpio y legible.
+                  </p>
+                  <div class="lab-acciones-counter" id="lab-acciones-counter"></div>
+                  <div class="lab-acciones-pool" id="lab-acciones-pool">
+                    <!-- Botones de acciones visibles -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FASE 4 · Explicación RFT -->
+          <section class="lab-fase" id="fase-4" data-fase="4">
+            <header class="lab-fase-header">
+              <span class="lab-pill">FASE 4</span>
+              <h2>Lo que acabas de construir desde la RFT</h2>
+              <p>
+                Observa la red que generaste: un valor en la cúspide, direcciones
+                amplias y acciones concretas. Esta estructura tiene un significado
+                particular desde la Teoría del Marco Relacional.
+              </p>
+            </header>
+
+            <article class="lab-explicacion">
+              <h3>Valores como nudos aumenting en una red jerárquica</h3>
+              <p id="lab-explicacion-texto">
+                Has configurado un valor como punto organizador (“nudo”) desde el
+                cual se derivan múltiples direcciones amplias. Cada dirección agrupa
+                acciones que comparten una función: orientan la conducta hacia
+                contribuir al bienestar de otros o vivir con honestidad, según el
+                valor que elegiste.
+              </p>
+              <p>
+                Desde una lectura funcional, los valores no son solo enunciados
+                abstractos, sino patrones de augmenting que cambian la función de
+                reglas, eventos privados y contextos: hacen que ciertas acciones
+                sean preferibles, incluso cuando implican esfuerzo o malestar.
+              </p>
+              <p>
+                La red que construiste muestra cómo un mismo valor puede expresarse
+                en acciones muy distintas y cómo las direcciones funcionan como
+                puentes entre formulaciones verbales y conductas observables.
+              </p>
+            </article>
+
+            <div class="lab-explicacion-extra">
+              <h3>Practicar la construcción desde las acciones</h3>
+              <p>
+                En la siguiente fase, comenzarás al revés: elegirás acciones y el
+                sistema te mostrará cómo pueden reorganizarse en direcciones y un
+                valor. Esto ilustra que los valores pueden formarse tanto “desde la
+                punta de la red” como desde la experiencia concreta.
+              </p>
+            </div>
+          </section>
+
+          <!-- FASE 5 · Reconstrucción desde las acciones -->
+          <section class="lab-fase" id="fase-5" data-fase="5">
+            <header class="lab-fase-header">
+              <span class="lab-pill">FASE 5</span>
+              <h2>Reconstruir el valor desde las acciones</h2>
+              <p>
+                Ahora comenzarás desde abajo: selecciona algunas acciones que te
+                gustaría encarnar en tu vida cotidiana y observa cómo se reagrupan en
+                direcciones y vuelven a un valor.
+              </p>
+            </header>
+
+            <div class="lab-reversa-layout">
+              <div class="lab-reversa-panel">
+                <h3>1. Elige hasta tres acciones que te representen hoy</h3>
+                <p>
+                  Haz clic en acciones que sientas especialmente relevantes en este
+                  momento. El sistema te mostrará a qué dirección y valor pertenecen.
+                </p>
+                <div class="lab-reversa-pool" id="lab-reversa-pool">
+                  <!-- Acciones mezcladas (JS) -->
+                </div>
+              </div>
+
+              <div class="lab-reversa-resultado">
+                <h3>2. Cómo se organizan jerárquicamente</h3>
+                <div id="lab-reversa-resumen">
+                  <p>
+                    Cuando selecciones acciones, aquí aparecerá una síntesis: qué
+                    direcciones agrupan esas acciones y qué valor parece organizar
+                    la red que elegiste.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CONTROLES INFERIORES -->
+          <footer class="lab-controls">
+            <button class="lab-btn lab-btn-secondary" id="btn-reiniciar">
+              🔄 Reiniciar laboratorio
+            </button>
+            <div class="lab-controls-spacer"></div>
+            <button class="lab-btn lab-btn-ghost" id="btn-anterior">
+              ⬅︎ Anterior
+            </button>
+            <button class="lab-btn lab-btn-primary" id="btn-siguiente">
+              Siguiente ➜
+            </button>
+          </footer>
+        </section>
+      </section>
+    </main>
   </div>
-</div>
 
-<script src="js/valores.js"></script>
+  <!-- Lógica del laboratorio -->
+  <script defer src="js/valores.js"></script>
 </body>
 </html>
