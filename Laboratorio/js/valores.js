@@ -1,65 +1,75 @@
-const zonas = {
-  valor: document.getElementById("zonaValor"),
-  direccion: document.getElementById("zonaDirecciones"),
-  accion: document.getElementById("zonaAcciones")
-};
+let faseActual = 0;
+const fases = document.querySelectorAll('.fase');
+const btnSiguiente = document.getElementById('siguiente');
+const btnReiniciar = document.getElementById('reiniciar');
 
-const panelValores = document.getElementById("panelValores");
-const panelDirecciones = document.getElementById("panelDirecciones");
-const panelAcciones = document.getElementById("panelAcciones");
+let valorSeleccionado = "";
+let direccionesCorrectas = 0;
 
-const mensaje = document.getElementById("mensajeCentral");
-const btnSiguiente = document.getElementById("btnSiguiente");
+function mostrarFase(n) {
+  fases.forEach(f => f.classList.remove('activa'));
+  fases[n].classList.add('activa');
+}
 
-let fase = 0;
-
-document.querySelectorAll(".tarjeta").forEach(t => {
-  t.addEventListener("dragstart", e => {
-    e.dataTransfer.setData("text", t.textContent);
-  });
-});
-
-Object.values(zonas).forEach(zona => {
-  zona.addEventListener("dragover", e => e.preventDefault());
-
-  zona.addEventListener("drop", e => {
-    e.preventDefault();
-    const texto = e.dataTransfer.getData("text");
-    zona.textContent = texto;
-
-    btnSiguiente.disabled = false;
-
-    if (fase === 0) mensaje.textContent = "Valor activado. Avanza a direcciones.";
-    if (fase === 1) mensaje.textContent = "Dirección organizada. Avanza a acciones.";
-    if (fase === 2) mensaje.textContent = "Acción transformada. Avanza al cierre.";
-  });
-});
-
-btnSiguiente.addEventListener("click", () => {
-  if (fase === 0) {
-    zonas.valor.classList.remove("oculto");
-    zonas.direccion.classList.remove("oculto");
-    panelValores.classList.remove("activo");
-    panelDirecciones.classList.add("activo");
-    btnSiguiente.disabled = true;
-    fase = 1;
-  } 
-  else if (fase === 1) {
-    zonas.accion.classList.remove("oculto");
-    panelDirecciones.classList.remove("activo");
-    panelAcciones.classList.add("activo");
-    btnSiguiente.disabled = true;
-    fase = 2;
-  } 
-  else if (fase === 2) {
-    document.getElementById("modalFinal").classList.remove("oculto");
+btnSiguiente.addEventListener('click', () => {
+  if (faseActual < fases.length - 1) {
+    faseActual++;
+    mostrarFase(faseActual);
   }
 });
 
-document.getElementById("cerrarModal").addEventListener("click", () => {
-  document.getElementById("modalFinal").classList.add("oculto");
-});
-
-document.getElementById("btnReiniciar").addEventListener("click", () => {
+btnReiniciar.addEventListener('click', () => {
   location.reload();
 });
+
+document.querySelectorAll('.tarjeta').forEach(tarjeta => {
+  tarjeta.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text', e.target.textContent);
+    e.dataTransfer.setData('correcta', e.target.dataset.correcta || "true");
+    e.dataTransfer.setData('tipo', e.target.classList.contains('direccion') ? 'direccion' :
+      e.target.classList.contains('accion') ? 'accion' : 'valor');
+  });
+});
+
+function activarDrop(zona, callback) {
+  zona.addEventListener('dragover', e => e.preventDefault());
+  zona.addEventListener('drop', e => {
+    e.preventDefault();
+    callback(e);
+  });
+}
+
+activarDrop(document.getElementById('zonaValor'), e => {
+  valorSeleccionado = e.dataTransfer.getData('text');
+  e.target.textContent = valorSeleccionado;
+  document.getElementById('valorFijo').textContent = valorSeleccionado;
+  document.getElementById('valorFinal').textContent = valorSeleccionado;
+});
+
+activarDrop(document.getElementById('zonaDireccion'), e => {
+  const correcta = e.dataTransfer.getData('correcta') === "true";
+  if (correcta) {
+    direccionesCorrectas++;
+    document.getElementById('direccionFinal').textContent =
+      e.dataTransfer.getData('text');
+  } else {
+    alert("Esta dirección no coordina con el valor activo.");
+  }
+});
+
+activarDrop(document.getElementById('zonaAccion'), e => {
+  e.target.textContent = e.dataTransfer.getData('text');
+  e.target.classList.add('correcta');
+});
+
+document.getElementById('btnValor').addEventListener('click', () => {
+  document.getElementById('resultadoFinal').textContent =
+    "Elegiste el valor: la coherencia sigue presente, pero la dirección de tu conducta cambia.";
+});
+
+document.getElementById('btnCoherencia').addEventListener('click', () => {
+  document.getElementById('resultadoFinal').textContent =
+    "Elegiste la coherencia: el malestar dirige nuevamente tu acción.";
+});
+
+mostrarFase(0);
