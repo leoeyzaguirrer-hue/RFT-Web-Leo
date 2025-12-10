@@ -1,95 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <title>Laboratorio Experimental Interactivo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>RFT-Web-Leo · Portal de Laboratorios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Estilos de la portada -->
-  <link rel="stylesheet" href="css/portada.css" />
+  <!-- Estilo premium nuevo -->
+  <link rel="stylesheet" href="../css/portada.css">
 </head>
 
 <body>
 
-  <!-- Red animada funcional -->
-  <div class="bg-network" id="network"></div>
+  <!-- FONDO ANIMADO -->
+  <div class="bg-premium">
+    <div class="gold-network"></div>
+  </div>
 
-  <!-- Contenido central -->
-  <main class="hero">
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="portal">
 
-    <!-- Nivel 0 -->
-    <div class="micro-title">Laboratorio Experimental Interactivo</div>
+    <header class="portal-header">
+      <div class="portal-chip">RFT-WEB-LEO</div>
+      <h1>Laboratorio Experimental Interactivo</h1>
+      <p class="portal-subtitle">
+        Entrenamiento en procesos relacionales, reglas, valores, coherencia funcional y transformación de funciones.
+      </p>
+    </header>
 
-    <!-- Nivel 1 -->
-    <h1>SIMULADOR DE PROCESOS RELACIONALES</h1>
+    <!-- GRID DE TARJETAS -->
+    <section class="portal-grid">
 
-    <!-- Nivel 2 -->
-    <h2>Entrenamiento experimental en aprendizaje relacional</h2>
-
-    <!-- Nivel 3 -->
-    <div class="linea-descriptiva">
-      Equivalencia de estímulos · Marcos relacionales · Reglas · Valores · Coherencia · Transformación de funciones
-    </div>
-
-    <div class="pre-accion">
-      Preparado para comenzar el entrenamiento
-    </div>
-
-    <!-- MENÚ ACTUALIZADO -->
-    <div class="lab-menu">
-
-      <!-- Equivalencia -->
-      <button class="btn-start" data-target="Laboratorio/pantalla-1-equivalencia.html">
-        1 · Equivalencia de Estímulos
+      <button class="portal-card" onclick="go('pantalla-1-equivalencia.html')">
+        ⭐ Equivalencia de Estímulos
+        <span>Base experimental del lenguaje simbólico</span>
       </button>
 
-      <!-- Marcos Relacionales -->
-      <button class="btn-start" data-target="Laboratorio/laboratorio-rft.html">
-        2 · Marcos Relacionales (RFT)
+      <button class="portal-card" onclick="go('laboratorio-rft.html')">
+        🔗 Marcos Relacionales (RFT)
+        <span>Entrenamiento en responder relacional arbitrario</span>
       </button>
 
-      <!-- Reglas -->
-      <button class="btn-start" data-target="Laboratorio/laboratorio-reglas.html">
-        3 · Reglas: Pliance, Tracking y Augmenting
+      <button class="portal-card" onclick="go('laboratorio-reglas.html')">
+        📘 Reglas: Pliance · Tracking · Augmenting
+        <span>Control verbal de la conducta</span>
       </button>
 
-      <!-- Valores -->
-      <button class="btn-start" data-target="Laboratorio/valores.html">
-        4 · Valores y Jerarquía
+      <button class="portal-card" onclick="go('valores.html')">
+        ❤️ Valores y Jerarquía
+        <span>Organización motivacional aumenting</span>
       </button>
 
-      <!-- Coherencia -->
-      <button class="btn-start" data-target="Laboratorio/laboratorio-coherencia.html">
-        5 · Coherencia Funcional
+      <button class="portal-card" onclick="go('laboratorio-coherencia.html')">
+        🎯 Coherencia Funcional
+        <span>Relación entre reglas, experiencia y acción</span>
       </button>
 
-      <!-- Transformación de funciones -->
-      <button class="btn-start" data-target="Laboratorio/laboratorio-transformacion.html">
-        6 · Transformación de Funciones
+      <button class="portal-card" onclick="go('laboratorio-transformacion.html')">
+        🔥 Transformación de Funciones
+        <span>Cambio de función sin contacto directo</span>
       </button>
 
-      <!-- Contextos funcionales -->
-      <button class="btn-start" data-target="Laboratorio/laboratorio-contextos.html">
-        7 · Contextos Funcionales (C. FUNC)
+      <button class="portal-card" onclick="go('laboratorio-contextos.html')">
+        🌐 Contextos Funcionales
+        <span>Control contextual del responder</span>
       </button>
 
-      <!-- Fábrica del Yo -->
-      <button class="btn-start" data-target="Laboratorio/fabrica-yo.html">
-        8 · La Fábrica del Yo (Self como Contexto)
+      <button class="portal-card portal-special" onclick="go('fabrica-yo.html')">
+        🧠 La Fábrica del Yo
+        <span>Self como contexto · deícticos · perspectiva</span>
       </button>
 
-    </div>
+    </section>
 
   </main>
 
-  <footer class="footer-note">
-    Cada pantalla reproduce principios básicos del aprendizaje simbólico humano.
-  </footer>
-
-  <!-- Lógica JS -->
-  <script src="js/portada.js"></script>
+  <!-- JS ROBUSTO DE NAVEGACIÓN -->
+  <script>
+    function go(url) {
+      window.location.href = url;
+    }
+  </script>
 
 </body>
-
 </html>
