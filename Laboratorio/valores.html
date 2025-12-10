@@ -1,116 +1,207 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Laboratorio de Valores · El Motor de los Valores</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+// ----- UTILIDADES BÁSICAS -----
+const panelValores = document.getElementById("panelValores");
+const panelDirecciones = document.getElementById("panelDirecciones");
+const panelAcciones = document.getElementById("panelAcciones");
 
-  <link rel="stylesheet" href="css/valores.css">
-  <script defer src="js/valores.js"></script>
-</head>
-<body>
+const mensaje = document.getElementById("mensajeCentral");
+const btnSiguiente = document.getElementById("btnSiguiente");
+const btnReiniciar = document.getElementById("btnReiniciar");
 
-<div class="lab-fondo"></div>
+const slotValor = document.getElementById("slotValor");
+const zonaDirecciones = document.getElementById("zonaDirecciones");
+const zonaAcciones = document.getElementById("zonaAcciones");
 
-<main class="lab-container">
+const nivelDirecciones = document.getElementById("nivelDirecciones");
+const nivelAcciones = document.getElementById("nivelAcciones");
 
-  <!-- CABECERA -->
-  <header class="lab-header">
-    <h1>EL MOTOR DE LOS VALORES</h1>
-    <h2>Cómo un valor reorganiza una vida</h2>
-  </header>
+let fase = 1;
+let valorActivo = null;
+let tarjetaValorEnSlot = null;
 
-  <!-- ESCENA CENTRAL -->
-  <section class="escena">
+// ----- CLASIFICAR TARJETAS POR TIPO (según panel de origen) -----
+const tarjetas = document.querySelectorAll(".tarjeta.draggable");
 
-    <!-- TRIÁNGULO JERÁRQUICO -->
-    <div class="triangulo">
+tarjetas.forEach((card) => {
+  const bloqueId = card.closest(".bloque").id;
+  if (bloqueId === "panelValores") {
+    card.dataset.type = "valor";
+  } else if (bloqueId === "panelDirecciones") {
+    card.dataset.type = "direccion";
+  } else if (bloqueId === "panelAcciones") {
+    card.dataset.type = "accion";
+  }
+});
 
-      <div class="nivel nivel-valor" id="nivelValor">
-        <span class="nivel-titulo">VALOR</span>
-        <div class="slot dropzone" id="slotValor" data-zone="valor">
-          Arrastra un valor aquí
-        </div>
-      </div>
+// ----- EVENTOS DE DRAG & DROP PARA TARJETAS -----
+tarjetas.forEach((card) => {
+  card.addEventListener("dragstart", (e) => {
+    card.classList.add("dragging");
+    // necesario para que algunos navegadores permitan el drop
+    e.dataTransfer.setData("text/plain", "");
+  });
 
-      <div class="nivel nivel-direcciones" id="nivelDirecciones">
-        <span class="nivel-titulo">DIRECCIONES</span>
-        <div class="slot dropzone" id="zonaDirecciones" data-zone="direcciones">
-          Activa direcciones que coordinen con el valor
-        </div>
-      </div>
+  card.addEventListener("dragend", () => {
+    card.classList.remove("dragging");
+  });
+});
 
-      <div class="nivel nivel-acciones" id="nivelAcciones">
-        <span class="nivel-titulo">ACCIONES</span>
-        <div class="slot dropzone" id="zonaAcciones" data-zone="acciones">
-          Las acciones cambiarán de función bajo el valor
-        </div>
-      </div>
+// ----- ZONAS DE DROP -----
+const dropzones = document.querySelectorAll(".dropzone");
 
-    </div>
+dropzones.forEach((zone) => {
+  zone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    zone.classList.add("dropzone-over");
+  });
 
-    <!-- PANEL DE TARJETAS -->
-    <aside class="panel">
+  zone.addEventListener("dragleave", () => {
+    zone.classList.remove("dropzone-over");
+  });
 
-      <!-- FASE 1: VALORES -->
-      <div class="bloque activo" id="panelValores">
-        <h3>1 · Activa un VALOR</h3>
-        <p class="bloque-texto">
-          Arrastra un valor al vértice superior. A partir de allí, todo el sistema se reorganiza en torno a él.
-        </p>
-        <div class="tarjetas">
-          <div class="tarjeta draggable" draggable="true">Estar presente</div>
-          <div class="tarjeta draggable" draggable="true">Cuidar</div>
-          <div class="tarjeta draggable" draggable="true">Aprender</div>
-          <div class="tarjeta draggable" draggable="true">Ser honesto</div>
-        </div>
-      </div>
+  zone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    zone.classList.remove("dropzone-over");
 
-      <!-- FASE 2: DIRECCIONES -->
-      <div class="bloque" id="panelDirecciones">
-        <h3>2 · Elige DIRECCIONES coherentes</h3>
-        <p class="bloque-texto">
-          Solo algunas direcciones coordinan jerárquicamente con el valor. Las incoherentes serán rechazadas.
-        </p>
-        <div class="tarjetas">
-          <div class="tarjeta draggable" draggable="true">Escuchar</div>
-          <div class="tarjeta draggable" draggable="true">Acompañar</div>
-          <div class="tarjeta draggable" draggable="true">Compartir</div>
-          <div class="tarjeta draggable" draggable="true">Evitar</div>
-          <div class="tarjeta draggable" draggable="true">Desentenderse</div>
-        </div>
-      </div>
+    const card = document.querySelector(".tarjeta.dragging");
+    if (!card) return;
 
-      <!-- FASE 3: ACCIONES -->
-      <div class="bloque" id="panelAcciones">
-        <h3>3 · Coloca ACCIONES bajo el valor</h3>
-        <p class="bloque-texto">
-          Observa cómo acciones neutras o costosas cambian de función al estar subordinadas al valor.
-        </p>
-        <div class="tarjetas">
-          <div class="tarjeta draggable" draggable="true">Apagar el celular</div>
-          <div class="tarjeta draggable" draggable="true">Escuchar sin interrumpir</div>
-          <div class="tarjeta draggable" draggable="true">Levantarse temprano</div>
-          <div class="tarjeta draggable" draggable="true">Irse de la habitación</div>
-        </div>
-      </div>
+    const tipo = card.dataset.type;
+    const zona = zone.dataset.zone;
 
-    </aside>
+    if (zona === "valor") {
+      manejarDropValor(card, zone, tipo);
+    } else if (zona === "direcciones") {
+      manejarDropDireccion(card, zone, tipo);
+    } else if (zona === "acciones") {
+      manejarDropAccion(card, zone, tipo);
+    }
+  });
+});
 
-  </section>
+// ----- MANEJO DE DROP: VALOR -----
+function manejarDropValor(card, zone, tipo) {
+  if (tipo !== "valor") {
+    mostrarMensaje("En el vértice superior solo van VALORES, no direcciones ni acciones.");
+    marcarError(card);
+    return;
+  }
 
-  <!-- MENSAJE CENTRAL -->
-  <div class="mensaje" id="mensajeCentral">
-    Activa un valor para iniciar el sistema.
-  </div>
+  // Si ya había un valor, lo devolvemos al panel de valores
+  if (tarjetaValorEnSlot && tarjetaValorEnSlot !== card) {
+    const contenedorValores = panelValores.querySelector(".tarjetas");
+    contenedorValores.appendChild(tarjetaValorEnSlot);
+  }
 
-  <!-- BOTONES -->
-  <footer class="lab-footer">
-    <button id="btnReiniciar">Reiniciar laboratorio</button>
-    <button id="btnSiguiente">Siguiente capa</button>
-  </footer>
+  zone.textContent = "";
+  zone.appendChild(card);
+  tarjetaValorEnSlot = card;
+  valorActivo = card.textContent.trim();
 
-</main>
+  card.classList.remove("dragging");
 
-</body>
-</html>
+  mostrarMensaje(
+    `Has activado el valor “${valorActivo}”. Desde ahora, las direcciones y acciones cambiarán de significado.`
+  );
+
+  // Activamos visualmente niveles inferiores
+  nivelDirecciones.classList.add("nivel-activo");
+  panelDirecciones.classList.add("activo");
+  fase = 1;
+}
+
+// ----- MANEJO DE DROP: DIRECCIÓN -----
+function manejarDropDireccion(card, zone, tipo) {
+  if (!valorActivo) {
+    mostrarMensaje("Primero activa un VALOR antes de organizar direcciones.");
+    marcarError(card);
+    return;
+  }
+
+  if (tipo !== "direccion") {
+    mostrarMensaje("Aquí solo van DIRECCIONES de vida, no valores ni acciones.");
+    marcarError(card);
+    return;
+  }
+
+  const texto = card.textContent.trim();
+  const incoherentes = ["Evitar", "Desentenderse"];
+
+  if (incoherentes.includes(texto)) {
+    mostrarMensaje("Esta dirección no coordina jerárquicamente con el valor activo.");
+    marcarError(card);
+    return;
+  }
+
+  // Dirección aceptada
+  zone.appendChild(card);
+  card.classList.add("direccion-activa");
+  card.classList.remove("dragging");
+
+  mostrarMensaje(
+    `La dirección “${texto}” coordina con el valor “${valorActivo}”. Empieza a organizar un estilo de responder.`
+  );
+
+  nivelAcciones.classList.add("nivel-activo");
+  panelAcciones.classList.add("activo");
+  fase = 2;
+}
+
+// ----- MANEJO DE DROP: ACCIÓN -----
+function manejarDropAccion(card, zone, tipo) {
+  if (!valorActivo) {
+    mostrarMensaje("Primero activa un VALOR y al menos una DIRECCIÓN antes de colocar acciones.");
+    marcarError(card);
+    return;
+  }
+
+  if (tipo !== "accion") {
+    mostrarMensaje("En este nivel solo se colocan ACCIONES concretas.");
+    marcarError(card);
+    return;
+  }
+
+  zone.appendChild(card);
+  card.classList.add("accion-transformada");
+  card.classList.remove("dragging");
+
+  mostrarMensaje(
+    `La acción “${card.textContent.trim()}” ha cambiado de función por estar subordinada al valor “${valorActivo}”.`
+  );
+
+  fase = 3;
+}
+
+// ----- MENSAJES Y ERRORES -----
+function mostrarMensaje(texto) {
+  mensaje.textContent = texto;
+}
+
+function marcarError(card) {
+  card.classList.add("tarjeta-error");
+  setTimeout(() => card.classList.remove("tarjeta-error"), 400);
+}
+
+// ----- BOTONES -----
+btnSiguiente.addEventListener("click", () => {
+  if (fase === 1) {
+    mostrarMensaje(
+      "Ahora observa qué direcciones de vida se subordinan al valor y cuáles son incoherentes."
+    );
+  } else if (fase === 2) {
+    mostrarMensaje(
+      "Coloca acciones concretas y nota cómo su función cambia al estar bajo el valor."
+    );
+  } else if (fase === 3) {
+    mostrarMensaje(
+      "En clínica, trabajar con valores implica mantener la dirección aun con malestar presente."
+    );
+  } else {
+    mostrarMensaje(
+      "Puedes seguir probando combinaciones de direcciones y acciones bajo el mismo valor."
+    );
+  }
+});
+
+btnReiniciar.addEventListener("click", () => {
+  window.location.reload();
+});
