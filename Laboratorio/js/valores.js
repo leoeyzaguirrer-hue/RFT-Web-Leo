@@ -327,9 +327,9 @@ function updateDireccionesSlots() {
   } else {
     resumen.innerHTML = `<p><strong>Valor:</strong> ${valor.nombre}</p>
       <p>Todavía no has elegido direcciones. Hazlo para seguir construyendo la red.</p>`;
-    
   }
   updateUI();
+
 }
 
 // Preparar estructura base de acciones (fase 3)
@@ -571,7 +571,6 @@ function toggleReversaAccion(btn) {
   }
 
   actualizarResumenReversa();
-   updateUI();
 }
 
 // Actualizar resumen de fase 5
@@ -698,7 +697,7 @@ function updateUI() {
   btnAnterior.disabled = state.fase === 1;
 
   if (state.fase === state.maxFase) {
-  btnSiguiente.disabled = state.reversaAccionesElegidas.length === 0;
+    btnSiguiente.disabled = true;
   } else {
     if (state.fase === 1) {
       btnSiguiente.disabled = !state.valorSeleccionado;
