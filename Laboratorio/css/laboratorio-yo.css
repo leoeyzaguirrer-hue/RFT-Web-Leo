@@ -1,750 +1,282 @@
-/* RESET MUY SUAVE */
-*,
-*::before,
-*::after {
+/* ===============================
+   BASE GLOBAL PREMIUM
+================================ */
+
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #fdf8ff 0%, #f0f7ff 40%, #e6f1ff 100%);
-  color: #123058;
+  background: radial-gradient(circle at top, #fdf8ff 0%, #eef4ff 40%, #e1ecff 100%);
+  color: #0e2a52;
+  font-size: 20px;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding: 3rem 2rem 5rem;
 }
 
-/* FONDO SUAVE */
-.lab-yo-bg {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at top, #ffffff 0, #eaf3ff 45%, #d6e7ff 100%);
-  opacity: 0.9;
-  z-index: -1;
-}
+/* ===============================
+   CABECERA
+================================ */
 
-/* CONTENEDOR PRINCIPAL */
-
-.lab-yo-container {
-  max-width: 1200px;
-  margin: 2rem auto 3rem;
-  padding: 1.5rem;
-}
-
-/* CABECERA */
-
-.lab-yo-header {
+.lab-header {
   text-align: center;
-  margin-bottom: 2rem;
-}
-
-.lab-yo-subtitle {
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.8rem;
-  color: #6c7ca3;
-  margin-bottom: 0.4rem;
+  margin-bottom: 3.5rem;
 }
 
 .lab-yo-title {
-  font-size: clamp(2.1rem, 2.7vw, 2.7rem);
-  letter-spacing: 0.07em;
+  font-size: clamp(3rem, 5vw, 4rem);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #11274f;
-  margin-bottom: 0.2rem;
+  color: #0d2a55;
+  margin-bottom: 0.8rem;
 }
 
 .lab-yo-subtitle-2 {
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  color: #36558d;
-  margin-bottom: 1rem;
+  color: #355d9a;
+  margin-bottom: 1.2rem;
 }
 
 .lab-yo-intro {
-  font-size: 0.98rem;
-  max-width: 720px;
+  font-size: 1.3rem;
+  max-width: 980px;
   margin: 0 auto;
-  color: #3e4f73;
-  line-height: 1.5;
+  color: #3f557d;
 }
 
-/* LAYOUT PRINCIPAL */
+/* ===============================
+   LAYOUT PRINCIPAL
+================================ */
 
-.lab-yo-layout {
+.lab-main {
   display: grid;
-  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: stretch;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* PANEL IZQUIERDO: YO */
+/* ===============================
+   TARJETAS PREMIUM
+================================ */
+
+.card {
+  background: linear-gradient(180deg, #fcfdff 0%, #f1f6ff 100%);
+  border-radius: 32px;
+  padding: 2.4rem 2.6rem;
+  box-shadow: 0 22px 44px rgba(15, 40, 90, 0.18);
+  font-size: 1.3rem;
+}
+
+.card-soft {
+  background: linear-gradient(180deg, #f7fbff 0%, #edf3ff 100%);
+}
+
+/* ===============================
+   CONTENEDOR DEL YO
+================================ */
 
 .yo-panel {
-  background: linear-gradient(180deg, #f5f6ff 0%, #e9f0ff 100%);
-  border-radius: 32px;
-  padding: 1.4rem;
-  box-shadow: 0 18px 40px rgba(17, 39, 79, 0.18);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  gap: 2rem;
+  height: 100%;
 }
 
-.yo-panel-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #102447;
+.yo-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #143660;
 }
-
-/* CONTENEDOR DEL YO */
 
 .yo-container {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 300px;
+  height: 300px;
   border-radius: 999px;
   background: radial-gradient(circle at top, #ffffff 0%, #e6f0ff 55%, #d5e4ff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  box-shadow: inset 0 0 0 2px rgba(90, 120, 180, 0.15),
+              0 18px 35px rgba(20, 60, 120, 0.25);
   transition: box-shadow 0.4s ease, transform 0.3s ease, background 0.5s ease;
 }
 
+.yo-container.active {
+  box-shadow:
+    inset 0 0 18px rgba(100, 160, 255, 0.6),
+    inset 0 0 0 3px rgba(120, 170, 255, 0.45),
+    0 25px 60px rgba(80, 140, 255, 0.45);
+  transform: scale(1.02);
+}
+
 .yo-figure {
-  font-size: 4rem;
+  font-size: 7rem;
   z-index: 2;
 }
 
-/* Aura */
-
-.yo-aura {
-  position: absolute;
-  inset: 14px;
-  border-radius: inherit;
-  border: 2px dashed rgba(17, 39, 79, 0.15);
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, transparent 70%);
-  transition: border 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-}
-
-/* Niveles de iluminación */
-
-.yo-container.nivel-0 .yo-aura {
-  border-style: dashed;
-  border-color: rgba(17, 39, 79, 0.12);
-  box-shadow: none;
-}
-
-.yo-container.nivel-1 .yo-aura {
-  border-style: solid;
-  border-color: rgba(46, 92, 167, 0.55);
-  box-shadow: 0 0 12px rgba(46, 92, 167, 0.4);
-}
-
-.yo-container.nivel-2 .yo-aura {
-  border-style: solid;
-  border-width: 2px;
-  border-color: rgba(46, 92, 167, 0.8);
-  box-shadow: 0 0 18px rgba(46, 92, 167, 0.6), 0 0 35px rgba(63, 129, 233, 0.4);
-}
-
-.yo-container.nivel-3 .yo-aura {
-  border-width: 3px;
-  border-color: rgba(255, 184, 60, 0.9);
-  box-shadow: 0 0 20px rgba(255, 184, 60, 0.7), 0 0 45px rgba(63, 129, 233, 0.5);
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 232, 0.95) 45%, transparent 75%);
-}
-
-.yo-container.nivel-3 {
-  transform: translateY(-4px);
-}
-
-/* Ejes deícticos */
+/* ===============================
+   EJES DEÍCTICOS
+================================ */
 
 .yo-axes {
   width: 100%;
-  margin-top: 0.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.yo-axis-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #4c618a;
-}
-
-.axis-dots {
-  opacity: 0.5;
-}
-
-.yo-panel-note {
-  font-size: 0.8rem;
-  color: #5a6e96;
-  text-align: center;
-}
-
-/* PANEL DERECHO: FASES */
-
-.fase-panel {
-  background: #ffffff;
-  border-radius: 32px;
-  padding: 1.6rem 1.7rem 1.9rem;
-  box-shadow: 0 18px 40px rgba(13, 38, 77, 0.18);
-}
-
-/* Indicador superior */
-
-.fase-indicador {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: #4a628d;
-}
-
-.fase-progreso {
-  font-weight: 600;
-  padding: 0.15rem 0.7rem;
-  border-radius: 999px;
-  background: #eef3ff;
-}
-
-/* Fases */
-
-.fase {
-  display: none;
-}
-
-.fase.activa {
-  display: block;
-}
-
-.fase-titulo {
   font-size: 1.2rem;
-  font-weight: 700;
-  color: #11274f;
-  margin-bottom: 0.4rem;
-}
-
-.fase-texto {
-  font-size: 0.95rem;
-  color: #435476;
-  margin-bottom: 1.1rem;
-  line-height: 1.5;
-}
-
-/* Grid de fase */
-
-.fase-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-  gap: 1rem;
-}
-
-/* Tarjetas generales */
-
-.card {
-  background: linear-gradient(180deg, #f9fbff 0%, #f2f6ff 100%);
-  border-radius: 24px;
-  padding: 1.1rem 1.2rem;
-  box-shadow: 0 12px 22px rgba(15, 35, 70, 0.12);
-}
-
-.card-simple .card-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #8292b9;
-  margin-bottom: 0.4rem;
-}
-
-.card-main {
-  font-size: 0.98rem;
-  color: #2e4168;
-  line-height: 1.5;
-}
-
-/* Fase 1 · Drag & drop */
-
-.card-droppable-zone .card-question {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-  color: #16305a;
-}
-
-.drag-item {
-  margin-bottom: 0.7rem;
-  padding: 0.6rem 0.8rem;
-  border-radius: 999px;
-  background: #fff5cf;
-  color: #634300;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-align: center;
-  cursor: grab;
-  box-shadow: 0 6px 10px rgba(160, 120, 0, 0.25);
-}
-
-.drag-item.dragging {
-  opacity: 0.7;
-}
-
-.drop-row {
-  display: flex;
-  gap: 0.7rem;
-}
-
-.drop-target {
-  flex: 1;
-  border-radius: 18px;
-  background: #eef3ff;
-  padding: 0.6rem 0.7rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed transparent;
-  transition: border 0.2s ease, background 0.2s ease, transform 0.15s ease;
-}
-
-.drop-target.over {
-  border-color: #3f7ae8;
-  background: #e2ecff;
-  transform: translateY(-2px);
-}
-
-.drop-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #16305a;
-}
-
-.drop-slot {
-  font-size: 0.8rem;
-  color: #60719a;
-  text-align: center;
-}
-
-.feedback {
-  margin-top: 0.7rem;
-  font-size: 0.88rem;
-  color: #345176;
-}
-
-/* Diálogo fase 2 */
-
-.card-dialogo-header {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #2b3f65;
-  margin-bottom: 0.5rem;
-}
-
-.emoji-speaker {
-  font-size: 1.4rem;
-}
-
-.card-question {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #132b54;
-  margin-bottom: 0.4rem;
-}
-
-.card-hint {
-  font-size: 0.85rem;
-  color: #6979a1;
-}
-
-.card-respuesta .card-answer {
-  font-size: 0.98rem;
-  min-height: 2.4rem;
-  margin-bottom: 0.7rem;
-  color: #2f4168;
-}
-
-/* Contador preguntas */
-
-.fase-footer {
+  color: #395a94;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 0.9rem;
-}
-
-.fase-contador {
-  font-size: 0.85rem;
-  color: #4a628d;
-}
-
-/* Escena aquí–allá */
-
-.card-escena {
-  text-align: center;
-}
-
-.escena-fila {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 0.8rem;
-}
-
-.escena-persona {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.1rem;
-}
-
-.escena-persona .escena-label {
-  font-size: 0.85rem;
-  color: #41547a;
-}
-
-.escena-lugares {
-  display: flex;
-  justify-content: space-around;
   margin-top: 0.5rem;
 }
 
-.escena-lugar {
-  padding: 0.4rem 0.7rem;
-  border-radius: 999px;
-  background: #eef3ff;
-  font-size: 0.9rem;
-  color: #2c4269;
+.yo-axes div {
+  line-height: 1.6;
 }
 
-/* Opciones generales */
-
-.card-opciones .card-question {
-  margin-bottom: 0.6rem;
-}
-
-.btn-opcion,
-.btn-opcion-final {
-  width: 100%;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  border: 2px solid transparent;
-  background: #ffffff;
-  font-size: 0.98rem;
-  margin-bottom: 0.4rem;
-  cursor: pointer;
-  text-align: left;
-  color: #1f3257;
-  transition: background 0.2s ease, transform 0.15s ease, border 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.btn-opcion:hover,
-.btn-opcion-final:hover {
-  background: #f3f6ff;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 12px rgba(17, 39, 79, 0.18);
-}
-
-.btn-opcion.correcta,
-.btn-opcion-final.correcta {
-  border-color: #30a46c;
-  background: #e9f9f0;
-}
-
-.btn-opcion.incorrecta,
-.btn-opcion-final.incorrecta {
-  border-color: #e45858;
-  background: #ffe9e9;
-}
-
-/* Línea temporal fase 4 */
-
-.card-timeline {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.timeline {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.timeline-point {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.timeline-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  background: #3f7ae8;
-}
-
-.timeline-line {
-  flex: 1;
-  height: 3px;
-  background: linear-gradient(90deg, #bfcdf4, #3f7ae8);
-  border-radius: 999px;
-}
-
-.timeline-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #1d3259;
-}
-
-.timeline-opcion {
-  padding: 0.5rem 0.8rem;
-  border-radius: 999px;
-  background: #ffffff;
-  font-size: 0.95rem;
-  margin-bottom: 0.4rem;
-  cursor: pointer;
-  border: 1px solid #d5def7;
-  transition: background 0.2s ease, border 0.2s ease, transform 0.15s ease;
-}
-
-.timeline-opcion.seleccionada-antes {
-  border-color: #f3a33b;
-  background: #fff4e4;
-}
-
-.timeline-opcion.seleccionada-ahora {
-  border-color: #3f7ae8;
-  background: #e6f0ff;
-}
-
-/* Selfing fase 5 */
-
-.fase-dos-columnas {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.card-self {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.self-header {
-  font-size: 0.9rem;
-  font-weight: 700;
-  padding: 0.4rem 0.7rem;
-  border-radius: 999px;
+.yo-footer {
+  font-size: 1.1rem;
+  color: #4d648f;
   text-align: center;
 }
 
-.self-header.sano {
-  background: #e4f7ee;
-  color: #22724a;
-}
+/* ===============================
+   PANEL DE FASE
+================================ */
 
-.self-header.problematico {
-  background: #ffe6e6;
-  color: #9b1d1d;
-}
-
-.self-lista {
-  list-style: none;
-  font-size: 0.95rem;
-  color: #2b3f65;
+.fase-panel {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 1.8rem;
 }
 
-.self-lista li::before {
-  content: "• ";
-  margin-right: 0.1rem;
-}
-
-.btn-self {
-  margin-top: 0.4rem;
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  border-radius: 999px;
-  border: 2px solid transparent;
-  font-size: 0.95rem;
-  cursor: pointer;
-  background: #ffffff;
-  color: #1f3257;
-  transition: background 0.2s ease, transform 0.15s ease, border 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.btn-self:hover {
-  background: #f1f4ff;
-  transform: translateY(-1px);
-  box-shadow: 0 7px 14px rgba(19, 41, 80, 0.18);
-}
-
-.btn-self.seleccionado-sano {
-  border-color: #30a46c;
-  background: #e9f9f0;
-}
-
-.btn-self.seleccionado-problematico {
-  border-color: #e45858;
-  background: #ffe9e9;
-}
-
-/* Micro tarjeta análisis funcional */
-
-.micro-card {
-  margin-top: 0.3rem;
-  padding: 0.5rem 0.6rem;
-  border-radius: 14px;
-  background: #fff9e6;
-  border: 1px solid #f5d47a;
-}
-
-.micro-title {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #7b6119;
-  margin-bottom: 0.1rem;
-}
-
-.micro-text {
-  font-size: 0.8rem;
-  color: #6b5819;
-}
-
-/* Fase 6 */
-
-.icon-row {
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 0.4rem;
-}
-
-.fase-cierre {
-  margin-top: 1.2rem;
-  padding: 1rem 1.1rem;
-  border-radius: 20px;
-  background: linear-gradient(180deg, #fff7e9 0%, #fff3dd 100%);
-  border: 1px solid #f1cf80;
-}
-
-.fase-cierre h4 {
+.fase-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #5678aa;
   font-size: 1rem;
-  margin-bottom: 0.4rem;
-  color: #7a5512;
+  font-weight: 600;
 }
 
-.fase-cierre p {
-  font-size: 0.92rem;
-  color: #6a4f1a;
+.fase-titulo {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f2f63;
 }
 
-/* BOTONES GENERALES */
+.fase-texto {
+  font-size: 1.3rem;
+  color: #415a82;
+}
+
+/* ===============================
+   BLOQUES INTERNOS
+================================ */
+
+.inner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+}
+
+.regla-clinica {
+  background: linear-gradient(180deg, #f4f8ff 0%, #e9efff 100%);
+  border-radius: 22px;
+  padding: 1.8rem;
+  font-size: 1.25rem;
+  color: #35588f;
+}
+
+.regla-clinica strong {
+  color: #0f2f63;
+}
+
+.tarea-panel {
+  background: linear-gradient(180deg, #fff8dd 0%, #ffeec0 100%);
+  border-radius: 22px;
+  padding: 1.8rem;
+}
+
+.tarea-panel h4 {
+  font-size: 1.35rem;
+  color: #755000;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.tarea-objeto {
+  background: linear-gradient(180deg, #fff4c2 0%, #ffe29f 100%);
+  border-radius: 999px;
+  padding: 1rem 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 18px rgba(160, 120, 20, 0.35);
+}
+
+/* ===============================
+   ZONAS YO / TÚ
+================================ */
+
+.zonas {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.zona {
+  flex: 1;
+  padding: 1.2rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #f1f6ff 0%, #e6efff 100%);
+  text-align: center;
+  font-weight: 700;
+  color: #0f2f63;
+}
+
+/* ===============================
+   BOTONES PREMIUM
+================================ */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  padding: 0.7rem 1.3rem;
+  gap: 0.6rem;
+  padding: 1.3rem 2.8rem;
   border-radius: 999px;
   border: none;
-  font-size: 0.96rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 800;
   cursor: pointer;
-  margin-top: 0.9rem;
-  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease,
-    opacity 0.2s ease;
+  margin-top: 2rem;
+  transition: all 0.2s ease;
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #f6b942 0%, #f59f00 100%);
-  color: #4a3200;
-  box-shadow: 0 14px 24px rgba(169, 107, 0, 0.32);
+  background: linear-gradient(135deg, #ffcd63, #ffb200);
+  color: #543800;
+  box-shadow: 0 10px 26px rgba(255, 180, 0, 0.45);
 }
 
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 34px rgba(169, 107, 0, 0.42);
+.btn-primary:hover {
+  transform: translateY(-2px);
 }
 
-.btn-secondary {
-  background: linear-gradient(90deg, #315eab 0%, #3f7ae8 100%);
-  color: #ffffff;
-  box-shadow: 0 14px 24px rgba(22, 52, 105, 0.35);
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.btn-secondary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 34px rgba(22, 52, 105, 0.45);
-}
+/* ===============================
+   RESPONSIVE PREMIUM
+================================ */
 
-.btn:disabled {
-  opacity: 0.45;
-  cursor: default;
-  box-shadow: none;
-  transform: none;
-}
-
-/* Btn pequeños de siguiente */
-
-.btn-next {
-  width: 100%;
-  justify-content: center;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-  .lab-yo-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .yo-panel {
-    order: 1;
-  }
-
-  .fase-panel {
-    order: 2;
-  }
-
-  .fase-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .lab-yo-container {
-    padding: 1rem;
-  }
-
-  .card {
-    border-radius: 18px;
-  }
-
-  .yo-container {
-    width: 150px;
-    height: 150px;
-  }
-
-  .lab-yo-title {
-    font-size: 1.8rem;
-  }
-}
+@media
