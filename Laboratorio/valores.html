@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Laboratorio de Valores · RFT</title>
+  <title>El Motor de los Valores</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="css/valores.css">
 </head>
+
 <body>
 
 <div class="lab-bg">
@@ -15,99 +15,34 @@
     <header class="lab-header">
       <div class="lab-badge">LABORATORIO RFT · VALORES</div>
       <h1>EL MOTOR DE LOS VALORES</h1>
-      <p class="lab-subtitle">
-        Cómo un valor reorganiza direcciones de vida, acciones y persistencia ante el malestar.
-      </p>
+      <p class="lab-subtitle">Cómo un valor organiza direcciones de vida y acciones concretas.</p>
     </header>
 
-    <section class="lab-content">
+    <div class="lab-body">
 
-      <!-- FASE 1 -->
-      <div class="fase activa" id="fase1">
-        <h2>FASE 1 · ACTIVANDO EL VALOR</h2>
-        <p class="lab-texto">
-          Arrastra un valor al vértice superior del triángulo. Observa cómo, al activarse, este valor
-          comienza a reorganizar el significado de las acciones que aparecerán después.
-        </p>
+      <!-- COLUMNA PIRÁMIDE -->
+      <div class="piramide-columna">
+        <div id="piramideValor" class="triangulo valor">VALOR</div>
 
-        <div class="piramide nivel1" id="piramide">
-          <div class="nivel valor" id="zonaValor">SUELTA EL VALOR AQUÍ</div>
+        <div class="fila-direcciones">
+          <div class="triangulo direccion" id="dir1">—</div>
+          <div class="triangulo direccion" id="dir2">—</div>
+          <div class="triangulo direccion" id="dir3">—</div>
         </div>
 
-        <div class="tarjetas">
-          <div class="tarjeta" draggable="true">Estar presente</div>
-          <div class="tarjeta" draggable="true">Cuidar</div>
-          <div class="tarjeta" draggable="true">Aprender</div>
-          <div class="tarjeta" draggable="true">Contribuir</div>
-        </div>
+        <div class="fila-acciones" id="zonaAcciones"></div>
       </div>
 
-      <!-- FASE 2 -->
-      <div class="fase" id="fase2">
-        <h2>FASE 2 · DIRECCIONES DE VIDA</h2>
-        <p class="lab-texto">
-          Arrastra solo las direcciones coherentes con el valor activado. Las direcciones deben coordinar
-          jerárquicamente con el valor.
-        </p>
-
-        <div class="piramide nivel2">
-          <div class="nivel valor fijo" id="valorFijo"></div>
-          <div class="nivel direccion" id="zonaDireccion">SUELTA AQUÍ LAS DIRECCIONES</div>
-        </div>
-
-        <div class="tarjetas">
-          <div class="tarjeta direccion" data-correcta="true" draggable="true">Escuchar</div>
-          <div class="tarjeta direccion" data-correcta="true" draggable="true">Acompañar</div>
-          <div class="tarjeta direccion" data-correcta="true" draggable="true">Compartir</div>
-          <div class="tarjeta direccion" data-correcta="false" draggable="true">Evitar</div>
-          <div class="tarjeta direccion" data-correcta="false" draggable="true">Desentenderse</div>
-        </div>
+      <!-- COLUMNA TARJETAS -->
+      <div class="tarjetas-columna">
+        <h2 id="tituloFase">FASE 1 · ELIGE UN VALOR</h2>
+        <div id="contenedorTarjetas" class="tarjetas"></div>
       </div>
 
-      <!-- FASE 3 -->
-      <div class="fase" id="fase3">
-        <h2>FASE 3 · ACCIONES CONCRETAS</h2>
-        <p class="lab-texto">
-          Ahora observa cómo acciones simples transforman su función al quedar bajo una dirección coherente con el valor.
-        </p>
-
-        <div class="piramide nivel3">
-          <div class="nivel valor fijo" id="valorFinal"></div>
-          <div class="nivel direccion fija" id="direccionFinal"></div>
-          <div class="nivel accion" id="zonaAccion">SUELTA AQUÍ LAS ACCIONES</div>
-        </div>
-
-        <div class="tarjetas">
-          <div class="tarjeta accion" draggable="true">Apagar el celular</div>
-          <div class="tarjeta accion" draggable="true">Escuchar sin interrumpir</div>
-          <div class="tarjeta accion" draggable="true">Acompañar a dormir</div>
-        </div>
-      </div>
-
-      <!-- FASE 4 -->
-      <div class="fase" id="fase4">
-        <h2>FASE 4 · CONFLICTO CON LA COHERENCIA</h2>
-        <p class="lab-texto">
-          Aparecen pensamientos automáticos. Elige si seguir la coherencia o seguir la acción bajo valor.
-        </p>
-
-        <div class="conflicto">
-          <div class="pensamiento">“Seguro lo haré mal”</div>
-          <div class="pensamiento">“No soy buen padre”</div>
-        </div>
-
-        <div class="elecciones">
-          <button id="btnCoherencia">Seguir la coherencia</button>
-          <button id="btnValor">Seguir el valor</button>
-        </div>
-
-        <div class="resultado" id="resultadoFinal"></div>
-      </div>
-
-    </section>
+    </div>
 
     <footer class="lab-footer">
-      <button id="reiniciar">REINICIAR LABORATORIO</button>
+      <button id="reiniciar">REINICIAR</button>
       <button id="siguiente">SIGUIENTE</button>
     </footer>
 
