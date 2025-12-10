@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.lab-fondo {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #0a2a5c, #020617);
+  z-index: -1;
+}
+
+.lab-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+.lab-header {
+  text-align: center;
+  padding: 20px;
+}
+
+.lab-header h1 {
+  font-size: 48px;
+  letter-spacing: 2px;
+}
+
+.lab-header h2 {
+  font-size: 22px;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.escena {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 30px;
+  gap: 30px;
+}
+
+.triangulo {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.nivel {
+  border-radius: 30px;
+  padding: 25px;
+  text-align: center;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.nivel-valor {
+  background: linear-gradient(135deg, #fdbf12, #eaa800);
+  color: #000;
+}
+
+.nivel-direcciones {
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.nivel-acciones {
+  background: rgba(255,255,255,0.08);
+  border: 2px dashed rgba(255,255,255,0.2);
+}
+
+.nivel-titulo {
+  font-size: 16px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.slot {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.panel {
+  background: rgba(255,255,255,0.05);
+  border-radius: 30px;
+  padding: 25px;
+  backdrop-filter: blur(10px);
+}
+
+.bloque {
+  display: none;
+}
+
+.bloque.activo {
+  display: block;
+}
+
+.bloque h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.tarjeta {
+  background: rgba(255,255,255,0.15);
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 18px;
+  text-align: center;
+  cursor: grab;
+  transition: 0.3s;
+}
+
+.tarjeta:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.02);
+}
+
+.mensaje {
+  text-align: center;
+  font-size: 22px;
+  padding: 15px;
+  opacity: 0.9;
+}
+
+.lab-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+button {
+  font-size: 18px;
+  padding: 12px 28px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+#btnReiniciar {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+#btnSiguiente {
+  background: #fdbf12;
+  color: #000;
+}
