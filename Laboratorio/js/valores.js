@@ -1,75 +1,93 @@
-let faseActual = 0;
-const fases = document.querySelectorAll('.fase');
-const btnSiguiente = document.getElementById('siguiente');
-const btnReiniciar = document.getElementById('reiniciar');
+let fase = 1;
+let valorActivo = null;
+let direcciones = [];
 
-let valorSeleccionado = "";
-let direccionesCorrectas = 0;
+const valores = ["Aprender","Contribuir","Estar presente","Cuidar"];
+const direccionesPorValor = {
+  Aprender:["Practicar","Explorar","Estudiar"],
+  Contribuir:["Ayudar","Enseñar","Apoyar"],
+  "Estar presente":["Escuchar","Acompañar","Compartir"],
+  Cuidar:["Proteger","Atender","Validar"]
+};
 
-function mostrarFase(n) {
-  fases.forEach(f => f.classList.remove('activa'));
-  fases[n].classList.add('activa');
-}
+const accionesPorDireccion = {
+  Escuchar:["Apagar el celular","No interrumpir","Parafrasear"],
+  Acompañar:["Acompañar a dormir","Permanecer cerca","Validar emoción"],
+  Compartir:["Hablar","Jugar juntos","Contar experiencias"],
+  Practicar:["Repetir ejercicios","Simular","Corregir errores"],
+  Ayudar:["Apoyar en tareas","Orientar","Resolver juntos"]
+};
 
-btnSiguiente.addEventListener('click', () => {
-  if (faseActual < fases.length - 1) {
-    faseActual++;
-    mostrarFase(faseActual);
-  }
-});
+const titulo = document.getElementById("tituloFase");
+const contenedor = document.getElementById("contenedorTarjetas");
 
-btnReiniciar.addEventListener('click', () => {
-  location.reload();
-});
-
-document.querySelectorAll('.tarjeta').forEach(tarjeta => {
-  tarjeta.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('text', e.target.textContent);
-    e.dataTransfer.setData('correcta', e.target.dataset.correcta || "true");
-    e.dataTransfer.setData('tipo', e.target.classList.contains('direccion') ? 'direccion' :
-      e.target.classList.contains('accion') ? 'accion' : 'valor');
-  });
-});
-
-function activarDrop(zona, callback) {
-  zona.addEventListener('dragover', e => e.preventDefault());
-  zona.addEventListener('drop', e => {
-    e.preventDefault();
-    callback(e);
+function cargarValores() {
+  titulo.textContent = "FASE 1 · ELIGE UN VALOR";
+  contenedor.innerHTML = "";
+  valores.forEach(v=>{
+    const t=document.createElement("div");
+    t.className="tarjeta";
+    t.textContent=v;
+    t.onclick=()=>activarValor(v);
+    contenedor.appendChild(t);
   });
 }
 
-activarDrop(document.getElementById('zonaValor'), e => {
-  valorSeleccionado = e.dataTransfer.getData('text');
-  e.target.textContent = valorSeleccionado;
-  document.getElementById('valorFijo').textContent = valorSeleccionado;
-  document.getElementById('valorFinal').textContent = valorSeleccionado;
-});
+function activarValor(v){
+  valorActivo=v;
+  document.getElementById("piramideValor").textContent=v;
+}
 
-activarDrop(document.getElementById('zonaDireccion'), e => {
-  const correcta = e.dataTransfer.getData('correcta') === "true";
-  if (correcta) {
-    direccionesCorrectas++;
-    document.getElementById('direccionFinal').textContent =
-      e.dataTransfer.getData('text');
-  } else {
-    alert("Esta dirección no coordina con el valor activo.");
+function cargarDirecciones(){
+  titulo.textContent="FASE 2 · ELIGE 3 DIRECCIONES";
+  contenedor.innerHTML="";
+  direcciones=[];
+  direccionesPorValor[valorActivo].forEach(d=>{
+    const t=document.createElement("div");
+    t.className="tarjeta";
+    t.textContent=d;
+    t.onclick=()=>agregarDireccion(d);
+    contenedor.appendChild(t);
+  });
+}
+
+function agregarDireccion(d){
+  if(direcciones.length<3){
+    direcciones.push(d);
+    document.getElementById("dir"+direcciones.length).textContent=d;
   }
-});
+}
 
-activarDrop(document.getElementById('zonaAccion'), e => {
-  e.target.textContent = e.dataTransfer.getData('text');
-  e.target.classList.add('correcta');
-});
+function cargarAcciones(){
+  titulo.textContent="FASE 3 · ACCIONES CONCRETAS";
+  contenedor.innerHTML="";
+  document.getElementById("zonaAcciones").innerHTML="";
+  direcciones.forEach(d=>{
+    accionesPorDireccion[d]?.forEach(a=>{
+      const t=document.createElement("div");
+      t.className="tarjeta";
+      t.textContent=a;
+      t.onclick=()=>agregarAccion(a);
+      contenedor.appendChild(t);
+    });
+  });
+}
 
-document.getElementById('btnValor').addEventListener('click', () => {
-  document.getElementById('resultadoFinal').textContent =
-    "Elegiste el valor: la coherencia sigue presente, pero la dirección de tu conducta cambia.";
-});
+function agregarAccion(a){
+  const el=document.createElement("div");
+  el.className="accion";
+  el.textContent=a;
+  document.getElementById("zonaAcciones").appendChild(el);
+}
 
-document.getElementById('btnCoherencia').addEventListener('click', () => {
-  document.getElementById('resultadoFinal').textContent =
-    "Elegiste la coherencia: el malestar dirige nuevamente tu acción.";
-});
+document.getElementById("siguiente").onclick=()=>{
+  if(fase===1 && valorActivo){
+    fase=2; cargarDirecciones();
+  }else if(fase===2 && direcciones.length===3){
+    fase=3; cargarAcciones();
+  }
+};
 
-mostrarFase(0);
+document.getElementById("reiniciar").onclick=()=>location.reload();
+
+cargarValores();
