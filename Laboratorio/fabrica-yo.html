@@ -1,101 +1,182 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Laboratorio RFT · La Fábrica del Yo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/fabrica-yo.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Laboratorio RFT · La Fábrica del Yo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<div class="fy-bg-gradient"></div>
+    <!-- Estilos del laboratorio -->
+    <link rel="stylesheet" href="css/fabrica-yo.css" />
+  </head>
+  <body>
+    <div class="fy-bg-gradient"></div>
 
-<main class="fy-lab-wrapper">
+    <main class="fy-lab-wrapper">
+      <!-- ENCABEZADO -->
+      <header class="fy-header">
+        <div class="fy-lab-pill">LABORATORIO RFT · SELF DEÍCTICO</div>
+        <h1 class="fy-title">LA FÁBRICA DEL YO</h1>
+        <p class="fy-subtitle">
+          Cómo el lenguaje construye a quien dice “yo”. Este laboratorio no se
+          organiza por niveles de dificultad, sino por capas de perspectiva. El
+          self no es un contenido, es un lugar relacional desde donde se
+          responde.
+        </p>
+      </header>
 
-  <header class="fy-header">
-    <div class="fy-lab-pill">LABORATORIO RFT · SELF DEÍCTICO</div>
-    <h1 class="fy-title">LA FÁBRICA DEL YO</h1>
-    <p class="fy-subtitle">
-      El self no es un contenido. Es un lugar relacional desde donde se organiza la experiencia.
-    </p>
-  </header>
+      <!-- TARJETA PRINCIPAL -->
+      <section class="fy-lab-card">
+        <!-- COLUMNA IZQUIERDA: MAPA DEL YO -->
+        <aside class="fy-left-panel">
+          <div class="fy-silhouette-wrapper">
+            <!-- Ejes deícticos -->
+            <div class="fy-deictic-axes">
+              <div class="fy-axis fy-axis-persona">
+                <span>YO</span>
+                <span>TÚ</span>
+              </div>
+              <div class="fy-axis fy-axis-tiempo">
+                <span>AHORA</span>
+                <span>ENTONCES</span>
+              </div>
+              <div class="fy-axis fy-axis-espacio">
+                <span>AQUÍ</span>
+                <span>ALLÁ</span>
+              </div>
+            </div>
 
-  <section class="fy-lab-card">
+            <!-- Contenedor del yo -->
+            <div class="fy-silhouette-base">
+              <div
+                class="fy-deictic-container fy-level-0"
+                id="deicticContainer"
+              >
+                <div class="fy-silhouette">
+                  <div class="fy-silhouette-face" id="childFace">🧒</div>
+                </div>
+              </div>
+            </div>
 
-    <!-- PANEL IZQUIERDO -->
-    <aside class="fy-left-panel">
-      <div class="fy-deictic-axes">
-        <div class="fy-axis"><span>YO</span><span>TÚ</span></div>
-        <div class="fy-axis"><span>AHORA</span><span>ENTONCES</span></div>
-        <div class="fy-axis"><span>AQUÍ</span><span>ALLÁ</span></div>
-      </div>
-
-      <div class="fy-silhouette-base">
-        <div class="fy-deictic-container fy-hidden" id="deicticContainer">
-          <div class="fy-silhouette">
-            <div class="fy-silhouette-face" id="childFace">🧒</div>
+            <!-- Métricas -->
+            <div class="fy-metrics">
+              <div class="fy-metric-pill">
+                <span class="fy-metric-label">Fase actual</span>
+                <span id="faseLabel" class="fy-metric-value">
+                  Fase 1 · Marcos de persona, lugar y tiempo (niño–adulto)
+                </span>
+              </div>
+              <div class="fy-metric-pill">
+                <span class="fy-metric-label">Pregunta</span>
+                <span id="preguntaLabel" class="fy-metric-value">1 / 8</span>
+              </div>
+              <div class="fy-metric-pill fy-metric-clarity">
+                <span class="fy-metric-label">YO–AQUÍ–AHORA</span>
+                <span id="claridadLabel" class="fy-metric-value-grande">0%</span>
+              </div>
+            </div>
           </div>
+        </aside>
+
+        <!-- COLUMNA DERECHA: INTERACCIÓN -->
+        <section class="fy-right-panel">
+          <div class="fy-phase-tag" id="phaseTag">
+            FASE 1D · NIÑO Y ADULTO
+          </div>
+          <h2 class="fy-phase-title" id="phaseTitle">
+            ENTRENANDO EL PUNTO DE «YO»
+          </h2>
+          <p class="fy-phase-text" id="phaseDescription">
+            Responde como si fueras el niño que aprende a diferenciar quién es
+            él, quién es el otro, dónde está y cuándo ocurren las cosas. No
+            estamos describiendo tu personalidad, sino estabilizando el lugar
+            desde donde respondes.
+          </p>
+
+          <!-- ESCENA NIÑO–ADULTO -->
+          <div class="fy-scene" id="sceneChildAdult">
+            <div class="fy-character fy-adult">
+              <div class="fy-avatar fy-avatar-adult">🧑‍🦱</div>
+              <p class="fy-character-label">ADULTO</p>
+              <div class="fy-speech-bubble" id="adultQuestion">
+                ¿Quién eres tú?
+              </div>
+            </div>
+
+            <div class="fy-character fy-child">
+              <div class="fy-avatar fy-avatar-child">🧒</div>
+              <p class="fy-character-label">NIÑO</p>
+              <div class="fy-answer-options" id="answerOptions">
+                <!-- Botones generados por JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- ESCENA CONTENIDOS DEL YO -->
+          <div class="fy-scene fy-scene-hidden" id="sceneContents">
+            <div class="fy-contents-field">
+              <div class="fy-bubble fy-bubble-thought" id="bubbleThought">
+                “Soy aburrido”
+              </div>
+              <div class="fy-bubble fy-bubble-emotion" id="bubbleEmotion">
+                Nudo en el pecho
+              </div>
+              <div class="fy-bubble fy-bubble-memory" id="bubbleMemory">
+                Recuerdo cuando me gritaron
+              </div>
+              <div class="fy-bubble fy-bubble-fear" id="bubbleFear">
+                Miedo ahora
+              </div>
+            </div>
+
+            <div class="fy-contents-panel">
+              <p class="fy-contents-question" id="contentsQuestion">
+                ¿Qué está ocurriendo en tu mente ahora?
+              </p>
+              <div class="fy-answer-options" id="contentsOptions">
+                <!-- Botones generados por JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- FEEDBACK -->
+          <div class="fy-feedback" id="feedbackArea">
+            Recuerda: estamos entrenando el lugar desde donde respondes, no tus
+            rasgos de personalidad.
+          </div>
+
+          <!-- BOTONES -->
+          <div class="fy-actions">
+            <button class="fy-secondary-button" id="resetButton">
+              REINICIAR LABORATORIO
+            </button>
+            <button class="fy-primary-button" id="nextButton" disabled>
+              SIGUIENTE
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <!-- TARJETA FINAL · “AQUÍ HAY UN PUNTO DESDE DONDE TODO SE ORGANIZA” -->
+      <div class="fy-final-overlay" id="finalOverlay">
+        <div class="fy-final-card">
+          <h2>✅ Aquí hay un punto desde donde todo se organiza</h2>
+          <p>
+            Has construido un locus estable de <strong>YO–AQUÍ–AHORA</strong>.
+            Este es el yo como contexto: no es un contenido, es el lugar desde
+            donde se organizan pensamientos, emociones, recuerdos y acciones.
+          </p>
+          <p>
+            En los siguientes módulos, este punto de vista servirá como base
+            para trabajar selfing, flexibilidad y valores en contexto.
+          </p>
+          <button class="fy-primary-button" id="finalRestartButton">
+            REINICIAR Y VOLVER A EMPEZAR
+          </button>
         </div>
       </div>
+    </main>
 
-      <div class="fy-metrics">
-        <div class="fy-metric-pill">
-          <span>Pregunta</span><span id="preguntaLabel">1 / 8</span>
-        </div>
-        <div class="fy-metric-pill fy-metric-clarity">
-          <span>Estabilidad YO–AQUÍ–AHORA</span>
-          <span id="claridadLabel" class="fy-metric-value-grande">0%</span>
-        </div>
-      </div>
-    </aside>
-
-    <!-- PANEL DERECHO -->
-    <section class="fy-right-panel">
-      <div class="fy-phase-tag">FASE · CONSTRUCCIÓN DEL PUNTO DE VISTA</div>
-
-      <h2 class="fy-phase-title">ENTRENANDO EL PUNTO DE «YO»</h2>
-
-      <p class="fy-phase-text">
-        Cada respuesta construye progresivamente el lugar desde donde respondes.
-      </p>
-
-      <div class="fy-scene">
-        <div class="fy-character">
-          <div class="fy-avatar fy-avatar-adult">🧑‍🦱</div>
-          <div class="fy-speech-bubble" id="adultQuestion"></div>
-        </div>
-
-        <div class="fy-character">
-          <div class="fy-avatar fy-avatar-child">🧒</div>
-          <div class="fy-answer-options" id="answerOptions"></div>
-        </div>
-      </div>
-
-      <div class="fy-feedback" id="feedbackArea"></div>
-
-      <div class="fy-actions">
-        <button class="fy-secondary-button" id="resetButton">REINICIAR</button>
-        <button class="fy-primary-button" id="nextButton" disabled>SIGUIENTE</button>
-      </div>
-    </section>
-
-  </section>
-
-  <!-- TARJETA FINAL -->
-  <div class="fy-final-overlay" id="finalOverlay">
-    <div class="fy-final-card">
-      <h2>✅ Aquí hay un punto desde donde todo se organiza</h2>
-      <p>
-        Ahora respondes desde un locus estable de <strong>YO–AQUÍ–AHORA</strong>.
-        Este es el yo como contexto: no es un contenido, es el lugar desde donde
-        aparecen pensamientos, emociones, recuerdos y acciones.
-      </p>
-      <button class="fy-primary-button" onclick="location.reload()">Reiniciar laboratorio</button>
-    </div>
-  </div>
-
-</main>
-
-<script src="js/fabrica-yo.js"></script>
-</body>
+    <!-- LÓGICA DEL LABORATORIO -->
+    <script src="js/fabrica-yo.js" defer></script>
+  </body>
 </html>
