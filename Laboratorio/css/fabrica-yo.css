@@ -547,4 +547,93 @@ body {
 
 /* OVERLAY FINAL */
 .fy-final-overlay {
-  position
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 15, 32, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.fy-final-overlay-active {
+  display: flex;
+}
+
+.fy-final-card {
+  max-width: 560px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 28px 26px 26px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.fy-final-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.fy-final-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .fy-lab-card {
+    grid-template-columns: 1fr;
+    padding: 22px 18px 20px;
+  }
+
+  .fy-left-panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(16, 37, 66, 0.08);
+    padding-right: 0;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+  }
+
+  .fy-silhouette-base {
+    width: 190px;
+    height: 280px;
+  }
+
+  .fy-scene {
+    flex-direction: column;
+  }
+
+  .fy-actions {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .fy-title {
+    font-size: 1.7rem;
+    letter-spacing: 0.14em;
+  }
+
+  .fy-subtitle {
+    font-size: 0.96rem;
+  }
+
+  .fy-phase-title {
+    font-size: 1.4rem;
+  }
+
+  .fy-phase-text {
+    font-size: 0.96rem;
+  }
+
+  .fy-contents-question {
+    font-size: 1rem;
+  }
+
+  .fy-answer-button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
