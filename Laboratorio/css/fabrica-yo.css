@@ -1,0 +1,531 @@
+/* Reset básico */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: #f5f7fb;
+  color: #102542;
+}
+
+/* Fondo general */
+.fy-bg-gradient {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, #ffe9b3 0, transparent 40%),
+    radial-gradient(circle at bottom right, #b4e2ff 0, transparent 45%),
+    linear-gradient(135deg, #fdfdfd 0, #e3f0ff 60%, #fff8e1 100%);
+  z-index: -1;
+}
+
+/* Contenedor principal */
+.fy-lab-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 32px;
+}
+
+/* Header */
+.fy-header {
+  max-width: 1100px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.fy-lab-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px dashed rgba(16, 37, 66, 0.28);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(16, 37, 66, 0.7);
+  margin-bottom: 8px;
+}
+
+.fy-title {
+  font-family: "Coco Gothic", "Poppins", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 1.9rem;
+  color: #102542;
+  margin-bottom: 6px;
+}
+
+.fy-subtitle {
+  font-size: 0.98rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: rgba(16, 37, 66, 0.8);
+}
+
+/* Tarjeta principal */
+.fy-lab-card {
+  max-width: 1180px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 28px;
+  box-shadow: 0 26px 80px rgba(0, 55, 110, 0.12);
+  padding: 24px 26px;
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 24px;
+}
+
+/* Panel izquierdo */
+.fy-left-panel {
+  border-right: 1px solid rgba(16, 37, 66, 0.08);
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fy-silhouette-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ejes deícticos */
+.fy-deictic-axes {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 6px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.fy-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(16, 37, 66, 0.72);
+}
+
+.fy-axis span:first-child {
+  font-weight: 700;
+}
+
+/* Silueta + contenedor */
+.fy-silhouette-base {
+  position: relative;
+  width: 180px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fy-deictic-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  border: 2px dashed rgba(0, 128, 255, 0.25);
+  box-shadow: 0 0 20px rgba(0, 150, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(179, 225, 255, 0.3) 0,
+    transparent 60%
+  );
+  transition: box-shadow 0.3s ease, border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.fy-silhouette {
+  width: 65px;
+  height: 160px;
+  border-radius: 50px;
+  background: linear-gradient(180deg, #0e294b 0, #1b3d73 100%);
+  position: relative;
+}
+
+.fy-silhouette::before {
+  content: "";
+  position: absolute;
+  top: -48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #0e294b 0, #1b3d73 100%);
+}
+
+/* Niveles de claridad del contenedor */
+.fy-level-0 {
+  border-style: dotted;
+  border-color: rgba(0, 128, 255, 0.18);
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.10);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(179, 225, 255, 0.2) 0,
+    transparent 60%
+  );
+}
+
+.fy-level-1 {
+  border-color: rgba(0, 140, 255, 0.32);
+  box-shadow: 0 0 22px rgba(0, 150, 255, 0.25);
+}
+
+.fy-level-2 {
+  border-color: rgba(0, 140, 255, 0.46);
+  box-shadow: 0 0 28px rgba(0, 155, 255, 0.3);
+}
+
+.fy-level-3 {
+  border-width: 2.5px;
+  border-color: rgba(0, 140, 255, 0.6);
+  box-shadow: 0 0 34px rgba(0, 170, 255, 0.35);
+}
+
+.fy-level-4 {
+  border-width: 3px;
+  border-color: rgba(0, 140, 255, 0.75);
+  box-shadow: 0 0 42px rgba(0, 180, 255, 0.4);
+}
+
+.fy-level-5,
+.fy-level-6,
+.fy-level-7,
+.fy-level-8 {
+  border-width: 3.5px;
+  border-color: rgba(0, 140, 255, 0.9);
+  box-shadow: 0 0 48px rgba(0, 190, 255, 0.48);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(179, 225, 255, 0.5) 0,
+    transparent 60%
+  );
+}
+
+/* Métricas */
+.fy-metrics {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.fy-metric-pill {
+  font-size: 0.78rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(16, 37, 66, 0.03);
+  border: 1px solid rgba(16, 37, 66, 0.08);
+}
+
+/* Panel derecho */
+.fy-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fy-phase-tag {
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e4f5ff;
+  color: #0b3a5f;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.fy-phase-title {
+  font-family: "Coco Gothic", "Poppins", system-ui, sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #102542;
+}
+
+.fy-phase-text {
+  font-size: 0.96rem;
+  color: rgba(16, 37, 66, 0.86);
+}
+
+/* Escenas */
+.fy-scene {
+  margin-top: 4px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f3f8ff 0, #fdfdfd 60%);
+  border: 1px solid rgba(16, 37, 66, 0.06);
+  padding: 16px 16px 18px;
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  min-height: 190px;
+}
+
+.fy-scene-hidden {
+  display: none;
+}
+
+/* Niño–adulto */
+.fy-character {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.fy-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.fy-avatar-adult {
+  background: radial-gradient(circle at top, #ffd29b 0, #f0a652 40%, #f68b45 100%);
+}
+
+.fy-avatar-child {
+  background: radial-gradient(circle at top, #9cc5ff 0, #4f86ff 40%, #2b5adf 100%);
+}
+
+.fy-character-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(16, 37, 66, 0.7);
+}
+
+.fy-speech-bubble {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(16, 37, 66, 0.08);
+  font-size: 0.92rem;
+  text-align: center;
+  color: rgba(16, 37, 66, 0.9);
+}
+
+.fy-answer-options {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Burbuja de contenidos */
+.fy-contents-field {
+  flex: 1.2;
+  position: relative;
+  min-height: 160px;
+  padding: 10px;
+}
+
+.fy-bubble {
+  position: absolute;
+  padding: 8px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  max-width: 140px;
+  opacity: 0.15;
+  transform: scale(0.96);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fy-bubble-thought {
+  top: 8px;
+  left: 10px;
+  background: #fffaf2;
+  border: 1px solid rgba(255, 193, 112, 0.5);
+}
+
+.fy-bubble-emotion {
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%) scale(0.96);
+  background: #ffeef2;
+  border: 1px solid rgba(244, 143, 177, 0.6);
+}
+
+.fy-bubble-memory {
+  bottom: 10px;
+  right: 12px;
+  background: #f3ecff;
+  border: 1px solid rgba(171, 143, 255, 0.6);
+}
+
+.fy-bubble-fear {
+  top: 18px;
+  right: 18px;
+  background: #e8f5ff;
+  border: 1px solid rgba(129, 199, 255, 0.7);
+}
+
+/* Estado activo de burbujas */
+.fy-bubble-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Panel derecho de contenidos */
+.fy-contents-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fy-contents-question {
+  font-size: 0.96rem;
+  color: rgba(16, 37, 66, 0.9);
+}
+
+/* Botones de respuesta */
+.fy-answer-button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid rgba(16, 37, 66, 0.12);
+  box-shadow: 0 4px 10px rgba(12, 36, 72, 0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease, border-color 0.15s ease;
+}
+
+.fy-answer-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(12, 36, 72, 0.12);
+}
+
+.fy-answer-button-correct {
+  background: #e4f7e9;
+  border-color: #66bb6a;
+}
+
+.fy-answer-button-wrong {
+  background: #ffeceb;
+  border-color: #ef5350;
+}
+
+/* Feedback */
+.fy-feedback {
+  min-height: 40px;
+  font-size: 0.88rem;
+  margin-top: 4px;
+  color: rgba(16, 37, 66, 0.9);
+}
+
+/* Botones principales */
+.fy-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.fy-primary-button,
+.fy-secondary-button {
+  border-radius: 999px;
+  border: none;
+  padding: 9px 18px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fy-primary-button {
+  background: #ffd76f;
+  box-shadow: 0 8px 18px rgba(214, 158, 67, 0.55);
+  color: #5c4206;
+  border: 1px solid rgba(153, 112, 24, 0.55);
+}
+
+.fy-primary-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+}
+
+.fy-secondary-button {
+  background: #ffffff;
+  border: 1px dashed rgba(16, 37, 66, 0.3);
+  color: rgba(16, 37, 66, 0.8);
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .fy-lab-card {
+    grid-template-columns: 1fr;
+    padding: 18px 16px 20px;
+  }
+
+  .fy-left-panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(16, 37, 66, 0.08);
+    padding-right: 0;
+    padding-bottom: 14px;
+    margin-bottom: 10px;
+  }
+
+  .fy-silhouette-base {
+    width: 150px;
+    height: 220px;
+  }
+
+  .fy-scene {
+    flex-direction: column;
+  }
+
+  .fy-actions {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .fy-title {
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+  }
+
+  .fy-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .fy-phase-title {
+    font-size: 1.1rem;
+  }
+
+  .fy-phase-text {
+    font-size: 0.9rem;
+  }
+}
