@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratorio de Valores · El Motor de los Valores</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/valores.css">
+
+  <script defer src="js/valores.js"></script>
+</head>
+<body>
+
+<div class="lab-fondo"></div>
+
+<main class="lab-container">
+
+  <!-- CABECERA -->
+  <header class="lab-header">
+    <h1>EL MOTOR DE LOS VALORES</h1>
+    <h2>Cómo un valor reorganiza una vida</h2>
+  </header>
+
+  <!-- ESCENA CENTRAL -->
+  <section class="escena">
+
+    <!-- TRIÁNGULO JERÁRQUICO -->
+    <div class="triangulo">
+
+      <div class="nivel nivel-valor" id="nivelValor">
+        <span class="nivel-titulo">VALOR</span>
+        <div class="slot" id="slotValor">Arrastra un valor aquí</div>
+      </div>
+
+      <div class="nivel nivel-direcciones" id="nivelDirecciones">
+        <span class="nivel-titulo">DIRECCIONES</span>
+        <div class="slot">Actívalas desde el valor</div>
+      </div>
+
+      <div class="nivel nivel-acciones" id="nivelAcciones">
+        <span class="nivel-titulo">ACCIONES</span>
+        <div class="slot">Las acciones cambiarán de función</div>
+      </div>
+
+    </div>
+
+    <!-- PANEL DE TARJETAS -->
+    <aside class="panel">
+
+      <div class="bloque activo" id="panelValores">
+        <h3>Selecciona un VALOR</h3>
+        <div class="tarjetas">
+          <div class="tarjeta draggable" draggable="true">Estar presente</div>
+          <div class="tarjeta draggable" draggable="true">Cuidar</div>
+          <div class="tarjeta draggable" draggable="true">Aprender</div>
+          <div class="tarjeta draggable" draggable="true">Ser honesto</div>
+        </div>
+      </div>
+
+      <div class="bloque" id="panelDirecciones">
+        <h3>Selecciona DIRECCIONES coherentes</h3>
+        <div class="tarjetas">
+          <div class="tarjeta draggable" draggable="true">Escuchar</div>
+          <div class="tarjeta draggable" draggable="true">Acompañar</div>
+          <div class="tarjeta draggable" draggable="true">Evitar</div>
+          <div class="tarjeta draggable" draggable="true">Desentenderse</div>
+        </div>
+      </div>
+
+      <div class="bloque" id="panelAcciones">
+        <h3>Selecciona ACCIONES</h3>
+        <div class="tarjetas">
+          <div class="tarjeta draggable" draggable="true">Apagar el celular</div>
+          <div class="tarjeta draggable" draggable="true">Escuchar sin interrumpir</div>
+          <div class="tarjeta draggable" draggable="true">Levantarse temprano</div>
+          <div class="tarjeta draggable" draggable="true">Irse de la habitación</div>
+        </div>
+      </div>
+
+    </aside>
+
+  </section>
+
+  <!-- MENSAJE CENTRAL -->
+  <div class="mensaje" id="mensajeCentral">
+    Activa un valor para iniciar el sistema.
+  </div>
+
+  <!-- BOTONES -->
+  <footer class="lab-footer">
+    <button id="btnReiniciar">Reiniciar</button>
+    <button id="btnSiguiente">Siguiente</button>
+  </footer>
+
+</main>
+
+</body>
+</html>
