@@ -327,7 +327,9 @@ function updateDireccionesSlots() {
   } else {
     resumen.innerHTML = `<p><strong>Valor:</strong> ${valor.nombre}</p>
       <p>Todavía no has elegido direcciones. Hazlo para seguir construyendo la red.</p>`;
+    
   }
+  updateUI();
 }
 
 // Preparar estructura base de acciones (fase 3)
