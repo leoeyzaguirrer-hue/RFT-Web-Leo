@@ -2,109 +2,118 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Laboratorio de Valores · Motor Jerárquico</title>
+  <title>Laboratorio de Valores · RFT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/valores.css">
-  <script defer src="js/valores.js"></script>
 </head>
 <body>
 
-<div class="lab-bg"></div>
+<div class="lab-bg">
+  <div class="lab-card">
 
-<main class="lab-wrap">
+    <header class="lab-header">
+      <div class="lab-badge">LABORATORIO RFT · VALORES</div>
+      <h1>EL MOTOR DE LOS VALORES</h1>
+      <p class="lab-subtitle">
+        Cómo un valor reorganiza direcciones de vida, acciones y persistencia ante el malestar.
+      </p>
+    </header>
 
-  <header class="lab-header">
-    <h1>EL MOTOR DE LOS VALORES</h1>
-    <h2>Estructura jerárquica, augmenting y transformación de funciones</h2>
-  </header>
+    <section class="lab-content">
 
-  <section class="lab-scene">
+      <!-- FASE 1 -->
+      <div class="fase activa" id="fase1">
+        <h2>FASE 1 · ACTIVANDO EL VALOR</h2>
+        <p class="lab-texto">
+          Arrastra un valor al vértice superior del triángulo. Observa cómo, al activarse, este valor
+          comienza a reorganizar el significado de las acciones que aparecerán después.
+        </p>
 
-    <!-- CONTENEDOR VISUAL DEL TRIÁNGULO -->
-    <div class="piramide-wrap">
+        <div class="piramide nivel1" id="piramide">
+          <div class="nivel valor" id="zonaValor">SUELTA EL VALOR AQUÍ</div>
+        </div>
 
-      <!-- TRIÁNGULO DECORATIVO -->
-      <div class="piramide-deco"></div>
-
-      <!-- ZONAS REALES DE DROP -->
-      <div class="zona-drop zona-valor oculto" id="zonaValor" data-zone="valor">
-        Arrastra un VALOR aquí
-      </div>
-
-      <div class="zona-drop zona-direcciones oculto" id="zonaDirecciones" data-zone="direccion">
-        Arrastra DIRECCIONES aquí
-      </div>
-
-      <div class="zona-drop zona-acciones oculto" id="zonaAcciones" data-zone="accion">
-        Arrastra ACCIONES aquí
-      </div>
-
-    </div>
-
-    <!-- PANEL -->
-    <aside class="panel">
-
-      <div class="bloque activo" id="panelValores">
-        <h3>1 · Activa un VALOR</h3>
         <div class="tarjetas">
           <div class="tarjeta" draggable="true">Estar presente</div>
           <div class="tarjeta" draggable="true">Cuidar</div>
           <div class="tarjeta" draggable="true">Aprender</div>
-          <div class="tarjeta" draggable="true">Ser honesto</div>
+          <div class="tarjeta" draggable="true">Contribuir</div>
         </div>
       </div>
 
-      <div class="bloque" id="panelDirecciones">
-        <h3>2 · Organiza DIRECCIONES</h3>
+      <!-- FASE 2 -->
+      <div class="fase" id="fase2">
+        <h2>FASE 2 · DIRECCIONES DE VIDA</h2>
+        <p class="lab-texto">
+          Arrastra solo las direcciones coherentes con el valor activado. Las direcciones deben coordinar
+          jerárquicamente con el valor.
+        </p>
+
+        <div class="piramide nivel2">
+          <div class="nivel valor fijo" id="valorFijo"></div>
+          <div class="nivel direccion" id="zonaDireccion">SUELTA AQUÍ LAS DIRECCIONES</div>
+        </div>
+
         <div class="tarjetas">
-          <div class="tarjeta" draggable="true">Escuchar</div>
-          <div class="tarjeta" draggable="true">Acompañar</div>
-          <div class="tarjeta" draggable="true">Compartir</div>
-          <div class="tarjeta" draggable="true">Evitar</div>
-          <div class="tarjeta" draggable="true">Desentenderse</div>
+          <div class="tarjeta direccion" data-correcta="true" draggable="true">Escuchar</div>
+          <div class="tarjeta direccion" data-correcta="true" draggable="true">Acompañar</div>
+          <div class="tarjeta direccion" data-correcta="true" draggable="true">Compartir</div>
+          <div class="tarjeta direccion" data-correcta="false" draggable="true">Evitar</div>
+          <div class="tarjeta direccion" data-correcta="false" draggable="true">Desentenderse</div>
         </div>
       </div>
 
-      <div class="bloque" id="panelAcciones">
-        <h3>3 · Coloca ACCIONES</h3>
+      <!-- FASE 3 -->
+      <div class="fase" id="fase3">
+        <h2>FASE 3 · ACCIONES CONCRETAS</h2>
+        <p class="lab-texto">
+          Ahora observa cómo acciones simples transforman su función al quedar bajo una dirección coherente con el valor.
+        </p>
+
+        <div class="piramide nivel3">
+          <div class="nivel valor fijo" id="valorFinal"></div>
+          <div class="nivel direccion fija" id="direccionFinal"></div>
+          <div class="nivel accion" id="zonaAccion">SUELTA AQUÍ LAS ACCIONES</div>
+        </div>
+
         <div class="tarjetas">
-          <div class="tarjeta" draggable="true">Apagar el celular</div>
-          <div class="tarjeta" draggable="true">Escuchar sin interrumpir</div>
-          <div class="tarjeta" draggable="true">Levantarse temprano</div>
-          <div class="tarjeta" draggable="true">Irse de la habitación</div>
+          <div class="tarjeta accion" draggable="true">Apagar el celular</div>
+          <div class="tarjeta accion" draggable="true">Escuchar sin interrumpir</div>
+          <div class="tarjeta accion" draggable="true">Acompañar a dormir</div>
         </div>
       </div>
 
-    </aside>
+      <!-- FASE 4 -->
+      <div class="fase" id="fase4">
+        <h2>FASE 4 · CONFLICTO CON LA COHERENCIA</h2>
+        <p class="lab-texto">
+          Aparecen pensamientos automáticos. Elige si seguir la coherencia o seguir la acción bajo valor.
+        </p>
 
-  </section>
+        <div class="conflicto">
+          <div class="pensamiento">“Seguro lo haré mal”</div>
+          <div class="pensamiento">“No soy buen padre”</div>
+        </div>
 
-  <div class="mensaje" id="mensajeCentral">Arrastra un valor para iniciar.</div>
+        <div class="elecciones">
+          <button id="btnCoherencia">Seguir la coherencia</button>
+          <button id="btnValor">Seguir el valor</button>
+        </div>
 
-  <footer class="lab-footer">
-    <button id="btnReiniciar">Reiniciar</button>
-    <button id="btnSiguiente" disabled>Siguiente capa</button>
-  </footer>
+        <div class="resultado" id="resultadoFinal"></div>
+      </div>
 
-</main>
+    </section>
 
-<!-- MODAL FINAL -->
-<div class="modal oculto" id="modalFinal">
-  <div class="modal-box">
-    <h2>¿Qué es un valor desde ACT y RFT?</h2>
-    <p>
-      Un valor funciona como un <strong>marco jerárquico superior</strong> que
-      organiza direcciones de vida y transforma la función de las acciones.
-    </p>
-    <p>
-      Desde RFT, los valores operan como <strong>augmenting motivacional</strong>,
-      alterando la importancia psicológica de las consecuencias sin eliminar
-      el malestar.
-    </p>
-    <button id="cerrarModal">Cerrar</button>
+    <footer class="lab-footer">
+      <button id="reiniciar">REINICIAR LABORATORIO</button>
+      <button id="siguiente">SIGUIENTE</button>
+    </footer>
+
   </div>
 </div>
 
+<script src="js/valores.js"></script>
 </body>
 </html>
