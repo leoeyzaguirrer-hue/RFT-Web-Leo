@@ -1,580 +1,150 @@
-/* Reset básico */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
 body {
-  height: 100%;
-}
-
-body {
-  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: Noto Sans, sans-serif;
   background: #f5f7fb;
-  color: #102542;
-  font-size: 16px;
+  margin: 0;
 }
 
-/* Fondo general */
 .fy-bg-gradient {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top left, #ffe3a3 0, transparent 45%),
-    radial-gradient(circle at bottom right, #b2e1ff 0, transparent 45%),
-    linear-gradient(135deg, #fdfdfd 0, #e4f1ff 60%, #fff6dd 100%);
+  background: radial-gradient(circle at top left,#ffe3a3,transparent 50%),
+              radial-gradient(circle at bottom right,#b2e1ff,transparent 50%);
   z-index: -1;
 }
 
-/* Contenedor principal */
 .fy-lab-wrapper {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px 16px 40px;
+  padding: 40px;
 }
 
-/* Header */
 .fy-header {
-  max-width: 1160px;
   text-align: center;
-  margin-bottom: 26px;
-}
-
-.fy-lab-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 22px;
-  border-radius: 999px;
-  border: 1px dashed rgba(16, 37, 66, 0.28);
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(16, 37, 66, 0.75);
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .fy-title {
-  font-family: "Coco Gothic", "Poppins", system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 2rem;
-  color: #102542;
-  margin-bottom: 8px;
+  font-size: 2.2rem;
+  letter-spacing: 0.2em;
 }
 
-.fy-subtitle {
-  font-size: 1.05rem;
-  line-height: 1.5;
-  max-width: 880px;
-  margin: 0 auto;
-  color: rgba(16, 37, 66, 0.85);
-}
-
-/* Tarjeta principal */
 .fy-lab-card {
-  max-width: 1180px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.97);
-  border-radius: 32px;
-  box-shadow: 0 28px 84px rgba(0, 55, 110, 0.18);
-  padding: 28px 30px 26px;
+  background: white;
+  border-radius: 30px;
+  padding: 30px;
   display: grid;
-  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
-  gap: 26px;
+  grid-template-columns: 330px 1fr;
+  gap: 30px;
 }
 
-/* Panel izquierdo */
 .fy-left-panel {
-  border-right: 1px solid rgba(16, 37, 66, 0.08);
-  padding-right: 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.fy-silhouette-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Ejes deícticos */
-.fy-deictic-axes {
-  display: grid;
-  grid-template-rows: repeat(3, auto);
-  gap: 8px;
-  margin-bottom: 20px;
-  width: 100%;
+  text-align: center;
 }
 
 .fy-axis {
   display: flex;
   justify-content: space-between;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgba(16, 37, 66, 0.8);
-}
-
-.fy-axis span:first-child {
+  margin: 8px 0;
   font-weight: 700;
+  letter-spacing: 0.15em;
 }
 
-/* Silueta + contenedor */
 .fy-silhouette-base {
-  position: relative;
-  width: 210px;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 20px 0;
+  height: 260px;
 }
 
 .fy-deictic-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  width: 200px;
+  height: 260px;
+  margin: auto;
   border-radius: 999px;
-  border: 3px dashed rgba(0, 128, 255, 0.28);
-  box-shadow: 0 0 26px rgba(0, 150, 255, 0.22);
+  border: 3px dashed rgba(0,140,255,.3);
+  box-shadow: 0 0 35px rgba(0,160,255,.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(179, 225, 255, 0.42) 0,
-    transparent 60%
-  );
-  transition: box-shadow 0.3s ease, border-color 0.3s ease,
-    background 0.3s ease, transform 0.2s ease;
+  opacity: 0;
+  transition: all .4s;
+}
+
+.fy-deictic-container.fy-visible {
+  opacity: 1;
 }
 
 .fy-silhouette {
-  width: 80px;
-  height: 190px;
+  width: 70px;
+  height: 180px;
+  background: linear-gradient(#0c2850,#1f4279);
   border-radius: 60px;
-  background: linear-gradient(180deg, #0c2850 0, #1f4279 100%);
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
 }
 
 .fy-silhouette-face {
   font-size: 2.6rem;
   position: absolute;
-  top: -54px;
+  top: -55px;
+  filter: blur(6px);
+  opacity: .3;
+  transition: all .4s;
 }
 
-/* Niveles de claridad del contenedor */
-.fy-level-0 {
-  border-style: dotted;
-  border-color: rgba(0, 128, 255, 0.18);
-  box-shadow: 0 0 16px rgba(0, 150, 255, 0.12);
-  background: radial-gradient(
-    ellipse at center,
-    rgba(179, 225, 255, 0.22) 0,
-    transparent 60%
-  );
-  transform: scale(0.96);
-}
-
-.fy-level-1 {
-  border-color: rgba(0, 140, 255, 0.35);
-  box-shadow: 0 0 26px rgba(0, 155, 255, 0.28);
-  transform: scale(0.98);
-}
-
-.fy-level-2 {
-  border-color: rgba(0, 140, 255, 0.45);
-  box-shadow: 0 0 30px rgba(0, 160, 255, 0.32);
-  transform: scale(1);
-}
-
-.fy-level-3 {
-  border-width: 3.2px;
-  border-color: rgba(0, 140, 255, 0.6);
-  box-shadow: 0 0 36px rgba(0, 170, 255, 0.38);
-}
-
-.fy-level-4 {
-  border-width: 3.4px;
-  border-color: rgba(0, 140, 255, 0.75);
-  box-shadow: 0 0 42px rgba(0, 180, 255, 0.42);
-}
-
-.fy-level-5,
-.fy-level-6,
-.fy-level-7,
-.fy-level-8 {
-  border-width: 3.8px;
-  border-color: rgba(0, 140, 255, 0.95);
-  box-shadow: 0 0 54px rgba(0, 195, 255, 0.55);
-  background: radial-gradient(
-    ellipse at center,
-    rgba(179, 225, 255, 0.6) 0,
-    transparent 60%
-  );
-}
-
-/* Métricas */
-.fy-metrics {
-  margin-top: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
+.fy-face-clear {
+  filter: blur(0);
+  opacity: 1;
 }
 
 .fy-metric-pill {
-  font-size: 0.95rem;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(16, 37, 66, 0.03);
-  border: 1px solid rgba(16, 37, 66, 0.09);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.fy-metric-label {
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.8rem;
-}
-
-.fy-metric-value {
-  font-weight: 500;
-}
-
-.fy-metric-clarity {
-  background: linear-gradient(90deg, #e7f4ff 0, #fff7d6 100%);
+  margin: 10px 0;
 }
 
 .fy-metric-value-grande {
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 1.7rem;
+  font-weight: bold;
   color: #084c8a;
 }
 
-/* Panel derecho */
-.fy-right-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.fy-phase-tag {
-  align-self: flex-start;
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: #e3f4ff;
-  color: #0b3a5f;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-}
-
-.fy-phase-title {
-  font-family: "Coco Gothic", "Poppins", system-ui, sans-serif;
-  font-size: 1.7rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: #102542;
-}
-
-.fy-phase-text {
-  font-size: 1.02rem;
-  line-height: 1.6;
-  color: rgba(16, 37, 66, 0.9);
-}
-
-/* Escenas */
 .fy-scene {
-  margin-top: 2px;
+  display: flex;
+  gap: 20px;
+  background: #f3f7ff;
   border-radius: 22px;
-  background: linear-gradient(135deg, #f3f7ff 0, #fdfdfd 70%);
-  border: 1px solid rgba(16, 37, 66, 0.06);
-  padding: 18px 18px 20px;
-  display: flex;
-  gap: 18px;
-  align-items: stretch;
-  min-height: 210px;
-}
-
-.fy-scene-hidden {
-  display: none;
-}
-
-/* Niño–adulto */
-.fy-character {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  padding: 20px;
 }
 
 .fy-avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 3rem;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
 }
 
-.fy-avatar-adult {
-  background: radial-gradient(circle at top, #ffe2b5 0, #f3a65b 40%, #f47f39 100%);
-}
-
-.fy-avatar-child {
-  background: radial-gradient(circle at top, #b1d5ff 0, #4c87ff 45%, #2752db 100%);
-}
-
-.fy-character-label {
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: rgba(16, 37, 66, 0.8);
-}
-
-.fy-speech-bubble {
-  margin-top: 6px;
-  padding: 12px 16px;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(16, 37, 66, 0.08);
-  font-size: 1.05rem;
-  text-align: center;
-  color: rgba(16, 37, 66, 0.96);
-}
-
-.fy-answer-options {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-/* Burbuja de contenidos */
-.fy-contents-field {
-  flex: 1.2;
-  position: relative;
-  min-height: 190px;
-  padding: 12px;
-}
-
-.fy-bubble {
-  position: absolute;
-  padding: 10px 12px;
-  border-radius: 16px;
-  font-size: 0.98rem;
-  max-width: 190px;
-  opacity: 0.18;
-  transform: scale(0.95);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.fy-bubble-thought {
-  top: 10px;
-  left: 10px;
-  background: #fff6e8;
-  border: 1px solid rgba(255, 193, 112, 0.7);
-}
-
-.fy-bubble-emotion {
-  top: 50%;
-  left: 6px;
-  transform: translateY(-50%) scale(0.95);
-  background: #ffe9f0;
-  border: 1px solid rgba(244, 143, 177, 0.8);
-}
-
-.fy-bubble-memory {
-  bottom: 12px;
-  right: 12px;
-  background: #f0e7ff;
-  border: 1px solid rgba(171, 143, 255, 0.8);
-}
-
-.fy-bubble-fear {
-  top: 22px;
-  right: 22px;
-  background: #e5f3ff;
-  border: 1px solid rgba(129, 199, 255, 0.9);
-}
-
-/* Estado activo de burbujas */
-.fy-bubble-active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Panel derecho de contenidos */
-.fy-contents-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.fy-contents-question {
-  font-size: 1.08rem;
-  color: rgba(16, 37, 66, 0.96);
-}
-
-/* Botones de respuesta */
 .fy-answer-button {
-  border: none;
+  font-size: 1.2rem;
+  padding: 10px 22px;
   border-radius: 999px;
-  padding: 10px 18px;
-  font-size: 1.02rem;
   cursor: pointer;
-  background: #ffffff;
-  border: 1px solid rgba(16, 37, 66, 0.12);
-  box-shadow: 0 5px 14px rgba(12, 36, 72, 0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.fy-answer-button:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(12, 36, 72, 0.18);
-}
-
-.fy-answer-button:disabled {
-  cursor: default;
-  opacity: 0.85;
-}
-
-.fy-answer-button-correct {
-  background: #e4f7e9;
-  border-color: #43a047;
-  color: #13521a;
-}
-
-.fy-answer-button-wrong {
-  background: #ffe9e8;
-  border-color: #e53935;
-  color: #8b1515;
-}
-
-/* Feedback */
-.fy-feedback {
-  min-height: 64px;
-  font-size: 1.02rem;
-  margin-top: 6px;
-  line-height: 1.5;
-  color: rgba(16, 37, 66, 0.96);
-}
-
-/* Botones principales */
-.fy-actions {
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-.fy-primary-button,
-.fy-secondary-button {
-  border-radius: 999px;
-  border: none;
-  padding: 11px 22px;
-  font-size: 1.02rem;
-  cursor: pointer;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .fy-primary-button {
   background: #ffd76f;
-  box-shadow: 0 10px 22px rgba(214, 158, 67, 0.65);
-  color: #5c4206;
-  border: 1px solid rgba(153, 112, 24, 0.65);
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-size: 1rem;
 }
 
-.fy-primary-button:disabled {
-  opacity: 0.5;
-  cursor: default;
-  box-shadow: none;
+.fy-final-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
-.fy-secondary-button {
-  background: #ffffff;
-  border: 1px dashed rgba(16, 37, 66, 0.4);
-  color: rgba(16, 37, 66, 0.86);
+.fy-final-overlay.active {
+  display: flex;
 }
 
-/* Responsivo */
-@media (max-width: 900px) {
-  .fy-lab-card {
-    grid-template-columns: 1fr;
-    padding: 22px 18px 20px;
-  }
-
-  .fy-left-panel {
-    border-right: none;
-    border-bottom: 1px solid rgba(16, 37, 66, 0.08);
-    padding-right: 0;
-    padding-bottom: 16px;
-    margin-bottom: 14px;
-  }
-
-  .fy-silhouette-base {
-    width: 190px;
-    height: 280px;
-  }
-
-  .fy-scene {
-    flex-direction: column;
-  }
-
-  .fy-actions {
-    justify-content: space-between;
-  }
-}
-
-@media (max-width: 600px) {
-  .fy-title {
-    font-size: 1.7rem;
-    letter-spacing: 0.14em;
-  }
-
-  .fy-subtitle {
-    font-size: 0.96rem;
-  }
-
-  .fy-phase-title {
-    font-size: 1.4rem;
-  }
-
-  .fy-phase-text {
-    font-size: 0.96rem;
-  }
-
-  .fy-contents-question {
-    font-size: 1rem;
-  }
-
-  .fy-answer-button {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
+.fy-final-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
 }
