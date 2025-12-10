@@ -698,7 +698,7 @@ function updateUI() {
   btnAnterior.disabled = state.fase === 1;
 
   if (state.fase === state.maxFase) {
-    btnSiguiente.disabled = true;
+  btnSiguiente.disabled = state.reversaAccionesElegidas.length === 0;
   } else {
     if (state.fase === 1) {
       btnSiguiente.disabled = !state.valorSeleccionado;
