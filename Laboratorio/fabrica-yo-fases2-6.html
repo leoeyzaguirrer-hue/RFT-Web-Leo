@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>La Fábrica del Yo · Fases 2–6</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Estilos del laboratorio (segunda parte) -->
+    <link rel="stylesheet" href="css/fabrica-yo-fases2-6.css" />
+  </head>
+  <body>
+    <div class="fy-bg-gradient"></div>
+
+    <main class="fy-lab-wrapper">
+      <!-- ENCABEZADO -->
+      <header class="fy-header">
+        <div class="fy-lab-pill">LABORATORIO RFT · SELF DEÍCTICO</div>
+        <h1 class="fy-title">LA FÁBRICA DEL YO · CAPAS 2–6</h1>
+        <p class="fy-subtitle">
+          Aquí partimos de un punto de <strong>YO–AQUÍ–AHORA</strong> ya
+          construido. Ahora exploramos cómo lugar, tiempo, contenido y
+          selfing se organizan alrededor de ese punto de vista.
+        </p>
+      </header>
+
+      <!-- TARJETA PRINCIPAL -->
+      <section class="fy-lab-card">
+        <!-- PANEL IZQUIERDO: CONTENEDOR ESTABLE -->
+        <aside class="fy-left-panel">
+          <div class="fy-silhouette-wrapper">
+            <!-- Ejes deícticos -->
+            <div class="fy-deictic-axes">
+              <div class="fy-axis fy-axis-persona">
+                <span>YO</span>
+                <span>TÚ</span>
+              </div>
+              <div class="fy-axis fy-axis-tiempo">
+                <span>AHORA</span>
+                <span>ANTES</span>
+              </div>
+              <div class="fy-axis fy-axis-espacio">
+                <span>AQUÍ</span>
+                <span>ALLÁ</span>
+              </div>
+            </div>
+
+            <!-- Contenedor del yo (ya estable) -->
+            <div class="fy-silhouette-base">
+              <div class="fy-deictic-container fy-level-estable">
+                <div class="fy-silhouette">
+                  <div class="fy-silhouette-face fy-face-clear">🧒</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Métricas -->
+            <div class="fy-metrics">
+              <div class="fy-metric-pill">
+                <span class="fy-metric-label">Fase</span>
+                <span id="faseLabel" class="fy-metric-value">
+                  Fase 2 · Aquí–Allá
+                </span>
+              </div>
+              <div class="fy-metric-pill">
+                <span class="fy-metric-label">Paso</span>
+                <span id="pasoLabel" class="fy-metric-value">1 / 6</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- PANEL DERECHO: INTERACCIÓN -->
+        <section class="fy-right-panel">
+          <div class="fy-phase-tag" id="phaseTag">FASE 2 · AQUÍ–ALLÁ</div>
+          <h2 class="fy-phase-title" id="phaseTitle">
+            PERSPECTIVA ESPACIAL DEL YO
+          </h2>
+          <p class="fy-phase-text" id="phaseDescription">
+            El yo no es el lugar donde estás, es el punto desde donde
+            observas lo que ocurre en distintos lugares.
+          </p>
+
+          <!-- ESCENA DINÁMICA RELLENABLE POR JS -->
+          <div class="fy-scene" id="phaseScene">
+            <!-- Aquí JS inyecta la escena de cada fase -->
+          </div>
+
+          <!-- FEEDBACK -->
+          <div class="fy-feedback" id="feedbackArea">
+            Lee con calma y responde. El objetivo no es acertar por intuición,
+            sino notar desde qué lugar estás respondiendo.
+          </div>
+
+          <!-- BOTONES -->
+          <div class="fy-actions">
+            <button class="fy-secondary-button" id="backButton">
+              ANTERIOR
+            </button>
+            <button class="fy-secondary-button" id="resetButton">
+              REINICIAR LABORATORIO
+            </button>
+            <button class="fy-primary-button" id="nextButton" disabled>
+              SIGUIENTE
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <!-- TARJETA FINAL -->
+      <div class="fy-final-overlay" id="finalOverlay">
+        <div class="fy-final-card">
+          <h2>✅ El miedo sigue aquí… pero ya no manda</h2>
+          <p>
+            Has recorrido las capas espaciales, temporales y de contenido del
+            self. El yo no es un rasgo ni un diagnóstico: es el lugar desde
+            donde se organizan coherencia, reglas, valores y experiencias
+            difíciles.
+          </p>
+          <p>
+            En sesión no trabajamos con “quién es el paciente”, sino con
+            <strong>desde dónde responde</strong> cuando habla de sí mismo.
+          </p>
+          <div class="fy-final-actions">
+            <button class="fy-secondary-button" id="finalBackButton">
+              VOLVER AL LABORATORIO
+            </button>
+            <button
+              class="fy-primary-button"
+              id="finalRestartButton"
+            >
+              REINICIAR ESTA SECCIÓN
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- LÓGICA DEL LABORATORIO FASES 2–6 -->
+    <script src="js/fabrica-yo-fases2-6.js" defer></script>
+  </body>
+</html>
