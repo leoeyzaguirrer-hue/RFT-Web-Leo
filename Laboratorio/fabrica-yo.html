@@ -14,17 +14,16 @@
   <main class="fy-lab-wrapper">
     <header class="fy-header">
       <div class="fy-lab-pill">LABORATORIO RFT · SELF DEÍCTICO</div>
-      <h1 class="fy-title">La Fábrica del Yo</h1>
+      <h1 class="fy-title">LA FÁBRICA DEL YO</h1>
       <p class="fy-subtitle">
-        Cómo el lenguaje construye a quien dice “yo”.
-        Este laboratorio no se organiza por niveles de dificultad, sino por capas
-        de perspectiva. El self no es un contenido, es un lugar relacional
-        desde donde se responde.
+        Cómo el lenguaje construye a quien dice “yo”. Este laboratorio no se
+        organiza por niveles de dificultad, sino por capas de perspectiva.
+        El self no es un contenido, es un lugar relacional desde donde se responde.
       </p>
     </header>
 
     <section class="fy-lab-card">
-      <!-- COLUMNA IZQUIERDA: MAPA DEÍCTICO -->
+      <!-- COLUMNA IZQUIERDA: MAPA DEL YO AQUÍ–AHORA -->
       <aside class="fy-left-panel">
         <div class="fy-silhouette-wrapper">
           <div class="fy-deictic-axes">
@@ -34,7 +33,7 @@
             </div>
             <div class="fy-axis fy-axis-tiempo">
               <span>AHORA</span>
-              <span>ANTES</span>
+              <span>ENTONCES</span>
             </div>
             <div class="fy-axis fy-axis-espacio">
               <span>AQUÍ</span>
@@ -44,19 +43,26 @@
 
           <div class="fy-silhouette-base">
             <div class="fy-deictic-container fy-level-0" id="deicticContainer">
-              <div class="fy-silhouette"></div>
+              <div class="fy-silhouette">
+                <div class="fy-silhouette-face">🧒</div>
+              </div>
             </div>
           </div>
 
           <div class="fy-metrics">
             <div class="fy-metric-pill">
-              Fase: <span id="faseLabel">Fase 1 · Marcos de persona, lugar y tiempo</span>
+              <span class="fy-metric-label">Fase actual:</span>
+              <span id="faseLabel" class="fy-metric-value">
+                Fase 1 · Marcos de persona, lugar y tiempo (niño–adulto)
+              </span>
             </div>
             <div class="fy-metric-pill">
-              Pregunta: <span id="preguntaLabel">1 / 8</span>
+              <span class="fy-metric-label">Pregunta:</span>
+              <span id="preguntaLabel" class="fy-metric-value">1 / 8</span>
             </div>
-            <div class="fy-metric-pill">
-              Claridad del punto de vista: <span id="claridadLabel">0%</span>
+            <div class="fy-metric-pill fy-metric-clarity">
+              <span class="fy-metric-label">Yo aquí ahora:</span>
+              <span id="claridadLabel" class="fy-metric-value-grande">0%</span>
             </div>
           </div>
         </div>
@@ -64,29 +70,30 @@
 
       <!-- COLUMNA DERECHA: INTERACCIÓN -->
       <section class="fy-right-panel">
-        <div class="fy-phase-tag" id="phaseTag">Fase 1D · Niño y adulto</div>
+        <div class="fy-phase-tag" id="phaseTag">FASE 1D · NIÑO Y ADULTO</div>
         <h2 class="fy-phase-title" id="phaseTitle">
-          ¿Desde qué punto respondes?
+          ENTRENANDO EL PUNTO DE «YO»
         </h2>
         <p class="fy-phase-text" id="phaseDescription">
-          A la izquierda hay una persona adulta que te hace preguntas. A la
-          derecha, un niño comienza a construir su punto de vista: el lugar
-          desde donde dice “yo”. Responde como si fueras ese niño.
+          Responde como si fueras el niño que aprende a diferenciar quién es él,
+          quién es el otro, dónde está y cuándo ocurren las cosas. No estamos
+          describiendo tu personalidad, sino estabilizando el lugar desde donde
+          respondes.
         </p>
 
         <!-- ESCENA NIÑO–ADULTO -->
         <div class="fy-scene" id="sceneChildAdult">
           <div class="fy-character fy-adult">
-            <div class="fy-avatar fy-avatar-adult"></div>
-            <p class="fy-character-label">Adulto</p>
+            <div class="fy-avatar fy-avatar-adult">🧑‍🦱</div>
+            <p class="fy-character-label">ADULTO</p>
             <div class="fy-speech-bubble" id="adultQuestion">
               ¿Quién eres tú?
             </div>
           </div>
 
           <div class="fy-character fy-child">
-            <div class="fy-avatar fy-avatar-child"></div>
-            <p class="fy-character-label">Niño</p>
+            <div class="fy-avatar fy-avatar-child">🧒</div>
+            <p class="fy-character-label">NIÑO</p>
             <div class="fy-answer-options" id="answerOptions">
               <!-- Botones de respuesta generados por JS -->
             </div>
@@ -127,10 +134,10 @@
 
         <div class="fy-actions">
           <button class="fy-secondary-button" id="resetButton">
-            Reiniciar laboratorio
+            REINICIAR LABORATORIO
           </button>
           <button class="fy-primary-button" id="nextButton" disabled>
-            Siguiente
+            SIGUIENTE
           </button>
         </div>
       </section>
