@@ -571,6 +571,7 @@ function toggleReversaAccion(btn) {
   }
 
   actualizarResumenReversa();
+   updateUI();
 }
 
 // Actualizar resumen de fase 5
