@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Laboratorio de Valores · El Motor de los Valores</title>
+  <title>Laboratorio de Valores · Motor Jerárquico</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/valores.css">
@@ -10,88 +10,68 @@
 </head>
 <body>
 
-<div class="lab-fondo"></div>
+<div class="lab-bg"></div>
 
-<main class="lab-container">
+<main class="lab-wrap">
 
-  <!-- CABECERA -->
   <header class="lab-header">
     <h1>EL MOTOR DE LOS VALORES</h1>
-    <h2>Cómo un valor reorganiza una vida</h2>
+    <h2>Estructura jerárquica, augmenting y transformación de funciones</h2>
   </header>
 
-  <!-- ESCENA CENTRAL -->
-  <section class="escena">
+  <section class="lab-scene">
 
-    <!-- TRIÁNGULO JERÁRQUICO -->
-    <div class="triangulo">
+    <!-- TRIÁNGULO REAL -->
+    <div class="piramide">
 
-      <div class="nivel nivel-valor" id="nivelValor">
-        <span class="nivel-titulo">VALOR</span>
-        <div class="slot dropzone" id="slotValor" data-zone="valor">
-          Arrastra un valor aquí
-        </div>
+      <div class="nivel nivel-valor oculto" id="zonaValor" data-zone="valor">
+        <span>VALOR</span>
       </div>
 
-      <div class="nivel nivel-direcciones" id="nivelDirecciones">
-        <span class="nivel-titulo">DIRECCIONES</span>
-        <div class="slot dropzone" id="zonaDirecciones" data-zone="direcciones">
-          Activa direcciones que coordinen con el valor
-        </div>
+      <div class="nivel nivel-direcciones oculto" id="zonaDirecciones" data-zone="direccion">
+        <span>DIRECCIONES</span>
       </div>
 
-      <div class="nivel nivel-acciones" id="nivelAcciones">
-        <span class="nivel-titulo">ACCIONES</span>
-        <div class="slot dropzone" id="zonaAcciones" data-zone="acciones">
-          Las acciones cambiarán de función bajo el valor
-        </div>
+      <div class="nivel nivel-acciones oculto" id="zonaAcciones" data-zone="accion">
+        <span>ACCIONES</span>
       </div>
 
     </div>
 
-    <!-- PANEL DE TARJETAS -->
+    <!-- PANEL -->
     <aside class="panel">
 
-      <!-- FASE 1: VALORES -->
       <div class="bloque activo" id="panelValores">
-        <h3>1 · Activa un VALOR</h3>
-        <p class="bloque-texto">
-          Arrastra un valor al vértice superior. A partir de allí, todo el sistema se reorganiza en torno a él.
-        </p>
+        <h3>Activa un VALOR</h3>
+        <p>Arrastra un valor al vértice superior.</p>
         <div class="tarjetas">
-          <div class="tarjeta draggable" draggable="true">Estar presente</div>
-          <div class="tarjeta draggable" draggable="true">Cuidar</div>
-          <div class="tarjeta draggable" draggable="true">Aprender</div>
-          <div class="tarjeta draggable" draggable="true">Ser honesto</div>
+          <div class="tarjeta" draggable="true">Estar presente</div>
+          <div class="tarjeta" draggable="true">Cuidar</div>
+          <div class="tarjeta" draggable="true">Aprender</div>
+          <div class="tarjeta" draggable="true">Ser honesto</div>
         </div>
       </div>
 
-      <!-- FASE 2: DIRECCIONES -->
       <div class="bloque" id="panelDirecciones">
-        <h3>2 · Elige DIRECCIONES coherentes</h3>
-        <p class="bloque-texto">
-          Solo algunas direcciones coordinan jerárquicamente con el valor. Las incoherentes serán rechazadas.
-        </p>
+        <h3>Elige DIRECCIONES</h3>
+        <p>Selecciona direcciones coherentes con el valor.</p>
         <div class="tarjetas">
-          <div class="tarjeta draggable" draggable="true">Escuchar</div>
-          <div class="tarjeta draggable" draggable="true">Acompañar</div>
-          <div class="tarjeta draggable" draggable="true">Compartir</div>
-          <div class="tarjeta draggable" draggable="true">Evitar</div>
-          <div class="tarjeta draggable" draggable="true">Desentenderse</div>
+          <div class="tarjeta" draggable="true">Escuchar</div>
+          <div class="tarjeta" draggable="true">Acompañar</div>
+          <div class="tarjeta" draggable="true">Compartir</div>
+          <div class="tarjeta" draggable="true">Evitar</div>
+          <div class="tarjeta" draggable="true">Desentenderse</div>
         </div>
       </div>
 
-      <!-- FASE 3: ACCIONES -->
       <div class="bloque" id="panelAcciones">
-        <h3>3 · Coloca ACCIONES bajo el valor</h3>
-        <p class="bloque-texto">
-          Observa cómo acciones neutras o costosas cambian de función al estar subordinadas al valor.
-        </p>
+        <h3>Coloca ACCIONES</h3>
+        <p>Observa cómo cambian su función bajo el valor.</p>
         <div class="tarjetas">
-          <div class="tarjeta draggable" draggable="true">Apagar el celular</div>
-          <div class="tarjeta draggable" draggable="true">Escuchar sin interrumpir</div>
-          <div class="tarjeta draggable" draggable="true">Levantarse temprano</div>
-          <div class="tarjeta draggable" draggable="true">Irse de la habitación</div>
+          <div class="tarjeta" draggable="true">Apagar el celular</div>
+          <div class="tarjeta" draggable="true">Escuchar sin interrumpir</div>
+          <div class="tarjeta" draggable="true">Levantarse temprano</div>
+          <div class="tarjeta" draggable="true">Irse de la habitación</div>
         </div>
       </div>
 
@@ -99,18 +79,34 @@
 
   </section>
 
-  <!-- MENSAJE CENTRAL -->
   <div class="mensaje" id="mensajeCentral">
-    Activa un valor para iniciar el sistema.
+    Arrastra un valor para iniciar la jerarquía.
   </div>
 
-  <!-- BOTONES -->
   <footer class="lab-footer">
-    <button id="btnReiniciar">Reiniciar laboratorio</button>
-    <button id="btnSiguiente">Siguiente capa</button>
+    <button id="btnReiniciar">Reiniciar</button>
+    <button id="btnSiguiente" disabled>Siguiente capa</button>
   </footer>
 
 </main>
+
+<!-- MODAL FINAL -->
+<div class="modal oculto" id="modalFinal">
+  <div class="modal-box">
+    <h2>¿Qué es un valor desde ACT y RFT?</h2>
+    <p>
+      Un valor no es una meta ni un estado emocional. Funciona como un
+      <strong>marco jerárquico superior</strong> que organiza direcciones de vida
+      y transforma la función de múltiples acciones.
+    </p>
+    <p>
+      En RFT, los valores operan como <strong>augmenting motivacional</strong>,
+      alterando la importancia psicológica de las consecuencias sin eliminar
+      el malestar. Orientan la conducta de manera sostenida.
+    </p>
+    <button id="cerrarModal">Cerrar</button>
+  </div>
+</div>
 
 </body>
 </html>
