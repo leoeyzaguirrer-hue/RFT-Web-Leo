@@ -1,0 +1,567 @@
+/* RESET BÁSICO */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: #f5f7fb;
+  color: #102542;
+}
+
+/* FONDO */
+.fy-bg-gradient {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, #ffe3a3 0, transparent 45%),
+    radial-gradient(circle at bottom right, #b2e1ff 0, transparent 45%),
+    linear-gradient(135deg, #fdfdfd 0, #e4f1ff 55%, #fff6dd 100%);
+  z-index: -1;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.fy-lab-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 40px;
+}
+
+/* HEADER */
+.fy-header {
+  max-width: 1160px;
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.fy-lab-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: 1px dashed rgba(16, 37, 66, 0.28);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(16, 37, 66, 0.75);
+  margin-bottom: 10px;
+}
+
+.fy-title {
+  font-family: "Coco Gothic", "Poppins", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 2rem;
+  color: #102542;
+  margin-bottom: 8px;
+}
+
+.fy-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  max-width: 880px;
+  margin: 0 auto;
+  color: rgba(16, 37, 66, 0.85);
+}
+
+/* TARJETA PRINCIPAL */
+.fy-lab-card {
+  max-width: 1180px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 32px;
+  box-shadow: 0 28px 84px rgba(0, 55, 110, 0.18);
+  padding: 28px 30px 26px;
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 26px;
+}
+
+/* PANEL IZQUIERDO */
+.fy-left-panel {
+  border-right: 1px solid rgba(16, 37, 66, 0.08);
+  padding-right: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fy-silhouette-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* EJES DEÍCTICOS */
+.fy-deictic-axes {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.fy-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(16, 37, 66, 0.8);
+}
+
+.fy-axis span:first-child {
+  font-weight: 700;
+}
+
+/* SILUETA + CONTENEDOR */
+.fy-silhouette-base {
+  position: relative;
+  width: 210px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fy-deictic-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fy-level-estable {
+  opacity: 1;
+  border: 3px solid rgba(0, 140, 255, 0.95);
+  box-shadow: 0 0 52px rgba(0, 205, 255, 0.55);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(179, 225, 255, 0.6) 0,
+    transparent 60%
+  );
+}
+
+.fy-silhouette {
+  width: 80px;
+  height: 190px;
+  border-radius: 60px;
+  background: linear-gradient(180deg, #0c2850 0, #1f4279 100%);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.fy-silhouette-face {
+  font-size: 2.6rem;
+  position: absolute;
+  top: -54px;
+}
+
+.fy-face-clear {
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* MÉTRICAS */
+.fy-metrics {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.fy-metric-pill {
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(16, 37, 66, 0.03);
+  border: 1px solid rgba(16, 37, 66, 0.09);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fy-metric-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+}
+
+.fy-metric-value {
+  font-weight: 500;
+}
+
+/* PANEL DERECHO */
+.fy-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fy-phase-tag {
+  align-self: flex-start;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #e3f4ff;
+  color: #0b3a5f;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.fy-phase-title {
+  font-family: "Coco Gothic", "Poppins", system-ui, sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #102542;
+}
+
+.fy-phase-text {
+  font-size: 1.04rem;
+  line-height: 1.6;
+  color: rgba(16, 37, 66, 0.9);
+}
+
+/* ESCENA DINÁMICA */
+.fy-scene {
+  margin-top: 4px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #f3f7ff 0, #fdfdfd 70%);
+  border: 1px solid rgba(16, 37, 66, 0.06);
+  padding: 22px 18px 20px;
+  min-height: 220px;
+  display: flex;
+  gap: 18px;
+}
+
+/* ESCENARIO ESPACIAL: CASA, CALLE, HABITACIÓN */
+.fy-space-layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.fy-space-card {
+  border-radius: 18px;
+  padding: 14px 12px;
+  background: #ffffff;
+  border: 1px solid rgba(16, 37, 66, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.fy-space-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.fy-space-icon {
+  font-size: 2.4rem;
+}
+
+.fy-space-hint {
+  font-size: 0.95rem;
+  text-align: center;
+  color: rgba(16, 37, 66, 0.85);
+}
+
+/* LÍNEA TEMPORAL */
+.fy-timeline {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fy-timeline-line {
+  position: relative;
+  height: 4px;
+  background: linear-gradient(90deg, #cfd8dc, #90caf9);
+  border-radius: 999px;
+}
+
+.fy-timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+.fy-timeline-labels span:first-child {
+  font-weight: 600;
+}
+
+/* TARJETAS CENTRALES */
+.fy-card-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fy-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.fy-card-text {
+  font-size: 1.02rem;
+}
+
+/* SELFING LADOS A/B */
+.fy-selfing-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.fy-selfing-column {
+  border-radius: 18px;
+  padding: 14px 12px;
+  background: #ffffff;
+  border: 1px solid rgba(16, 37, 66, 0.08);
+}
+
+.fy-selfing-header {
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.fy-selfing-header-sano {
+  color: #1b5e20;
+}
+
+.fy-selfing-header-problematico {
+  color: #b71c1c;
+}
+
+.fy-selfing-list {
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+/* BOTONES DE RESPUESTA */
+.fy-answer-options {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fy-answer-button {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 1.06rem;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid rgba(16, 37, 66, 0.18);
+  box-shadow: 0 5px 14px rgba(12, 36, 72, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.fy-answer-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(12, 36, 72, 0.18);
+}
+
+.fy-answer-button:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.fy-answer-button-correct {
+  background: #e4f7e9;
+  border-color: #43a047;
+  color: #13521a;
+}
+
+.fy-answer-button-wrong {
+  background: #ffe9e8;
+  border-color: #e53935;
+  color: #8b1515;
+}
+
+/* FEEDBACK */
+.fy-feedback {
+  min-height: 70px;
+  font-size: 1.02rem;
+  margin-top: 6px;
+  line-height: 1.5;
+  color: rgba(16, 37, 66, 0.96);
+}
+
+/* ACCIONES */
+.fy-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.fy-primary-button,
+.fy-secondary-button {
+  border-radius: 999px;
+  border: none;
+  padding: 11px 22px;
+  font-size: 1.02rem;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fy-primary-button {
+  background: #ffd76f;
+  box-shadow: 0 10px 22px rgba(214, 158, 67, 0.65);
+  color: #5c4206;
+  border: 1px solid rgba(153, 112, 24, 0.65);
+}
+
+.fy-primary-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+  box-shadow: none;
+}
+
+.fy-secondary-button {
+  background: #ffffff;
+  border: 1px dashed rgba(16, 37, 66, 0.4);
+  color: rgba(16, 37, 66, 0.86);
+}
+
+/* OVERLAY FINAL */
+.fy-final-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 15, 32, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.fy-final-overlay-active {
+  display: flex;
+}
+
+.fy-final-card {
+  max-width: 580px;
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 28px 26px 24px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.fy-final-card h2 {
+  font-size: 1.7rem;
+  margin-bottom: 12px;
+}
+
+.fy-final-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.fy-final-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .fy-lab-card {
+    grid-template-columns: 1fr;
+    padding: 22px 18px 20px;
+  }
+
+  .fy-left-panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(16, 37, 66, 0.08);
+    padding-right: 0;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+  }
+
+  .fy-silhouette-base {
+    width: 190px;
+    height: 280px;
+  }
+
+  .fy-scene {
+    flex-direction: column;
+  }
+
+  .fy-space-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fy-selfing-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fy-actions {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .fy-title {
+    font-size: 1.7rem;
+    letter-spacing: 0.14em;
+  }
+
+  .fy-subtitle {
+    font-size: 0.96rem;
+  }
+
+  .fy-phase-title {
+    font-size: 1.4rem;
+  }
+
+  .fy-phase-text {
+    font-size: 0.97rem;
+  }
+
+  .fy-answer-button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
