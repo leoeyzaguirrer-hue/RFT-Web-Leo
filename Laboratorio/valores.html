@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/valores.css">
-
   <script defer src="js/valores.js"></script>
 </head>
 <body>
@@ -29,17 +28,23 @@
 
       <div class="nivel nivel-valor" id="nivelValor">
         <span class="nivel-titulo">VALOR</span>
-        <div class="slot" id="slotValor">Arrastra un valor aquí</div>
+        <div class="slot dropzone" id="slotValor" data-zone="valor">
+          Arrastra un valor aquí
+        </div>
       </div>
 
       <div class="nivel nivel-direcciones" id="nivelDirecciones">
         <span class="nivel-titulo">DIRECCIONES</span>
-        <div class="slot">Actívalas desde el valor</div>
+        <div class="slot dropzone" id="zonaDirecciones" data-zone="direcciones">
+          Activa direcciones que coordinen con el valor
+        </div>
       </div>
 
       <div class="nivel nivel-acciones" id="nivelAcciones">
         <span class="nivel-titulo">ACCIONES</span>
-        <div class="slot">Las acciones cambiarán de función</div>
+        <div class="slot dropzone" id="zonaAcciones" data-zone="acciones">
+          Las acciones cambiarán de función bajo el valor
+        </div>
       </div>
 
     </div>
@@ -47,8 +52,12 @@
     <!-- PANEL DE TARJETAS -->
     <aside class="panel">
 
+      <!-- FASE 1: VALORES -->
       <div class="bloque activo" id="panelValores">
-        <h3>Selecciona un VALOR</h3>
+        <h3>1 · Activa un VALOR</h3>
+        <p class="bloque-texto">
+          Arrastra un valor al vértice superior. A partir de allí, todo el sistema se reorganiza en torno a él.
+        </p>
         <div class="tarjetas">
           <div class="tarjeta draggable" draggable="true">Estar presente</div>
           <div class="tarjeta draggable" draggable="true">Cuidar</div>
@@ -57,18 +66,27 @@
         </div>
       </div>
 
+      <!-- FASE 2: DIRECCIONES -->
       <div class="bloque" id="panelDirecciones">
-        <h3>Selecciona DIRECCIONES coherentes</h3>
+        <h3>2 · Elige DIRECCIONES coherentes</h3>
+        <p class="bloque-texto">
+          Solo algunas direcciones coordinan jerárquicamente con el valor. Las incoherentes serán rechazadas.
+        </p>
         <div class="tarjetas">
           <div class="tarjeta draggable" draggable="true">Escuchar</div>
           <div class="tarjeta draggable" draggable="true">Acompañar</div>
+          <div class="tarjeta draggable" draggable="true">Compartir</div>
           <div class="tarjeta draggable" draggable="true">Evitar</div>
           <div class="tarjeta draggable" draggable="true">Desentenderse</div>
         </div>
       </div>
 
+      <!-- FASE 3: ACCIONES -->
       <div class="bloque" id="panelAcciones">
-        <h3>Selecciona ACCIONES</h3>
+        <h3>3 · Coloca ACCIONES bajo el valor</h3>
+        <p class="bloque-texto">
+          Observa cómo acciones neutras o costosas cambian de función al estar subordinadas al valor.
+        </p>
         <div class="tarjetas">
           <div class="tarjeta draggable" draggable="true">Apagar el celular</div>
           <div class="tarjeta draggable" draggable="true">Escuchar sin interrumpir</div>
@@ -88,8 +106,8 @@
 
   <!-- BOTONES -->
   <footer class="lab-footer">
-    <button id="btnReiniciar">Reiniciar</button>
-    <button id="btnSiguiente">Siguiente</button>
+    <button id="btnReiniciar">Reiniciar laboratorio</button>
+    <button id="btnSiguiente">Siguiente capa</button>
   </footer>
 
 </main>
