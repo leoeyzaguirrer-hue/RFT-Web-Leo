@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · La Fábrica del Yo</title>
+
+  <!-- Estilos del laboratorio -->
+  <link rel="stylesheet" href="css/fabrica-yo.css" />
+</head>
+<body>
+  <div class="fy-bg-gradient"></div>
+
+  <main class="fy-lab-wrapper">
+    <header class="fy-header">
+      <div class="fy-lab-pill">LABORATORIO RFT · SELF DEÍCTICO</div>
+      <h1 class="fy-title">La Fábrica del Yo</h1>
+      <p class="fy-subtitle">
+        Cómo el lenguaje construye a quien dice “yo”.
+        Este laboratorio no se organiza por niveles de dificultad, sino por capas
+        de perspectiva. El self no es un contenido, es un lugar relacional
+        desde donde se responde.
+      </p>
+    </header>
+
+    <section class="fy-lab-card">
+      <!-- COLUMNA IZQUIERDA: MAPA DEÍCTICO -->
+      <aside class="fy-left-panel">
+        <div class="fy-silhouette-wrapper">
+          <div class="fy-deictic-axes">
+            <div class="fy-axis fy-axis-persona">
+              <span>YO</span>
+              <span>TÚ</span>
+            </div>
+            <div class="fy-axis fy-axis-tiempo">
+              <span>AHORA</span>
+              <span>ANTES</span>
+            </div>
+            <div class="fy-axis fy-axis-espacio">
+              <span>AQUÍ</span>
+              <span>ALLÁ</span>
+            </div>
+          </div>
+
+          <div class="fy-silhouette-base">
+            <div class="fy-deictic-container fy-level-0" id="deicticContainer">
+              <div class="fy-silhouette"></div>
+            </div>
+          </div>
+
+          <div class="fy-metrics">
+            <div class="fy-metric-pill">
+              Fase: <span id="faseLabel">Fase 1 · Marcos de persona, lugar y tiempo</span>
+            </div>
+            <div class="fy-metric-pill">
+              Pregunta: <span id="preguntaLabel">1 / 8</span>
+            </div>
+            <div class="fy-metric-pill">
+              Claridad del punto de vista: <span id="claridadLabel">0%</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- COLUMNA DERECHA: INTERACCIÓN -->
+      <section class="fy-right-panel">
+        <div class="fy-phase-tag" id="phaseTag">Fase 1D · Niño y adulto</div>
+        <h2 class="fy-phase-title" id="phaseTitle">
+          ¿Desde qué punto respondes?
+        </h2>
+        <p class="fy-phase-text" id="phaseDescription">
+          A la izquierda hay una persona adulta que te hace preguntas. A la
+          derecha, un niño comienza a construir su punto de vista: el lugar
+          desde donde dice “yo”. Responde como si fueras ese niño.
+        </p>
+
+        <!-- ESCENA NIÑO–ADULTO -->
+        <div class="fy-scene" id="sceneChildAdult">
+          <div class="fy-character fy-adult">
+            <div class="fy-avatar fy-avatar-adult"></div>
+            <p class="fy-character-label">Adulto</p>
+            <div class="fy-speech-bubble" id="adultQuestion">
+              ¿Quién eres tú?
+            </div>
+          </div>
+
+          <div class="fy-character fy-child">
+            <div class="fy-avatar fy-avatar-child"></div>
+            <p class="fy-character-label">Niño</p>
+            <div class="fy-answer-options" id="answerOptions">
+              <!-- Botones de respuesta generados por JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ESCENA CONTENIDOS DEL YO -->
+        <div class="fy-scene fy-scene-hidden" id="sceneContents">
+          <div class="fy-contents-field">
+            <div class="fy-bubble fy-bubble-thought" id="bubbleThought">
+              “Soy aburrido”
+            </div>
+            <div class="fy-bubble fy-bubble-emotion" id="bubbleEmotion">
+              Nudo en el pecho
+            </div>
+            <div class="fy-bubble fy-bubble-memory" id="bubbleMemory">
+              Recuerdo cuando me gritaron
+            </div>
+            <div class="fy-bubble fy-bubble-fear" id="bubbleFear">
+              Miedo ahora
+            </div>
+          </div>
+
+          <div class="fy-contents-panel">
+            <p class="fy-contents-question" id="contentsQuestion">
+              ¿Qué está ocurriendo en tu mente ahora?
+            </p>
+            <div class="fy-answer-options" id="contentsOptions">
+              <!-- Botones generados por JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="fy-feedback" id="feedbackArea">
+          Recuerda: estamos entrenando el lugar desde donde respondes,
+          no tus rasgos de personalidad.
+        </div>
+
+        <div class="fy-actions">
+          <button class="fy-secondary-button" id="resetButton">
+            Reiniciar laboratorio
+          </button>
+          <button class="fy-primary-button" id="nextButton" disabled>
+            Siguiente
+          </button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/fabrica-yo.js" defer></script>
+</body>
+</html>
