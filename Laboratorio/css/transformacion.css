@@ -1,0 +1,155 @@
+/* ================================
+   ESTILO GENERAL PREMIUM BLANCO
+================================ */
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  color: #1a1a1a;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.hero h1 {
+  font-family: "Coco Gothic", sans-serif;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.referencia-superior,
+.referencia-inferior {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.6;
+  margin: 10px auto;
+}
+
+/* CONTENEDOR DEL LABORATORIO */
+.lab-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 18px;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* FASES */
+.fase { display: none; }
+.visible { display: block; }
+.oculto { display: none; }
+
+h2 {
+  font-family: "Coco Gothic", sans-serif;
+  font-size: 28px;
+  margin-top: 0;
+}
+
+.texto-explicacion {
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+/* BOTONES */
+.boton {
+  padding: 14px 26px;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  background: #2d5dd7;
+  color: white;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: 0.2s;
+}
+
+.boton:hover {
+  transform: scale(1.05);
+  background: #2047a1;
+}
+
+.boton-secundario {
+  background: #555;
+}
+.boton-secundario:hover {
+  background: #333;
+}
+
+/* FASE 1 */
+.area-estimulos {
+  text-align: center;
+  min-height: 150px;
+  margin-bottom: 20px;
+  font-size: 60px;
+}
+
+/* FASE 2 */
+.simbolo {
+  font-size: 120px;
+  text-align: center;
+}
+
+.flash {
+  animation: flashAnim 0.3s alternate 3;
+}
+
+@keyframes flashAnim {
+  from { color: #000; }
+  to { color: #ff2f2f; }
+}
+
+/* FASE 3 */
+.tarjeta-resultado {
+  border: 1px solid #dcdcdc;
+  padding: 25px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.simbolo-res {
+  font-size: 70px;
+  margin-bottom: 12px;
+}
+
+/* BARRAS DE INTENSIDAD */
+.barra {
+  width: 100%;
+  height: 18px;
+  background: #e6e6e6;
+  border-radius: 10px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.relleno {
+  height: 100%;
+  background: #ff6b6b;
+}
+
+.nivel3 .relleno { width: 100%; }
+.nivel2 .relleno { width: 60%; }
+.nivel1 .relleno { width: 30%; }
+
+.fuegos {
+  font-size: 28px;
+  margin: 8px 0;
+}
+
+/* Glow */
+.nivel3 { box-shadow: 0 0 20px rgba(255,0,0,0.4); }
+.nivel2 { box-shadow: 0 0 12px rgba(255,0,0,0.3); }
+.nivel1 { box-shadow: 0 0 8px rgba(255,0,0,0.2); }
