@@ -5,133 +5,207 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Laboratorio RFT · Transformación de Funciones</title>
 
-  <!-- CSS DEL LABORATORIO -->
+  <!-- Estilos del laboratorio -->
   <link rel="stylesheet" href="css/transformacion.css" />
 </head>
 
 <body>
-
-  <!-- REFERENCIA SUPERIOR -->
-  <div class="referencia-superior">
+  <!-- Referencia superior, discreta -->
+  <div class="ref-superior">
     Basado en: Dougher, M. J., Hamilton, D. A., Fink, B. C., & Harrington, J. (2007).
-    <br>Transformation of the discriminative and eliciting functions of generalized relational stimuli.
-    <br><em>Journal of the Experimental Analysis of Behavior, 88(2), 179–197.</em>
-  </div>
-
-  <!-- HERO PRINCIPAL -->
-  <section class="hero">
-    <h1>LABORATORIO RFT · TRANSFORMACIÓN DE FUNCIONES</h1>
-    <p>Cómo una red relacional transforma funciones sin entrenamiento directo.</p>
-  </section>
-
-  <!-- CONTENEDOR CENTRAL -->
-  <main class="lab-container">
-
-    <!-- ============================= -->
-    <!-- FASE 1: APRENDIZAJE RELACIONAL -->
-    <!-- ============================= -->
-    <section id="fase1" class="fase visible">
-      <h2>FASE 1 · Aprendizaje Relacional (Orden Arbitrario)</h2>
-
-      <p class="texto-explicacion">
-        En esta fase, los participantes aprendieron relaciones arbitrarias entre tres símbolos.
-        Cada símbolo indicaba si debían elegir el menor, el mediano o el mayor.
-      </p>
-
-      <div id="area-estimulos" class="area-estimulos"></div>
-
-      <button id="btnMostrarEstimulo" class="boton">MOSTRAR SÍMBOLO</button>
-      <button id="btnSiguienteF1" class="boton oculto">SIGUIENTE</button>
-
-      <div id="resumenF1" class="resumen oculto">
-        <h3>Relaciones aprendidas</h3>
-        <p><strong>S1 &lt; S2 &lt; S3</strong> (jerarquía arbitraria)</p>
-        <button id="btnIrFase2" class="boton">IR A FASE 2</button>
-      </div>
-    </section>
-
-    <!-- ============================= -->
-    <!-- FASE 2: CONDICIONAMIENTO AVERSIVO -->
-    <!-- ============================= -->
-    <section id="fase2" class="fase oculto">
-      <h2>FASE 2 · Condicionamiento Aversivo (Simulado)</h2>
-
-      <p class="texto-explicacion">
-        Solo el símbolo S3 recibe función aversiva directa en esta simulación.
-      </p>
-
-      <div class="estimulo-aversivo">
-        <div id="simboloS3" class="simbolo">⋔</div>
-      </div>
-
-      <button id="btnAplicarAversivo" class="boton">APLICAR ⚡</button>
-
-      <div id="resumenF2" class="resumen oculto">
-        <p><strong>S3 adquirió función aversiva directa.</strong><br>
-           S1 y S2 no recibieron estímulos aversivos.</p>
-        <button id="btnIrFase3" class="boton">CONTINUAR A FASE 3</button>
-      </div>
-    </section>
-
-    <!-- ============================= -->
-    <!-- FASE 3: TRANSFORMACIÓN DE FUNCIONES -->
-    <!-- ============================= -->
-    <section id="fase3" class="fase oculto">
-      <h2>FASE 3 · Transformación de Funciones</h2>
-
-      <p class="texto-explicacion">
-        Aunque solo S3 recibió el estímulo aversivo, S2 y S1 muestran funciones aversivas derivadas.
-      </p>
-
-      <button id="btnMostrarResultados" class="boton">MOSTRAR RESULTADOS</button>
-
-      <div id="resultadosF3" class="resultados oculto">
-
-        <!-- S3 -->
-        <div class="tarjeta-resultado nivel3">
-          <div class="simbolo-res">⋔</div>
-          <div class="barra">
-            <div class="relleno nivel3"></div>
-          </div>
-          <div class="fuegos">🔥🔥🔥</div>
-          <p>Función aversiva alta (entrenamiento directo)</p>
-        </div>
-
-        <!-- S2 -->
-        <div class="tarjeta-resultado nivel2">
-          <div class="simbolo-res">⚶</div>
-          <div class="barra">
-            <div class="relleno nivel2"></div>
-          </div>
-          <div class="fuegos">🔥🔥</div>
-          <p>Función aversiva moderada (relación con S3)</p>
-        </div>
-
-        <!-- S1 -->
-        <div class="tarjeta-resultado nivel1">
-          <div class="simbolo-res">⟟</div>
-          <div class="barra">
-            <div class="relleno nivel1"></div>
-          </div>
-          <div class="fuegos">🔥</div>
-          <p>Función aversiva leve (relación con S2 y S3)</p>
-        </div>
-
-        <button id="btnReiniciar" class="boton boton-secundario">REINICIAR LABORATORIO</button>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- REFERENCIA INFERIOR -->
-  <div class="referencia-inferior">
-    Dougher, M. J., Hamilton, D. A., Fink, B. C., & Harrington, J. (2007).
     Transformation of the discriminative and eliciting functions of generalized relational stimuli.
     <em>Journal of the Experimental Analysis of Behavior, 88(2), 179–197.</em>
   </div>
 
-  <!-- JS DEL LABORATORIO -->
-  <script defer src="js/transformacion.js"></script>
+  <!-- HERO -->
+  <header class="hero">
+    <h1>LABORATORIO RFT · TRANSFORMACIÓN DE FUNCIONES</h1>
+    <p>Simulación del estudio de Dougher et al. sobre relaciones ordinales y transformación de funciones.</p>
+  </header>
 
+  <!-- TARJETA PRINCIPAL -->
+  <main class="lab-card">
+
+    <!-- FASE 1 -->
+    <section id="fase1" class="fase fase-activa">
+      <h2>FASE 1 · Aprendizaje de relaciones ordinales</h2>
+      <p class="intro-fase">
+        En esta fase, los participantes aprenden que, según el símbolo de contexto, deben elegir
+        siempre el estímulo más pequeño, el mediano o el más grande de entre nueve opciones.
+      </p>
+
+      <div class="contexto-panel">
+        <div class="contexto-info">
+          <h3 id="tituloContexto">Contexto A · Elegir el más pequeño</h3>
+          <p id="textoContexto">
+            Observa el símbolo de contexto y luego selecciona el estímulo que corresponde
+            a la regla de esta fase.
+          </p>
+          <div class="contexto-simbolo" id="simboloContexto">
+            <!-- Se rellena por JS (A, B o C con barras como en el paper) -->
+          </div>
+          <p class="progreso" id="progresoContexto">Ensayo 1 de 3</p>
+        </div>
+
+        <div class="panel-estimulos">
+          <div id="gridEstimulos" class="grid-estimulos">
+            <!-- Aquí aparecen los 9 estímulos por JS -->
+          </div>
+          <div id="mensajeF1" class="mensaje-fase"></div>
+        </div>
+      </div>
+
+      <div class="botonera-fase">
+        <button id="btnNuevoEnsayo" class="btn-principal">NUEVO ENSAYO</button>
+        <button id="btnSiguienteContexto" class="btn-principal btn-secundario" disabled>
+          PASAR AL SIGUIENTE CONTEXTO
+        </button>
+      </div>
+
+      <div id="resumenF1" class="resumen oculto">
+        <h3>Resumen de la Fase 1</h3>
+        <p>
+          Los participantes aprendieron una red ordinal arbitraria:
+          en presencia de A se elige siempre el estímulo más pequeño, con B el mediano y con C el más grande.
+          Esta red permite luego que nuevas funciones se distribuyan siguiendo ese orden.
+        </p>
+        <button id="btnIrFase2" class="btn-principal">IR A FASE 2</button>
+      </div>
+    </section>
+
+    <!-- FASE 2 -->
+    <section id="fase2" class="fase">
+      <h2>FASE 2 · Asignación de función aversiva (simulada)</h2>
+      <p class="intro-fase">
+        En el estudio original, solo uno de los estímulos se emparejó con una descarga eléctrica.
+        Aquí lo simulamos con un efecto visual sobre un símbolo objetivo.
+      </p>
+
+      <div class="panel-fase2">
+        <div class="target-fase2">
+          <div class="contexto-simbolo simbolo-fase2">
+            C
+            <div class="barras-fase2">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="estimulo-shock" id="estimuloShock">
+            <!-- SVG tipo cruz roja + estrella negra -->
+            <svg viewBox="0 0 120 120" class="svg-cruz">
+              <rect x="40" y="10" width="40" height="100" rx="8" />
+              <rect x="10" y="40" width="100" height="40" rx="8" />
+            </svg>
+            <svg viewBox="0 0 120 120" class="svg-estrella">
+              <line x1="60" y1="5"  x2="60" y2="115" />
+              <line x1="5"  y1="60" x2="115" y2="60" />
+              <line x1="20" y1="20" x2="100" y2="100" />
+              <line x1="20" y1="100" x2="100" y2="20" />
+              <circle cx="60" cy="60" r="10" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="texto-fase2">
+          <p id="textoFase2">
+            Este símbolo representará el “más grande” dentro de la red. Haz clic en el botón para simular
+            la entrega del estímulo aversivo sobre él.
+          </p>
+          <button id="btnAplicarShock" class="btn-principal">APLICAR ⚡</button>
+
+          <div id="resumenF2" class="resumen oculto">
+            <p>
+              Solo este estímulo recibió la “descarga” (en nuestra simulación, un cambio visual intenso).
+              En la siguiente fase observaremos cómo esa función se distribuye a otros estímulos de la red.
+            </p>
+            <button id="btnIrFase3" class="btn-principal">CONTINUAR A FASE 3</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 3 -->
+    <section id="fase3" class="fase">
+      <h2>FASE 3 · Transformación de funciones</h2>
+      <p class="intro-fase">
+        Aunque solo el estímulo “más grande” recibió el estímulo aversivo directo,
+        los demás estímulos adquieren funciones aversivas en distintos grados, siguiendo la red ordinal aprendida.
+      </p>
+
+      <button id="btnMostrarResultados" class="btn-principal">MOSTRAR RESULTADOS</button>
+
+      <div id="resultadosF3" class="resultados oculto">
+        <!-- Resultado S3 (más grande) -->
+        <article class="card-resultado nivel3">
+          <h3>Estímulo “Más grande”</h3>
+          <div class="fila-resultado">
+            <svg viewBox="0 0 120 120" class="svg-estrella grande">
+              <line x1="60" y1="5"  x2="60" y2="115" />
+              <line x1="5"  y1="60" x2="115" y2="60" />
+              <line x1="20" y1="20" x2="100" y2="100" />
+              <line x1="20" y1="100" x2="100" y2="20" />
+              <circle cx="60" cy="60" r="12" />
+            </svg>
+            <div class="intensidad">
+              <div class="barra"><div class="relleno nivel3"></div></div>
+              <div class="fuegos">🔥🔥🔥</div>
+            </div>
+          </div>
+          <p>Función aversiva alta: estímulo emparejado directamente con la “descarga”.</p>
+        </article>
+
+        <!-- Resultado S2 -->
+        <article class="card-resultado nivel2">
+          <h3>Estímulo “Mediano”</h3>
+          <div class="fila-resultado">
+            <svg viewBox="0 0 120 120" class="svg-estrella mediana">
+              <line x1="60" y1="10" x2="60" y2="110" />
+              <line x1="10" y1="60" x2="110" y2="60" />
+              <line x1="25" y1="25" x2="95" y2="95" />
+              <line x1="25" y1="95" x2="95" y2="25" />
+              <circle cx="60" cy="60" r="9" />
+            </svg>
+            <div class="intensidad">
+              <div class="barra"><div class="relleno nivel2"></div></div>
+              <div class="fuegos">🔥🔥</div>
+            </div>
+          </div>
+          <p>Función aversiva moderada: no recibió descarga directa, pero está ordenado “cerca” del mayor.</p>
+        </article>
+
+        <!-- Resultado S1 -->
+        <article class="card-resultado nivel1">
+          <h3>Estímulo “Más pequeño”</h3>
+          <div class="fila-resultado">
+            <svg viewBox="0 0 120 120" class="svg-estrella pequena">
+              <line x1="60" y1="20" x2="60" y2="100" />
+              <line x1="20" y1="60" x2="100" y2="60" />
+              <line x1="30" y1="30" x2="90" y2="90" />
+              <line x1="30" y1="90" x2="90" y2="30" />
+              <circle cx="60" cy="60" r="7" />
+            </svg>
+            <div class="intensidad">
+              <div class="barra"><div class="relleno nivel1"></div></div>
+              <div class="fuegos">🔥</div>
+            </div>
+          </div>
+          <p>Función aversiva leve: se comporta “como si” también fuera peligroso, por su relación con los otros.</p>
+        </article>
+
+        <button id="btnReiniciar" class="btn-principal btn-secundario">
+          REINICIAR LABORATORIO
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Referencia inferior -->
+  <footer class="ref-inferior">
+    Dougher, M. J., Hamilton, D. A., Fink, B. C., & Harrington, J. (2007).
+    Transformation of the discriminative and eliciting functions of generalized relational stimuli.
+    <em>Journal of the Experimental Analysis of Behavior, 88(2), 179–197.</em>
+  </footer>
+
+  <!-- Lógica del laboratorio -->
+  <script defer src="js/transformacion.js"></script>
 </body>
 </html>
