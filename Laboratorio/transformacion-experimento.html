@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · Transformación de Funciones</title>
+
+  <!-- CSS DEL LABORATORIO -->
+  <link rel="stylesheet" href="css/transformacion.css" />
+</head>
+
+<body>
+
+  <!-- REFERENCIA SUPERIOR -->
+  <div class="referencia-superior">
+    Basado en: Dougher, M. J., Hamilton, D. A., Fink, B. C., & Harrington, J. (2007).
+    <br>Transformation of the discriminative and eliciting functions of generalized relational stimuli.
+    <br><em>Journal of the Experimental Analysis of Behavior, 88(2), 179–197.</em>
+  </div>
+
+  <!-- HERO PRINCIPAL -->
+  <section class="hero">
+    <h1>LABORATORIO RFT · TRANSFORMACIÓN DE FUNCIONES</h1>
+    <p>Cómo una red relacional transforma funciones sin entrenamiento directo.</p>
+  </section>
+
+  <!-- CONTENEDOR CENTRAL -->
+  <main class="lab-container">
+
+    <!-- ============================= -->
+    <!-- FASE 1: APRENDIZAJE RELACIONAL -->
+    <!-- ============================= -->
+    <section id="fase1" class="fase visible">
+      <h2>FASE 1 · Aprendizaje Relacional (Orden Arbitrario)</h2>
+
+      <p class="texto-explicacion">
+        En esta fase, los participantes aprendieron relaciones arbitrarias entre tres símbolos.
+        Cada símbolo indicaba si debían elegir el menor, el mediano o el mayor.
+      </p>
+
+      <div id="area-estimulos" class="area-estimulos"></div>
+
+      <button id="btnMostrarEstimulo" class="boton">MOSTRAR SÍMBOLO</button>
+      <button id="btnSiguienteF1" class="boton oculto">SIGUIENTE</button>
+
+      <div id="resumenF1" class="resumen oculto">
+        <h3>Relaciones aprendidas</h3>
+        <p><strong>S1 &lt; S2 &lt; S3</strong> (jerarquía arbitraria)</p>
+        <button id="btnIrFase2" class="boton">IR A FASE 2</button>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- FASE 2: CONDICIONAMIENTO AVERSIVO -->
+    <!-- ============================= -->
+    <section id="fase2" class="fase oculto">
+      <h2>FASE 2 · Condicionamiento Aversivo (Simulado)</h2>
+
+      <p class="texto-explicacion">
+        Solo el símbolo S3 recibe función aversiva directa en esta simulación.
+      </p>
+
+      <div class="estimulo-aversivo">
+        <div id="simboloS3" class="simbolo">⋔</div>
+      </div>
+
+      <button id="btnAplicarAversivo" class="boton">APLICAR ⚡</button>
+
+      <div id="resumenF2" class="resumen oculto">
+        <p><strong>S3 adquirió función aversiva directa.</strong><br>
+           S1 y S2 no recibieron estímulos aversivos.</p>
+        <button id="btnIrFase3" class="boton">CONTINUAR A FASE 3</button>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- FASE 3: TRANSFORMACIÓN DE FUNCIONES -->
+    <!-- ============================= -->
+    <section id="fase3" class="fase oculto">
+      <h2>FASE 3 · Transformación de Funciones</h2>
+
+      <p class="texto-explicacion">
+        Aunque solo S3 recibió el estímulo aversivo, S2 y S1 muestran funciones aversivas derivadas.
+      </p>
+
+      <button id="btnMostrarResultados" class="boton">MOSTRAR RESULTADOS</button>
+
+      <div id="resultadosF3" class="resultados oculto">
+
+        <!-- S3 -->
+        <div class="tarjeta-resultado nivel3">
+          <div class="simbolo-res">⋔</div>
+          <div class="barra">
+            <div class="relleno nivel3"></div>
+          </div>
+          <div class="fuegos">🔥🔥🔥</div>
+          <p>Función aversiva alta (entrenamiento directo)</p>
+        </div>
+
+        <!-- S2 -->
+        <div class="tarjeta-resultado nivel2">
+          <div class="simbolo-res">⚶</div>
+          <div class="barra">
+            <div class="relleno nivel2"></div>
+          </div>
+          <div class="fuegos">🔥🔥</div>
+          <p>Función aversiva moderada (relación con S3)</p>
+        </div>
+
+        <!-- S1 -->
+        <div class="tarjeta-resultado nivel1">
+          <div class="simbolo-res">⟟</div>
+          <div class="barra">
+            <div class="relleno nivel1"></div>
+          </div>
+          <div class="fuegos">🔥</div>
+          <p>Función aversiva leve (relación con S2 y S3)</p>
+        </div>
+
+        <button id="btnReiniciar" class="boton boton-secundario">REINICIAR LABORATORIO</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- REFERENCIA INFERIOR -->
+  <div class="referencia-inferior">
+    Dougher, M. J., Hamilton, D. A., Fink, B. C., & Harrington, J. (2007).
+    Transformation of the discriminative and eliciting functions of generalized relational stimuli.
+    <em>Journal of the Experimental Analysis of Behavior, 88(2), 179–197.</em>
+  </div>
+
+  <!-- JS DEL LABORATORIO -->
+  <script defer src="js/transformacion.js"></script>
+
+</body>
+</html>
