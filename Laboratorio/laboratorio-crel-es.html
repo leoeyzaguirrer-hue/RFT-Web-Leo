@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio RFT · Clave Relacional "es"</title>
+
+  <!-- Estilos del laboratorio -->
+  <link rel="stylesheet" href="css/crel-es.css" />
+</head>
+
+<body>
+  <!-- Referencia superior discreta -->
+  <div class="ref-superior">
+    Inspirado en demostraciones de aprendizaje por múltiples ejemplares en RFT
+    (marco de coordinación “es”).
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>LABORATORIO RFT · CLAVE RELACIONAL «ES»</h1>
+    <p>Cómo un niño aprende que «X es Y» mediante múltiples ejemplares hasta derivar nuevas relaciones.</p>
+  </header>
+
+  <!-- TARJETA PRINCIPAL -->
+  <main class="lab-card">
+
+    <!-- ===================== -->
+    <!-- FASE 1: PALABRA → OBJETO -->
+    <!-- ===================== -->
+    <section id="fase1" class="fase fase-activa">
+      <h2>FASE 1 · Palabra → Objeto</h2>
+      <p class="intro-fase">
+        Papá dice palabras y el niño aprende a relacionarlas con objetos concretos.
+        Cada ejemplo refuerza la clave relacional «es» en una dirección: palabra → cosa.
+      </p>
+
+      <div class="fase-layout">
+        <div class="panel-texto">
+          <h3 id="f1Titulo">Ejemplo 1 de 4</h3>
+          <p id="f1FrasePapa" class="frase-papa">Papá dice: «limón».</p>
+          <p id="f1Instruccion" class="instruccion">
+            Haz clic en la imagen que corresponde a la palabra que dijo papá.
+          </p>
+        </div>
+
+        <div class="panel-opciones">
+          <div id="f1Opciones" class="opciones-grid">
+            <!-- Opciones por JS -->
+          </div>
+          <div id="f1Feedback" class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="botonera-fase">
+        <button id="btnF1Nuevo" class="btn-principal">MOSTRAR EJEMPLO</button>
+        <button id="btnF1Siguiente" class="btn-principal btn-secundario" disabled>
+          SIGUIENTE EJEMPLO
+        </button>
+      </div>
+
+      <div id="f1Resumen" class="resumen oculto">
+        <h3>Resumen de la Fase 1</h3>
+        <p>
+          Después de muchos ejemplos reforzados, el niño aprende un patrón:
+          cuando escucha «X es…», debe relacionar la palabra con un objeto concreto.
+          Este patrón es parte de la clave relacional «es».
+        </p>
+        <button id="btnIrFase2" class="btn-principal">IR A FASE 2</button>
+      </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- FASE 2: OBJETO → PALABRA -->
+    <!-- ===================== -->
+    <section id="fase2" class="fase">
+      <h2>FASE 2 · Objeto → Palabra</h2>
+      <p class="intro-fase">
+        Ahora el niño escucha «Esto es X». Aprende que la misma clave «es» funciona también
+        desde el objeto hacia la palabra.
+      </p>
+
+      <div class="fase-layout">
+        <div class="panel-texto">
+          <h3 id="f2Titulo">Ejemplo 1 de 4</h3>
+          <p id="f2FrasePapa" class="frase-papa">Papá muestra 🍋 y dice: «Esto es…»</p>
+          <p id="f2Instruccion" class="instruccion">
+            Haz clic en la palabra que completa correctamente la frase de papá.
+          </p>
+        </div>
+
+        <div class="panel-opciones">
+          <div id="f2EmojiGrande" class="emoji-grande">🍋</div>
+          <div id="f2Opciones" class="opciones-grid">
+            <!-- Opciones por JS -->
+          </div>
+          <div id="f2Feedback" class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="botonera-fase">
+        <button id="btnF2Nuevo" class="btn-principal">MOSTRAR EJEMPLO</button>
+        <button id="btnF2Siguiente" class="btn-principal btn-secundario" disabled>
+          SIGUIENTE EJEMPLO
+        </button>
+      </div>
+
+      <div id="f2Resumen" class="resumen oculto">
+        <h3>Resumen de la Fase 2</h3>
+        <p>
+          Con suficientes ejemplos en ambas direcciones (palabra → objeto y objeto → palabra),
+          el niño no solo aprende asociaciones específicas, sino el uso general de la clave relacional «es».
+        </p>
+        <button id="btnIrFase3" class="btn-principal">IR A FASE 3</button>
+      </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- FASE 3: DERIVACIÓN (ÁRBOL) -->
+    <!-- ===================== -->
+    <section id="fase3" class="fase">
+      <h2>FASE 3 · Derivación: un nuevo ejemplar</h2>
+      <p class="intro-fase">
+        Tras muchos entrenamientos, la clave «es» se vuelve un patrón general.
+        Cuando papá dice por primera vez «Esto es un árbol», el niño puede derivar la relación
+        sin un entrenamiento directo previo.
+      </p>
+
+      <div class="fase-layout fase3-layout">
+        <div class="panel-texto">
+          <p class="frase-papa">
+            Papá muestra 🌳 y dice: «Esto es…».
+          </p>
+          <p class="instruccion">
+            Elige la palabra que completa la frase. En el experimento real, esta relación
+            se deriva gracias a la historia previa con la clave «es».
+          </p>
+        </div>
+
+        <div class="panel-opciones">
+          <div class="emoji-grande fase3-emoji">🌳</div>
+          <div id="f3Opciones" class="opciones-grid">
+            <!-- Opciones por JS -->
+          </div>
+          <div id="f3Feedback" class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="botonera-fase">
+        <button id="btnF3Mostrar" class="btn-principal">MOSTRAR OPCIONES</button>
+      </div>
+
+      <div id="f3Resumen" class="resumen oculto">
+        <h3>¿Qué muestra esta derivación?</h3>
+        <p>
+          El niño no aprendió «árbol» con los mismos ensayos que limón o hamburguesa.
+          Sin embargo, al escuchar «Esto es un árbol», responde correctamente porque
+          la clave relacional «es» organiza nuevas relaciones de coordinación.
+        </p>
+        <button id="btnReiniciar" class="btn-principal btn-secundario">
+          REINICIAR LABORATORIO
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Referencia inferior -->
+  <footer class="ref-inferior">
+    Demostración pedagógica del entrenamiento por múltiples ejemplares de la clave relacional
+    de coordinación «es», dentro del marco de la Teoría del Marco Relacional (RFT).
+  </footer>
+
+  <!-- Lógica del laboratorio -->
+  <script defer src="js/crel-es.js"></script>
+</body>
+</html>
