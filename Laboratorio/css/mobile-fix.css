@@ -1,0 +1,72 @@
+/* ============================================================
+   FIX GLOBAL PARA CELULARES · RFT-WEB-LEO
+   Este archivo SOLO actúa bajo 768px
+============================================================ */
+
+@media (max-width: 768px) {
+
+  /* ✅ Permitir scroll real */
+  html, body {
+    height: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ✅ Quitar bloqueos de alto forzado */
+  .hero,
+  .portal,
+  .lab,
+  .pantalla,
+  .main,
+  .contenedor,
+  .lab-shell,
+  .lab-card {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* ✅ Todas las tarjetas pasan a una sola columna */
+  .portal-grid,
+  .lab-card,
+  .lab-layout,
+  .lab-acciones-layout,
+  .lab-direcciones-layout,
+  .lab-reversa-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ✅ Quitar cualquier position: fixed que bloquee scroll */
+  .bg-premium,
+  .gold-network,
+  .bg-network {
+    position: absolute !important;
+  }
+
+  /* ✅ Texto cómodo para dedo y lectura */
+  h1 { font-size: 1.9rem !important; }
+  h2 { font-size: 1.6rem !important; }
+  h3 { font-size: 1.35rem !important; }
+  p  { font-size: 1.05rem !important; line-height: 1.7; }
+
+  /* ✅ Botones táctiles reales */
+  button {
+    min-height: 52px;
+    font-size: 1rem;
+  }
+
+  /* ✅ Evitar que tarjetas se recorten */
+  .portal-card,
+  .lab-piramide-card,
+  .lab-resumen-card,
+  .lab-fase,
+  .lab-explicacion,
+  .lab-reversa-panel {
+    overflow: visible !important;
+  }
+
+  /* ✅ Evitar desbordes invisibles */
+  * {
+    max-width: 100vw !important;
+  }
+}
