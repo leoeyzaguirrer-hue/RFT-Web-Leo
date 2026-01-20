@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Análisis Funcional - FlexiMap</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/analisis.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <a href="index.html" class="back-link">← Volver al inicio</a>
+            <h1>Análisis Funcional Conductual</h1>
+            <p class="subtitle">Modelo ITEMA - Instituto Terapéutico de Madrid</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+                <span class="step active" data-step="1">Información Básica</span>
+                <span class="step" data-step="2">Variables Disposicionales</span>
+                <span class="step" data-step="3">Análisis ABC</span>
+                <span class="step" data-step="4">Hipótesis Funcional</span>
+            </div>
+        </div>
+
+        <form id="analisisForm">
+            <!-- ========================================
+                 SECCIÓN 1: INFORMACIÓN BÁSICA
+                 ======================================== -->
+            <section class="form-section active" id="seccion1">
+                <h2>📋 Información Básica del Caso</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombreCaso">Nombre/Código del Caso *</label>
+                        <input type="text" id="nombreCaso" name="nombreCaso" required
+                               placeholder="Ej: Caso Susana">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edad">Edad *</label>
+                        <input type="number" id="edad" name="edad" min="1" required
+                               placeholder="Ej: 23">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="motivoConsulta">Motivo de Consulta *</label>
+                        <p class="helper-text">¿Qué le trae a consulta? Utiliza las palabras del paciente</p>
+                        <textarea id="motivoConsulta" name="motivoConsulta" rows="4" required 
+                                  placeholder="Ejemplo: 'Tengo mucho miedo a conducir desde hace 5 meses. Me da ansiedad subirme al coche y prefiero que otros me lleven...'"></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="conductaProblema">Definición Operacional de la Conducta Problema *</label>
+                        <p class="helper-text">¿Qué HACE específicamente? (Observable y medible, no mentalista)</p>
+                        <textarea id="conductaProblema" name="conductaProblema" rows="3" required
+                                  placeholder="Ejemplo: Evita coger el coche sola, pide a otros que conduzcan, se baja del coche cuando experimenta síntomas, llora, respira profundamente..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duracionProblema">¿Cuánto tiempo lleva con el problema?</label>
+                        <input type="text" id="duracionProblema" name="duracionProblema" 
+                               placeholder="Ej: 5 meses, 2 años">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="frecuencia">Frecuencia de la conducta problema</label>
+                        <select id="frecuencia" name="frecuencia">
+                            <option value="">Seleccionar...</option>
+                            <option value="diaria">Diaria</option>
+                            <option value="varias-semana">Varias veces por semana</option>
+                            <option value="semanal">Semanal</option>
+                            <option value="ocasional">Ocasional</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-nav">
+                    <button type="button" class="btn btn-primary" onclick="nextSection(2)">
+                        Continuar →
+                    </button>
+                </div>
+            </section>
+
+            <!-- ========================================
+                 SECCIÓN 2: VARIABLES DISPOSICIONALES
+                 ======================================== -->
+            <section class="form-section" id="seccion2">
+                <h2>🔍 Variables Disposicionales</h2>
+                
+                <div class="info-box">
+                    <p>Variables que PREDISPONEN o FACILITAN el problema (NO lo causan directamente). Factores que hacen más probable la aparición o mantenimiento.</p>
+                </div>
+
+                <div class="subsection">
+                    <h3>📍 Del Entorno</h3>
+                    
+                    <div class="form-group full-width">
+                        <label for="entornoFamiliar">Contexto Familiar</label>
+                        <p class="helper-text">Aspectos relevantes del entorno familiar que facilitan el problema</p>
+                        <textarea id="entornoFamiliar" name="entornoFamiliar" rows="3"
+                                  placeholder="Ejemplo: Al inicio los padres presionaban para que cogiera el coche. Luego cambiaron y empezaron a comprenderla más y a llevarla ellos (reforzamiento negativo y positivo)."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="entornoSocial">Contexto Social/Laboral/Académico</label>
+                        <textarea id="entornoSocial" name="entornoSocial" rows="3"
+                                  placeholder="Ejemplo: Es estudiante de derecho. El problema coincidió con época de exámenes (mayor tensión). Buena adaptación social general."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="otrosEntorno">Otros aspectos del entorno relevantes</label>
+                        <textarea id="otrosEntorno" name="otrosEntorno" rows="2"
+                                  placeholder="Ejemplo: Recibió información sobre un accidente de una chica que se desmayó conduciendo. Esto le impactó mucho."></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>👤 Del Individuo</h3>
+                    
+                    <div class="form-group full-width">
+                        <label for="historiaAprendizaje">Historia de Aprendizaje Relevante</label>
+                        <p class="helper-text">Experiencias pasadas que se relacionan con el problema actual</p>
+                        <textarea id="historiaAprendizaje" name="historiaAprendizaje" rows="3"
+                                  placeholder="Ejemplo: Tuvo dos pequeños accidentes a los 17 años (le dieron por detrás), pero no le causaron miedo en ese momento. Años después escuchó la historia del desmayo conduciendo."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="repertorioHabilidades">Repertorio de Habilidades Básicas</label>
+                        <p class="helper-text">¿Qué habilidades tiene que ayudan o dificultan? ¿Qué estrategias ha usado?</p>
+                        <textarea id="repertorioHabilidades" name="repertorioHabilidades" rows="3"
+                                  placeholder="Ejemplo: Es muy independiente. A pesar del miedo se ha obligado a seguir conduciendo en trayectos cortos. Usa respiraciones, lleva caramelos, trata de distraerse leyendo en el transporte."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="alteracionesFuncionales">Alteraciones Funcionales/Estado Organismo</label>
+                        <p class="helper-text">Nivel de activación, problemas físicos, sustancias, sueño, etc.</p>
+                        <textarea id="alteracionesFuncionales" name="alteracionesFuncionales" rows="2"
+                                  placeholder="Ejemplo: Nivel de activación fisiológica muy elevado en general. Esto facilita que aparezcan síntomas de ansiedad en más situaciones. Es asmática (aunque esto no ha sido relevante)."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-nav">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection(1)">
+                        ← Anterior
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(3)">
+                        Continuar →
+                    </button>
+                </div>
+            </section>
+
+            <!-- ========================================
+                 SECCIÓN 3: ANÁLISIS ABC
+                 ======================================== -->
+            <section class="form-section" id="seccion3">
+                <h2>🔄 Análisis de Contingencias (ABC)</h2>
+                
+                <div class="info-box">
+                    <h4>Instrucciones importantes:</h4>
+                    <p>Describe un episodio RECIENTE y ESPECÍFICO de la conducta problema. No generalices. Usa un ejemplo concreto que el paciente recuerde bien.</p>
+                </div>
+
+                <div class="abc-container">
+                    <!-- ANTECEDENTES -->
+                    <div class="abc-box antecedente">
+                        <h3>A: ANTECEDENTES</h3>
+                        <p class="abc-question">¿Qué pasó JUSTO ANTES de la conducta?</p>
+
+                        <div class="form-group">
+                            <label for="situacionExterna">Situación externa (EN)</label>
+                            <p class="helper-text">Contexto observable externo</p>
+                            <textarea id="situacionExterna" name="situacionExterna" rows="2"
+                                      placeholder="Ejemplo: Tenía que coger el coche para ir a la universidad, era un trayecto de 20 minutos"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pensamientosAntecedentes">Pensamientos/Verbalizaciones previas</label>
+                            <p class="helper-text">¿Qué se decía a sí misma?</p>
+                            <textarea id="pensamientosAntecedentes" name="pensamientosAntecedentes" rows="2"
+                                      placeholder="Ejemplo: 'Me va a dar un desmayo', 'Voy a tener un accidente', 'No voy a poder controlarlo'"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emocionesAntecedentes">Emociones/Sensaciones físicas previas</label>
+                            <textarea id="emocionesAntecedentes" name="emocionesAntecedentes" rows="2"
+                                      placeholder="Ejemplo: Ansiedad anticipatoria, presión en el pecho, vista borrosa, mareo"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- CONDUCTA -->
+                    <div class="abc-box conducta">
+                        <h3>B: CONDUCTA</h3>
+                        <p class="abc-question">¿Qué hizo ESPECÍFICAMENTE? (Observable)</p>
+
+                        <div class="form-group">
+                            <label for="componenteMotor">Componente Motor *</label>
+                            <p class="helper-text">Lo que HIZO (acciones observables)</p>
+                            <textarea id="componenteMotor" name="componenteMotor" rows="2" required
+                                      placeholder="Ejemplo: Pidió a su padre que la llevara en coche, no cogió el coche ella"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="componenteFisiologico">Componente Fisiológico</label>
+                            <p class="helper-text">Respuestas del cuerpo</p>
+                            <textarea id="componenteFisiologico" name="componenteFisiologico" rows="2"
+                                      placeholder="Ejemplo: Taquicardia, sudoración, tensión muscular, temblor, estómago revuelto"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="componenteCognitivo">Componente Cognitivo</label>
+                            <p class="helper-text">Pensamientos DURANTE</p>
+                            <textarea id="componenteCognitivo" name="componenteCognitivo" rows="2"
+                                      placeholder="Ejemplo: 'Qué alivio no tener que conducir', 'No puedo hacerlo'"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- CONSECUENCIAS -->
+                    <div class="abc-box consecuencia">
+                        <h3>C: CONSECUENCIAS</h3>
+                        <p class="abc-question">¿Qué pasó INMEDIATAMENTE DESPUÉS?</p>
+
+                        <div class="form-group">
+                            <label for="consecuenciasExternas">Consecuencias EXTERNAS</label>
+                            <p class="helper-text">Cambios en el ambiente</p>
+                            <textarea id="consecuenciasExternas" name="consecuenciasExternas" rows="2"
+                                      placeholder="Ejemplo: Su padre accedió a llevarla, llegó a su destino sin conducir"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="consecuenciasInternas">Consecuencias INTERNAS *</label>
+                            <p class="helper-text">Cambios emocionales/corporales</p>
+                            <textarea id="consecuenciasInternas" name="consecuenciasInternas" rows="2" required
+                                      placeholder="Ejemplo: La ansiedad disminuyó progresivamente, se sintió aliviada, su cuerpo se relajó"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo de consecuencia que mantiene la conducta:</label>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="radio" name="tipoConsecuencia" value="r-negativo">
+                                    <strong>R- (Refuerzo Negativo)</strong> - Quita algo desagradable → ESCAPE/EVITACIÓN
+                                </label>
+                                <label>
+                                    <input type="radio" name="tipoConsecuencia" value="r-positivo">
+                                    <strong>R+ (Refuerzo Positivo)</strong> - Obtiene algo agradable
+                                </label>
+                                <label>
+                                    <input type="radio" name="tipoConsecuencia" value="castigo">
+                                    <strong>C+ (Castigo Positivo)</strong> - Aparece algo aversivo
+                                </label>
+                                <label>
+                                    <input type="radio" name="tipoConsecuencia" value="mixto">
+                                    <strong>Mixto</strong> - Combinación de los anteriores
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-nav">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection(2)">
+                        ← Anterior
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(4)">
+                        Continuar →
+                    </button>
+                </div>
+            </section>
+
+            <!-- ========================================
+                 SECCIÓN 4: HIPÓTESIS FUNCIONAL
+                 ======================================== -->
+            <section class="form-section" id="seccion4">
+                <h2>💡 Hipótesis de Mantenimiento</h2>
+                
+                <div class="info-box">
+                    <p><strong>IMPORTANTE:</strong> La hipótesis de mantenimiento explica qué mantiene el problema EN LA ACTUALIDAD. No importa cómo empezó, sino qué lo mantiene ahora.</p>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="funcionPrincipal">Función Principal de la Conducta *</label>
+                    <p class="helper-text">¿Qué consigue o qué evita el paciente con esta conducta?</p>
+                    <select id="funcionPrincipal" name="funcionPrincipal" required>
+                        <option value="">Seleccionar función...</option>
+                        <option value="escape-malestar">Escape/Evitación de malestar emocional (R-)</option>
+                        <option value="atencion-validacion">Obtención de atención/validación social (R+)</option>
+                        <option value="regulacion-emocional">Regulación emocional inadaptativa</option>
+                        <option value="falta-reforzadores">Falta de reforzadores en el ambiente (inactividad)</option>
+                        <option value="automatico">Reforzamiento automático/sensorial</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="hipotesisMantenimiento">Explicación de cómo se MANTIENE el problema *</label>
+                    <p class="helper-text">Redacta en 4-6 líneas cómo las contingencias actuales mantienen la conducta</p>
+                    <textarea id="hipotesisMantenimiento" name="hipotesisMantenimiento" rows="6" required
+                              placeholder="Ejemplo: La conducta de evitar conducir se mantiene por reforzamiento negativo (R-). Cada vez que evita coger el coche, experimenta alivio inmediato al eliminar la ansiedad anticipatoria. Este alivio refuerza la evitación. Como consecuencia, nunca se expone al estímulo temido (coche), lo que impide la habituación. El coche sigue funcionando como EC que elicita ansiedad (RC). Las conductas de escape (pararse, pedir que la reemplacen) también se refuerzan al reducir temporalmente la ansiedad."></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="conductasMantenimiento">Lista de conductas que mantienen el problema</label>
+                    <p class="helper-text">Enumera las conductas específicas de escape, evitación o seguridad</p>
+                    <textarea id="conductasMantenimiento" name="conductasMantenimiento" rows="4"
+                              placeholder="Ejemplo:
+- Evita coger el coche sola
+- Pide a otros que conduzcan
+- Solo conduce en trayectos cortos y conocidos
+- Para el coche cuando siente ansiedad
+- Usa conductas de seguridad (respirar profundo, llevar caramelos)
+- Evita autopistas y trayectos largos"></textarea>
+                </div>
+
+                <div class="section-nav">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection(3)">
+                        ← Anterior
+                    </button>
+                    <button type="submit" class="btn btn-success btn-large">
+                        ✓ Generar Análisis Completo
+                    </button>
+                </div>
+            </section>
+        </form>
+
+        <!-- RESULTADO SE MOSTRARÁ AQUÍ -->
+        <div id="resultado" class="resultado-container" style="display: none;">
+            <!-- JavaScript generará el resultado aquí -->
+        </div>
+    </div>
+
+    <script src="js/analisis.js"></script>
+</body>
+</html>
