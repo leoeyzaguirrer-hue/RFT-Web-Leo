@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Funcional - FlexiMap</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="analisis.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header con navegación -->
+        <header class="header-nav">
+            <a href="index.html" class="back-link">← Volver al inicio</a>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-text" id="progressText">Sección A: Información Básica</div>
+        </header>
+
+        <!-- Título principal -->
+        <div class="page-title">
+            <h1>Análisis Funcional Conductual-Contextual</h1>
+            <p class="page-subtitle">Identificación de procesos para formulación de caso</p>
+        </div>
+
+        <!-- Formulario principal -->
+        <form id="analysisForm">
+            
+            <!-- SECCIÓN A: INFORMACIÓN BÁSICA -->
+            <section class="form-section active" id="sectionA" data-section="A">
+                <div class="section-header">
+                    <span class="section-label">Sección A</span>
+                    <h2>Información Básica del Caso</h2>
+                    <p class="section-description">
+                        Datos identificativos y contexto del problema principal
+                    </p>
+                </div>
+
+                <div class="form-grid">
+                    <!-- A1: Datos Identificativos -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">A1. Datos Identificativos</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="caseCode">Código/Nombre del caso *</label>
+                        <input type="text" id="caseCode" name="caseCode" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Edad *</label>
+                        <input type="number" id="age" name="age" min="18" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Género</label>
+                        <select id="gender" name="gender">
+                            <option value="">Seleccionar...</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="no-binario">No binario</option>
+                            <option value="prefiere-no-decir">Prefiere no decir</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="analysisDate">Fecha de análisis *</label>
+                        <input type="date" id="analysisDate" name="analysisDate" required>
+                    </div>
+
+                    <!-- A2: Queja Principal -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">A2. Queja Principal</h3>
+                        <p class="helper-text">
+                            Anotar literalmente lo que el paciente dice sobre su problema principal.<br>
+                            <strong>Pregunta clave:</strong> "¿Qué te trae a consulta?"
+                        </p>
+                        <label for="chiefComplaint">En palabras del paciente *</label>
+                        <textarea id="chiefComplaint" name="chiefComplaint" rows="4" required 
+                                  placeholder="Ej: 'No puedo salir de casa sin sentir que me va a pasar algo malo...'"></textarea>
+                    </div>
+
+                    <!-- A3: Definición Operacional -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">A3. Definición Operacional de la Conducta Problema</h3>
+                        <div class="info-box">
+                            <strong>Instrucción:</strong> Definir la conducta en términos observables y medibles.<br>
+                            ❌ NO aceptar: "Está ansioso", "Está deprimido"<br>
+                            ✅ SÍ aceptar: "Evita salir de casa", "Permanece en cama 12+ horas/día"
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="behavior1">Conducta problema principal 1 *</label>
+                        <input type="text" id="behavior1" name="behavior1" required 
+                               placeholder="Ej: Evita situaciones sociales (fiestas, reuniones, eventos)">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="behavior2">Conducta problema 2 (opcional)</label>
+                        <input type="text" id="behavior2" name="behavior2" 
+                               placeholder="Ej: Permanece en cama hasta tarde">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="behavior3">Conducta problema 3 (opcional)</label>
+                        <input type="text" id="behavior3" name="behavior3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="frequency">Frecuencia aproximada</label>
+                        <select id="frequency" name="frequency">
+                            <option value="">Seleccionar...</option>
+                            <option value="diaria">Diaria</option>
+                            <option value="varias-semana">Varias veces por semana</option>
+                            <option value="semanal">Semanal</option>
+                            <option value="quincenal">Quincenal</option>
+                            <option value="mensual">Mensual</option>
+                            <option value="ocasional">Ocasional</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duración (cuando aplica)</label>
+                        <input type="text" id="duration" name="duration" 
+                               placeholder="Ej: 2-3 horas, Todo el día">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="intensity">Intensidad (0-10)</label>
+                        <input type="range" id="intensity" name="intensity" min="0" max="10" value="5" step="1">
+                        <output id="intensityValue">5</output>
+                    </div>
+
+                    <!-- A4: Contexto -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">A4. Contexto del Problema</h3>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>¿CUÁNDO ocurre?</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="when" value="manana">
+                                <span>Por la mañana</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="when" value="tarde">
+                                <span>Por la tarde</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="when" value="noche">
+                                <span>Por la noche</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="when" value="todo-dia">
+                                <span>Todo el día</span>
+                            </label>
+                        </div>
+                        <input type="text" name="whenOther" placeholder="Situaciones específicas...">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>¿DÓNDE ocurre?</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="where" value="casa">
+                                <span>Casa</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="where" value="trabajo">
+                                <span>Trabajo</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="where" value="social">
+                                <span>Contextos sociales</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="where" value="todos">
+                                <span>Todos los contextos</span>
+                            </label>
+                        </div>
+                        <input type="text" name="whereOther" placeholder="Otros lugares...">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>¿Con QUIÉN ocurre?</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="withWhom" value="solo">
+                                <span>Solo/a</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="withWhom" value="pareja">
+                                <span>Con pareja</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="withWhom" value="familia">
+                                <span>Con familia</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="withWhom" value="amigos">
+                                <span>Con amigos</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="withWhom" value="desconocidos">
+                                <span>Con desconocidos</span>
+                            </label>
+                        </div>
+                        <input type="text" name="withWhomOther" placeholder="Otras personas...">
+                    </div>
+
+                    <!-- A5: Historia -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">A5. Historia del Problema</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problemDuration">Duración del problema</label>
+                        <input type="text" id="problemDuration" name="problemDuration" 
+                               placeholder="Ej: 6 meses, 2 años">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="onset">Inicio: ¿Qué pasaba cuando empezó?</label>
+                        <textarea id="onset" name="onset" rows="3" 
+                                  placeholder="Ej: Empezó después de perder su trabajo..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Curso: ¿Ha empeorado, mejorado o está igual?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="course" value="empeorado">
+                                <span>Ha empeorado gradualmente</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="course" value="mejorado">
+                                <span>Ha mejorado algo pero persiste</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="course" value="igual">
+                                <span>Igual desde el inicio</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="course" value="variable">
+                                <span>Cursos variables (altas y bajas)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="previousAttempts">Intentos previos de solución</label>
+                        <textarea id="previousAttempts" name="previousAttempts" rows="3" 
+                                  placeholder="¿Qué ha hecho el paciente para intentar resolver el problema?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whatWorked">¿Qué funcionó (aunque sea temporalmente)?</label>
+                        <input type="text" id="whatWorked" name="whatWorked">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whatDidntWork">¿Qué NO funcionó?</label>
+                        <input type="text" id="whatDidntWork" name="whatDidntWork">
+                    </div>
+                </div>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-primary" onclick="nextSection('B')">
+                        Continuar a Sección B: Análisis de Contingencias →
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECCIÓN B: ANÁLISIS DE CONTINGENCIAS (ABC) -->
+            <section class="form-section" id="sectionB" data-section="B">
+                <div class="section-header">
+                    <span class="section-label">Sección B</span>
+                    <h2>Análisis de Contingencias (ABC)</h2>
+                    <p class="section-description">
+                        Identificar las relaciones funcionales entre conducta y ambiente
+                    </p>
+                </div>
+
+                <div class="info-box important">
+                    <h4>📌 RECORDATORIO: Análisis Funcional</h4>
+                    <p><strong>A</strong> (Antecedente) → <strong>B</strong> (Behavior/Conducta) → <strong>C</strong> (Consecuencia)</p>
+                    <p>La conducta es FUNCIÓN de:</p>
+                    <ul>
+                        <li>Lo que la precede (antecedentes)</li>
+                        <li>Lo que la sigue (consecuencias)</li>
+                    </ul>
+                    <p><strong>Pregunta clave:</strong> ¿Qué MANTIENE esta conducta? (no qué la causó)</p>
+                </div>
+
+                <div class="form-grid">
+                    <!-- B1: Episodio ABC -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">B1. Análisis ABC - Episodio Reciente</h3>
+                        <p class="helper-text">
+                            Piensa en un episodio <strong>RECIENTE Y ESPECÍFICO</strong> de la conducta problema.
+                            Describe el ABC completo:
+                        </p>
+                    </div>
+
+                    <div class="abc-box antecedent">
+                        <h4>A: ANTECEDENTE (¿Qué pasó JUSTO ANTES?)</h4>
+                        
+                        <div class="form-group full-width">
+                            <label for="situationExternal">Situación externa:</label>
+                            <textarea id="situationExternal" name="situationExternal" rows="2" 
+                                      placeholder="Ej: Recibió invitación a una fiesta por WhatsApp"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="thoughts">Pensamientos del paciente:</label>
+                            <textarea id="thoughts" name="thoughts" rows="2" 
+                                      placeholder="Ej: 'Van a pensar que soy raro', 'No voy a saber qué decir'"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="emotions">Emociones/sensaciones del paciente:</label>
+                            <textarea id="emotions" name="emotions" rows="2" 
+                                      placeholder="Ej: Ansiedad intensa, palpitaciones, sudoración"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="abc-box behavior">
+                        <h4>B: CONDUCTA (¿Qué hizo ESPECÍFICAMENTE?)</h4>
+                        
+                        <div class="form-group full-width">
+                            <label for="observableBehavior">Conducta observable:</label>
+                            <textarea id="observableBehavior" name="observableBehavior" rows="2" 
+                                      placeholder="Ej: Respondió 'No puedo ir, tengo otros planes' (mintió)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="behaviorDuration">¿Duración?</label>
+                            <input type="text" id="behaviorDuration" name="behaviorDuration" 
+                                   placeholder="Ej: 2 minutos">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="behaviorIntensity">¿Intensidad (0-10)?</label>
+                            <input type="range" id="behaviorIntensity" name="behaviorIntensity" 
+                                   min="0" max="10" value="5" step="1">
+                            <output id="behaviorIntensityValue">5</output>
+                        </div>
+                    </div>
+
+                    <div class="abc-box consequence">
+                        <h4>C: CONSECUENCIAS (¿Qué pasó INMEDIATAMENTE DESPUÉS?)</h4>
+                        
+                        <div class="form-group full-width">
+                            <label for="externalConsequences">Consecuencias EXTERNAS (del ambiente):</label>
+                            <textarea id="externalConsequences" name="externalConsequences" rows="2" 
+                                      placeholder="Ej: Amigo respondió 'Ok, otra vez será'"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <h5>Consecuencias INTERNAS (en el paciente):</h5>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="emotionChanges">¿Qué emociones/sensaciones cambiaron?</label>
+                            <input type="text" id="emotionChanges" name="emotionChanges" 
+                                   placeholder="Ej: La ansiedad disminuyó inmediatamente">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="thoughtsAfter">¿Qué pensamientos vinieron después?</label>
+                            <input type="text" id="thoughtsAfter" name="thoughtsAfter" 
+                                   placeholder="Ej: 'Qué alivio', 'Pero sigo siendo un fracaso'">
+                        </div>
+
+                        <div class="form-group">
+                            <label>¿Hubo alivio?</label>
+                            <div class="radio-group inline">
+                                <label class="radio-label">
+                                    <input type="radio" name="relief" value="si">
+                                    <span>Sí</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="relief" value="no">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reliefOf">¿Alivio de qué?</label>
+                            <input type="text" id="reliefOf" name="reliefOf" 
+                                   placeholder="Ej: De la ansiedad, del miedo">
+                        </div>
+                    </div>
+
+                    <!-- B2: Función -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">B2. Función de la Conducta - Hipótesis Principal</h3>
+                        <div class="info-box">
+                            <strong>Pregunta crítica:</strong> ¿Qué OBTIENE o qué EVITA el paciente con esta conducta?
+                        </div>
+                        <p class="helper-text">Selecciona la función PRINCIPAL (máximo 2):</p>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <div class="function-options">
+                            <label class="function-label">
+                                <input type="checkbox" name="function" value="escape">
+                                <div class="function-content">
+                                    <strong>ESCAPE/EVITACIÓN de malestar emocional</strong>
+                                    <p>Reforzamiento negativo - quita algo aversivo</p>
+                                    <input type="text" name="functionEscapeDetail" 
+                                           placeholder="Especificar qué evita...">
+                                </div>
+                            </label>
+
+                            <label class="function-label">
+                                <input type="checkbox" name="function" value="atencion">
+                                <div class="function-content">
+                                    <strong>OBTENCIÓN de atención, validación o cuidado</strong>
+                                    <p>Reforzamiento social positivo</p>
+                                    <input type="text" name="functionAtencionDetail" 
+                                           placeholder="Especificar de quién...">
+                                </div>
+                            </label>
+
+                            <label class="function-label">
+                                <input type="checkbox" name="function" value="placer">
+                                <div class="function-content">
+                                    <strong>OBTENCIÓN de alivio/placer inmediato</strong>
+                                    <p>Reforzamiento positivo corto plazo</p>
+                                    <input type="text" name="functionPlacerDetail" 
+                                           placeholder="Especificar qué...">
+                                </div>
+                            </label>
+
+                            <label class="function-label">
+                                <input type="checkbox" name="function" value="regulacion">
+                                <div class="function-content">
+                                    <strong>REGULACIÓN emocional inadaptativa</strong>
+                                    <p>Reduce tensión emocional pero causa problemas</p>
+                                    <input type="text" name="functionRegulacionDetail" 
+                                           placeholder="Especificar cómo...">
+                                </div>
+                            </label>
+
+                            <label class="function-label">
+                                <input type="checkbox" name="function" value="comunicacion">
+                                <div class="function-content">
+                                    <strong>COMUNICACIÓN indirecta</strong>
+                                    <p>Expresa algo que no puede/sabe verbalizar</p>
+                                    <input type="text" name="functionComunicacionDetail" 
+                                           placeholder="Especificar qué...">
+                                </div>
+                            </label>
+
+                            <label class="function-label">
+                                <input type="checkbox" name="function" value="automatico">
+                                <div class="function-content">
+                                    <strong>AUTOMÁTICO/Sensorial</strong>
+                                    <p>La conducta en sí misma produce estimulación</p>
+                                    <input type="text" name="functionAutomaticoDetail" 
+                                           placeholder="Especificar...">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- B3: Variables EO -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">B3. Variables que Aumentan la Probabilidad (EOs)</h3>
+                        <p class="helper-text">¿Qué CONDICIONES hacen más probable que ocurra la conducta?</p>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="privacion-sueno">
+                                <span>Privación de sueño</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="hambre">
+                                <span>Hambre/malestar físico</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="estres">
+                                <span>Estrés/presión acumulada</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="soledad">
+                                <span>Soledad/aislamiento prolongado</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="sustancias">
+                                <span>Uso de sustancias</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="conflictos">
+                                <span>Conflictos interpersonales</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="demandas">
+                                <span>Demandas/exigencias</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="eos" value="incertidumbre">
+                                <span>Incertidumbre</span>
+                            </label>
+                        </div>
+                        <input type="text" name="eosOther" placeholder="Otro...">
+                    </div>
+
+                    <!-- B4: Patrón de Reforzamiento -->
+                    <div class="form-group full-width">
+                        <h3 class="subsection-title">B4. Patrón de Reforzamiento</h3>
+                        <p class="helper-text">
+                            ¿Con qué FRECUENCIA la conducta "funciona" (logra su objetivo)?
+                        </p>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="reinforcementPattern" value="100">
+                                <span>Siempre (100%) - Reforzamiento continuo</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reinforcementPattern" value="80-99">
+                                <span>Casi siempre (80-99%)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reinforcementPattern" value="50-79">
+                                <span>Frecuentemente (50-79%)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reinforcementPattern" value="20-49">
+                                <span>A veces (20-49%) - Reforzamiento intermitente</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reinforcementPattern" value="0-19">
+                                <span>Rara vez (<20%)</span>
+                            </label>
+                        </div>
+                        <div class="info-box" style="margin-top: 1rem;">
+                            💡 <strong>NOTA:</strong> El reforzamiento intermitente es MÁS resistente a la extinción que el continuo.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection('A')">
+                        ← Volver a Sección A
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection('C')">
+                        Continuar a Sección C: Evaluación de Procesos →
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECCIÓN C: EVALUACIÓN DE PROCESOS -->
+            <section class="form-section" id="sectionC" data-section="C">
+                <div class="section-header">
+                    <span class="section-label">Sección C</span>
+                    <h2>Evaluación de Procesos Conductuales</h2>
+                    <p class="section-description">
+                        Medir procesos específicos basados en ciencia conductual contextual
+                    </p>
+                </div>
+
+                <div class="info-box important">
+                    <h4>📌 FILOSOFÍA DE ESTA EVALUACIÓN</h4>
+                    <p>Los procesos NO son "constructos mentales"<br>
+                    Los procesos SON patrones funcionales de conducta que interactúan con el ambiente</p>
+                    <p><strong>Evalúas:</strong> ¿Este patrón funcional está presente? ¿Con qué intensidad? ¿Cómo mantiene el problema?</p>
+                </div>
+
+                <!-- Aquí irían los 7 procesos, por ahora incluyo el Proceso 1 como ejemplo -->
+                
+                <!-- PROCESO 1: EVITACIÓN EXPERIENCIAL -->
+                <div class="process-container">
+                    <div class="process-header">
+                        <span class="process-number">Proceso 1</span>
+                        <h3>Evitación Experiencial</h3>
+                    </div>
+
+                    <div class="process-definition">
+                        <h4>Definición Funcional:</h4>
+                        <p>
+                            Patrón en el cual la persona se comporta para <strong>EVITAR, ESCAPAR o CONTROLAR</strong> 
+                            experiencias internas (pensamientos, emociones, sensaciones, recuerdos, impulsos) incluso 
+                            cuando hacerlo causa problemas o estrecha su vida.
+                        </p>
+                        <div class="definition-details">
+                            <div><strong>FUNCIÓN:</strong> Reforzamiento negativo (quitar malestar) a corto plazo</div>
+                            <div><strong>PROBLEMA:</strong> Mantenimiento del problema a largo plazo + limitación vital</div>
+                        </div>
+                    </div>
+
+                    <div class="process-indicators">
+                        <h4>Indicadores (marca los presentes):</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evitacionIndicators" value="situaciones">
+                                <span>Evita situaciones que provocan ansiedad/tristeza/malestar</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evitacionIndicators" value="pensamientos">
+                                <span>Evita pensar en ciertos temas o recuerdos</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evitacionIndicators" value="supresion">
+                                <span>Intenta suprimir o "controlar" pensamientos</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evitacionIndicators" value="sensaciones">
+                                <span>Evita sensaciones corporales (taquicardia, tensión)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evitacionIndicators" value="distraccion">
+                                <span>Usa distracción para no sentir emociones</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evitacionIndicators" value="limitacion">
+                                <span>Su vida está significativamente limitada por lo que evita</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evitacionIndicators" value="reconoce">
+                                <span>Reconoce que la evitación es un problema pero "no puede parar"</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="process-questions">
+                        <h4>Preguntas de Evaluación:</h4>
+                        <p class="scale-legend">
+                            <span>0 = No presente</span>
+                            <span>5 = Moderado</span>
+                            <span>10 = Extremadamente presente</span>
+                        </p>
+
+                        <div class="question-item">
+                            <label>1. ¿Evita activamente situaciones que le causan malestar emocional?</label>
+                            <div class="slider-container">
+                                <span>0</span>
+                                <input type="range" name="evitacion1" min="0" max="10" value="5" step="1">
+                                <span>10</span>
+                                <output class="slider-output">5</output>
+                            </div>
+                            <div class="slider-labels">
+                                <span>Nunca evita</span>
+                                <span>Constantemente evita</span>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <label>2. ¿Intenta NO pensar en ciertos pensamientos o recuerdos?</label>
+                            <div class="slider-container">
+                                <span>0</span>
+                                <input type="range" name="evitacion2" min="0" max="10" value="5" step="1">
+                                <span>10</span>
+                                <output class="slider-output">5</output>
+                            </div>
+                            <div class="slider-labels">
+                                <span>No intenta suprimir</span>
+                                <span>Supresión constante</span>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <label>3. ¿Evita sensaciones corporales incómodas? (palpitaciones, tensión)</label>
+                            <div class="slider-container">
+                                <span>0</span>
+                                <input type="range" name="evitacion3" min="0" max="10" value="5" step="1">
+                                <span>10</span>
+                                <output class="slider-output">5</output>
+                            </div>
+                            <div class="slider-labels">
+                                <span>No evita sensaciones</span>
+                                <span>Evita constantemente</span>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <label>4. ¿Su vida está LIMITADA por cosas que evita?</label>
+                            <div class="slider-container">
+                                <span>0</span>
+                                <input type="range" name="evitacion4" min="0" max="10" value="5" step="1">
+                                <span>10</span>
+                                <output class="slider-output">5</output>
+                            </div>
+                            <div class="slider-labels">
+                                <span>Vida sin restricciones</span>
+                                <span>Vida muy limitada</span>
+                            </div>
+                        </div>
+
+                        <div class="process-score">
+                            <strong>PUNTUACIÓN TOTAL PROCESO 1:</strong>
+                            <span class="score-value" id="evitacionScore">20</span>
+                            <span class="score-max">/40</span>
+                            <div class="score-interpretation" id="evitacionInterpretation">
+                                Evitación leve-moderada
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOTA: Aquí irían los Procesos 2-7 con la misma estructura -->
+                <!-- Por razones de espacio, continuaré en el siguiente archivo -->
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection('B')">
+                        ← Volver a Sección B
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection('D')">
+                        Continuar a Sección D: Síntesis Funcional →
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECCIÓN D: SÍNTESIS FUNCIONAL -->
+            <section class="form-section" id="sectionD" data-section="D">
+                <div class="section-header">
+                    <span class="section-label">Sección D</span>
+                    <h2>Síntesis Funcional y Generación de Perfil</h2>
+                    <p class="section-description">
+                        El sistema generará automáticamente tu perfil conductual
+                    </p>
+                </div>
+
+                <div class="results-container" id="resultsContainer">
+                    <div class="loading-state">
+                        <p>Completa las secciones anteriores para generar el perfil...</p>
+                    </div>
+                </div>
+
+                <div class="section-navigation">
+                    <button type="button" class="btn btn-secondary" onclick="previousSection('C')">
+                        ← Volver a Sección C
+                    </button>
+                    <button type="submit" class="btn btn-success btn-large">
+                        ✓ Generar Perfil Conductual y Guardar
+                    </button>
+                </div>
+            </section>
+
+        </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="analisis.js"></script>
+</body>
+</html>
