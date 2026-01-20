@@ -494,6 +494,622 @@
         .back-button:active {
             transform: scale(0.95);
         }
+
+        /* Timeline - Pantalla 4 */
+        .strategy-timeline {
+            margin: 20px 0;
+        }
+
+        .strategy-item {
+            background: white;
+            border-left: 4px solid var(--naranja-calido);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .strategy-item h4 {
+            color: var(--azul-oscuro);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .outcome-box {
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .outcome-short {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+
+        .outcome-long {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+
+        .add-strategy-btn {
+            background: var(--verde-bosque);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 20px;
+            width: 100%;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .conclusion-card {
+            background: linear-gradient(135deg, #721c24, #dc3545);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .conclusion-card h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Control simulator - Pantalla 5 */
+        .control-simulator {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .anxiety-meter {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            height: 40px;
+            background: var(--gris-medio);
+            border-radius: 20px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .anxiety-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffc107, #dc3545);
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .control-button {
+            background: var(--azul-oscuro);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .control-button:active {
+            transform: scale(0.95);
+        }
+
+        .attempt-counter {
+            background: var(--gris-claro);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .attempt-counter strong {
+            color: var(--azul-oscuro);
+            font-size: 1.1rem;
+        }
+
+        /* Backpack - Pantalla 6 */
+        .backpack-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto;
+        }
+
+        .backpack-svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .pain-items {
+            margin: 20px 0;
+        }
+
+        .pain-chip {
+            display: inline-block;
+            background: var(--azul-oscuro);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .pain-chip.added {
+            background: var(--naranja-calido);
+            transform: scale(0.9);
+        }
+
+        .pain-chip:active {
+            transform: scale(0.95);
+        }
+
+        .values-path {
+            background: linear-gradient(135deg, var(--verde-bosque), var(--naranja-calido));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .values-path h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .walking-animation {
+            font-size: 3rem;
+            animation: walk 2s ease-in-out infinite;
+        }
+
+        @keyframes walk {
+            0%, 100% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* Observer exercise - Pantalla 7 */
+        .timeline-scroll {
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 0;
+            margin: 20px 0;
+        }
+
+        .timeline-track {
+            display: flex;
+            gap: 20px;
+            min-width: max-content;
+            padding: 0 20px;
+        }
+
+        .timeline-event {
+            background: white;
+            border: 3px solid var(--verde-bosque);
+            border-radius: 12px;
+            padding: 15px;
+            min-width: 200px;
+            max-width: 200px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-event:active {
+            transform: scale(0.95);
+        }
+
+        .timeline-event.trauma {
+            border-color: var(--naranja-calido);
+            background: #fff5f0;
+        }
+
+        .timeline-event .year {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .timeline-event h4 {
+            color: var(--azul-oscuro);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-event p {
+            font-size: 0.8rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .observer-box {
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--verde-bosque));
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .observer-box::before {
+            content: '👁️';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .observer-box h3 {
+            position: relative;
+            z-index: 2;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .observer-box p {
+            position: relative;
+            z-index: 2;
+            color: white;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .deictic-exercise {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .deictic-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .deictic-btn {
+            background: var(--gris-claro);
+            border: 2px solid var(--verde-bosque);
+            color: var(--azul-oscuro);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .deictic-btn.selected {
+            background: var(--verde-bosque);
+            color: white;
+        }
+
+        .deictic-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Values wheel - Pantalla 8 */
+        .values-wheel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .value-card {
+            background: white;
+            border: 3px solid var(--gris-medio);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .value-card.selected {
+            border-color: var(--naranja-calido);
+            background: linear-gradient(135deg, #fff5f0, white);
+        }
+
+        .value-card h4 {
+            color: var(--azul-oscuro);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .value-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .importance-slider {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .gap-display {
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--naranja-calido));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .gap-display h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .gap-bar {
+            background: rgba(255,255,255,0.3);
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .gap-fill {
+            background: #dc3545;
+            height: 100%;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            transition: width 0.5s ease;
+        }
+
+        .funeral-exercise {
+            background: var(--gris-claro);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--verde-bosque);
+        }
+
+        .funeral-exercise textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid var(--gris-medio);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        /* Action plan - Pantalla 9 */
+        .action-builder {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .action-builder h4 {
+            color: var(--azul-oscuro);
+            margin-bottom: 15px;
+        }
+
+        .action-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--gris-medio);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .action-input:focus {
+            outline: none;
+            border-color: var(--verde-bosque);
+        }
+
+        .barrier-box {
+            background: #fff5f0;
+            border: 2px solid var(--naranja-calido);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .barrier-box h5 {
+            color: var(--azul-oscuro);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .commitment-card {
+            background: linear-gradient(135deg, var(--verde-bosque), var(--azul-oscuro));
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .commitment-card h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .commitment-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            font-size: 1rem;
+        }
+
+        .commitment-checkbox input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        /* Case study - Pantalla 10 */
+        .case-presentation {
+            background: var(--gris-claro);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--azul-oscuro);
+        }
+
+        .case-presentation h3 {
+            color: var(--azul-oscuro);
+            margin-bottom: 10px;
+        }
+
+        .case-presentation p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .decision-point {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .decision-point h4 {
+            color: var(--azul-oscuro);
+            margin-bottom: 15px;
+        }
+
+        .decision-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .decision-btn {
+            background: white;
+            border: 2px solid var(--gris-medio);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .decision-btn:active {
+            transform: scale(0.98);
+        }
+
+        .decision-btn.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .decision-btn.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .feedback-box {
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--verde-bosque));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .feedback-box.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .feedback-box h4 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .feedback-box p {
+            color: white;
+            line-height: 1.6;
+        }
+
+        .score-display {
+            background: var(--naranja-calido);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .score-display h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, var(--verde-bosque), var(--naranja-calido));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .final-message h2 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .final-message p {
+            color: white;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -570,6 +1186,678 @@
 
         <button class="nav-button" onclick="nextScreen(3)">
             Continuar: Fusión con la Mente →
+        </button>
+    </div>
+
+    <!-- PANTALLA 5: El Problema del Control -->
+    <div id="screen5" class="screen">
+        <button class="back-button" onclick="nextScreen(4)">← Volver</button>
+        
+        <div class="header">
+            <h1>🎮 El Problema del Control</h1>
+            <p>Capítulo 5: Cuando "arreglarlo" empeora las cosas</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 5 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 50%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Ejercicio: Polígrafo del Sufrimiento</h2>
+            <p><strong>Del libro:</strong> Intenta NO sentir ansiedad. Ahora mismo. Hazlo desaparecer.</p>
+            
+            <div class="instruction-box">
+                👇 Presiona el botón para intentar controlar la ansiedad
+            </div>
+
+            <div class="control-simulator">
+                <h3 style="color: var(--azul-oscuro); margin-bottom: 15px;">Medidor de Ansiedad</h3>
+                
+                <div class="anxiety-meter">
+                    <div class="anxiety-fill" id="anxietyFill" style="width: 50%;">
+                        50%
+                    </div>
+                </div>
+
+                <button class="control-button" onclick="tryToControl()">
+                    🛑 Intentar NO sentir ansiedad
+                </button>
+
+                <button class="control-button" onclick="tryToSuppress()">
+                    🧠 Suprimir pensamientos
+                </button>
+
+                <div class="attempt-counter">
+                    <strong>Intentos: <span id="attemptCount">0</span></strong><br>
+                    <span id="resultText" style="color: #666; font-size: 0.85rem;">
+                        Intenta controlar la ansiedad...
+                    </span>
+                </div>
+            </div>
+
+            <div class="explanation-box" id="controlExplanation">
+                <strong>¿Qué está pasando?</strong>
+                <p>Mientras más intentas controlar la ansiedad, MÁS aparece. Este es el efecto paradójico del control.</p>
+                <p style="margin-top: 10px;"><strong>Del libro:</strong> "El control funciona en el mundo externo, pero NO en el mundo interno."</p>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>La Agenda de Control ES el Problema</h3>
+                <ul>
+                    <li>No puedes "no pensar" en el trauma</li>
+                    <li>No puedes "eliminar" la ansiedad</li>
+                    <li>No puedes "borrar" los recuerdos</li>
+                </ul>
+                <p style="margin-top: 15px; color: white;"><strong>Pregunta clave:</strong> "¿Y si dejaras de luchar?"</p>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(6)">
+            Continuar: Willingness/Disposición →
+        </button>
+    </div>
+
+    <!-- PANTALLA 6: Willingness -->
+    <div id="screen6" class="screen">
+        <button class="back-button" onclick="nextScreen(5)">← Volver</button>
+        
+        <div class="header">
+            <h1>🎒 Willingness - Disposición</h1>
+            <p>Capítulo 6: La alternativa a la evitación</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 6 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 60%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Ejercicio: Llevar tu Mochila</h2>
+            <p><strong>Metáfora del libro:</strong> "¿Puedes cargar esto Y TAMBIÉN moverte hacia tus valores?"</p>
+            
+            <div class="instruction-box">
+                👇 Toca cada experiencia para añadirla a la mochila
+            </div>
+
+            <div class="backpack-container">
+                <svg class="backpack-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,40 L70,60 L70,140 L130,140 L130,60 Z" 
+                          fill="#2d5f4e" stroke="#1a3a52" stroke-width="3"/>
+                    <path d="M85,60 Q100,50 115,60" 
+                          fill="none" stroke="#1a3a52" stroke-width="3"/>
+                    <circle cx="100" cy="90" r="8" fill="#d97642"/>
+                    <text x="100" y="95" text-anchor="middle" fill="white" font-size="12" font-weight="bold">
+                        <tspan id="backpackCount">0</tspan>
+                    </text>
+                </svg>
+            </div>
+
+            <div class="pain-items">
+                <div class="pain-chip" onclick="addToPack(this)">😰 Ansiedad</div>
+                <div class="pain-chip" onclick="addToPack(this)">😢 Tristeza</div>
+                <div class="pain-chip" onclick="addToPack(this)">💭 Recuerdos intrusivos</div>
+                <div class="pain-chip" onclick="addToPack(this)">😡 Rabia</div>
+                <div class="pain-chip" onclick="addToPack(this)">😨 Miedo</div>
+                <div class="pain-chip" onclick="addToPack(this)">😔 Culpa</div>
+                <div class="pain-chip" onclick="addToPack(this)">😓 Vergüenza</div>
+                <div class="pain-chip" onclick="addToPack(this)">💔 Dolor</div>
+            </div>
+
+            <div class="values-path">
+                <h3>Y aún así... puedes caminar</h3>
+                <div class="walking-animation">🚶</div>
+                <p style="color: white; margin-top: 10px;">
+                    <strong>Disposición:</strong> Llevar lo que viene, mientras te mueves hacia lo que importa
+                </p>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>Willingness vs. Wanting</h3>
+                <p><strong>NO es:</strong> "Querer" tener ansiedad</p>
+                <p><strong>SÍ es:</strong> Estar dispuesto a experimentarla si aparece en el camino hacia valores</p>
+                <p style="margin-top: 15px; color: white;"><strong>Del libro:</strong> "Disposición es hacer espacio para lo difícil"</p>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(7)">
+            Continuar: Yo-como-Contexto →
+        </button>
+    </div>
+
+    <!-- PANTALLA 8: Valores Post-Trauma -->
+    <div id="screen8" class="screen">
+        <button class="back-button" onclick="nextScreen(7)">← Volver</button>
+        
+        <div class="header">
+            <h1>🧭 Valores Post-Trauma</h1>
+            <p>Capítulo 8: ¿Qué quieres que represente tu vida?</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 8 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 80%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Clarificación de Valores</h2>
+            <p><strong>Del libro:</strong> "Los valores son direcciones elegidas, no destinos"</p>
+            
+            <div class="instruction-box">
+                👇 Selecciona los valores más importantes para ti
+            </div>
+
+            <div class="values-wheel">
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">👨‍👩‍👧</div>
+                    <h4>Familia</h4>
+                </div>
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">❤️</div>
+                    <h4>Relaciones Íntimas</h4>
+                </div>
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">🤝</div>
+                    <h4>Amistad</h4>
+                </div>
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">💼</div>
+                    <h4>Trabajo/Carrera</h4>
+                </div>
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">🌱</div>
+                    <h4>Crecimiento Personal</h4>
+                </div>
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">💪</div>
+                    <h4>Salud Física</h4>
+                </div>
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">🎨</div>
+                    <h4>Creatividad</h4>
+                </div>
+                <div class="value-card" onclick="selectValue(this)">
+                    <div class="value-icon">🙏</div>
+                    <h4>Espiritualidad</h4>
+                </div>
+            </div>
+
+            <div class="gap-display" id="gapDisplay" style="display: none;">
+                <h3>La Brecha Valores-Acción</h3>
+                <p style="color: white;">Esta brecha es el COSTO de la evitación</p>
+                <div class="gap-bar">
+                    <div class="gap-fill" id="gapFill" style="width: 70%;">
+                        70% de brecha
+                    </div>
+                </div>
+                <p style="color: white; margin-top: 15px; font-size: 0.9rem;">
+                    Sabes qué es importante... pero la evitación te mantiene alejado de ello.
+                </p>
+            </div>
+
+            <div class="funeral-exercise">
+                <h4 style="color: var(--azul-oscuro); margin-bottom: 10px;">Ejercicio del Funeral (del libro)</h4>
+                <p style="color: #555; font-size: 0.9rem; line-height: 1.6;">
+                    Si pudieras escuchar tu propio funeral, ¿qué querrías que las personas importantes para ti dijeran sobre cómo viviste tu vida?
+                </p>
+                <textarea placeholder="Escribe aquí lo que te gustaría que dijeran..."></textarea>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>Valores vs. Metas</h3>
+                <p><strong>Metas:</strong> Alcanzables, se pueden "completar"</p>
+                <p><strong>Valores:</strong> Direcciones, nunca se "terminan"</p>
+                <p style="margin-top: 15px; color: white;">
+                    <strong>Ejemplo:</strong> "Casarse" es meta. "Ser pareja amorosa" es valor - se vive cada día.
+                </p>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(9)">
+            Continuar: Acción Comprometida →
+        </button>
+    </div>
+
+    <!-- PANTALLA 9: Acción Comprometida -->
+    <div id="screen9" class="screen">
+        <button class="back-button" onclick="nextScreen(8)">← Volver</button>
+        
+        <div class="header">
+            <h1>🎯 Acción Comprometida</h1>
+            <p>Capítulo 9: De valores a acciones concretas</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 9 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 90%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Constructor de Plan de Acción</h2>
+            <p><strong>Del libro:</strong> "Los valores sin acción son solo palabras"</p>
+            
+            <div class="action-builder">
+                <h4>1. ¿Qué valor elegiste?</h4>
+                <input type="text" class="action-input" placeholder="Ej: Ser mejor padre/madre" id="actionValue">
+                
+                <h4 style="margin-top: 20px;">2. Acción pequeña esta semana</h4>
+                <input type="text" class="action-input" placeholder="Ej: Jugar 30 min con mis hijos el martes" id="actionStep">
+                
+                <h4 style="margin-top: 20px;">3. Fecha y hora específica</h4>
+                <input type="text" class="action-input" placeholder="Ej: Martes 7pm" id="actionDate">
+            </div>
+
+            <div class="barrier-box">
+                <h5>🚧 Barreras Anticipadas</h5>
+                <p style="color: #555; font-size: 0.85rem; margin-bottom: 10px;">
+                    ¿Qué malestar puede aparecer?
+                </p>
+                <input type="text" class="action-input" placeholder="Ej: Ansiedad, miedo al rechazo, recuerdos" id="actionBarrier">
+                
+                <div class="instruction-box" style="margin-top: 15px;">
+                    <strong>Pregunta clave:</strong><br>
+                    ¿Estás dispuesto a experimentar ese malestar si aparece en el camino hacia este valor?
+                </div>
+            </div>
+
+            <div class="commitment-card">
+                <h3>Compromiso Público</h3>
+                <p style="color: white; margin-bottom: 15px;">
+                    <strong>Del libro:</strong> "El compromiso público aumenta la probabilidad de seguimiento"
+                </p>
+                
+                <div class="commitment-checkbox">
+                    <input type="checkbox" id="commitCheck">
+                    <label for="commitCheck" style="color: white;">
+                        Me comprometo a hacer esto
+                    </label>
+                </div>
+                
+                <p style="color: white; font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">
+                    (En terapia real, esto se compartiría con el terapeuta)
+                </p>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>Acción ≠ Resultado</h3>
+                <p>Te comprometes a la ACCIÓN, no al resultado.</p>
+                <p style="margin-top: 10px;">
+                    <strong>Ejemplo:</strong> "Invitaré a mi amigo" (acción) vs. "Mi amigo dirá que sí" (resultado - no está bajo tu control)
+                </p>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(10)">
+            Continuar: Caso Clínico →
+        </button>
+    </div>
+
+    <!-- PANTALLA 10: Caso Clínico Integrador -->
+    <div id="screen10" class="screen">
+        <button class="back-button" onclick="nextScreen(9)">← Volver</button>
+        
+        <div class="header">
+            <h1>📋 Caso Clínico</h1>
+            <p>Integración: Aplicando ACT para PTSD</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 10 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>María: Sobreviviente de Asalto Sexual</h2>
+            
+            <div class="case-presentation">
+                <h3>Información del Caso</h3>
+                <p><strong>Edad:</strong> 28 años</p>
+                <p><strong>Evento traumático:</strong> Asalto sexual hace 3 años</p>
+                <p><strong>Síntomas principales:</strong></p>
+                <ul style="margin-left: 20px; color: #333;">
+                    <li>Flashbacks recurrentes</li>
+                    <li>Evita intimidad con su pareja</li>
+                    <li>No puede estar en lugares oscuros</li>
+                    <li>Culpa intensa ("fue mi culpa")</li>
+                    <li>Uso de alcohol para "no sentir"</li>
+                </ul>
+                <p style="margin-top: 10px;">
+                    <strong>Lo que más valora:</strong> Su relación de pareja, su carrera como profesora
+                </p>
+            </div>
+
+            <div class="decision-point" id="decision1">
+                <h4>Punto de Decisión 1: Primera Sesión</h4>
+                <p style="color: #555; margin-bottom: 15px;">
+                    María dice: "Necesito OLVIDAR lo que pasó. Por favor ayúdeme a que desaparezcan estos recuerdos."
+                </p>
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">
+                    ¿Cuál sería la respuesta más consistente con ACT?
+                </p>
+                
+                <div class="decision-options">
+                    <button class="decision-btn" onclick="makeDecision(1, 'a')">
+                        A) "Vamos a trabajar en técnicas para eliminar esos recuerdos usando EMDR y reestructuración cognitiva"
+                    </button>
+                    <button class="decision-btn" onclick="makeDecision(1, 'b')">
+                        B) "Entiendo que quieres que desaparezcan. ¿Puedo preguntarte qué has intentado hasta ahora para hacerlos desaparecer?"
+                    </button>
+                    <button class="decision-btn" onclick="makeDecision(1, 'c')">
+                        C) "Los recuerdos son normales después de trauma. No deberías querer eliminarlos."
+                    </button>
+                </div>
+                
+                <div class="feedback-box" id="feedback1">
+                    <h4>Feedback</h4>
+                    <p id="feedbackText1"></p>
+                </div>
+            </div>
+
+            <div class="decision-point" id="decision2" style="display: none;">
+                <h4>Punto de Decisión 2: Explorando Control</h4>
+                <p style="color: #555; margin-bottom: 15px;">
+                    María ha intentado: evitar estar sola, beber alcohol, supresión de pensamientos. Dice: "Trabajo MUY duro pero nada funciona."
+                </p>
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">
+                    ¿Qué explorarías ahora?
+                </p>
+                
+                <div class="decision-options">
+                    <button class="decision-btn" onclick="makeDecision(2, 'a')">
+                        A) "Necesitas intentar estrategias más efectivas. Te enseñaré técnicas de relajación"
+                    </button>
+                    <button class="decision-btn" onclick="makeDecision(2, 'b')">
+                        B) "¿Y qué ha sido el costo de trabajar tan duro para eliminar el malestar?"
+                    </button>
+                    <button class="decision-btn" onclick="makeDecision(2, 'c')">
+                        C) "Es porque no has procesado el trauma adecuadamente"
+                    </button>
+                </div>
+                
+                <div class="feedback-box" id="feedback2">
+                    <h4>Feedback</h4>
+                    <p id="feedbackText2"></p>
+                </div>
+            </div>
+
+            <div class="decision-point" id="decision3" style="display: none;">
+                <h4>Punto de Decisión 3: Hacia Valores</h4>
+                <p style="color: #555; margin-bottom: 15px;">
+                    María reconoce que la evitación le ha costado su relación (su pareja está frustrada) y ha faltado al trabajo por ansiedad.
+                </p>
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">
+                    ¿Cuál sería el siguiente paso en ACT?
+                </p>
+                
+                <div class="decision-options">
+                    <button class="decision-btn" onclick="makeDecision(3, 'a')">
+                        A) "Ahora que entiendes el problema, ¿qué es lo que realmente quieres que tu vida represente?"
+                    </button>
+                    <button class="decision-btn" onclick="makeDecision(3, 'b')">
+                        B) "Necesitamos trabajar en tu autoestima primero"
+                    </button>
+                    <button class="decision-btn" onclick="makeDecision(3, 'c')">
+                        C) "Deberías terminar esa relación si te causa tanto estrés"
+                    </button>
+                </div>
+                
+                <div class="feedback-box" id="feedback3">
+                    <h4>Feedback</h4>
+                    <p id="feedbackText3"></p>
+                </div>
+            </div>
+
+            <div class="score-display" id="finalScore" style="display: none;">
+                <h3>Score: <span id="scoreNumber">0</span>/3</h3>
+                <p style="color: white; margin-top: 10px;">Fidelidad al Modelo ACT</p>
+            </div>
+
+            <div class="final-message" id="finalMessage" style="display: none;">
+                <h2>🎓 ¡Laboratorio Completado!</h2>
+                <p>Has explorado los componentes centrales de ACT para PTSD basado en el libro de Walser & Westrup (2007).</p>
+                <p style="margin-top: 15px; font-weight: 600;">
+                    Conceptos clave integrados:
+                </p>
+                <ul style="list-style: none; padding: 0; margin-top: 10px; color: white;">
+                    <li>✓ Evitación Experiencial</li>
+                    <li>✓ Naturaleza Verbal del Trauma (RFT)</li>
+                    <li>✓ Fusión vs. Defusión</li>
+                    <li>✓ Desesperanza Creativa</li>
+                    <li>✓ Control como Problema</li>
+                    <li>✓ Willingness</li>
+                    <li>✓ Self-as-Context</li>
+                    <li>✓ Valores y Acción Comprometida</li>
+                </ul>
+            </div>
+        </div>
+
+        <button class="nav-button" id="restartBtn" onclick="nextScreen(1)" style="display: none;">
+            🔄 Reiniciar Laboratorio
+        </button>
+    </div>
+
+    <!-- PANTALLA 7: Yo-como-Contexto -->
+    <div id="screen7" class="screen">
+        <button class="back-button" onclick="nextScreen(6)">← Volver</button>
+        
+        <div class="header">
+            <h1>👁️ Yo-como-Contexto</h1>
+            <p>Capítulo 7: Tú no ERES tus pensamientos</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 7 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 70%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Ejercicio: El Observador</h2>
+            <p><strong>Del libro:</strong> "¿Quién ha estado ahí observando TODO esto?"</p>
+            
+            <div class="instruction-box">
+                👉 Desliza para ver eventos de tu vida
+            </div>
+
+            <div class="timeline-scroll">
+                <div class="timeline-track">
+                    <div class="timeline-event">
+                        <div class="year">5 años</div>
+                        <h4>Primera memoria</h4>
+                        <p>Jugando en el parque. Sentías curiosidad, alegría.</p>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="year">12 años</div>
+                        <h4>Escuela</h4>
+                        <p>Primeros amigos. Sentías pertenencia, a veces ansiedad.</p>
+                    </div>
+                    
+                    <div class="timeline-event trauma">
+                        <div class="year">18 años</div>
+                        <h4>⚠️ Evento Traumático</h4>
+                        <p>El asalto. Terror, confusión, dolor.</p>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="year">20 años</div>
+                        <h4>Post-trauma</h4>
+                        <p>Intentando recuperarte. Ansiedad constante, evitación.</p>
+                    </div>
+                    
+                    <div class="timeline-event">
+                        <div class="year">Hoy</div>
+                        <h4>Ahora</h4>
+                        <p>Buscando ayuda. Esperanza mezclada con miedo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="observer-box">
+                <h3>¿Quién ha estado observando TODO esto?</h3>
+                <p>Los eventos cambiaron. Los pensamientos cambiaron. Las emociones vinieron y fueron.</p>
+                <p style="margin-top: 15px; font-weight: 600;">
+                    Pero hay un TÚ que ha estado presente en cada momento.
+                </p>
+                <p style="margin-top: 15px; font-size: 0.9rem;">
+                    Ese TÚ no es tus pensamientos, no es tus emociones, no es el trauma.
+                </p>
+                <p style="margin-top: 10px; font-size: 1.1rem; font-weight: 600;">
+                    Es el ESPACIO donde todo ocurre.
+                </p>
+            </div>
+
+            <div class="deictic-exercise">
+                <h3 style="color: var(--azul-oscuro); margin-bottom: 10px;">Ejercicio Deíctico (I-HERE-NOW)</h3>
+                <p style="color: #555; font-size: 0.9rem; margin-bottom: 15px;">Toca cada perspectiva:</p>
+                
+                <div class="deictic-buttons">
+                    <button class="deictic-btn" onclick="selectDeictic(this, 'yo')">
+                        YO estoy aquí
+                    </button>
+                    <button class="deictic-btn" onclick="selectDeictic(this, 'tu')">
+                        TÚ estás ahí
+                    </button>
+                    <button class="deictic-btn" onclick="selectDeictic(this, 'aqui')">
+                        Esto es AQUÍ
+                    </button>
+                    <button class="deictic-btn" onclick="selectDeictic(this, 'alli')">
+                        Eso es ALLÍ
+                    </button>
+                    <button class="deictic-btn" onclick="selectDeictic(this, 'ahora')">
+                        Esto es AHORA
+                    </button>
+                    <button class="deictic-btn" onclick="selectDeictic(this, 'entonces')">
+                        Eso fue ENTONCES
+                    </button>
+                </div>
+
+                <p style="margin-top: 15px; color: #555; font-size: 0.85rem; line-height: 1.5;">
+                    <strong>YO-AQUÍ-AHORA</strong> es siempre el mismo punto de perspectiva. 
+                    El trauma fue <strong>ENTONCES-ALLÍ</strong>. Tú estás <strong>AQUÍ-AHORA</strong>.
+                </p>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>Self-as-Context</h3>
+                <p><strong>Del libro (Williams, 2006):</strong> Veteranos de guerra que recibieron TODO ACT incluyendo self-as-context tuvieron MENORES puntuaciones de PTSD.</p>
+                <p style="margin-top: 15px; color: white;">El YO-CONTEXTO es mayor que el trauma, los pensamientos, las emociones.</p>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(8)">
+            Continuar: Valores Post-Trauma →
+        </button>
+    </div>
+
+    <!-- PANTALLA 4: Desesperanza Creativa -->
+    <div id="screen4" class="screen">
+        <button class="back-button" onclick="nextScreen(3)">← Volver</button>
+        
+        <div class="header">
+            <h1>💔 Desesperanza Creativa</h1>
+            <p>Capítulo 4: "Finding the Place Where Something New Can Happen"</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 4 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>¿Qué tal si el control es el problema?</h2>
+            <p><strong>Del libro:</strong> "Has trabajado DURO para solucionar esto... ¿y dónde estás?"</p>
+            
+            <div class="instruction-box">
+                Mapea las estrategias que ha usado tu paciente
+            </div>
+
+            <div class="strategy-timeline" id="strategyTimeline">
+                <!-- Ejemplo pre-cargado -->
+                <div class="strategy-item">
+                    <h4>📊 Ejemplo: Evitar lugares públicos</h4>
+                    <div class="outcome-grid">
+                        <div class="outcome-box outcome-short">
+                            <strong>Corto plazo:</strong><br>
+                            ✓ Ansiedad baja<br>
+                            ✓ Alivio inmediato
+                        </div>
+                        <div class="outcome-box outcome-long">
+                            <strong>Largo plazo:</strong><br>
+                            ✗ Aislamiento<br>
+                            ✗ Perdió trabajo<br>
+                            ✗ Ansiedad mayor
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strategy-item">
+                    <h4>📊 Ejemplo: Uso de alcohol</h4>
+                    <div class="outcome-grid">
+                        <div class="outcome-box outcome-short">
+                            <strong>Corto plazo:</strong><br>
+                            ✓ No piensa en trauma<br>
+                            ✓ Se siente "mejor"
+                        </div>
+                        <div class="outcome-box outcome-long">
+                            <strong>Largo plazo:</strong><br>
+                            ✗ Adicción<br>
+                            ✗ Problemas hepáticos<br>
+                            ✗ Relaciones rotas
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strategy-item">
+                    <h4>📊 Ejemplo: Supresión de pensamientos</h4>
+                    <div class="outcome-grid">
+                        <div class="outcome-box outcome-short">
+                            <strong>Corto plazo:</strong><br>
+                            ✓ Distracción funciona<br>
+                            ✓ Coherente con cultura
+                        </div>
+                        <div class="outcome-box outcome-long">
+                            <strong>Largo plazo:</strong><br>
+                            ✗ Efecto rebote<br>
+                            ✗ Más pensamientos<br>
+                            ✗ Agotamiento mental
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conclusion-card">
+                <h3>El Patrón es Claro</h3>
+                <p style="color: white;">TODAS las estrategias de control:</p>
+                <p style="color: white; margin-top: 10px;">✓ Funcionan un poco a corto plazo</p>
+                <p style="color: white;">✗ Empeoran las cosas a largo plazo</p>
+                <p style="color: white; margin-top: 15px; font-size: 1.1rem; font-weight: 600;">
+                    "Has trabajado DURO... ¿y dónde estás?"
+                </p>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>Desesperanza CREATIVA</h3>
+                <p>No es rendirse. Es reconocer que la agenda de control NO FUNCIONA.</p>
+                <p style="margin-top: 10px;"><strong>Pregunta del libro:</strong> "¿Estás dispuesto a experimentar con algo diferente?"</p>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(5)">
+            Continuar: El Problema del Control →
         </button>
     </div>
 
@@ -911,6 +2199,212 @@
                     card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
             }
+        }
+
+        // PANTALLA 5: Control simulator
+        let attemptCount = 0;
+        let anxietyLevel = 50;
+
+        function tryToControl() {
+            attemptCount++;
+            anxietyLevel = Math.min(100, anxietyLevel + Math.random() * 15 + 10);
+            updateAnxietyDisplay();
+            
+            document.getElementById('resultText').innerHTML = 
+                `Intentaste controlarla... pero AUMENTÓ a ${Math.round(anxietyLevel)}%<br>
+                <span style="color: #dc3545; font-weight: 600;">Mientras más controlas, más aparece</span>`;
+        }
+
+        function tryToSuppress() {
+            attemptCount++;
+            anxietyLevel = Math.min(100, anxietyLevel + Math.random() * 20 + 15);
+            updateAnxietyDisplay();
+            
+            document.getElementById('resultText').innerHTML = 
+                `Intentaste suprimirla... pero EMPEORÓ a ${Math.round(anxietyLevel)}%<br>
+                <span style="color: #dc3545; font-weight: 600;">Efecto rebote: lo que suprimes regresa más fuerte</span>`;
+        }
+
+        function updateAnxietyDisplay() {
+            const fill = document.getElementById('anxietyFill');
+            const counter = document.getElementById('attemptCount');
+            
+            fill.style.width = anxietyLevel + '%';
+            fill.textContent = Math.round(anxietyLevel) + '%';
+            counter.textContent = attemptCount;
+            
+            if (anxietyLevel >= 80) {
+                document.getElementById('controlExplanation').innerHTML = `
+                    <strong style="color: white;">¿Ves el patrón?</strong>
+                    <p>Después de ${attemptCount} intentos, la ansiedad está en ${Math.round(anxietyLevel)}%.</p>
+                    <p style="margin-top: 10px;"><strong style="color: white;">Del libro:</strong> "El control es el problema, no la solución."</p>
+                    <p style="margin-top: 10px; color: white;">¿Y si dejaras de luchar y empezaras a VIVIR?</p>
+                `;
+            }
+        }
+
+        // PANTALLA 6: Backpack
+        let backpackCount = 0;
+
+        function addToPack(chip) {
+            if (!chip.classList.contains('added')) {
+                chip.classList.add('added');
+                backpackCount++;
+                document.getElementById('backpackCount').textContent = backpackCount;
+                
+                // Animate backpack
+                const svg = document.querySelector('.backpack-svg');
+                svg.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    svg.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+
+        // PANTALLA 7: Deictic exercise
+        function selectDeictic(btn, type) {
+            // Toggle selection
+            btn.classList.toggle('selected');
+            
+            // Check if we have I-HERE-NOW selected
+            const selected = document.querySelectorAll('.deictic-btn.selected');
+            const types = Array.from(selected).map(b => b.textContent);
+            
+            if (types.some(t => t.includes('YO')) && 
+                types.some(t => t.includes('AQUÍ')) && 
+                types.some(t => t.includes('AHORA'))) {
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('✓ Exacto! YO-AQUÍ-AHORA es el punto de perspectiva constante.\n\nEl trauma fue ENTONCES-ALLÍ.\nTú estás AQUÍ-AHORA, observando.');
+                }, 500);
+            }
+        }
+
+        // PANTALLA 8: Values selection
+        let selectedValuesCount = 0;
+        
+        function selectValue(card) {
+            if (card.classList.contains('selected')) {
+                card.classList.remove('selected');
+                selectedValuesCount--;
+            } else {
+                card.classList.add('selected');
+                selectedValuesCount++;
+            }
+            
+            // Show gap display if at least one value selected
+            if (selectedValuesCount > 0) {
+                document.getElementById('gapDisplay').style.display = 'block';
+            }
+        }
+
+        // PANTALLA 10: Case study decisions
+        let caseScore = 0;
+        let currentDecision = 1;
+
+        const decisionFeedback = {
+            1: {
+                b: {
+                    correct: true,
+                    text: "✓ Correcto! Esto es DESESPERANZA CREATIVA. En lugar de prometer eliminar recuerdos (imposible), exploras qué ha intentado y su workability. Del libro: 'Has trabajado duro... ¿y dónde estás?'"
+                },
+                a: {
+                    correct: false,
+                    text: "✗ Esto refuerza la agenda de control - que los recuerdos DEBEN eliminarse para poder vivir bien. ACT no promete eliminar síntomas."
+                },
+                c: {
+                    correct: false,
+                    text: "✗ Esto invalida su experiencia. ACT valida el deseo de no sufrir, pero explora si la agenda de control funciona."
+                }
+            },
+            2: {
+                b: {
+                    correct: true,
+                    text: "✓ Correcto! Exploras el COSTO de la evitación. Del libro Cap. 4: 'El patrón es claro - funcionan a corto plazo, empeoran a largo plazo.' Esto prepara para willingness."
+                },
+                a: {
+                    correct: false,
+                    text: "✗ Ofreces MÁS estrategias de control. ACT no es una 'mejor' técnica de control - es abandonar la agenda de control."
+                },
+                c: {
+                    correct: false,
+                    text: "✗ Esto es lenguaje mentalista/mecanicista. ACT se centra en workability, no en 'procesamiento' mental."
+                }
+            },
+            3: {
+                b: {
+                    correct: true,
+                    text: "✓ Correcto! Pasas a VALORES. Del libro Cap. 8: '¿Qué quieres que tu vida represente?' Los valores son la brújula para la acción comprometida."
+                },
+                a: {
+                    correct: false,
+                    text: "✗ 'Autoestima' es concepto mentalista. ACT no trabaja en 'arreglar' el self, sino en self-as-context y acción basada en valores."
+                },
+                c: {
+                    correct: false,
+                    text: "✗ Esto es dar consejo y asumir que relación es problema. ACT explora: ¿Qué valores tiene ella en la relación? ¿La evitación la aleja de esos valores?"
+                }
+            }
+        };
+
+        function makeDecision(decisionNum, choice) {
+            const feedback = decisionFeedback[decisionNum][choice];
+            const feedbackBox = document.getElementById('feedback' + decisionNum);
+            const feedbackText = document.getElementById('feedbackText' + decisionNum);
+            
+            // Show feedback
+            feedbackText.textContent = feedback.text;
+            feedbackBox.classList.add('show');
+            
+            // Style buttons
+            const buttons = document.querySelectorAll(`#decision${decisionNum} .decision-btn`);
+            buttons.forEach((btn, index) => {
+                const btnChoice = String.fromCharCode(97 + index); // 'a', 'b', 'c'
+                if (btnChoice === choice) {
+                    btn.classList.add(feedback.correct ? 'correct' : 'incorrect');
+                }
+                btn.disabled = true;
+                btn.style.opacity = '0.7';
+                btn.style.cursor = 'default';
+            });
+            
+            // Update score
+            if (feedback.correct) {
+                caseScore++;
+            }
+            
+            // Show next decision or final results
+            setTimeout(() => {
+                if (decisionNum < 3) {
+                    document.getElementById('decision' + (decisionNum + 1)).style.display = 'block';
+                    // Scroll to next decision
+                    document.getElementById('decision' + (decisionNum + 1)).scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                } else {
+                    // Show final score and message
+                    showFinalResults();
+                }
+            }, 3000);
+        }
+
+        function showFinalResults() {
+            const scoreDisplay = document.getElementById('finalScore');
+            const finalMessage = document.getElementById('finalMessage');
+            const restartBtn = document.getElementById('restartBtn');
+            
+            document.getElementById('scoreNumber').textContent = caseScore;
+            scoreDisplay.style.display = 'block';
+            
+            setTimeout(() => {
+                finalMessage.style.display = 'block';
+                restartBtn.style.display = 'block';
+                
+                // Scroll to final message
+                finalMessage.scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
         }
     </script>
 
