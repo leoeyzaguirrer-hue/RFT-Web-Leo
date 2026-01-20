@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos Guardados - FlexiMap</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/analisis.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <a href="index.html" class="back-link">← Volver al inicio</a>
+            <h1>Casos Guardados</h1>
+            <p class="subtitle">Análisis funcionales almacenados localmente</p>
+        </header>
+
+        <div class="info-box">
+            <h4>💾 Almacenamiento Local</h4>
+            <p>Los casos se guardan en el navegador (LocalStorage). Si borras el caché del navegador o cambias de dispositivo, los casos desaparecerán. <strong>Recomendación:</strong> Exporta periódicamente a JSON como backup.</p>
+        </div>
+
+        <div id="casosList" class="casos-container">
+            <!-- JavaScript cargará los casos aquí -->
+        </div>
+
+        <div id="noCasos" style="display: none;" class="form-section">
+            <h3>No hay casos guardados</h3>
+            <p>Aún no has completado ningún análisis funcional.</p>
+            <a href="analisis-nuevo.html" class="btn btn-primary">Crear Primer Análisis</a>
+        </div>
+    </div>
+
+    <script src="js/casos-guardados.js"></script>
+</body>
+</html>
