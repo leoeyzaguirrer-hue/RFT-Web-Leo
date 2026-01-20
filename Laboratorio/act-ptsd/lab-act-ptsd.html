@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ACT para PTSD - Laboratorio Interactivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --azul-oscuro: #1a3a52;
+            --verde-bosque: #2d5f4e;
+            --naranja-calido: #d97642;
+            --gris-claro: #f5f5f5;
+            --gris-medio: #e0e0e0;
+            --blanco: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--gris-claro) 0%, var(--gris-medio) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .screen {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .header {
+            background: var(--azul-oscuro);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .progress-label {
+            font-size: 0.85rem;
+            color: var(--azul-oscuro);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            background: var(--gris-medio);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--verde-bosque), var(--naranja-calido));
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* Content card */
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+
+        .content-card h2 {
+            color: var(--azul-oscuro);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .content-card p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* Circular diagram */
+        .cycle-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin: 30px auto;
+            aspect-ratio: 1;
+        }
+
+        .cycle-layer {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .cycle-layer.active {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .layer-center {
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--azul-oscuro);
+            color: white;
+            font-size: 0.75rem;
+            z-index: 4;
+            border: 3px solid white;
+        }
+
+        .layer-1 {
+            width: 140px;
+            height: 140px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(42, 95, 78, 0.9);
+            color: white;
+            font-size: 0.7rem;
+            z-index: 3;
+            border: 3px solid white;
+        }
+
+        .layer-2 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(217, 118, 66, 0.85);
+            color: white;
+            font-size: 0.7rem;
+            z-index: 2;
+            border: 3px solid white;
+        }
+
+        .layer-3 {
+            width: 260px;
+            height: 260px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(200, 80, 50, 0.75);
+            color: white;
+            font-size: 0.7rem;
+            z-index: 1;
+            border: 3px solid white;
+        }
+
+        /* Info panel */
+        .info-panel {
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--verde-bosque));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            min-height: 120px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .info-panel h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .info-panel p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .info-panel ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .info-panel li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: white;
+        }
+
+        .info-panel strong {
+            color: white;
+        }
+
+        /* Instruction box */
+        .instruction-box {
+            background: var(--naranja-calido);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Navigation button */
+        .nav-button {
+            background: var(--naranja-calido);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(217, 118, 66, 0.3);
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .nav-button:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 6px rgba(217, 118, 66, 0.3);
+        }
+
+        /* Connection lines */
+        .connection-line {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            transform-origin: left center;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .connection-line.active {
+            background: rgba(255,255,255,0.8);
+            height: 3px;
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Touch feedback */
+        .touchable {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .touchable::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .touchable:active::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Network diagram - Pantalla 2 */
+        .network-container {
+            position: relative;
+            width: 100%;
+            min-height: 400px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .word-node {
+            position: absolute;
+            background: var(--gris-medio);
+            color: var(--azul-oscuro);
+            padding: 12px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .word-node.trigger {
+            background: var(--naranja-calido);
+            color: white;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .word-node.activated {
+            background: var(--azul-oscuro);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(26, 58, 82, 0.4);
+        }
+
+        .connection-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .connection-path {
+            stroke: var(--gris-medio);
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.3;
+            transition: all 0.4s ease;
+        }
+
+        .connection-path.active {
+            stroke: var(--verde-bosque);
+            stroke-width: 3;
+            opacity: 1;
+            animation: flowAnimation 2s ease-in-out;
+        }
+
+        @keyframes flowAnimation {
+            0%, 100% { stroke-dashoffset: 0; }
+            50% { stroke-dashoffset: -10; }
+        }
+
+        .explanation-box {
+            background: linear-gradient(135deg, var(--verde-bosque), var(--azul-oscuro));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .explanation-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .explanation-box p {
+            color: white;
+        }
+
+        .explanation-box ul {
+            color: white;
+            margin-top: 10px;
+        }
+
+        .explanation-box li {
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        /* Fusion cards - Pantalla 3 */
+        .fusion-grid {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .fusion-card {
+            background: white;
+            border-left: 5px solid var(--naranja-calido);
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fusion-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .fusion-card h4 {
+            color: var(--azul-oscuro);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fusion-card p {
+            color: #555;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .fusion-card .example {
+            background: var(--gris-claro);
+            padding: 12px;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .fusion-card.expanded {
+            background: linear-gradient(135deg, var(--gris-claro), white);
+            border-left-color: var(--verde-bosque);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back-button {
+            background: var(--gris-medio);
+            color: var(--azul-oscuro);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA 2: Naturaleza Verbal del Trauma -->
+    <div id="screen2" class="screen">
+        <button class="back-button" onclick="nextScreen(1)">← Volver</button>
+        
+        <div class="header">
+            <h1>🗣️ Naturaleza Verbal del Trauma</h1>
+            <p>Cuando el lenguaje mantiene el dolor</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 2 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 20%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Del Libro (Walser & Westrup, Cap. 1)</h2>
+            <p><strong>"La descripción y evaluación del trauma mismo puede volverse aversiva"</strong></p>
+            <p>El trauma NO tiene que estar presente para sentir el dolor. Las relaciones simbólicas traen el pasado al AHORA.</p>
+            
+            <div class="instruction-box">
+                👆 Toca la palabra NARANJA para ver cómo se activa la red
+            </div>
+
+            <div class="network-container" id="networkContainer">
+                <svg class="connection-svg" id="connectionSvg"></svg>
+                
+                <!-- Nodo central - palabra neutral que activa todo -->
+                <div class="word-node trigger" id="triggerWord" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    Uniforme
+                </div>
+                
+                <!-- Nodos conectados -->
+                <div class="word-node" data-node="autoridad" style="top: 15%; left: 25%;">
+                    Autoridad
+                </div>
+                <div class="word-node" data-node="oscuridad" style="top: 15%; left: 70%;">
+                    Oscuridad
+                </div>
+                <div class="word-node" data-node="miedo" style="top: 45%; left: 10%;">
+                    Miedo
+                </div>
+                <div class="word-node" data-node="peligro" style="top: 45%; left: 85%;">
+                    Peligro
+                </div>
+                <div class="word-node" data-node="evento" style="top: 75%; left: 30%;">
+                    Evento<br>Traumático
+                </div>
+                <div class="word-node" data-node="dolor" style="top: 75%; left: 65%;">
+                    Dolor<br>Físico
+                </div>
+            </div>
+
+            <div class="explanation-box" id="networkExplanation">
+                <strong>Toca "Uniforme" para activar la red relacional</strong>
+                <p>Una palabra NEUTRAL adquiere funciones aversivas por equivalencia. El trauma no necesita estar presente - el LENGUAJE lo trae al momento presente.</p>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>Transformación de Funciones (RFT)</h3>
+                <p><strong>Ejemplo del libro:</strong> "Simplemente CONTAR la historia del trauma evoca emociones negativas... el trauma actual no tiene que estar presente."</p>
+                <ul>
+                    <li>La auto-charla sobre eventos traumáticos puede aparecer en CUALQUIER contexto</li>
+                    <li>En cualquier momento, por tiempo ILIMITADO</li>
+                    <li>El potencial de problemas CRECE con el tiempo</li>
+                </ul>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(3)">
+            Continuar: Fusión con la Mente →
+        </button>
+    </div>
+
+    <!-- PANTALLA 3: Fusión con la Mente -->
+    <div id="screen3" class="screen">
+        <button class="back-button" onclick="nextScreen(2)">← Volver</button>
+        
+        <div class="header">
+            <h1>🧠 Fusión con la Mente</h1>
+            <p>"Derretidos" con nuestros pensamientos</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 3 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 30%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>"Melting with Language"</h2>
+            <p><strong>Fusión:</strong> "To blend, to be united as if melted together"</p>
+            <p>Cuando sostenemos pensamientos e interpretaciones como literalmente VERDADEROS, nos "derretimos" con ellos.</p>
+            
+            <div class="instruction-box">
+                👆 Toca cada tipo de fusión para ver ejemplos
+            </div>
+
+            <div class="fusion-grid">
+                <div class="fusion-card" onclick="toggleFusion(this)">
+                    <h4>
+                        <span style="font-size: 1.3rem;">🔮</span>
+                        1. Futuros Construidos Verbalmente
+                    </h4>
+                    <p>Imaginar "qué hubiera pasado SI..."</p>
+                    <div class="example hidden">
+                        <strong>Ejemplo PTSD:</strong><br>
+                        "Si solo NO hubiera sido abusado, mi vida sería perfecta"<br><br>
+                        <strong>El problema:</strong> Historia solo funciona en UNA dirección - es aditiva. No se puede deshacer el pasado. Años desperdiciados tratando de tener otra historia.
+                    </div>
+                </div>
+
+                <div class="fusion-card" onclick="toggleFusion(this)">
+                    <h4>
+                        <span style="font-size: 1.3rem;">✨</span>
+                        2. Ideales Imaginados
+                    </h4>
+                    <p>Compararse con un yo "ideal" sin trauma</p>
+                    <div class="example hidden">
+                        <strong>Ejemplo PTSD:</strong><br>
+                        "Las personas normales no tienen ansiedad... Necesito SER como ellas antes de poder vivir bien"<br><br>
+                        <strong>El problema:</strong> Para alcanzar el ideal, necesito ELIMINAR la ansiedad primero. La vida queda en PAUSA.
+                    </div>
+                </div>
+
+                <div class="fusion-card" onclick="toggleFusion(this)">
+                    <h4>
+                        <span style="font-size: 1.3rem;">🔗</span>
+                        3. Razones como Causas
+                    </h4>
+                    <p>Creer que las razones CAUSAN el comportamiento</p>
+                    <div class="example hidden">
+                        <strong>Ejemplo PTSD:</strong><br>
+                        "Tengo ansiedad, POR ESO no puedo tener intimidad"<br>
+                        "Siento rabia, POR ESO golpeé la pared"<br><br>
+                        <strong>El problema:</strong> Las razones necesitan cambiar para que el comportamiento cambie. Pero emociones/pensamientos NO se van permanentemente.
+                    </div>
+                </div>
+
+                <div class="fusion-card" onclick="toggleFusion(this)">
+                    <h4>
+                        <span style="font-size: 1.3rem;">🏷️</span>
+                        4. Evaluación como Identidad
+                    </h4>
+                    <p>Creer que la evaluación ESTÁ EN la persona</p>
+                    <div class="example hidden">
+                        <strong>Ejemplo PTSD:</strong><br>
+                        "Estoy DAÑADO" (no "tengo la evaluación de que estoy dañado")<br>
+                        "Soy INSERVIBLE"<br><br>
+                        <strong>El problema:</strong> Si ERES dañado, necesitas ARREGLARTE antes de poder vivir bien. Primero pierdes, luego juegas el juego de la vida.
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-panel" style="margin-top: 20px;">
+                <h3>La Consecuencia</h3>
+                <p>Todas estas formas de fusión llevan a:</p>
+                <ul>
+                    <li><strong>Evitación</strong> de self, momento presente y el mundo</li>
+                    <li><strong>Intentos de control</strong> de experiencia privada</li>
+                    <li><strong>Rango limitado</strong> de comportamientos</li>
+                    <li><strong>Flexibilidad comprometida</strong> - psicológica y conductual</li>
+                </ul>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(4)">
+            Continuar: Desesperanza Creativa →
+        </button>
+    </div>
+
+    <!-- PANTALLA 1: La Paradoja del Trauma -->
+    <div id="screen1" class="screen active">
+        <div class="header">
+            <h1>🔄 La Paradoja del Trauma</h1>
+            <p>¿Por qué persiste el PTSD?</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Pantalla 1 de 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%"></div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>El Ciclo de Evitación Experiencial</h2>
+            <p>El PTSD persiste porque las estrategias que usamos para "solucionarlo" son precisamente lo que lo mantiene vivo.</p>
+            
+            <div class="instruction-box">
+                👆 Toca cada capa del círculo para explorar el ciclo
+            </div>
+
+            <div class="cycle-container">
+                <div class="cycle-layer layer-center touchable pulse" data-layer="center">
+                    Evento Traumático
+                </div>
+                <div class="cycle-layer layer-1 touchable" data-layer="1">
+                    Síntomas PTSD
+                </div>
+                <div class="cycle-layer layer-2 touchable" data-layer="2">
+                    Estrategias de Control
+                </div>
+                <div class="cycle-layer layer-3 touchable" data-layer="3">
+                    Pérdida de Vida Valiosa
+                </div>
+            </div>
+
+            <div class="info-panel" id="infoPanel">
+                <h3>Toca cualquier capa para comenzar</h3>
+                <p>Este diagrama muestra cómo la evitación experiencial mantiene el PTSD en un ciclo perpetuo.</p>
+            </div>
+        </div>
+
+        <button class="nav-button" onclick="nextScreen(2)">
+            Continuar: Naturaleza Verbal del Trauma →
+        </button>
+    </div>
+
+    <script>
+        // Layer information
+        const layerInfo = {
+            center: {
+                title: "El Evento Traumático",
+                content: "Asalto sexual, combate, accidente, abuso... El evento que cambió todo. Historia que NO se puede cambiar, solo es additive."
+            },
+            1: {
+                title: "Síntomas de PTSD (DSM-IV-TR)",
+                content: `
+                    <ul>
+                        <li><strong>Reexperiencia:</strong> Flashbacks, pesadillas, pensamientos intrusivos</li>
+                        <li><strong>Evitación:</strong> Evitar lugares, personas, conversaciones</li>
+                        <li><strong>Hipervigilancia:</strong> Alerta constante, sobresaltos, insomnio</li>
+                    </ul>
+                `
+            },
+            2: {
+                title: "Estrategias de Control/Evitación",
+                content: `
+                    <ul>
+                        <li>Uso de sustancias para "no sentir"</li>
+                        <li>Aislamiento social</li>
+                        <li>Supresión de pensamientos</li>
+                        <li>Evitar intimidad</li>
+                        <li>Trabajo excesivo para "no pensar"</li>
+                    </ul>
+                    <p style="margin-top:10px; font-style:italic;">→ Funcionan a CORTO plazo, pero...</p>
+                `
+            },
+            3: {
+                title: "Consecuencias a Largo Plazo",
+                content: `
+                    <ul>
+                        <li>Pérdida de relaciones importantes</li>
+                        <li>Aislamiento y soledad</li>
+                        <li>Problemas laborales</li>
+                        <li>Comorbilidad (depresión, adicciones)</li>
+                        <li>Vida definida por el trauma</li>
+                    </ul>
+                    <p style="margin-top:10px; font-weight:600;">El costo: VITALIDAD y VALORES</p>
+                `
+            }
+        };
+
+        // Handle layer clicks
+        document.querySelectorAll('.cycle-layer').forEach(layer => {
+            layer.addEventListener('click', function() {
+                // Remove active class from all
+                document.querySelectorAll('.cycle-layer').forEach(l => l.classList.remove('active'));
+                
+                // Add active to clicked
+                this.classList.add('active');
+                
+                // Update info panel
+                const layerKey = this.dataset.layer;
+                const info = layerInfo[layerKey];
+                const panel = document.getElementById('infoPanel');
+                
+                panel.innerHTML = `
+                    <h3>${info.title}</h3>
+                    ${info.content}
+                `;
+                
+                // Visual feedback
+                this.style.transform = this.dataset.layer === 'center' 
+                    ? 'translate(-50%, -50%) scale(1.1)' 
+                    : 'translate(-50%, -50%) scale(1.1)';
+                    
+                setTimeout(() => {
+                    this.style.transform = this.dataset.layer === 'center'
+                        ? 'translate(-50%, -50%) scale(1)'
+                        : 'translate(-50%, -50%) scale(1.05)';
+                }, 200);
+            });
+        });
+
+        // Navigation
+        function nextScreen(screenNumber) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            
+            // Show target screen
+            const targetScreen = document.getElementById('screen' + screenNumber);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                window.scrollTo(0, 0);
+            } else {
+                alert('Pantalla ' + screenNumber + ' en construcción');
+            }
+        }
+
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // PANTALLA 2: Network activation
+        function activateNetwork() {
+            const triggerWord = document.getElementById('triggerWord');
+            const nodes = document.querySelectorAll('.word-node:not(.trigger)');
+            const svg = document.getElementById('connectionSvg');
+            const explanation = document.getElementById('networkExplanation');
+            
+            if (!triggerWord || !svg) return;
+            
+            // Clear previous lines
+            svg.innerHTML = '';
+            
+            // Get trigger position
+            const container = document.getElementById('networkContainer');
+            const containerRect = container.getBoundingClientRect();
+            const triggerRect = triggerWord.getBoundingClientRect();
+            const triggerX = triggerRect.left + triggerRect.width/2 - containerRect.left;
+            const triggerY = triggerRect.top + triggerRect.height/2 - containerRect.top;
+            
+            // Activate each node with delay
+            nodes.forEach((node, index) => {
+                setTimeout(() => {
+                    node.classList.add('activated');
+                    
+                    // Draw connection line
+                    const nodeRect = node.getBoundingClientRect();
+                    const nodeX = nodeRect.left + nodeRect.width/2 - containerRect.left;
+                    const nodeY = nodeRect.top + nodeRect.height/2 - containerRect.top;
+                    
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('class', 'connection-path');
+                    path.setAttribute('d', `M ${triggerX} ${triggerY} Q ${(triggerX + nodeX)/2} ${(triggerY + nodeY)/2 - 20} ${nodeX} ${nodeY}`);
+                    path.setAttribute('stroke-dasharray', '5,5');
+                    svg.appendChild(path);
+                    
+                    setTimeout(() => {
+                        path.classList.add('active');
+                    }, 100);
+                }, index * 300);
+            });
+            
+            // Update explanation after all activated
+            setTimeout(() => {
+                explanation.innerHTML = `
+                    <strong>¡Red Activada!</strong>
+                    <p><strong>"Uniforme"</strong> es una palabra NEUTRAL. Pero por equivalencia con el evento traumático, ahora evoca:</p>
+                    <ul>
+                        <li>Miedo</li>
+                        <li>Sensación de peligro</li>
+                        <li>Dolor físico</li>
+                        <li>Respuestas fisiológicas (taquicardia, sudor)</li>
+                    </ul>
+                    <p style="margin-top:10px;"><strong>Esto es RFT:</strong> Transformación de funciones de estímulo a través de relaciones derivadas.</p>
+                `;
+            }, nodes.length * 300 + 500);
+        }
+        
+        // Add click handler to trigger word
+        window.addEventListener('load', function() {
+            const triggerWord = document.getElementById('triggerWord');
+            if (triggerWord) {
+                triggerWord.addEventListener('click', activateNetwork);
+            }
+        });
+
+        // PANTALLA 3: Fusion card toggle
+        function toggleFusion(card) {
+            const example = card.querySelector('.example');
+            const allCards = document.querySelectorAll('.fusion-card');
+            
+            // If this card is already expanded, collapse it
+            if (card.classList.contains('expanded')) {
+                card.classList.remove('expanded');
+                example.classList.add('hidden');
+            } else {
+                // Collapse all cards first
+                allCards.forEach(c => {
+                    c.classList.remove('expanded');
+                    c.querySelector('.example').classList.add('hidden');
+                });
+                
+                // Expand clicked card
+                card.classList.add('expanded');
+                example.classList.remove('hidden');
+                
+                // Scroll card into view
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+    </script>
+
+</body>
+</html>
