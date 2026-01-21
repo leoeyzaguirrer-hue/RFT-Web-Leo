@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio: Disociación desde RFT | LEO RFT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap');
+        
+        :root {
+            --primary-deep: #1a3a5c;
+            --primary-blue: #2d5f8d;
+            --accent-cyan: #4db8d8;
+            --accent-purple: #7b5ea7;
+            --accent-orange: #f39c6b;
+            --accent-yellow: #ffd166;
+            --neutral-dark: #2c3e50;
+            --neutral-light: #ecf0f1;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--neutral-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Container principal */
+        .lab-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Progress bar */
+        .progress-bar {
+            background: var(--white);
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .progress-track {
+            background: var(--neutral-light);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--primary-blue) 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(77, 184, 216, 0.5);
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        /* Pantallas */
+        .screen {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            padding: 2rem 1.5rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .screen.active {
+            display: flex;
+        }
+        
+        /* Asegurar que la portada se comporte igual */
+        .screen.cover {
+            padding: 2rem;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Animaciones para emojis */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(2deg); }
+            75% { transform: translateY(-5px) rotate(-2deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-5px) rotate(-3deg); }
+            75% { transform: translateX(5px) rotate(3deg); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(77, 184, 216, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(77, 184, 216, 0.8), 0 0 30px rgba(77, 184, 216, 0.6);
+            }
+        }
+        
+        /* Animación de aparición escalonada */
+        .stagger-1 { animation: fadeIn 0.5s ease-out 0.1s both; }
+        .stagger-2 { animation: fadeIn 0.5s ease-out 0.2s both; }
+        .stagger-3 { animation: fadeIn 0.5s ease-out 0.3s both; }
+        .stagger-4 { animation: fadeIn 0.5s ease-out 0.4s both; }
+        .stagger-5 { animation: fadeIn 0.5s ease-out 0.5s both; }
+        .stagger-6 { animation: fadeIn 0.5s ease-out 0.6s both; }
+        
+        /* Clases de animación reutilizables */
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-bounce {
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .animate-shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .animate-spin {
+            animation: spin 2s linear infinite;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        /* Portada */
+        .cover {
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover.active {
+            min-height: 100vh;
+        }
+        
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.5; }
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-emoji {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .cover h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .cover-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 3rem;
+        }
+        
+        .cover-btn {
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 1.25rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(243, 156, 107, 0.4);
+        }
+        
+        .cover-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(243, 156, 107, 0.6);
+        }
+        
+        /* Content wrapper */
+        .content-wrapper {
+            flex: 1;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 10px 40px var(--shadow);
+            overflow-y: auto;
+        }
+        
+        .screen-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .emoji-title {
+            font-size: 2rem;
+        }
+        
+        /* Tarjetas */
+        .card {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, #e8eef5 100%);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+        }
+        
+        .card.purple { border-left-color: var(--accent-purple); }
+        .card.orange { border-left-color: var(--accent-orange); }
+        .card.yellow { border-left-color: var(--accent-yellow); }
+        
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Ejemplos con emojis */
+        .emoji-example {
+            background: var(--white);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .emoji-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .emoji-large {
+            font-size: 3rem;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+        }
+        
+        .emoji-large:hover {
+            transform: scale(1.3) rotate(15deg);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+        
+        .emoji-large:active {
+            transform: scale(0.9);
+        }
+        
+        /* Emojis con diferentes animaciones */
+        .emoji-large:nth-child(1) {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .emoji-large:nth-child(2) {
+            animation: bounce 2.5s ease-in-out infinite;
+            animation-delay: 0.3s;
+        }
+        
+        .emoji-large:nth-child(3) {
+            animation: pulse 2s ease-in-out infinite;
+            animation-delay: 0.6s;
+        }
+        
+        .emoji-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-top: 0.5rem;
+        }
+        
+        /* Insight box */
+        .insight-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+            border: 3px solid var(--accent-yellow);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .insight-box::before {
+            content: '💡';
+            font-size: 2.5rem;
+            display: block;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .insight-box p {
+            font-weight: 600;
+            color: var(--neutral-dark);
+            font-size: 1.05rem;
+            text-align: center;
+        }
+        
+        /* Diagrama */
+        .diagram {
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8dc 100%);
+            border: 3px solid var(--accent-orange);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .diagram-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .flow-step {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0 3px 10px rgba(243, 156, 107, 0.2);
+        }
+        
+        /* Comparación */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (min-width: 640px) {
+            .comparison {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .comparison-box {
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .comparison-box.healthy {
+            background: linear-gradient(135deg, #d4f1d4 0%, #a8e6a8 100%);
+            border: 3px solid #4caf50;
+        }
+        
+        .comparison-box.trauma {
+            background: linear-gradient(135deg, #ffd4d4 0%, #ffb3b3 100%);
+            border: 3px solid #f44336;
+        }
+        
+        .comparison-box h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        /* Lista con emojis */
+        .emoji-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .emoji-list li {
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .emoji-list li::before {
+            content: attr(data-emoji);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Navegación */
+        .navigation {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--white);
+            box-shadow: 0 -2px 10px var(--shadow);
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-btn.prev {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            color: var(--primary-blue);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .nav-btn:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+        
+        .nav-btn:not(:disabled):active {
+            transform: translateY(0);
+        }
+        
+        /* Demo interactivo */
+        .interactive-demo {
+            background: linear-gradient(135deg, #f0f0ff 0%, #e8e8ff 100%);
+            border: 3px solid var(--accent-purple);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, #9b7ec7 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+        
+        .demo-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(123, 94, 167, 0.4);
+        }
+        
+        .demo-state {
+            font-size: 2.5rem;
+            margin: 1.5rem 0;
+            transition: all 0.5s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .demo-state.transformed {
+            transform: scale(1.1);
+            color: var(--accent-orange);
+        }
+        
+        .demo-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        /* Scrollbar */
+        .content-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-track {
+            background: var(--neutral-light);
+            border-radius: 10px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent-cyan);
+            border-radius: 10px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="lab-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar" id="progressBar" style="display: none;">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Pantalla 1 de 16</div>
+        </div>
+        
+        <!-- PANTALLA 0: PORTADA -->
+        <div class="screen cover" data-screen="0">
+            <div class="cover-content">
+                <div class="cover-emoji">🧠</div>
+                <h1>Disociación desde RFT</h1>
+                <div class="cover-question">
+                    ¿Qué funciones conductuales sirven las experiencias que llamamos "disociación"?
+                </div>
+                <p class="cover-subtitle">
+                    Un análisis funcional de cómo el lenguaje y la historia de aprendizaje crean patrones de respuesta disociativos
+                </p>
+                <button class="cover-btn" onclick="nextScreen()">
+                    🚀 Comenzar Laboratorio
+                </button>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 1: QUÉ ES DISOCIACIÓN -->
+        <div class="screen" data-screen="1">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🔍</span>
+                    ¿Qué es la Disociación?
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 Contexto desde la investigación:</strong> La relación entre trauma temprano y escucha de voces ha sido ampliamente documentada. Un meta-análisis mostró que la adversidad infantil aumenta <strong>2.8 veces</strong> el riesgo de desarrollar psicosis. Pero aquí está lo interesante: <strong>la disociación actúa como mediador</strong> en esta relación.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            💡 <strong>Ejemplo:</strong> Imagina a una niña de 8 años 👧 que experimenta abuso. Su mente desarrolla una respuesta: "Si esto no me está pasando a MÍ, no duele tanto". Con el tiempo, esta separación entre "YO" y "experiencia" se vuelve un patrón automático. <strong>No es locura - es una respuesta funcional a un contexto imposible</strong>.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Definición Tradicional</h3>
+                    <p>"Falta de integración normal de pensamientos, sentimientos y experiencias en el flujo de conciencia y memoria"</p>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">— Bernstein & Putnam, 1986</p>
+                </div>
+                
+                <div class="emoji-example">
+                    <p style="font-weight: 600; margin-bottom: 1rem;">Manifestaciones comunes:</p>
+                    <div class="emoji-row">
+                        <div>
+                            <div class="emoji-large">🌫️</div>
+                            <span class="emoji-label">Despersonalización</span>
+                        </div>
+                        <div>
+                            <div class="emoji-large">🧩</div>
+                            <span class="emoji-label">Fragmentación</span>
+                        </div>
+                        <div>
+                            <div class="emoji-large">❓</div>
+                            <span class="emoji-label">Amnesia</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card purple">
+                    <h3>Desde Análisis Funcional</h3>
+                    <p>La disociación NO es una "cosa" que se tiene, sino un <strong>patrón de comportamiento</strong> que:</p>
+                    <ul class="emoji-list">
+                        <li data-emoji="🎯">Sirve funciones específicas (escape, evitación)</li>
+                        <li data-emoji="📚">Tiene antecedentes históricos (trauma)</li>
+                        <li data-emoji="🔄">Se mantiene por sus consecuencias</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-box">
+                    <p>"No refleja procesos anormales. Refleja historias atípicas y respuestas conductuales a estas"</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 2: MARCOS RELACIONALES INTRO -->
+        <div class="screen" data-screen="2">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🔗</span>
+                    Los Marcos Relacionales
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-purple);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 La clave de RFT:</strong> Los humanos con lenguaje podemos relacionar eventos de formas que van <strong>más allá de las propiedades físicas</strong>. Un perro puede aprender que dos objetos rojos son "similares", pero solo los humanos podemos entender que una moneda pequeña "vale más" que una grande 💰. Esta capacidad es la base del lenguaje... <strong>y también de la disociación</strong>.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🎯 <strong>Por qué importa:</strong> Si puedo relacionar arbitrariamente "YO" con "OTROS" (coordinación), entonces mis experiencias internas pueden adquirir las funciones de estímulos externos. Un pensamiento 💭 puede convertirse en una voz 🗣️. <strong>No por magia, sino por enmarcamiento relacional</strong>.
+                        </p>
+                    </div>
+                </div>
+                
+                <p style="margin-bottom: 1.5rem;">Antes de entender la disociación, necesitamos entender cómo el <strong>lenguaje crea relaciones entre eventos</strong>:</p>
+                
+                <div class="card">
+                    <h3>Dos Tipos de Relación</h3>
+                    
+                    <div style="background: white; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+                        <strong>TIPO 1: Basadas en propiedades físicas</strong>
+                        <div class="emoji-row" style="margin: 1rem 0;">
+                            <span style="font-size: 2rem;">🍎</span>
+                            <span style="font-size: 1.5rem;">≈</span>
+                            <span style="font-size: 2rem;">🍎</span>
+                        </div>
+                        <p style="font-size: 0.9rem;">Dos manzanas rojas son "similares" por el color compartido</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.7;">✓ Animales pueden hacer esto</p>
+                    </div>
+                    
+                    <div style="background: #fff5f0; padding: 1rem; margin: 1rem 0; border-radius: 8px; border: 2px solid var(--accent-orange);">
+                        <strong>TIPO 2: Relaciones arbitrarias (ENMARCAMIENTO)</strong>
+                        <div class="emoji-row" style="margin: 1rem 0;">
+                            <span style="font-size: 1.5rem;">💰</span>
+                            <span style="font-size: 1.5rem; color: var(--accent-orange);">></span>
+                            <span style="font-size: 2rem;">💰</span>
+                        </div>
+                        <p style="font-size: 0.9rem;">Moneda pequeña "vale más" que una grande</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.7;">✓ Solo humanos con lenguaje</p>
+                    </div>
+                </div>
+                
+                <div class="insight-box">
+                    <p>El enmarcamiento relacional es la <strong>base del lenguaje y cognición humana</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 3: COORDINACIÓN VS DISTINCIÓN -->
+        <div class="screen" data-screen="3">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">⚖️</span>
+                    Coordinación vs Distinción
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-orange);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 El núcleo del modelo:</strong> La disociación, desde RFT, representa una <strong>disrupción significativa</strong> en el desarrollo típico de relaciones de distinción entre self y otros. En lugar de "YO soy diferente de OTROS", la persona responde como si "YO soy lo mismo que OTROS". Este cambio tiene consecuencias devastadoras para los límites psicológicos.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🎭 <strong>Ejemplo cotidiano:</strong> María siente tristeza 😢. <br>
+                            <strong>Con DISTINCIÓN:</strong> "Yo me siento triste" (interno, mío)<br>
+                            <strong>Con COORDINACIÓN:</strong> "Alguien me dice que estoy triste" (externo, de otros)<br>
+                            La tristeza sigue ahí, pero cambió de <strong>propiedad psicológica</strong>.
+                        </p>
+                    </div>
+                </div>
+                
+                <p style="margin-bottom: 1rem;">Dos marcos relacionales <strong>críticos</strong> para entender disociación:</p>
+                
+                <div class="comparison">
+                    <div class="comparison-box healthy">
+                        <h4>🟢 COORDINACIÓN</h4>
+                        <p style="margin: 1rem 0; font-weight: 600;">"es lo mismo que"</p>
+                        <div class="emoji-row" style="margin: 1.5rem 0;">
+                            <span style="font-size: 2.5rem;">🌍</span>
+                            <span style="font-size: 2rem; color: #4caf50;">➡️</span>
+                            <span style="font-size: 2.5rem;">⚪</span>
+                        </div>
+                        <p style="font-size: 0.95rem;">"El mundo ES redondo"</p>
+                        <div style="background: rgba(255,255,255,0.7); padding: 1rem; margin-top: 1rem; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>En disociación:</strong><br>
+                            YO coordinado con OTROS = pérdida de límites
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-box trauma">
+                        <h4>🔵 DISTINCIÓN</h4>
+                        <p style="margin: 1rem 0; font-weight: 600;">"es diferente de"</p>
+                        <div class="emoji-row" style="margin: 1.5rem 0;">
+                            <span style="font-size: 2.5rem;">🐱</span>
+                            <span style="font-size: 2rem; color: #f44336;">≠</span>
+                            <span style="font-size: 2.5rem;">🐶</span>
+                        </div>
+                        <p style="font-size: 0.95rem;">"Gatos son DIFERENTES de perros"</p>
+                        <div style="background: rgba(255,255,255,0.7); padding: 1rem; margin-top: 1rem; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>En desarrollo saludable:</strong><br>
+                            YO distinto de OTROS = límites claros
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card orange">
+                    <h3>🎯 Punto Clave</h3>
+                    <p>La disociación implica un cambio de <strong>DISTINCIÓN</strong> (saludable) a <strong>COORDINACIÓN</strong> (problemática) entre YO y OTROS.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 4: RELACIONES DEÍCTICAS -->
+        <div class="screen" data-screen="4">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🧭</span>
+                    Relaciones de Perspectiva
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid #4caf50;">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 YO-AQUÍ-AHORA = Tu locus de control:</strong> Las relaciones deícticas son únicas porque especifican la <strong>perspectiva desde donde experimentas el mundo</strong>. No puedes ver literalmente "a través de los ojos de otro" - la distinción espacial e interpersonal lo previene. Pero cuando el trauma debilita esta distinción, otros pueden "colarse" en tu AQUÍ-AHORA.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🎯 <strong>Experimento mental:</strong><br>
+                            Cierra los ojos. Todo lo que piensas/sientes está en <strong>YO-AQUÍ-AHORA</strong> 👤⚡.<br>
+                            Lo que otros piensan está en <strong>OTROS-ALLÁ-ENTONCES</strong> 👥📍⏰.<br>
+                            <strong>Esta separación es tu escudo psicológico</strong>. La disociación ocurre cuando este escudo se debilita.
+                        </p>
+                    </div>
+                </div>
+                
+                <p style="margin-bottom: 1rem;">Las relaciones <strong>MÁS importantes</strong> para entender disociación:</p>
+                
+                <div class="card purple">
+                    <h3>🎯 RELACIONES DEÍCTICAS (de Perspectiva)</h3>
+                    <p style="margin: 0.75rem 0;">Especifican la perspectiva del individuo en 3 dimensiones:</p>
+                </div>
+                
+                <div class="diagram">
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin: 0.75rem 0;">
+                        <strong style="font-size: 1.1rem;">🧑 Interpersonal</strong>
+                        <div style="margin: 0.75rem 0; font-size: 1.5rem;">
+                            YO vs TÚ/OTROS
+                        </div>
+                        <p style="font-size: 0.9rem;">"Yo tengo hambre" vs "Tú tienes hambre"</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin: 0.75rem 0;">
+                        <strong style="font-size: 1.1rem;">📍 Espacial</strong>
+                        <div style="margin: 0.75rem 0; font-size: 1.5rem;">
+                            AQUÍ vs ALLÁ
+                        </div>
+                        <p style="font-size: 0.9rem;">"El libro está aquí" vs "El libro está allá"</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin: 0.75rem 0;">
+                        <strong style="font-size: 1.1rem;">⏰ Temporal</strong>
+                        <div style="margin: 0.75rem 0; font-size: 1.5rem;">
+                            AHORA vs ENTONCES
+                        </div>
+                        <p style="font-size: 0.9rem;">"Siento miedo ahora" vs "Sentí miedo entonces"</p>
+                    </div>
+                </div>
+                
+                <div class="insight-box">
+                    <p><strong>YO-AQUÍ-AHORA</strong> = El locus desde donde experimento el mundo</p>
+                </div>
+                
+                <div class="card orange">
+                    <h3>🛡️ Distinción Crítica para Salud</h3>
+                    <div style="font-size: 1.2rem; margin: 1rem 0; font-weight: 700; text-align: center; color: var(--accent-orange);">
+                        YO-AQUÍ-AHORA ≠ OTROS-ALLÁ-ENTONCES
+                    </div>
+                    <ul class="emoji-list">
+                        <li data-emoji="✅">Opero desde MI perspectiva (no la de otros)</li>
+                        <li data-emoji="💪">Mis experiencias internas son MÍAS</li>
+                        <li data-emoji="🎯">Los otros tienen perspectivas DIFERENTES y SEPARADAS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 5: DESARROLLO TÍPICO -->
+        <div class="screen" data-screen="5">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🌱</span>
+                    Desarrollo Típico del Self
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid #4caf50;">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 La base de la salud psicológica:</strong> En un desarrollo típico, el niño aprende que <strong>sus experiencias internas le pertenecen</strong>. Cuando llora 😢, sus cuidadores validan: "Estás triste, está bien". Con el tiempo, deriva una distinción clara: "Lo que YO siento es MÍO, lo que OTROS sienten es de ELLOS". Esta distinción crea límites psicológicos saludables.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🛡️ <strong>Seguridad psicológica en acción:</strong><br>
+                            Niño: "Tengo miedo" 😨<br>
+                            Madre: "Veo que tienes miedo, cuéntame"<br>
+                            <strong>Resultado:</strong> El miedo es validado como SUYO, interno, controlable. No invade desde OTROS-ALLÁ, viene de YO-AQUÍ. 
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="comparison-box healthy" style="margin: 1.5rem 0;">
+                    <h4>✅ Trayectoria Saludable</h4>
+                    <div style="margin: 2rem 0;">
+                        <div style="font-size: 2.5rem; margin: 1rem 0;">👤</div>
+                        <div style="font-weight: 700; font-size: 1.2rem; margin: 0.5rem 0;">YO-AQUÍ-AHORA</div>
+                        <div style="font-size: 2rem; color: #4caf50; margin: 1rem 0;">⬇️ DISTINCIÓN ⬇️</div>
+                        <div style="font-size: 2.5rem; margin: 1rem 0;">👥</div>
+                        <div style="font-weight: 700; font-size: 1.2rem; margin: 0.5rem 0;">OTROS-ALLÁ-ENTONCES</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>🎯 Características del Desarrollo Saludable</h3>
+                    <ul class="emoji-list">
+                        <li data-emoji="🧭"><strong>Perspectiva estable:</strong> Siempre experimento desde YO-AQUÍ-AHORA</li>
+                        <li data-emoji="🛡️"><strong>Límites claros:</strong> Lo que OTROS piensan/sienten está ALLÁ-ENTONCES</li>
+                        <li data-emoji="🚫"><strong>Imposibilidad de fusión:</strong> No puedo ver literalmente a través de ojos de otro</li>
+                        <li data-emoji="💪"><strong>Seguridad psicológica:</strong> Mis experiencias me pertenecen, no son controladas por otros</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-box">
+                    <p>La <strong>distinción</strong> entre YO y OTROS es la base de límites psicológicos saludables</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 6: DESARROLLO TRAUMÁTICO -->
+        <div class="screen" data-screen="6">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">⚠️</span>
+                    Desarrollo Traumático
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid #f44336;">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 Cuando OTROS invaden tu AQUÍ-AHORA:</strong> En historias traumáticas, especialmente con cuidadores <strong>sobrecontroladores, intrusivos o impredecibles</strong>, los OTROS controlan el contenido psicológico del niño. "No estás triste, deja de llorar" se repite cientos de veces. El niño aprende que sus experiencias internas no le pertenecen completamente.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            💔 <strong>El proceso de invasión:</strong><br>
+                            Niño: "Tengo miedo" 😨<br>
+                            Padre: "NO tienes miedo, no seas débil"<br>
+                            <strong>Resultado:</strong> El niño deriva: "OTROS me dicen qué siento" → "Lo que siento AQUÍ-AHORA es controlado por OTROS" → <strong>Coordinación YO-OTROS</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card orange">
+                    <h3>🏠 Contexto: Historias que Debilitan la Distinción</h3>
+                    <p style="margin: 1rem 0;">Tipos de experiencias traumáticas específicas:</p>
+                </div>
+                
+                <div style="background: #fff5f5; padding: 1.25rem; margin: 1rem 0; border-radius: 12px; border-left: 4px solid #f44336;">
+                    <strong style="display: block; margin-bottom: 0.75rem; font-size: 1.1rem;">Control Excesivo de Experiencia Interna:</strong>
+                    <div style="background: white; padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; font-size: 0.9rem;">
+                        💬 "No estás triste" (cuando el niño SÍ está triste)
+                    </div>
+                    <div style="background: white; padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; font-size: 0.9rem;">
+                        💬 "No tienes permitido llorar"
+                    </div>
+                    <div style="background: white; padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; font-size: 0.9rem;">
+                        💬 "No deberías sentirte así"
+                    </div>
+                    <div style="background: white; padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; font-size: 0.9rem;">
+                        💬 "Lo que sientes no es real"
+                    </div>
+                </div>
+                
+                <div class="comparison-box trauma" style="margin: 1.5rem 0;">
+                    <h4>⚡ Resultado Conductual</h4>
+                    <div style="margin: 2rem 0;">
+                        <div style="font-size: 2.5rem; margin: 1rem 0;">👤</div>
+                        <div style="font-weight: 700; font-size: 1.2rem; margin: 0.5rem 0;">YO</div>
+                        <div style="font-size: 2rem; color: #f44336; margin: 1rem 0;">⬇️ COORDINACIÓN ⬇️</div>
+                        <div style="font-size: 2.5rem; margin: 1rem 0;">👥</div>
+                        <div style="font-weight: 700; font-size: 1.2rem; margin: 0.5rem 0;">OTROS</div>
+                    </div>
+                    <p style="font-weight: 600; margin-top: 1.5rem;">Los OTROS ejercen control sobre experiencias que deberían ser del YO-AQUÍ-AHORA</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 7: DE DISTINCIÓN A COORDINACIÓN -->
+        <div class="screen" data-screen="7">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🔄</span>
+                    Proceso de Transformación
+                </h2>
+                
+                <div class="diagram">
+                    <div class="diagram-title">De la Distinción a la Coordinación</div>
+                    
+                    <div class="flow-step">
+                        <strong style="color: var(--accent-purple);">PASO 1: Experiencia Repetida</strong>
+                        <div style="margin-top: 0.75rem; font-size: 0.95rem; line-height: 1.8;">
+                            "Otros me dicen qué siento" (múltiples ejemplos)<br>
+                            ⬇️<br>
+                            "Otros controlan mi experiencia interna AQUÍ-AHORA"<br>
+                            ⬇️<br>
+                            "Lo que siento no es solo MÍO"
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 1rem 0;">⬇️</div>
+                    
+                    <div class="flow-step">
+                        <strong style="color: var(--accent-orange);">PASO 2: Marco Relacional Derivado</strong>
+                        <div style="margin-top: 0.75rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
+                            <div style="text-decoration: line-through; margin-bottom: 0.75rem;">
+                                YO-AQUÍ-AHORA [DISTINCIÓN] OTROS-ALLÁ-ENTONCES
+                            </div>
+                            <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-orange);">
+                                ⬇️<br>
+                                YO [COORDINACIÓN] OTROS-AQUÍ-AHORA
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 1rem 0;">⬇️</div>
+                    
+                    <div class="flow-step" style="background: linear-gradient(135deg, #ffd4d4 0%, #ffb3b3 100%); border: 2px solid #f44336;">
+                        <strong style="color: #c62828;">PASO 3: Debilitamiento de Límites</strong>
+                        <ul class="emoji-list" style="margin-top: 0.75rem;">
+                            <li data-emoji="🌊">La distinción YO/OTROS se debilita</li>
+                            <li data-emoji="👥">OTROS ya no están solo ALLÁ-ENTONCES</li>
+                            <li data-emoji="🔗">OTROS coordinados conmigo AQUÍ-AHORA</li>
+                            <li data-emoji="⚠️">Mis límites psicológicos se vuelven permeables</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="insight-box" style="background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%); border-color: #f44336;">
+                    <p>Resultado = <strong>YO & OTROS-AQUÍ-AHORA</strong><br>Fundamento de la experiencia disociativa</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 8: NIVEL 1 DISOCIACIÓN -->
+        <div class="screen" data-screen="8">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">📊</span>
+                    Nivel 1: YO & OTROS-AQUÍ-AHORA
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-orange);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 La experiencia disociativa básica:</strong> Aquí el YO sigue operando AQUÍ-AHORA (no estás "perdido" en el pasado), <strong>PERO</strong> muchos aspectos del YO están coordinados con OTROS. La persona no puede descifrar claramente: "¿Este pensamiento/sentimiento es MÍO o viene de OTROS?". La frontera se ha vuelto permeable.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🎭 <strong>¿Cómo se siente?</strong><br>
+                            Persona típica: "Pienso que soy un fracaso" 💭 (interno)<br>
+                            Persona disociada: "Una voz me dice que soy un fracaso" 🗣️ (¿externo?)<br>
+                            <strong>Mismo contenido, diferente relación de propiedad</strong>. El pensamiento adquirió funciones de estímulo externo.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card orange">
+                    <h3>La Experiencia Disociativa Básica</h3>
+                    <p style="margin-top: 0.5rem;">Perspectiva operando desde <strong>YO & OTROS-AQUÍ-AHORA</strong> en lugar de YO-AQUÍ-AHORA</p>
+                </div>
+                
+                <div class="emoji-example">
+                    <p style="font-weight: 600; margin-bottom: 1rem;">Transformación de Eventos Internos:</p>
+                    <div class="emoji-row">
+                        <div>
+                            <div style="font-size: 2.5rem;">💭</div>
+                            <div style="font-size: 0.8rem; font-weight: 600; margin-top: 0.25rem;">Pensamiento</div>
+                        </div>
+                        <div style="font-size: 2rem; color: var(--accent-orange);">➡️</div>
+                        <div>
+                            <div style="font-size: 2.5rem;">🗣️</div>
+                            <div style="font-size: 0.8rem; font-weight: 600; margin-top: 0.25rem;">Voz externa</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card purple">
+                    <h3>🔍 Proceso Paso a Paso</h3>
+                    
+                    <div style="background: white; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+                        <strong>1. Marco relacional alterado:</strong>
+                        <div style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            <span style="text-decoration: line-through;">Normal: YO [DISTINCIÓN] OTROS</span><br>
+                            <span style="color: var(--accent-purple); font-weight: 600;">Alterado: YO [COORDINACIÓN] OTROS</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+                        <strong>2. Pérdida de límites:</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            ❓ ¿Esto es MÍO o de OTROS?<br>
+                            ❓ ¿Es interno o externo?<br>
+                            ❓ ¿Lo pienso YO o me lo dicen OTROS?
+                        </p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+                        <strong>3. Transformación de funciones:</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            Pensamiento interno → Adquiere funciones de estímulo externo<br>
+                            Sentimiento privado → Experimentado como "voz de otro"
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="interactive-demo">
+                    <p style="font-weight: 600; margin-bottom: 1rem;">👆 Presiona para ver la transformación:</p>
+                    <button class="demo-btn" onclick="toggleTransform()">Transformar</button>
+                    <div class="demo-state" id="demoState">
+                        💭 "Me siento triste"
+                    </div>
+                    <div class="demo-label" id="demoLabel">Pensamiento interno (YO-AQUÍ-AHORA)</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 9: NIVEL 2 DISOCIACIÓN -->
+        <div class="screen" data-screen="9">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🌫️</span>
+                    Nivel 2: YO & OTROS-ALLÁ-ENTONCES
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-purple);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 Disociación extrema:</strong> Aquí la perspectiva cambia de AQUÍ-AHORA a ALLÁ-ENTONCES. El YO coordinado con OTRO ahora opera <strong>como si fuera la perspectiva de otro</strong>, separado del AQUÍ-AHORA. Las experiencias son removidas de la conciencia porque la perspectiva no opera en el presente inmediato. Resultado: <strong>despersonalización, desrealización, amnesia</strong>.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            👻 <strong>El escape psicológico definitivo:</strong><br>
+                            Cuando el trauma es insoportable AQUÍ-AHORA y no hay escape físico 🚪🔒, el niño deriva: "Si YO no estoy AQUÍ-AHORA, no me duele". La perspectiva se mueve a ALLÁ-ENTONCES. <strong>Mollon (1996) lo llamó: "No estoy aquí; esto no me está pasando; no estoy en este cuerpo"</strong>.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card purple">
+                    <h3>Disociación Extrema - Despersonalización</h3>
+                    <p style="margin-top: 0.5rem;">Perspectiva opera desde <strong>YO & OTROS-ALLÁ-ENTONCES</strong> (como si fuera perspectiva de otro)</p>
+                </div>
+                
+                <div class="emoji-example" style="background: linear-gradient(135deg, #f5f0ff 0%, #e8dcff 100%); border-color: var(--accent-purple);">
+                    <p style="font-weight: 600; margin-bottom: 1rem;">Cambio de Perspectiva:</p>
+                    <div class="emoji-row">
+                        <div style="opacity: 0.5;">
+                            <div style="font-size: 2rem;">👤</div>
+                            <div style="font-size: 0.7rem; margin-top: 0.25rem;">YO</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--accent-purple);">🔗</div>
+                        <div style="opacity: 0.5;">
+                            <div style="font-size: 2rem;">👥</div>
+                            <div style="font-size: 0.7rem; margin-top: 0.25rem;">OTROS</div>
+                        </div>
+                        <div style="font-size: 1.5rem;">📍</div>
+                        <div>
+                            <div style="font-size: 2.5rem;">🌫️</div>
+                            <div style="font-size: 0.8rem; font-weight: 600; margin-top: 0.25rem;">ALLÁ-ENTONCES</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.95rem; font-style: italic;">
+                        "Como si estuviera viendo desde fuera de mí mismo"
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3>🎯 Características</h3>
+                    <ul class="emoji-list">
+                        <li data-emoji="👻">YO coordinado con OTRO</li>
+                        <li data-emoji="🌫️">Pero AHORA también opera ALLÁ-ENTONCES</li>
+                        <li data-emoji="📍">Separado de perspectiva AQUÍ-AHORA</li>
+                        <li data-emoji="❓">Experiencias removidas de conciencia</li>
+                    </ul>
+                </div>
+                
+                <div class="card orange">
+                    <h3>📋 Explicación de:</h3>
+                    <ul class="emoji-list">
+                        <li data-emoji="🌫️">Desrealización / Despersonalización</li>
+                        <li data-emoji="❓">Amnesia</li>
+                        <li data-emoji="🚪">Estados de fuga</li>
+                        <li data-emoji="🛡️">Escape psicológico cuando escape físico es imposible</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-box">
+                    <p>"Resultado de adversidades severas, donde existe necesidad de <strong>removerse a sí mismo</strong> de eventos traumáticos AQUÍ-AHORA"</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 10: EJEMPLO THE ANGEL -->
+        <div class="screen" data-screen="10">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">👼</span>
+                    Ejemplo: The Angel
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-yellow);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 Análisis funcional real:</strong> Este caso clínico del artículo muestra cómo las voces NO son síntomas aleatorios, sino <strong>respuestas funcionales a necesidades no satisfechas</strong>. Cuando una madre no proporciona nutrición emocional, el repertorio conductual típico (buscar apoyo en ella) no funciona. ¿Alternativa? Una respuesta conductual que SÍ proporciona esa función: una voz nutritiva.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            💝 <strong>La lógica funcional:</strong><br>
+                            Necesidad: Nutrición/cuidado 💔<br>
+                            Fuente típica: Madre ❌ (No disponible/rechaza)<br>
+                            Alternativa conductual: Voz "Angel" ✅<br>
+                            <strong>Resultado:</strong> La necesidad se satisface, la voz se refuerza, el patrón se mantiene.
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fff9f0 0%, #ffe8d4 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">📋 CONTEXTO CLÍNICO:</p>
+                    <p>Niña con madre manipuladora y abusiva. Escucha dos voces. Primera voz: <strong>The Angel</strong></p>
+                </div>
+                
+                <div class="card">
+                    <h3>👼 The Angel (La Voz Nutricia)</h3>
+                    <div style="font-size: 0.9rem; font-style: italic; margin: 0.5rem 0; opacity: 0.8;">
+                        "Voz dulce, calmante, que dice cosas reconfortantes"
+                    </div>
+                </div>
+                
+                <div style="background: #f0f9ff; padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--accent-cyan); margin: 1rem 0;">
+                    <strong style="display: block; margin-bottom: 0.75rem;">🎯 FUNCIONES:</strong>
+                    <ul class="emoji-list">
+                        <li data-emoji="💝">Nutrición y cuidado (función apetitiva)</li>
+                        <li data-emoji="🏃">Escape de rechazo y realidad dolorosa (función de escape)</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #fff5f0; padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--accent-orange); margin: 1rem 0;">
+                    <strong style="display: block; margin-bottom: 0.75rem;">📚 ORIGEN FUNCIONAL:</strong>
+                    <div class="flow-step">
+                        Madre no proporciona nutrición
+                        <div style="margin: 0.5rem 0; font-size: 1.5rem;">⬇️</div>
+                        Necesidad de cuidado NO satisfecha
+                        <div style="margin: 0.5rem 0; font-size: 1.5rem;">⬇️</div>
+                        Voz "apoyo" emerge como alternativa conductual
+                    </div>
+                </div>
+                
+                <div style="background: #f5fff0; padding: 1.25rem; border-radius: 12px; border-left: 4px solid #4caf50; margin: 1rem 0;">
+                    <strong style="display: block; margin-bottom: 0.75rem;">🔗 COORDINACIÓN:</strong>
+                    <p style="font-style: italic; font-size: 1.05rem;">
+                        "La nutrición que necesito AQUÍ-AHORA viene de OTROS (la voz)"
+                    </p>
+                </div>
+                
+                <div class="insight-box">
+                    <p>La voz NO es "síntoma patológico" - es <strong>respuesta funcional</strong> a necesidad real insatisfecha</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 11: EJEMPLO THE WITCH -->
+        <div class="screen" data-screen="11">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🧙‍♀️</span>
+                    Ejemplo: The Witch
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-purple);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 Coherencia como reforzador:</strong> Esta voz sirve una función diferente pero igualmente importante: <strong>dar sentido a lo incomprensible</strong>. Para una niña, el esquema "las madres son buenas" es necesario para funcionar. Pero su madre es abusiva. ¿Solución? El comportamiento abusivo se absorbe en una voz categorizada como "bruja mala". La madre queda "buena", la coherencia se restaura.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🧩 <strong>La función de coherencia:</strong><br>
+                            Esquema necesario: "Madres = buenas" 🤱<br>
+                            Evidencia contradictoria: Abuso 💥<br>
+                            Solución conductual: "BRUJA = mala" 🧙‍♀️<br>
+                            <strong>Resultado:</strong> Coherencia psicológica mantenida, esquemas necesarios intactos. <strong>Costo: fragmentación del self</strong>.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card purple">
+                    <h3>🧙‍♀️ The Witch (La Voz Categorizadora)</h3>
+                    <div style="font-size: 0.9rem; font-style: italic; margin: 0.5rem 0; opacity: 0.8;">
+                        "Voz amenazante, crítica, que refleja comportamiento abusivo"
+                    </div>
+                </div>
+                
+                <div style="background: #f9f0ff; padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--accent-purple); margin: 1rem 0;">
+                    <strong style="display: block; margin-bottom: 0.75rem;">🎯 FUNCIONES:</strong>
+                    <ul class="emoji-list">
+                        <li data-emoji="🧩">Coherencia psicológica (función apetitiva)</li>
+                        <li data-emoji="📊">Categorización de comportamiento incomprensible</li>
+                    </ul>
+                </div>
+                
+                <div class="diagram">
+                    <div class="diagram-title">🧠 Lógica Interna del Proceso</div>
+                    
+                    <div style="background: white; padding: 1.25rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid #f44336;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">❌</div>
+                        <strong>Problema 1:</strong>
+                        <p style="margin-top: 0.5rem;">"Las madres son buenas" (esquema necesario para funcionar)</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1.25rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid #f44336;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">❌</div>
+                        <strong>Problema 2:</strong>
+                        <p style="margin-top: 0.5rem;">"Mi madre es abusiva" (evidencia conductual presente)</p>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 1rem 0; color: var(--accent-purple);">⬇️</div>
+                    
+                    <div style="background: #f5fff0; padding: 1.25rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✅</div>
+                        <strong style="color: #2e7d32;">SOLUCIÓN:</strong>
+                        <p style="margin-top: 0.75rem; font-size: 1.1rem; font-weight: 600; color: var(--accent-purple);">
+                            "La BRUJA es mala"
+                        </p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                            → Comportamiento abusivo absorbido por "bruja"<br>
+                            → Esquema "madre buena" se mantiene<br>
+                            → <strong>Coherencia psicológica restaurada</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="insight-box">
+                    <p>La voz permite <strong>dar sentido</strong> a lo incomprensible sin destruir esquemas necesarios para funcionar</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 12: FUNCIONES -->
+        <div class="screen" data-screen="12">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">⚙️</span>
+                    Funciones de la Disociación
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid #14b8a6;">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 Principio fundamental del análisis funcional:</strong> No confundir <strong>funciones servidas por comportamiento</strong> con evaluaciones topográficas de las voces. Una voz "atemorizante" puede servir <strong>funciones apetitivas</strong> (coherencia, nutrición). Una voz "placentera" puede servir <strong>funciones de escape</strong>. La investigación muestra funciones múltiples que cambian en el tiempo.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🎯 <strong>Las 4 funciones principales:</strong><br>
+                            1. <strong>Escape/Evitación</strong> 🏃: "Si no es MÍO, no duele"<br>
+                            2. <strong>Nutrición</strong> 💝: Alternativa cuando otros fallan<br>
+                            3. <strong>Coherencia</strong> 🧩: Dar sentido a lo incomprensible<br>
+                            4. <strong>Control</strong> 🎮: Psicológico cuando físico es imposible
+                        </p>
+                    </div>
+                </div>
+                
+                <p style="margin-bottom: 1rem;">La disociación NO es aleatoria. Sirve <strong>funciones psicológicas importantes</strong>:</p>
+                
+                <div class="diagram">
+                    <div class="diagram-title">🔄 Análisis Funcional</div>
+                    
+                    <div style="background: white; padding: 1.25rem; border-radius: 10px; margin: 1rem 0;">
+                        <strong style="color: var(--accent-purple); display: block; margin-bottom: 0.75rem;">⏮️ ANTECEDENTE (Historia):</strong>
+                        <ul class="emoji-list">
+                            <li data-emoji="⚡">Trauma temprano</li>
+                            <li data-emoji="🎭">Control externo de experiencia interna</li>
+                            <li data-emoji="💔">Necesidades no satisfechas</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 0.5rem 0;">⬇️</div>
+                    
+                    <div style="background: white; padding: 1.25rem; border-radius: 10px; margin: 1rem 0;">
+                        <strong style="color: var(--accent-orange); display: block; margin-bottom: 0.75rem;">🎬 CONDUCTA:</strong>
+                        <ul class="emoji-list">
+                            <li data-emoji="🔊">Externalización de eventos internos</li>
+                            <li data-emoji="🗣️">Escucha de voces</li>
+                            <li data-emoji="👻">Despersonalización</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 0.5rem 0;">⬇️</div>
+                    
+                    <div style="background: white; padding: 1.25rem; border-radius: 10px; margin: 1rem 0;">
+                        <strong style="color: var(--accent-cyan); display: block; margin-bottom: 0.75rem;">🎯 CONSECUENCIAS (Funciones):</strong>
+                        <ul class="emoji-list">
+                            <li data-emoji="🏃">Escape/evitación de dolor</li>
+                            <li data-emoji="💝">Nutrición/cuidado alternativo</li>
+                            <li data-emoji="🧩">Coherencia psicológica</li>
+                            <li data-emoji="🎮">Control (paradójico)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="insight-box">
+                    <p>Todas las funciones proporcionan <strong>reforzamiento</strong> - por eso la conducta se mantiene</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 13: LA PARADOJA -->
+        <div class="screen" data-screen="13">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">🔄</span>
+                    La Paradoja del Reforzamiento
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-red);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 El ciclo autoperpetuante:</strong> Aquí está el problema central del modelo: la coordinación YO-OTROS proporciona alivio inicial (reforzamiento), lo cual <strong>fortalece aún más la coordinación</strong>. Pero esto debilita más los límites self-otros, lo cual hace más probable la externalización, lo cual hace que OTROS se perciban como más amenazantes, lo cual aumenta la necesidad de coordinación... <strong>Es un ciclo que se retroalimenta</strong>.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            ⚠️ <strong>Por qué es tan difícil de romper:</strong><br>
+                            Coordinación → Alivio 😌 (reforzamiento positivo)<br>
+                            Reforzamiento → Más coordinación 🔗<br>
+                            Más coordinación → Self más fragmentado 🧩<br>
+                            Self fragmentado → Otros más amenazantes 😰<br>
+                            <strong>Y el ciclo continúa...</strong> Cada "solución" alimenta el problema.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card orange">
+                    <h3>⚠️ Las Funciones NO son Estáticas</h3>
+                    <p>Observa cómo cambian a través del tiempo:</p>
+                </div>
+                
+                <div class="diagram">
+                    <div class="diagram-title">Ciclo de Mantenimiento</div>
+                    
+                    <div class="flow-step">
+                        <strong>1️⃣ Fase Inicial</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            Primera voz → Intento distracción (escape) → Falla repetidamente → "No tengo opción" → Escuchar (aproximación)
+                        </p>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 0.5rem 0;">⬇️</div>
+                    
+                    <div class="flow-step" style="background: linear-gradient(135deg, #fff5f0 0%, #ffe8dc 100%);">
+                        <strong style="color: var(--accent-orange);">2️⃣ Coordinación proporciona alivio inicial</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            "Ya no es solo MÍO" → Reducción temporal de dolor
+                        </p>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 0.5rem 0;">⚡</div>
+                    
+                    <div class="flow-step" style="background: linear-gradient(135deg, #ffd4d4 0%, #ffb3b3 100%); border: 2px solid #f44336;">
+                        <strong style="color: #c62828;">3️⃣ REFUERZA la coordinación</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            Alivio = consecuencia reforzante → Patrón se fortalece
+                        </p>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 0.5rem 0;">⬇️</div>
+                    
+                    <div class="flow-step">
+                        <strong>4️⃣ Self se fragmenta MÁS</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            Límites YO-OTROS cada vez más débiles
+                        </p>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2rem; margin: 0.5rem 0; color: var(--accent-purple);">🔄</div>
+                    
+                    <div class="flow-step">
+                        <strong>5️⃣ OTROS se vuelven más amenazantes</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                            Más externalizo mi experiencia → Más amenazante el mundo externo
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="insight-box" style="background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%); border-color: #f44336;">
+                    <p>"Cuanto más coordino mi experiencia con otros, más probable es que externalice y más amenazantes se vuelven los otros"</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 14: IMPLICACIONES CLÍNICAS -->
+        <div class="screen" data-screen="14">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">💊</span>
+                    Implicaciones Clínicas
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan);">
+                    <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>📖 Por qué los enfoques tradicionales pueden fallar:</strong> Si la disociación emerge de OTROS controlando la experiencia interna del niño, entonces <strong>un terapeuta que intenta controlar/eliminar las voces replica exactamente esa dinámica</strong>. El artículo sugiere que el enfoque Maastricht (validar, explorar funciones) es más efectivo porque <strong>NO refuerza la coordinación YO-OTROS</strong>.
+                    </p>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="font-size: 0.95rem;">
+                            🎯 <strong>El cambio de paradigma:</strong><br>
+                            Tradicional: "Esa voz no es real, debes ignorarla" 🚫<br>
+                            <strong>Problema:</strong> Otro (terapeuta) controla tu experiencia interna<br><br>
+                            Funcional: "Cuéntame de esa voz, ¿qué función cumple?" ✅<br>
+                            <strong>Beneficio:</strong> TÚ mantienes propiedad de tu experiencia, fortalecemos distinción YO-OTROS
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="comparison">
+                    <div class="comparison-box trauma">
+                        <h4>❌ Enfoque Tradicional</h4>
+                        <ul class="emoji-list" style="text-align: left; margin-top: 1rem;">
+                            <li data-emoji="🎯">Eliminar síntomas</li>
+                            <li data-emoji="🚫">Reducir/socavar voces</li>
+                            <li data-emoji="⚠️">Replica control externo</li>
+                            <li data-emoji="🔁">Refuerza YO & OTROS</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-box healthy">
+                        <h4>✅ Enfoque Funcional</h4>
+                        <ul class="emoji-list" style="text-align: left; margin-top: 1rem;">
+                            <li data-emoji="🔍">Entender funciones</li>
+                            <li data-emoji="✅">Validar experiencias</li>
+                            <li data-emoji="🎯">Explorar significado</li>
+                            <li data-emoji="🛡️">Fortalecer límites</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>🎯 Principios de Intervención RFT</h3>
+                    <ul class="emoji-list">
+                        <li data-emoji="✅"><strong>Validar:</strong> No eliminar, explorar función</li>
+                        <li data-emoji="🔧"><strong>Fortalecer distinción:</strong> Trabajo en relaciones deícticas</li>
+                        <li data-emoji="👁️"><strong>Self-as-context:</strong> Perspectiva estable YO-AQUÍ-AHORA</li>
+                        <li data-emoji="🛡️"><strong>Autonomía:</strong> Contenido psicológico pertenece al YO</li>
+                    </ul>
+                </div>
+                
+                <div class="diagram">
+                    <div class="diagram-title">🎬 Preguntas Terapéuticas</div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px;">
+                        <strong>🧭 Perspectiva:</strong>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">"¿Desde dónde estás experimentando esto?"</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px;">
+                        <strong>👤 Propiedad:</strong>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">"¿A quién pertenece este pensamiento?"</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px;">
+                        <strong>🎯 Función:</strong>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">"¿Qué hace esta voz por ti?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA 15: RESUMEN -->
+        <div class="screen" data-screen="15">
+            <div class="content-wrapper">
+                <h2 class="screen-title">
+                    <span class="emoji-title">📝</span>
+                    Resumen Ejecutivo
+                </h2>
+                
+                <div class="insight-box">
+                    <p style="font-size: 1.15rem;"><strong>Núcleo de la Disociación:</strong><br>
+                    Coordinación (no distinción) entre YO y OTROS en la experiencia AQUÍ-AHORA</p>
+                </div>
+                
+                <div class="card">
+                    <h3>💎 Conceptos Clave</h3>
+                    <ul class="emoji-list">
+                        <li data-emoji="✅">NO es anormal - respuesta funcional a historia atípica</li>
+                        <li data-emoji="🔗">Núcleo = Coordinación entre YO y OTROS</li>
+                        <li data-emoji="🧠">Proceso relacional - marcos derivados</li>
+                        <li data-emoji="🎯">Funciones múltiples - escape, nutrición, coherencia</li>
+                        <li data-emoji="🧩">Self fragmentado = pérdida límites YO/OTROS</li>
+                        <li data-emoji="💊">Tratamiento = fortalecer distinción, NO eliminar</li>
+                    </ul>
+                </div>
+                
+                <div class="diagram">
+                    <div class="diagram-title">🔄 Proceso en 5 Pasos</div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <strong>1. TÍPICO:</strong> YO-AQUÍ-AHORA [DISTINCIÓN] OTROS-ALLÁ-ENTONCES
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid #ff9800;">
+                        <strong>2. TRAUMA:</strong> Control externo + Invalidación
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid var(--accent-orange);">
+                        <strong>3. DERIVACIÓN:</strong> YO [COORDINACIÓN] OTROS
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid #f44336;">
+                        <strong>4. LÍMITES:</strong> YO & OTROS-AQUÍ-AHORA
+                    </div>
+                    
+                    <div style="background: white; padding: 1rem; margin: 0.75rem 0; border-radius: 8px; border-left: 4px solid var(--accent-purple);">
+                        <strong>5. MANIFESTACIÓN:</strong> Voces, despersonalización, amnesia
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-blue) 100%); border-radius: 16px; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧠</div>
+                    <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.5rem; margin-bottom: 0.5rem;">¡Laboratorio Completado!</h3>
+                    <p style="font-size: 0.95rem; opacity: 0.95;">Basado en: McEnteggart et al. (2017) - Journal of Trauma & Dissociation</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <div class="navigation">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevScreen()" disabled>
+                ◀️ Anterior
+            </button>
+            <button class="nav-btn next" id="nextBtn" onclick="nextScreen()">
+                Siguiente ▶️
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        let currentScreen = 0;
+        const totalScreens = 16;
+        let isTransformed = false;
+        
+        // Inicializar la pantalla correcta al cargar
+        window.addEventListener('DOMContentLoaded', function() {
+            updateScreen();
+        });
+        
+        function updateScreen() {
+            // IMPORTANTE: Ocultar TODAS las pantallas primero
+            const allScreens = document.querySelectorAll('.screen');
+            allScreens.forEach(screen => {
+                screen.classList.remove('active');
+                screen.style.display = 'none'; // Forzar ocultación
+            });
+            
+            // Mostrar SOLO la pantalla actual
+            const currentScreenElement = document.querySelector(`[data-screen="${currentScreen}"]`);
+            if (currentScreenElement) {
+                currentScreenElement.classList.add('active');
+                currentScreenElement.style.display = 'flex'; // Forzar visualización
+            }
+            
+            // Actualizar botones
+            document.getElementById('prevBtn').disabled = (currentScreen === 0);
+            document.getElementById('nextBtn').disabled = (currentScreen === totalScreens - 1);
+            
+            if (currentScreen === totalScreens - 1) {
+                document.getElementById('nextBtn').textContent = '✓ Finalizado';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Siguiente ▶️';
+            }
+            
+            // Actualizar progress bar
+            if (currentScreen === 0) {
+                document.getElementById('progressBar').style.display = 'none';
+            } else {
+                document.getElementById('progressBar').style.display = 'block';
+                const progress = ((currentScreen) / (totalScreens - 1)) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressText').textContent = `Pantalla ${currentScreen} de ${totalScreens - 1}`;
+            }
+            
+            // Scroll al top
+            window.scrollTo(0, 0);
+        }
+        
+        function nextScreen() {
+            if (currentScreen < totalScreens - 1) {
+                currentScreen++;
+                updateScreen();
+            }
+        }
+        
+        function prevScreen() {
+            if (currentScreen > 0) {
+                currentScreen--;
+                updateScreen();
+            }
+        }
+        
+        function toggleTransform() {
+            const state = document.getElementById('demoState');
+            const label = document.getElementById('demoLabel');
+            
+            if (!isTransformed) {
+                state.textContent = '🗣️ "Estás triste"';
+                state.classList.add('transformed');
+                label.textContent = 'Voz externa (YO & OTROS-AQUÍ-AHORA)';
+                label.style.color = 'var(--accent-orange)';
+            } else {
+                state.textContent = '💭 "Me siento triste"';
+                state.classList.remove('transformed');
+                label.textContent = 'Pensamiento interno (YO-AQUÍ-AHORA)';
+                label.style.color = 'var(--primary-blue)';
+            }
+            
+            isTransformed = !isTransformed;
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && currentScreen < totalScreens - 1) {
+                nextScreen();
+            } else if (e.key === 'ArrowLeft' && currentScreen > 0) {
+                prevScreen();
+            }
+        });
+        
+        // Swipe navigation para móvil
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold && currentScreen < totalScreens - 1) {
+                nextScreen();
+            }
+            if (touchEndX > touchStartX + swipeThreshold && currentScreen > 0) {
+                prevScreen();
+            }
+        }
+    </script>
+</body>
+</html>
