@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operacionalización Nivel 3 - LEO RFT 🔍</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --error: #ef4444;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            animation: gradient-shift 20s ease infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, -50px); }
+        }
+        
+        .container {
+            background: var(--surface);
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 1000px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 32px 40px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .progress-bar-bg {
+            flex: 1;
+            height: 14px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            width: 0%;
+            transition: width 0.6s ease;
+            border-radius: 20px;
+        }
+        
+        .score-display {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .intro-box {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .intro-emoji {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .intro-box h2 {
+            font-size: 40px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .intro-box p {
+            font-size: 18px;
+            color: var(--text);
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .instruction-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: left;
+        }
+        
+        .instruction-card h3 {
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .instruction-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .instruction-card li {
+            color: var(--text);
+            opacity: 0.9;
+            padding: 8px 0;
+            padding-left: 32px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .instruction-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .exercise-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .exercise-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .task-instruction {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid #f59e0b;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .task-instruction-icon {
+            font-size: 32px;
+        }
+        
+        .task-instruction-text {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .vignette-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        
+        .vignette-title {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            opacity: 0.7;
+        }
+        
+        .vignette-text {
+            font-size: 20px;
+            line-height: 1.9;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .phrase {
+            display: inline;
+            padding: 4px 6px;
+            margin: 0 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .phrase.selectable {
+            background: rgba(99, 102, 241, 0.2);
+            border-bottom: 2px solid rgba(99, 102, 241, 0.5);
+        }
+        
+        .phrase.selectable:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .phrase.selected {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+            border-bottom: 3px solid var(--success);
+            font-weight: 700;
+            animation: select-pop 0.4s ease;
+        }
+        
+        @keyframes select-pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .phrase.selected::after {
+            content: "✓";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--success);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+        }
+        
+        .phrase.wrong {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3));
+            border-bottom: 3px solid var(--error);
+            animation: shake-error 0.5s ease;
+        }
+        
+        @keyframes shake-error {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        
+        .counter-display {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin-top: 24px;
+            text-align: center;
+        }
+        
+        .counter-display .label {
+            font-size: 14px;
+            color: var(--text);
+            opacity: 0.7;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .counter-display .value {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feedback {
+            margin-top: 32px;
+            padding: 28px;
+            border-radius: 20px;
+            display: none;
+            border: 3px solid;
+        }
+        
+        .feedback.show {
+            display: block;
+            animation: feedback-appear 0.5s ease;
+        }
+        
+        @keyframes feedback-appear {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .feedback.correct {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            border-color: var(--success);
+        }
+        
+        .feedback.incorrect {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+            border-color: var(--error);
+        }
+        
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .feedback-icon {
+            font-size: 48px;
+        }
+        
+        .feedback-title {
+            font-size: 28px;
+            font-weight: 900;
+        }
+        
+        .feedback.correct .feedback-title { color: var(--success); }
+        .feedback.incorrect .feedback-title { color: var(--error); }
+        
+        .feedback-text {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 17px;
+            opacity: 0.9;
+        }
+        
+        .missing-items {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+        
+        .missing-items h4 {
+            color: #f59e0b;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .missing-items ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .missing-items li {
+            color: var(--text);
+            padding: 4px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .missing-items li::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: #f59e0b;
+            font-size: 20px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .results-box {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .results-emoji {
+            font-size: 140px;
+            margin-bottom: 24px;
+        }
+        
+        .results-score {
+            font-size: 80px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .results-message {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+        
+        .results-description {
+            font-size: 18px;
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 28px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
+        
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        
+        .stat-value {
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text);
+            opacity: 0.7;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 640px) {
+            .header { padding: 24px; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px; }
+            .intro-box h2 { font-size: 28px; }
+            .vignette-text { font-size: 18px; }
+            .results-emoji { font-size: 80px; }
+            .results-score { font-size: 56px; }
+            .button-group { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Operacionalización Nivel 3</h1>
+            <p>Extraer Conductas de Viñetas Clínicas</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="score-display" id="scoreDisplay">0/10</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="screen active" id="introScreen">
+                <div class="intro-box">
+                    <div class="intro-emoji">🔍</div>
+                    <h2>¡Detective Conductual!</h2>
+                    <p>Leerás <strong>viñetas clínicas</strong> y deberás <strong>identificar</strong> las conductas operacionalizadas.</p>
+                    
+                    <div class="instruction-card">
+                        <h3>📋 ¿Cómo funciona?</h3>
+                        <ul>
+                            <li>Lee la viñeta cuidadosamente</li>
+                            <li><strong>Haz click</strong> en frases que describan conductas observables</li>
+                            <li>Se destacarán en <strong>azul</strong></li>
+                            <li>Encuentra TODAS (generalmente 3-4)</li>
+                            <li>El sistema te dirá si acertaste</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="margin-top: 24px; font-size: 16px; opacity: 0.7;">
+                        💡 Busca acciones <strong>observables, medibles y específicas</strong>
+                    </p>
+                    
+                    <div class="button-group" style="justify-content: center;">
+                        <button class="btn btn-primary" onclick="startExercises()">
+                            Comenzar los 10 Casos 🚀
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screen" id="exerciseScreen">
+                <div class="exercise-header">
+                    <div class="exercise-badge" id="exerciseBadge">Caso 1 de 10</div>
+                </div>
+                
+                <div class="task-instruction">
+                    <div class="task-instruction-icon">👀</div>
+                    <div class="task-instruction-text">
+                        <strong>Instrucción:</strong> Haz click en frases que describan <strong>conductas observables</strong>
+                    </div>
+                </div>
+                
+                <div class="vignette-container">
+                    <div class="vignette-title">📄 Viñeta Clínica</div>
+                    <div class="vignette-text" id="vignetteText"></div>
+                </div>
+                
+                <div class="counter-display">
+                    <div class="label">Conductas Seleccionadas</div>
+                    <div class="value" id="counterValue">0 / 0</div>
+                </div>
+                
+                <div class="feedback" id="feedback">
+                    <div class="feedback-header">
+                        <div class="feedback-icon" id="feedbackIcon"></div>
+                        <div class="feedback-title" id="feedbackTitle"></div>
+                    </div>
+                    <div class="feedback-text" id="feedbackText"></div>
+                    <div id="missingContainer"></div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" id="checkBtn" onclick="checkAnswer()" disabled>
+                        Verificar Respuesta ✓
+                    </button>
+                    <button class="btn btn-secondary" id="nextBtn" onclick="nextExercise()" style="display: none;">
+                        Siguiente Caso →
+                    </button>
+                </div>
+            </div>
+            
+            <div class="screen" id="resultsScreen">
+                <div class="results-box">
+                    <div class="results-emoji" id="resultsEmoji">🎉</div>
+                    <div class="results-score" id="resultsScore">0/10</div>
+                    <div class="results-message" id="resultsMessage"></div>
+                    <div class="results-description" id="resultsDescription"></div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-value" id="correctCount">0</div>
+                            <div class="stat-label">CORRECTAS</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">❌</div>
+                            <div class="stat-value" id="incorrectCount">0</div>
+                            <div class="stat-label">INCORRECTAS</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-value" id="accuracyPercent">0%</div>
+                            <div class="stat-label">PRECISIÓN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group" style="justify-content: center;">
+                        <button class="btn btn-secondary" onclick="restartModule()">
+                            🔄 Reintentar
+                        </button>
+                        <button class="btn btn-primary" onclick="alert('🎯 Nivel completado!')">
+                            Finalizar →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const cases = [
+            {
+                vignette: ["Pedro es un empleado de 32 años que trabaja en el departamento de ventas de una empresa mediana. Según su jefe, tiene problemas de motivación y compromiso laboral. Su supervisor lo describe como alguien con bajo rendimiento y actitud negativa. Durante la evaluación inicial,", "Pedro llega tarde al trabajo todos los días,", "tiene dificultades para relacionarse con el equipo,", "se queda en silencio durante las reuniones", "y no responde los mensajes de su jefe.", "Sus compañeros comentan que parece estar desmotivado y que posiblemente tiene problemas personales que están afectando su desempeño profesional."],
+                correct: [1, 3, 4],
+                total: 3
+            },
+            {
+                vignette: ["María es una paciente de 28 años referida por su médico general por presentar síntomas compatibles con depresión mayor. Reporta sentirse abrumada por la vida y sin esperanza hacia el futuro. Su familia está preocupada porque la ven muy triste últimamente. Durante la primera sesión de terapia,", "María llora durante 15 minutos", "después de que se le pregunta sobre su situación actual. Se siente muy triste y sin energía para hacer las cosas que antes disfrutaba.", "Dice que no ve solución a sus problemas", "y que todo le parece muy difícil.", "Permanece sentada con la cabeza baja", "durante toda la entrevista, evitando mirar directamente al terapeuta. Su tono de voz es bajo y su postura corporal refleja desánimo."],
+                correct: [1, 3, 5],
+                total: 3
+            },
+            {
+                vignette: ["Carlos tiene 35 años y fue referido a terapia por recursos humanos después de múltiples quejas de sus compañeros de trabajo. Los reportes indican que tiene serios problemas de manejo de ira y dificultades para controlar sus impulsos. Su supervisor describe un ambiente laboral tenso cuando Carlos está presente. Los colegas evitan trabajar con él por miedo a sus reacciones explosivas. Durante las observaciones en su lugar de trabajo,", "Carlos grita a sus compañeros", "cuando le piden ayuda o le hacen sugerencias. Está muy enojado últimamente según comentan varios empleados.", "Golpea su escritorio con el puño", "cuando algo no sale como él espera. Tiene problemas evidentes de manejo de ira según evaluó el psicólogo organizacional. Los recursos humanos están considerando medidas disciplinarias."],
+                correct: [1, 3],
+                total: 2
+            },
+            {
+                vignette: ["Ana es una estudiante universitaria de 22 años que acude a consulta por dificultades significativas en sus relaciones interpersonales. Reporta sentir miedo intenso en situaciones sociales y cree que los demás la juzgan negativamente. Su familia nota que se ha aislado progresivamente en los últimos meses. Los profesores comentan que es una alumna brillante pero muy retraída. Durante la evaluación clínica se observa que", "Ana evita asistir a reuniones sociales,", "dice 'no puedo ir' cuando la invitan", "a eventos o fiestas con sus compañeros de clase,", "y permanece en casa los fines de semana", "en lugar de socializar. Tiene ansiedad social diagnosticada y le da miedo conocer gente nueva según explica. Sus amigas están cada vez más preocupadas por su aislamiento creciente."],
+                correct: [1, 2, 4],
+                total: 3
+            },
+            {
+                vignette: ["Roberto es un adolescente de 15 años derivado por su colegio debido a bajo rendimiento académico y problemas de atención en clase. Los profesores reportan que parece desinteresado y que no presta atención a las explicaciones. Sus padres están preocupados porque sus calificaciones han bajado significativamente este semestre. El orientador escolar sospecha que podría tener déficit de atención. Durante las observaciones en el aula,", "Roberto mira su celular cada 2 minutos", "incluso cuando el profesor está explicando conceptos importantes,", "no responde cuando el profesor le pregunta", "directamente sobre la materia,", "y dibuja en su cuaderno", "en lugar de tomar apuntes. Está claramente distraído y no tiene interés en la clase según comenta el profesor titular. Los docentes sugieren una evaluación neuropsicológica."],
+                correct: [1, 3, 5],
+                total: 3
+            },
+            {
+                vignette: ["Laura es una mujer de 30 años que llega a consulta acompañada por su madre, quien está muy preocupada por el estado anímico de su hija. La paciente fue diagnosticada con depresión mayor hace dos meses y recientemente dejó de tomar su medicación. Su familia nota un deterioro progresivo en sus hábitos de autocuidado y en su funcionamiento diario. Los amigos han intentado contactarla sin éxito. Durante la evaluación en el domicilio se observa que", "Laura permanece en cama más de 14 horas al día,", "tiene problemas de insomnio y no logra mantener una rutina saludable,", "rechaza invitaciones de amigos", "con quienes antes tenía contacto frecuente,", "y no se ducha hace 3 días", "ni realiza actividades básicas de higiene personal. Está claramente deprimida y ha perdido todo interés en las actividades que antes disfrutaba según cuenta su madre preocupada. La familia considera una hospitalización."],
+                correct: [1, 3, 5],
+                total: 3
+            },
+            {
+                vignette: ["Diego es un estudiante de secundaria de 16 años referido por el departamento de orientación escolar debido a niveles alarmantes de ansiedad relacionada con el rendimiento académico. Sus profesores lo describen como un alumno excesivamente meticuloso y perfeccionista. Los padres reportan que pasa horas haciendo y rehaciendo las tareas. El psicólogo escolar sospecha rasgos obsesivo-compulsivos. Durante los exámenes se observa que", "Diego revisa su examen 12 veces", "antes de entregarlo al profesor,", "borra y reescribe las respuestas", "múltiples veces incluso cuando están correctas,", "y tarda 2 horas en un examen de 30 minutos", "que sus compañeros completan en el tiempo estipulado. Es extremadamente perfeccionista y tiene pensamientos obsesivos sobre cometer errores según explica la psicóloga escolar. Sus padres están considerando terapia especializada."],
+                correct: [1, 3, 5],
+                total: 3
+            },
+            {
+                vignette: ["Elena es una paciente de 25 años que acude a terapia por recomendación de su pareja, quien nota que ha estado muy negativa últimamente. Reporta sentimientos intensos de inutilidad y desesperanza que han aumentado en los últimos meses. Su historia incluye episodios previos de depresión tratados con medicación. Los test psicológicos sugieren baja autoestima y pensamientos depresivos recurrentes. Durante la sesión inicial,", "Elena dice 'no sirvo para nada' 8 veces", "en el transcurso de la entrevista,", "evita contacto visual", "con la terapeuta manteniendo la mirada baja constantemente,", "y habla en voz muy baja", "de manera que resulta difícil escucharla. Tiene baja autoestima evidente y un patrón de pensamientos negativos muy arraigado según la evaluación inicial. La terapeuta considera necesario trabajar esquemas cognitivos disfuncionales."],
+                correct: [1, 3, 5],
+                total: 3
+            },
+            {
+                vignette: ["Jorge es un niño de 9 años derivado por la escuela debido a problemas conductuales significativos en el aula. Los maestros reportan que es desafiante y poco cooperativo con las instrucciones. Sus padres mencionan dificultades similares en casa durante las tareas y rutinas diarias. El equipo docente sospecha trastorno negativista desafiante. Durante las observaciones en clase se nota que", "Jorge cruza los brazos", "cuando la maestra le hace peticiones o le pide que realice alguna actividad,", "dice 'no quiero' a todas las tareas", "que se le asignan independientemente de su dificultad,", "y gira la cabeza", "hacia otro lado cuando los adultos intentan hablarle directamente. No coopera con las normas establecidas y tiene una actitud claramente desafiante según el reporte escolar. Los padres están considerando evaluación psiquiátrica."],
+                correct: [1, 3, 4],
+                total: 3
+            },
+            {
+                vignette: ["Sofía es una estudiante de 8 años que su profesora describe como excepcionalmente participativa y entusiasta en clase. Los padres reportan que siempre pregunta por hacer más actividades y parece disfrutar genuinamente del aprendizaje. El equipo docente la considera un modelo a seguir por su actitud positiva. Los test de motivación académica muestran puntuaciones muy altas. Durante las observaciones en el aula,", "Sofía completa 6 ejercicios en 20 minutos", "mientras sus compañeros aún están trabajando en el segundo ejercicio,", "levanta la mano 10 veces", "durante una sola clase para participar y responder preguntas,", "y sonríe diciendo 'quiero hacer más'", "cuando termina las actividades asignadas. Está claramente muy motivada y demuestra mucho entusiasmo por aprender según comenta su profesora. La escuela está considerando avanzarla de grado."],
+                correct: [1, 3, 5],
+                total: 3
+            }
+        ];
+        
+        let currentCase = 0;
+        let selectedPhrases = [];
+        let correctAnswers = 0;
+        
+        function startExercises() {
+            document.getElementById('introScreen').classList.remove('active');
+            document.getElementById('exerciseScreen').classList.add('active');
+            loadCase();
+        }
+        
+        function loadCase() {
+            const caseData = cases[currentCase];
+            const vignetteContainer = document.getElementById('vignetteText');
+            vignetteContainer.innerHTML = '';
+            selectedPhrases = [];
+            
+            document.getElementById('exerciseBadge').textContent = `Caso ${currentCase + 1} de 10`;
+            document.getElementById('counterValue').textContent = `0 / ${caseData.total}`;
+            
+            caseData.vignette.forEach((phrase, index) => {
+                const span = document.createElement('span');
+                span.textContent = phrase + ' ';
+                span.className = 'phrase selectable';
+                span.dataset.index = index;
+                span.onclick = () => togglePhrase(index);
+                vignetteContainer.appendChild(span);
+            });
+            
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+            document.getElementById('checkBtn').disabled = true;
+            document.getElementById('checkBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').style.display = 'none';
+            
+            const progress = ((currentCase + 1) / cases.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('scoreDisplay').textContent = `${correctAnswers}/10`;
+        }
+        
+        function togglePhrase(index) {
+            const phrases = document.querySelectorAll('.phrase');
+            const phrase = phrases[index];
+            
+            if (phrase.classList.contains('selected')) {
+                phrase.classList.remove('selected');
+                selectedPhrases = selectedPhrases.filter(i => i !== index);
+            } else {
+                phrase.classList.add('selected');
+                selectedPhrases.push(index);
+            }
+            
+            const caseData = cases[currentCase];
+            document.getElementById('counterValue').textContent = `${selectedPhrases.length} / ${caseData.total}`;
+            document.getElementById('checkBtn').disabled = selectedPhrases.length === 0;
+        }
+        
+        function checkAnswer() {
+            const caseData = cases[currentCase];
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            const missingContainer = document.getElementById('missingContainer');
+            
+            const correctSelections = selectedPhrases.filter(i => caseData.correct.includes(i));
+            const wrongSelections = selectedPhrases.filter(i => !caseData.correct.includes(i));
+            const missedSelections = caseData.correct.filter(i => !selectedPhrases.includes(i));
+            
+            const isCorrect = correctSelections.length === caseData.total && wrongSelections.length === 0;
+            
+            const phrases = document.querySelectorAll('.phrase');
+            wrongSelections.forEach(index => {
+                phrases[index].classList.add('wrong');
+            });
+            
+            if (isCorrect) {
+                feedback.classList.add('show', 'correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = '¡Perfecto!';
+                feedbackText.textContent = `Identificaste correctamente las ${caseData.total} conductas operacionalizadas. ¡Excelente!`;
+                missingContainer.innerHTML = '';
+                correctAnswers++;
+            } else {
+                feedback.classList.add('show', 'incorrect');
+                feedbackIcon.textContent = '❌';
+                feedbackTitle.textContent = 'Revisa tu respuesta';
+                
+                let text = '';
+                if (wrongSelections.length > 0) {
+                    text += `Seleccionaste ${wrongSelections.length} frase(s) NO observables. `;
+                }
+                if (missedSelections.length > 0) {
+                    text += `Te faltaron ${missedSelections.length} conducta(s).`;
+                }
+                
+                feedbackText.textContent = text;
+                
+                if (missedSelections.length > 0) {
+                    missingContainer.innerHTML = `
+                        <div class="missing-items">
+                            <h4>⚠️ Te Faltó:</h4>
+                            <ul>
+                                ${missedSelections.map(i => `<li>${caseData.vignette[i]}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    missingContainer.innerHTML = '';
+                }
+            }
+            
+            document.getElementById('scoreDisplay').textContent = `${correctAnswers}/10`;
+            document.getElementById('checkBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+        
+        function nextExercise() {
+            currentCase++;
+            
+            if (currentCase < cases.length) {
+                loadCase();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            document.getElementById('exerciseScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            const accuracy = Math.round((correctAnswers / cases.length) * 100);
+            
+            document.getElementById('resultsScore').textContent = `${correctAnswers}/10`;
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('incorrectCount').textContent = cases.length - correctAnswers;
+            document.getElementById('accuracyPercent').textContent = accuracy + '%';
+            
+            let emoji, message, description;
+            
+            if (accuracy >= 90) {
+                emoji = '🏆';
+                message = '¡Detective Maestro!';
+                description = 'Dominas perfectamente la identificación de conductas operacionalizadas. ¡Excepcional!';
+            } else if (accuracy >= 70) {
+                emoji = '🎯';
+                message = '¡Muy Bien!';
+                description = 'Tienes buen ojo para identificar conductas observables. ¡Sigue así!';
+            } else if (accuracy >= 50) {
+                emoji = '📚';
+                message = 'Buen Intento';
+                description = 'Vas por buen camino. Revisa qué hace que una conducta sea observable.';
+            } else {
+                emoji = '💪';
+                message = 'Sigue Practicando';
+                description = 'Revisa los niveles anteriores y vuelve a intentar.';
+            }
+            
+            document.getElementById('resultsEmoji').textContent = emoji;
+            document.getElementById('resultsMessage').textContent = message;
+            document.getElementById('resultsDescription').textContent = description;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+        
+        function restartModule() {
+            currentCase = 0;
+            correctAnswers = 0;
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('introScreen').classList.add('active');
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('scoreDisplay').textContent = '0/10';
+        }
+    </script>
+</body>
+</html>
