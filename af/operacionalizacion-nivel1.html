@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operacionalización Nivel 1 - LEO RFT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Crimson+Pro:wght@600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --success: #059669;
+            --success-light: #10b981;
+            --error: #dc2626;
+            --error-light: #ef4444;
+            --neutral-50: #f8fafc;
+            --neutral-100: #f1f5f9;
+            --neutral-200: #e2e8f0;
+            --neutral-700: #334155;
+            --neutral-800: #1e293b;
+            --neutral-900: #0f172a;
+        }
+        
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--neutral-800);
+        }
+        
+        .container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            background: var(--neutral-100);
+            height: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Header */
+        .header {
+            padding: 32px 40px 24px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-bottom: 2px solid var(--neutral-200);
+        }
+        
+        .header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: var(--neutral-700);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .question-counter {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+        
+        /* Content */
+        .content {
+            padding: 40px;
+            min-height: 400px;
+        }
+        
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Intro Screen */
+        /* Theory Screens */
+        .theory-content h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 32px;
+            color: var(--neutral-900);
+            margin-bottom: 24px;
+        }
+        
+        .theory-content h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 32px 0 16px;
+        }
+        
+        .theory-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--neutral-700);
+            margin-bottom: 16px;
+        }
+        
+        .theory-content strong {
+            color: var(--neutral-900);
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid var(--primary-light);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 12px;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .concept-box {
+            background: var(--neutral-50);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+        
+        .concept-box h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .concept-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .concept-box li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--neutral-700);
+            line-height: 1.6;
+        }
+        
+        .concept-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .comparison-card {
+            padding: 20px;
+            border-radius: 12px;
+            border: 3px solid;
+        }
+        
+        .comparison-card.wrong {
+            background: rgba(220, 38, 38, 0.05);
+            border-color: var(--error-light);
+        }
+        
+        .comparison-card.right {
+            background: rgba(5, 150, 105, 0.05);
+            border-color: var(--success-light);
+        }
+        
+        .comparison-card .icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        
+        .comparison-card .label {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .comparison-card.wrong .label {
+            color: var(--error);
+        }
+        
+        .comparison-card.right .label {
+            color: var(--success);
+        }
+        
+        .comparison-card .text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--neutral-700);
+        }
+        
+        /* Dimensions Grid */
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .dimension-card {
+            background: var(--neutral-50);
+            border: 2px solid var(--primary-light);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .dimension-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(102, 126, 234, 0.2);
+        }
+        
+        .dimension-card .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+        
+        .dimension-card .title {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .dimension-card .description {
+            font-size: 14px;
+            color: var(--neutral-700);
+            line-height: 1.5;
+        }
+        
+        .dimension-card .example {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--neutral-200);
+            font-size: 13px;
+            color: var(--neutral-600);
+            font-style: italic;
+        }
+        
+        /* Interactive Demo */
+        .demo-container {
+            background: var(--neutral-50);
+            border: 2px solid var(--primary-light);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        
+        .demo-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .demo-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .demo-result {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .demo-result.show {
+            display: block;
+        }
+        
+        .demo-result .verdict {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .demo-result.correct .verdict {
+            color: var(--success);
+        }
+        
+        .demo-result.incorrect .verdict {
+            color: var(--error);
+        }
+        
+        .demo-result .explanation {
+            color: var(--neutral-700);
+            line-height: 1.6;
+        }
+        
+        /* Navigation buttons for theory */
+        .theory-nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            justify-content: space-between;
+        }
+        
+        /* Exercise Screen */
+        .exercise-instruction {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            border: 2px solid var(--primary-light);
+        }
+        
+        .exercise-instruction p {
+            font-size: 16px;
+            color: var(--neutral-800);
+            font-weight: 500;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .option-card {
+            background: var(--neutral-50);
+            border: 3px solid var(--neutral-200);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-card:hover:not(.selected):not(.disabled) {
+            border-color: var(--primary-light);
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateX(4px);
+        }
+        
+        .option-card.selected.correct {
+            border-color: var(--success);
+            background: rgba(5, 150, 105, 0.08);
+        }
+        
+        .option-card.selected.incorrect {
+            border-color: var(--error);
+            background: rgba(220, 38, 38, 0.08);
+        }
+        
+        .option-card.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .option-label {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .option-card.selected.correct .option-label {
+            background: var(--success);
+        }
+        
+        .option-card.selected.incorrect .option-label {
+            background: var(--error);
+        }
+        
+        .option-text {
+            font-size: 18px;
+            color: var(--neutral-800);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .feedback {
+            margin-top: 24px;
+            padding: 20px 24px;
+            border-radius: 12px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .feedback.correct {
+            background: rgba(5, 150, 105, 0.1);
+            border: 2px solid var(--success);
+        }
+        
+        .feedback.incorrect {
+            background: rgba(220, 38, 38, 0.1);
+            border: 2px solid var(--error);
+        }
+        
+        .feedback-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feedback.correct .feedback-title {
+            color: var(--success);
+        }
+        
+        .feedback.incorrect .feedback-title {
+            color: var(--error);
+        }
+        
+        .feedback-text {
+            color: var(--neutral-700);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        /* Results Screen */
+        .results-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            box-shadow: 0 20px 40px -10px rgba(30, 64, 175, 0.3);
+        }
+        
+        .score-number {
+            font-size: 56px;
+            font-weight: 700;
+            font-family: 'Crimson Pro', serif;
+        }
+        
+        .score-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+        
+        .results-message {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+        }
+        
+        .results-description {
+            font-size: 16px;
+            color: var(--neutral-700);
+            line-height: 1.8;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+        
+        .stat-card {
+            background: var(--neutral-50);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--neutral-200);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Crimson Pro', serif;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--neutral-700);
+            margin-top: 4px;
+        }
+        
+        /* Buttons */
+        .button-container {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(30, 64, 175, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header {
+                padding: 24px 24px 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 24px;
+            }
+            
+            .theory-content h2 {
+                font-size: 26px;
+            }
+            
+            .option-text {
+                font-size: 16px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimensions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="header">
+            <h1>Operacionalización de la Conducta</h1>
+            <p>Nivel 1: Identificar Conductas Operacionalizadas</p>
+            <span class="question-counter" id="questionCounter">Teoría 1 de 6</span>
+        </div>
+        
+        <div class="content">
+            <!-- Theory Screen 1: Introduction -->
+            <div class="screen active" id="theoryScreen1">
+                <div class="theory-content">
+                    <h2>¿Qué es Operacionalizar una Conducta?</h2>
+                    <p>Imagina que eres un investigador observando a través de una cámara. <strong>¿Qué puedes ver y qué debes inferir?</strong></p>
+                    
+                    <div class="highlight-box">
+                        <p>🎯 <strong>Operacionalizar</strong> significa traducir conceptos abstractos (como "ansiedad", "depresión", "agresividad") en <strong>acciones concretas</strong> que podemos observar, contar y medir.</p>
+                    </div>
+                    
+                    <p>En análisis funcional, no trabajamos con estados mentales porque:</p>
+                    <div class="concept-box">
+                        <ul>
+                            <li>No podemos verlos directamente</li>
+                            <li>Dos observadores podrían inferir cosas diferentes</li>
+                            <li>No podemos intervenir directamente sobre ellos</li>
+                            <li>Necesitamos precisión para medir cambios</li>
+                        </ul>
+                    </div>
+                    
+                    <p><strong>El truco:</strong> En lugar de decir "el paciente está ansioso", describimos exactamente <strong>qué hace</strong> el paciente cuando decimos que "está ansioso".</p>
+                    
+                    <div class="theory-nav">
+                        <div></div>
+                        <button class="btn btn-primary" onclick="goToTheoryScreen(2)">Siguiente: ¿Por qué operacionalizar? →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theory Screen 2: Why operationalize -->
+            <div class="screen" id="theoryScreen2">
+                <div class="theory-content">
+                    <h2>¿Por qué NO usar términos mentalistas?</h2>
+                    
+                    <p>Veamos un ejemplo real de terapia:</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-card wrong">
+                            <div class="icon">❌</div>
+                            <div class="label">Descripción Mentalista</div>
+                            <div class="text">"María está deprimida y tiene baja autoestima"</div>
+                        </div>
+                        
+                        <div class="comparison-card right">
+                            <div class="icon">✅</div>
+                            <div class="label">Descripción Operacionalizada</div>
+                            <div class="text">"María permanece en cama 12+ horas al día, dice 'no sirvo para nada' 5-8 veces por sesión, y evita contestar llamadas de amigos"</div>
+                        </div>
+                    </div>
+                    
+                    <h3>¿Cuál es mejor para intervenir?</h3>
+                    
+                    <p>Con la descripción operacionalizada podemos:</p>
+                    <div class="concept-box">
+                        <ul>
+                            <li><strong>Medir el progreso:</strong> Contar horas en cama, frecuencia de verbalizaciones negativas</li>
+                            <li><strong>Identificar patrones:</strong> ¿Cuándo dice "no sirvo para nada"? ¿Qué pasa después?</li>
+                            <li><strong>Diseñar intervenciones específicas:</strong> Establecer horarios de activación, trabajar verbalizaciones alternativas</li>
+                            <li><strong>Evaluar resultados:</strong> Comparar datos antes vs después</li>
+                        </ul>
+                    </div>
+                    
+                    <p>"Depresión" no nos dice <strong>qué hacer</strong>. Las conductas específicas sí.</p>
+                    
+                    <div class="theory-nav">
+                        <button class="btn btn-secondary" onclick="goToTheoryScreen(1)">← Anterior</button>
+                        <button class="btn btn-primary" onclick="goToTheoryScreen(3)">Siguiente: Las 4 Características →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theory Screen 3: 4 Characteristics -->
+            <div class="screen" id="theoryScreen3">
+                <div class="theory-content">
+                    <h2>Las 4 Características de una Buena Definición</h2>
+                    
+                    <p>Toda conducta operacionalizada debe cumplir estas características:</p>
+                    
+                    <div class="concept-box">
+                        <h3>1. Observable 👁️</h3>
+                        <ul>
+                            <li>Puede ser vista, escuchada, o detectada por los sentidos</li>
+                            <li>Dos personas viendo lo mismo deben poder registrarla</li>
+                            <li><strong>Ejemplo:</strong> "Grita" (✅) vs "Está enojado" (❌)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-box">
+                        <h3>2. Medible 📊</h3>
+                        <ul>
+                            <li>Puede contarse, cronometrarse, o cuantificarse</li>
+                            <li>Tiene dimensiones: frecuencia, duración, intensidad, latencia</li>
+                            <li><strong>Ejemplo:</strong> "Llora 15 minutos" (✅) vs "Llora mucho" (❌)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-box">
+                        <h3>3. Específica 🎯</h3>
+                        <ul>
+                            <li>Describe acciones concretas, no categorías amplias</li>
+                            <li>Evita ambigüedad - todos entienden lo mismo</li>
+                            <li><strong>Ejemplo:</strong> "Muerde uñas del pulgar" (✅) vs "Está nervioso" (❌)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-box">
+                        <h3>4. Sin Inferencias 🚫🧠</h3>
+                        <ul>
+                            <li>No requiere adivinar estados internos</li>
+                            <li>No usa términos de procesos mentales como causa</li>
+                            <li><strong>Ejemplo:</strong> "Evita contacto visual" (✅) vs "Es tímido" (❌)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theory-nav">
+                        <button class="btn btn-secondary" onclick="goToTheoryScreen(2)">← Anterior</button>
+                        <button class="btn btn-primary" onclick="goToTheoryScreen(4)">Siguiente: Dimensiones →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theory Screen 4: Dimensions -->
+            <div class="screen" id="theoryScreen4">
+                <div class="theory-content">
+                    <h2>Las 4 Dimensiones de la Conducta</h2>
+                    
+                    <p>Una vez operacionalizada, toda conducta puede medirse en estas dimensiones:</p>
+                    
+                    <div class="dimensions-grid">
+                        <div class="dimension-card">
+                            <div class="icon">🔢</div>
+                            <div class="title">Frecuencia</div>
+                            <div class="description">¿Cuántas veces ocurre en un período?</div>
+                            <div class="example">"Se mordió las uñas 12 veces en la sesión"</div>
+                        </div>
+                        
+                        <div class="dimension-card">
+                            <div class="icon">⏱️</div>
+                            <div class="title">Duración</div>
+                            <div class="description">¿Cuánto tiempo dura cada episodio?</div>
+                            <div class="example">"Lloró durante 8 minutos continuos"</div>
+                        </div>
+                        
+                        <div class="dimension-card">
+                            <div class="icon">⚡</div>
+                            <div class="title">Latencia</div>
+                            <div class="description">¿Cuánto tarda en aparecer después del antecedente?</div>
+                            <div class="example">"Respondió 3 segundos después de la pregunta"</div>
+                        </div>
+                        
+                        <div class="dimension-card">
+                            <div class="icon">💪</div>
+                            <div class="title">Intensidad</div>
+                            <div class="description">¿Qué tan fuerte o intensa es?</div>
+                            <div class="example">"Gritó a 85 decibelios" o "Golpeó la mesa con fuerza alta"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>💡 <strong>Clave:</strong> No todas las dimensiones son relevantes para cada conducta. Elegimos las que nos ayudan a entender el problema y medir el cambio.</p>
+                    </div>
+                    
+                    <p><strong>Ejemplo completo:</strong> "Interrumpe conversaciones" se puede operacionalizar como:<br>
+                    → <em>"Habla antes de que la otra persona termine su frase, <strong>frecuencia:</strong> 8 veces por conversación, <strong>latencia:</strong> 2 segundos antes del final esperado"</em></p>
+                    
+                    <div class="theory-nav">
+                        <button class="btn btn-secondary" onclick="goToTheoryScreen(3)">← Anterior</button>
+                        <button class="btn btn-primary" onclick="goToTheoryScreen(5)">Siguiente: Experimento →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theory Screen 5: Interactive Demo -->
+            <div class="screen" id="theoryScreen5">
+                <div class="theory-content">
+                    <h2>🧪 Experimento: ¿Operacionalizada o No?</h2>
+                    
+                    <p>Antes de comenzar los ejercicios formales, probemos tu comprensión con 3 casos. Haz clic en tu respuesta:</p>
+                    
+                    <div class="demo-container">
+                        <div class="demo-title">Caso 1: "Pedro está ansioso"</div>
+                        <div class="demo-buttons">
+                            <button class="demo-btn" onclick="checkDemo(1, false)">✅ Está operacionalizada</button>
+                            <button class="demo-btn" onclick="checkDemo(1, true)">❌ NO está operacionalizada</button>
+                        </div>
+                        <div class="demo-result" id="demoResult1"></div>
+                    </div>
+                    
+                    <div class="demo-container">
+                        <div class="demo-title">Caso 2: "Ana habla en voz baja durante toda la sesión"</div>
+                        <div class="demo-buttons">
+                            <button class="demo-btn" onclick="checkDemo(2, true)">✅ Está operacionalizada</button>
+                            <button class="demo-btn" onclick="checkDemo(2, false)">❌ NO está operacionalizada</button>
+                        </div>
+                        <div class="demo-result" id="demoResult2"></div>
+                    </div>
+                    
+                    <div class="demo-container">
+                        <div class="demo-title">Caso 3: "Luis tiene actitud defensiva"</div>
+                        <div class="demo-buttons">
+                            <button class="demo-btn" onclick="checkDemo(3, false)">✅ Está operacionalizada</button>
+                            <button class="demo-btn" onclick="checkDemo(3, true)">❌ NO está operacionalizada</button>
+                        </div>
+                        <div class="demo-result" id="demoResult3"></div>
+                    </div>
+                    
+                    <div class="theory-nav">
+                        <button class="btn btn-secondary" onclick="goToTheoryScreen(4)">← Anterior</button>
+                        <button class="btn btn-primary" id="demoNextBtn" onclick="goToTheoryScreen(6)" style="display: none;">Siguiente: Resumen →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theory Screen 6: Summary -->
+            <div class="screen" id="theoryScreen6">
+                <div class="theory-content">
+                    <h2>📝 Resumen: Checklist para Operacionalizar</h2>
+                    
+                    <p>Antes de comenzar los ejercicios, recuerda esta guía rápida:</p>
+                    
+                    <div class="concept-box">
+                        <h3>✅ Una buena definición conductual es:</h3>
+                        <ul>
+                            <li><strong>Observable:</strong> La puedo ver/escuchar directamente</li>
+                            <li><strong>Medible:</strong> La puedo contar o cronometrar</li>
+                            <li><strong>Específica:</strong> Describe acciones concretas</li>
+                            <li><strong>Sin inferencias:</strong> No adivino estados mentales</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-card wrong">
+                            <div class="icon">❌</div>
+                            <div class="label">NO Operacionalizado</div>
+                            <div class="text">
+                                • Está triste<br>
+                                • Es agresivo<br>
+                                • Tiene ansiedad<br>
+                                • No coopera<br>
+                                • Está distraído
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-card right">
+                            <div class="icon">✅</div>
+                            <div class="label">SÍ Operacionalizado</div>
+                            <div class="text">
+                                • Llora 10 minutos<br>
+                                • Grita y golpea mesa<br>
+                                • Respira 25x por minuto<br>
+                                • Cruza brazos y gira cabeza<br>
+                                • Mira celular cada 2 min
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>🎯 <strong>Tu objetivo en los ejercicios:</strong> Identificar cuál de 3 opciones describe una conducta de forma operacionalizada. Tendrás 20 casos para practicar.</p>
+                    </div>
+                    
+                    <p style="text-align: center; font-size: 20px; margin-top: 32px;"><strong>¿Listo para los ejercicios?</strong></p>
+                    
+                    <div class="button-container">
+                        <button class="btn btn-secondary" onclick="goToTheoryScreen(5)">← Repasar</button>
+                        <button class="btn btn-primary" onclick="startExercises()" style="font-size: 18px; padding: 18px 40px;">🚀 Comenzar los 20 Ejercicios</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercise Screen -->
+            <div class="screen" id="exerciseScreen">
+                <div class="exercise-instruction">
+                    <p>📋 <strong>Instrucción:</strong> Selecciona la opción que describe la conducta de forma operacionalizada (observable, medible, específica, sin inferencias).</p>
+                </div>
+                
+                <div class="options-container" id="optionsContainer">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="feedback" id="feedback">
+                    <div class="feedback-title" id="feedbackTitle"></div>
+                    <div class="feedback-text" id="feedbackText"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display: none;">Siguiente Ejercicio →</button>
+                </div>
+            </div>
+            
+            <!-- Results Screen -->
+            <div class="screen" id="resultsScreen">
+                <div class="results-content">
+                    <div class="score-circle">
+                        <div class="score-number" id="scoreNumber">0</div>
+                        <div class="score-label">de 20</div>
+                    </div>
+                    
+                    <div class="results-message" id="resultsMessage"></div>
+                    <div class="results-description" id="resultsDescription"></div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="correctCount">0</div>
+                            <div class="stat-label">Correctas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="incorrectCount">0</div>
+                            <div class="stat-label">Incorrectas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="accuracyPercent">0%</div>
+                            <div class="stat-label">Precisión</div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-container">
+                        <button class="btn btn-primary" onclick="restartModule()">Reintentar Módulo</button>
+                        <button class="btn btn-secondary" onclick="alert('Próximamente: Nivel 2')">Continuar al Nivel 2 →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Database of 20 exercises
+        const exercises = [
+            {
+                question: "¿Cuál de estas opciones describe correctamente la conducta de Juan?",
+                options: [
+                    { text: "Juan está nervioso", correct: false },
+                    { text: "Juan se muerde las uñas", correct: true },
+                    { text: "Juan tiene ansiedad", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Perfecto! 'Se muerde las uñas' es observable, medible y específica. Podemos ver directamente esta conducta y contarla.",
+                    incorrect: "Esta opción usa términos mentalistas que requieren inferencia. No podemos observar directamente 'nerviosismo' o 'ansiedad', pero sí podemos ver acciones específicas como morderse las uñas."
+                }
+            },
+            {
+                question: "Identifica la definición operacionalizada de la conducta de Carmen:",
+                options: [
+                    { text: "Carmen está deprimida", correct: false },
+                    { text: "Carmen llora durante 10 minutos", correct: true },
+                    { text: "Carmen se siente triste", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Excelente! Esta definición es observable (podemos ver el llanto), medible (10 minutos) y específica.",
+                    incorrect: "'Deprimida' y 'triste' son estados emocionales que no podemos observar directamente. En cambio, 'llorar' es una conducta observable que podemos ver y medir."
+                }
+            },
+            {
+                question: "¿Qué opción describe mejor el comportamiento de Luis?",
+                options: [
+                    { text: "Luis tiene baja autoestima", correct: false },
+                    { text: "Luis dice 'no puedo hacerlo' 5 veces", correct: true },
+                    { text: "Luis se siente inseguro", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Correcto! Esta opción especifica exactamente qué dice Luis (observable) y cuántas veces (medible).",
+                    incorrect: "'Baja autoestima' e 'inseguridad' son construcciones psicológicas inferidas. Necesitamos describir las conductas específicas que observamos."
+                }
+            },
+            {
+                question: "Selecciona la definición conductual adecuada para María:",
+                options: [
+                    { text: "María evita el contacto visual", correct: true },
+                    { text: "María es tímida", correct: false },
+                    { text: "María tiene miedo social", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Muy bien! 'Evitar contacto visual' es una conducta específica y observable que podemos registrar.",
+                    incorrect: "'Tímida' y 'miedo social' son etiquetas generales. En análisis funcional necesitamos describir las conductas específicas observables."
+                }
+            },
+            {
+                question: "¿Cuál es la mejor operacionalización para la conducta de Pedro?",
+                options: [
+                    { text: "Pedro está enojado", correct: false },
+                    { text: "Pedro levanta la voz y cierra la puerta con fuerza", correct: true },
+                    { text: "Pedro tiene problemas de ira", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Perfecto! Esta opción describe acciones concretas y observables: levantar la voz y cerrar la puerta. Ambas pueden ser vistas/escuchadas y medidas.",
+                    incorrect: "'Enojado' y 'problemas de ira' son interpretaciones de estados internos. Necesitamos las conductas específicas que podemos observar."
+                }
+            },
+            {
+                question: "Identifica la conducta operacionalizada de Ana:",
+                options: [
+                    { text: "Ana está distraída", correct: false },
+                    { text: "Ana mira su celular cada 2 minutos", correct: true },
+                    { text: "Ana no presta atención", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Excelente! 'Mirar el celular cada 2 minutos' es observable, medible (frecuencia) y específica.",
+                    incorrect: "'Distraída' y 'no prestar atención' son términos vagos. Describen estados mentales en lugar de conductas observables."
+                }
+            },
+            {
+                question: "¿Qué opción describe correctamente el comportamiento de Roberto?",
+                options: [
+                    { text: "Roberto es agresivo", correct: false },
+                    { text: "Roberto está molesto", correct: false },
+                    { text: "Roberto golpea la mesa con el puño", correct: true }
+                ],
+                feedback: {
+                    correct: "¡Correcto! Esta es una descripción precisa de una acción observable: golpear la mesa con el puño.",
+                    incorrect: "'Agresivo' y 'molesto' son etiquetas que requieren interpretación. Necesitamos describir la acción específica que Roberto realiza."
+                }
+            },
+            {
+                question: "Selecciona la mejor definición operacional para la conducta de Laura:",
+                options: [
+                    { text: "Laura permanece en cama más de 12 horas", correct: true },
+                    { text: "Laura está cansada", correct: false },
+                    { text: "Laura tiene fatiga", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Muy bien! Esta opción es observable (podemos ver a Laura en cama), medible (12 horas) y específica.",
+                    incorrect: "'Cansada' y 'fatiga' son estados que inferimos. La conducta observable es permanecer en cama, y podemos medirla en horas."
+                }
+            },
+            {
+                question: "¿Cuál es la operacionalización correcta del comportamiento de Diego?",
+                options: [
+                    { text: "Diego está concentrado", correct: false },
+                    { text: "Diego mantiene la mirada en el libro durante 30 minutos", correct: true },
+                    { text: "Diego está enfocado", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Perfecto! Describe una acción observable (mirar el libro) con una duración específica medible (30 minutos).",
+                    incorrect: "'Concentrado' y 'enfocado' son estados mentales inferidos. Debemos describir qué hace Diego exactamente que nos permite inferir concentración."
+                }
+            },
+            {
+                question: "Identifica la definición conductual adecuada para Elena:",
+                options: [
+                    { text: "Elena es impulsiva", correct: false },
+                    { text: "Elena interrumpe a otros 8 veces en la conversación", correct: true },
+                    { text: "Elena no tiene autocontrol", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Excelente! Esta opción especifica la conducta (interrumpir) y la frecuencia (8 veces), ambos observables y medibles.",
+                    incorrect: "'Impulsiva' y 'falta de autocontrol' son interpretaciones generales. Necesitamos las conductas específicas que podemos contar."
+                }
+            },
+            {
+                question: "¿Qué opción describe mejor lo que hace Sofía?",
+                options: [
+                    { text: "Sofía está feliz", correct: false },
+                    { text: "Sofía sonríe y dice 'me siento muy bien'", correct: true },
+                    { text: "Sofía tiene buen ánimo", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Correcto! Esta opción combina conductas observables: una acción motora (sonreír) y una verbal (decir algo específico).",
+                    incorrect: "'Feliz' y 'buen ánimo' son estados emocionales que inferimos. Debemos describir las conductas específicas que observamos."
+                }
+            },
+            {
+                question: "Selecciona la operacionalización correcta para la conducta de Javier:",
+                options: [
+                    { text: "Javier evita salir de casa durante 3 días", correct: true },
+                    { text: "Javier tiene agorafobia", correct: false },
+                    { text: "Javier siente miedo a salir", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Muy bien! Esta es una conducta observable (no salir) con una duración medible (3 días).",
+                    incorrect: "'Agorafobia' es un diagnóstico y 'miedo' es un estado emocional. Ambos requieren inferencia. La conducta observable es 'no salir de casa'."
+                }
+            },
+            {
+                question: "¿Cuál es la mejor definición conductual para Andrea?",
+                options: [
+                    { text: "Andrea está ansiosa", correct: false },
+                    { text: "Andrea respira rápidamente (20 respiraciones por minuto)", correct: true },
+                    { text: "Andrea está alterada", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Perfecto! Esta definición incluye la conducta observable (respirar rápido) y su medición precisa (20 resp/min).",
+                    incorrect: "'Ansiosa' y 'alterada' son estados que inferimos a partir de conductas observables como la respiración acelerada."
+                }
+            },
+            {
+                question: "Identifica la operacionalización adecuada para Miguel:",
+                options: [
+                    { text: "Miguel no coopera", correct: false },
+                    { text: "Miguel cruza los brazos y gira la cabeza cuando le hablan", correct: true },
+                    { text: "Miguel tiene actitud negativa", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Excelente! Esta opción describe acciones motoras específicas y observables que podemos ver directamente.",
+                    incorrect: "'No coopera' y 'actitud negativa' son interpretaciones. Necesitamos describir exactamente qué hace Miguel con su cuerpo."
+                }
+            },
+            {
+                question: "¿Qué opción describe correctamente el comportamiento de Carla?",
+                options: [
+                    { text: "Carla está confundida", correct: false },
+                    { text: "Carla pregunta '¿qué significa esto?' 4 veces", correct: true },
+                    { text: "Carla no entiende", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Correcto! Esta opción especifica la conducta verbal exacta (preguntar algo específico) y su frecuencia (4 veces).",
+                    incorrect: "'Confundida' y 'no entiende' son estados cognitivos inferidos. La conducta observable es hacer preguntas específicas."
+                }
+            },
+            {
+                question: "Selecciona la definición operacionalizada para Ricardo:",
+                options: [
+                    { text: "Ricardo tartamudea al hablar con desconocidos", correct: true },
+                    { text: "Ricardo es inseguro", correct: false },
+                    { text: "Ricardo tiene ansiedad social", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Muy bien! 'Tartamudear' es observable y audible. Además, especifica el contexto (con desconocidos).",
+                    incorrect: "'Inseguro' y 'ansiedad social' son interpretaciones psicológicas. Tartamudear es la conducta específica que podemos escuchar."
+                }
+            },
+            {
+                question: "¿Cuál es la mejor operacionalización para Daniela?",
+                options: [
+                    { text: "Daniela está motivada", correct: false },
+                    { text: "Daniela completa 5 ejercicios en 30 minutos", correct: true },
+                    { text: "Daniela tiene interés", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Perfecto! Esta opción cuantifica la conducta (5 ejercicios) y especifica el tiempo (30 minutos), ambos medibles.",
+                    incorrect: "'Motivada' e 'interés' son estados internos. La conducta observable y medible es completar ejercicios en un tiempo determinado."
+                }
+            },
+            {
+                question: "Identifica la conducta operacionalizada de Fernando:",
+                options: [
+                    { text: "Fernando está relajado", correct: false },
+                    { text: "Fernando está tranquilo", correct: false },
+                    { text: "Fernando respira profundamente cada 5 segundos", correct: true }
+                ],
+                feedback: {
+                    correct: "¡Excelente! Describe una acción observable (respirar profundamente) con una frecuencia medible (cada 5 segundos).",
+                    incorrect: "'Relajado' y 'tranquilo' son estados emocionales que inferimos. Debemos describir las conductas específicas como el patrón respiratorio."
+                }
+            },
+            {
+                question: "¿Qué opción describe correctamente lo que hace Patricia?",
+                options: [
+                    { text: "Patricia es perfeccionista", correct: false },
+                    { text: "Patricia revisa su trabajo 10 veces antes de entregarlo", correct: true },
+                    { text: "Patricia es obsesiva", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Correcto! Esta opción especifica la acción (revisar) y cuantifica su frecuencia (10 veces), ambas medibles.",
+                    incorrect: "'Perfeccionista' y 'obsesiva' son rasgos de personalidad inferidos. La conducta observable es revisar el trabajo múltiples veces."
+                }
+            },
+            {
+                question: "Selecciona la mejor definición conductual para Gabriel:",
+                options: [
+                    { text: "Gabriel levanta la mano para hablar en clase", correct: true },
+                    { text: "Gabriel es participativo", correct: false },
+                    { text: "Gabriel está interesado", correct: false }
+                ],
+                feedback: {
+                    correct: "¡Muy bien! Esta es una acción motora específica y observable que podemos ver directamente y contar.",
+                    incorrect: "'Participativo' e 'interesado' son etiquetas generales. La conducta específica observable es levantar la mano."
+                }
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let demosCompleted = 0;
+        
+        // Theory navigation
+        function goToTheoryScreen(screenNumber) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Show target screen
+            document.getElementById('theoryScreen' + screenNumber).classList.add('active');
+            
+            // Update header
+            document.getElementById('questionCounter').textContent = `Teoría ${screenNumber} de 6`;
+            
+            // Update progress
+            const progress = (screenNumber / 6) * 50; // Theory is 50% of total
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        // Interactive demo
+        function checkDemo(demoNumber, isCorrect) {
+            const resultDiv = document.getElementById('demoResult' + demoNumber);
+            const buttons = resultDiv.previousElementSibling.querySelectorAll('.demo-btn');
+            
+            // Disable buttons
+            buttons.forEach(btn => btn.disabled = true);
+            
+            // Show result
+            resultDiv.classList.add('show');
+            
+            if (demoNumber === 1) {
+                if (isCorrect) {
+                    resultDiv.classList.add('correct');
+                    resultDiv.innerHTML = `
+                        <div class="verdict">✓ ¡Correcto!</div>
+                        <div class="explanation">"Ansioso" es un término mentalista. No podemos ver directamente la ansiedad. Necesitaríamos describir <strong>qué hace</strong> Pedro cuando decimos que está ansioso: ¿tiembla? ¿suda? ¿respira rápido? ¿mueve las piernas?</div>
+                    `;
+                } else {
+                    resultDiv.classList.add('incorrect');
+                    resultDiv.innerHTML = `
+                        <div class="verdict">✗ No exactamente</div>
+                        <div class="explanation">"Ansioso" es un estado interno que <strong>inferimos</strong>, no lo vemos directamente. Para operacionalizar, necesitamos describir las conductas observables que nos llevan a inferir ansiedad.</div>
+                    `;
+                }
+            } else if (demoNumber === 2) {
+                if (isCorrect) {
+                    resultDiv.classList.add('correct');
+                    resultDiv.innerHTML = `
+                        <div class="verdict">✓ ¡Correcto!</div>
+                        <div class="explanation">Esta definición es observable (podemos escuchar el volumen), medible (volumen bajo), específica (hablar) y tiene duración (toda la sesión). ¡Perfectamente operacionalizada!</div>
+                    `;
+                } else {
+                    resultDiv.classList.add('incorrect');
+                    resultDiv.innerHTML = `
+                        <div class="verdict">✗ Revisa de nuevo</div>
+                        <div class="explanation">Esta SÍ está operacionalizada. "Hablar en voz baja" es observable (podemos escucharlo), medible y específico. Describe una conducta concreta, no un estado mental.</div>
+                    `;
+                }
+            } else if (demoNumber === 3) {
+                if (isCorrect) {
+                    resultDiv.classList.add('correct');
+                    resultDiv.innerHTML = `
+                        <div class="verdict">✓ ¡Exacto!</div>
+                        <div class="explanation">"Actitud defensiva" es una interpretación psicológica. Para operacionalizar necesitamos describir <strong>qué hace exactamente Luis</strong>: ¿cruza los brazos? ¿evita contacto visual? ¿interrumpe? ¿niega afirmaciones?</div>
+                    `;
+                } else {
+                    resultDiv.classList.add('incorrect');
+                    resultDiv.innerHTML = `
+                        <div class="verdict">✗ Piénsalo de nuevo</div>
+                        <div class="explanation">"Actitud" es una construcción psicológica que requiere interpretación. No podemos ver una "actitud", pero sí podemos ver conductas específicas como cruzar brazos, elevar el tono de voz, etc.</div>
+                    `;
+                }
+            }
+            
+            demosCompleted++;
+            
+            // Show next button when all 3 demos are done
+            if (demosCompleted === 3) {
+                document.getElementById('demoNextBtn').style.display = 'inline-block';
+            }
+        }
+        
+        function updateProgress() {
+            // Progress is 50% theory + 50% exercises
+            const exerciseProgress = ((currentQuestion + 1) / exercises.length) * 50;
+            const totalProgress = 50 + exerciseProgress; // Start at 50% after theory
+            document.getElementById('progressBar').style.width = totalProgress + '%';
+            document.getElementById('questionCounter').textContent = `Pregunta ${currentQuestion + 1} de ${exercises.length}`;
+        }
+        
+        function startExercises() {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById('exerciseScreen').classList.add('active');
+            loadQuestion();
+        }
+        
+        function loadQuestion() {
+            updateProgress();
+            
+            const exercise = exercises[currentQuestion];
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            const labels = ['A', 'B', 'C'];
+            
+            exercise.options.forEach((option, index) => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                optionCard.onclick = () => selectOption(index);
+                
+                optionCard.innerHTML = `
+                    <div class="option-label">${labels[index]}</div>
+                    <div class="option-text">${option.text}</div>
+                `;
+                
+                container.appendChild(optionCard);
+            });
+            
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+        
+        function selectOption(selectedIndex) {
+            const exercise = exercises[currentQuestion];
+            const cards = document.querySelectorAll('.option-card');
+            
+            // Disable all cards
+            cards.forEach(card => card.classList.add('disabled'));
+            
+            // Mark selected card
+            const selectedCard = cards[selectedIndex];
+            const isCorrect = exercise.options[selectedIndex].correct;
+            
+            selectedCard.classList.add('selected', isCorrect ? 'correct' : 'incorrect');
+            
+            // Update stats
+            if (isCorrect) {
+                correctAnswers++;
+            } else {
+                incorrectAnswers++;
+            }
+            
+            // Show feedback
+            const feedback = document.getElementById('feedback');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            
+            if (isCorrect) {
+                feedback.classList.add('show', 'correct');
+                feedbackTitle.innerHTML = '✓ ¡Correcto!';
+                feedbackText.textContent = exercise.feedback.correct;
+            } else {
+                feedback.classList.add('show', 'incorrect');
+                feedbackTitle.innerHTML = '✗ Incorrecto';
+                feedbackText.textContent = exercise.feedback.incorrect;
+            }
+            
+            // Show next button
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion < exercises.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            document.getElementById('exerciseScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            const accuracy = Math.round((correctAnswers / exercises.length) * 100);
+            
+            document.getElementById('scoreNumber').textContent = correctAnswers;
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('incorrectCount').textContent = incorrectAnswers;
+            document.getElementById('accuracyPercent').textContent = accuracy + '%';
+            
+            // Progress bar to 100%
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('questionCounter').textContent = 'Completado';
+            
+            // Personalized message
+            let message, description;
+            
+            if (accuracy >= 85) {
+                message = '🎉 ¡Excelente trabajo!';
+                description = 'Has dominado el Nivel 1 de Operacionalización. Tienes una comprensión sólida de cómo definir conductas de forma observable y medible. Estás listo para avanzar al Nivel 2.';
+            } else if (accuracy >= 70) {
+                message = '👏 ¡Muy bien!';
+                description = 'Tienes una buena comprensión de la operacionalización. Considera revisar los conceptos donde tuviste dificultades antes de avanzar al siguiente nivel.';
+            } else if (accuracy >= 50) {
+                message = '📚 Sigue practicando';
+                description = 'Has comprendido algunos conceptos básicos, pero te beneficiarías de repasar el material teórico y practicar más ejercicios antes de continuar.';
+            } else {
+                message = '💪 No te desanimes';
+                description = 'La operacionalización requiere práctica. Te recomendamos revisar la introducción teórica y reintentar el módulo. Con práctica, mejorarás significativamente.';
+            }
+            
+            document.getElementById('resultsMessage').textContent = message;
+            document.getElementById('resultsDescription').textContent = description;
+        }
+        
+        function restartModule() {
+            currentQuestion = 0;
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            demosCompleted = 0;
+            
+            // Reset demo results
+            for (let i = 1; i <= 3; i++) {
+                const resultDiv = document.getElementById('demoResult' + i);
+                resultDiv.classList.remove('show', 'correct', 'incorrect');
+                resultDiv.innerHTML = '';
+                
+                // Re-enable demo buttons
+                const demoContainer = resultDiv.parentElement;
+                const buttons = demoContainer.querySelectorAll('.demo-btn');
+                buttons.forEach(btn => btn.disabled = false);
+            }
+            
+            document.getElementById('demoNextBtn').style.display = 'none';
+            
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('theoryScreen1').classList.add('active');
+            
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('questionCounter').textContent = 'Teoría 1 de 6';
+        }
+    </script>
+</body>
+</html>
