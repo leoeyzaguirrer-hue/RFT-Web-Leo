@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operacionalización Nivel 2 - LEO RFT 🎯</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --bg-dark: #1e1b4b;
+            --bg-medium: #312e81;
+            --text-light: #e0e7ff;
+            --text-dark: #1e293b;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background particles */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+            animation: float 20s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-100px) translateX(50px) rotate(90deg); }
+            50% { transform: translateY(-50px) translateX(-50px) rotate(180deg); }
+            75% { transform: translateY(-150px) translateX(100px) rotate(270deg); }
+        }
+        
+        .container {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.4);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Header con gradiente animado */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 32px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            color: var(--text-light);
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .progress-bar-bg {
+            flex: 1;
+            height: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+        }
+        
+        .score-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Content */
+        .content {
+            padding: 40px;
+            min-height: 500px;
+        }
+        
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Intro Screen */
+        .intro-hero {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .intro-hero .emoji {
+            font-size: 80px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .intro-hero h2 {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+        }
+        
+        .intro-hero p {
+            font-size: 18px;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            padding: 24px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .example-box::before {
+            content: '💡';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            background: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .example-arrow {
+            font-size: 32px;
+            text-align: center;
+            margin: 16px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        .example-before, .example-after {
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 8px 0;
+        }
+        
+        .example-before {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error);
+            color: var(--error);
+        }
+        
+        .example-after {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success);
+            color: var(--success);
+        }
+        
+        /* Exercise Screen */
+        .exercise-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05));
+            border: 3px solid var(--primary);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        .exercise-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+        
+        .exercise-prompt {
+            display: flex;
+            align-items: start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .emoji-large {
+            font-size: 48px;
+            animation: wobble 3s infinite;
+        }
+        
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        
+        .prompt-text {
+            flex: 1;
+        }
+        
+        .prompt-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .prompt-content {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+        
+        .input-section {
+            margin-top: 24px;
+        }
+        
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 18px;
+            font-family: 'Poppins', sans-serif;
+            border: 3px solid #e2e8f0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .char-counter {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        
+        .hint-button {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hint-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(245, 158, 11, 0.3);
+        }
+        
+        .hint-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));
+            border: 2px solid var(--warning);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .hint-box.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hint-box p {
+            margin: 0;
+            color: var(--text-dark);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Feedback */
+        .feedback {
+            margin-top: 24px;
+            padding: 24px;
+            border-radius: 20px;
+            display: none;
+            animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .feedback.correct {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15));
+            border: 3px solid var(--success);
+        }
+        
+        .feedback.incorrect {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.15));
+            border: 3px solid var(--error);
+        }
+        
+        .feedback.partial {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15));
+            border: 3px solid var(--warning);
+        }
+        
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .feedback-icon {
+            font-size: 40px;
+            animation: spin 0.6s ease;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg) scale(0); }
+            to { transform: rotate(360deg) scale(1); }
+        }
+        
+        .feedback-title {
+            font-size: 24px;
+            font-weight: 800;
+        }
+        
+        .feedback.correct .feedback-title {
+            color: var(--success);
+        }
+        
+        .feedback.incorrect .feedback-title {
+            color: var(--error);
+        }
+        
+        .feedback.partial .feedback-title {
+            color: var(--warning);
+        }
+        
+        .feedback-text {
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .correct-answer {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-top: 16px;
+            border-left: 4px solid var(--success);
+        }
+        
+        .correct-answer-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .correct-answer-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        /* Buttons */
+        .button-container {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 3px solid var(--primary);
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Results */
+        .results-hero {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .results-emoji {
+            font-size: 120px;
+            margin-bottom: 24px;
+            animation: zoomBounce 0.8s ease;
+        }
+        
+        @keyframes zoomBounce {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .results-score {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        
+        .results-message {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        
+        .results-description {
+            font-size: 18px;
+            color: #64748b;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            padding: 24px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.2);
+        }
+        
+        .stat-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            position: fixed;
+            animation: confetti-fall 3s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header {
+                padding: 24px 24px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 24px;
+            }
+            
+            .intro-hero h2 {
+                font-size: 28px;
+            }
+            
+            .prompt-content {
+                font-size: 20px;
+            }
+            
+            .emoji-large {
+                font-size: 36px;
+            }
+            
+            .results-emoji {
+                font-size: 80px;
+            }
+            
+            .results-score {
+                font-size: 56px;
+            }
+            
+            .results-message {
+                font-size: 24px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated particles -->
+    <div class="particle" style="width: 100px; height: 100px; background: rgba(139, 92, 246, 0.3); top: 10%; left: 10%;"></div>
+    <div class="particle" style="width: 60px; height: 60px; background: rgba(236, 72, 153, 0.3); top: 70%; left: 80%; animation-delay: -5s;"></div>
+    <div class="particle" style="width: 80px; height: 80px; background: rgba(251, 191, 36, 0.3); top: 40%; left: 90%; animation-delay: -10s;"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>🎯 Operacionalización Nivel 2</h1>
+                <p>Corregir Definiciones Mentalistas</p>
+                
+                <div class="progress-container">
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="score-badge" id="scoreBadge">
+                        <span>🏆</span>
+                        <span id="scoreDisplay">0 pts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Intro Screen -->
+            <div class="screen active" id="introScreen">
+                <div class="intro-hero">
+                    <div class="emoji">✍️</div>
+                    <h2>¡Hora de Escribir!</h2>
+                    <p>En este nivel vas a <strong>reformular</strong> definiciones mentalistas en conductas observables.</p>
+                    <p>No se trata de elegir, sino de <strong>crear</strong> tu propia definición operacionalizada.</p>
+                    
+                    <div class="example-box">
+                        <h3 style="margin-bottom: 20px; margin-top: 20px; color: var(--text-dark);">Ejemplo:</h3>
+                        
+                        <div class="example-before">
+                            ❌ "Juan tiene baja autoestima"
+                        </div>
+                        
+                        <div class="example-arrow">⬇️</div>
+                        
+                        <div class="example-after">
+                            ✅ "Juan dice 'no sirvo para nada' cuando comete errores"
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 16px; color: #64748b; margin-top: 24px;">
+                        💡 Recuerda: debe ser <strong>observable, medible, específica y sin inferencias</strong>
+                    </p>
+                    
+                    <div class="button-container" style="justify-content: center;">
+                        <button class="btn btn-primary" onclick="startExercises()">
+                            Comenzar Ejercicios 🚀
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercise Screen -->
+            <div class="screen" id="exerciseScreen">
+                <div class="exercise-card">
+                    <div class="exercise-number" id="exerciseNumber">Ejercicio 1/12</div>
+                    
+                    <div class="exercise-prompt">
+                        <div class="emoji-large" id="exerciseEmoji">😰</div>
+                        <div class="prompt-text">
+                            <div class="prompt-label">❌ Definición Mentalista:</div>
+                            <div class="prompt-content" id="promptText"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-section">
+                        <div class="input-label">
+                            <span>✅</span>
+                            <span>Tu Definición Operacionalizada:</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea 
+                                class="text-input" 
+                                id="userInput" 
+                                placeholder="Escribe aquí una descripción observable, medible y específica..."
+                                rows="3"
+                                maxlength="200"
+                            ></textarea>
+                            <div class="char-counter" id="charCounter">0/200</div>
+                        </div>
+                        
+                        <button class="hint-button" onclick="showHint()">
+                            💡 Dame una pista
+                        </button>
+                        
+                        <div class="hint-box" id="hintBox">
+                            <p id="hintText"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback" id="feedback">
+                        <div class="feedback-header">
+                            <div class="feedback-icon" id="feedbackIcon"></div>
+                            <div class="feedback-title" id="feedbackTitle"></div>
+                        </div>
+                        <div class="feedback-text" id="feedbackText"></div>
+                        <div class="correct-answer" id="correctAnswerBox" style="display: none;">
+                            <div class="correct-answer-label">💚 Ejemplo de Respuesta Correcta:</div>
+                            <div class="correct-answer-text" id="correctAnswerText"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-container">
+                        <button class="btn btn-primary" id="checkBtn" onclick="checkAnswer()">
+                            Evaluar mi Respuesta ✓
+                        </button>
+                        <button class="btn btn-secondary" id="nextBtn" onclick="nextExercise()" style="display: none;">
+                            Siguiente Ejercicio →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Screen -->
+            <div class="screen" id="resultsScreen">
+                <div class="results-hero">
+                    <div class="results-emoji" id="resultsEmoji">🎉</div>
+                    <div class="results-score" id="resultsScore">0</div>
+                    <div class="results-message" id="resultsMessage"></div>
+                    <div class="results-description" id="resultsDescription"></div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-value" id="correctCount">0</div>
+                            <div class="stat-label">Correctas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⚠️</div>
+                            <div class="stat-value" id="partialCount">0</div>
+                            <div class="stat-label">Parciales</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">❌</div>
+                            <div class="stat-value" id="incorrectCount">0</div>
+                            <div class="stat-label">Incorrectas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-value" id="totalPoints">0</div>
+                            <div class="stat-label">Puntos Totales</div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-container" style="justify-content: center;">
+                        <button class="btn btn-secondary" onclick="restartModule()">
+                            🔄 Reintentar
+                        </button>
+                        <button class="btn btn-primary" onclick="alert('🎯 Próximamente: Nivel 3')">
+                            Continuar al Nivel 3 →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const exercises = [
+            {
+                mentalista: "María está ansiosa",
+                emoji: "😰",
+                keywords: ["respira", "tiembla", "suda", "mueve", "habla rápido", "tartamudea", "evita", "mira", "toca"],
+                ejemplos: [
+                    "María respira rápidamente (20 respiraciones por minuto)",
+                    "María tiembla las manos mientras habla",
+                    "María se toca el cuello repetidamente"
+                ],
+                hint: "Piensa: ¿Qué hace María con su cuerpo cuando decimos que 'está ansiosa'? ¿Respira diferente? ¿Tiembla? ¿Suda? ¿Se mueve mucho?"
+            },
+            {
+                mentalista: "Pedro tiene baja autoestima",
+                emoji: "😔",
+                keywords: ["dice", "no puedo", "no sirvo", "soy malo", "evita", "baja la cabeza", "voz baja", "no habla"],
+                ejemplos: [
+                    "Pedro dice 'no sirvo para nada' cuando comete errores",
+                    "Pedro evita contacto visual y habla en voz muy baja",
+                    "Pedro dice 'no soy capaz' antes de intentar tareas"
+                ],
+                hint: "¿Qué dice Pedro sobre sí mismo? ¿Cómo actúa su cuerpo? ¿Evita ciertas cosas? ¿Cómo es su postura o su voz?"
+            },
+            {
+                mentalista: "Laura está deprimida",
+                emoji: "😢",
+                keywords: ["llora", "permanece en cama", "no sale", "duerme", "no responde", "rechaza", "aislada"],
+                ejemplos: [
+                    "Laura permanece en cama más de 12 horas al día",
+                    "Laura llora 3-4 veces por día durante 10+ minutos",
+                    "Laura rechaza invitaciones sociales y no sale de casa"
+                ],
+                hint: "¿Cuánto tiempo pasa Laura en cama? ¿Sale de casa? ¿Llora? ¿Responde mensajes? ¿Qué hace (o deja de hacer)?"
+            },
+            {
+                mentalista: "Carlos es agresivo",
+                emoji: "😡",
+                keywords: ["grita", "golpea", "empuja", "insulta", "levanta la voz", "cierra", "tira"],
+                ejemplos: [
+                    "Carlos grita y golpea la mesa con el puño",
+                    "Carlos levanta la voz por encima de 80 decibelios",
+                    "Carlos empuja objetos y cierra puertas con fuerza"
+                ],
+                hint: "¿Qué hace Carlos exactamente? ¿Grita? ¿Golpea cosas? ¿Levanta la voz? ¿Empuja? Describe la acción física."
+            },
+            {
+                mentalista: "Ana tiene miedo social",
+                emoji: "😨",
+                keywords: ["evita", "no habla", "permanece callada", "sale", "rechaza", "cancela", "no asiste"],
+                ejemplos: [
+                    "Ana evita asistir a reuniones sociales con más de 3 personas",
+                    "Ana permanece en silencio durante toda la conversación grupal",
+                    "Ana cancela planes sociales 1-2 horas antes"
+                ],
+                hint: "¿Qué hace (o NO hace) Ana en situaciones sociales? ¿Evita lugares? ¿Habla? ¿Cancela planes?"
+            },
+            {
+                mentalista: "Roberto está distraído",
+                emoji: "🤔",
+                keywords: ["mira", "celular", "cambia", "no responde", "pierde", "olvida", "interrumpe"],
+                ejemplos: [
+                    "Roberto mira su celular cada 2 minutos durante la clase",
+                    "Roberto no responde cuando le hacen preguntas directas",
+                    "Roberto cambia de actividad cada 5 minutos"
+                ],
+                hint: "¿A dónde dirige su atención Roberto? ¿Mira su celular? ¿Responde preguntas? ¿Cuánto tiempo mantiene una actividad?"
+            },
+            {
+                mentalista: "Elena es perfeccionista",
+                emoji: "😤",
+                keywords: ["revisa", "repite", "corrige", "borra", "reescribe", "tarda", "vuelve a hacer"],
+                ejemplos: [
+                    "Elena revisa su trabajo 8-10 veces antes de entregarlo",
+                    "Elena borra y reescribe el mismo párrafo 5+ veces",
+                    "Elena tarda 3 horas en una tarea de 30 minutos"
+                ],
+                hint: "¿Cuántas veces revisa Elena su trabajo? ¿Borra y reescribe? ¿Cuánto tiempo le toma completar tareas?"
+            },
+            {
+                mentalista: "Jorge no coopera",
+                emoji: "🙅",
+                keywords: ["cruza", "gira", "no responde", "dice no", "niega", "rechaza", "ignora"],
+                ejemplos: [
+                    "Jorge cruza los brazos y gira la cabeza cuando le piden algo",
+                    "Jorge dice 'no' o 'no quiero' a todas las peticiones",
+                    "Jorge ignora instrucciones y no responde verbalmente"
+                ],
+                hint: "¿Qué hace Jorge cuando le piden algo? ¿Dice algo? ¿Qué hace con su cuerpo? ¿Responde?"
+            },
+            {
+                mentalista: "Sofía está motivada",
+                emoji: "💪",
+                keywords: ["completa", "termina", "hace", "pregunta", "participa", "levanta la mano", "sonríe"],
+                ejemplos: [
+                    "Sofía completa 5 ejercicios en 20 minutos sin parar",
+                    "Sofía levanta la mano 8 veces por sesión para participar",
+                    "Sofía sonríe y dice 'quiero hacer más' al terminar"
+                ],
+                hint: "¿Qué hace Sofía? ¿Completa tareas? ¿Participa? ¿Pregunta? ¿Qué dice? ¿Cuánto hace?"
+            },
+            {
+                mentalista: "Diego tiene actitud negativa",
+                emoji: "😒",
+                keywords: ["dice", "no va a funcionar", "es imposible", "suspira", "pone los ojos", "se queja"],
+                ejemplos: [
+                    "Diego dice 'esto no va a funcionar' antes de empezar",
+                    "Diego suspira fuerte y pone los ojos en blanco",
+                    "Diego dice 'es imposible' y 'no tiene sentido' 3-4 veces"
+                ],
+                hint: "¿Qué dice Diego? ¿Hace gestos con los ojos? ¿Suspira? ¿Qué frases usa?"
+            },
+            {
+                mentalista: "Carmen está confundida",
+                emoji: "😕",
+                keywords: ["pregunta", "qué significa", "no entiendo", "repite", "mira", "frunce"],
+                ejemplos: [
+                    "Carmen pregunta '¿qué significa esto?' 4-5 veces por sesión",
+                    "Carmen dice 'no entiendo' y pide que le repitan",
+                    "Carmen frunce el ceño y mira fijamente el material"
+                ],
+                hint: "¿Qué pregunta Carmen? ¿Qué dice? ¿Qué hace con su cara o su mirada?"
+            },
+            {
+                mentalista: "Javier está cansado",
+                emoji: "😴",
+                keywords: ["bosteza", "cierra los ojos", "apoya la cabeza", "responde lento", "tarda"],
+                ejemplos: [
+                    "Javier bosteza 6-8 veces en 30 minutos",
+                    "Javier apoya la cabeza en la mesa por períodos de 2+ minutos",
+                    "Javier cierra los ojos y tarda 5+ segundos en responder"
+                ],
+                hint: "¿Bosteza Javier? ¿Cierra los ojos? ¿Apoya la cabeza? ¿Qué tan rápido responde?"
+            }
+        ];
+        
+        let currentExercise = 0;
+        let score = 0;
+        let correctCount = 0;
+        let partialCount = 0;
+        let incorrectCount = 0;
+        let hintShown = false;
+        
+        // Character counter
+        document.getElementById('userInput').addEventListener('input', function() {
+            const count = this.value.length;
+            document.getElementById('charCounter').textContent = `${count}/200`;
+        });
+        
+        function startExercises() {
+            document.getElementById('introScreen').classList.remove('active');
+            document.getElementById('exerciseScreen').classList.add('active');
+            loadExercise();
+        }
+        
+        function loadExercise() {
+            const exercise = exercises[currentExercise];
+            
+            // Update UI
+            document.getElementById('exerciseNumber').textContent = `Ejercicio ${currentExercise + 1}/12`;
+            document.getElementById('exerciseEmoji').textContent = exercise.emoji;
+            document.getElementById('promptText').textContent = exercise.mentalista;
+            document.getElementById('hintText').textContent = exercise.hint;
+            
+            // Reset
+            document.getElementById('userInput').value = '';
+            document.getElementById('charCounter').textContent = '0/200';
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect', 'partial');
+            document.getElementById('hintBox').classList.remove('show');
+            document.getElementById('correctAnswerBox').style.display = 'none';
+            document.getElementById('checkBtn').style.display = 'inline-flex';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('userInput').disabled = false;
+            hintShown = false;
+            
+            // Update progress
+            const progress = ((currentExercise + 1) / exercises.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('scoreDisplay').textContent = `${score} pts`;
+        }
+        
+        function showHint() {
+            const hintBox = document.getElementById('hintBox');
+            hintBox.classList.toggle('show');
+            hintShown = true;
+        }
+        
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userInput').value.trim().toLowerCase();
+            
+            if (userAnswer.length < 10) {
+                alert('⚠️ Tu respuesta es muy corta. Intenta escribir una definición más completa.');
+                return;
+            }
+            
+            const exercise = exercises[currentExercise];
+            
+            // Check for keywords
+            let keywordMatches = 0;
+            exercise.keywords.forEach(keyword => {
+                if (userAnswer.includes(keyword.toLowerCase())) {
+                    keywordMatches++;
+                }
+            });
+            
+            // Evaluate response
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            const correctAnswerBox = document.getElementById('correctAnswerBox');
+            const correctAnswerText = document.getElementById('correctAnswerText');
+            
+            let pointsEarned = 0;
+            
+            if (keywordMatches >= 2) {
+                // Correct
+                feedback.classList.add('show', 'correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = '¡Excelente!';
+                feedbackText.textContent = 'Tu definición es operacionalizada: incluye conductas observables y específicas. ¡Muy bien hecho!';
+                pointsEarned = hintShown ? 8 : 10;
+                correctCount++;
+                createConfetti();
+            } else if (keywordMatches === 1) {
+                // Partial
+                feedback.classList.add('show', 'partial');
+                feedbackIcon.textContent = '⚠️';
+                feedbackTitle.textContent = '¡Casi!';
+                feedbackText.textContent = 'Tu respuesta va por buen camino, pero podría ser más específica. Intenta describir conductas más concretas y observables.';
+                correctAnswerBox.style.display = 'block';
+                correctAnswerText.textContent = exercise.ejemplos[0];
+                pointsEarned = hintShown ? 4 : 5;
+                partialCount++;
+            } else {
+                // Incorrect
+                feedback.classList.add('show', 'incorrect');
+                feedbackIcon.textContent = '❌';
+                feedbackTitle.textContent = 'Inténtalo de nuevo';
+                feedbackText.textContent = 'Tu respuesta aún contiene términos mentalistas o no es lo suficientemente observable. Recuerda: debe ser algo que puedas VER o ESCUCHAR directamente.';
+                correctAnswerBox.style.display = 'block';
+                correctAnswerText.textContent = exercise.ejemplos[0];
+                pointsEarned = 0;
+                incorrectCount++;
+            }
+            
+            score += pointsEarned;
+            
+            // Update UI
+            document.getElementById('checkBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-flex';
+            document.getElementById('userInput').disabled = true;
+            document.getElementById('scoreDisplay').textContent = `${score} pts`;
+        }
+        
+        function nextExercise() {
+            currentExercise++;
+            
+            if (currentExercise < exercises.length) {
+                loadExercise();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            document.getElementById('exerciseScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            const maxScore = exercises.length * 10;
+            const percentage = (score / maxScore) * 100;
+            
+            document.getElementById('resultsScore').textContent = `${score}/${maxScore}`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('partialCount').textContent = partialCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            document.getElementById('totalPoints').textContent = score;
+            
+            let emoji, message, description;
+            
+            if (percentage >= 85) {
+                emoji = '🏆';
+                message = '¡Maestro de la Operacionalización!';
+                description = 'Dominas perfectamente el arte de convertir términos mentalistas en conductas observables. ¡Estás listo para el Nivel 3!';
+                createMassiveConfetti();
+            } else if (percentage >= 70) {
+                emoji = '🎯';
+                message = '¡Muy Bien!';
+                description = 'Tienes una buena comprensión de cómo operacionalizar conductas. Con un poco más de práctica serás un experto.';
+            } else if (percentage >= 50) {
+                emoji = '📚';
+                message = 'Buen Intento';
+                description = 'Vas por buen camino. Te recomendamos revisar los ejemplos y practicar más para mejorar tu precisión.';
+            } else {
+                emoji = '💪';
+                message = 'Sigue Practicando';
+                description = 'La operacionalización requiere práctica. Revisa la teoría del Nivel 1 y vuelve a intentar este nivel.';
+            }
+            
+            document.getElementById('resultsEmoji').textContent = emoji;
+            document.getElementById('resultsMessage').textContent = message;
+            document.getElementById('resultsDescription').textContent = description;
+            
+            // Progress to 100%
+            document.getElementById('progressBar').style.width = '100%';
+        }
+        
+        function restartModule() {
+            currentExercise = 0;
+            score = 0;
+            correctCount = 0;
+            partialCount = 0;
+            incorrectCount = 0;
+            
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('introScreen').classList.add('active');
+            
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('scoreDisplay').textContent = '0 pts';
+        }
+        
+        function createConfetti() {
+            const colors = ['#8b5cf6', '#ec4899', '#10b981', '#fbbf24', '#3b82f6'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+        
+        function createMassiveConfetti() {
+            const colors = ['#8b5cf6', '#ec4899', '#10b981', '#fbbf24', '#3b82f6'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 20);
+            }
+        }
+    </script>
+</body>
+</html>
