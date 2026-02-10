@@ -1,4 +1,26 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TRAP → TRAC | Activación Conductual</title>
+  <meta name="description" content="Aprende a reconocer las trampas de la depresión y construir salidas efectivas con el modelo TRAP-TRAC de Activación Conductual.">
+  <meta name="theme-color" content="#D0E8F7">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪤</text></svg>">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; overflow-x: hidden; }
+    #root { min-height: 100vh; }
+  </style>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
 
 // ==================== DATA ====================
 const LEVELS_META = [
@@ -1297,7 +1319,7 @@ const LevelSummary = ({ level, principles, onNext }) => {
 };
 
 // ==================== MAIN APP ====================
-export default function App() {
+function App() {
   const [screen, setScreen] = useState("home"); // home, level, summary, final
   const [currentLevel, setCurrentLevel] = useState(1);
   const [phase, setPhase] = useState("theory"); // theory, exercises
@@ -2084,3 +2106,10 @@ function ExpertTrapExercise({ exercise, onComplete }) {
     </div>
   );
 }
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(App));
+  </script>
+</body>
+</html>
