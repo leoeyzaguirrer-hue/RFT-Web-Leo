@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>FASIT — Guía Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDFBF7;
+  --card: #FFFFFF;
+  --text: #2C2825;
+  --text-soft: #7A7470;
+  --border: #EDE8E3;
+  --shadow: 0 3px 16px rgba(44,40,37,0.06);
+  --radius: 16px;
+  --classA: #D4603A;--classA-bg: #FDF0EC;--classA-soft: #F8DDD4;
+  --classB: #2E7D8C;--classB-bg: #E6F3F6;--classB-soft: #C8E4EA;
+  --classC: #B5442E;--classC-bg: #FBEAE7;--classC-soft: #F3CFC8;
+  --classD: #6B7B3A;--classD-bg: #F2F4E8;--classD-soft: #DEE3C8;
+  --classE: #8B5E9B;--classE-bg: #F4EDF7;--classE-soft: #E0D0E8;
+  --green: #4A7C59;--green-bg: #E8F0EB;
+  --yellow: #C49A2A;--yellow-bg: #F5F0E0;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+.container{max-width:520px;margin:0 auto;padding:0 20px 60px}
+
+/* HERO */
+.hero{text-align:center;padding:48px 16px 32px;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(212,96,58,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-emoji{font-size:56px;margin-bottom:12px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;line-height:1.15;margin-bottom:8px}
+.hero h1 span{color:var(--classA)}
+.hero .subtitle{font-size:15px;color:var(--text-soft);max-width:340px;margin:0 auto}
+
+/* NAV */
+.class-nav{display:flex;gap:8px;padding:20px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.class-nav::-webkit-scrollbar{display:none}
+.nav-pill{flex-shrink:0;padding:10px 18px;border-radius:100px;font-size:13px;font-weight:700;border:2px solid var(--border);background:var(--card);color:var(--text-soft);cursor:pointer;transition:all 0.25s;text-decoration:none;white-space:nowrap}
+.nav-pill:active{transform:scale(0.96)}
+.nav-pill[data-class="A"]{border-color:var(--classA-soft);color:var(--classA)}
+.nav-pill[data-class="B"]{border-color:var(--classB-soft);color:var(--classB)}
+.nav-pill[data-class="C"]{border-color:var(--classC-soft);color:var(--classC)}
+.nav-pill[data-class="D"]{border-color:var(--classD-soft);color:var(--classD)}
+.nav-pill[data-class="E"]{border-color:var(--classE-soft);color:var(--classE)}
+
+/* INTRO CARD */
+.intro-card{background:var(--card);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:28px}
+.intro-card h2{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:12px}
+.intro-card p{font-size:14px;color:var(--text-soft);margin-bottom:10px}
+.intro-card .emoji-row{font-size:28px;letter-spacing:8px;margin:16px 0 12px}
+
+/* DISCLAIMER MINI */
+.disclaimer-mini{background:var(--yellow-bg);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--text-soft);line-height:1.7;margin-bottom:28px}
+.disclaimer-mini strong{color:var(--yellow)}
+
+/* CLASS SECTION */
+.class-section{margin-bottom:40px;scroll-margin-top:20px}
+.class-header{padding:28px 24px;border-radius:var(--radius);margin-bottom:20px;position:relative;overflow:hidden}
+.class-header::after{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;opacity:0.15;pointer-events:none}
+.class-header.classA{background:var(--classA-bg)}.class-header.classA::after{background:var(--classA)}
+.class-header.classB{background:var(--classB-bg)}.class-header.classB::after{background:var(--classB)}
+.class-header.classC{background:var(--classC-bg)}.class-header.classC::after{background:var(--classC)}
+.class-header.classD{background:var(--classD-bg)}.class-header.classD::after{background:var(--classD)}
+.class-header.classE{background:var(--classE-bg)}.class-header.classE::after{background:var(--classE)}
+.class-header .class-emoji{font-size:40px;margin-bottom:10px}
+.class-header .class-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.class-header h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;margin-bottom:10px;line-height:1.3}
+.class-header p{font-size:14px;line-height:1.7;opacity:0.8}
+.classA .class-label{color:var(--classA)}.classB .class-label{color:var(--classB)}.classC .class-label{color:var(--classC)}.classD .class-label{color:var(--classD)}.classE .class-label{color:var(--classE)}
+
+/* SUBSECTION */
+.subsection{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:16px;overflow:hidden}
+.subsection-header{padding:18px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:background 0.2s}
+.subsection-header:active{background:var(--bg)}
+.subsection-header .ss-emoji{font-size:22px;flex-shrink:0}
+.subsection-header .ss-title{font-size:15px;font-weight:600;flex:1;line-height:1.4}
+.subsection-header .ss-arrow{font-size:12px;color:var(--text-soft);transition:transform 0.3s;flex-shrink:0}
+.subsection.open .ss-arrow{transform:rotate(180deg)}
+.subsection-body{display:none;padding:0 20px 20px}
+.subsection.open .subsection-body{display:block;animation:slideDown 0.3s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* CONTENT ELEMENTS */
+.definition{font-size:14px;color:var(--text-soft);line-height:1.8;margin-bottom:16px;padding:14px 16px;background:var(--bg);border-radius:12px;border-left:3px solid var(--border)}
+.definition strong{color:var(--text)}
+.tip{font-size:13px;padding:12px 16px;border-radius:10px;margin:12px 0;line-height:1.7}
+.tip-warning{background:var(--yellow-bg);color:#8B6914}
+.tip-info{background:#E8F0EB;color:var(--green)}
+.tip-key{background:var(--classA-bg);color:var(--classA)}
+
+/* VIGNETTE */
+.vignette{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:18px;margin:16px 0}
+.vignette-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-soft);margin-bottom:8px}
+.vignette-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:14px;font-style:italic}
+.vignette-question{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px}
+.vignette-reveal{display:none;padding:12px 14px;background:var(--green-bg);border-radius:10px;font-size:13px;color:var(--green);line-height:1.7;margin-top:10px}
+.vignette-reveal.show{display:block;animation:slideDown 0.3s ease}
+.reveal-btn{padding:10px 20px;border:2px solid var(--border);border-radius:10px;background:var(--card);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text-soft);cursor:pointer;transition:all 0.2s}
+.reveal-btn:active{background:var(--bg);transform:scale(0.97)}
+
+/* QUIZ */
+.quiz{background:var(--card);border:2px dashed var(--border);border-radius:14px;padding:18px;margin:20px 0}
+.quiz-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.quiz-label.classA-label{color:var(--classA)}.quiz-label.classB-label{color:var(--classB)}.quiz-label.classC-label{color:var(--classC)}.quiz-label.classD-label{color:var(--classD)}.quiz-label.classE-label{color:var(--classE)}
+.quiz-scenario{font-size:14px;line-height:1.7;margin-bottom:14px;font-style:italic}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.quiz-opt{padding:12px 16px;border:2px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;transition:all 0.2s;text-align:left;background:var(--card)}
+.quiz-opt:active{transform:scale(0.98)}
+.quiz-opt.correct{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.quiz-opt.wrong{background:#FDE8E8;border-color:#D94444;color:#D94444}
+.quiz-opt.disabled{pointer-events:none;opacity:0.5}
+.quiz-feedback{display:none;padding:12px 14px;border-radius:10px;font-size:13px;line-height:1.7;margin-top:10px}
+.quiz-feedback.show{display:block;animation:slideDown 0.3s ease}
+.quiz-feedback.correct-fb{background:var(--green-bg);color:var(--green)}
+.quiz-feedback.wrong-fb{background:#FDE8E8;color:#C43333}
+
+/* SUBTYPE ITEM */
+.subtype{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--bg)}
+.subtype:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.subtype-name{font-size:14px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.subtype-name .st-emoji{font-size:18px}
+.subtype-desc{font-size:13.5px;color:var(--text-soft);line-height:1.75}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px 20px;font-size:12px;color:var(--text-soft);line-height:1.8;border-top:1px solid var(--border);margin-top:40px}
+
+/* SCROLL ANIM */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:380px){.hero h1{font-size:30px}.class-header h2{font-size:21px}}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-emoji">🔍</div>
+  <h1>Guía completa del <span>FASIT</span></h1>
+  <p class="subtitle">Aprende a identificar y comprender las 5 clases de habilidades interpersonales del terapeuta</p>
+</div>
+
+<!-- NAV -->
+<div class="class-nav">
+  <a class="nav-pill" data-class="A" href="#classA">🗣️ Clase A</a>
+  <a class="nav-pill" data-class="B" href="#classB">🔄 Clase B</a>
+  <a class="nav-pill" data-class="C" href="#classC">⚡ Clase C</a>
+  <a class="nav-pill" data-class="D" href="#classD">💛 Clase D</a>
+  <a class="nav-pill" data-class="E" href="#classE">🌊 Clase E</a>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer-mini">
+  <strong>⚠️ Nota:</strong> El FASIT (Callaghan, 2006) es un sistema de evaluación clínica con preguntas abiertas de supervisión — no un cuestionario estandarizado con puntuación psicométrica. Esta guía es una adaptación pedagógica para facilitar el aprendizaje del sistema. Las viñetas son ilustrativas y simplificadas; la realidad clínica siempre requiere más matiz y contexto.
+</div>
+
+<!-- ═══════════ INTRO ═══════════ -->
+<div class="intro-card fade-in">
+  <h2>¿Qué es el FASIT? 📋</h2>
+  <p>El <strong>Functional Assessment of Skills for Interpersonal Therapists</strong> es un manual de evaluación diseñado para identificar habilidades y dificultades interpersonales del terapeuta que afectan su capacidad de conducir terapias interpersonales como FAP.</p>
+  <p>Organiza los problemas del terapeuta en <strong>5 clases funcionales</strong>. Cada clase sigue la misma estructura:</p>
+  <div class="emoji-row">🎯 📡 🏃 🚫 ⚠️</div>
+  <p>🎯 <strong>Discriminación</strong> — ¿Puede el terapeuta detectar lo que ocurre?</p>
+  <p>📡 <strong>Control contextual</strong> — ¿Sabe cuándo, dónde y con quién responder?</p>
+  <p>🏃 <strong>Escape</strong> — ¿Inicia una respuesta pero la interrumpe por incomodidad?</p>
+  <p>🚫 <strong>Evitación</strong> — ¿Directamente no se involucra para no sentir malestar?</p>
+  <p>⚠️ <strong>Repertorios problemáticos</strong> — ¿Responde pero de forma ineficaz, excesiva, o aversiva?</p>
+  <div class="tip tip-info">💡 <strong>Clave:</strong> Antes de evaluar el repertorio de respuesta, siempre hay que verificar que la discriminación esté intacta. Si el terapeuta no puede detectar lo que ocurre, trabajar en su respuesta no servirá.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--              CLASE A                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="class-section" id="classA">
+<div class="class-header classA fade-in">
+  <div class="class-emoji">🗣️</div>
+  <div class="class-label">Clase A</div>
+  <h2>Aserción de Necesidades</h2>
+  <p>Problemas del terapeuta para identificar, especificar y expresar sus necesidades en supervisión y en sesión con el cliente.</p>
+</div>
+
+<!-- A: Discriminación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🎯</span>
+    <span class="ss-title">Problemas de Discriminación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta no puede identificar o especificar qué necesita del supervisor o del cliente. No reconoce que podría hacer una petición.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔸</span> No identifica necesidades del supervisor</div>
+      <div class="subtype-desc">El terapeuta no reconoce que necesita dirección, apoyo emocional o retroalimentación sobre su desempeño. Puede sentirse "perdido" pero no traducir eso en una petición concreta.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔸</span> No identifica necesidades del cliente</div>
+      <div class="subtype-desc">No reconoce que necesita que el cliente haga algo específico: llegar a tiempo, hacer tareas, intentar una conducta diferente en sesión. El terapeuta "espera" que las cosas ocurran sin pedir activamente.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔸</span> No identifica que podría hacer una petición</div>
+      <div class="subtype-desc">Cuando el cliente es hostil, confrontativo o rudo, el terapeuta no reconoce que puede pedir al cliente que responda de forma más efectiva interpersonalmente.</div>
+    </div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"El cliente llega tarde a las últimas 4 sesiones. La terapeuta siente frustración pero no dice nada. Cuando el supervisor pregunta si hay algo que le gustaría abordar, ella responde: 'No, todo va bien, solo que el cliente tiene horarios complicados.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Problema de discriminación:</strong> La terapeuta no identifica que necesita que el cliente llegue a tiempo (necesidad del cliente) ni que podría pedir apoyo al supervisor para abordar esto (necesidad del supervisor). La frustración es una señal de necesidad insatisfecha, pero no la traduce en petición.</div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Control Contextual -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">📡</span>
+    <span class="ss-title">Problemas de Control Contextual</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta sabe que tiene necesidades, pero no discrimina cuándo, dónde o con quién es apropiado expresarlas.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">⬇️</span> Sub-generalización</div>
+      <div class="subtype-desc">El terapeuta no pide algo aunque la relación lo permite. Por ejemplo, se siente mal pero decide no "cargar al supervisor" con sus problemas, aunque la supervisión es exactamente el lugar para eso.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">⬆️</span> Sobre-generalización</div>
+      <div class="subtype-desc">El terapeuta hace peticiones que exceden los límites de la relación. Por ejemplo, pedir al supervisor verlo fuera de horario, de urgencia, o solicitar niveles de apoyo emocional más propios de una relación terapéutica personal.</div>
+    </div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"Después de una sesión difícil con un cliente suicida, el terapeuta se siente muy afectado. Sin embargo, en supervisión solo habla de la conceptualización del caso y nunca menciona cómo se siente él."</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Sub-generalización:</strong> El terapeuta tiene la necesidad de apoyo emocional (la discrimina) pero no identifica que la supervisión es un contexto válido para expresarla. No "generaliza" las características de la relación supervisiva que le permitirían pedir lo que necesita.</div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Escape -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🏃</span>
+    <span class="ss-title">Repertorio de Escape</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta <strong>inicia</strong> una petición o aserción de necesidad, pero la <strong>termina antes de que pueda ser satisfecha</strong> debido a un aumento en la incomodidad social percibida. Puede incluir sentimientos de culpa, vergüenza o ansiedad.</div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"En supervisión, la terapeuta empieza a decir: 'Creo que necesito algo más de orientación con este caso, es que...' pero inmediatamente agrega '...bueno, en realidad no es tan grave, seguro lo puedo manejar sola, perdón por quitarte tiempo.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Escape:</strong> Inició la petición (pedir orientación), pero la incomodidad social la llevó a terminarla antes de que se completara. La disculpa ("perdón por quitarte tiempo") funciona como la conducta que termina el malestar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Evitación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🚫</span>
+    <span class="ss-title">Repertorio de Evitación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta directamente <strong>no hace la petición</strong>. Ni siquiera la inicia. Evita la experiencia completa de pedir algo por miedo a las repercusiones sociales. Puede parecer tímido o inseguro.</div>
+    <div class="tip tip-key">🔑 <strong>Diferencia escape vs. evitación:</strong> En el escape, la petición comienza y se interrumpe. En la evitación, nunca comienza. Ambas reducen la incomodidad del terapeuta pero dejan la necesidad insatisfecha.</div>
+  </div>
+</div>
+
+<!-- A: Rechazo de la necesidad -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🙅</span>
+    <span class="ss-title">Rechazo de la Necesidad (Tact Distorsionado)</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> Cuando se le da la oportunidad de expresar o reconocer una necesidad, el terapeuta <strong>niega que la necesidad exista</strong>, aunque claramente está presente. Es una distorsión de la descripción de su propia experiencia.</div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"El supervisor nota que el terapeuta parece abrumado y pregunta: '¿Me estás pidiendo apoyo ahora mismo?' El terapeuta responde: 'No, no, estoy bien, solo estaba comentando.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Rechazo de la necesidad:</strong> El terapeuta tiene la necesidad, tiene la oportunidad de reconocerla (el supervisor la nombró), pero la niega activamente. Esto puede funcionar como escape o evitación disfrazada — las consecuencias inmediatas de negar son menos aversivas que las de admitir la necesidad.</div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Aserción ineficaz -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">😶‍🌫️</span>
+    <span class="ss-title">Aserción Ineficaz o Poco Clara</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta identifica su necesidad e intenta expresarla, pero lo hace de forma tan vaga, indirecta o rodeada de descalificaciones que el oyente no entiende qué se le está pidiendo.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🎭</span> Petición Disfrazada (Mando Disfrazado)</div>
+      <div class="subtype-desc">La petición viene disfrazada como una observación o pregunta. Ejemplo: <em>"Es difícil llegar a supervisión a esa hora"</em> en lugar de <em>"¿Podemos cambiar el horario?"</em>. O: <em>"La gente no entiende lo difícil que es esta terapia"</em> cuando lo que necesita es comprensión y apoyo.</div>
+    </div>
+    <div class="tip tip-warning">⚡ <strong>Importante:</strong> Las peticiones disfrazadas muchas veces funcionan — los oyentes las interpretan naturalmente. Solo es un problema cuando, al no funcionar, el terapeuta NO hace una petición directa como siguiente paso, quedando con la necesidad insatisfecha.</div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"El terapeuta dice al supervisor: 'Últimamente las sesiones con este cliente son como... intensas, ¿no? O sea, es mucho, no sé si... bueno, no sé, es como que a veces uno siente que... pero bueno, ya veré cómo lo manejo.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Aserción ineficaz:</strong> Hay una necesidad detrás (probablemente orientación o apoyo), pero está tan envuelta en vaguedad y auto-descalificaciones ("ya veré cómo lo manejo") que el supervisor no puede responder efectivamente a algo que no fue claramente pedido.</div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Excesivas -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">📢</span>
+    <span class="ss-title">Peticiones Excesivas</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta hace tantas peticiones al supervisor o cliente que el oyente deja de atenderlas. Cada petición individual puede ser razonable; el problema es la <strong>cantidad</strong>. Suele ocurrir cuando el terapeuta está ansioso o frustrado.</div>
+    <div class="tip tip-info">💡 Estos terapeutas también pueden tener problemas en la Clase B (no discriminan el impacto que su exceso de peticiones tiene en los demás).</div>
+  </div>
+</div>
+
+<!-- A: Aversivo -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">😤</span>
+    <span class="ss-title">Estilo Aversivo</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta sabe qué necesita y cuándo pedirlo, pero el <strong>tono, estilo o actitud</strong> con que lo hace genera que el oyente no quiera cumplir la petición. Puede sonar demandante, agresivo o condescendiente, provocando contrapliance (resistencia) en el otro.</div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"El terapeuta dice al cliente con tono irritado: '¿Podrías POR FAVOR intentar expresarte con un poco más de claridad? Llevamos semanas en lo mismo y realmente necesito que hagas un esfuerzo aquí.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Estilo aversivo:</strong> La petición es legítima (que el cliente se exprese más claramente), pero el tono irritado y la frase cargada de frustración funcionan como un estímulo aversivo que probablemente genere resistencia o retirada del cliente, no cooperación.</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ A -->
+<div class="quiz fade-in">
+  <div class="quiz-label classA-label">🧩 EJERCICIO — CLASE A</div>
+  <div class="quiz-scenario">"En supervisión grupal, una terapeuta quiere pedir que la ayuden con un caso difícil. En lugar de decirlo, comenta: 'A veces los casos de personalidad son muy demandantes, ¿no creen?' y espera a ver si alguien ofrece ayuda."</div>
+  <div class="vignette-question">¿Qué subtipo de la Clase A describe mejor esta conducta?</div>
+  <div class="quiz-options">
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','La evitación implica no hacer ningún intento. Aquí sí hay un intento, solo que disfrazado.')">🚫 Evitación</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'correct','¡Exacto! La terapeuta hace una observación general en lugar de una petición directa. Es un mando disfrazado: usa una afirmación para obtener algo sin pedirlo explícitamente.')">🎭 Petición disfrazada</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','El escape requiere iniciar la petición directa y luego cortarla. Aquí nunca hubo petición directa.')">🏃 Escape</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','El estilo aversivo tiene que ver con el tono agresivo o demandante, no con la indirección.')">😤 Estilo aversivo</button>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+</div><!-- end classA -->
+
+<!-- ═══════════════════════════════════════ -->
+<!--              CLASE B                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="class-section" id="classB">
+<div class="class-header classB fade-in">
+  <div class="class-emoji">🔄</div>
+  <div class="class-label">Clase B</div>
+  <h2>Comunicación Bidireccional</h2>
+  <p>Problemas del terapeuta para detectar su impacto interpersonal, recibir feedback, responder al feedback y proporcionarlo efectivamente. Es la clase más crítica para FAP.</p>
+</div>
+
+<!-- B: Discriminación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🎯</span>
+    <span class="ss-title">Problemas de Discriminación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta tiene dificultades para detectar (a) el impacto que tiene en otros, (b) que le están dando feedback, (c) si ese feedback es preciso, y/o (d) que podría dar feedback al otro.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">👤</span> No detecta su impacto en otros</div>
+      <div class="subtype-desc">El terapeuta no nota cómo sus comentarios, silencios, o estilo afectan emocionalmente al cliente o supervisor. Puede hacer un comentario inapropiado sin darse cuenta de su efecto.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">📩</span> No detecta que le dan feedback</div>
+      <div class="subtype-desc">El cliente o supervisor le da señales (sutiles o directas) de que algo no funciona, pero el terapeuta no las registra como feedback. Es diferente a ignorar el feedback (eso es insensibilidad).</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">⚖️</span> No discrimina precisión del feedback</div>
+      <div class="subtype-desc">No puede distinguir si el feedback que recibe es acertado o no. Esto es diferente a rechazar todo feedback negativo — un terapeuta que acepta elogios pero rechaza toda crítica probablemente SÍ discrimina que es feedback, pero tiene problemas de insensibilidad (ver más abajo).</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">💬</span> No identifica oportunidades de dar feedback</div>
+      <div class="subtype-desc">No reconoce momentos donde dar feedback al cliente sobre su conducta sería terapéutico y fortalecería la relación.</div>
+    </div>
+    <div class="tip tip-key">🔑 <strong>Clave diagnóstica:</strong> Si el terapeuta acepta elogios pero rechaza toda crítica, el problema NO es de discriminación — es de insensibilidad selectiva. El terapeuta SÍ detecta el feedback, pero no lo acepta.</div>
+  </div>
+</div>
+
+<!-- B: Control Contextual -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">📡</span>
+    <span class="ss-title">Problemas de Control Contextual</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta no discrimina cuándo, dónde o con quién debería estar más o menos atento a su impacto, o cuándo sería apropiado dar feedback.</div>
+  </div>
+</div>
+
+<!-- B: Hipersensibilidad (Escape) -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">😰</span>
+    <span class="ss-title">Hipersensibilidad al Impacto / Feedback (Escape)</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta está hipervigilante sobre su impacto en otros. Es tan sensible a cualquier señal de desagrado del oyente que <strong>cambia su conducta para escapar de la incomodidad</strong>, incluso a costa de sus propias necesidades o del progreso terapéutico. Puede parecer excesivamente complaciente.</div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"La terapeuta está a punto de señalar una CRB1 del cliente. Nota un leve cambio en la expresión del cliente y de inmediato suaviza todo: 'Bueno, no es tan importante, sigamos con lo que me estabas contando.' Más tarde comenta al supervisor: 'Sentí que lo iba a lastimar.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Hipersensibilidad (escape):</strong> La terapeuta detectó una microexpresión del cliente y cambió su conducta para terminar la incomodidad que ella sentía, sacrificando una intervención terapéutica importante. Su conducta está más controlada por la evitación de malestar propio que por las necesidades del tratamiento.</div>
+    </div>
+  </div>
+</div>
+
+<!-- B: Evitación — No solicitar feedback -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🙈</span>
+    <span class="ss-title">Evitación: No Solicitar Feedback</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta no pregunta a otros sobre su desempeño o su impacto. Al no preguntar, evita contactar sentimientos aversivos que vendrían con las respuestas, pero se queda sin información sobre cómo lo perciben.</div>
+  </div>
+</div>
+
+<!-- B: Falta de respuesta -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">😶</span>
+    <span class="ss-title">Falta de Respuesta al Feedback</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta reconoce que le dieron feedback y puede evaluar si es preciso, pero <strong>no sabe cómo responder</strong>. Se queda en blanco, para la interacción, o no expresa afecto congruente con lo que le están diciendo. El que da el feedback se queda sin saber si fue escuchado.</div>
+  </div>
+</div>
+
+<!-- B: Insensibilidad -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🧱</span>
+    <span class="ss-title">Insensibilidad al Feedback</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta reconoce que su impacto es ineficaz o que le dieron feedback directo, pero <strong>continúa o aumenta la misma conducta</strong>. Funciona como si ignorara el feedback, distanciándose interpersonalmente.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔄</span> Escalada de la respuesta</div>
+      <div class="subtype-desc">Continúa o intensifica la conducta original, quizás "intentando hacerse entender mejor", pero el efecto es el contrario — más distancia interpersonal.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🪞</span> Rechazo del feedback (Externalización)</div>
+      <div class="subtype-desc">Rechaza el feedback diciendo que la fuente está equivocada o es culpable de dar el feedback. Funciona para detener el feedback futuro. Si escala a agresión contra quien da el feedback → evaluar Clase C (Conflicto).</div>
+    </div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"El supervisor le dice al terapeuta: 'He notado que tiendes a dar muchas explicaciones psicoeducativas en sesión, y el cliente parece desconectarse cuando lo haces.' El terapeuta responde: 'Es que si no le explico el modelo, no va a entender el tratamiento', y la semana siguiente hace más psicoeducación que antes."</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Insensibilidad con escalada:</strong> El terapeuta recibió feedback claro, lo rechazó con una justificación, y luego aumentó la misma conducta. El supervisor necesita discriminar: ¿el terapeuta realmente no registró que era feedback? (problema de discriminación) ¿o lo rechazó activamente? (insensibilidad). Que justifique = probablemente discriminó el feedback pero no lo acepta.</div>
+    </div>
+  </div>
+</div>
+
+<!-- B: Problemas dando feedback -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">📤</span>
+    <span class="ss-title">Problemas para DAR Feedback</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta tiene dificultades para proporcionar feedback útil al cliente o al supervisor sobre el impacto que tienen en él/ella.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🚫</span> Evitación: No da feedback</div>
+      <div class="subtype-desc">No proporciona feedback en ninguna o casi ninguna situación, posiblemente por miedo a que el otro se enoje.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🌀</span> Feedback ineficaz / sobreelaborado</div>
+      <div class="subtype-desc">Da feedback pero con tantas palabras, explicaciones o intentos repetidos que el mensaje central se pierde. El oyente no sabe cuál era el punto.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">⛔</span> Feedback negativista</div>
+      <div class="subtype-desc">Se enfoca excesivamente en los problemas sin ofrecer alternativas ni un contexto de apoyo general. Crea un ambiente donde es difícil responder con una conducta mejorada.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔬</span> Feedback excesivamente detallado</div>
+      <div class="subtype-desc">Usa demasiado detalle sobre los problemas del otro, lo que no optimiza que el oyente responda con algo nuevo o mejor.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔁</span> Perseveración del feedback</div>
+      <div class="subtype-desc">Continúa dando el mismo feedback más allá del punto donde es útil. El oyente ya entendió, pero el terapeuta sigue insistiendo.</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ B -->
+<div class="quiz fade-in">
+  <div class="quiz-label classB-label">🧩 EJERCICIO — CLASE B</div>
+  <div class="quiz-scenario">"Un terapeuta recibe feedback del supervisor de que habla demasiado en sesión. Dice 'Gracias por decírmelo, tienes razón' pero la siguiente semana sigue hablando igual o más. Cuando se le señala nuevamente, dice: 'Es que si no guío la conversación, el cliente no avanza.'"</div>
+  <div class="vignette-question">¿Cuál es el problema principal?</div>
+  <div class="quiz-options">
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','Si no detectara el feedback, no diría gracias. El problema es que no modifica su conducta.')">🎯 Discriminación</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'correct','¡Exacto! El terapeuta detectó el feedback (dijo gracias), pero no modificó su conducta y la justificó. Esto es insensibilidad al feedback con escalada.')">🧱 Insensibilidad al feedback</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','La hipersensibilidad implicaría que cambie su conducta excesivamente para complacer. Aquí hace lo contrario.')">😰 Hipersensibilidad</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','Falta de respuesta implica quedarse en blanco. Aquí responde, solo que no implementa el cambio.')">😶 Falta de respuesta</button>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+</div><!-- end classB -->
+
+<!-- ═══════════════════════════════════════ -->
+<!--              CLASE C                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="class-section" id="classC">
+<div class="class-header classC fade-in">
+  <div class="class-emoji">⚡</div>
+  <div class="class-label">Clase C</div>
+  <h2>Conflicto</h2>
+  <p>Problemas del terapeuta para identificar y responder efectivamente al conflicto interpersonal. Esencial al trabajar con clientes con patrones de personalidad complejos.</p>
+</div>
+
+<!-- C: Discriminación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🎯</span>
+    <span class="ss-title">Problemas de Discriminación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta no reconoce que hay un conflicto ocurriendo. Puede deberse a evitación del conflicto o a falta de entrenamiento para reconocer que los desacuerdos son parte normal de las relaciones interpersonales cercanas.</div>
+    <div class="tip tip-info">💡 El conflicto en el FASIT no es solo hostilidad abierta. Es cualquier interacción con metas o necesidades en disputa, que puede ser sutil y difícil de discriminar.</div>
+  </div>
+</div>
+
+<!-- C: Control Contextual -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">📡</span>
+    <span class="ss-title">Problemas de Control Contextual</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta no discrimina cuándo, dónde y con quién abordar un conflicto o emplear habilidades de resolución.</div>
+  </div>
+</div>
+
+<!-- C: Escape — Aquiescencia excesiva -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🏳️</span>
+    <span class="ss-title">Escape: Aquiescencia Excesiva</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> Ante el conflicto, el terapeuta cede rápida o excesivamente al otro para terminar la incomodidad, sin haber expresado sus propias necesidades u opinión. Acepta la posición del otro aunque no esté de acuerdo.</div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"Un cliente cuestiona enojado por qué la terapeuta le pidió hacer una tarea: '¿Y a ti quién te dio el derecho de decirme qué hacer?' La terapeuta responde de inmediato: 'Tienes razón, perdona, no era mi intención. No hagas la tarea si no quieres, está bien.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Aquiescencia excesiva:</strong> La terapeuta cedió instantáneamente para terminar el conflicto, sin explorar lo que ocurría interpersonalmente ni mantener su posición clínica. La incomodidad del conflicto controló su conducta más que las necesidades del tratamiento.</div>
+    </div>
+  </div>
+</div>
+
+<!-- C: Evitación — Retirada y conciliación excesiva -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🚪</span>
+    <span class="ss-title">Evitación: Retirada Social y Respuestas Conciliatorias Excesivas</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🚪</span> Retirada social</div>
+      <div class="subtype-desc">El terapeuta se retira (física o emocionalmente) cuando hay o puede haber conflicto. Mantiene esta estrategia de forma inflexible, inhibiendo relaciones interpersonales efectivas.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🕊️</span> Respuestas conciliatorias excesivas</div>
+      <div class="subtype-desc">El terapeuta está hipervigilante a las necesidades del otro y las anticipa para prevenir conflicto. "Se adelanta" a satisfacer al supervisor o cliente sin que se lo pidan. Puede tener múltiples relaciones pero reportar que sus propias necesidades no son satisfechas y que "se aprovechan" de él/ella.</div>
+    </div>
+  </div>
+</div>
+
+<!-- C: Intentos ineficaces -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🤏</span>
+    <span class="ss-title">Intentos Indirectos / Ineficaces de Resolución</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta detecta el conflicto e intenta resolverlo, pero lo hace con tan poca fuerza conductual o de forma tan vaga que resulta ineficaz. Parece tímido o inseguro sobre la resolución.</div>
+  </div>
+</div>
+
+<!-- C: Inflexibilidad -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🪨</span>
+    <span class="ss-title">Inflexibilidad ante el Compromiso</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta detecta el conflicto y que podría resolverse, pero <strong>no cede</strong> para mantener la posición de estar "en lo correcto". Las contingencias aversivas de estar "equivocado" son más poderosas que los beneficios de resolver el conflicto.</div>
+    <div class="tip tip-warning">⚡ Puede haber control adicional por parte de otro (ej: un grupo de pares que refuerza "tener razón"), lo que hace más difícil ceder. Considerar también problemas con Clase E — la experiencia emocional de "estar equivocado" puede ser lo que se evita.</div>
+  </div>
+</div>
+
+<!-- C: Escalada -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🔥</span>
+    <span class="ss-title">Repertorio Facilitador / Escalador de Conflicto</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta reconoce que hay conflicto pero se involucra en conductas que lo mantienen o lo escalan en lugar de resolverlo. Puede no discriminar que sus conductas facilitan el conflicto, o puede buscar/mantener conflicto para obtener reforzadores sociales (como atención) no obtenidos de otra forma.</div>
+    <div class="tip tip-key">🔑 <strong>Señal clave:</strong> Si el terapeuta reporta sentirse más conectado o cercano a alguien durante conflicto intenso → evaluar a fondo la Clase D (Cercanía Interpersonal). Puede ser que la cercanía solo se experimenta a través del conflicto, lo que indica una historia de aprendizaje donde intimidad = conflicto.</div>
+    <div class="tip tip-warning">⚡ <strong>Ética:</strong> Callaghan enfatiza que es éticamente importante que los terapeutas NO obtengan sus necesidades emocionales a través de clientes, especialmente con este repertorio.</div>
+  </div>
+</div>
+
+<!-- QUIZ C -->
+<div class="quiz fade-in">
+  <div class="quiz-label classC-label">🧩 EJERCICIO — CLASE C</div>
+  <div class="quiz-scenario">"Un terapeuta siempre se asegura de que el cliente esté cómodo antes de empezar la sesión. Pregunta varias veces si está bien, si necesita algo. Cuando en supervisión le preguntan sobre el caso, dice: 'El cliente está contento conmigo, nunca tenemos problemas.' Sin embargo, la terapia no avanza y el terapeuta nunca ha evocado una CRB1."</div>
+  <div class="vignette-question">¿Qué describe mejor este patrón?</div>
+  <div class="quiz-options">
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','La discriminación es no detectar el conflicto. Aquí el terapeuta previene activamente que ocurra.')">🎯 Problema de discriminación</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'correct','¡Exacto! El terapeuta anticipa las necesidades del cliente para prevenir cualquier malestar o conflicto. La hipervigilancia y la anticipación excesiva funcionan como evitación del conflicto interpersonal necesario para la terapia.')">🕊️ Respuestas conciliatorias excesivas</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','La aquiescencia es ceder ante un conflicto que ya empezó. Aquí el conflicto nunca llega a empezar.')">🏳️ Aquiescencia excesiva</button>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+</div><!-- end classC -->
+
+<!-- ═══════════════════════════════════════ -->
+<!--              CLASE D                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="class-section" id="classD">
+<div class="class-header classD fade-in">
+  <div class="class-emoji">💛</div>
+  <div class="class-label">Clase D</div>
+  <h2>Revelación y Cercanía Interpersonal</h2>
+  <p>Problemas del terapeuta para establecer y mantener relaciones interpersonales cercanas: auto-revelación, búsqueda de apoyo social, y respuesta a las revelaciones de otros.</p>
+</div>
+
+<!-- D: Discriminación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🎯</span>
+    <span class="ss-title">Problemas de Discriminación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta no identifica que la cercanía o el apoyo serían útiles, no reconoce que está haciendo una revelación (o sus características), o no detecta que el otro hizo una revelación que requiere respuesta.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔸</span> No identifica que la supervisión tiene características de relación cercana</div>
+      <div class="subtype-desc">No reconoce que la supervisión es un espacio donde puede buscar apoyo, no solo instrucción técnica.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🔸</span> No identifica que la terapia NO es lugar para buscar apoyo propio</div>
+      <div class="subtype-desc">El terapeuta busca apoyo emocional del cliente. Esto invierte el foco de la terapia y es una señal clínica importante.</div>
+    </div>
+  </div>
+</div>
+
+<!-- D: Control Contextual -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">📡</span>
+    <span class="ss-title">Problemas de Control Contextual</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">📢</span> Sobre-revelación</div>
+      <div class="subtype-desc">Se revela en contextos donde la relación no tiene suficiente historia para soportar esa revelación. Puede crear relaciones terapéuticas inapropiadas.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🤐</span> Sub-revelación</div>
+      <div class="subtype-desc">No se revela aunque la relación lo permite y sería beneficioso. Puede parecer retirado o socialmente aislado. Importante para la supervisión donde compartir la experiencia es clave.</div>
+    </div>
+  </div>
+</div>
+
+<!-- D: Escape/Evitación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🏃</span>
+    <span class="ss-title">Escape / Evitación: Búsqueda Infrecuente de Cercanía</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta identifica las condiciones para la cercanía, pero evita o escapa la experiencia. Puede tener una historia donde buscar apoyo fue castigado socialmente (vergüenza, enojo).</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">❄️</span> Bajo deseo de cercanía</div>
+      <div class="subtype-desc">Puede expresar que no desea relaciones cercanas. Si esto es genuino y el terapeuta nunca ha tenido relaciones cercanas, vale discutir si las terapias interpersonales son compatibles con sus valores y habilidades.</div>
+    </div>
+    <div class="tip tip-warning">⚡ <strong>Evaluar reglas:</strong> El terapeuta puede tener reglas específicas sobre cuándo está "permitido" hablar de sentimientos o pedir apoyo. Estas reglas pueden funcionar como evitación si restringen inflexiblemente el repertorio.</div>
+  </div>
+</div>
+
+<!-- D: Revelación poco clara -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🌫️</span>
+    <span class="ss-title">Revelación Poco Clara</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta intenta revelarse o pedir apoyo, pero lo hace de forma tan vaga o con tantas descalificaciones que el oyente no entiende qué está compartiendo o qué necesita. Paralelo a la aserción ineficaz de Clase A, pero específico a la búsqueda de apoyo social.</div>
+  </div>
+</div>
+
+<!-- D: Revelación inexacta -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🪞</span>
+    <span class="ss-title">Revelación Inexacta</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">⬇️</span> Autodepreciación</div>
+      <div class="subtype-desc">Hace comentarios excesivamente autodepreciativos que no son consistentes con la realidad. "No sirvo para esto", "Soy el peor terapeuta del grupo."</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">⬆️</span> Grandiosa / Exagerada</div>
+      <div class="subtype-desc">Se involucra en habla grandiosa o exagerada sobre sus habilidades. También incluye respuestas no genuinas o excesivamente afectadas.</div>
+    </div>
+    <div class="tip tip-info">💡 Los comentarios humorísticos o irónicos sobre uno mismo NO califican como problema a menos que resulten en disminución de las interacciones sociales.</div>
+  </div>
+</div>
+
+<!-- D: Revelación excesiva -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🌊</span>
+    <span class="ss-title">Revelación Excesiva / Búsqueda Excesiva de Apoyo</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> Habla tanto de sí mismo o pide apoyo con tanta frecuencia que el oyente deja de proveer apoyo o evita interactuar. Cuando esto ocurre con el cliente, el foco de la terapia se invierte — se centra en el terapeuta, no en el cliente.</div>
+  </div>
+</div>
+
+<!-- D: No solicitar / No responder -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🤷</span>
+    <span class="ss-title">No Solicitar la Revelación del Otro / No Responder a la Revelación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">❓</span> No solicitar revelación del otro</div>
+      <div class="subtype-desc">No pregunta al otro sobre su experiencia. Esto crea conversaciones unilaterales que hacen sentir al otro menos importante. Es un repertorio crucial para terapeutas en intervenciones interpersonales.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🧊</span> No responder a la revelación del otro</div>
+      <div class="subtype-desc">Cuando el otro se revela o pide apoyo, el terapeuta no responde o responde de forma percibida como no empática. Esto limita futuras revelaciones y puede dañar la relación.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🤝</span> Problemas con repertorio prosocial general</div>
+      <div class="subtype-desc">Dificultades para mantener conversaciones que van más allá de lo superficial pero que no requieren revelación íntima. Es el "tejido social" básico de las relaciones.</div>
+    </div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"En supervisión, la terapeuta comparte por 15 minutos su dificultad con un caso. Al terminar, el supervisor le pregunta cómo se siente. Ella se abre emocionalmente. Luego, la terapeuta no le pregunta al supervisor cómo va su día ni se interesa por la experiencia del compañero que presentó antes que ella."</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Falta de reciprocidad:</strong> La terapeuta se revela y busca apoyo (bien), pero no solicita la revelación del otro ni reciproca con apoyo. Esto genera una relación unilateral ("toma más de lo que da") que puede agotar al supervisor o pares y reducir el apoyo disponible a largo plazo.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end classD -->
+
+<!-- ═══════════════════════════════════════ -->
+<!--              CLASE E                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="class-section" id="classE">
+<div class="class-header classE fade-in">
+  <div class="class-emoji">🌊</div>
+  <div class="class-label">Clase E</div>
+  <h2>Experiencia y Expresión Emocional</h2>
+  <p>Problemas del terapeuta para identificar, tolerar, etiquetar y expresar sus experiencias emocionales. Fundamental para intervenciones interpersonales donde el terapeuta debe permanecer emocionalmente presente.</p>
+</div>
+
+<!-- E: Discriminación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🎯</span>
+    <span class="ss-title">Problemas de Discriminación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta no puede identificar que está teniendo una experiencia emocional mientras ocurre, o no puede distinguir entre diferentes tipos de emociones.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">⏰</span> Solo detecta retrospectivamente</div>
+      <div class="subtype-desc">Se da cuenta de que tuvo una emoción después de que pasó, pero no en el momento. "Ahora que lo pienso, creo que estaba ansioso" pero durante la sesión no lo notó.</div>
+    </div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🎨</span> No diferencia emociones</div>
+      <div class="subtype-desc">Todo le parece "mal" o "raro" sin poder distinguir si es tristeza, ansiedad, enojo, frustración, decepción, etc.</div>
+    </div>
+  </div>
+</div>
+
+<!-- E: Control Contextual -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">📡</span>
+    <span class="ss-title">Problemas de Control Contextual</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> No discrimina cuándo, dónde y con quién sería apropiado reconocer o expresar una emoción. Incluye no reconocer que ciertos contextos típicamente evocan emociones.</div>
+  </div>
+</div>
+
+<!-- E: Escape -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🏃</span>
+    <span class="ss-title">Repertorio de Escape</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> La experiencia emocional <strong>ya comenzó</strong>, y el terapeuta se involucra en estrategias para <strong>terminarla</strong>. El inicio puede o no ser observable, pero la conducta de escape sí lo será.</div>
+    <div class="vignette">
+      <div class="vignette-label">📖 Viñeta clínica</div>
+      <div class="vignette-text">"El terapeuta está hablando en supervisión sobre un cliente que le recuerda a su padre. Sus ojos se humedecen brevemente. De inmediato cambia de tema, saca una nota de su cuaderno y dice en tono profesional: 'Bueno, pero lo que realmente quería consultar era sobre la frecuencia de las tareas.'"</div>
+      <button class="reveal-btn" onclick="event.stopPropagation();toggleReveal(this)">🔍 Ver análisis</button>
+      <div class="vignette-reveal">✅ <strong>Escape:</strong> La emoción empezó (ojos húmedos), pero el terapeuta la terminó activamente cambiando de tema y adoptando un tono profesional distante. El cambio abrupto es la conducta de escape — terminó la experiencia emocional aversiva.</div>
+    </div>
+  </div>
+</div>
+
+<!-- E: Evitación -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🚫</span>
+    <span class="ss-title">Repertorio de Evitación</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta se involucra en actividades que <strong>previenen que la experiencia emocional comience</strong>. Tiene muy poco contacto con la emoción evitada. Puede retirarse socialmente o involucrarse en actividades que impiden el contacto emocional.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">📜</span> Reglas sobre emociones</div>
+      <div class="subtype-desc">El terapeuta puede tener reglas explícitas o implícitas que previenen la experiencia emocional: "No me permito sentir tristeza", "Un profesional no muestra ansiedad", "La vulnerabilidad es debilidad". Estas reglas funcionan como evitación experiencial.</div>
+    </div>
+    <div class="tip tip-key">🔑 <strong>Diferencia escape vs. evitación:</strong> En escape, la emoción llega a iniciar y luego es terminada. En evitación, la emoción nunca comienza porque el terapeuta previene las condiciones que la evocarían. Ambas son problema cuando son inflexibles e interfieren con la intervención.</div>
+  </div>
+</div>
+
+<!-- E: Etiquetado inexacto -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🏷️</span>
+    <span class="ss-title">Etiquetado Inexacto de la Experiencia Emocional</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta tiene la experiencia emocional pero la etiqueta incorrectamente, lo que impide que el oyente responda adecuadamente. Puede haber incongruencia entre el afecto expresado y el contenido verbal.</div>
+    <div class="subtype">
+      <div class="subtype-name"><span class="st-emoji">🤕</span> Somatización</div>
+      <div class="subtype-desc">Identifica la experiencia emocional como un estado corporal o físico: "Me siento cansado" cuando "Me siento triste" sería más preciso dado el contexto. Esto dificulta que el cliente entienda y responda, y no modela expresión emocional efectiva.</div>
+    </div>
+    <div class="tip tip-key">🔑 <strong>Distinción clave:</strong> Etiquetado inexacto ≠ Escape/evitación. Un terapeuta que escapa puede <em>nombrar</em> la emoción que evita ("sé que es tristeza, pero no quiero sentirla"). Un terapeuta con etiquetado inexacto genuinamente <em>no sabe</em> qué es lo que siente. El supervisor puede probar: "Otras personas en esta situación podrían sentir tristeza" — si el terapeuta dice "no es eso" pero muestra afecto innombrado, probablemente es etiquetado inexacto. Si dice "eso no me pasaría", probablemente es evitación.</div>
+  </div>
+</div>
+
+<!-- E: Expresión ineficaz -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🤷</span>
+    <span class="ss-title">Expresión Ineficaz o Poco Clara</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta identifica y etiqueta correctamente su emoción, pero al comunicarla lo hace de forma tan vaga o indirecta que el oyente no puede responder efectivamente. Insinúa lo que siente en lugar de expresarlo directamente. Si el oyente malinterpreta, puede ignorar o descartar la expresión.</div>
+  </div>
+</div>
+
+<!-- E: Expresión excesiva -->
+<div class="subsection fade-in" onclick="toggleSS(this)">
+  <div class="subsection-header">
+    <span class="ss-emoji">🌋</span>
+    <span class="ss-title">Expresión Afectiva Excesiva</span>
+    <span class="ss-arrow">▼</span>
+  </div>
+  <div class="subsection-body">
+    <div class="definition"><strong>¿Qué significa?</strong> El terapeuta identifica correctamente su emoción pero la expresa con una frecuencia o intensidad que excede lo apropiado para la situación. No puede modular la respuesta afectiva. Puede crear relaciones inapropiadas o ineficaces, especialmente si se trae a sesión y se enfoca en las emociones del terapeuta más que en las del cliente.</div>
+    <div class="tip tip-info">💡 Estos terapeutas también pueden tener problemas con la Clase B (no discriminan el impacto que su expresión excesiva tiene en los demás).</div>
+  </div>
+</div>
+
+<!-- QUIZ E -->
+<div class="quiz fade-in">
+  <div class="quiz-label classE-label">🧩 EJERCICIO — CLASE E</div>
+  <div class="quiz-scenario">"Un terapeuta trabajando con un caso de duelo dice al supervisor: 'La sesión fue intensa. Me sentí un poco cansado después.' Cuando el supervisor explora más, el terapeuta dice: 'No, no fue emocional, solo agotamiento físico.' Sin embargo, el supervisor nota que el terapeuta evitó mirar al cliente durante los momentos más intensos de la sesión."</div>
+  <div class="vignette-question">¿Cuál es la hipótesis más probable?</div>
+  <div class="quiz-options">
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','La evitación previene que la emoción comience. Aquí parece que hubo contacto emocional — hubo agotamiento y evitación de contacto visual IN SESSION.')">🚫 Evitación pura</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'correct','¡Exacto! El terapeuta describe como cansancio algo que probablemente fue tristeza o angustia. La desviar la mirada en sesión sugiere que hubo contacto emocional (escape), y la etiqueta &quot;cansancio&quot; es una somatización — nombrar una emoción como estado corporal.')">🏷️ Etiquetado inexacto (somatización) + escape</button>
+    <button class="quiz-opt" onclick="checkQuiz(this,'wrong','La expresión excesiva implicaría mostrar demasiada emoción. Aquí el problema es lo opuesto.')">🌋 Expresión excesiva</button>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+</div><!-- end classE -->
+
+<!-- ═══════════════════════════════════════ -->
+<!--             INTEGRACIÓN                 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="intro-card fade-in">
+  <h2>🔗 Las clases se conectan</h2>
+  <p>Callaghan insiste en que las 5 clases <strong>no son ortogonales</strong> — se superponen y se alimentan mutuamente. Algunos patrones comunes:</p>
+  <p>🔸 Un terapeuta con problemas de <strong>Clase E</strong> (no tolera emociones) probablemente también evitará conflicto (<strong>Clase C</strong>) y cercanía interpersonal (<strong>Clase D</strong>).</p>
+  <p>🔸 Un terapeuta con <strong>hipersensibilidad al feedback</strong> (Clase B) puede ceder excesivamente ante el conflicto (<strong>Clase C</strong>) y no expresar sus necesidades (<strong>Clase A</strong>).</p>
+  <p>🔸 Un terapeuta que <strong>escala conflictos</strong> (Clase C) puede hacerlo porque es la única forma que conoce de obtener cercanía (<strong>Clase D</strong>).</p>
+  <div class="tip tip-key">🔑 <strong>Siempre verificar discriminación primero.</strong> En cualquier clase, antes de intervenir en el repertorio de respuesta, hay que asegurarse de que el terapeuta puede detectar lo que está pasando. Si la discriminación no está intacta, entrenar respuestas no generalizará a situaciones nuevas.</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>FASIT</strong> — Functional Assessment of Skills for Interpersonal Therapists</p>
+  <p>Callaghan, G. M. (2006). <em>The Behavior Analyst Today</em>, 7(3), 399-433.</p>
+  <p>Adaptación pedagógica. No es un instrumento estandarizado.</p>
+  <p style="margin-top:12px">Creado por <a href="https://instagram.com/leo.eyzaguirre" style="color:var(--classA);text-decoration:none;font-weight:600">@leo.eyzaguirre</a></p>
+</div>
+
+</div><!-- container -->
+
+<script>
+function toggleSS(el){
+  // Don't toggle if click was on a button
+  if(event.target.closest('.reveal-btn')||event.target.closest('.quiz-opt'))return;
+  el.classList.toggle('open');
+}
+function toggleReveal(btn){
+  const reveal=btn.nextElementSibling;
+  reveal.classList.toggle('show');
+  btn.textContent=reveal.classList.contains('show')?'🙈 Ocultar análisis':'🔍 Ver análisis';
+}
+function checkQuiz(btn,result,explanation){
+  const quiz=btn.closest('.quiz');
+  const opts=quiz.querySelectorAll('.quiz-opt');
+  const fb=quiz.querySelector('.quiz-feedback');
+  opts.forEach(o=>{o.classList.add('disabled');o.classList.remove('correct','wrong')});
+  if(result==='correct'){
+    btn.classList.add('correct');
+    fb.className='quiz-feedback show correct-fb';
+    fb.innerHTML='✅ '+explanation;
+  }else{
+    btn.classList.add('wrong');
+    fb.className='quiz-feedback show wrong-fb';
+    fb.innerHTML='❌ '+explanation;
+    // Show correct one
+    opts.forEach(o=>{if(!o.classList.contains('wrong')&&o.getAttribute('onclick').includes("'correct'"))o.classList.add('correct')});
+  }
+}
+
+// Scroll animations
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// Smooth scroll for nav
+document.querySelectorAll('.nav-pill').forEach(pill=>{
+  pill.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(pill.getAttribute('href'));
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
