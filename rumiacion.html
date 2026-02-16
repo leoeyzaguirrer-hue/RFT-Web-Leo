@@ -2217,6 +2217,16 @@ function CertScreen({
     }
   }, "Has entrenado las 4 competencias cl\u00EDnicas para abordar la rumiaci\u00F3n desde la Activaci\u00F3n Conductual."), React.createElement(SkillTracker, {
     skills: skills
+  }), React.createElement("canvas", {
+    ref: canvasRef,
+    style: {
+      display: gen ? "block" : "none",
+      width: "100%",
+      maxWidth: 360,
+      borderRadius: 12,
+      border: "2px solid " + C.accent,
+      margin: "0 auto"
+    }
   }), !gen ? React.createElement(Card, null, React.createElement("p", {
     style: {
       fontSize: 18,
@@ -2246,15 +2256,7 @@ function CertScreen({
     onClick: generate,
     disabled: !name.trim(),
     full: true
-  }, "Generar certificado \u{1F393}")) : React.createElement("div", null, React.createElement("canvas", {
-    ref: canvasRef,
-    style: {
-      width: "100%",
-      maxWidth: 360,
-      borderRadius: 12,
-      border: "2px solid " + C.accent
-    }
-  }), React.createElement(Btn, {
+  }, "Generar certificado \u{1F393}")) : React.createElement("div", null, React.createElement(Btn, {
     onClick: download,
     full: true
   }, "Descargar para Instagram Stories \u{1F4F2}"), React.createElement("p", {
