@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CCRs en Sesión | Entrenamiento Clínico FAP</title>
+<meta name="description" content="Entrenamiento interactivo en detección e intervención de Conductas Clínicamente Relevantes (CCRs) desde la Psicoterapia Analítica Funcional">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;overflow-x:hidden;background:#E0D6EE}
+button{-webkit-tap-highlight-color:transparent}
+input{-webkit-appearance:none}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes checkPop{0%{transform:scale(0.9)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script>
+const {
+  useState,
+  useEffect,
+  useRef
+} = React;
+
+// ===== COLORS (same palette as rumination app - series look) =====
+const C = {
+  bg: "#E0D6EE",
+  card: "#FFFFFF",
+  border: "#C5B8DC",
+  text: "#1a1a2e",
+  textMid: "#4a4a6a",
+  textLight: "#8888aa",
+  lv: ["#5C6BC0", "#42A5F5", "#EF6C00", "#26A69A", "#EF5350"],
+  accent: "#7E57C2",
+  ok: "#C8E6C9",
+  okBd: "#43A047",
+  okTx: "#1B5E20",
+  no: "#FFCDD2",
+  noBd: "#E53935",
+  noTx: "#B71C1C",
+  hi: "#F5F0FF"
+};
+
+// ===== LEVEL META =====
+const META = [{
+  t: "La sesi\u00F3n como muestra",
+  e: "\u{1F52C}",
+  d: "Detecta CCR1, CCR2 y CCR3 en sesi\u00F3n"
+}, {
+  t: "Sin formulaci\u00F3n no hay FAP",
+  e: "\u{1F3AF}",
+  d: "Construye el mapa CCR de cada paciente"
+}, {
+  t: "Responder a la CCR",
+  e: "\u{1FA9E}",
+  d: "Reforzamiento natural vs artificial"
+}, {
+  t: "El flujo completo",
+  e: "\u{1F4AC}",
+  d: "Integra detectar + formular + responder"
+}, {
+  t: "Sesi\u00F3n simulada: Camila",
+  e: "\u{1F3AF}",
+  d: "Caso cl\u00EDnico completo con consecuencias"
+}];
+const SKILLS = [["\u{1F52C}", "Detectar CCRs"], ["\u{1F3AF}", "Formular CCRs"], ["\u{1FA9E}", "Responder a CCRs"], ["\u{1F4AC}", "Integrar en flujo"]];
+
+// ===== THEORY =====
+var THEORY = {
+  1: [{
+    title: "\u{1F914} \u00BFPor qu\u00E9 esto?",
+    text: "Tu paciente es amable en sesi\u00F3n. Colabora, asiente, nunca se queja. Afuera su vida relacional es un desastre.\n\n\u00BFY si su problema no solo est\u00E1 afuera? \u00BFY si est\u00E1 pasando **AQU\u00CD**, contigo, **ahora mismo** en sesi\u00F3n?\n\nFAP (Kohlenberg & Tsai, 1991) propone algo que cambia tu mirada cl\u00EDnica: los problemas interpersonales del paciente **se repiten en la relaci\u00F3n terap\u00E9utica**. No es transferencia psicoanal\u00EDtica. Es **generalizaci\u00F3n funcional**: el mismo patr\u00F3n conductual que opera afuera, opera contigo."
+  }, {
+    title: "\u{1F52C} Conductas Cl\u00EDnicamente Relevantes",
+    text: "Las CCRs son conductas del paciente que ocurren **en sesi\u00F3n** y son funcionalmente equivalentes a sus problemas de la vida diaria.\n\nNo son \u201Ccualquier cosa que haga el paciente\u201D. Son espec\u00EDficas: el **mismo patr\u00F3n** que le genera problemas afuera, ocurriendo en vivo frente a ti.\n\nHay 3 tipos:\n\n**CCR1** \u{1F534} = El problema ocurriendo EN sesi\u00F3n\n(evitar, complacer, desconectarse, agredir, no pedir)\n\n**CCR2** \u{1F7E2} = La mejor\u00EDa ocurriendo EN sesi\u00F3n\n(expresar, pedir, ser vulnerable, tolerar malestar)\n\n**CCR3** \u{1F535} = El paciente observa su propio patr\u00F3n\n(\u201Cme estoy cerrando ahora mismo contigo\u201D)",
+    quote: "\u201CLos problemas del cliente ocurrir\u00E1n en la relaci\u00F3n terap\u00E9utica\u201D \u2014 Kohlenberg & Tsai (1991)"
+  }, {
+    title: "\u{1F4A1} Por qu\u00E9 esto importa",
+    text: "Si tu paciente evita expresar necesidades en sus relaciones, va a evitar expresar necesidades **contigo**. Cuando le preguntes c\u00F3mo le fue con la tarea y diga \u201Cbien, todo bien\u201D (cuando no entendi\u00F3 nada)... eso no es falta de motivaci\u00F3n.\n\n**Eso es el problema ocurriendo en vivo.**\n\nY ah\u00ED est\u00E1 la oportunidad: si el cambio puede ocurrir en la relaci\u00F3n terap\u00E9utica, la sesi\u00F3n deja de ser solo un lugar donde hablas SOBRE los problemas. Se convierte en el lugar donde los **trabajas directamente**.\n\nLa habilidad que entrenamos: **ver** cu\u00E1ndo eso est\u00E1 pasando."
+  }],
+  2: [{
+    title: "\u{1F914} \u00BFPor qu\u00E9 esto?",
+    text: "Ya sabes qu\u00E9 son CCR1, CCR2 y CCR3. Ahora: **\u00BFc\u00F3mo sabes cu\u00E1l conducta es CCR y cu\u00E1l no?**\n\nSi tu paciente llega tarde, \u00BFes CCR1? Depende. Si su problema es evitaci\u00F3n, quiz\u00E1s. Si su problema es asertividad, probablemente no.\n\n**Sin formulaci\u00F3n de caso, no hay FAP.** Hay adivinanza."
+  }, {
+    title: "\u{1F3AF} El mapa CCR",
+    text: "La formulaci\u00F3n FAP no es diagn\u00F3stico DSM ni esquemas cognitivos. Es identificar la **clase funcional interpersonal central** del paciente.\n\nPregunta clave: **\u00BFCu\u00E1l es el patr\u00F3n relacional que se repite en la vida de esta persona?**\n\nPor ejemplo: \u201CAndr\u00E9s no mantiene relaciones cercanas. Cuando alguien se acerca emocionalmente, se vuelve distante y fr\u00EDo.\u201D\n\nDesde ah\u00ED construyes el mapa:\n\n**CCR1 probable:** Cuando t\u00FA te acerques emocionalmente, Andr\u00E9s se va a distanciar. Respuestas cortas, intelectualizar, cambiar de tema.\n\n**CCR2 esperada:** Que Andr\u00E9s se quede presente cuando algo lo toque. Que diga \u201Cesto me incomoda pero quiero quedarme\u201D.\n\n**CCR3 ideal:** \u201CMe doy cuenta de que acabo de cerrarme. Es lo mismo que hago con mi pareja.\u201D"
+  }, {
+    title: "\u{1F50D} Equivalencia funcional",
+    text: "La clave es la **funci\u00F3n**, no la forma.\n\nUn paciente que evita conflicto puede:\n\u2192 Afuera: no decirle a su pareja que algo le molesta\n\u2192 En sesi\u00F3n: decirte \u201Cs\u00ED, tienes raz\u00F3n\u201D cuando no est\u00E1 de acuerdo\n\nLa **forma** es diferente (silencio con pareja vs complacencia contigo). La **funci\u00F3n** es la misma: evitar el malestar de un posible conflicto.\n\nPor eso necesitas la formulaci\u00F3n: sin ella no puedes ver que \u201Cs\u00ED, tienes raz\u00F3n\u201D y \u201Cno le digo nada a mi esposa\u201D son la **misma conducta**.",
+    quote: "\u201CLa equivalencia funcional entre la conducta en sesi\u00F3n y fuera de ella es lo que hace que las CCRs sean cl\u00EDnicamente relevantes\u201D \u2014 Kohlenberg & Tsai (1991)"
+  }, {
+    title: "\u26A0\uFE0F Filtro: \u00BFes CCR o no?",
+    text: "**S\u00CD es CCR si:**\n\u2713 La conducta en sesi\u00F3n tiene la misma funci\u00F3n que el problema de afuera\n\u2713 Puedes conectarla con el patr\u00F3n central de la formulaci\u00F3n\n\n**NO es CCR si:**\n\u2717 Es conducta normal sin relaci\u00F3n con el patr\u00F3n central\n\u2717 No puedes formular qu\u00E9 funci\u00F3n cumple\n\nEjemplo: paciente que evita conflicto.\n\u2192 Dice \u201Cs\u00ED, todo bien\u201D cuando no entendi\u00F3 \u2192 **CCR1** (evita expresar necesidad)\n\u2192 Pregunta el horario de la pr\u00F3xima sesi\u00F3n \u2192 **No es CCR** (conducta normal)\n\u2192 Pide cambiar de tema cuando algo le incomoda \u2192 **CCR1** (evita malestar relacional)"
+  }],
+  3: [{
+    title: "\u{1F914} \u00BFPor qu\u00E9 esto?",
+    text: "Detectas la CCR. Tienes la formulaci\u00F3n. Sabes que el problema est\u00E1 pasando en vivo.\n\n**\u00BFY ahora qu\u00E9?**\n\nLo que haces DESPU\u00C9S de la CCR es lo que produce cambio. O lo mantiene.\n\nFAP propone: responder de manera **funcionalmente diferente** a como el mundo responde habitualmente al paciente."
+  }, {
+    title: "\u{1F534} Responder a CCR1",
+    text: "CCR1 aparece. El paciente acaba de hacer el problema en vivo. \u00BFQu\u00E9 haces?\n\n**\u274C No ignoras** \u2192 Si no dices nada, el patr\u00F3n se refuerza por defecto\n\n**\u274C No castigas** \u2192 \u201CEst\u00E1s evitando otra vez\u201D genera defensa, no cambio\n\n**\u2705 Haces visible con cuidado** \u2192 \u201CNoto que acabas de decir \u2018no importa\u2019 cuando te pregunt\u00E9 qu\u00E9 sentiste. \u00BFQu\u00E9 pas\u00F3 ah\u00ED?\u201D\n\n**\u2705 Evocas CCR2** \u2192 Abres espacio para que haga algo diferente\n\nLa intervenci\u00F3n ante CCR1 no es se\u00F1alar el error. Es **crear la oportunidad** para CCR2."
+  }, {
+    title: "\u{1F7E2} Responder a CCR2",
+    text: "CCR2 aparece. El paciente acaba de hacer la mejora en vivo. **Este es EL momento.**\n\nFAP propone **reforzamiento natural**: tu reacci\u00F3n aut\u00E9ntica y genuina.\n\n**\u274C Artificial:** \u201C\u00A1Muy bien! Me alegra que pudieras decir eso\u201D\n\u2192 Suena a f\u00F3rmula. El paciente detecta que es t\u00E9cnica.\n\n**\u274C Ignorar:** Sigues con la siguiente pregunta\n\u2192 Oportunidad perdida. No reforzaste el cambio.\n\n**\u2705 Natural:** \u201CLo que acabas de hacer \u2014 decirme directamente que algo te molest\u00F3 \u2014 me importa. Y me hace querer escucharte m\u00E1s.\u201D\n\u2192 Tu reacci\u00F3n humana genuina ante el cambio del otro.",
+    quote: "\u201CEl reforzamiento natural por parte del terapeuta es el mecanismo de cambio central en FAP\u201D \u2014 Kohlenberg & Tsai (1991)"
+  }, {
+    title: "\u26A0\uFE0F El riesgo: reforzamiento artificial",
+    text: "Si tu \u201Crefuerzo\u201D suena a f\u00F3rmula, pasa algo peor que no reforzar:\n\nEl paciente aprende a decir **lo que cree que quieres o\u00EDr** para recibir tu aprobaci\u00F3n.\n\nFelicitaste CCR2... y **provocaste CCR1** (complacer).\n\n\u00BFC\u00F3mo saber si es natural?\n\u2192 **\u00BFEsto que voy a decir lo siento genuinamente?**\n\u2192 **\u00BFResponder\u00EDa as\u00ED si no fuera terapeuta?**\n\u2192 **\u00BFMe estoy viendo afectado por lo que hizo?**\n\nLa autenticidad del terapeuta no es opcional en FAP. **Es el mecanismo de cambio.**"
+  }, {
+    title: "\u{1F527} Lo que NO es FAP",
+    text: "Distinciones importantes:\n\n**NO es halagos** \u274C\n\u201CEres muy valiente por decir eso\u201D \u2192 Juicio evaluativo, no reforzamiento natural.\n\n**NO es t\u00E9cnica mec\u00E1nica** \u274C\n\u201CStep 1: detectar CCR. Step 2: reforzar.\u201D \u2192 Si lo haces como receta, se pierde lo esencial.\n\n**NO es confrontaci\u00F3n** \u274C\n\u201CEstas evitando de nuevo\u201D \u2192 Se\u00F1alar no es evocar.\n\n**NO funciona sin formulaci\u00F3n** \u274C\nSin saber cu\u00E1l es el patr\u00F3n, refuerzas cualquier cosa y llamas a todo CCR.\n\nFAP es relaci\u00F3n genuina **guiada por formulaci\u00F3n funcional**. Ninguna de las dos sola alcanza."
+  }],
+  4: [{
+    title: "\u{1F914} \u00BFPor qu\u00E9 esto?",
+    text: "Ya tienes las piezas:\n\n\u{1F52C} Detectar CCRs\n\u{1F3AF} Formular el mapa\n\u{1FA9E} Responder funcionalmente\n\nEn sesi\u00F3n real, esto no viene por separado. Las CCRs aparecen **r\u00E1pido**, dentro de conversaci\u00F3n normal, sin etiqueta.\n\nCada turno tuyo es una **bifurcaci\u00F3n**: puedes ir al contenido (lo que dice) o a la relaci\u00F3n (lo que est\u00E1 haciendo contigo ahora)."
+  }, {
+    title: "\u{1F504} El flujo FAP",
+    text: "Las 4 reglas b\u00E1sicas del terapeuta FAP en acci\u00F3n:\n\n**Regla 1: Observa** \u{1F441}\uFE0F\nEst\u00E1 atento a las CCRs. No solo a lo que dice, sino a c\u00F3mo se relaciona contigo.\n\n**Regla 2: Evoca** \u{1F4A8}\nCrea situaciones en sesi\u00F3n donde la CCR2 pueda ocurrir. No la fuerces, pero abre espacio.\n\n**Regla 3: Refuerza naturalmente** \u{1F49A}\nCuando CCR2 aparece, responde con tu reacci\u00F3n genuina.\n\n**Regla 4: Observa el efecto** \u{1F50D}\n\u00BFTu respuesta fue reforzante? \u00BFEl paciente se abri\u00F3 m\u00E1s o se cerr\u00F3? Ajusta."
+  }, {
+    title: "\u{1F6A8} Errores comunes",
+    text: "Los errores m\u00E1s frecuentes cuando intentas hacer FAP en flujo:\n\n**Perseguir contenido cuando hay CCR disponible** \u274C\nEl paciente te dice algo vulnerable y t\u00FA sigues con la tarea.\n\n**Reforzar CCR1 sin darte cuenta** \u274C\n\u201CQu\u00E9 bueno que siempre eres tan colaborador\u201D a un paciente que complace.\n\n**Forzar CCR2 antes de tiempo** \u274C\n\u201CDime qu\u00E9 te molesta de m\u00ED\u201D en la sesi\u00F3n 2.\n\n**Confundir intensidad emocional con CCR2** \u274C\nLlorar no es autom\u00E1ticamente mejora. Depende de la formulaci\u00F3n."
+  }],
+  5: [{
+    title: "\u{1F3AF} Sesi\u00F3n simulada",
+    text: "Es hora de integrar todo.\n\nVas a atender a **Camila**, un caso donde las CCRs son la v\u00EDa principal de intervenci\u00F3n.\n\nCada decisi\u00F3n afectar\u00E1 c\u00F3mo responde. Si eliges bien, se abre. Si eliges mal, se cierra o complace.\n\nConf\u00EDa en tu entrenamiento. Empecemos."
+  }]
+};
+
+// ===== EXERCISES =====
+var EX = {
+  1: [
+  // Classify CCRs
+  {
+    type: "classify",
+    instruction: "Lee cada fragmento de sesi\u00F3n. \u00BFEs CCR1 (\u{1F534} problema), CCR2 (\u{1F7E2} mejora) o CCR3 (\u{1F535} auto-observaci\u00F3n)?",
+    items: [{
+      text: "Paciente con dificultad para pedir ayuda. Le preguntas si entendi\u00F3 el ejercicio. Dice: \u201CS\u00ED, s\u00ED, todo claro\u201D. Despu\u00E9s descubres que no entendi\u00F3 nada pero no quiso \u201Cmolestarte\u201D.",
+      a: 0,
+      fb: "CCR1. Evitar pedir es su patr\u00F3n relacional central ocurriendo en vivo contigo."
+    }, {
+      text: "Mismo paciente, semanas despu\u00E9s. Dice: \u201CLa verdad... no entend\u00ED el ejercicio. Me da verg\u00FCenza, pero necesito que me lo expliques de nuevo.\u201D",
+      a: 1,
+      fb: "CCR2. Pidi\u00F3 directamente, expres\u00F3 vulnerabilidad. La mejora ocurriendo en vivo."
+    }, {
+      text: "Paciente que evita conflicto. Le das feedback sobre algo y dice: \u201CMe acabo de dar cuenta de que estaba a punto de decirte que todo est\u00E1 bien cuando no lo est\u00E1.\u201D",
+      a: 2,
+      fb: "CCR3. Auto-observaci\u00F3n en tiempo real de su propio patr\u00F3n. \u201CEstaba a punto de...\u201D es verlo mientras pasa."
+    }, {
+      text: "Paciente que se a\u00EDsla cuando sufre. Est\u00E1 contando algo doloroso y de pronto dice: \u201CBueno, no es tan grave. Hablemos de otra cosa.\u201D",
+      a: 0,
+      fb: "CCR1. Desconectarse emocionalmente y minimizar cuando hay dolor. El mismo patr\u00F3n de aislamiento que tiene afuera."
+    }, {
+      text: "Paciente que complace. Al final de sesi\u00F3n, por primera vez dice: \u201CHoy no me senti\u00F3 \u00FAtil la sesi\u00F3n. Siento que no avanzamos.\u201D",
+      a: 1,
+      fb: "CCR2. Un paciente que complace diciendo algo negativo al terapeuta es una mejora enorme. Expres\u00F3 insatisfacci\u00F3n directamente."
+    }, {
+      text: "Paciente que evita intimidad. Dices algo genuinamente c\u00E1lido y responde con un chiste. Despu\u00E9s dice: \u201CSiempre hago eso. Cuando alguien se acerca, meto humor para no sentir.\u201D",
+      a: 2,
+      fb: "CCR3. Primero hizo CCR1 (el chiste), pero inmediatamente lo observ\u00F3 y lo nombr\u00F3. Esa auto-observaci\u00F3n es CCR3."
+    }]
+  },
+  // Spot CCR in dialogue
+  {
+    type: "spot",
+    instruction: "En este di\u00E1logo, la paciente (que tiene dificultad para expresar malestar) emite una CCR. \u00BFEn qu\u00E9 l\u00EDnea?",
+    lines: [{
+      s: "T",
+      t: "\u00BFC\u00F3mo te fue con lo que hablamos la semana pasada?"
+    }, {
+      s: "P",
+      t: "Bien, hice el ejercicio de valores. Fue interesante."
+    }, {
+      s: "T",
+      t: "\u00BFQu\u00E9 descubriste?"
+    }, {
+      s: "P",
+      t: "Que quiero relaciones m\u00E1s honestas. Pero es dif\u00EDcil."
+    }, {
+      s: "T",
+      t: "\u00BFQu\u00E9 lo hace dif\u00EDcil?"
+    }, {
+      s: "P",
+      t: "Bueno... la verdad es que la semana pasada me molest\u00F3 algo que me dijiste. Y no te dije nada."
+    }, {
+      s: "T",
+      t: "\u00BFQu\u00E9 te molest\u00F3?"
+    }],
+    correct: 5,
+    fb: "En la l\u00EDnea 6, la paciente hace algo que NO hace normalmente: expresar malestar directamente al terapeuta. Eso es CCR2 \u2014 la mejora ocurriendo en vivo. Notar\u00E1s que fue justo despu\u00E9s de hablar de \u2018relaciones m\u00E1s honestas\u2019. La sesi\u00F3n cre\u00F3 el contexto."
+  },
+  // Expert trap
+  {
+    type: "trap",
+    title: "\u{1FA9C} Trampa del terapeuta",
+    scenario: "Tu paciente tiene dificultad para decir que no. En sesi\u00F3n le propones un ejercicio de exposici\u00F3n que le parece excesivo. Dice: \u201CS\u00ED, dale, hagamos eso.\u201D Lo hace, pero se ve inc\u00F3moda. Al final dice: \u201CEstuvo bien, gracias.\u201D",
+    q: "\u00BFQu\u00E9 acaba de pasar?",
+    opts: [{
+      t: "La paciente colabor\u00F3 bien con el ejercicio, buena alianza terap\u00E9utica",
+      c: false,
+      fb: "Su \u2018colaboraci\u00F3n\u2019 ES su problema. No puede decir que no. T\u00FA provocaste CCR1 y la reforzaste."
+    }, {
+      t: "La paciente hizo CCR1 (complaci\u00F3 en vez de expresar incomodidad) y el terapeuta la reforz\u00F3 sin darse cuenta",
+      c: true,
+      fb: "Exacto. \u201CS\u00ED, dale\u201D cuando quer\u00EDa decir \u201Cme parece demasiado\u201D es su problema en vivo. Y al seguir adelante, le ense\u00F1aste que complacer funciona."
+    }, {
+      t: "Necesita m\u00E1s psicoeducaci\u00F3n sobre la importancia de los ejercicios",
+      c: false,
+      fb: "No es falta de entendimiento. Es su patr\u00F3n relacional: dice s\u00ED para evitar conflicto."
+    }]
+  }],
+  2: [
+  // Build CCR map
+  {
+    type: "map",
+    instruction: "Dado el problema fuera de sesi\u00F3n, elige la CCR1 m\u00E1s probable en sesi\u00F3n.",
+    cases: [{
+      problem: "Elena no puede mantener l\u00EDmites. Dice s\u00ED a todo, se sobrecarga, y despu\u00E9s explota o desaparece.",
+      q: "\u00BFCu\u00E1l ser\u00EDa CCR1 en sesi\u00F3n?",
+      opts: ["Acepta todas tus propuestas sin cuestionar, incluso las que no le sirven", "Llega tarde a las sesiones", "Habla mucho sobre sus emociones"],
+      c: 0,
+      fb: "Decir s\u00ED a todo en sesi\u00F3n = no poner l\u00EDmites contigo. Misma funci\u00F3n que afuera."
+    }, {
+      problem: "Roberto se cierra emocionalmente cuando alguien se acerca. Sus relaciones siempre se estancan en lo superficial.",
+      q: "\u00BFCu\u00E1l ser\u00EDa CCR1 en sesi\u00F3n?",
+      opts: ["Habla solo de hechos, intelectualiza, evita contacto emocional contigo", "No hace las tareas entre sesiones", "Se queja frecuentemente"],
+      c: 0,
+      fb: "Intelectualizar y mantenerse en lo racional contigo = la misma distancia emocional que tiene afuera."
+    }, {
+      problem: "Sof\u00EDa busca aprobaci\u00F3n constante. Moldea su conducta seg\u00FAn lo que cree que el otro quiere.",
+      q: "\u00BFCu\u00E1l ser\u00EDa CCR2 (mejora) en sesi\u00F3n?",
+      opts: ["Hace exactamente lo que le sugieres en terapia", "Te dice que no est\u00E1 de acuerdo con algo que propusiste", "Llora en sesi\u00F3n"],
+      c: 1,
+      fb: "Decir \u2018no estoy de acuerdo\u2019 a ALGUIEN QUE BUSCA COMPLACER es CCR2 pura. Dej\u00F3 de moldear su conducta por tu aprobaci\u00F3n."
+    }]
+  },
+  // Filter: CCR or not?
+  {
+    type: "filter",
+    instruction: "Paciente: Diego, problema central: evita expresar vulnerabilidad. \u00BFCu\u00E1les de estas conductas en sesi\u00F3n son CCR1?",
+    items: [{
+      text: "Dice \u201Cestoy bien\u201D cuando claramente no lo est\u00E1",
+      ccr: true,
+      fb: "CCR1. Oculta vulnerabilidad contigo = misma funci\u00F3n que afuera."
+    }, {
+      text: "Pide cambiar el horario de la cita",
+      ccr: false,
+      fb: "Conducta normal. No tiene relaci\u00F3n con su patr\u00F3n de evitar vulnerabilidad."
+    }, {
+      text: "Cuando le preguntas qu\u00E9 siente, responde con an\u00E1lisis racional",
+      ccr: true,
+      fb: "CCR1. Intelectualizar = evitar el contacto emocional directo contigo."
+    }, {
+      text: "Te pide una recomendaci\u00F3n de libro sobre ansiedad",
+      ccr: false,
+      fb: "Conducta normal. Puede o no ser relevante, pero no es funcionalmente equivalente a su problema central."
+    }, {
+      text: "Hace un chiste cada vez que la conversaci\u00F3n se pone intensa",
+      ccr: true,
+      fb: "CCR1. Humor como escape de la vulnerabilidad. Misma funci\u00F3n que afuera: desconectarse cuando algo toca."
+    }]
+  },
+  // Full case
+  {
+    type: "fullcase",
+    caseText: "Marcela, 35 a\u00F1os. En sus relaciones siempre termina cuidando al otro. Atrae personas que necesitan ayuda. Nunca pide nada para s\u00ED misma. Cuando necesita algo, se siente culpable.",
+    q1: {
+      label: "Patr\u00F3n central:",
+      opts: ["No pone l\u00EDmites y explota", "Cuida al otro para evitar pedir para s\u00ED misma", "Tiene dificultad para confiar"],
+      c: 1,
+      fb: "Cuidar al otro es la cara visible. La funci\u00F3n: evitar la vulnerabilidad de necesitar algo del otro."
+    },
+    q2: {
+      label: "CCR1 probable en sesi\u00F3n:",
+      opts: ["Se preocupa por c\u00F3mo est\u00E1s t\u00FA como terapeuta, te pregunta si est\u00E1s cansado", "Llega tarde a las sesiones", "Habla solo de problemas de otros"],
+      c: 0,
+      fb: "Cuidarte a TI en sesi\u00F3n es exactamente su patr\u00F3n: priorizar al otro para no pedir para s\u00ED misma."
+    },
+    q3: {
+      label: "CCR2 esperada:",
+      opts: ["Que hable de sus logros de la semana", "Que te diga: \u201CHoy necesito que me escuches. Solo eso.\u201D", "Que analice por qu\u00E9 cuida tanto al otro"],
+      c: 1,
+      fb: "Pedir directamente lo que necesita \u2014 sin cuidarte a ti primero \u2014 es la mejora en vivo."
+    }
+  }],
+  3: [
+  // Best response to CCR2
+  {
+    type: "bestq",
+    instruction: "CCR2 aparece. Elige la mejor respuesta.",
+    scenarios: [{
+      ctx: "Paciente que siempre complace. Por primera vez te dice: \u201CNo estoy de acuerdo con lo que dijiste la sesi\u00F3n pasada. Me pareci\u00F3 injusto.\u201D",
+      opts: [{
+        t: "\u201CEntiendo. \u00BFPuedes decirme m\u00E1s sobre qu\u00E9 te pareci\u00F3 injusto?\u201D",
+        c: false,
+        fb: "No es mala respuesta, pero se va al contenido. Perdiste el momento de reforzar que te lo DIJO."
+      }, {
+        t: "\u201C\u00A1Muy bien! Me alegra que puedas expresar eso.\u201D",
+        c: false,
+        fb: "Reforzamiento artificial. Suena a f\u00F3rmula. Riesgo: que vuelva a complacer para recibir tu aprobaci\u00F3n."
+      }, {
+        t: "\u201CQue me digas esto directamente, sabiendo que te cuesta \u2014 me importa. Quiero escuchar qu\u00E9 te pareci\u00F3 injusto.\u201D",
+        c: true,
+        fb: "Reforzamiento natural: reconoces lo que acaba de hacer (CCR2) con impacto genuino, y abres espacio para continuar."
+      }, {
+        t: "\u201C\u00BFPor qu\u00E9 crees que no me lo dijiste antes?\u201D",
+        c: false,
+        fb: "Lleva a analizar el pasado en vez de reforzar lo que est\u00E1 haciendo AHORA."
+      }]
+    }, {
+      ctx: "Paciente que evita intimidad emocional. Despu\u00E9s de meses de intelectualizar, dice con voz quebrada: \u201CMe siento muy solo. Nunca le digo esto a nadie.\u201D",
+      opts: [{
+        t: "\u201CEs normal sentirse solo a veces. Muchas personas lo experimentan.\u201D",
+        c: false,
+        fb: "Normalizas pero minimizas. Perdiste el momento \u00FAnico: te acaba de dejar entrar."
+      }, {
+        t: "Silencio c\u00E1lido, contacto visual, y despu\u00E9s: \u201CGracias por dejarme estar aqu\u00ED contigo en esto.\u201D",
+        c: true,
+        fb: "Reforzamiento natural: tu presencia genuina ES el refuerzo. No necesitas palabras elaboradas. Tu estar ah\u00ED es lo opuesto a lo que el mundo le da."
+      }, {
+        t: "\u201C\u00BFDesde cu\u00E1ndo te sientes as\u00ED?\u201D",
+        c: false,
+        fb: "Lleva de la experiencia al an\u00E1lisis. Justo cuando se abri\u00F3, lo mandas a pensar."
+      }, {
+        t: "\u201CEs un gran avance que puedas decir eso. Buen trabajo.\u201D",
+        c: false,
+        fb: "Artificial. \u2018Buen trabajo\u2019 convierte un momento \u00EDntimo en una evaluaci\u00F3n de desempe\u00F1o."
+      }]
+    }]
+  },
+  // Respond to CCR1
+  {
+    type: "ccr1resp",
+    instruction: "CCR1 aparece. \u00BFC\u00F3mo respondes?",
+    scenarios: [{
+      ctx: "Paciente que evita conflicto. Le das feedback sobre un patr\u00F3n. Dice r\u00E1pidamente: \u201CS\u00ED, s\u00ED, tienes toda la raz\u00F3n.\u201D Sonr\u00EDe. Cambia de tema.",
+      opts: [{
+        t: "\u201CMe doy cuenta de que dijiste \u2018tienes raz\u00F3n\u2019 muy r\u00E1pido. \u00BFRealmente estuviste de acuerdo o fue m\u00E1s f\u00E1cil decir que s\u00ED?\u201D",
+        ok: true,
+        fb: "Haces visible CCR1 sin juzgar. Abres espacio para que explore qu\u00E9 pas\u00F3."
+      }, {
+        t: "Sigues con la sesi\u00F3n normalmente",
+        ok: false,
+        fb: "Ignoraste CCR1. El patr\u00F3n se refuerza: complacer funciona, nadie lo nota."
+      }, {
+        t: "\u201CSiempre est\u00E1s de acuerdo conmigo. Eso es parte de tu problema.\u201D",
+        ok: false,
+        fb: "Confrontaci\u00F3n directa que genera defensa. Hacer visible no es atacar."
+      }]
+    }, {
+      ctx: "Paciente que se a\u00EDsla cuando sufre. Est\u00E1 contando algo doloroso sobre su padre. De repente dice: \u201CBueno, ya fue. No tiene sentido hablar de esto.\u201D y se cruza de brazos.",
+      opts: [{
+        t: "\u201CTienes raz\u00F3n, cambiemos de tema. \u00BFC\u00F3mo te fue en el trabajo?\u201D",
+        ok: false,
+        fb: "Te uniste a la evitaci\u00F3n. Reforzaste CCR1."
+      }, {
+        t: "\u201CAlgo pas\u00F3 justo ahora. Estabas contando algo importante y de pronto cerraste. \u00BFQu\u00E9 sentiste?\u201D",
+        ok: true,
+        fb: "Haces visible el momento exacto del cambio. No lo fuerzas a volver al padre, sino a notar qu\u00E9 pas\u00F3 internamente."
+      }, {
+        t: "\u201CEs importante que hablemos de tu padre. Contin\u00FAa.\u201D",
+        ok: false,
+        fb: "Fuerzas el contenido en vez de trabajar el proceso. No respetas el cierre del paciente."
+      }]
+    }, {
+      ctx: "Paciente que busca aprobaci\u00F3n. Despu\u00E9s de contarte algo le pregunta: \u201C\u00BFEso estuvo bien? \u00BFHice bien en decirle eso a mi jefe?\u201D",
+      opts: [{
+        t: "\u201CS\u00ED, creo que lo manejaste muy bien.\u201D",
+        ok: false,
+        fb: "Diste la aprobaci\u00F3n que busca. Reforzaste CCR1 directamente."
+      }, {
+        t: "\u201CAntes de responderte: \u00BFqu\u00E9 piensas T\u00DA? \u00BFC\u00F3mo te sentiste despu\u00E9s de decirlo?\u201D",
+        ok: true,
+        fb: "Evocas CCR2: que forme su propia opini\u00F3n en vez de buscar la tuya. La validaci\u00F3n tiene que venir de adentro."
+      }, {
+        t: "\u201CSiempre me preguntas si lo hiciste bien. Eso es parte de tu patr\u00F3n.\u201D",
+        ok: false,
+        fb: "Correcto pero demasiado directo. Hacer visible requiere cuidado, no confrontaci\u00F3n."
+      }]
+    }]
+  },
+  // Detect artificial reinforcement
+  {
+    type: "artificial",
+    instruction: "El terapeuta intenta reforzar CCR2. \u00BFEs reforzamiento natural o artificial?",
+    items: [{
+      dialogue: "Paciente expresa enojo por primera vez. Terapeuta: \u201C\u00A1Excelente! Eso es justo lo que quer\u00EDamos lograr.\u201D",
+      ans: "artificial",
+      fb: "\u201CJusto lo que quer\u00EDamos lograr\u201D convierte la emoci\u00F3n en tarea cumplida. Artificial."
+    }, {
+      dialogue: "Paciente dice que la sesi\u00F3n no le sirvi\u00F3. Terapeuta, genuinamente: \u201CEso me importa. Quiero que este espacio te sirva. \u00BFQu\u00E9 necesitar\u00EDas diferente?\u201D",
+      ans: "natural",
+      fb: "Reacci\u00F3n genuina: le import\u00F3 de verdad y respondi\u00F3 desde ah\u00ED. Natural."
+    }, {
+      dialogue: "Paciente llora por primera vez en sesi\u00F3n. Terapeuta: \u201CMuy bien, est\u00E1s en contacto con tus emociones. Eso es progreso.\u201D",
+      ans: "artificial",
+      fb: "\u201CMuy bien\u201D + \u201Cprogreso\u201D = evaluaci\u00F3n de desempe\u00F1o. Artificial."
+    }, {
+      dialogue: "Paciente pide ayuda directamente. Terapeuta, con voz suave: \u201CQue me pidas esto directamente... me llega. Claro que te ayudo.\u201D",
+      ans: "natural",
+      fb: "Se ve afectado genuinamente por lo que el paciente hizo. Responde como persona, no como t\u00E9cnico. Natural."
+    }]
+  }],
+  4: [
+  // Mini dialogue 1: Patient who pleases
+  {
+    type: "dialogue",
+    title: "Diego: el complaciente",
+    turns: [{
+      p: "Hice todo lo que me pediste esta semana. El ejercicio de exposici\u00F3n, el registro, todo. \u00BFEstuvo bien?",
+      opts: [{
+        t: "S\u00ED, muy bien Diego. Se nota tu compromiso.",
+        ok: false,
+        next: 2,
+        fb: "Reforzaste CCR1: hacer todo \u2018bien\u2019 para tu aprobaci\u00F3n."
+      }, {
+        t: "Antes de decirte si estuvo bien... \u00BFc\u00F3mo te sent\u00ED TU haci\u00E9ndolo?",
+        ok: true,
+        next: 1,
+        fb: "Redireccionas de buscar aprobaci\u00F3n externa a auto-evaluaci\u00F3n."
+      }]
+    }, {
+      p: "Mmm... la verdad, el de exposici\u00F3n me pareci\u00F3 demasiado. Pero lo hice igual porque no quer\u00EDa quedar mal contigo.",
+      opts: [{
+        t: "Diego, lo que acabas de decirme \u2014 que fue demasiado y que lo hiciste por m\u00ED \u2014 es m\u00E1s valioso que cualquier ejercicio perfecto.",
+        ok: true,
+        next: 3,
+        fb: "Reforzamiento natural de CCR2: valor\u00F3 la honestidad por encima de la complacencia."
+      }, {
+        t: "Entiendo. La pr\u00F3xima vez aj\u00FAstalo a tu ritmo.",
+        ok: false,
+        next: 3,
+        fb: "V\u00E1lido pero perdiste el momento FAP: no reforzaste que te lo DIJO."
+      }]
+    }, {
+      p: "Ok, genial. \u00BFQu\u00E9 hago esta semana?",
+      opts: [{
+        t: "Noto que dijiste \u2018ok genial\u2019 muy r\u00E1pido. \u00BFRealmente fue genial o es m\u00E1s f\u00E1cil decir que s\u00ED?",
+        ok: true,
+        next: 3,
+        fb: "Haces visible CCR1 en el momento. Buen recovery."
+      }, {
+        t: "Esta semana quiero que...",
+        ok: false,
+        next: 3,
+        fb: "Seguiste adelante. CCR1 pasa desapercibida."
+      }]
+    }, {
+      p: "...Tienes raz\u00F3n. A veces digo que s\u00ED porque me da miedo decepcionarte.",
+      opts: [{
+        t: "Eso que acabas de hacer \u2014 decirme que tienes miedo de decepcionarme \u2014 es exactamente lo que necesitas practicar. Y aqu\u00ED estamos. No me decepcionaste.",
+        ok: true,
+        next: "good",
+        fb: "CCR2 + reforzamiento natural + generalizaci\u00F3n impl\u00EDcita."
+      }, {
+        t: "\u00BFDesde cu\u00E1ndo sientes esa necesidad de no decepcionar?",
+        ok: false,
+        next: "good",
+        fb: "V\u00E1lido, pero se va al an\u00E1lisis. El momento FAP era reforzar lo que acaba de hacer."
+      }]
+    }],
+    good: "Diego reconoce su patr\u00F3n contigo y practica hacer algo diferente. El cambio est\u00E1 ocurriendo en la relaci\u00F3n. \u{1F44F}",
+    bad: "Diego sigue complaciendo. La sesi\u00F3n fue \u2018productiva\u2019 en contenido pero el patr\u00F3n relacional no se toc\u00F3."
+  },
+  // Resistance/rapid detection
+  {
+    type: "rapid",
+    instruction: "Detecci\u00F3n r\u00E1pida. Lee cada fragmento: \u00BFhay CCR? \u00BFCu\u00E1l?",
+    items: [{
+      text: "Paciente (evita pedir ayuda): \u201CNo te preocupes, yo investigo por mi cuenta.\u201D",
+      opts: ["\u{1F534} CCR1: evita pedirte ayuda", "\u{1F7E2} CCR2: muestra autonom\u00EDa", "No es CCR"],
+      c: 0,
+      fb: "\u201CNo te preocupes\u201D + \u201Cyo investigo\u201D = evitar pedir. CCR1."
+    }, {
+      text: "Paciente (busca aprobaci\u00F3n): \u201CS\u00E9 que quiz\u00E1s no te guste esto, pero decid\u00ED no seguir tu sugerencia. Me pareci\u00F3 que no era para m\u00ED.\u201D",
+      opts: ["\u{1F534} CCR1: desaf\u00EDa la autoridad", "\u{1F7E2} CCR2: toma su propia decisi\u00F3n sin buscar aprobaci\u00F3n", "No es CCR"],
+      c: 1,
+      fb: "En alguien que busca aprobaci\u00F3n, decidir por s\u00ED misma aunque el terapeuta piense diferente = CCR2."
+    }, {
+      text: "Paciente (evita conflicto): \u201CLa sesi\u00F3n pasada me qued\u00E9 pensando que no estoy de acuerdo con algo que dijiste.\u201D",
+      opts: ["\u{1F534} CCR1: rumiaci\u00F3n sobre la sesi\u00F3n", "\u{1F7E2} CCR2: expresa desacuerdo directo", "No es CCR"],
+      c: 1,
+      fb: "Expresar desacuerdo al terapeuta = CCR2 para alguien que evita conflicto."
+    }]
+  }]
+};
+
+// ===== CASE LEVEL 5 =====
+var CASE5 = {
+  intro: "Camila, 30 a\u00F1os, psic\u00F3loga educativa. Su \u00FAltima relaci\u00F3n termin\u00F3 hace 5 meses. \u201CNunca le dije lo que necesitaba. Siempre prioric\u00E9 lo que \u00E9l quer\u00EDa.\u201D En sus amistades es \u201Cla que siempre escucha\u201D. En el trabajo asume tareas extra sin quejarse. Llega a terapia diciendo: \u201CQuiero aprender a ser menos intensa y molestar menos a la gente.\u201D",
+  stages: [{
+    title: "Etapa 1: Detectar CCR1 \u{1F534}",
+    prompt: "Segunda sesi\u00F3n. Le pides que cuente c\u00F3mo fue su semana. Dice: \u201CBien, bastante normal. \u00BFT\u00FA c\u00F3mo est\u00E1s? Se te ve cansado hoy.\u201D",
+    q: "\u00BFQu\u00E9 est\u00E1 pasando?",
+    opts: [{
+      t: "Conducta normal, est\u00E1 siendo amable",
+      ok: false,
+      cons: "Respondes: \u2018Estoy bien, gracias por preguntar.\u2019 La sesi\u00F3n se va a contenido superficial.",
+      fb: "Preocuparse por ti en vez de hablar de s\u00ED misma ES su patr\u00F3n: priorizar al otro para no exponer necesidades propias."
+    }, {
+      t: "CCR1: est\u00E1 cuidando al terapeuta para evitar hablar de s\u00ED misma",
+      ok: true,
+      cons: "Detectas el patr\u00F3n. Ahora puedes decidir c\u00F3mo intervenir.",
+      fb: "\u201C\u00BFT\u00FA c\u00F3mo est\u00E1s?\u201D no es amabilidad neutral. Es su patr\u00F3n relacional central: poner al otro primero."
+    }, {
+      t: "Ruptura de alianza, est\u00E1 evitando la terapia",
+      ok: false,
+      cons: "Exploras resistencia. Camila dice \u2018no, no, todo bien, perd\u00F3n.\u2019 Se cierra m\u00E1s.",
+      fb: "No es resistencia a la terapia. Es su forma de relacionarse: cuidar al otro."
+    }]
+  }, {
+    title: "Etapa 2: Hacer visible \u{1FA9E}",
+    prompt: "Detectaste CCR1. Ahora necesitas hacerla visible sin que Camila se sienta atacada.",
+    q: "\u00BFQu\u00E9 le dices?",
+    opts: [{
+      t: "\u201CCamila, noto algo: te pregunt\u00E9 por tu semana y me preguntaste por m\u00ED. \u00BFQu\u00E9 pasa si ponemos el foco en ti?\u201D",
+      ok: true,
+      cons: "Pausa. \u2018...Es que siempre hago eso, \u00BFno? Me preocupo por los dem\u00E1s para no hablar de m\u00ED.\u2019",
+      fb: "Haces visible sin juzgar. Camila lo reconoce sola."
+    }, {
+      t: "\u201CEst\u00E1s repitiendo tu patr\u00F3n de cuidar al otro.\u201D",
+      ok: false,
+      cons: "\u2018\u00BFQu\u00E9? No, solo estaba siendo amable. Perd\u00F3n.\u2019 Se disculpa y se cierra.",
+      fb: "Demasiado directo. Etiquetar genera defensa."
+    }, {
+      t: "\u201CEstoy bien, gracias. Cu\u00E9ntame de tu semana.\u201D",
+      ok: false,
+      cons: "Habla de su semana superficialmente. CCR1 pas\u00F3 desapercibida.",
+      fb: "Ignoraste CCR1. Oportunidad perdida."
+    }]
+  }, {
+    title: "Etapa 3: Evocar CCR2 \u{1F7E2}",
+    prompt: "Camila dice: \u2018Es que siempre hago eso. Pero ac\u00E1 \u00BFqu\u00E9 se supone que haga? No s\u00E9 c\u00F3mo ser diferente.\u2019",
+    q: "\u00BFC\u00F3mo evocas CCR2?",
+    opts: [{
+      t: "\u201CAhora mismo, en este momento: \u00BFqu\u00E9 necesitas de m\u00ED? No lo que crees que deber\u00EDas necesitar. Lo que realmente necesitas.\u201D",
+      ok: true,
+      cons: "Silencio largo. \u2018...Necesito que no me juzgues si digo algo ego\u00EDsta.\u2019 Primera vez que pide algo.",
+      fb: "Evocaste CCR2 en tiempo real. No le ense\u00F1aste qu\u00E9 hacer, le creaste el espacio para hacerlo."
+    }, {
+      t: "\u201CVamos a practicar con un role-play: imagina que soy tu pareja y pract\u00EDcame decir que no.\u201D",
+      ok: false,
+      cons: "\u2018Ok, dale.\u2019 Lo hace bien en el role-play. Pero es actuaci\u00F3n, no CCR2 real.",
+      fb: "Role-play no es FAP. El cambio real es con la relaci\u00F3n terap\u00E9utica, no simulando otra."
+    }, {
+      t: "\u201CReflexiona esta semana sobre qu\u00E9 necesitar\u00EDas diferente en tus relaciones.\u201D",
+      ok: false,
+      cons: "\u2018Listo, lo pienso.\u2019 Semana siguiente: un an\u00E1lisis intelectual perfecto. Ninguna CCR2.",
+      fb: "Mandaste la oportunidad a \u2018fuera de sesi\u00F3n\u2019. FAP es AQU\u00CD y AHORA."
+    }]
+  }, {
+    title: "Etapa 4: Reforzar naturalmente \u{1F49A}",
+    prompt: "Camila dice con voz baja: \u2018Necesito que no me juzgues si digo algo ego\u00EDsta.\u2019 Pausa. \u2018A veces... quiero que alguien me pregunte c\u00F3mo estoy YO. Sin que yo tenga que preguntar primero.\u2019",
+    q: "\u00BFC\u00F3mo refuerzas esta CCR2?",
+    opts: [{
+      t: "\u201C\u00A1Excelente, Camila! Eso es justo lo que necesitamos que practiques.\u201D",
+      ok: false,
+      cons: "Sonr\u00EDe. \u2018Gracias.\u2019 Cambia de tema. Volvi\u00F3 a complacer: dijo lo que quer\u00EDas o\u00EDr.",
+      fb: "Reforzamiento artificial. \u2018Excelente\u2019 + \u2018lo que necesitamos\u2019 = evaluaci\u00F3n t\u00E9cnica. No impacto humano."
+    }, {
+      t: "Pausa. La miras. \u201CEso que acabas de decir no es ego\u00EDsmo, Camila. Es necesitar. Y a m\u00ED me importa saber lo que necesitas.\u201D",
+      ok: true,
+      cons: "Se le llenan los ojos de l\u00E1grimas. \u2018Nadie me hab\u00EDa dicho eso.\u2019 Se queda presente. No huye.",
+      fb: "Reforzamiento natural: tu reacci\u00F3n genuina ante su vulnerabilidad. Le diste exactamente lo que nunca recibi\u00F3: que alguien quiera saber qu\u00E9 necesita."
+    }, {
+      t: "\u201C\u00BFDesde cu\u00E1ndo sientes que no puedes pedir eso?\u201D",
+      ok: false,
+      cons: "Piensa. \u2018Desde chica, mi mam\u00E1 siempre necesitaba que yo fuera la fuerte.\u2019 Se va al an\u00E1lisis hist\u00F3rico.",
+      fb: "V\u00E1lido en otro momento. Pero justo ahora, ir al pasado interrumpe el momento presente de conexi\u00F3n."
+    }]
+  }, {
+    title: "Etapa 5: CCR3 + Generalizaci\u00F3n \u{1F504}",
+    prompt: "Camila se limpia las l\u00E1grimas. Dice: \u2018Esto que acabo de hacer ac\u00E1... decirte lo que necesito... es lo que nunca hice con Mart\u00EDn. Ni con nadie.\u2019",
+    q: "\u00BFC\u00F3mo facilitas la conexi\u00F3n sesi\u00F3n \u2194 vida?",
+    opts: [{
+      t: "\u201CExactamente. Y si pudiste hacerlo aqu\u00ED, puedes empezar a practicarlo afuera. \u00BFCon qui\u00E9n podr\u00EDas intentarlo esta semana?\u201D",
+      ok: true,
+      cons: "Piensa. \u2018Quiz\u00E1s con mi amiga Laura. Ella siempre me pregunta c\u00F3mo estoy y yo siempre digo \u2018bien\u2019.\u2019 Plan concreto.",
+      fb: "Generalizaci\u00F3n natural: lo que hizo AQUÍ lo lleva AFUERA. CCR3 + plan conductual."
+    }, {
+      t: "\u201CS\u00ED, es un patr\u00F3n que viene de lejos. Vamos a trabajarlo.\u201D",
+      ok: false,
+      cons: "\u2018Ok.\u2019 La sesi\u00F3n se vuelve gen\u00E9rica. El momento de conexi\u00F3n se diluy\u00F3.",
+      fb: "Respuesta gen\u00E9rica que no aprovecha la CCR3. Ella ya hizo la conexi\u00F3n; necesitaba que la amplificaras."
+    }, {
+      t: "\u201C\u00BFQu\u00E9 se siente haber dicho eso en voz alta, aqu\u00ED, ahora?\u201D",
+      ok: true,
+      cons: "\u2018Se siente raro. Pero... bien. Como que puedo respirar.\u2019 Contacta la experiencia del cambio.",
+      fb: "Profundizas CCR3: que no solo OBSERVE el patr\u00F3n sino que SIENTA la diferencia. Experiencia del cambio en vivo."
+    }]
+  }]
+};
+
+// ===== ASSESSMENT =====
+var ASSESS = [{
+  q: "Tu paciente dice \u201CS\u00ED, tienes raz\u00F3n\u201D a todo lo que propones, pero fuera de sesi\u00F3n no cambia nada. \u00BFQu\u00E9 pasa?",
+  opts: ["Falta motivaci\u00F3n para cambiar", "No entiende las instrucciones", "Su patr\u00F3n de complacer (CCR1) est\u00E1 ocurriendo contigo", "Necesita psicoeducaci\u00F3n"],
+  best: 2
+}, {
+  q: "Tu paciente que evita conflicto te dice: \u201CMe molest\u00F3 que llegaras tarde.\u201D \u00BFQu\u00E9 es esto?",
+  opts: ["Una queja que debo resolver", "CCR2: est\u00E1 expresando malestar directamente", "Transferencia negativa", "Se\u00F1al de ruptura de alianza"],
+  best: 1
+}, {
+  q: "Dices \u201C\u00A1Muy bien! Me alegra que pudieras expresar eso\u201D despu\u00E9s de una CCR2. \u00BFCu\u00E1l es el riesgo?",
+  opts: ["Ninguno, es reforzamiento positivo", "Que se sienta infantilizado", "Que sea reforzamiento artificial y evoque CCR1", "Que pierda el hilo de la sesi\u00F3n"],
+  best: 2
+}];
+var SUMMARIES = ["Las CCRs son conductas del paciente en sesi\u00F3n que son funcionalmente equivalentes a sus problemas de afuera. CCR1 = problema en vivo. CCR2 = mejora en vivo. CCR3 = auto-observaci\u00F3n.", "Sin formulaci\u00F3n de caso no hay FAP. Necesitas saber el patr\u00F3n central para distinguir CCR de conducta normal. La clave es la funci\u00F3n, no la forma.", "Ante CCR1: hacer visible sin castigar. Ante CCR2: reforzamiento natural (tu reacci\u00F3n genuina). Artificial = \u2018Muy bien\u2019. Natural = tu impacto humano real.", "El flujo FAP: observar \u2192 evocar \u2192 reforzar naturalmente \u2192 evaluar efecto. Cada turno es una bifurcaci\u00F3n: contenido o relaci\u00F3n.", "El cambio en FAP ocurre en la relaci\u00F3n terap\u00E9utica. Lo que pasa AQU\u00CD se generaliza a AFUERA. La sesi\u00F3n no es donde hablas del problema \u2014 es donde lo trabajas directamente."];
+
+// ===== RENDER HELPERS =====
+function RichText({
+  text
+}) {
+  var parts = text.split(/(\*\*.+?\*\*)/g);
+  return React.createElement("span", null, parts.map(function (part, i) {
+    if (part.startsWith("**") && part.endsWith("**")) return React.createElement("strong", {
+      key: i
+    }, part.slice(2, -2));
+    return React.createElement("span", {
+      key: i
+    }, part);
+  }));
+}
+function TextBlock({
+  text
+}) {
+  return React.createElement("div", null, text.split("\n\n").map(function (p, i) {
+    var lines = p.split("\n");
+    return React.createElement("p", {
+      key: i,
+      style: {
+        marginBottom: 14,
+        lineHeight: 1.75,
+        fontSize: 17
+      }
+    }, lines.map(function (line, j) {
+      return React.createElement(React.Fragment, {
+        key: j
+      }, j > 0 ? React.createElement("br") : null, React.createElement(RichText, {
+        text: line
+      }));
+    }));
+  }));
+}
+
+// ===== UI COMPONENTS =====
+function Btn({
+  children,
+  onClick,
+  color,
+  disabled,
+  full,
+  outline,
+  small
+}) {
+  return React.createElement("button", {
+    onClick: onClick,
+    disabled: disabled,
+    style: {
+      width: full ? "100%" : "auto",
+      padding: small ? "10px 14px" : "14px 18px",
+      background: outline ? "transparent" : disabled ? "#ccc" : color || C.accent,
+      color: outline ? color || C.accent : disabled ? "#999" : "#fff",
+      border: outline ? "2px solid " + (color || C.accent) : "none",
+      borderRadius: 14,
+      fontSize: small ? 16 : 18,
+      fontWeight: 700,
+      cursor: disabled ? "not-allowed" : "pointer",
+      fontFamily: "inherit",
+      marginTop: 12,
+      transition: "all 0.3s"
+    }
+  }, children);
+}
+function Card({
+  children,
+  style
+}) {
+  return React.createElement("div", {
+    style: Object.assign({
+      background: C.card,
+      borderRadius: 18,
+      padding: 20,
+      border: "1px solid " + C.border,
+      boxShadow: "0 4px 24px #00000018"
+    }, style || {})
+  }, children);
+}
+function FeedbackBox({
+  ok,
+  text
+}) {
+  return React.createElement("div", {
+    style: {
+      padding: 14,
+      borderRadius: 12,
+      marginTop: 12,
+      background: ok ? C.ok : C.no,
+      border: "1px solid " + (ok ? C.okBd : C.noBd),
+      animation: ok ? "checkPop 0.3s" : "shake 0.3s"
+    }
+  }, React.createElement("span", {
+    style: {
+      fontSize: 20,
+      marginRight: 8
+    }
+  }, ok ? "\u2705" : "\u274C"), React.createElement("span", {
+    style: {
+      fontSize: 16,
+      color: ok ? C.okTx : C.noTx,
+      lineHeight: 1.5
+    }
+  }, text));
+}
+function ProgressBar({
+  current,
+  total,
+  color
+}) {
+  return React.createElement("div", {
+    style: {
+      width: "100%",
+      height: 6,
+      background: "#E0D8EA",
+      borderRadius: 3,
+      overflow: "hidden",
+      marginBottom: 16
+    }
+  }, React.createElement("div", {
+    style: {
+      height: "100%",
+      width: current / total * 100 + "%",
+      background: color,
+      borderRadius: 3,
+      transition: "width 0.5s"
+    }
+  }));
+}
+function SkillTracker({
+  skills
+}) {
+  return React.createElement("div", {
+    style: {
+      background: C.card,
+      borderRadius: 16,
+      padding: 16,
+      border: "1px solid " + C.border,
+      marginBottom: 20
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      fontWeight: 700,
+      color: C.textMid,
+      marginBottom: 12
+    }
+  }, "\u{1F3AF} Competencias"), React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 8
+    }
+  }, SKILLS.map(function (s, i) {
+    return React.createElement("div", {
+      key: i,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 6
+      }
+    }, React.createElement("span", {
+      style: {
+        fontSize: 18
+      }
+    }, s[0]), React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, React.createElement("div", {
+      style: {
+        fontSize: 14,
+        color: C.textMid,
+        marginBottom: 2
+      }
+    }, s[1]), React.createElement("div", {
+      style: {
+        height: 4,
+        background: "#E8E0F0",
+        borderRadius: 2
+      }
+    }, React.createElement("div", {
+      style: {
+        height: "100%",
+        width: Math.min((skills[i] || 0) * 20, 100) + "%",
+        background: C.lv[i],
+        borderRadius: 2,
+        transition: "width 0.5s"
+      }
+    }))));
+  })));
+}
+function OptionBtn({
+  text,
+  selected,
+  correct,
+  showResult,
+  onClick
+}) {
+  var bg = C.card,
+    bd = C.border;
+  if (showResult && selected) {
+    bg = correct ? C.ok : C.no;
+    bd = correct ? C.okBd : C.noBd;
+  } else if (showResult && correct) {
+    bg = C.ok;
+    bd = C.okBd;
+  }
+  return React.createElement("button", {
+    onClick: onClick,
+    disabled: showResult,
+    style: {
+      textAlign: "left",
+      padding: "12px 14px",
+      borderRadius: 12,
+      cursor: showResult ? "default" : "pointer",
+      width: "100%",
+      background: bg,
+      border: "2px solid " + bd,
+      fontSize: 16,
+      color: C.text,
+      lineHeight: 1.5,
+      transition: "all 0.3s",
+      fontFamily: "inherit",
+      marginBottom: 6
+    }
+  }, text);
+}
+
+// ===== EXERCISE COMPONENTS =====
+// Reusing same patterns as rumination app
+
+function ExClassify({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var item = data.items[cur];
+  var labels = ["\u{1F534} CCR1", "\u{1F7E2} CCR2", "\u{1F535} CCR3"];
+  function pick(v) {
+    if (sel !== null) return;
+    setSel(v);
+    if (v === item.a) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.items.length - 1) {
+      onDone(sc + (sel === item.a ? 1 : 0));
+      return;
+    }
+    setCur(function (c) {
+      return c + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 8
+    }
+  }, data.instruction), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 10
+    }
+  }, "Vi\u00F1eta " + (cur + 1) + " de " + data.items.length), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, item.text), React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 8
+    }
+  }, labels.map(function (l, i) {
+    var isSel = sel === i,
+      isC = i === item.a;
+    var bg = C.card,
+      bd = C.border;
+    if (sel !== null && isSel) {
+      bg = isC ? C.ok : C.no;
+      bd = isC ? C.okBd : C.noBd;
+    }
+    return React.createElement("button", {
+      key: i,
+      onClick: function () {
+        pick(i);
+      },
+      disabled: sel !== null,
+      style: {
+        flex: 1,
+        padding: "14px 8px",
+        borderRadius: 12,
+        fontSize: 15,
+        fontWeight: 700,
+        cursor: sel !== null ? "default" : "pointer",
+        background: bg,
+        border: "2px solid " + bd,
+        color: C.text,
+        transition: "all 0.3s",
+        fontFamily: "inherit"
+      }
+    }, l);
+  })), sel !== null ? React.createElement(FeedbackBox, {
+    ok: sel === item.a,
+    text: item.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.items.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExSpot({
+  data,
+  onDone
+}) {
+  var _s = useState(null),
+    sel = _s[0],
+    setSel = _s[1];
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 12
+    }
+  }, data.instruction), data.lines.map(function (line, i) {
+    var isC = i === data.correct;
+    var bg = C.card,
+      bd = C.border;
+    if (sel !== null && isC) {
+      bg = C.ok;
+      bd = C.okBd;
+    } else if (sel === i && !isC) {
+      bg = C.no;
+      bd = C.noBd;
+    }
+    return React.createElement("button", {
+      key: i,
+      onClick: function () {
+        if (sel === null) setSel(i);
+      },
+      disabled: sel !== null,
+      style: {
+        textAlign: "left",
+        padding: "10px 14px",
+        borderRadius: 12,
+        width: "100%",
+        marginBottom: 6,
+        cursor: sel !== null ? "default" : "pointer",
+        background: bg,
+        border: "1px solid " + bd,
+        transition: "all 0.3s",
+        fontFamily: "inherit"
+      }
+    }, React.createElement("span", {
+      style: {
+        fontSize: 13,
+        fontWeight: 700,
+        color: line.s === "P" ? C.lv[1] : C.lv[3]
+      }
+    }, line.s === "P" ? "Paciente:" : "Terapeuta:"), React.createElement("p", {
+      style: {
+        fontSize: 16,
+        color: C.text,
+        lineHeight: 1.5,
+        marginTop: 2
+      }
+    }, "\u201C" + line.t + "\u201D"), sel !== null && isC ? React.createElement("span", {
+      style: {
+        fontSize: 14,
+        color: C.okTx,
+        fontWeight: 600
+      }
+    }, "\u{1F7E2} CCR2 aqu\u00ED") : null);
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: sel === data.correct,
+    text: data.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: function () {
+      onDone(sel === data.correct ? 1 : 0);
+    },
+    full: true
+  }, "Continuar \u2192") : null);
+}
+function ExTrap({
+  data,
+  onDone
+}) {
+  var _s = useState(null),
+    sel = _s[0],
+    setSel = _s[1];
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("h3", {
+    style: {
+      fontSize: 19,
+      fontWeight: 800,
+      color: C.lv[2],
+      marginBottom: 8
+    }
+  }, data.title), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 12,
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, data.scenario), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      marginBottom: 10
+    }
+  }, data.q), data.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt.t,
+      selected: sel === i,
+      correct: opt.c,
+      showResult: sel !== null,
+      onClick: function () {
+        if (sel === null) setSel(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: data.opts[sel].c,
+    text: data.opts[sel].fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: function () {
+      onDone(data.opts[sel].c ? 1 : 0);
+    },
+    full: true
+  }, "Continuar \u2192") : null);
+}
+function ExMap({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var c = data.cases[cur];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (i === c.c) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.cases.length - 1) {
+      onDone(sc + (sel === c.c ? 1 : 0));
+      return;
+    }
+    setCur(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 8
+    }
+  }, data.instruction), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 10
+    }
+  }, "Caso " + (cur + 1) + " de " + data.cases.length), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 10,
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, React.createElement("strong", null, "Problema fuera: "), c.problem), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      marginBottom: 10
+    }
+  }, c.q), c.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt,
+      selected: sel === i,
+      correct: i === c.c,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: sel === c.c,
+    text: c.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.cases.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExFilter({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var item = data.items[cur];
+  var labels = ["\u{1F534} S\u00ED, es CCR1", "\u{1F7E0} No es CCR"];
+  function pick(v) {
+    if (sel !== null) return;
+    var isC = v === 0 === item.ccr;
+    setSel(v);
+    if (isC) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.items.length - 1) {
+      onDone(sc);
+      return;
+    }
+    setCur(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 8
+    }
+  }, data.instruction), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 10
+    }
+  }, "Conducta " + (cur + 1) + " de " + data.items.length), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, "\u201C" + item.text + "\u201D"), React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 10
+    }
+  }, labels.map(function (l, i) {
+    var expected = i === 0 ? item.ccr : !item.ccr;
+    var bg = C.card,
+      bd = C.border;
+    if (sel !== null && sel === i) {
+      bg = expected ? C.ok : C.no;
+      bd = expected ? C.okBd : C.noBd;
+    }
+    return React.createElement("button", {
+      key: i,
+      onClick: function () {
+        pick(i);
+      },
+      disabled: sel !== null,
+      style: {
+        flex: 1,
+        padding: "14px 12px",
+        borderRadius: 12,
+        fontSize: 15,
+        fontWeight: 700,
+        cursor: sel !== null ? "default" : "pointer",
+        background: bg,
+        border: "2px solid " + bd,
+        color: C.text,
+        transition: "all 0.3s",
+        fontFamily: "inherit"
+      }
+    }, l);
+  })), sel !== null ? React.createElement(FeedbackBox, {
+    ok: sel === 0 === item.ccr,
+    text: item.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.items.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExFullCase({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    step = _s[0],
+    setStep = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var qs = [data.q1, data.q2, data.q3];
+  var q = qs[step];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (i === q.c) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    if (step >= 2) {
+      onDone(sc + (sel === q.c ? 1 : 0));
+      return;
+    }
+    setStep(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 14,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, data.caseText), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      marginBottom: 10,
+      color: C.lv[step]
+    }
+  }, q.label), q.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt,
+      selected: sel === i,
+      correct: i === q.c,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: sel === q.c,
+    text: q.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, step >= 2 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExBestQ({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var s = data.scenarios[cur];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (s.opts[i].c) setSc(function (x) {
+      return x + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.scenarios.length - 1) {
+      onDone(sc + (s.opts[sel].c ? 1 : 0));
+      return;
+    }
+    setCur(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 8
+    }
+  }, data.instruction), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 14,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 16,
+      lineHeight: 1.6
+    }
+  }, React.createElement("strong", null, "Contexto: "), s.ctx), s.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt.t,
+      selected: sel === i,
+      correct: opt.c,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: s.opts[sel].c,
+    text: s.opts[sel].fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.scenarios.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExCCR1Resp({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var s = data.scenarios[cur];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (s.opts[i].ok) setSc(function (x) {
+      return x + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.scenarios.length - 1) {
+      onDone(sc + (s.opts[sel].ok ? 1 : 0));
+      return;
+    }
+    setCur(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 12
+    }
+  }, data.instruction), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 10
+    }
+  }, "Escenario " + (cur + 1) + " de " + data.scenarios.length), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 14,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 16,
+      lineHeight: 1.6
+    }
+  }, s.ctx), s.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt.t,
+      selected: sel === i,
+      correct: opt.ok,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: s.opts[sel].ok,
+    text: s.opts[sel].fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.scenarios.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExArtificial({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var item = data.items[cur];
+  var labels = ["\u{1F49A} Natural", "\u{1F534} Artificial"];
+  function pick(v) {
+    if (sel !== null) return;
+    var isNat = v === 0;
+    var correct = isNat && item.ans === "natural" || !isNat && item.ans === "artificial";
+    setSel(v);
+    if (correct) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.items.length - 1) {
+      onDone(sc);
+      return;
+    }
+    setCur(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  var isCorrect = sel !== null && (sel === 0 && item.ans === "natural" || sel === 1 && item.ans === "artificial");
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 12
+    }
+  }, data.instruction), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 10
+    }
+  }, "Di\u00E1logo " + (cur + 1) + " de " + data.items.length), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 16,
+      lineHeight: 1.7,
+      fontStyle: "italic"
+    }
+  }, item.dialogue), React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 10
+    }
+  }, labels.map(function (l, i) {
+    var bg = C.card,
+      bd = C.border;
+    if (sel !== null && sel === i) {
+      bg = isCorrect ? C.ok : C.no;
+      bd = isCorrect ? C.okBd : C.noBd;
+    }
+    return React.createElement("button", {
+      key: i,
+      onClick: function () {
+        pick(i);
+      },
+      disabled: sel !== null,
+      style: {
+        flex: 1,
+        padding: "14px 12px",
+        borderRadius: 12,
+        fontSize: 16,
+        fontWeight: 700,
+        cursor: sel !== null ? "default" : "pointer",
+        background: bg,
+        border: "2px solid " + bd,
+        color: C.text,
+        transition: "all 0.3s",
+        fontFamily: "inherit"
+      }
+    }, l);
+  })), sel !== null ? React.createElement(FeedbackBox, {
+    ok: isCorrect,
+    text: item.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.items.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExDialogue({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    ti = _s[0],
+    setTi = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(null),
+    ended = _s3[0],
+    setEnded = _s3[1];
+  var _s4 = useState(0),
+    sc = _s4[0],
+    setSc = _s4[1];
+  if (ended) {
+    return React.createElement("div", {
+      style: {
+        animation: "fadeIn 0.4s"
+      }
+    }, React.createElement("div", {
+      style: {
+        padding: 20,
+        borderRadius: 14,
+        background: ended === "good" ? C.ok : C.no,
+        border: "2px solid " + (ended === "good" ? C.okBd : C.noBd)
+      }
+    }, React.createElement("p", {
+      style: {
+        fontSize: 18,
+        fontWeight: 700,
+        color: ended === "good" ? C.okTx : C.noTx,
+        marginBottom: 8
+      }
+    }, ended === "good" ? "\u2705 Buen resultado" : "\u26A0\uFE0F Resultado sub\u00F3ptimo"), React.createElement("p", {
+      style: {
+        fontSize: 16,
+        color: ended === "good" ? C.okTx : C.noTx,
+        lineHeight: 1.6
+      }
+    }, ended === "good" ? data.good : data.bad)), React.createElement(Btn, {
+      onClick: function () {
+        onDone(sc);
+      },
+      full: true
+    }, "Continuar \u2192"));
+  }
+  var turn = data.turns[ti];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (turn.opts[i].ok) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    var nxt = turn.opts[sel].next;
+    if (nxt === "good") {
+      setEnded("good");
+      return;
+    }
+    if (nxt === "bad") {
+      setEnded("bad");
+      return;
+    }
+    setTi(nxt);
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("h3", {
+    style: {
+      fontSize: 18,
+      fontWeight: 700,
+      marginBottom: 12
+    }
+  }, data.title), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 14,
+      borderRadius: 12,
+      marginBottom: 14
+    }
+  }, React.createElement("span", {
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: C.lv[1]
+    }
+  }, "Paciente:"), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.6,
+      marginTop: 4
+    }
+  }, "\u201C" + turn.p + "\u201D")), React.createElement("p", {
+    style: {
+      fontSize: 15,
+      fontWeight: 700,
+      marginBottom: 8
+    }
+  }, "Tu respuesta:"), turn.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt.t,
+      selected: sel === i,
+      correct: opt.ok,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: turn.opts[sel].ok,
+    text: turn.opts[sel].fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, "Continuar \u2192") : null);
+}
+function ExRapid({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var item = data.items[cur];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (i === item.c) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.items.length - 1) {
+      onDone(sc + (sel === item.c ? 1 : 0));
+      return;
+    }
+    setCur(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 12
+    }
+  }, data.instruction), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 10
+    }
+  }, "Fragmento " + (cur + 1) + " de " + data.items.length), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, item.text), item.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt,
+      selected: sel === i,
+      correct: i === item.c,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: sel === item.c,
+    text: item.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.items.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+function ExCase({
+  caseData,
+  onDone
+}) {
+  var _s = useState(0),
+    stage = _s[0],
+    setStage = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var st = caseData.stages[stage];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (st.opts[i].ok) setSc(function (x) {
+      return x + 1;
+    });
+  }
+  function next() {
+    if (stage >= caseData.stages.length - 1) {
+      onDone(sc + (st.opts[sel].ok ? 1 : 0));
+      return;
+    }
+    setStage(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, stage === 0 ? React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 14,
+      marginBottom: 16,
+      border: "2px solid " + C.lv[4] + "40"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      fontWeight: 700,
+      color: C.lv[4],
+      marginBottom: 6
+    }
+  }, "\u{1F4CB} Caso cl\u00EDnico"), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, caseData.intro)) : null, React.createElement("h3", {
+    style: {
+      fontSize: 18,
+      fontWeight: 800,
+      color: C.lv[4],
+      marginBottom: 8
+    }
+  }, st.title), React.createElement(Card, {
+    style: {
+      marginBottom: 12
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.7,
+      fontStyle: "italic"
+    }
+  }, st.prompt)), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      marginBottom: 10
+    }
+  }, st.q), st.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt.t,
+      selected: sel === i,
+      correct: opt.ok,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement("div", {
+    style: {
+      marginTop: 12
+    }
+  }, React.createElement("div", {
+    style: {
+      padding: 14,
+      borderRadius: 12,
+      marginBottom: 8,
+      background: st.opts[sel].ok ? "#E8F0FF" : "#FFF4E8",
+      border: "1px solid " + (st.opts[sel].ok ? "#3B82F680" : "#EF6C0080")
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 14,
+      fontWeight: 700,
+      color: C.textMid,
+      marginBottom: 4
+    }
+  }, "\u{1F4CE} Consecuencia:"), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.6,
+      fontStyle: "italic"
+    }
+  }, st.opts[sel].cons)), React.createElement(FeedbackBox, {
+    ok: st.opts[sel].ok,
+    text: st.opts[sel].fb
+  })) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    color: C.lv[4],
+    full: true
+  }, stage >= caseData.stages.length - 1 ? "Ver resultado final" : "Siguiente etapa \u2192") : null);
+}
+
+// ===== ASSESSMENT =====
+function Assessment({
+  questions,
+  isPost,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState([]),
+    answers = _s3[0],
+    setAnswers = _s3[1];
+  var q = questions[cur];
+  function next() {
+    var newA = answers.concat([sel]);
+    if (cur >= questions.length - 1) {
+      onDone(newA);
+      return;
+    }
+    setAnswers(newA);
+    setCur(function (c) {
+      return c + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("h2", {
+    style: {
+      fontSize: 23,
+      fontWeight: 800,
+      marginBottom: 4
+    }
+  }, isPost ? "\u{1F4CA} Post-evaluaci\u00F3n" : "\u{1F4CB} Pre-evaluaci\u00F3n"), React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      marginBottom: 16
+    }
+  }, isPost ? "Las mismas preguntas. Veamos cu\u00E1nto cambi\u00F3 tu criterio." : "Responde r\u00E1pido, sin pensarlo mucho."), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 12
+    }
+  }, "Pregunta " + (cur + 1) + " de " + questions.length), React.createElement("div", {
+    style: {
+      background: C.hi,
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 14,
+      fontSize: 17,
+      fontWeight: 600,
+      lineHeight: 1.6
+    }
+  }, q.q), q.opts.map(function (opt, i) {
+    return React.createElement("button", {
+      key: i,
+      onClick: function () {
+        if (sel === null) setSel(i);
+      },
+      disabled: sel !== null,
+      style: {
+        textAlign: "left",
+        padding: "12px 14px",
+        borderRadius: 12,
+        width: "100%",
+        marginBottom: 6,
+        cursor: sel !== null ? "default" : "pointer",
+        background: sel === i ? C.hi : C.card,
+        border: "2px solid " + (sel === i ? C.accent : C.border),
+        fontSize: 16,
+        color: C.text,
+        lineHeight: 1.5,
+        transition: "all 0.3s",
+        fontFamily: "inherit"
+      }
+    }, opt);
+  }), sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= questions.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
+}
+
+// ===== CERTIFICATE =====
+function CertScreen({
+  skills,
+  onRestart
+}) {
+  var _s = useState(function () {
+      try {
+        return localStorage.getItem("ccr_name") || "";
+      } catch (e) {
+        return "";
+      }
+    }),
+    name = _s[0],
+    setName = _s[1];
+  var _s2 = useState(false),
+    gen = _s2[0],
+    setGen = _s2[1];
+  var canvasRef = useRef(null);
+  function generate() {
+    try {
+      localStorage.setItem("ccr_name", name);
+    } catch (e) {}
+    var cv = canvasRef.current;
+    var ctx = cv.getContext("2d");
+    cv.width = 1080;
+    cv.height = 1920;
+    var g = ctx.createLinearGradient(0, 0, 0, 1920);
+    g.addColorStop(0, "#EDE7F6");
+    g.addColorStop(0.5, "#F3EFF8");
+    g.addColorStop(1, "#E8E0F0");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, 1080, 1920);
+    ctx.strokeStyle = "#7E57C2";
+    ctx.lineWidth = 6;
+    ctx.strokeRect(40, 40, 1000, 1840);
+    ctx.fillStyle = "#1a1a2e";
+    ctx.textAlign = "center";
+    ctx.font = "bold 36px Segoe UI, system-ui, sans-serif";
+    ctx.fillText("CERTIFICADO DE ENTRENAMIENTO", 540, 200);
+    ctx.font = "80px serif";
+    ctx.fillText("\u{1F52C}", 540, 320);
+    ctx.fillStyle = "#7E57C2";
+    ctx.font = "bold 42px Segoe UI, system-ui, sans-serif";
+    ctx.fillText("CCRs en Sesi\u00F3n", 540, 430);
+    ctx.font = "28px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#4a4a6a";
+    ctx.fillText("Psicoterapia Anal\u00EDtica Funcional", 540, 480);
+    ctx.font = "24px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#8888aa";
+    ctx.fillText("Certifica que", 540, 580);
+    ctx.font = "bold 48px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#1a1a2e";
+    ctx.fillText(name || "Participante", 540, 650);
+    ctx.strokeStyle = "#7E57C260";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(240, 670);
+    ctx.lineTo(840, 670);
+    ctx.stroke();
+    ctx.font = "22px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#4a4a6a";
+    ctx.fillText("Ha completado los 5 niveles de entrenamiento cl\u00EDnico", 540, 740);
+    ctx.fillText("en detecci\u00F3n e intervenci\u00F3n de CCRs", 540, 775);
+    ctx.fillText("desde la Psicoterapia Anal\u00EDtica Funcional", 540, 810);
+    ctx.font = "bold 22px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#1a1a2e";
+    ctx.fillText("Competencias entrenadas:", 540, 910);
+    var sl = ["\u{1F52C} Detectar CCRs en sesi\u00F3n", "\u{1F3AF} Formular CCRs espec\u00EDficas", "\u{1FA9E} Responder funcionalmente a CCRs", "\u{1F4AC} Integrar en flujo de sesi\u00F3n"];
+    ctx.font = "22px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#4a4a6a";
+    sl.forEach(function (s, i) {
+      ctx.fillText(s, 540, 960 + i * 45);
+    });
+    ctx.font = "italic 20px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#8888aa";
+    ctx.fillText("Basado en: Functional Analytic Psychotherapy", 540, 1350);
+    ctx.fillText("Kohlenberg & Tsai (1991)", 540, 1385);
+    var date = new Date().toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+    ctx.font = "22px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#4a4a6a";
+    ctx.fillText(date, 540, 1470);
+    ctx.font = "bold 24px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#7E57C2";
+    ctx.fillText("@leo.eyzaguirre", 540, 1600);
+    ctx.font = "18px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "#8888aa";
+    ctx.fillText("Entrenamiento en Psicoterapia Conductual Contextual", 540, 1640);
+    setGen(true);
+  }
+  function download() {
+    var cv = canvasRef.current;
+    var link = document.createElement("a");
+    link.download = "certificado-ccrs-fap.png";
+    link.href = cv.toDataURL("image/png");
+    link.click();
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.5s",
+      textAlign: "center"
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 80,
+      marginBottom: 16,
+      animation: "pulse 2s infinite"
+    }
+  }, "\u{1F3C6}"), React.createElement("h1", {
+    style: {
+      fontSize: 28,
+      fontWeight: 900,
+      marginBottom: 12,
+      color: C.accent
+    }
+  }, "\u00A1Completaste el entrenamiento!"), React.createElement("p", {
+    style: {
+      fontSize: 17,
+      color: C.textMid,
+      lineHeight: 1.6,
+      marginBottom: 24
+    }
+  }, "Has entrenado las 4 competencias cl\u00EDnicas para detectar e intervenir CCRs desde FAP."), React.createElement(SkillTracker, {
+    skills: skills
+  }), React.createElement("canvas", {
+    ref: canvasRef,
+    style: {
+      display: gen ? "block" : "none",
+      width: "100%",
+      maxWidth: 360,
+      borderRadius: 12,
+      border: "2px solid " + C.accent,
+      margin: "0 auto"
+    }
+  }), !gen ? React.createElement(Card, null, React.createElement("p", {
+    style: {
+      fontSize: 17,
+      fontWeight: 700,
+      marginBottom: 12
+    }
+  }, "Genera tu certificado \u{1F4DC}"), React.createElement("input", {
+    type: "text",
+    value: name,
+    onChange: function (e) {
+      setName(e.target.value);
+    },
+    placeholder: "Tu nombre completo",
+    style: {
+      width: "100%",
+      padding: "14px 16px",
+      borderRadius: 12,
+      border: "2px solid " + C.border,
+      background: C.hi,
+      fontSize: 18,
+      textAlign: "center",
+      outline: "none",
+      fontFamily: "inherit",
+      color: C.text
+    }
+  }), React.createElement(Btn, {
+    onClick: generate,
+    disabled: !name.trim(),
+    full: true
+  }, "Generar certificado \u{1F393}")) : React.createElement("div", null, React.createElement(Btn, {
+    onClick: download,
+    full: true
+  }, "Descargar para Instagram Stories \u{1F4F2}"), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginTop: 8
+    }
+  }, "Formato 1080\u00D71920 \u00B7 Listo para compartir")), React.createElement(Btn, {
+    onClick: onRestart,
+    outline: true,
+    full: true
+  }, "Volver al inicio \u{1F3E0}"), React.createElement("div", {
+    style: {
+      padding: "24px 0",
+      fontSize: 14,
+      color: C.textLight
+    }
+  }, "Creado con \u{1F49C} \u00B7 @leo.eyzaguirre"));
+}
+
+// ===== MAIN APP =====
+function App() {
+  var _s = useState("home"),
+    screen = _s[0],
+    setScreen = _s[1];
+  var _s2 = useState(1),
+    lvl = _s2[0],
+    setLvl = _s2[1];
+  var _s3 = useState("theory"),
+    phase = _s3[0],
+    setPhase = _s3[1];
+  var _s4 = useState(0),
+    tSlide = _s4[0],
+    setTSlide = _s4[1];
+  var _s5 = useState(0),
+    exIdx = _s5[0],
+    setExIdx = _s5[1];
+  var _s6 = useState(function () {
+      try {
+        var s = localStorage.getItem("ccr_done");
+        return s ? JSON.parse(s) : [];
+      } catch (e) {
+        return [];
+      }
+    }),
+    done = _s6[0],
+    setDone = _s6[1];
+  var _s7 = useState(function () {
+      try {
+        var s = localStorage.getItem("ccr_sk");
+        return s ? JSON.parse(s) : [0, 0, 0, 0];
+      } catch (e) {
+        return [0, 0, 0, 0];
+      }
+    }),
+    sk = _s7[0],
+    setSk = _s7[1];
+  var _s8 = useState(null),
+    preA = _s8[0],
+    setPreA = _s8[1];
+  useEffect(function () {
+    try {
+      localStorage.setItem("ccr_done", JSON.stringify(done));
+    } catch (e) {}
+  }, [done]);
+  useEffect(function () {
+    try {
+      localStorage.setItem("ccr_sk", JSON.stringify(sk));
+    } catch (e) {}
+  }, [sk]);
+  function scrollUp() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+  function addSkill(i, amt) {
+    setSk(function (s) {
+      var n = s.slice();
+      n[i] = Math.min(n[i] + amt, 5);
+      return n;
+    });
+  }
+  function startLvl(l) {
+    setLvl(l);
+    setPhase("theory");
+    setTSlide(0);
+    setExIdx(0);
+    setScreen("level");
+    scrollUp();
+  }
+  function theoryNext() {
+    var t = THEORY[lvl];
+    if (tSlide < t.length - 1) {
+      setTSlide(function (s) {
+        return s + 1;
+      });
+      scrollUp();
+    } else {
+      setPhase("exercise");
+      setExIdx(0);
+      scrollUp();
+    }
+  }
+  function exDone(score) {
+    if (lvl === 1) addSkill(0, 1);
+    if (lvl === 2) addSkill(1, 1);
+    if (lvl === 3) addSkill(2, 1);
+    if (lvl === 4) {
+      addSkill(2, 0.5);
+      addSkill(3, 0.5);
+    }
+    if (lvl === 5) addSkill(3, 1);
+    var exCount = lvl === 5 ? 1 : EX[lvl].length;
+    if (exIdx >= exCount - 1) {
+      setPhase("summary");
+      scrollUp();
+    } else {
+      setExIdx(function (i) {
+        return i + 1;
+      });
+      scrollUp();
+    }
+  }
+  function lvlDone() {
+    if (done.indexOf(lvl) === -1) setDone(function (d) {
+      return d.concat([lvl]);
+    });
+    if (lvl === 5) {
+      setScreen("certificate");
+    } else {
+      startLvl(lvl + 1);
+    }
+    scrollUp();
+  }
+  var wrap = {
+    minHeight: "100vh",
+    background: "linear-gradient(180deg,#E0D6EE 0%,#E8DFF3 50%,#DDD5E8 100%)",
+    color: C.text,
+    fontFamily: "'Segoe UI',system-ui,-apple-system,sans-serif"
+  };
+  var inner = {
+    padding: "40px 16px 20px",
+    maxWidth: 520,
+    margin: "0 auto"
+  };
+  if (screen === "home") {
+    return React.createElement("div", {
+      style: wrap
+    }, React.createElement("div", {
+      style: inner
+    }, React.createElement("div", {
+      style: {
+        textAlign: "center",
+        marginBottom: 28
+      }
+    }, React.createElement("div", {
+      style: {
+        fontSize: 64,
+        marginBottom: 8
+      }
+    }, "\u{1F52C}"), React.createElement("h1", {
+      style: {
+        fontSize: 28,
+        fontWeight: 900,
+        lineHeight: 1.2,
+        marginBottom: 8
+      }
+    }, "CCRs en Sesi\u00F3n"), React.createElement("p", {
+      style: {
+        fontSize: 16,
+        color: C.textMid,
+        lineHeight: 1.5
+      }
+    }, "Entrenamiento cl\u00EDnico en detecci\u00F3n e intervenci\u00F3n"), React.createElement("p", {
+      style: {
+        fontSize: 14,
+        color: C.textLight,
+        marginTop: 4
+      }
+    }, "Basado en Kohlenberg & Tsai (1991)")), React.createElement(SkillTracker, {
+      skills: sk
+    }), META.map(function (m, i) {
+      var completed = done.indexOf(i + 1) >= 0;
+      var locked = i > 0 && done.indexOf(i) < 0;
+      return React.createElement("button", {
+        key: i,
+        disabled: locked,
+        onClick: function () {
+          if (!locked) {
+            if (preA || i > 0) startLvl(i + 1);else setScreen("pre");
+          }
+        },
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 14,
+          padding: "16px 18px",
+          borderRadius: 16,
+          background: C.card,
+          border: "2px solid " + (completed ? C.lv[i] : locked ? C.border : C.lv[i] + "60"),
+          cursor: locked ? "not-allowed" : "pointer",
+          opacity: locked ? 0.5 : 1,
+          textAlign: "left",
+          width: "100%",
+          marginBottom: 10,
+          transition: "all 0.3s",
+          fontFamily: "inherit"
+        }
+      }, React.createElement("div", {
+        style: {
+          width: 50,
+          height: 50,
+          borderRadius: 14,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: completed ? C.lv[i] : C.lv[i] + "15",
+          fontSize: 28
+        }
+      }, completed ? "\u2705" : locked ? "\u{1F512}" : m.e), React.createElement("div", {
+        style: {
+          flex: 1
+        }
+      }, React.createElement("p", {
+        style: {
+          fontSize: 13,
+          fontWeight: 700,
+          color: C.lv[i]
+        }
+      }, "NIVEL " + (i + 1)), React.createElement("p", {
+        style: {
+          fontSize: 17,
+          fontWeight: 700
+        }
+      }, m.t), React.createElement("p", {
+        style: {
+          fontSize: 14,
+          color: C.textMid
+        }
+      }, m.d)));
+    }), done.length === 5 ? React.createElement(Btn, {
+      onClick: function () {
+        setScreen("certificate");
+      },
+      full: true
+    }, "Ver mi certificado \u{1F3C6}") : null, React.createElement("div", {
+      style: {
+        textAlign: "center",
+        padding: "16px 0",
+        fontSize: 14,
+        color: C.textLight
+      }
+    }, "Creado con \u{1F49C} \u00B7 @leo.eyzaguirre")));
+  }
+  if (screen === "pre") {
+    return React.createElement("div", {
+      style: wrap
+    }, React.createElement("div", {
+      style: inner
+    }, React.createElement(Assessment, {
+      questions: ASSESS,
+      isPost: false,
+      onDone: function (a) {
+        setPreA(a);
+        startLvl(1);
+      }
+    })));
+  }
+  if (screen === "certificate") {
+    return React.createElement("div", {
+      style: wrap
+    }, React.createElement("div", {
+      style: inner
+    }, React.createElement(CertScreen, {
+      skills: sk,
+      onRestart: function () {
+        setScreen("home");
+      }
+    })));
+  }
+  if (screen === "level") {
+    var m = META[lvl - 1];
+    var theoryList = THEORY[lvl];
+    return React.createElement("div", {
+      style: wrap
+    }, React.createElement("div", {
+      style: {
+        padding: "20px 16px",
+        maxWidth: 520,
+        margin: "0 auto"
+      }
+    }, React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        marginBottom: 16
+      }
+    }, React.createElement("button", {
+      onClick: function () {
+        setScreen("home");
+      },
+      style: {
+        background: C.card,
+        border: "1px solid " + C.border,
+        borderRadius: 10,
+        width: 36,
+        height: 36,
+        cursor: "pointer",
+        fontSize: 16,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "inherit"
+      }
+    }, "\u2190"), React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, React.createElement("p", {
+      style: {
+        fontSize: 13,
+        fontWeight: 700,
+        color: C.lv[lvl - 1]
+      }
+    }, "NIVEL " + lvl), React.createElement("p", {
+      style: {
+        fontSize: 18,
+        fontWeight: 800
+      }
+    }, m.e + " " + m.t)), React.createElement("div", {
+      style: {
+        padding: "4px 10px",
+        borderRadius: 20,
+        fontSize: 13,
+        fontWeight: 700,
+        background: phase === "theory" ? C.lv[lvl - 1] + "15" : phase === "exercise" ? C.accent + "15" : C.lv[3] + "15",
+        color: phase === "theory" ? C.lv[lvl - 1] : phase === "exercise" ? C.accent : C.lv[3]
+      }
+    }, phase === "theory" ? "\u{1F4D6} Teor\u00EDa" : phase === "exercise" ? "\u270F\uFE0F Ejercicio" : "\u2705 Resumen")), React.createElement(Card, null, phase === "theory" ? React.createElement("div", {
+      style: {
+        animation: "fadeIn 0.4s"
+      }
+    }, React.createElement(ProgressBar, {
+      current: tSlide + 1,
+      total: theoryList.length,
+      color: C.lv[lvl - 1]
+    }), React.createElement("h2", {
+      style: {
+        fontSize: 23,
+        fontWeight: 800,
+        marginBottom: 16
+      }
+    }, theoryList[tSlide].title), React.createElement(TextBlock, {
+      text: theoryList[tSlide].text
+    }), theoryList[tSlide].quote ? React.createElement("div", {
+      style: {
+        margin: "16px 0",
+        padding: "12px 16px",
+        background: C.hi,
+        borderLeft: "3px solid " + C.lv[lvl - 1],
+        borderRadius: "0 10px 10px 0",
+        fontSize: 15,
+        color: C.textMid,
+        fontStyle: "italic",
+        lineHeight: 1.6
+      }
+    }, theoryList[tSlide].quote) : null, React.createElement(Btn, {
+      onClick: theoryNext,
+      color: C.lv[lvl - 1],
+      full: true
+    }, "Continuar \u2192")) : null, phase === "exercise" && lvl === 1 ? exIdx === 0 ? React.createElement(ExClassify, {
+      data: EX[1][0],
+      onDone: exDone
+    }) : exIdx === 1 ? React.createElement(ExSpot, {
+      data: EX[1][1],
+      onDone: exDone
+    }) : React.createElement(ExTrap, {
+      data: EX[1][2],
+      onDone: exDone
+    }) : null, phase === "exercise" && lvl === 2 ? exIdx === 0 ? React.createElement(ExMap, {
+      data: EX[2][0],
+      onDone: exDone
+    }) : exIdx === 1 ? React.createElement(ExFilter, {
+      data: EX[2][1],
+      onDone: exDone
+    }) : React.createElement(ExFullCase, {
+      data: EX[2][2],
+      onDone: exDone
+    }) : null, phase === "exercise" && lvl === 3 ? exIdx === 0 ? React.createElement(ExBestQ, {
+      data: EX[3][0],
+      onDone: exDone
+    }) : exIdx === 1 ? React.createElement(ExCCR1Resp, {
+      data: EX[3][1],
+      onDone: exDone
+    }) : React.createElement(ExArtificial, {
+      data: EX[3][2],
+      onDone: exDone
+    }) : null, phase === "exercise" && lvl === 4 ? exIdx === 0 ? React.createElement(ExDialogue, {
+      data: EX[4][0],
+      onDone: exDone
+    }) : React.createElement(ExRapid, {
+      data: EX[4][1],
+      onDone: exDone
+    }) : null, phase === "exercise" && lvl === 5 ? React.createElement(ExCase, {
+      caseData: CASE5,
+      onDone: exDone
+    }) : null, phase === "summary" ? React.createElement("div", {
+      style: {
+        animation: "fadeIn 0.4s",
+        textAlign: "center"
+      }
+    }, React.createElement("div", {
+      style: {
+        fontSize: 52,
+        marginBottom: 12
+      }
+    }, m.e), React.createElement("h2", {
+      style: {
+        fontSize: 23,
+        fontWeight: 800,
+        marginBottom: 8
+      }
+    }, "Nivel " + lvl + " completado"), React.createElement(Card, {
+      style: {
+        textAlign: "left",
+        marginBottom: 20
+      }
+    }, React.createElement("p", {
+      style: {
+        fontSize: 16,
+        color: C.lv[lvl - 1],
+        fontWeight: 700,
+        marginBottom: 8
+      }
+    }, "\u{1F511} Principio clave:"), React.createElement("p", {
+      style: {
+        fontSize: 16,
+        lineHeight: 1.7
+      }
+    }, SUMMARIES[lvl - 1])), React.createElement(Btn, {
+      onClick: lvlDone,
+      color: C.lv[lvl - 1],
+      full: true
+    }, lvl === 5 ? "Ver resultado final \u{1F3C6}" : "Siguiente nivel \u2192")) : null)));
+  }
+  return null;
+}
+try {
+  var root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(React.createElement(App));
+} catch (e) {
+  document.getElementById("root").innerHTML = "<p style='padding:20px;color:red'>Error: " + e.message + "</p>";
+}
+</script>
+</body>
+</html>
