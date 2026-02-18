@@ -94,6 +94,14 @@ var THEORY = {
     text: "La clave es la **funci\u00F3n**, no la forma.\n\nUn paciente que evita conflicto puede:\n\u2192 Afuera: no decirle a su pareja que algo le molesta\n\u2192 En sesi\u00F3n: decirte \u201Cs\u00ED, tienes raz\u00F3n\u201D cuando no est\u00E1 de acuerdo\n\nLa **forma** es diferente (silencio con pareja vs complacencia contigo). La **funci\u00F3n** es la misma: evitar el malestar de un posible conflicto.\n\nPor eso necesitas la formulaci\u00F3n: sin ella no puedes ver que \u201Cs\u00ED, tienes raz\u00F3n\u201D y \u201Cno le digo nada a mi esposa\u201D son la **misma conducta**.",
     quote: "\u201CLa equivalencia funcional entre la conducta en sesi\u00F3n y fuera de ella es lo que hace que las CCRs sean cl\u00EDnicamente relevantes\u201D \u2014 Kohlenberg & Tsai (1991)"
   }, {
+    title: "\u{1F9EC} \u00BFQu\u00E9 significa \u2018funcionalmente equivalente\u2019?",
+    text: "Kohlenberg y Tsai plantean una pregunta clave: **\u00BFC\u00F3mo determinamos si dos ambientes son similares?**\n\nUna opci\u00F3n es comparar sus caracter\u00EDsticas f\u00EDsicas. El consultorio no se parece a la casa del paciente.\n\nPero FAP propone otra v\u00EDa: un **an\u00E1lisis funcional**. Los ambientes no se comparan por c\u00F3mo se ven, sino por las **conductas que evocan**. Si dos ambientes evocan la misma conducta, entonces son **funcionalmente similares**.\n\nLa sesi\u00F3n de terapia es funcionalmente equivalente a la vida diaria del paciente **si las mismas conductas problem\u00E1ticas aparecen en ambos contextos.**\n\nEjemplo del libro: un hombre cuyo problema es la hostilidad en relaciones \u00EDntimas. El ambiente terap\u00E9utico ser\u00E1 funcionalmente equivalente al de su vida diaria si se vuelve hostil con el terapeuta conforme se desarrolla la relaci\u00F3n.",
+    quote: "\u201CM\u00E1s que por las caracter\u00EDsticas f\u00EDsicas, los ambientes se comparan en virtud de las conductas que evocan. Si evocan la misma conducta, entonces son parecidos funcionalmente\u201D \u2014 Kohlenberg & Tsai (1991, p.25)"
+  }, {
+    title: "\u{1F4A1} La clase funcional como filtro cl\u00EDnico",
+    text: "Esto tiene consecuencias directas para tu pr\u00E1ctica:\n\n**1. La CCR no se define por la forma, sino por la funci\u00F3n.**\nUn paciente que \u201Csiempre colabora\u201D en sesi\u00F3n puede estar haciendo exactamente su problema: complacer para evitar conflicto. La topograf\u00EDa se ve \u201Cbien\u201D. La funci\u00F3n es la misma que afuera.\n\n**2. La CCR3 incluye observar estas equivalencias.**\nSegún el libro, los repertorios de CCR3 incluyen las \u201Cdescripciones de las equivalencias funcionales, que indican las similaridades entre lo que ocurre en la sesi\u00F3n y lo que ocurre en la vida diaria\u201D. Es decir: cuando el paciente dice \u201Cesto que hago contigo es lo mismo que hago con mi pareja\u201D, eso es CCR3.\n\n**3. Sin formulaci\u00F3n funcional, no ves la equivalencia.**\nSi no sabes cu\u00E1l es la clase funcional del problema (evitar intimidad, buscar aprobaci\u00F3n, no poner l\u00EDmites), no puedes ver que conductas con topograf\u00EDas opuestas (callarse afuera vs intelectualizar contigo) pertenecen a la **misma clase funcional de respuesta**.",
+    quote: "\u201CLos repertorios de CCR3 incluyen tambi\u00E9n las descripciones de las equivalencias funcionales, que indican las similaridades entre lo que ocurre en la sesi\u00F3n y lo que ocurre en la vida diaria\u201D \u2014 Kohlenberg & Tsai (1991, p.32)"
+  }, {
     title: "\u26A0\uFE0F Filtro: \u00BFes CCR o no?",
     text: "**S\u00CD es CCR si:**\n\u2713 La conducta en sesi\u00F3n tiene la misma funci\u00F3n que el problema de afuera\n\u2713 Puedes conectarla con el patr\u00F3n central de la formulaci\u00F3n\n\n**NO es CCR si:**\n\u2717 Es conducta normal sin relaci\u00F3n con el patr\u00F3n central\n\u2717 No puedes formular qu\u00E9 funci\u00F3n cumple\n\nEjemplo: paciente que evita conflicto.\n\u2192 Dice \u201Cs\u00ED, todo bien\u201D cuando no entendi\u00F3 \u2192 **CCR1** (evita expresar necesidad)\n\u2192 Pregunta el horario de la pr\u00F3xima sesi\u00F3n \u2192 **No es CCR** (conducta normal)\n\u2192 Pide cambiar de tema cuando algo le incomoda \u2192 **CCR1** (evita malestar relacional)"
   }],
@@ -213,6 +221,30 @@ var EX = {
     }]
   }],
   2: [
+  // Functional equivalence exercise
+  {
+    type: "funceq",
+    instruction: "Misma funci\u00F3n, diferente topograf\u00EDa. La conducta de afuera y la de sesi\u00F3n se ven diferente pero cumplen la MISMA funci\u00F3n. Identifica cu\u00E1l es la clase funcional compartida.",
+    items: [{
+      afuera: "No le dice a su jefe que la carga laboral es excesiva. Trabaja horas extra sin quejarse hasta que explota.",
+      sesion: "Le propones un ejercicio de exposici\u00F3n que le parece excesivo. Dice: \u2018S\u00ED, dale, hag\u00E1moslo.\u2019",
+      opts: ["Evitaci\u00F3n de expresar l\u00EDmites y necesidades propias", "Perfeccionismo", "Dificultad para planificar"],
+      c: 0,
+      fb: "Ambas conductas se ven diferentes (trabajar extra vs aceptar un ejercicio) pero la funci\u00F3n es la misma: evitar el malestar de poner un l\u00EDmite a una figura de autoridad."
+    }, {
+      afuera: "Cuando su pareja le pregunta \u2018\u00BFqu\u00E9 te pasa?\u2019, dice \u2018nada\u2019 y se va a otra habitaci\u00F3n.",
+      sesion: "Cuando le preguntas qu\u00E9 sinti\u00F3 con el ejercicio, dice: \u2018Fue interesante, me hizo pensar en varias cosas\u2019 y da un an\u00E1lisis racional.",
+      opts: ["Alexitimia", "Evitaci\u00F3n del contacto emocional directo ante cercan\u00EDa interpersonal", "Estilo de apego evitativo"],
+      c: 1,
+      fb: "Topograf\u00EDas opuestas: afuera se calla y se va; en sesi\u00F3n habla mucho e intelectualiza. Pero la funci\u00F3n es id\u00E9ntica: escapar del contacto emocional directo cuando alguien se acerca."
+    }, {
+      afuera: "En reuniones de trabajo siempre pregunta: \u2018\u00BFEst\u00E1 bien lo que hice? \u00BFAlgo que deba cambiar?\u2019",
+      sesion: "Al final de cada sesi\u00F3n pregunta: \u2018\u00BFVoy bien? \u00BFEstoy haciendo bien la terapia?\u2019",
+      opts: ["Inseguridad laboral", "Responsabilidad con su proceso terap\u00E9utico", "B\u00FAsqueda de validaci\u00F3n externa como regulaci\u00F3n emocional"],
+      c: 2,
+      fb: "Las topograf\u00EDas son casi id\u00E9nticas (preguntar si lo hizo bien), pero lo que importa es ver la FUNCI\u00D3N: regular su incertidumbre emocional a trav\u00E9s de la aprobaci\u00F3n del otro. Misma clase funcional en ambos contextos."
+    }]
+  },
   // Build CCR map
   {
     type: "map",
@@ -1072,6 +1104,119 @@ function ExTrap({
     },
     full: true
   }, "Continuar \u2192") : null);
+}
+function ExFuncEq({
+  data,
+  onDone
+}) {
+  var _s = useState(0),
+    cur = _s[0],
+    setCur = _s[1];
+  var _s2 = useState(null),
+    sel = _s2[0],
+    setSel = _s2[1];
+  var _s3 = useState(0),
+    sc = _s3[0],
+    setSc = _s3[1];
+  var item = data.items[cur];
+  function pick(i) {
+    if (sel !== null) return;
+    setSel(i);
+    if (i === item.c) setSc(function (s) {
+      return s + 1;
+    });
+  }
+  function next() {
+    if (cur >= data.items.length - 1) {
+      onDone(sc + (sel === item.c ? 1 : 0));
+      return;
+    }
+    setCur(function (x) {
+      return x + 1;
+    });
+    setSel(null);
+  }
+  return React.createElement("div", {
+    style: {
+      animation: "fadeIn 0.4s"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: C.textMid,
+      fontWeight: 600,
+      marginBottom: 8
+    }
+  }, data.instruction), React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: C.textLight,
+      marginBottom: 10
+    }
+  }, "Caso " + (cur + 1) + " de " + data.items.length), React.createElement("div", {
+    style: {
+      background: "#FFF8E1",
+      padding: 14,
+      borderRadius: 12,
+      marginBottom: 8,
+      border: "1px solid #FFE08240"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#E65100",
+      marginBottom: 4
+    }
+  }, "\u{1F30D} Afuera de sesi\u00F3n:"), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.6
+    }
+  }, item.afuera)), React.createElement("div", {
+    style: {
+      background: "#E8F5E9",
+      padding: 14,
+      borderRadius: 12,
+      marginBottom: 14,
+      border: "1px solid #A5D6A740"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: 13,
+      fontWeight: 700,
+      color: "#2E7D32",
+      marginBottom: 4
+    }
+  }, "\u{1FA91} En sesi\u00F3n contigo:"), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.6
+    }
+  }, item.sesion)), React.createElement("p", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      marginBottom: 10
+    }
+  }, "\u00BFCu\u00E1l es la clase funcional compartida?"), item.opts.map(function (opt, i) {
+    return React.createElement(OptionBtn, {
+      key: i,
+      text: opt,
+      selected: sel === i,
+      correct: i === item.c,
+      showResult: sel !== null,
+      onClick: function () {
+        pick(i);
+      }
+    });
+  }), sel !== null ? React.createElement(FeedbackBox, {
+    ok: sel === item.c,
+    text: item.fb
+  }) : null, sel !== null ? React.createElement(Btn, {
+    onClick: next,
+    full: true
+  }, cur >= data.items.length - 1 ? "Finalizar" : "Siguiente \u2192") : null);
 }
 function ExMap({
   data,
@@ -2535,14 +2680,17 @@ function App() {
     }) : React.createElement(ExTrap, {
       data: EX[1][2],
       onDone: exDone
-    }) : null, phase === "exercise" && lvl === 2 ? exIdx === 0 ? React.createElement(ExMap, {
+    }) : null, phase === "exercise" && lvl === 2 ? exIdx === 0 ? React.createElement(ExFuncEq, {
       data: EX[2][0],
       onDone: exDone
-    }) : exIdx === 1 ? React.createElement(ExFilter, {
+    }) : exIdx === 1 ? React.createElement(ExMap, {
       data: EX[2][1],
       onDone: exDone
-    }) : React.createElement(ExFullCase, {
+    }) : exIdx === 2 ? React.createElement(ExFilter, {
       data: EX[2][2],
+      onDone: exDone
+    }) : React.createElement(ExFullCase, {
+      data: EX[2][3],
       onDone: exDone
     }) : null, phase === "exercise" && lvl === 3 ? exIdx === 0 ? React.createElement(ExBestQ, {
       data: EX[3][0],
