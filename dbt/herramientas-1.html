@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DBT Simulador · Entrenamiento Clínico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A1628;
+  --surface: #112240;
+  --surface2: #1A3358;
+  --surface3: #223F6A;
+  --accent: #F5C518;
+  --accent2: #E8703A;
+  --correct: #3DBE8A;
+  --wrong: #E85555;
+  --text: #E2EAF4;
+  --text-muted: #7A9EBF;
+  --text-dim: #4A6F8A;
+  --patient-bg: #1A3358;
+  --therapist-bg: #E8703A;
+  --border: rgba(255,255,255,0.07);
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+[data-theme="light"] {
+  --bg: #EEF2F7;
+  --surface: #FFFFFF;
+  --surface2: #E4EBF5;
+  --surface3: #D4DFEF;
+  --accent: #1B3A6B;
+  --accent2: #E8703A;
+  --text: #1B2A4A;
+  --text-muted: #5A7A9A;
+  --text-dim: #8AAAC0;
+  --patient-bg: #E4EBF5;
+  --therapist-bg: #E8703A;
+  --border: rgba(0,0,0,0.07);
+  --shadow: 0 4px 24px rgba(0,0,0,0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* SCREENS */
+.screen { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; display: none; flex-direction: column; }
+.screen.active { display: flex; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes pop { 0% { transform:scale(0.9); opacity:0; } 100% { transform:scale(1); opacity:1; } }
+@keyframes slideRight { from { opacity:0; transform:translateX(-16px); } to { opacity:1; transform:none; } }
+@keyframes slideLeft { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:none; } }
+@keyframes shimmer { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+
+/* ==================== HOME ==================== */
+#home {
+  background: var(--bg);
+  min-height: 100%;
+}
+.home-header {
+  padding: 56px 24px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  animation: fadeUp 0.5s ease both;
+}
+.home-brand { display: flex; flex-direction: column; }
+.home-brand .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.home-brand h1 {
+  font-family: 'Lora', serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text);
+}
+.home-brand h1 em {
+  font-style: italic;
+  color: var(--accent2);
+}
+.theme-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.theme-btn:hover { background: var(--surface2); }
+.home-intro {
+  padding: 0 24px 32px;
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+.home-intro p {
+  color: var(--text-muted);
+  font-size: 14px;
+  max-width: 320px;
+  line-height: 1.6;
+}
+.home-intro strong { color: var(--text); font-weight: 500; }
+.skills-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.skill-tag {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.levels-label {
+  padding: 0 24px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  animation: fadeUp 0.5s 0.15s ease both;
+}
+.level-cards {
+  padding: 0 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.level-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+  animation: fadeUp 0.5s ease both;
+}
+.level-card:nth-child(1) { animation-delay: 0.2s; }
+.level-card:nth-child(2) { animation-delay: 0.3s; }
+.level-card:nth-child(3) { animation-delay: 0.4s; }
+.level-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.level-card:active { transform: scale(0.98); }
+.level-card.completed { border-color: var(--correct); }
+.level-card.locked { opacity: 0.5; cursor: not-allowed; }
+.level-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.level-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.level-card:nth-child(1) .level-icon { background: rgba(245, 197, 24, 0.15); }
+.level-card:nth-child(2) .level-icon { background: rgba(232, 112, 58, 0.15); }
+.level-card:nth-child(3) .level-icon { background: rgba(61, 190, 138, 0.15); }
+.level-card-info { flex: 1; }
+.level-card-info .level-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+}
+.level-card-info .level-person {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.level-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.badge-easy { background: rgba(245,197,24,0.15); color: var(--accent); }
+.badge-mid { background: rgba(232,112,58,0.15); color: var(--accent2); }
+.badge-hard { background: rgba(61,190,138,0.15); color: var(--correct); }
+.level-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.level-score-badge {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: var(--correct);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.accent-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+.level-card:nth-child(1) .accent-line { background: var(--accent); }
+.level-card:nth-child(2) .accent-line { background: var(--accent2); }
+.level-card:nth-child(3) .accent-line { background: var(--correct); }
+
+/* ==================== SESSION ==================== */
+#session {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+}
+#session.active { display: flex; }
+.session-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 52px 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.back-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.back-btn:hover { background: var(--surface3); }
+.session-info { flex: 1; min-width: 0; }
+.session-patient {
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.session-level {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.session-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.score-display {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.guide-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+.guide-btn:hover { background: var(--surface3); color: var(--text); }
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+.chat-msg {
+  max-width: 82%;
+  animation: fadeIn 0.3s ease;
+}
+.chat-msg.patient {
+  align-self: flex-start;
+  animation: slideRight 0.3s ease;
+}
+.chat-msg.therapist {
+  align-self: flex-end;
+  animation: slideLeft 0.3s ease;
+}
+.chat-msg.narrator {
+  align-self: center;
+  animation: fadeIn 0.3s ease;
+}
+.bubble {
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.patient .bubble {
+  background: var(--patient-bg);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+.therapist .bubble {
+  background: var(--therapist-bg);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+.narrator .bubble {
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+  padding: 4px 12px;
+}
+.step-badge {
+  display: inline-block;
+  background: rgba(61,190,138,0.15);
+  color: var(--correct);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 12px;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+.wrong-feedback {
+  background: rgba(232,85,85,0.1);
+  border: 1.5px solid rgba(232,85,85,0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--wrong);
+  animation: fadeIn 0.3s ease;
+}
+.correct-feedback {
+  background: rgba(61,190,138,0.08);
+  border: 1.5px solid rgba(61,190,138,0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--correct);
+  animation: fadeIn 0.3s ease;
+}
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--patient-bg);
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+}
+.typing-dot {
+  width: 7px; height: 7px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  animation: shimmer 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+.decision-area {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 12px 16px 28px;
+  flex-shrink: 0;
+}
+.decision-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.step-indicator {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+.decision-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.option-btn {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13.5px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.45;
+  transition: all 0.2s;
+}
+.option-btn:hover { background: var(--surface3); border-color: rgba(255,255,255,0.15); transform: translateX(2px); }
+.option-btn:active { transform: scale(0.98); }
+.option-btn.correct { border-color: var(--correct); background: rgba(61,190,138,0.08); }
+.option-btn.wrong { border-color: var(--wrong); background: rgba(232,85,85,0.08); }
+
+/* ==================== RESULT ==================== */
+#result {
+  min-height: 100%;
+  background: var(--bg);
+}
+.result-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 52px 20px 20px;
+}
+.result-title {
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.result-subtitle { color: var(--text-muted); font-size: 13px; }
+.score-ring-container {
+  display: flex;
+  justify-content: center;
+  padding: 32px 20px 16px;
+  animation: pop 0.4s ease;
+}
+.score-ring {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  border: 6px solid var(--surface2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.score-ring-num {
+  font-family: 'Lora', serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+}
+.score-ring-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+.steps-review {
+  padding: 8px 16px 24px;
+}
+.review-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 12px 4px 8px;
+}
+.step-result-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 8px;
+  animation: fadeUp 0.3s ease both;
+}
+.step-result-card.perfect { border-color: rgba(61,190,138,0.3); }
+.step-result-card.retried { border-color: rgba(245,197,24,0.3); }
+.step-result-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.step-result-icon { font-size: 16px; }
+.step-result-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+}
+.step-result-pts {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.step-result-pts.full { color: var(--correct); }
+.step-result-pts.half { color: var(--accent); }
+.step-result-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.result-actions {
+  padding: 8px 16px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.btn-primary {
+  background: var(--accent2);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 15px 20px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  width: 100%;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  width: 100%;
+}
+.btn-secondary:hover { background: var(--surface2); }
+
+/* ==================== CERTIFICATE ==================== */
+#certificate {
+  min-height: 100%;
+  background: var(--bg);
+}
+.cert-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 52px 20px 20px;
+}
+.cert-header h2 {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+.cert-header p { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+.cert-container {
+  padding: 24px 16px;
+  animation: fadeUp 0.4s ease;
+}
+.certificate-card {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cert-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: repeating-linear-gradient(45deg, var(--accent) 0, var(--accent) 1px, transparent 0, transparent 50%);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+.cert-top-accent {
+  width: 60px; height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+.cert-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.cert-main-title {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+.cert-recipient-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.cert-name {
+  font-family: 'Lora', serif;
+  font-size: 26px;
+  font-style: italic;
+  color: var(--accent2);
+  margin-bottom: 20px;
+  min-height: 36px;
+}
+.cert-skills {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.cert-skill-chip {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+.cert-total-score {
+  font-family: 'Lora', serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.cert-score-label { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+.cert-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0;
+}
+.cert-disclaimer {
+  font-size: 10px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.cert-site {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+.cert-input-section {
+  padding: 0 16px 16px;
+}
+.cert-input-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: block;
+}
+.cert-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.cert-input:focus { border-color: var(--accent); }
+.cert-actions {
+  padding: 8px 16px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ==================== GUIDE MODAL ==================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+.modal-overlay.open { display: flex; align-items: flex-end; }
+.modal-sheet {
+  background: var(--surface);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: fadeUp 0.25s ease;
+}
+.modal-handle {
+  width: 36px; height: 4px;
+  background: var(--surface3);
+  border-radius: 2px;
+  margin: 12px auto 4px;
+}
+.modal-header {
+  padding: 12px 20px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.modal-header h3 {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+.modal-close {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.guide-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+.guide-tab {
+  flex: 1;
+  padding: 10px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.guide-tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+.guide-content { padding: 16px 20px 32px; }
+.guide-step {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  animation: fadeUp 0.3s ease both;
+}
+.guide-step:nth-child(1) { animation-delay: 0s; }
+.guide-step:nth-child(2) { animation-delay: 0.05s; }
+.guide-step:nth-child(3) { animation-delay: 0.1s; }
+.guide-step:nth-child(4) { animation-delay: 0.15s; }
+.guide-step:nth-child(5) { animation-delay: 0.2s; }
+.guide-step:nth-child(6) { animation-delay: 0.25s; }
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.step-text { flex: 1; }
+.step-text strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.step-text p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home" class="screen active">
+  <div class="home-header">
+    <div class="home-brand">
+      <span class="label">DBT · Entrenamiento Clínico</span>
+      <h1>Modo<br><em>Sesión</em></h1>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+  <div class="home-intro">
+    <p>El paciente te escribe. Vos elegís cómo guiarlo a través de <strong>Verificar los Hechos</strong> y <strong>Acción Opuesta</strong>. Cada decisión tiene consecuencias.</p>
+    <div class="skills-tags">
+      <span class="skill-tag">Verificar los Hechos</span>
+      <span class="skill-tag">Acción Opuesta</span>
+      <span class="skill-tag">6 pasos c/u</span>
+    </div>
+  </div>
+  <div class="levels-label">Seleccioná un caso</div>
+  <div class="level-cards" id="levelCards"></div>
+</div>
+
+<!-- SESSION -->
+<div id="session" class="screen">
+  <div class="session-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="session-info">
+      <div class="session-patient" id="sessionPatient">—</div>
+      <div class="session-level" id="sessionLevel">—</div>
+    </div>
+    <div class="session-controls">
+      <div class="score-display" id="scoreDisplay">0 pts</div>
+      <button class="guide-btn" onclick="openGuide()" id="guideBtnEl" title="Ver pasos">📋</button>
+    </div>
+  </div>
+  <div class="chat-area" id="chatArea"></div>
+  <div class="decision-area" id="decisionArea" style="display:none;">
+    <div class="decision-label">
+      <span>Tu respuesta</span>
+      <span class="step-indicator" id="stepIndicator"></span>
+    </div>
+    <div class="decision-options" id="decisionOptions"></div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="result" class="screen">
+  <div class="result-header">
+    <div class="result-title" id="resultTitle">Caso completado</div>
+    <div class="result-subtitle" id="resultSubtitle"></div>
+  </div>
+  <div class="score-ring-container">
+    <div class="score-ring" id="scoreRing">
+      <div class="score-ring-num" id="scoreRingNum">—</div>
+      <div class="score-ring-label">puntos</div>
+    </div>
+  </div>
+  <div class="steps-review" id="stepsReview"></div>
+  <div class="result-actions" id="resultActions"></div>
+</div>
+
+<!-- CERTIFICATE -->
+<div id="certificate" class="screen">
+  <div class="cert-header">
+    <h2>🏅 Certificado de Entrenamiento</h2>
+    <p>Completaste los 3 niveles del simulador DBT.</p>
+  </div>
+  <div class="cert-container">
+    <div class="certificate-card" id="certCard">
+      <div class="cert-bg-pattern"></div>
+      <div class="cert-top-accent"></div>
+      <div class="cert-label">Certificado de participación</div>
+      <div class="cert-main-title">Entrenamiento en<br>Regulación Emocional DBT</div>
+      <div class="cert-recipient-label">Otorgado a</div>
+      <div class="cert-name" id="certNameDisplay">Tu nombre</div>
+      <div class="cert-skills">
+        <span class="cert-skill-chip">✓ Verificar los Hechos</span>
+        <span class="cert-skill-chip">✓ Acción Opuesta</span>
+        <span class="cert-skill-chip">✓ 3 casos clínicos</span>
+      </div>
+      <div class="cert-total-score" id="certScore">—</div>
+      <div class="cert-score-label">puntos totales obtenidos</div>
+      <div class="cert-divider"></div>
+      <div class="cert-disclaimer">Este certificado no tiene validez académica ni profesional.<br>Es un recurso de entrenamiento clínico.</div>
+      <div class="cert-site">@leo.eyzaguirre · DBT Simulador</div>
+    </div>
+  </div>
+  <div class="cert-input-section">
+    <label class="cert-input-label">¿Cómo querés que aparezca tu nombre?</label>
+    <input type="text" class="cert-input" id="certNameInput" placeholder="Ej: Lic. María García" oninput="updateCertName(this.value)">
+  </div>
+  <div class="cert-actions">
+    <button class="btn-primary" onclick="shareCert()">Compartir certificado</button>
+    <button class="btn-secondary" onclick="goHome()">Volver al inicio</button>
+  </div>
+</div>
+
+<!-- GUIDE MODAL -->
+<div class="modal-overlay" id="guideModal" onclick="closeGuideOnOverlay(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3>Referencia de pasos</h3>
+      <button class="modal-close" onclick="closeGuide()">✕</button>
+    </div>
+    <div class="guide-tabs">
+      <button class="guide-tab active" onclick="switchGuideTab('vh', this)">Verificar los Hechos</button>
+      <button class="guide-tab" onclick="switchGuideTab('ao', this)">Acción Opuesta</button>
+    </div>
+    <div class="guide-content" id="guideContent"></div>
+  </div>
+</div>
+
+<script>
+// ==================== GAME DATA ====================
+const GUIDE = {
+  vh: [
+    { num: 1, q: '¿Cuál es la emoción que quiero cambiar?', desc: 'Etiquetar con precisión. No "me siento mal" — ¿bronca, miedo, vergüenza, culpa? Incluir intensidad 0-100.' },
+    { num: 2, q: '¿Cuál es el evento desencadenante?', desc: 'Solo los hechos observables. Sin juicios ni absolutos. Lo que cualquiera con ojos podría haber visto.' },
+    { num: 3, q: '¿Cuáles son mis interpretaciones sobre ese evento?', desc: 'Separar el hecho de la historia construida encima. Las interpretaciones generan emociones tan intensas como los hechos.' },
+    { num: 4, q: '¿Estoy asumiendo una amenaza?', desc: 'Etiquetar la amenaza. Evaluar la probabilidad real de que ocurra. Pensar en todos los otros resultados posibles.' },
+    { num: 5, q: '¿Cuál es la catástrofe?', desc: 'Si ocurre el peor resultado, ¿cuáles son las consecuencias realistas? Imaginar que podemos manejarla bien.' },
+    { num: 6, q: '¿Mi emoción y su intensidad se ajustan a los hechos?', desc: 'El veredicto. No si la emoción existe — sino si su nivel tiene sentido dado lo que realmente ocurrió.' },
+  ],
+  ao: [
+    { num: 1, q: 'Identificar y nombrar la emoción', desc: 'El mismo punto de partida. Sin nombre preciso, no hay blanco al que apuntar.' },
+    { num: 2, q: 'Verificar los hechos', desc: 'Confirmar que la emoción no encaja. Es el puente entre las dos habilidades.' },
+    { num: 3, q: 'Identificar el impulso de acción', desc: '¿Qué te urge hacer o decir? Ese impulso es el que vas a invertir.' },
+    { num: 4, q: '¿Actuar sobre el impulso es efectivo?', desc: 'Preguntale a tu Mente Sabia. Si la respuesta es no, seguís al paso 5.' },
+    { num: 5, q: 'Actuá de forma opuesta al impulso', desc: 'Opuesto a tu impulso real — no a cualquier lista. La emoción es la guía.' },
+    { num: 6, q: 'Hacelo por completo', desc: 'Postura, tono, gestos, pensamientos: todo en la misma dirección. A medias no funciona.' },
+  ]
+};
+
+const LEVELS = [
+  {
+    id: 0,
+    title: 'Valentina',
+    sub: '26 años · Psicóloga junior',
+    desc: 'Vergüenza intensa después de equivocarse en una reunión. La emoción no encaja a esa intensidad.',
+    diff: 'Fácil',
+    diffClass: 'badge-easy',
+    icon: '😟',
+    showGuide: true,
+    maxScore: 50,
+    beats: [
+      { type:'narrator', text:'— Valentina te escribe por WhatsApp —' },
+      { type:'patient', text:'Hola, necesito que me ayudes. Pasé algo horrible hoy y no me lo puedo sacar de la cabeza.' },
+      { type:'patient', text:'Estoy pensando en pedir licencia o algo así.' },
+      {
+        type:'decision',
+        stepLabel:'VH · Paso 1',
+        options: [
+          { text:'¿Qué emoción estás sintiendo ahora mismo?',
+            correct:true, pts:10,
+            reaction:'Vergüenza. Mucha. Un 85/100 si tuviera que calificarlo. Hoy en la reunión di una respuesta completamente equivocada delante de todo el equipo.',
+            ok:'Correcto — el primer movimiento es identificar y nombrar la emoción antes de cualquier otra cosa.',
+            badge:'VH Paso 1: emoción identificada' },
+          { text:'¿Qué fue lo que pasó? Contame todo.',
+            correct:false,
+            reaction:'Hoy en la reunión me confundí con los datos y di información incorrecta. Ahora todos van a pensar que soy incompetente...',
+            fail:'Fuiste directo al contenido antes de anclar la emoción. El relato se expande y perdés el foco clínico.' },
+          { text:'Tranquila, seguro no fue para tanto.',
+            correct:false,
+            reaction:'...Fácil decirlo desde afuera.',
+            fail:'Minimizaste antes de explorar. El paciente se siente invalidado y se cierra.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'VH · Pasos 2 y 3',
+        options: [
+          { text:'¿Qué es exactamente lo que pasó — solo hechos, sin interpretaciones?',
+            correct:true, pts:10,
+            reaction:'Hmm... el hecho es que di una respuesta incorrecta cuando me preguntaron. Eso es lo que pasó. Lo otro — que todos piensan que soy incompetente — eso no lo sé en realidad.',
+            ok:'Exacto. Separaste el evento observable de las interpretaciones. Esos son los Pasos 2 y 3.',
+            badge:'VH Pasos 2-3: hechos vs. interpretaciones' },
+          { text:'¿Cómo reaccionaron tus compañeros exactamente?',
+            correct:false,
+            reaction:'Algunos me miraron, uno me preguntó si estaba bien... No sé, quizás notaron que algo estaba mal.',
+            fail:'Fuiste a las consecuencias en lugar de separar hechos de interpretaciones. Eso puede amplificar la emoción.' },
+          { text:'¿Esto te pasó antes?',
+            correct:false,
+            reaction:'Sí, una o dos veces. Siempre me pasa en las reuniones importantes...',
+            fail:'Buscar patrones históricos puede ser útil más adelante, pero primero necesitás separar los hechos del evento específico.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'VH · Pasos 4 y 5',
+        options: [
+          { text:'¿Cuál es la peor consecuencia realista de lo que pasó hoy?',
+            correct:true, pts:10,
+            reaction:'Que alguien piense que me equivoqué... una vez. Dicho así suena muy diferente a lo que sentía. Pero igual lo siento muy fuerte.',
+            ok:'Bien — evaluaste la catástrofe real versus la imaginada. Y lo que Valentina dice al final es la señal exacta de que la emoción no encaja a esa intensidad.',
+            badge:'VH Pasos 4-5: amenaza y catástrofe' },
+          { text:'Basta de catastrofizar, eso no ayuda.',
+            correct:false,
+            reaction:'Sé que soy exagerada, me lo dicen siempre...',
+            fail:'Etiquetaste el pensamiento sin explorarlo. La autoinvalidación que ya hace el paciente se refuerza.' },
+          { text:'¿Y si tu jefe estuvo en esa reunión?',
+            correct:false,
+            reaction:'No... no lo sé. Ahora estoy peor.',
+            fail:'Amplificaste la amenaza en lugar de evaluarla. La emoción sube, no baja.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'VH · Paso 6',
+        options: [
+          { text:'¿Un 85% de vergüenza tiene sentido por haberte equivocado una vez en una reunión?',
+            correct:true, pts:10,
+            reaction:'No... supongo que no. Pero mi cuerpo no lo registra así todavía.',
+            ok:'Exacto. La emoción existe pero su intensidad no encaja con los hechos. Eso es cuándo entrás en Acción Opuesta.',
+            badge:'VH Paso 6: la intensidad no encaja' },
+          { text:'Entonces ya sabés que exageraste.',
+            correct:false,
+            reaction:'...Sí. Siempre soy exagerada.',
+            fail:'Diagnosticaste sin explorar. El paciente internaliza el juicio en lugar de desarrollar la habilidad.' },
+          { text:'¿Qué soluciones tenés para evitar que vuelva a pasar?',
+            correct:false,
+            reaction:'Podría prepararme más, estudiar los datos antes...',
+            fail:'Saltaste a Resolución de Problemas antes de completar Verificar los Hechos. Es la trampa más común.' }
+        ]
+      },
+      { type:'patient', text:'Entiendo lo que decís. Pero cuando pienso en ir a trabajar mañana se me cierra el pecho.' },
+      {
+        type:'decision',
+        stepLabel:'AO · Pasos 3–6',
+        options: [
+          { text:'¿Qué te urge hacer con tus compañeros mañana, y cómo sería hacer exactamente lo contrario — con cuerpo, tono, postura?',
+            correct:true, pts:10,
+            reaction:'Me urge evitarlos, no hablar en las reuniones. Lo contrario sería ir, participar, hablar cuando tenga algo para decir. Con postura recta, no con la cabeza baja.',
+            ok:'Perfecto. Identificaste el impulso, evaluaste si es efectivo, y definiste la acción opuesta completa — postura, voz, presencia. No a medias.',
+            badge:'AO Pasos 3-6: impulso → opuesto completo' },
+          { text:'Forzate a ir a trabajar mañana y ya.',
+            correct:false,
+            reaction:'Sí... supongo.',
+            fail:'Diste la instrucción sin identificar el impulso ni trabajar la dimensión corporal. Acción Opuesta a medias no funciona.' },
+          { text:'¿Podés comprometerte a no evitar a tus compañeros?',
+            correct:false,
+            reaction:'Voy a intentarlo...',
+            fail:'El compromiso es vago y no define el comportamiento concreto. Sin postura, tono y gestos, el paciente no sabe qué hacer.' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 1,
+    title: 'Marcos',
+    sub: '34 años · Contador',
+    desc: 'Bronca intensa con su hermano que le debe dinero. Emociones mezcladas y resistencia al proceso.',
+    diff: 'Intermedio',
+    diffClass: 'badge-mid',
+    icon: '😤',
+    showGuide: false,
+    maxScore: 50,
+    beats: [
+      { type:'narrator', text:'— Marcos te escribe en medio de una situación activa —' },
+      { type:'patient', text:'Necesito hablar. Mi hermano me debe plata hace 4 meses y hoy lo vi en Instagram de vacaciones. Estoy que exploto.' },
+      { type:'patient', text:'Tengo ganas de mandarle un mensajón o ir a su casa directamente.' },
+      {
+        type:'decision',
+        stepLabel:'VH · Paso 1',
+        options: [
+          { text:'Antes de hacer cualquier cosa — ¿qué emoción estás sintiendo, y qué tan intensa?',
+            correct:true, pts:10,
+            reaction:'Bronca. Un 80/100. Y algo de tristeza también — me siento traicionado por alguien que es mi familia.',
+            ok:'Bien. Nombraste dos emociones y pediste intensidad. Cuando hay emociones mezcladas es clave identificar cuál es la primaria.',
+            badge:'VH Paso 1: emociones mixtas identificadas' },
+          { text:'¿Qué le vas a decir cuando lo contactes?',
+            correct:false,
+            reaction:'Eso es lo que no sé. Si le mando lo que tengo ganas de mandar va a ser un desastre.',
+            fail:'Fuiste directo a la acción. Sin identificar las emociones primero, cualquier estrategia va a estar al servicio de la urgencia.' },
+          { text:'Entiendo que estés enojado, es muy injusto.',
+            correct:false,
+            reaction:'Sí, exactamente. O sea, ¿cómo puede...?',
+            fail:'Validar es importante, pero acá amplificó la emoción en lugar de anclarla. Primero identificar, después validar selectivamente.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'VH · Pasos 2 y 3',
+        options: [
+          { text:'¿Qué es lo que viste hoy exactamente — solo hechos observables, sin lo que interpretás?',
+            correct:true, pts:10,
+            reaction:'Una foto en Instagram donde está en la playa con amigos. Eso es lo que vi. Lo que interpreto — que tiene plata para vacaciones y no para devolverme lo mío — eso no lo sé con certeza.',
+            ok:'Exacto. La foto es el hecho. "Tiene plata y no me paga" es la interpretación. Esa distinción cambia todo.',
+            badge:'VH Pasos 2-3: hechos vs. interpretaciones' },
+          { text:'¿Antes de esto te había dado señales de que no iba a pagar?',
+            correct:false,
+            reaction:'Siempre fue así. Una vez tardó meses en devolverme algo...',
+            fail:'Buscaste patrones históricos antes de clarificar los hechos del evento actual. Eso puede solidificar la interpretación como si fuera un hecho.' },
+          { text:'Y tu hermano, ¿sabe que lo necesitás?',
+            correct:false,
+            reaction:'Le mandé tres mensajes. Los vio. No contestó.',
+            fail:'Buen dato clínico pero salteaste la distinción hechos-interpretaciones. Sin ese paso, la bronca sigue mezclada con suposiciones.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'VH · Paso 6',
+        options: [
+          { text:'La bronca por sentirte ignorado tiene sentido. Pero ¿80/100 encaja con lo que podés confirmar?',
+            correct:true, pts:10,
+            reaction:'No sé... sí me ignoró, eso es real. Pero tampoco sé si tiene plata o no. Quizás el 80 es mucho para lo que puedo confirmar.',
+            ok:'Validaste la emoción y trabajaste la intensidad sin invalidarla. La bronca puede encajar — pero no al 80 con la información disponible.',
+            badge:'VH Paso 6: intensidad vs. hechos confirmados' },
+          { text:'Tu hermano te ignoró, así que la bronca está justificada.',
+            correct:false,
+            reaction:'Exacto, y encima de vacaciones...',
+            fail:'Validaste la emoción pero reforzaste la intensidad sin verificar la interpretación. La bronca puede ser válida — pero no necesariamente al 80.' },
+          { text:'En realidad no sabés si tiene plata, así que no tenés razones para estar enojado.',
+            correct:false,
+            reaction:'Pero me ignoró. Eso es real.',
+            fail:'Invalidaste la emoción en lugar de trabajar la intensidad. Marcos tiene razón: el ignorar sí ocurrió.' }
+        ]
+      },
+      { type:'patient', text:'Pero igual, aunque sea un 60, sigue siendo mi hermano y me falló. No puedo simplemente actuar como si nada.' },
+      {
+        type:'decision',
+        stepLabel:'AO · Resistencia + Paso 3',
+        options: [
+          { text:'Acción Opuesta no es actuar como si nada. Es que cuando actuás sobre un impulso que no es efectivo, lo reforzás. ¿Qué te urge hacer ahora mismo?',
+            correct:true, pts:10,
+            reaction:'Confrontarlo. Ir a su casa o mandarle un mensaje diciéndole todo lo que pienso.',
+            ok:'Clarificaste el concepto sin invalidar. Y ahora tenés el impulso de acción identificado con precisión.',
+            badge:'AO Paso 3: impulso identificado' },
+          { text:'Entiendo, pero si actuás sobre la emoción vas a empeorar las cosas.',
+            correct:false,
+            reaction:'Eso no me ayuda. ¿Qué hago entonces?',
+            fail:'Avanzaste sin validar ni explicar la lógica de Acción Opuesta. El paciente siente que le decís qué no hacer sin darle un marco.' },
+          { text:'Tenés razón. Mejor hablemos de cómo recuperar el dinero.',
+            correct:false,
+            reaction:'Sí, eso es lo que necesito...',
+            fail:'Saltaste a Resolución de Problemas antes de trabajar la emoción. Con 60/100 de bronca, cualquier estrategia va a estar contaminada.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'AO · Pasos 4–6',
+        options: [
+          { text:'¿Confrontarlo ahora, con esta intensidad, te va a acercar a recuperar el dinero o a mantener la relación?',
+            correct:true, pts:10,
+            reaction:'No... probablemente empeore todo. Aunque tampoco puedo ignorarlo.',
+            ok:'Evaluaste efectividad con Mente Sabia y Marcos llegó solo a la conclusión. Y tiene razón: la parte válida de la emoción se puede trabajar con Resolución de Problemas después.',
+            badge:'AO Pasos 4-6: efectividad + acción opuesta' },
+          { text:'Hacé lo contrario: no le escribas, esperá a estar más tranquilo.',
+            correct:false,
+            reaction:'Sí, supongo.',
+            fail:'Diste la instrucción sin el proceso. Marcos no entiende por qué — y probablemente igualmente le mande el mensajón.' },
+          { text:'¿Y si le mandás un mensaje breve y concreto pidiendo una fecha de pago?',
+            correct:false,
+            reaction:'Con la bronca que tengo igual le escribo mal.',
+            fail:'Fuiste a Resolución de Problemas sin regular la emoción primero. Marcos mismo señala el problema.' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Elena',
+    sub: '41 años · Gerente de proyectos',
+    desc: 'Fue despedida después de 8 años. Su tristeza encaja con los hechos. Caso para terapeutas avanzados.',
+    diff: 'Avanzado',
+    diffClass: 'badge-hard',
+    icon: '😔',
+    showGuide: false,
+    maxScore: 40,
+    beats: [
+      { type:'narrator', text:'— Elena llega a sesión tres días después de ser despedida —' },
+      { type:'patient', text:'Me despidieron el jueves. Ocho años en esa empresa. Me lo comunicaron por mail.' },
+      { type:'patient', text:'Estoy muy triste. No puedo dormir, no tengo ganas de nada. Y también estoy enojada, pero lo que más siento es tristeza.' },
+      {
+        type:'decision',
+        stepLabel:'VH · Paso 1',
+        options: [
+          { text:'¿Cuál es la emoción más fuerte ahora, y qué tan intensa?',
+            correct:true, pts:10,
+            reaction:'Tristeza. Un 75/100. Perdí algo que fue muy importante para mí. Y la forma en que lo manejaron — por mail, sin ni una reunión.',
+            ok:'Bien. Identificaste la emoción primaria. Y Elena ya hace algo importante: distingue la tristeza (por la pérdida) de la bronca (por el trato).',
+            badge:'VH Paso 1: emoción primaria identificada' },
+          { text:'Eso es muy duro. ¿Tenés apoyo en casa?',
+            correct:false,
+            reaction:'Sí, mi pareja está muy presente. Pero igual no puedo con esto.',
+            fail:'Exploraste la red de apoyo antes de anclar la emoción. Útil clínicamente, pero no es el primer movimiento en este protocolo.' },
+          { text:'¿Qué vas a hacer ahora con el trabajo?',
+            correct:false,
+            reaction:'No sé. No puedo ni pensar en eso todavía.',
+            fail:'Fuiste a la acción. La respuesta de Elena lo dice claramente: no está lista para eso.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'VH · Paso 6',
+        options: [
+          { text:'Perdiste un trabajo de 8 años de forma abrupta. La tristeza ante una pérdida real encaja completamente con los hechos.',
+            correct:true, pts:10,
+            reaction:'Sí... sé que tiene sentido sentirme así. Pero igual es muy difícil.',
+            ok:'Exacto. Cuando la emoción encaja con los hechos, Acción Opuesta no es la herramienta. La tristeza es válida y tiene función.',
+            badge:'VH Paso 6: la emoción SÍ encaja' },
+          { text:'Igual, 75% parece mucho. Vamos a trabajar con Acción Opuesta.',
+            correct:false,
+            reaction:'¿Actuar opuesto a la tristeza? ¿Forzarme a estar bien?',
+            fail:'Este es el error central del nivel avanzado: aplicar Acción Opuesta cuando la emoción sí encaja. La tristeza por una pérdida real no se regula con AO.' },
+          { text:'La tristeza es normal pero no podés quedarte paralizada.',
+            correct:false,
+            reaction:'Lo sé, pero no puedo hacer nada ahora mismo.',
+            fail:'Invalidaste la función adaptativa de la tristeza. Ante una pérdida real, primero conservar recursos — forzar acción prematura interfiere con ese proceso.' }
+        ]
+      },
+      { type:'patient', text:'Y lo de la bronca — me parece que ahí sí hay algo para hacer. La forma en que me lo comunicaron fue un faltazo.' },
+      {
+        type:'decision',
+        stepLabel:'Integración de habilidades',
+        options: [
+          { text:'La tristeza por la pérdida encaja y necesita validación y Resolución de Problemas. La bronca por el trato — ahí podemos verificar si la intensidad encaja.',
+            correct:true, pts:10,
+            reaction:'Eso tiene mucho sentido. Son dos cosas distintas.',
+            ok:'Exactamente. Misma situación, dos emociones, dos rutas. La tristeza → Resolución de Problemas. La bronca → verificar intensidad → ¿AO o PS?',
+            badge:'Integración: cada emoción tiene su ruta' },
+          { text:'Las dos emociones encajan, así que Resolución de Problemas para ambas.',
+            correct:false,
+            reaction:'¿Las dos? Sí, supongo...',
+            fail:'La tristeza sí encaja → Resolución de Problemas. Pero la bronca todavía necesita verificación de intensidad. No toda emoción que encaja tiene la intensidad justa.' },
+          { text:'Concentrémonos en la tristeza, la bronca la dejamos para después.',
+            correct:false,
+            reaction:'De acuerdo.',
+            fail:'Elena misma señaló que en la bronca hay algo para hacer. Ignorarlo puede sentirse como invalidación.' }
+        ]
+      },
+      {
+        type:'decision',
+        stepLabel:'Resolución de Problemas',
+        options: [
+          { text:'La tristeza tiene función: primero conservar recursos, después movilizar. ¿Qué necesitás ahora para atravesarla sin hundirte?',
+            correct:true, pts:10,
+            reaction:'Creo que necesito un poco de tiempo para procesarlo. Y después — hablar con personas de la industria, actualizar el CV. Pero no hoy.',
+            ok:'Perfecto. Acompañaste la función de la tristeza y abriste la puerta a la movilización cuando Elena esté lista. Eso es Resolución de Problemas al servicio de la emoción, no contra ella.',
+            badge:'Resolución de Problemas: con la emoción, no contra ella' },
+          { text:'¿Qué estrategias concretas tenés para encontrar un nuevo trabajo?',
+            correct:false,
+            reaction:'Ahora mismo no tengo cabeza para eso...',
+            fail:'Fuiste a estrategias concretas demasiado pronto. Elena lo dice claramente: la tristeza todavía está en fase de conservar recursos.' },
+          { text:'Lo más importante ahora es que no te quedes sola con esto.',
+            correct:false,
+            reaction:'Sí, mi pareja...',
+            fail:'El apoyo social es válido pero no es Resolución de Problemas. Elena necesita un plan concreto alineado con dónde está emocionalmente.' }
+        ]
+      }
+    ]
+  }
+];
+
+// ==================== STATE ====================
+const state = {
+  theme: 'dark',
+  currentLevel: null,
+  beatIndex: 0,
+  score: 0,
+  results: [], // {stepLabel, pts, maxPts, firstTry}
+  completedLevels: {},
+  totalScore: 0,
+  currentDecision: null,
+  waitingForDecision: false,
+  currentAttempt: 0, // retries on current decision
+};
+
+// ==================== INIT ====================
+function init() {
+  renderHomeCards();
+  renderGuideContent('vh');
+}
+
+function renderHomeCards() {
+  const container = document.getElementById('levelCards');
+  container.innerHTML = LEVELS.map((lvl, i) => {
+    const completed = state.completedLevels[i];
+    const locked = i > 0 && !state.completedLevels[i-1];
+    return `
+    <div class="level-card ${completed?'completed':''} ${locked?'locked':''}" onclick="startLevel(${i})">
+      <div class="accent-line"></div>
+      ${completed ? `<div class="level-score-badge">${completed.score}/${completed.max}</div>` : ''}
+      <div class="level-card-top">
+        <div class="level-icon">${lvl.icon}</div>
+        <div class="level-card-info">
+          <div class="level-name">${lvl.title}</div>
+          <div class="level-person">${lvl.sub}</div>
+        </div>
+        <span class="level-badge ${lvl.diffClass}">${lvl.diff}</span>
+      </div>
+      <div class="level-desc">${lvl.desc}</div>
+    </div>`;
+  }).join('');
+}
+
+// ==================== SESSION ====================
+function startLevel(idx) {
+  const lvl = LEVELS[idx];
+  if (idx > 0 && !state.completedLevels[idx-1]) return;
+  
+  state.currentLevel = idx;
+  state.beatIndex = 0;
+  state.score = 0;
+  state.results = [];
+  state.currentDecision = null;
+  state.waitingForDecision = false;
+  state.currentAttempt = 0;
+
+  document.getElementById('sessionPatient').textContent = `${lvl.title} · ${lvl.sub}`;
+  document.getElementById('sessionLevel').textContent = `Nivel ${idx+1} — ${lvl.diff}`;
+  document.getElementById('scoreDisplay').textContent = '0 pts';
+  document.getElementById('chatArea').innerHTML = '';
+  document.getElementById('decisionArea').style.display = 'none';
+  document.getElementById('guideBtnEl').style.display = lvl.showGuide ? 'flex' : 'flex'; // always show
+
+  showScreen('session');
+  setTimeout(() => runBeats(), 300);
+}
+
+async function runBeats() {
+  const lvl = LEVELS[state.currentLevel];
+  while (state.beatIndex < lvl.beats.length) {
+    const beat = lvl.beats[state.beatIndex];
+    if (beat.type === 'decision') {
+      await showDecision(beat);
+      state.beatIndex++;
+    } else {
+      await showMessage(beat.type, beat.text);
+      state.beatIndex++;
+      await delay(400);
+    }
+  }
+  // Case completed
+  await delay(600);
+  showResult();
+}
+
+function showMessage(type, text, extra) {
+  return new Promise(resolve => {
+    const chat = document.getElementById('chatArea');
+    
+    if (type === 'patient') {
+      // Show typing indicator first
+      const typing = document.createElement('div');
+      typing.className = 'chat-msg patient';
+      typing.innerHTML = `<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+      chat.appendChild(typing);
+      scrollChat();
+      
+      setTimeout(() => {
+        typing.innerHTML = `<div class="bubble">${text}</div>`;
+        if (extra?.badge) {
+          const badge = document.createElement('div');
+          badge.className = 'chat-msg patient';
+          badge.innerHTML = `<span class="step-badge">✓ ${extra.badge}</span>`;
+          chat.appendChild(badge);
+        }
+        scrollChat();
+        resolve();
+      }, 900);
+    } else {
+      const msg = document.createElement('div');
+      msg.className = `chat-msg ${type}`;
+      if (type === 'therapist') {
+        msg.innerHTML = `<div class="bubble">${text}</div>`;
+      } else {
+        msg.innerHTML = `<div class="bubble">${text}</div>`;
+      }
+      chat.appendChild(msg);
+      if (extra?.badge) {
+        const badge = document.createElement('div');
+        badge.className = 'chat-msg patient';
+        badge.innerHTML = `<span class="step-badge">✓ ${extra.badge}</span>`;
+        chat.appendChild(badge);
+      }
+      scrollChat();
+      setTimeout(resolve, 200);
+    }
+  });
+}
+
+function showDecision(beat) {
+  return new Promise(resolve => {
+    state.currentDecision = beat;
+    state.waitingForDecision = true;
+    state.currentAttempt = 0;
+    state._decisionResolve = resolve;
+    state._decisionFirstTry = true;
+
+    const area = document.getElementById('decisionArea');
+    const options = document.getElementById('decisionOptions');
+    const indicator = document.getElementById('stepIndicator');
+    
+    indicator.textContent = beat.stepLabel;
+    options.innerHTML = beat.options.map((opt, i) =>
+      `<button class="option-btn" onclick="selectOption(${i})">${opt.text}</button>`
+    ).join('');
+    area.style.display = 'block';
+    
+    // Animate buttons
+    options.querySelectorAll('.option-btn').forEach((btn, i) => {
+      btn.style.animation = `fadeUp 0.25s ${i*0.06}s ease both`;
+    });
+  });
+}
+
+async function selectOption(idx) {
+  if (!state.waitingForDecision) return;
+  
+  const beat = state.currentDecision;
+  const opt = beat.options[idx];
+  const btns = document.querySelectorAll('.option-btn');
+  
+  // Disable all buttons
+  btns.forEach(b => b.style.pointerEvents = 'none');
+  
+  // Show therapist bubble
+  const chat = document.getElementById('chatArea');
+  const therapistMsg = document.createElement('div');
+  therapistMsg.className = 'chat-msg therapist';
+  therapistMsg.innerHTML = `<div class="bubble">${opt.text}</div>`;
+  chat.appendChild(therapistMsg);
+  scrollChat();
+  
+  await delay(600);
+  
+  if (opt.correct) {
+    // Show patient reaction
+    await showMessage('patient', opt.reaction);
+    
+    // Show positive feedback
+    const feedback = document.createElement('div');
+    feedback.className = 'correct-feedback';
+    feedback.textContent = opt.ok;
+    chat.appendChild(feedback);
+    
+    // Show step badge
+    if (opt.badge) {
+      const badge = document.createElement('div');
+      badge.className = 'chat-msg patient';
+      badge.innerHTML = `<span class="step-badge">✓ ${opt.badge}</span>`;
+      chat.appendChild(badge);
+    }
+    scrollChat();
+    
+    // Score
+    const pts = state._decisionFirstTry ? opt.pts : Math.floor(opt.pts / 2);
+    state.score += pts;
+    state.results.push({
+      label: beat.stepLabel,
+      pts,
+      maxPts: opt.pts,
+      firstTry: state._decisionFirstTry,
+      badge: opt.badge
+    });
+    document.getElementById('scoreDisplay').textContent = `${state.score} pts`;
+    
+    // Hide decision area
+    document.getElementById('decisionArea').style.display = 'none';
+    state.waitingForDecision = false;
+    await delay(500);
+    state._decisionResolve();
+    
+  } else {
+    // Wrong answer
+    state._decisionFirstTry = false;
+    btns[idx].classList.add('wrong');
+    
+    await delay(300);
+    
+    // Show patient reaction to wrong choice
+    await showMessage('patient', opt.reaction);
+    
+    // Show feedback
+    const feedback = document.createElement('div');
+    feedback.className = 'wrong-feedback';
+    feedback.textContent = opt.fail;
+    chat.appendChild(feedback);
+    scrollChat();
+    
+    await delay(1200);
+    
+    // Reset buttons for retry
+    document.getElementById('decisionOptions').innerHTML = beat.options.map((o, i) =>
+      `<button class="option-btn" onclick="selectOption(${i})">${o.text}</button>`
+    ).join('');
+    document.querySelectorAll('.option-btn').forEach((btn, i) => {
+      btn.style.animation = `fadeUp 0.2s ${i*0.05}s ease both`;
+    });
+  }
+}
+
+function scrollChat() {
+  const chat = document.getElementById('chatArea');
+  setTimeout(() => chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' }), 50);
+}
+
+// ==================== RESULT ====================
+function showResult() {
+  const lvl = LEVELS[state.currentLevel];
+  const pct = Math.round((state.score / lvl.maxScore) * 100);
+  
+  document.getElementById('resultTitle').textContent = `${lvl.title} · Completado`;
+  document.getElementById('resultSubtitle').textContent = `${lvl.diff} · ${state.results.length} pasos trabajados`;
+  
+  const ring = document.getElementById('scoreRing');
+  const ringNum = document.getElementById('scoreRingNum');
+  ringNum.textContent = state.score;
+  const color = pct >= 80 ? '#3DBE8A' : pct >= 60 ? '#F5C518' : '#E85555';
+  ring.style.borderColor = color;
+  ringNum.style.color = color;
+  
+  // Steps review
+  const review = document.getElementById('stepsReview');
+  review.innerHTML = `<div class="review-section-title">Decisiones clínicas</div>` +
+    state.results.map((r, i) => `
+    <div class="step-result-card ${r.firstTry?'perfect':'retried'}" style="animation-delay:${i*0.08}s">
+      <div class="step-result-header">
+        <span class="step-result-icon">${r.firstTry ? '✓' : '↺'}</span>
+        <span class="step-result-name">${r.badge || r.label}</span>
+        <span class="step-result-pts ${r.pts === r.maxPts ? 'full' : 'half'}">${r.pts}/${r.maxPts}</span>
+      </div>
+      <div class="step-result-desc">${r.firstTry ? 'Primer intento correcto' : 'Correcto tras reintento'}</div>
+    </div>`).join('');
+  
+  // Save result
+  state.completedLevels[state.currentLevel] = { score: state.score, max: lvl.maxScore };
+  
+  // Actions
+  const actions = document.getElementById('resultActions');
+  const allDone = Object.keys(state.completedLevels).length === 3;
+  if (allDone) {
+    const total = Object.values(state.completedLevels).reduce((a, b) => a + b.score, 0);
+    state.totalScore = total;
+    actions.innerHTML = `
+      <button class="btn-primary" onclick="showCertificate()">Ver mi certificado 🏅</button>
+      <button class="btn-secondary" onclick="goHome()">Volver al inicio</button>`;
+  } else {
+    const nextIdx = state.currentLevel + 1;
+    const hasNext = nextIdx < LEVELS.length;
+    actions.innerHTML = `
+      ${hasNext ? `<button class="btn-primary" onclick="startLevel(${nextIdx})">Siguiente caso →</button>` : ''}
+      <button class="btn-secondary" onclick="goHome()">Volver al inicio</button>`;
+  }
+  
+  showScreen('result');
+}
+
+// ==================== CERTIFICATE ====================
+function showCertificate() {
+  const total = Object.values(state.completedLevels).reduce((a, b) => a + b.score, 0);
+  document.getElementById('certScore').textContent = total;
+  document.getElementById('certNameDisplay').textContent = 'Tu nombre';
+  document.getElementById('certNameInput').value = '';
+  showScreen('certificate');
+}
+
+function updateCertName(val) {
+  document.getElementById('certNameDisplay').textContent = val || 'Tu nombre';
+}
+
+function shareCert() {
+  const name = document.getElementById('certNameInput').value || 'Terapeuta';
+  const total = state.totalScore;
+  const text = `Completé el entrenamiento en Regulación Emocional DBT (Verificar los Hechos + Acción Opuesta) con ${total} puntos en el simulador de @leo.eyzaguirre 🧠\n\n#DBT #PsicologíaContextual #RegulacionEmocional`;
+  
+  if (navigator.share) {
+    navigator.share({ title: 'Certificado DBT Simulador', text });
+  } else {
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Texto copiado al portapapeles');
+    });
+  }
+}
+
+// ==================== GUIDE ====================
+let currentGuideTab = 'vh';
+
+function openGuide() {
+  document.getElementById('guideModal').classList.add('open');
+  renderGuideContent(currentGuideTab);
+}
+
+function closeGuide() {
+  document.getElementById('guideModal').classList.remove('open');
+}
+
+function closeGuideOnOverlay(e) {
+  if (e.target === document.getElementById('guideModal')) closeGuide();
+}
+
+function switchGuideTab(tab, el) {
+  currentGuideTab = tab;
+  document.querySelectorAll('.guide-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderGuideContent(tab);
+}
+
+function renderGuideContent(tab) {
+  const steps = GUIDE[tab];
+  document.getElementById('guideContent').innerHTML = steps.map(s => `
+    <div class="guide-step">
+      <div class="step-num">${s.num}</div>
+      <div class="step-text">
+        <strong>${s.q}</strong>
+        <p>${s.desc}</p>
+      </div>
+    </div>`).join('');
+}
+
+// ==================== NAVIGATION ====================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById(id).scrollTop = 0;
+}
+
+function goHome() {
+  renderHomeCards();
+  showScreen('home');
+}
+
+// ==================== THEME ====================
+function toggleTheme() {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', state.theme);
+  document.getElementById('themeBtn').textContent = state.theme === 'dark' ? '🌙' : '☀️';
+}
+
+// ==================== UTILS ====================
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+init();
+</script>
+</body>
+</html>
