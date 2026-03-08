@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sostener la Experiencia · RFT Lab · @leo.eyzaguirre</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F0E8;
+  --surface: #FFFFFF;
+  --surface2: #EDE8DF;
+  --text: #0A1628;
+  --text-muted: #5A6A82;
+  --blue-dark: #0A1628;
+  --blue: #1A3A6B;
+  --blue-light: #4ABDE8;
+  --orange: #FF6B35;
+  --yellow: #FFD700;
+  --green: #27AE60;
+  --red: #E74C3C;
+  --border: rgba(10,22,40,0.1);
+  --shadow: 0 4px 24px rgba(10,22,40,0.08);
+  --radius: 16px;
+  --nav-h: 64px;
+  --bottom-h: 70px;
+}
+[data-theme="dark"] {
+  --bg: #060D1A;
+  --surface: #0A1628;
+  --surface2: #0F1F3D;
+  --text: #F5F0E8;
+  --text-muted: #7A8FA8;
+  --border: rgba(245,240,232,0.07);
+  --shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .3s,color .3s;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* HEX BG */
+.hex-bg{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104'%3E%3Cpath d='M30 69L0 52V18L30 1l30 17v34z' fill='none' stroke='%234ABDE8' stroke-width='1'/%3E%3Cpath d='M30 103L0 86V52l30-17 30 17v34z' fill='none' stroke='%234ABDE8' stroke-width='1'/%3E%3C/svg%3E");
+}
+[data-theme="dark"] .hex-bg{opacity:.07}
+
+/* TOP NAV */
+.top-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  backdrop-filter:blur(12px);
+}
+.nav-logo{font-weight:900;font-size:15px;color:var(--blue-light);letter-spacing:-.5px;line-height:1.1}
+.nav-logo span{color:var(--orange)}
+.nav-logo small{display:block;font-size:9px;font-weight:600;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase}
+.nav-actions{display:flex;gap:8px}
+.btn-icon{
+  width:36px;height:36px;border-radius:50%;
+  border:1.5px solid var(--border);
+  background:var(--surface2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:transform .2s,background .2s;
+}
+.btn-icon:hover{transform:scale(1.08);background:var(--surface)}
+
+/* MAIN */
+main{padding-top:var(--nav-h);position:relative;z-index:1}
+.section{
+  display:none;
+  min-height:calc(100vh - var(--nav-h));
+  padding:24px 18px calc(var(--bottom-h) + 20px);
+  animation:fadeIn .35s ease;
+}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  height:var(--bottom-h);
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-around;align-items:center;
+  padding:0 4px calc(env(safe-area-inset-bottom));
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  cursor:pointer;padding:6px 10px;border-radius:12px;
+  transition:all .2s;min-width:0;flex:1;
+}
+.nav-item.active{background:rgba(74,189,232,.12)}
+.nav-item .ni{font-size:22px;line-height:1}
+.nav-item .nl{font-size:9px;font-weight:800;color:var(--text-muted);letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.nav-item.active .nl{color:var(--blue-light)}
+
+/* ── SHARED COMPONENTS ── */
+.page-title{font-size:24px;font-weight:900;line-height:1.2;margin-bottom:6px}
+.page-sub{color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:24px}
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(74,189,232,.12);color:var(--blue-light);
+  border:1px solid rgba(74,189,232,.25);
+  border-radius:20px;padding:3px 12px;
+  font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:14px;
+}
+.btn{
+  display:block;width:100%;
+  padding:15px;border-radius:12px;
+  font-size:15px;font-weight:800;font-family:'Nunito',sans-serif;
+  cursor:pointer;transition:all .2s;border:none;
+}
+.btn-main{background:linear-gradient(135deg,var(--blue-light),var(--blue));color:#fff}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(74,189,232,.3)}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+.watermark{text-align:center;font-size:11px;color:var(--text-muted);opacity:.5;padding:8px;margin-top:8px}
+
+/* ── HOME ── */
+.hero{text-align:center;padding:32px 0 28px}
+.hero h1{font-size:30px;font-weight:900;line-height:1.15;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p{color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:0}
+.progress-card{
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:18px;margin-bottom:18px;
+}
+.progress-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px}
+.pbar-wrap{background:var(--surface2);border-radius:10px;height:9px;overflow:hidden;margin-bottom:7px}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--blue-light),var(--orange));border-radius:10px;transition:width .6s ease;width:0%}
+.pbar-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted)}
+.lcard{
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:18px;display:flex;align-items:center;gap:14px;
+  cursor:pointer;transition:all .2s;position:relative;overflow:hidden;margin-bottom:10px;
+}
+.lcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lc,var(--blue-light))}
+.lcard:hover:not(.locked){transform:translateX(3px)}
+.lcard.locked{opacity:.45;cursor:not-allowed}
+.lcard.completed::before{background:var(--green)}
+.lc-emoji{font-size:30px}
+.lc-info{flex:1;min-width:0}
+.lc-name{font-weight:800;font-size:15px;margin-bottom:2px}
+.lc-desc{font-size:12px;color:var(--text-muted)}
+.lc-status{font-size:20px;flex-shrink:0}
+
+/* ── TEORIA ── */
+.acc-list{display:flex;flex-direction:column;gap:10px}
+.acc-item{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.acc-head{
+  padding:16px 18px;cursor:pointer;
+  display:flex;align-items:center;gap:10px;
+  font-weight:800;font-size:15px;
+  user-select:none;
+}
+.acc-em{font-size:20px}
+.acc-title{flex:1}
+.acc-arr{margin-left:auto;font-size:11px;color:var(--text-muted);transition:transform .3s}
+.acc-item.open .acc-arr{transform:rotate(180deg)}
+.acc-body{
+  display:none;padding:0 18px 18px;
+  font-size:14px;line-height:1.75;color:var(--text-muted);
+}
+.acc-item.open .acc-body{display:block;animation:fadeIn .25s ease}
+.acc-body p{margin-bottom:12px}
+.acc-body strong{color:var(--text)}
+.ex-box{
+  background:var(--surface2);border-left:3px solid var(--orange);
+  border-radius:0 10px 10px 0;padding:13px 15px;margin:12px 0;
+}
+.ex-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:6px}
+.chip{
+  display:inline-block;background:rgba(74,189,232,.1);color:var(--blue-light);
+  border:1px solid rgba(74,189,232,.2);border-radius:20px;
+  padding:2px 10px;font-size:12px;font-weight:700;margin:2px;
+}
+.ref{font-size:12px;color:var(--text-muted);font-style:italic}
+
+/* ── QUIZ ── */
+.ql-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;margin-bottom:14px;
+}
+.qprog{display:flex;gap:5px;margin-bottom:20px}
+.qdot{flex:1;height:5px;border-radius:3px;background:var(--surface2);transition:background .3s}
+.qdot.done{background:var(--blue-light)}
+.qdot.cur{background:var(--orange)}
+.qcard{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.qtext{font-size:16px;font-weight:700;line-height:1.5;margin-bottom:18px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{
+  background:var(--surface2);border:2px solid transparent;border-radius:12px;
+  padding:13px 14px;cursor:pointer;font-size:14px;font-weight:600;line-height:1.4;
+  transition:all .2s;display:flex;align-items:flex-start;gap:10px;
+}
+.opt:hover:not(.disabled){border-color:var(--blue-light);background:rgba(74,189,232,.07)}
+.opt.correct{border-color:var(--green)!important;background:rgba(39,174,96,.1)!important}
+.opt.wrong{border-color:var(--red)!important;background:rgba(231,76,60,.09)!important}
+.opt.disabled{cursor:not-allowed;pointer-events:none}
+.oletter{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--surface);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:900;flex-shrink:0;margin-top:1px;
+}
+.fb{border-radius:12px;padding:15px;margin-top:12px;font-size:14px;line-height:1.65;display:none}
+.fb.show{display:block;animation:fadeIn .3s ease}
+.fb.ok{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.25)}
+.fb.ko{background:rgba(231,76,60,.07);border:1px solid rgba(231,76,60,.18)}
+.fb-title{font-weight:800;font-size:13px;margin-bottom:5px}
+.btn-next{
+  width:100%;background:linear-gradient(135deg,var(--blue-light),var(--blue));
+  color:#fff;border:none;border-radius:12px;padding:15px;
+  font-size:15px;font-weight:800;cursor:pointer;margin-top:14px;
+  display:none;transition:all .2s;font-family:'Nunito',sans-serif;
+}
+.btn-next.show{display:block}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(74,189,232,.3)}
+
+/* ── SESSION ── */
+.sess-head{
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:15px;margin-bottom:14px;display:flex;align-items:center;gap:12px;
+}
+.cav{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue-light),var(--orange));
+  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+}
+.cinfo .cname{font-weight:800;font-size:15px}
+.cinfo .cdesc{font-size:12px;color:var(--text-muted)}
+.timer-wrap{margin-left:auto;text-align:right}
+.timer-toggle{font-size:10px;font-weight:700;color:var(--text-muted);cursor:pointer;margin-bottom:2px;user-select:none}
+.timer-num{font-size:22px;font-weight:900;color:var(--orange);font-variant-numeric:tabular-nums}
+.timer-num.urgent{color:var(--red);animation:pulse .5s ease infinite alternate}
+@keyframes pulse{from{opacity:1}to{opacity:.6}}
+.conv{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;max-height:260px;overflow-y:auto;padding:2px}
+.bubble{max-width:88%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.5;animation:bubIn .3s ease}
+@keyframes bubIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.bubble.client{background:var(--surface2);border:1.5px solid var(--border);border-bottom-left-radius:4px;align-self:flex-start}
+.bubble.therapist{background:rgba(74,189,232,.12);border:1.5px solid rgba(74,189,232,.2);border-bottom-right-radius:4px;align-self:flex-end}
+.blabel{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:3px}
+.step-counter{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px}
+
+/* ── ACHIEVEMENTS ── */
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.ach{
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:18px 14px;text-align:center;transition:all .3s;
+}
+.ach.unlocked{border-color:var(--yellow);background:rgba(255,215,0,.04)}
+.ach.locked{opacity:.35;filter:grayscale(1)}
+.ach-em{font-size:36px;margin-bottom:8px}
+.ach-name{font-weight:800;font-size:13px;margin-bottom:3px}
+.ach-desc{font-size:11px;color:var(--text-muted);line-height:1.4}
+
+/* ── CERTIFICATE ── */
+.cert-wrap{text-align:center}
+.cert-card{
+  background:linear-gradient(145deg,#060D1A,#1A3A6B);
+  border-radius:var(--radius);padding:30px 22px;margin:18px 0;
+  position:relative;overflow:hidden;
+}
+.cert-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104'%3E%3Cpath d='M30 69L0 52V18L30 1l30 17v34z' fill='none' stroke='%234ABDE8' stroke-width='.6'/%3E%3C/svg%3E");
+  opacity:.06;
+}
+.cert-inner{position:relative;z-index:1}
+.cert-logo{font-size:10px;color:rgba(74,189,232,.75);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.cert-certifies{font-size:11px;color:rgba(245,240,232,.5);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.cert-name{font-size:26px;font-weight:900;color:#FFD700;margin-bottom:10px;min-height:34px;word-break:break-word}
+.cert-desc{font-size:13px;color:rgba(245,240,232,.7);line-height:1.6;margin-bottom:16px}
+.cert-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:20px;padding:4px 12px;font-size:11px;color:#FFD700;font-weight:700}
+.cert-ref{margin-top:14px;font-size:10px;color:rgba(245,240,232,.35);line-height:1.6}
+.name-in{
+  width:100%;background:var(--surface);border:2px solid var(--border);border-radius:12px;
+  padding:14px 16px;font-size:16px;font-family:'Nunito',sans-serif;font-weight:700;
+  color:var(--text);outline:none;transition:border-color .2s;margin-bottom:10px;
+}
+.name-in:focus{border-color:var(--blue-light)}
+.locked-msg{text-align:center;padding:40px 20px;color:var(--text-muted)}
+.lock-em{font-size:52px;margin-bottom:12px}
+canvas{display:none}
+
+/* ── RESULT ── */
+.result{text-align:center;padding:40px 0}
+.result-em{font-size:72px;margin-bottom:14px}
+.result-title{font-size:26px;font-weight:900;margin-bottom:8px}
+.result-sub{color:var(--text-muted);font-size:15px;margin-bottom:28px;line-height:1.6}
+.score-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.score-big{font-size:52px;font-weight:900;color:var(--blue-light)}
+.score-lbl{font-size:13px;color:var(--text-muted)}
+
+/* ── GLOSSARY ── */
+.glos-btn{
+  position:fixed;bottom:calc(var(--bottom-h) + 12px);right:16px;z-index:90;
+  width:50px;height:50px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue-light),var(--blue));border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 4px 18px rgba(74,189,232,.4);transition:all .2s;
+}
+.glos-btn:hover{transform:scale(1.08)}
+.glos-panel{
+  position:fixed;bottom:calc(var(--bottom-h) + 72px);right:16px;left:16px;z-index:89;
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);max-height:58vh;overflow-y:auto;
+  display:none;animation:slideUp .3s ease;
+}
+.glos-panel.open{display:block}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.glos-header{padding:14px 18px 10px;border-bottom:1px solid var(--border);font-weight:800;font-size:14px;position:sticky;top:0;background:var(--surface)}
+.glos-item{padding:12px 18px;border-bottom:1px solid var(--border)}
+.glos-item:last-child{border-bottom:none}
+.glos-term{font-weight:800;font-size:13px;color:var(--blue-light);margin-bottom:4px}
+.glos-def{font-size:12px;color:var(--text-muted);line-height:1.55}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;top:calc(var(--nav-h) + 10px);left:50%;
+  transform:translateX(-50%) translateY(-12px);
+  background:var(--surface);border:1.5px solid var(--yellow);border-radius:14px;
+  padding:11px 18px;display:flex;align-items:center;gap:9px;
+  font-size:13px;font-weight:700;
+  box-shadow:0 4px 20px rgba(255,215,0,.2);z-index:200;
+  opacity:0;transition:all .3s;white-space:nowrap;max-width:calc(100vw - 40px);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Level selector in niveles */
+.lvl-sel-head{margin-bottom:20px}
+</style>
+</head>
+<body data-theme="dark">
+<div class="hex-bg"></div>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-logo">
+    🧠 RFT<span>Lab</span>
+    <small>@leo.eyzaguirre</small>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-icon" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<main>
+<!-- ══ HOME ══ -->
+<section class="section active" id="sec-home">
+  <div class="hero">
+    <div class="badge">📚 Törneke · Luciano · Barnes-Holmes</div>
+    <h1>Sostener la<br><em>Experiencia</em></h1>
+    <p>Entrená una técnica clínica con base en RFT — dos niveles de dificultad, feedback inmediato y certificado.</p>
+  </div>
+  <div class="progress-card">
+    <div class="progress-label">📊 Tu progreso general</div>
+    <div class="pbar-wrap"><div class="pbar-fill" id="g-bar"></div></div>
+    <div class="pbar-labels"><span id="g-label">0 de 3 niveles</span><span id="g-pct">0%</span></div>
+  </div>
+  <div id="home-lcards"></div>
+  <div class="watermark">@leo.eyzaguirre · CBS Clínica</div>
+</section>
+
+<!-- ══ TEORIA ══ -->
+<section class="section" id="sec-teoria">
+  <div class="page-title">📖 Marco teórico</div>
+  <div class="page-sub">Todo lo que necesitás saber — con ejemplos clínicos concretos.</div>
+  <div class="acc-list">
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-em">🧠</span><span class="acc-title">¿Qué es la RFT y por qué importa en terapia?</span><span class="acc-arr">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>La <strong>Teoría del Marco Relacional (RFT)</strong> es una teoría del lenguaje y la cognición humana basada en el análisis del comportamiento. Su idea central: los humanos aprendemos a relacionar eventos y palabras de manera arbitraria — no solo por similitud física, sino por convención social y aprendizaje.</p>
+        <p>Esto tiene un impacto clínico enorme: <strong>el sufrimiento psicológico no es solo respuesta al ambiente físico, sino al ambiente verbal</strong> que el consultante construye constantemente a través del lenguaje.</p>
+        <div class="ex-box">
+          <div class="ex-label">🔍 Ejemplo</div>
+          Un consultante no sufrió cuando falló en el examen, sino cuando relacionó ese fallo con "soy un fracaso como persona". Esa relación es <em>aprendida y arbitraria</em> — y se puede trabajar clínicamente cambiando el tipo de marco relacional que la sostiene.
+        </div>
+        <p>En psicoterapia, la RFT nos da herramientas para trabajar <strong>la estructura de cómo el consultante se relaciona con su experiencia privada</strong> — no solo el contenido de sus pensamientos.</p>
+        <p class="ref">📖 Törneke, Luciano, Barnes-Holmes & Bond (2015). Wiley Handbook of Contextual Behavioral Science.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-em">🔗</span><span class="acc-title">Marcos de coordinación vs. marcos jerárquicos</span><span class="acc-arr">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>Cuando una persona dice <strong>"yo soy mi ansiedad"</strong>, está respondiendo en un <span class="chip">marco de coordinación</span>: el "yo" y la "ansiedad" son funcionalmente lo mismo. Desde ahí, la conducta queda atrapada — si soy mi ansiedad, ¿cómo podría actuar diferente a lo que ella dicta?</p>
+        <p>El <span class="chip">marco jerárquico</span> establece una relación diferente: <em>"yo tengo ansiedad"</em>. El yo y la experiencia ya no son lo mismo — hay una diferencia de nivel, como entre un libro y quien lo lee.</p>
+        <div class="ex-box">
+          <div class="ex-label">🔍 Ejemplo clínico</div>
+          <strong>Coordinación:</strong> "Soy inseguro. Por eso no puedo hablar en público." — La inseguridad ES quien es.<br><br>
+          <strong>Jerárquico:</strong> "Tengo una sensación de inseguridad en el pecho. ¿Qué quiero hacer, más allá de eso?" — La inseguridad es algo que tiene, no lo que es.
+        </div>
+        <p>El objetivo clínico de la técnica <strong>"Sostener la Experiencia"</strong> es exactamente este: construir activamente el marco jerárquico donde antes solo había coordinación.</p>
+        <div class="ex-box">
+          <div class="ex-label">💡 Clave técnica</div>
+          Esta distinción es la razón de ser de la técnica. No es metáfora ni ejercicio de mindfulness genérico — es ingeniería relacional deliberada. Cambiar el tipo de marco que conecta al "yo" con la experiencia privada cambia la función que esa experiencia tiene sobre la conducta.
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-em">👁️</span><span class="acc-title">El Yo deíctico — ¿quién es el que observa?</span><span class="acc-arr">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>Los <span class="chip">marcos deícticos</span> son marcos relacionales que implican una perspectiva: Yo/Tú, Aquí/Allá, Ahora/Antes. A diferencia de otros marcos, no describen propiedades de las cosas sino <strong>la posición desde la que se observan</strong>.</p>
+        <p>El <span class="chip">Yo deíctico</span> es esa perspectiva estable que permanece constante a través del tiempo, aunque todo lo que se observa cambie. Puedo haberme sentido distinto hace años, pero el "yo que estaba ahí" es el mismo que observa ahora.</p>
+        <div class="ex-box">
+          <div class="ex-label">🔍 Ejemplo</div>
+          Cuando el terapeuta pregunta <em>"¿quién está viendo eso?"</em> después de que el consultante exterioriza una sensación, está activando el Yo deíctico — ese observador que no es la ansiedad, ni el recuerdo, ni el pensamiento, sino quien los tiene.
+        </div>
+        <p>Desde la perspectiva del Yo deíctico, el consultante puede enmarcar sus experiencias privadas en jerarquía consigo mismo, y desde ahí elegir una dirección conductual distinta.</p>
+        <p>Este proceso es lo que en ACT se conoce como <em>"Yo como contexto"</em>, pero la RFT nos da la <strong>explicación mecánica de por qué funciona</strong>: activa y entrena el marco jerárquico deíctico como repertorio alternativo.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-em">📜</span><span class="acc-title">Conducta gobernada por reglas — la "trampa verbal"</span><span class="acc-arr">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>Los humanos podemos actuar en base a instrucciones verbales en lugar de solo aprender por contacto directo con consecuencias. Es una ventaja enorme: puedo planificar, actuar por valores abstractos, aprender sin vivir cada experiencia.</p>
+        <p>Pero puede ser una trampa. Cuando alguien sigue una regla aunque las consecuencias no la confirmen, hablamos de <span class="chip">insensibilidad a las contingencias</span>. El seguimiento se vuelve rígido e inflexible.</p>
+        <div class="ex-box">
+          <div class="ex-label">🔍 Ejemplo clínico</div>
+          Pedro sigue la regla interna: <em>"si siento peligro, debo actuar para proteger a mi hija"</em>. Cada vez que la sigue (comprueba, evita, lava), se reduce momentáneamente la ansiedad — pero a largo plazo aumenta la rigidez y el sufrimiento.<br><br>
+          No deja de seguirla aunque no funcione, porque el alivio inmediato refuerza el seguimiento. Eso es conducta gobernada por reglas en modo trampa.
+        </div>
+        <p>La técnica <strong>Sostener la Experiencia</strong> no busca eliminar la regla, sino transformar su función — que el consultante pueda <em>tener</em> la regla sin necesariamente <em>seguirla</em> de manera automática.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-em">⚡</span><span class="acc-title">Augmentals apetitivos — la función de los valores</span><span class="acc-arr">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>Los <span class="chip">augmentals</span> son un tipo especial de regla verbal que <strong>cambia el impacto motivacional de ciertas consecuencias</strong>. Los augmentals apetitivos aumentan el valor de consecuencias deseadas, funcionando como motivadores verbalmente construidos.</p>
+        <p>En términos simples: cuando un consultante conecta una conducta difícil con algo que genuinamente importa, esa conexión tiene una función motivacional real — no como promesa, sino como función augmental activa.</p>
+        <div class="ex-box">
+          <div class="ex-label">🔍 Ejemplo</div>
+          Pedro teme contaminar a su hija. Cuando el terapeuta le ayuda a contactar con el padre presente y cariñoso que quiere ser — y vincula eso con sostener la ansiedad sin seguir las "advertencias" — esa imagen funciona como augmental apetitivo. Le da dirección sin eliminar el miedo.
+        </div>
+        <p>En la técnica, los augmentals aparecen al final: <em>"sosteniéndolo ahí, ¿qué harías que sea importante para ti?"</em>. No es cambiar de tema — es vincular el marco jerárquico con motivación basada en valores.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span class="acc-em">🛠️</span><span class="acc-title">La técnica completa — paso a paso</span><span class="acc-arr">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>La técnica tiene dos momentos que pueden usarse por separado o integrados en una secuencia fluida:</p>
+        <div class="ex-box">
+          <div class="ex-label">🔵 Momento 1 — Exteriorizar y sostener</div>
+          <strong>Paso 1 — Exteriorizar:</strong> Invitás al consultante a describir la experiencia con propiedades sensoriales. ¿Dónde está en el cuerpo? ¿Qué forma tiene? ¿Qué color?<br><br>
+          <strong>Paso 2 — Sostener:</strong> Pedís que la "sostenga" delante suyo, en las manos o el regazo. La experiencia pasa de ser "yo soy esto" a "yo tengo esto".
+        </div>
+        <div class="ex-box">
+          <div class="ex-label">🟠 Momento 2 — El giro deíctico y los valores</div>
+          <strong>Paso 3 — ¿Quién observa?</strong> "¿Quién está viendo eso?" — activa el Yo deíctico jerárquico.<br><br>
+          <strong>Paso 4 — Dirección:</strong> "Sosteniéndolo ahí, ¿qué harías que sea importante para ti?" — vincula con augmentals apetitivos.
+        </div>
+        <div class="ex-box">
+          <div class="ex-label">💡 Diferencia con defusión convencional</div>
+          La defusión trabaja el <em>contenido</em> del pensamiento — distanciarse de lo que dice. Esta técnica trabaja la <em>estructura relacional</em>: construye activamente el marco jerárquico deíctico. El Momento 2 añade la activación explícita del observador, que no es solo distancia del contenido, sino entrenamiento de un repertorio relacional específico.
+        </div>
+        <p class="ref">📖 Törneke, Luciano, Barnes-Holmes & Bond (2015). "RFT para la práctica clínica: tres estrategias esenciales." Wiley Handbook of Contextual Behavioral Science, pp. 254–272.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="watermark">@leo.eyzaguirre · CBS Clínica</div>
+</section>
+
+<!-- ══ NIVELES ══ -->
+<section class="section" id="sec-niveles">
+  <div id="lsel">
+    <div class="lvl-sel-head">
+      <div class="page-title">🎯 Niveles de entrenamiento</div>
+      <div class="page-sub">Completá cada nivel para desbloquear el siguiente.</div>
+    </div>
+    <div id="lsel-cards"></div>
+  </div>
+  <div id="quiz1" style="display:none"></div>
+  <div id="quiz2" style="display:none"></div>
+  <div id="quiz3" style="display:none"></div>
+  <div id="res1" style="display:none"></div>
+  <div id="res2" style="display:none"></div>
+  <div id="res3" style="display:none"></div>
+</section>
+
+<!-- ══ LOGROS ══ -->
+<section class="section" id="sec-logros">
+  <div class="page-title">🏅 Logros</div>
+  <div class="page-sub">Cada insignia reconoce un repertorio clínico real.</div>
+  <div class="ach-grid" id="ach-grid"></div>
+  <div class="watermark">@leo.eyzaguirre · CBS Clínica</div>
+</section>
+
+<!-- ══ CERTIFICADO ══ -->
+<section class="section" id="sec-cert">
+  <div class="cert-wrap">
+    <div class="page-title">🎓 Certificado</div>
+    <div class="page-sub" id="cert-msg">Completá los 3 niveles para desbloquear tu certificado.</div>
+    <div id="cert-locked">
+      <div class="locked-msg">
+        <div class="lock-em">🔒</div>
+        <p>Completá los 3 niveles de entrenamiento para desbloquear el certificado.</p>
+      </div>
+    </div>
+    <div id="cert-open" style="display:none">
+      <div class="cert-card">
+        <div class="cert-inner">
+          <div class="cert-logo">@leo.eyzaguirre · RFT Lab</div>
+          <div class="cert-certifies">Certifica que</div>
+          <div class="cert-name" id="cname-show">Tu nombre aquí</div>
+          <div class="cert-desc">completó el entrenamiento clínico<br><strong style="color:#F5F0E8">Sostener la Experiencia</strong><br>técnica basada en Teoría del Marco Relacional</div>
+          <div class="cert-badge">✅ 3 niveles completados</div>
+          <div class="cert-ref">Törneke, Luciano, Barnes-Holmes & Bond (2015)<br>Wiley Handbook of Contextual Behavioral Science</div>
+        </div>
+      </div>
+      <input class="name-in" id="cname-in" type="text" placeholder="✍️ Escribí tu nombre completo" oninput="updateCertName(this.value)">
+      <button class="btn btn-main" onclick="downloadCert()" style="margin-bottom:10px">⬇️ Descargar certificado</button>
+      <button class="btn btn-outline" onclick="shareIG()">📸 Compartir en Instagram</button>
+      <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:10px;line-height:1.6">
+        ¡Nos encantaría verlo! 🙌<br>Etiquetá a <strong>@leo.eyzaguirre</strong>
+      </p>
+    </div>
+  </div>
+  <canvas id="certCanvas"></canvas>
+  <div class="watermark">@leo.eyzaguirre · CBS Clínica</div>
+</section>
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="go('home')" id="nav-home"><span class="ni">🏠</span><span class="nl">Inicio</span></div>
+  <div class="nav-item" onclick="go('teoria')" id="nav-teoria"><span class="ni">📖</span><span class="nl">Teoría</span></div>
+  <div class="nav-item" onclick="go('niveles')" id="nav-niveles"><span class="ni">🎯</span><span class="nl">Entrenar</span></div>
+  <div class="nav-item" onclick="go('logros')" id="nav-logros"><span class="ni">🏅</span><span class="nl">Logros</span></div>
+  <div class="nav-item" onclick="go('cert')" id="nav-cert"><span class="ni">🎓</span><span class="nl">Cert.</span></div>
+</nav>
+
+<!-- FLOATING GLOSSARY -->
+<button class="glos-btn" onclick="toggleGlossary()">📚</button>
+<div class="glos-panel" id="glos">
+  <div class="glos-header">📚 Glosario RFT rápido</div>
+  <div class="glos-item"><div class="glos-term">Marco relacional</div><div class="glos-def">Habilidad aprendida de relacionar eventos de manera arbitraria bajo control contextual. Base de todo el lenguaje y cognición humana según la RFT.</div></div>
+  <div class="glos-item"><div class="glos-term">Marco de coordinación</div><div class="glos-def">Relación de equivalencia funcional. Cuando "yo" y "mi ansiedad" quedan en marco de coordinación, son funcionalmente lo mismo — el "yo" queda atrapado en la experiencia.</div></div>
+  <div class="glos-item"><div class="glos-term">Marco jerárquico</div><div class="glos-def">Relación de contenido/contenedor. "Yo tengo ansiedad" establece jerarquía: el yo contiene la experiencia, pero no son lo mismo.</div></div>
+  <div class="glos-item"><div class="glos-term">Marco deíctico</div><div class="glos-def">Marco que implica perspectiva: Yo/Tú, Aquí/Allá, Ahora/Antes. El Yo deíctico es el punto de vista estable desde el que se observa la experiencia.</div></div>
+  <div class="glos-item"><div class="glos-term">Conducta gobernada por reglas</div><div class="glos-def">Conducta controlada por estímulos verbales (reglas) en lugar de contacto directo con contingencias. Puede volverse rígida e insensible a cambios en el ambiente.</div></div>
+  <div class="glos-item"><div class="glos-term">Augmental apetitivo</div><div class="glos-def">Regla verbal que aumenta el valor motivacional de consecuencias deseadas. En clínica: vincular conductas difíciles con valores genuinos del consultante.</div></div>
+  <div class="glos-item"><div class="glos-term">Flexibilidad psicológica</div><div class="glos-def">Habilidad de notar y reaccionar a los propios pensamientos y sentimientos, dándose la oportunidad de actuar hacia lo que importa. Meta central de la técnica.</div></div>
+  <div class="glos-item"><div class="glos-term">Insensibilidad a contingencias</div><div class="glos-def">Continuar siguiendo una regla aunque las consecuencias no la confirmen. Característica central de la rigidez psicológica y muchos problemas clínicos.</div></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="t-em">🏅</span><span id="t-msg">¡Logro desbloqueado!</span></div>
+
+<script>
+// ─────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────
+const S = {
+  lvl: {1:'available',2:'locked',3:'locked'},
+  sc: {1:0,2:0,3:0},
+  ach: {explorer:false,analyst:false,clinician:false,perfect:false,master:false},
+  timer: {on:false,iv:null,secs:0},
+  sess: {step:0,score:0},
+  cq: {lvl:0,idx:0}
+};
+
+// ─────────────────────────────────────────
+// DATA — LEVEL 1
+// ─────────────────────────────────────────
+const Q1 = [
+  {
+    q:"🤔 Un consultante dice: 'Soy un fracaso total, por eso no intento nada nuevo.' Desde la RFT, esto es un ejemplo de...",
+    opts:["Marco jerárquico entre el Yo y la experiencia privada","Marco de coordinación entre el 'Yo' y la experiencia privada","Enmarque deíctico activo","Augmental apetitivo que motiva la evitación"],
+    ok:1,
+    fc:"💯 ¡Exacto! Cuando 'yo' y 'fracaso' quedan en marco de coordinación, son funcionalmente lo mismo. El consultante no tiene la etiqueta de fracaso — la es. Desde ahí, la conducta queda sin opciones.",
+    fi:"💡 La clave está en la fusión entre 'yo' y la experiencia. En marco de coordinación, el consultante y el pensamiento se vuelven funcionalmente equivalentes — no hay distancia entre quien observa y lo que se observa."
+  },
+  {
+    q:"🎯 El objetivo principal de la técnica 'Sostener la Experiencia' es...",
+    opts:["Eliminar el pensamiento o emoción perturbadora","Enseñar al consultante a relajarse cuando siente ansiedad","Cambiar la relación funcional entre el consultante y su experiencia privada","Aplicar reestructuración cognitiva desde el análisis de conducta"],
+    ok:2,
+    fc:"💯 ¡Correcto! No se trata de eliminar, sino de transformar la estructura relacional. La experiencia puede seguir presente — lo que cambia es el tipo de marco que la conecta con el 'yo' del consultante.",
+    fi:"💡 La técnica no busca eliminar ni reducir la experiencia privada. Lo que busca es cambiar el tipo de relación que existe entre el consultante y esa experiencia: de coordinación a jerarquía."
+  },
+  {
+    q:"👁️ Cuando el terapeuta pregunta '¿Quién está viendo eso?' después de que el consultante exterioriza una sensación, técnicamente está...",
+    opts:["Aplicando mindfulness sin base teórica específica","Activando el enmarque deíctico jerárquico — el Yo-como-contexto","Haciendo psicoeducación sobre defusión cognitiva","Evaluando el nivel de insight del consultante"],
+    ok:1,
+    fc:"💯 ¡Perfecto! Esa pregunta activa el Yo deíctico — la perspectiva estable desde donde se observa. No es solo defusión del contenido, es activación del observador como perspectiva jerárquica distinta de lo que observa.",
+    fi:"💡 'Quién está viendo eso' no es una pregunta de mindfulness genérico. Activa el marco deíctico jerárquico: señala que existe un observador (Yo deíctico) que es distinto de lo que observa."
+  },
+  {
+    q:"⚡ Los augmentals apetitivos en la técnica cumplen la función de...",
+    opts:["Reducir la intensidad de la emoción antes de actuar","Aumentar el impacto motivacional de consecuencias deseadas, vinculando valores con conducta","Servir como instrucciones formales sobre qué debe hacer el consultante","Reforzar seguimiento de reglas adaptativas"],
+    ok:1,
+    fc:"💯 ¡Exacto! Los augmentals no eliminan el malestar ni dan instrucciones — cambian el valor funcional de las consecuencias deseadas. Cuando el consultante contacta genuinamente con lo que importa, eso tiene fuerza motivacional real.",
+    fi:"💡 Los augmentals apetitivos no son instrucciones ni técnicas de reducción de ansiedad. Son reglas verbales que aumentan el impacto de lo que el consultante valora — motivadores construidos verbalmente."
+  },
+  {
+    q:"🔍 ¿En qué se diferencia el Nivel 2 de esta técnica de la defusión cognitiva convencional?",
+    opts:["No hay diferencia real — son nombres distintos para el mismo proceso","La defusión trabaja el contenido del pensamiento; esta técnica construye activamente el marco deíctico jerárquico","La defusión es más efectiva porque trabaja directamente el contenido","Esta técnica solo aplica a trastornos de ansiedad"],
+    ok:1,
+    fc:"💯 ¡Correcto! La defusión busca distanciar al consultante del contenido de sus pensamientos. El Nivel 2 construye activamente el Yo deíctico — la perspectiva del observador. Es un mecanismo distinto, no una diferencia de estilo.",
+    fi:"💡 La diferencia no es cosmética. La defusión trabaja qué dice el pensamiento. Esta técnica trabaja la estructura: construye el marco jerárquico deíctico, entrenando al consultante a emplazar su experiencia en jerarquía con el Yo."
+  }
+];
+
+// ─────────────────────────────────────────
+// DATA — LEVEL 2
+// ─────────────────────────────────────────
+const Q2 = [
+  {
+    q:"🗣️ El consultante Carlos dice: 'Cada vez que pienso que voy a contaminar a mi hija, tengo que revisar todo. Sé que es irracional pero no puedo parar.' ¿Cuál es el primer paso terapéutico más alineado con la técnica?",
+    opts:["Desafiar cognitivamente la probabilidad real de contaminación","Pedirle que respire profundo antes de revisar","Preguntarle qué hace cuando llegan esos pensamientos y adónde lo lleva eso","Explicarle el concepto de evitación experiencial para generar insight"],
+    ok:2,
+    fc:"💯 ¡Exacto! Antes de intervenir necesitamos que el consultante discrimine la clase funcional problemática — qué hace, cuándo, y con qué consecuencias. Esta pregunta construye el análisis funcional en vivo.",
+    fi:"💡 El primer paso no es intervenir en el contenido ni educar en conceptos. Es ayudar al consultante a discriminar la relación entre su conducta (seguir la advertencia) y sus consecuencias a largo plazo."
+  },
+  {
+    q:"🎭 El consultante describe ansiedad: 'La siento aquí en el pecho, como una piedra.' El terapeuta quiere comenzar la exteriorización. ¿Cuál es la respuesta más apropiada?",
+    opts:["'Ese pensamiento no es real, intentemos cuestionarlo juntos'","'¿Podríamos quedarnos con eso un momento? Si esa piedra tuviera un color, ¿cuál sería?'","'Vamos a hacer una respiración para que esa sensación baje'","'¿Desde cuándo sentís esa ansiedad en el pecho?'"],
+    ok:1,
+    fc:"💯 ¡Perfecto! Esta respuesta pide permiso para quedarse con la experiencia (en lugar de evitarla) y comienza la exteriorización sensorial — darle propiedades al objeto que luego podrá sostenerse 'afuera'.",
+    fi:"💡 El objetivo es empezar a construir la experiencia como un 'objeto' observable con propiedades sensoriales. Preguntar por el color no es poético — es técnicamente necesario para que el consultante pueda 'sostenerla' separada del yo."
+  },
+  {
+    q:"🤲 El consultante ya describió la ansiedad como 'una masa café oscura en el pecho'. ¿Cuál es el siguiente movimiento?",
+    opts:["Preguntarle cuándo fue la primera vez que sintió algo así","Pedirle que intente hacer que la masa desaparezca","'¿Podés tomar esa masa café oscura con tus manos y sostenerla frente a vos?'","Explicarle que esa sensación es producto de sus pensamientos automáticos"],
+    ok:2,
+    fc:"💯 ¡Correcto! Al pedirle que la tenga en las manos frente a él, la experiencia pasa de estar 'dentro y siendo el yo' a estar 'afuera y siendo tenida por el yo'. Ese movimiento es funcionalmente real, no solo metafórico.",
+    fi:"💡 Con la experiencia exteriorizada, el siguiente paso es pedirle que la 'sostenga' fuera del cuerpo. Eso construye la diferencia entre 'yo soy esto' y 'yo tengo esto'. El movimiento imaginario es técnicamente preciso."
+  },
+  {
+    q:"👁️ El consultante está sosteniendo la 'masa café oscura' en sus manos, frente a él. Completó el Momento 1. ¿Cuál es el giro del Momento 2?",
+    opts:["'Ahora intentá hacer que esa masa se haga más pequeña'","'¿Qué te dice esa masa? ¿Cuál es el mensaje del pensamiento?'","'¿Podés notar quién está viendo esa masa ahí frente a vos?'","'Muy bien, ahora hablemos de algo que te ponga contento'"],
+    ok:2,
+    fc:"💯 ¡Exacto! Esta pregunta activa el observador — la perspectiva estable que no es la masa, ni la ansiedad, sino el consultante que los tiene. Desde ahí se puede elegir.",
+    fi:"💡 El Momento 2 no busca cambiar la experiencia — busca activar al observador. '¿Quién está viendo eso?' señala al Yo deíctico: la perspectiva constante que existe más allá de cualquier contenido específico."
+  },
+  {
+    q:"🎯 El consultante identificó al observador. Ahora el terapeuta quiere integrar el augmental. ¿Cuál es la respuesta más apropiada?",
+    opts:["'Perfecto, ahora que la ves, intentá convencerte de que no es para tanto'","'Sosteniéndola ahí, ¿qué harías que sea importante para vos hoy?'","'Vamos a practicar esto en casa para que la ansiedad baje con el tiempo'","'¿Qué te dice ese observador que deberías hacer?'"],
+    ok:1,
+    fc:"💯 ¡Perfecto! Esta pregunta integra los tres pasos: la experiencia está sostenida (marco jerárquico), el observador está activo (Yo deíctico), y se vincula con valores (augmental apetitivo). No elimina la ansiedad — propone actuar desde algo más grande.",
+    fi:"💡 El movimiento final no es interpretar ni dar tareas. Es preguntar por valores desde la posición del observador. 'Sosteniéndola ahí, ¿qué harías que sea importante para vos?' vincula el marco jerárquico con los augmentals apetitivos."
+  }
+];
+
+// ─────────────────────────────────────────
+// DATA — LEVEL 3 SESSION (Ana)
+// ─────────────────────────────────────────
+const SESSION = {
+  name:"Ana", age:31, desc:"Ansiedad social · Evitación laboral", em:"👩",
+  steps:[
+    {
+      cs:"No sé ni cómo explicarlo... cada vez que tengo que hablar en una reunión, me bloqueo. Sé perfectamente lo que quiero decir, pero cuando todos me miran, es como si me apagara. Y después me odio por eso.",
+      q:"¿Cuál es el mejor primer movimiento del terapeuta?",
+      opts:["Enseñarle técnicas de respiración para controlar el bloqueo","Explorar qué siente cuando se bloquea y qué hace inmediatamente después","Decirle que no debería odiarse, que todos se bloquean a veces","Preguntarle si tuvo experiencias humillantes en el pasado"],
+      ok:1,
+      ts:"Contame un poco más... cuando te bloqueás y todos te miran, ¿qué pasa justo ahí? ¿Qué sentís y qué hacés en ese momento?",
+      cn:"El corazón se me dispara, me siento como si fuera a desmayarme. Y lo que hago es... mirar la mesa, decir lo mínimo posible y esperar que termine.",
+      fc:"✅ Análisis funcional en vivo — Identificaste la secuencia: estímulo (miradas), respuesta (bloqueo), conducta (evitación), consecuencia (alivio a corto plazo). Esto es la Estrategia 1 de Törneke et al.",
+      fi:"💡 Antes de intervenir, necesitamos que Ana discrimine la clase funcional conductual — qué hace cuando eso aparece y adónde la lleva. La pregunta funcional es el primer paso."
+    },
+    {
+      cs:"El corazón se me dispara, me siento como si fuera a desmayarme. Y lo que hago es... mirar la mesa, decir lo mínimo posible y esperar que termine.",
+      q:"Ana describió el patrón. ¿Cuál es el siguiente paso?",
+      opts:["Preguntarle adónde la lleva ese patrón a largo plazo","Sugerirle que practique hablar más en reuniones como exposición","Explicarle que su ansiedad es una respuesta condicionada","Normalizarle que la ansiedad social es muy común"],
+      ok:0,
+      ts:"¿Y cómo está quedando tu vida laboral con ese patrón? ¿Adónde te lleva, al final?",
+      cn:"A ningún lado bueno. Siento que cada reunión me confirma que no puedo, que soy menos que los demás. Y eso me hace querer evitar todavía más.",
+      fc:"✅ Cierre del análisis funcional — Conectaste la conducta con sus consecuencias a largo plazo. Ana puede ver que seguir la 'advertencia' no la lleva donde quiere.",
+      fi:"💡 El segundo paso es conectar la conducta con sus consecuencias reales a largo plazo. ¿Adónde lleva ese patrón? Sin ese cierre, la motivación para cambiar es débil."
+    },
+    {
+      cs:"A ningún lado bueno. Siento que cada reunión me confirma que no puedo, que soy menos que los demás. Y eso me hace querer evitar todavía más.",
+      q:"Ana ve el patrón. Ahora querés iniciar el trabajo con la experiencia. ¿Cuál es tu movimiento?",
+      opts:["Pedirle que imagine una reunión y se quede con lo que aparece en el cuerpo","Decirle que sus pensamientos de ser 'menos' no son objetivos","Sugerirle llevar un registro de sus pensamientos automáticos","Preguntarle cuándo fue la primera vez que se sintió así"],
+      ok:0,
+      ts:"¿Podemos intentar algo? Imaginá que estás por entrar a una reunión ahora. ¿Podés sentir algo de eso que describís, aunque sea levemente?",
+      cn:"Sí... algo, en el pecho. Como si me apretara.",
+      fc:"✅ Evocación en sesión — Invitaste a Ana a contactar con la experiencia en vivo. Esto es clave para hacer el trabajo del Momento 1 con material real, no solo recordado.",
+      fi:"💡 Para el trabajo de exteriorización, necesitamos que la experiencia esté presente ahora. Evocarla en imaginación activa permite trabajar con material vivo."
+    },
+    {
+      cs:"Sí... algo, en el pecho. Como si me apretara.",
+      q:"La experiencia está presente. ¿Cuál es el primer paso del Momento 1?",
+      opts:["Pedirle que respire hasta que la presión disminuya","Preguntarle si esa presión le recuerda algún momento del pasado","Invitarla a describir la presión: forma, color, textura","Decirle que esa presión es solo activación del sistema nervioso"],
+      ok:2,
+      ts:"Quedémonos ahí un momento. Esa presión en el pecho — si tuviera una forma, ¿cómo sería? ¿Y si tuviera un color?",
+      cn:"Como... un bloque gris. Pesado. Está justo acá (se toca el pecho).",
+      fc:"✅ Exteriorización sensorial — El 'bloque gris pesado' ya no es 'yo soy ansiedad' — es algo con forma que puede ser observado. Paso 1 del Momento 1 completado.",
+      fi:"💡 El primer paso es darle propiedades sensoriales a la experiencia. Preguntar por forma, color y textura construye la experiencia como un objeto observable, no uno que sos."
+    },
+    {
+      cs:"Como... un bloque gris. Pesado. Está justo acá (se toca el pecho).",
+      q:"La experiencia tiene forma. ¿Cuál es el segundo paso del Momento 1?",
+      opts:["Pedirle que intente hacer que el bloque sea más liviano","Preguntarle desde cuándo carga con ese bloque","Invitarla a tomar ese bloque gris con ambas manos y sostenerlo frente a ella","Decirle que ese bloque representa sus creencias negativas"],
+      ok:2,
+      ts:"¿Podrías tomar ese bloque gris con ambas manos y sostenerlo ahí, delante de vos? Solo miralo.",
+      cn:"Es raro... pero sí, puedo. Lo veo ahí. Sigue siendo pesado pero... es diferente.",
+      fc:"✅ Sostener — Momento 1 completado. Ana ahora tiene el bloque 'afuera'. La distancia funcional cambió: ya no es el bloque, lo tiene. Inicio del marco jerárquico.",
+      fi:"💡 Después de dar forma, el siguiente paso es exteriorizar — pedirle que la tenga en las manos frente a ella. Ese movimiento construye la diferencia entre 'ser' la experiencia y 'tenerla'."
+    },
+    {
+      cs:"Es raro... pero sí, puedo. Lo veo ahí. Sigue siendo pesado pero... es diferente.",
+      q:"Ana sostiene el bloque. ¿Cuál es el giro del Momento 2?",
+      opts:["Pedirle que intente explicarle al bloque por qué no tiene sentido","Preguntarle qué mensaje le envía ese bloque","Preguntarle quién está viendo ese bloque ahí frente a ella","Sugerirle que visualice el bloque cuando aparezca en reuniones"],
+      ok:2,
+      ts:"¿Podés notar quién está viendo ese bloque ahí frente a vos?",
+      cn:"Soy yo... soy yo quien lo estoy mirando. El bloque está ahí y yo estoy acá.",
+      fc:"✅ Activación del Yo deíctico — Ana distingue entre 'el bloque' (experiencia) y 'yo' (perspectiva estable). El marco jerárquico deíctico está activo.",
+      fi:"💡 '¿Quién está viendo?' activa el Yo deíctico — la perspectiva estable que no es el bloque. Sin este paso, hay exteriorización pero no activación del observador."
+    },
+    {
+      cs:"Soy yo... soy yo quien lo estoy mirando. El bloque está ahí y yo estoy acá.",
+      q:"Ana está en posición de observadora. ¿Cuál es el paso final?",
+      opts:["Celebrar el logro y terminar el ejercicio","Preguntarle qué siente ahora que el bloque está 'afuera'","Sosteniéndolo ahí, preguntarle qué haría que sea importante para ella","Pedirle que practique el ejercicio sola en casa"],
+      ok:2,
+      ts:"Sosteniéndolo ahí frente a vos — con vos como la que observa — ¿qué harías que sea importante para vos, en esa reunión?",
+      cn:"Quiero... hablar. Quiero que mi voz esté ahí, aunque el bloque también esté.",
+      fc:"✅ Augmental apetitivo — 'Quiero que mi voz esté ahí' es conducta dirigida por valores, no por control de la ansiedad. Los tres pasos del modelo integrados en un solo movimiento.",
+      fi:"💡 El paso final conecta el marco jerárquico con la motivación: '¿qué harías que sea importante?' invita a actuar desde valores, no desde la eliminación del malestar."
+    },
+    {
+      cs:"Quiero... hablar. Quiero que mi voz esté ahí, aunque el bloque también esté.",
+      q:"Ana formuló su valor. ¿Cómo cerrás esta parte de la sesión?",
+      opts:["Decirle que con práctica el bloque va a desaparecer","Darle una tarea de exposición gradual para la próxima semana","Reflejar lo que ocurrió en términos del proceso y orientar el trabajo futuro","Pedirle que repita el ejercicio inmediatamente para consolidarlo"],
+      ok:2,
+      ts:"Notá lo que pasó: el bloque seguía ahí, y aun así pudiste ver quién sos más allá de él. Y desde ahí apareció lo que querés. Eso es exactamente lo que vamos a ir entrenando.",
+      cn:"Sí... no desapareció. Pero se sintió diferente. Como que había más espacio.",
+      fc:"✅ Cierre con reflejo de proceso — Nombraste el mecanismo (no desapareció, apareció el observador, apareció lo que importa). Consolida el aprendizaje sin prometer eliminación del malestar.",
+      fi:"💡 El cierre ideal refleja el proceso: 'el bloque seguía, y apareciste vos más allá de él'. Eso consolida el aprendizaje experiencial sin crear expectativas de eliminación del malestar."
+    }
+  ]
+};
+
+// ─────────────────────────────────────────
+// ACHIEVEMENTS
+// ─────────────────────────────────────────
+const ACHS = [
+  {id:'explorer',em:'🔍',name:'Explorador RFT',desc:'Completaste el Nivel 1'},
+  {id:'analyst',em:'📊',name:'Analista funcional',desc:'Completaste el Nivel 2'},
+  {id:'clinician',em:'🎭',name:'Clínico en acción',desc:'Completaste el Nivel 3'},
+  {id:'perfect',em:'⭐',name:'Puntaje perfecto',desc:'Respondiste todo bien en un nivel'},
+  {id:'master',em:'🏆',name:'Maestría RFT',desc:'Completaste los 3 niveles'}
+];
+
+// ─────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────
+function go(sec) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('sec-'+sec).classList.add('active');
+  document.getElementById('nav-'+sec).classList.add('active');
+  closeGlossary();
+  if(sec==='logros') renderAch();
+  if(sec==='cert') checkCert();
+  if(sec==='niveles') showLSel();
+  if(sec==='home') updateHome();
+}
+
+// ─────────────────────────────────────────
+// HOME
+// ─────────────────────────────────────────
+function updateHome(){
+  const done = [1,2,3].filter(n=>S.lvl[n]==='completed').length;
+  const pct = Math.round(done/3*100);
+  document.getElementById('g-bar').style.width=pct+'%';
+  document.getElementById('g-label').textContent=done+' de 3 niveles completados';
+  document.getElementById('g-pct').textContent=pct+'%';
+
+  const ldata = [
+    {n:1,em:'🔍',name:'Nivel 1 — Conceptos RFT',desc:'5 preguntas · Marcos relacionales en acción',c:'var(--blue-light)'},
+    {n:2,em:'🎯',name:'Nivel 2 — Elección de intervención',desc:'5 escenarios · Elige la respuesta terapéutica',c:'var(--orange)'},
+    {n:3,em:'🎭',name:'Nivel 3 — Simulación de sesión',desc:'8 intercambios · Conduce una sesión real',c:'var(--yellow)'}
+  ];
+  document.getElementById('home-lcards').innerHTML = ldata.map(l=>`
+    <div class="lcard ${S.lvl[l.n]==='locked'?'locked':''} ${S.lvl[l.n]==='completed'?'completed':''}"
+      style="--lc:${l.c}" onclick="homeGoLevel(${l.n})">
+      <div class="lc-emoji">${l.em}</div>
+      <div class="lc-info">
+        <div class="lc-name">${l.name}</div>
+        <div class="lc-desc">${l.desc}</div>
+      </div>
+      <div class="lc-status">${S.lvl[l.n]==='completed'?'✅':S.lvl[l.n]==='locked'?'🔒':'▶️'}</div>
+    </div>`).join('');
+}
+
+function homeGoLevel(n){
+  if(S.lvl[n]==='locked') return;
+  go('niveles');
+  setTimeout(()=>startLevel(n),80);
+}
+
+// ─────────────────────────────────────────
+// LEVEL SELECTOR
+// ─────────────────────────────────────────
+function showLSel(){
+  hideAll();
+  document.getElementById('lsel').style.display='block';
+  const ldata = [
+    {n:1,em:'🔍',name:'Nivel 1 — Conceptos RFT',desc:'5 preguntas · Marcos relacionales en acción',c:'var(--blue-light)'},
+    {n:2,em:'🎯',name:'Nivel 2 — Elección de intervención',desc:'5 escenarios · Elige la respuesta terapéutica',c:'var(--orange)'},
+    {n:3,em:'🎭',name:'Nivel 3 — Simulación de sesión',desc:'8 intercambios · Con timer opcional · Acceso al certificado',c:'var(--yellow)'}
+  ];
+  document.getElementById('lsel-cards').innerHTML = ldata.map(l=>`
+    <div class="lcard ${S.lvl[l.n]==='locked'?'locked':''} ${S.lvl[l.n]==='completed'?'completed':''}"
+      style="--lc:${l.c}" onclick="startLevel(${l.n})">
+      <div class="lc-emoji">${l.em}</div>
+      <div class="lc-info">
+        <div class="lc-name">${l.name}</div>
+        <div class="lc-desc">${l.desc}</div>
+      </div>
+      <div class="lc-status">${S.lvl[l.n]==='completed'?'✅':S.lvl[l.n]==='locked'?'🔒':'▶️'}</div>
+    </div>`).join('');
+}
+
+function hideAll(){
+  ['lsel','quiz1','quiz2','quiz3','res1','res2','res3'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+}
+
+// ─────────────────────────────────────────
+// QUIZ ENGINE (L1 & L2)
+// ─────────────────────────────────────────
+function startLevel(n){
+  if(S.lvl[n]==='locked') return;
+  hideAll();
+  S.cq = {lvl:n, idx:0};
+  if(n===3){
+    S.sess={step:0,score:0};
+    stopTimer();
+    S.timer.secs=0;
+    document.getElementById('quiz3').style.display='block';
+    renderSessStep();
+    return;
+  }
+  document.getElementById('quiz'+n).style.display='block';
+  renderQ(n,0);
+}
+
+function renderQ(n,idx){
+  const data = n===1?Q1:Q2;
+  if(idx>=data.length){showResult(n);return;}
+  const q=data[idx]; S.cq={lvl:n,idx};
+  const dots = data.map((_,i)=>`<div class="qdot ${i<idx?'done':i===idx?'cur':''}"></div>`).join('');
+  const opts = q.opts.map((o,i)=>`
+    <div class="opt" id="o${n}_${i}" onclick="pick(${n},${idx},${i})">
+      <div class="oletter">${'ABCD'[i]}</div>
+      <span>${o}</span>
+    </div>`).join('');
+  document.getElementById('quiz'+n).innerHTML=`
+    <div class="ql-badge">${n===1?'🔍 Nivel 1':'🎯 Nivel 2'} · Pregunta ${idx+1} de ${data.length}</div>
+    <div class="qprog">${dots}</div>
+    <div class="qcard">
+      <div class="qtext">${q.q}</div>
+      <div class="opts">${opts}</div>
+      <div class="fb" id="fb${n}"></div>
+      <button class="btn-next" id="bn${n}" onclick="renderQ(${n},${idx+1})">
+        ${idx<data.length-1?'Siguiente →':'Ver resultado'}
+      </button>
+    </div>`;
+}
+
+function pick(n,idx,i){
+  const q=(n===1?Q1:Q2)[idx];
+  const ok=i===q.ok;
+  if(ok) S.sc[n]++;
+  document.querySelectorAll(`[id^="o${n}_"]`).forEach(el=>el.classList.add('disabled'));
+  document.getElementById('o'+n+'_'+q.ok).classList.add('correct');
+  if(!ok) document.getElementById('o'+n+'_'+i).classList.add('wrong');
+  const fb=document.getElementById('fb'+n);
+  fb.className='fb show '+(ok?'ok':'ko');
+  fb.innerHTML=`<div class="fb-title">${ok?'✅ ¡Correcto!':'❌ No era esa'}</div><div>${ok?q.fc:q.fi}</div>`;
+  document.getElementById('bn'+n).classList.add('show');
+}
+
+// ─────────────────────────────────────────
+// SESSION (L3)
+// ─────────────────────────────────────────
+function renderSessStep(){
+  const step=SESSION.steps[S.sess.step];
+  const total=SESSION.steps.length;
+  const dots=Array.from({length:total},(_,i)=>`<div class="qdot ${i<S.sess.step?'done':i===S.sess.step?'cur':''}"></div>`).join('');
+  document.getElementById('quiz3').innerHTML=`
+    <div class="sess-head">
+      <div class="cav">${SESSION.em}</div>
+      <div class="cinfo">
+        <div class="cname">${SESSION.name}, ${SESSION.age} años</div>
+        <div class="cdesc">${SESSION.desc}</div>
+      </div>
+      <div class="timer-wrap">
+        <div class="timer-toggle" onclick="toggleTimer()">⏱️ ${S.timer.on?'ON · tap para OFF':'tap para ON'}</div>
+        <div class="timer-num" id="t-num">${formatTime(S.timer.secs)}</div>
+      </div>
+    </div>
+    <div class="step-counter">Intercambio ${S.sess.step+1} de ${total}</div>
+    <div class="qprog">${dots}</div>
+    <div class="conv" id="conv">
+      <div class="bubble client"><div class="blabel">${SESSION.name}</div>${step.cs}</div>
+    </div>
+    <div class="qcard">
+      <div class="qtext">${step.q}</div>
+      <div class="opts">${step.opts.map((o,i)=>`
+        <div class="opt" id="so_${i}" onclick="pickSess(${i})">
+          <div class="oletter">${'ABCD'[i]}</div><span>${o}</span>
+        </div>`).join('')}
+      </div>
+      <div class="fb" id="sfb"></div>
+      <button class="btn-next" id="sbn" onclick="nextSessStep()">
+        ${S.sess.step<total-1?'Siguiente intercambio →':'Ver resultado final'}
+      </button>
+    </div>`;
+}
+
+function pickSess(i){
+  const step=SESSION.steps[S.sess.step];
+  const ok=i===step.ok;
+  if(ok) S.sess.score++;
+  document.querySelectorAll('[id^="so_"]').forEach(el=>el.classList.add('disabled'));
+  document.getElementById('so_'+step.ok).classList.add('correct');
+  if(!ok) document.getElementById('so_'+i).classList.add('wrong');
+  const fb=document.getElementById('sfb');
+  fb.className='fb show '+(ok?'ok':'ko');
+  fb.innerHTML=`<div class="fb-title">${ok?'✅ Buena intervención':'❌ Otra respuesta hubiera funcionado mejor'}</div><div>${ok?step.fc:step.fi}</div>`;
+  if(ok){
+    const conv=document.getElementById('conv');
+    conv.innerHTML+=`
+      <div class="bubble therapist"><div class="blabel">Terapeuta</div>${step.ts}</div>
+      <div class="bubble client"><div class="blabel">${SESSION.name}</div>${step.cn}</div>`;
+    conv.scrollTop=conv.scrollHeight;
+  }
+  document.getElementById('sbn').classList.add('show');
+}
+
+function nextSessStep(){
+  S.sess.step++;
+  if(S.sess.step>=SESSION.steps.length){
+    S.sc[3]=S.sess.score;
+    stopTimer();
+    showResult(3);
+  } else {
+    renderSessStep();
+  }
+}
+
+// ─────────────────────────────────────────
+// RESULT
+// ─────────────────────────────────────────
+function showResult(n){
+  hideAll();
+  const tot=n===3?SESSION.steps.length:(n===1?Q1.length:Q2.length);
+  const sc=n===3?S.sess.score:S.sc[n];
+  const pct=Math.round(sc/tot*100);
+  S.lvl[n]='completed';
+  if(n===1) S.lvl[2]='available';
+  if(n===2) S.lvl[3]='available';
+  const achMap={1:'explorer',2:'analyst',3:'clinician'};
+  unlockAch(achMap[n]);
+  if(sc===tot) unlockAch('perfect');
+  if([1,2,3].every(i=>S.lvl[i]==='completed')) unlockAch('master');
+  const em=pct===100?'🏆':pct>=80?'⭐':pct>=60?'✅':'💪';
+  const msg=pct===100?'¡Perfecto! Dominás cada paso de la técnica.':pct>=80?'Excelente trabajo clínico.':pct>=60?'Nivel completado. Seguís avanzando.':'Buen intento. Podés repetirlo cuando quieras.';
+  document.getElementById('res'+n).style.display='block';
+  document.getElementById('res'+n).innerHTML=`
+    <div class="result">
+      <div class="result-em">${em}</div>
+      <div class="result-title">Nivel ${n} completado</div>
+      <div class="result-sub">${msg}</div>
+      <div class="score-card">
+        <div class="score-big">${sc}/${tot}</div>
+        <div class="score-lbl">respuestas correctas · ${pct}%</div>
+      </div>
+      ${n<3?`<button class="btn btn-main" onclick="startLevel(${n+1})" style="margin-bottom:10px">Siguiente nivel →</button>`:''}
+      ${n===3?`<button class="btn btn-main" onclick="go('cert')" style="margin-bottom:10px">🎓 Ver certificado</button>`:''}
+      <button class="btn btn-outline" onclick="showLSel()">Volver al menú</button>
+    </div>`;
+  updateHome();
+}
+
+// ─────────────────────────────────────────
+// TIMER
+// ─────────────────────────────────────────
+function toggleTimer(){
+  if(S.timer.on) stopTimer(); else startTimer();
+  renderSessStep();
+}
+function startTimer(){
+  S.timer.on=true;
+  S.timer.iv=setInterval(()=>{
+    S.timer.secs++;
+    const el=document.getElementById('t-num');
+    if(el){el.textContent=formatTime(S.timer.secs);el.className='timer-num'+(S.timer.secs>120?' urgent':'');}
+  },1000);
+}
+function stopTimer(){
+  S.timer.on=false;
+  clearInterval(S.timer.iv);
+}
+function formatTime(s){
+  return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+}
+
+// ─────────────────────────────────────────
+// ACHIEVEMENTS
+// ─────────────────────────────────────────
+function unlockAch(id){
+  if(S.ach[id]) return;
+  S.ach[id]=true;
+  const a=ACHS.find(x=>x.id===id);
+  if(a) showToast(a.em,'¡'+a.name+' desbloqueado!');
+}
+function renderAch(){
+  document.getElementById('ach-grid').innerHTML=ACHS.map(a=>`
+    <div class="ach ${S.ach[a.id]?'unlocked':'locked'}">
+      <div class="ach-em">${a.em}</div>
+      <div class="ach-name">${a.name}</div>
+      <div class="ach-desc">${a.desc}</div>
+    </div>`).join('');
+}
+
+// ─────────────────────────────────────────
+// CERTIFICATE
+// ─────────────────────────────────────────
+function checkCert(){
+  const all=[1,2,3].every(n=>S.lvl[n]==='completed');
+  document.getElementById('cert-locked').style.display=all?'none':'block';
+  document.getElementById('cert-open').style.display=all?'block':'none';
+  document.getElementById('cert-msg').textContent=all?'Descargá tu certificado y compartilo.':'Completá los 3 niveles para desbloquear tu certificado.';
+}
+function updateCertName(v){
+  document.getElementById('cname-show').textContent=v||'Tu nombre aquí';
+}
+function downloadCert(){
+  const name=document.getElementById('cname-in').value.trim()||'Terapeuta';
+  const c=document.getElementById('certCanvas');
+  c.width=1080;c.height=1080;
+  const ctx=c.getContext('2d');
+  const g=ctx.createLinearGradient(0,0,1080,1080);
+  g.addColorStop(0,'#060D1A');g.addColorStop(1,'#1A3A6B');
+  ctx.fillStyle=g;ctx.fillRect(0,0,1080,1080);
+  // hex pattern
+  ctx.strokeStyle='rgba(74,189,232,.07)';ctx.lineWidth=1;
+  for(let x=0;x<1080;x+=60){for(let y=0;y<1080;y+=104){drawHex(ctx,x+30,y+35,28);ctx.stroke();}}
+  // border
+  ctx.strokeStyle='rgba(74,189,232,.3)';ctx.lineWidth=3;ctx.strokeRect(40,40,1000,1000);
+  ctx.strokeStyle='rgba(255,215,0,.15)';ctx.lineWidth=1;ctx.strokeRect(54,54,972,972);
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(74,189,232,.8)';ctx.font='bold 22px sans-serif';ctx.fillText('@leo.eyzaguirre · RFT Lab',540,110);
+  ctx.font='72px sans-serif';ctx.fillText('🧠',540,240);
+  ctx.fillStyle='rgba(245,240,232,.5)';ctx.font='600 26px sans-serif';ctx.fillText('CERTIFICA QUE',540,320);
+  ctx.fillStyle='#FFD700';ctx.font='bold 60px sans-serif';ctx.fillText(name,540,405);
+  ctx.fillStyle='rgba(245,240,232,.75)';ctx.font='400 26px sans-serif';
+  ctx.fillText('completó el entrenamiento clínico',540,475);
+  ctx.fillStyle='#F5F0E8';ctx.font='bold 34px sans-serif';ctx.fillText('Sostener la Experiencia',540,525);
+  ctx.fillStyle='rgba(245,240,232,.65)';ctx.font='400 22px sans-serif';
+  ctx.fillText('técnica clínica basada en Teoría del Marco Relacional',540,565);
+  // badge bg
+  ctx.fillStyle='rgba(255,215,0,.08)';roundRect(ctx,380,595,320,52,26);ctx.fill();
+  ctx.strokeStyle='rgba(255,215,0,.35)';ctx.lineWidth=1.5;roundRect(ctx,380,595,320,52,26);ctx.stroke();
+  ctx.fillStyle='#FFD700';ctx.font='bold 20px sans-serif';ctx.fillText('✅ 3 niveles completados',540,626);
+  ctx.strokeStyle='rgba(74,189,232,.18)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(200,685);ctx.lineTo(880,685);ctx.stroke();
+  ctx.fillStyle='rgba(245,240,232,.3)';ctx.font='400 18px sans-serif';
+  ctx.fillText('Törneke, Luciano, Barnes-Holmes & Bond (2015)',540,730);
+  ctx.fillText('Wiley Handbook of Contextual Behavioral Science',540,758);
+  const d=new Date().toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric'});
+  ctx.fillStyle='rgba(245,240,232,.35)';ctx.font='400 20px sans-serif';ctx.fillText(d,540,870);
+  const a=document.createElement('a');
+  a.download='certificado-rft-'+name.replace(/\s+/g,'-').toLowerCase()+'.png';
+  a.href=c.toDataURL('image/png');a.click();
+}
+function drawHex(ctx,cx,cy,r){
+  ctx.beginPath();
+  for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/6;ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));}
+  ctx.closePath();
+}
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+}
+function shareIG(){alert('📸 ¡Descargá el certificado y subilo a Instagram!\n\nEtiquetá a @leo.eyzaguirre\n\n¡Nos encantaría ver tu logro! 🧠');}
+
+// ─────────────────────────────────────────
+// GLOSSARY / THEME / ACCORDION / TOAST
+// ─────────────────────────────────────────
+function toggleGlossary(){document.getElementById('glos').classList.toggle('open');}
+function closeGlossary(){document.getElementById('glos').classList.remove('open');}
+function toggleTheme(){
+  const dark=document.body.getAttribute('data-theme')==='dark';
+  document.body.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('themeBtn').textContent=dark?'🌙':'☀️';
+}
+function toggleAcc(h){h.parentElement.classList.toggle('open');}
+function showToast(em,msg){
+  const t=document.getElementById('toast');
+  document.getElementById('t-em').textContent=em;
+  document.getElementById('t-msg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+// ─────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────
+updateHome();
+renderAch();
+</script>
+</body>
+</html>
