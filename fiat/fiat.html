@@ -270,6 +270,11 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="route-info"><div class="route-title">Seguimiento semana a semana</div><div class="route-sub">FIAT-DA · FIAT-T pre/post · Rastrear el cambio</div></div>
       <span class="route-badge">✓</span><span class="route-arr">→</span>
     </a>
+    <a class="route-card" id="rc-8" onclick="goStep(7)">
+      <div class="route-num">8</div>
+      <div class="route-info"><div class="route-title">Preguntas frecuentes + CBS</div><div class="route-sub">FAQ clínico · ACT · DBT · RFT · Integración</div></div>
+      <span class="route-badge">✓</span><span class="route-arr">→</span>
+    </a>
     <div style="height:20px"></div>
     <div class="section-sep">Herramientas</div>
     <div style="display:flex;gap:9px;padding:0 16px;flex-wrap:wrap;margin-bottom:30px">
@@ -285,7 +290,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="screen" id="sc-step-0">
   <div class="wrap">
     <div class="step-hero">
-      <div class="step-badge"><span class="step-num">Paso 1 de 7</span><span class="step-time">⏱ 3 min</span></div>
+      <div class="step-badge"><span class="step-num">Paso 1 de 8</span><span class="step-time">⏱ 3 min</span></div>
       <div class="step-title">¿Es el FIAT para tu caso?</div>
       <div class="step-sub">Antes de empezar, verificá si este sistema es el adecuado para lo que estás buscando.</div>
     </div>
@@ -367,7 +372,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="screen" id="sc-step-1">
   <div class="wrap">
     <div class="step-hero">
-      <div class="step-badge"><span class="step-num">Paso 2 de 7</span><span class="step-time">⏱ 5 min</span></div>
+      <div class="step-badge"><span class="step-num">Paso 2 de 8</span><span class="step-time">⏱ 5 min</span></div>
       <div class="step-title">Preparar la primera sesión</div>
       <div class="step-sub">Cómo presentar el FIAT al consultante y por qué el timing importa.</div>
     </div>
@@ -440,7 +445,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="screen" id="sc-step-2">
   <div class="wrap">
     <div class="step-hero">
-      <div class="step-badge"><span class="step-num">Paso 3 de 7</span><span class="step-time">⏱ 8 min</span></div>
+      <div class="step-badge"><span class="step-num">Paso 3 de 8</span><span class="step-time">⏱ 8 min</span></div>
       <div class="step-title">Administrar el FIAT-Q</div>
       <div class="step-sub">Qué hace el consultante, qué evalúa cada clase, y qué limitaciones tener en cuenta.</div>
     </div>
@@ -552,7 +557,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="screen" id="sc-step-3">
   <div class="wrap">
     <div class="step-hero">
-      <div class="step-badge"><span class="step-num">Paso 4 de 7</span><span class="step-time">⏱ 5 min</span></div>
+      <div class="step-badge"><span class="step-num">Paso 4 de 8</span><span class="step-time">⏱ 5 min</span></div>
       <div class="step-title">Leer los resultados</div>
       <div class="step-sub">Cómo interpretar sin sobre-interpretar. El resultado es un punto de partida, no una conclusión.</div>
     </div>
@@ -621,6 +626,62 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </div>
       </div>
 
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('t4-crit')">
+          <div class="theory-head-left"><span class="theory-icon">📐</span><span class="theory-title">¿Cuándo una clase es realmente un problema?</span><span class="theory-chip">Callaghan, 2006</span></div>
+          <span class="theory-arr" id="tarr-t4-crit">▼</span>
+        </div>
+        <div class="theory-body" id="t4-crit">
+          <p>Callaghan aclara que casi todas las personas muestran instancias de todas las clases en algún momento — y eso es <strong>adaptativo</strong>. Un puntaje alto no necesariamente indica problema clínico.</p>
+          <p>Para que una clase sea un <strong>área problema real</strong>, se necesitan dos condiciones simultáneas:</p>
+          <div class="example">
+            <div class="ex-label">Criterio 1 — Inflexibilidad</div>
+            <div class="ex-text">El consultante usa estas estrategias de forma <strong>rígida</strong> — no puede ajustar nuevos repertorios según lo que el contexto requiere. No es que siempre evite el conflicto: es que no puede <em>no</em> evitarlo cuando el contexto lo pediría.</div>
+          </div>
+          <div class="example">
+            <div class="ex-label">Criterio 2 — Inefectividad</div>
+            <div class="ex-text">Las conductas son <strong>inefectivas o inapropiadas</strong> en relación a los objetivos a largo plazo del consultante, particularmente en sus relaciones interpersonales. La conducta tiene un costo relacional real.</div>
+          </div>
+          <div class="tip"><strong>💡 Implicancia clínica:</strong> un consultante que evita el conflicto solo en relaciones superficiales y se maneja bien en las cercanas no tiene un problema en Clase C — aunque su puntaje sea alto. El número necesita ser leído con este criterio.</div>
+          <div class="sub-expand">
+            <div class="sub-head" onclick="toggleSub('s4-crit-escape')"><span class="sub-head-title">⚠️ El caso del escape exitoso</span><span class="sub-arr" id="sarr-s4-crit-escape">▼</span></div>
+            <div class="sub-body" id="s4-crit-escape">
+              <p>Callaghan señala un caso especial: un consultante puede evitar el conflicto tan eficazmente que <strong>no puede discriminar su ocurrencia</strong>. En el cuestionario reportará "no hay conflicto" — y lo creerá genuinamente.</p>
+              <p>El escape exitoso borra la señal de alerta. Esto hace que el autoinforme sea especialmente poco confiable precisamente donde más se necesita: en el área de mayor evitación.</p>
+              <p>La evaluación del terapeuta en sesión es el único contrapeso disponible para este fenómeno.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('t4-disc')">
+          <div class="theory-head-left"><span class="theory-icon">⚡</span><span class="theory-title">Cuando el consultante y vos no coinciden</span><span class="theory-chip">Discrepancia</span></div>
+          <span class="theory-arr" id="tarr-t4-disc">▼</span>
+        </div>
+        <div class="theory-body" id="t4-disc">
+          <p>Es frecuente: el consultante reporta "sin problemas" en Clase C y vos observás evitación de conflicto en cada sesión. O reporta alta dificultad en Clase D pero se abre espontáneamente en sesión.</p>
+          <p><span class="hl">Esta discrepancia no es un error — es información clínica de primer orden.</span></p>
+          <div class="example">
+            <div class="ex-label">Consultante bajo, terapeuta alto</div>
+            <div class="ex-text">El consultante no percibe el problema. Posibilidades: escape exitoso (no detecta el evento que evita), falta de acceso a la historia de consecuencias, o el problema ocurre en contextos que no incluye en su autoinforme.</div>
+          </div>
+          <div class="example">
+            <div class="ex-label">Consultante alto, terapeuta bajo</div>
+            <div class="ex-text">El consultante sobrestima su dificultad. Posibilidades: fusión con reglas ("soy malo para las relaciones"), alta autocrítica, o el contexto terapéutico evoca repertorios más funcionales que otros contextos de su vida.</div>
+          </div>
+          <div class="sub-expand">
+            <div class="sub-head" onclick="toggleSub('s4-disc-2')"><span class="sub-head-title">🧠 Cómo usar la discrepancia terapéuticamente</span><span class="sub-arr" id="sarr-s4-disc-2">▼</span></div>
+            <div class="sub-body" id="s4-disc-2">
+              <p>No resolvas la discrepancia con el consultante hasta que tengas hipótesis clara sobre su función. Podés usarla para:</p>
+              <p><strong>1. Generar curiosidad:</strong> "Notá algo interesante — acá dijiste que el conflicto no es un problema, y sin embargo en las últimas dos sesiones cada vez que tocamos algo incómodo el tema cambia. ¿Cómo lo entendés vos?"</p>
+              <p><strong>2. Exponer el patrón en vivo:</strong> la discrepancia misma puede ser material clínico si el consultante puede observarla con vos en sesión.</p>
+              <p><strong>3. Afinar la conceptualización:</strong> la dirección de la discrepancia (consultante subestima vs. sobreestima) orienta hacia mecanismos distintos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="action-row">
         <a href="fiat-terapeuta.html" class="btn-main">📊 Ver resultados del caso</a>
       </div>
@@ -635,7 +696,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="screen" id="sc-step-4">
   <div class="wrap">
     <div class="step-hero">
-      <div class="step-badge"><span class="step-num">Paso 5 de 7</span><span class="step-time">⏱ 6 min</span></div>
+      <div class="step-badge"><span class="step-num">Paso 5 de 8</span><span class="step-time">⏱ 6 min</span></div>
       <div class="step-title">La entrevista semiestructurada</div>
       <div class="step-sub">Aquí ocurre la evaluación real. El cuestionario te orienta — la entrevista te da los datos clínicos verdaderos.</div>
     </div>
@@ -698,7 +759,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="screen" id="sc-step-5">
   <div class="wrap">
     <div class="step-hero">
-      <div class="step-badge"><span class="step-num">Paso 6 de 7</span><span class="step-time">⏱ 8 min</span></div>
+      <div class="step-badge"><span class="step-num">Paso 6 de 8</span><span class="step-time">⏱ 8 min</span></div>
       <div class="step-title">Construir la conceptualización</div>
       <div class="step-sub">Vos sos quien construye el análisis — la plataforma solo te da preguntas guía.</div>
     </div>
@@ -782,7 +843,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="screen" id="sc-step-6">
   <div class="wrap">
     <div class="step-hero">
-      <div class="step-badge"><span class="step-num">Paso 7 de 7</span><span class="step-time">⏱ 5 min</span></div>
+      <div class="step-badge"><span class="step-num">Paso 7 de 8</span><span class="step-time">⏱ 5 min</span></div>
       <div class="step-title">Seguimiento semana a semana</div>
       <div class="step-sub">El cambio ocurre entre sesiones. Estas herramientas te permiten rastrearlo con detalle idiográfico.</div>
     </div>
@@ -823,10 +884,239 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         <a href="fiat-seguimiento.html" class="btn-sec">📅 FIAT-DA Digital</a>
       </div>
 
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('t7-readmin')">
+          <div class="theory-head-left"><span class="theory-icon">🔁</span><span class="theory-title">Re-administrar el FIAT-Q al cierre</span><span class="theory-chip">Medición de cambio</span></div>
+          <span class="theory-arr" id="tarr-t7-readmin">▼</span>
+        </div>
+        <div class="theory-body" id="t7-readmin">
+          <p>El FIAT-Q puede administrarse <strong>al final del tratamiento</strong> para medir cambio. Comparar los puntajes iniciales y finales por clase te da un indicador de evolución idiográfica.</p>
+          <p>Callaghan anticipa que esta comparación tiene valor tanto para el terapeuta (¿en qué clases cambió más?) como para el consultante (puede observar su propio recorrido).</p>
+          <div class="sub-expand">
+            <div class="sub-head" onclick="toggleSub('s7-readmin-1')"><span class="sub-head-title">📐 Cómo interpretar los cambios</span><span class="sub-arr" id="sarr-s7-readmin-1">▼</span></div>
+            <div class="sub-body" id="s7-readmin-1">
+              <p><strong>Cambio esperado:</strong> reducción en las clases que fueron foco de tratamiento. Si trabajaste principalmente Clase C y E, ahí deberían verse los movimientos más claros.</p>
+              <p><strong>Cambio en clases no trabajadas directamente:</strong> es posible y tiene valor clínico. Si mejoró E sin haberla trabajado en forma directa, puede indicar generalización o que E era derivada de otra clase que sí se trabajó.</p>
+              <p><strong>Sin cambio o empeoramiento:</strong> puede indicar que el trabajo aún no generalizó fuera de sesión, o que el consultante tiene ahora más conciencia del patrón (y por eso lo reporta más). Explorar antes de concluir.</p>
+            </div>
+          </div>
+          <div class="sub-expand">
+            <div class="sub-head" onclick="toggleSub('s7-readmin-2')"><span class="sub-head-title">💬 Cómo presentárselo al consultante</span><span class="sub-arr" id="sarr-s7-readmin-2">▼</span></div>
+            <div class="sub-body" id="s7-readmin-2">
+              <p>No presentar como examen ni como evaluación de éxito/fracaso. Una forma posible:</p>
+              <p><em>"Al comienzo del proceso completaste este cuestionario. Te propongo completarlo de nuevo — no para comparar números, sino para que veas vos mismo qué cambió en cómo te relacionás con los demás."</em></p>
+              <p>El énfasis está en la <strong>conciencia del consultante sobre su propio cambio</strong>, no en la validación técnica.</p>
+            </div>
+          </div>
+          <div class="warn"><strong>⚠️ Recordá:</strong> el cambio en el cuestionario refleja cambio percibido fuera de sesión. El cambio en sesión (CRBs) puede haber ocurrido antes y no estar reflejado aún en el autoinforme. Ambas fuentes son complementarias, no equivalentes.</div>
+        </div>
+      </div>
+
       <div style="height:20px"></div>
       <div class="card" style="background:linear-gradient(135deg,var(--blue),#1E3A7A);border:none;text-align:center">
         <div style="font-size:15px;font-weight:900;color:#fff;margin-bottom:6px">🎉 Completaste la guía</div>
         <div style="font-size:12px;color:rgba(255,255,255,.7);margin-bottom:14px;line-height:1.6">Ya tenés el mapa completo del sistema FIAT. Ahora es momento de usarlo con un caso real.</div>
+        <div style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
+          <a href="fiat-terapeuta.html" class="btn-main" style="flex:0 1 auto">🧠 Crear primer caso →</a>
+          <button class="btn-sec" style="flex:0 1 auto" onclick="goHome()">↩ Volver al inicio</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PASO 8: FAQ + CBS
+══════════════════════════════════════════ -->
+<div class="screen" id="sc-step-7">
+  <div class="wrap">
+    <div class="step-hero">
+      <div class="step-badge"><span class="step-num">Paso 8 de 8</span><span class="step-time">⏱ 7 min</span></div>
+      <div class="step-title">FAQ clínico e integración CBS</div>
+      <div class="step-sub">Preguntas que aparecen en la práctica real, y cómo el FIAT se integra con ACT, DBT, RFT y FAP.</div>
+    </div>
+    <div class="step-content">
+
+      <div class="card card-yellow">
+        <div class="card-title">❓ Preguntas frecuentes</div>
+        <div class="card-body"><p>Las preguntas que los terapeutas hacen en la práctica real.</p></div>
+      </div>
+
+      <!-- FAQ 1 -->
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('faq1')">
+          <div class="theory-head-left"><span class="theory-icon">❓</span><span class="theory-title">¿El FIAT reemplaza la conceptualización de caso?</span></div>
+          <span class="theory-arr" id="tarr-faq1">▼</span>
+        </div>
+        <div class="theory-body" id="faq1">
+          <p>No. El FIAT <strong>informa</strong> la conceptualización, no la reemplaza. Los resultados son hipótesis sobre dónde mirar — la confirmación viene de la observación clínica en sesión.</p>
+          <p>Un puntaje alto en Clase C no significa "tiene un problema con el conflicto." Significa que hay que prestar atención específica a cómo maneja los desacuerdos en el contexto terapéutico. El terapeuta sigue siendo quien integra y conceptualiza.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('faq2')">
+          <div class="theory-head-left"><span class="theory-icon">❓</span><span class="theory-title">¿Qué hago si todas las clases tienen señal alta?</span></div>
+          <span class="theory-arr" id="tarr-faq2">▼</span>
+        </div>
+        <div class="theory-body" id="faq2">
+          <p>Tres posibilidades a explorar antes de concluir que hay dificultades pervasivas:</p>
+          <p><strong>1. Sesgo de respuesta:</strong> el consultante puede estar respondiendo con aquiescencia general, especialmente si llega en crisis o con alta autocrítica. La entrevista verbal suele dar un perfil más diferenciado.</p>
+          <p><strong>2. Las clases son no-ortogonales:</strong> problemas severos en una clase generan problemas en otras. Un déficit profundo en Clase E suele elevar también A, C y D de forma derivada.</p>
+          <p><strong>3. Alta angustia al completarlo:</strong> el estado emocional en el momento de responder afecta el perfil.</p>
+          <div class="tip"><strong>💡 Estrategia clínica:</strong> nunca trabajar todas las clases simultáneamente. Identificar cuál, si mejora, tiene más impacto sobre las otras — usualmente E o C — y comenzar ahí. La mejora se propagará.</div>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('faq3')">
+          <div class="theory-head-left"><span class="theory-icon">❓</span><span class="theory-title">¿Qué hago si el consultante pide ver sus resultados?</span></div>
+          <span class="theory-arr" id="tarr-faq3">▼</span>
+        </div>
+        <div class="theory-body" id="faq3">
+          <p>El FIAT no está diseñado para compartirse como informe numérico. El número en sí tiene poco valor clínico — el valor está en la conceptualización que genera.</p>
+          <p>Lo que sí podés hacer es usar los hallazgos como punto de entrada a la conversación:</p>
+          <div class="example">
+            <div class="ex-label">Forma de usarlo sin compartir el número</div>
+            <div class="ex-text"><strong>"Respondiste que a veces cuesta pedir lo que necesitás — ¿podemos explorar eso?"</strong><br>El número desaparece. La conversación clínica, no.</div>
+          </div>
+          <p>Si el consultante insiste en ver los puntajes, podés compartirlos con el encuadre explícito de que son <em>señales orientativas para la entrevista</em>, no un diagnóstico ni una evaluación de su persona.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('faq4')">
+          <div class="theory-head-left"><span class="theory-icon">❓</span><span class="theory-title">¿El índice porcentual es del paper original?</span></div>
+          <span class="theory-arr" id="tarr-faq4">▼</span>
+        </div>
+        <div class="theory-body" id="faq4">
+          <p>No. Callaghan describe el FIAT como herramienta <strong>cualitativa e idiográfica</strong>, sin sistema de puntaje numérico oficial. El índice porcentual fue construido para esta plataforma como indicador relativo de orientación clínica.</p>
+          <p>Lo que importa — como Callaghan señala — es el patrón de respuesta y su análisis funcional, no el número absoluto. Los porcentajes son un punto de entrada, nunca una conclusión.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('faq5')">
+          <div class="theory-head-left"><span class="theory-icon">❓</span><span class="theory-title">¿Cuándo y cómo hacer una segunda administración?</span></div>
+          <span class="theory-arr" id="tarr-faq5">▼</span>
+        </div>
+        <div class="theory-body" id="faq5">
+          <p>Al cierre del tratamiento, o en un punto de revisión intermedia (ej: sesión 20, mitad del proceso). No antes de las 8-10 semanas de trabajo activo — el cambio interpersonal es lento y una re-administración prematura puede dar falsos negativos.</p>
+          <p>Callaghan también menciona su uso como <strong>medida de proceso</strong>: si en la sesión 12 el perfil no ha cambiado nada en la clase que es foco de tratamiento, es una señal para revisar la estrategia.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 6 -->
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('faq6')">
+          <div class="theory-head-left"><span class="theory-icon">❓</span><span class="theory-title">¿Qué formación mínima necesito?</span></div>
+          <span class="theory-arr" id="tarr-faq6">▼</span>
+        </div>
+        <div class="theory-body" id="faq6">
+          <p>Callaghan especifica dos requisitos en el manual:</p>
+          <p><strong>1.</strong> Conocimiento funcional de los principios de FAP.</p>
+          <p><strong>2.</strong> Comprensión de <strong>clases de respuesta funcionales</strong> — la capacidad de diferenciar el efecto de una conducta de su mera topografía.</p>
+          <p>Sin el segundo, el FIAT se usa como clasificación topográfica de síntomas, perdiendo completamente su valor funcional-idiográfico. Podés conocer FAP perfectamente y aun así usar mal el FIAT si no podés ir de la forma a la función de una conducta.</p>
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <!-- CBS INTEGRATION -->
+      <div class="card card-yellow">
+        <div class="card-title">🔗 Integración con el sistema CBS</div>
+        <div class="card-body"><p>El FIAT no es solo una herramienta FAP. Mapeá cómo se ancla con lo que ya hacés.</p></div>
+      </div>
+
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('cbs-fap')">
+          <div class="theory-head-left"><span class="theory-icon">🟡</span><span class="theory-title">FAP — Psicoterapia Analítico Funcional</span><span class="tag tag-fap" style="margin-left:4px">FAP</span></div>
+          <span class="theory-arr" id="tarr-cbs-fap">▼</span>
+        </div>
+        <div class="theory-body" id="cbs-fap">
+          <p>El FIAT es un sistema creado <em>para</em> FAP. Los déficits de cada clase son el <strong>mapa de CRBs1 anticipados</strong>. La relación terapéutica es el contexto para evocarlos y moldear CRBs2 en vivo.</p>
+          <p>La estructura de los Ejemplares (pregunta FAP-rap) conecta directamente con la Regla 1 de FAP: observar CRBs. El FIAT-T pre/post conecta con la Regla 2 y 3: evocar y reforzar naturalmente.</p>
+          <div class="example">
+            <div class="ex-label">Mapeo directo</div>
+            <div class="ex-text">Déficit en Clase A → CRB1: no pedir entre sesiones, minimizar necesidades.<br>Déficit en Clase C → CRB1: evitar desacuerdo con terapeuta, cambiar de tema ante tensión.<br>Déficit en Clase E → CRB1: hablar de emociones en pasado cuando están ocurriendo ahora.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('cbs-act')">
+          <div class="theory-head-left"><span class="theory-icon">🔵</span><span class="theory-title">ACT — Terapia de Aceptación y Compromiso</span><span class="tag tag-act" style="margin-left:4px">ACT</span></div>
+          <span class="theory-arr" id="tarr-cbs-act">▼</span>
+        </div>
+        <div class="theory-body" id="cbs-act">
+          <p>Los déficits del FIAT mapean directamente sobre <strong>evitación experiencial</strong>. La inflexibilidad (criterio de inclusión de Callaghan) es inflexibilidad psicológica en términos ACT.</p>
+          <p>Los <strong>valores</strong> orientan qué clases importan más para este consultante: si la conexión íntima es un valor central, Clase D es prioritaria aunque el puntaje no sea el más alto.</p>
+          <p>La <strong>defusión</strong> es especialmente relevante para reglas verbales que sostienen los déficits: "pedir es debilidad" (Clase A), "el conflicto destruye" (Clase C), "si siento, pierdo el control" (Clase E).</p>
+          <div class="sub-expand">
+            <div class="sub-head" onclick="toggleSub('s-act-hex')"><span class="sub-head-title">🔍 FIAT y el hexaflex</span><span class="sub-arr" id="sarr-s-act-hex">▼</span></div>
+            <div class="sub-body" id="s-act-hex">
+              <p><strong>Aceptación:</strong> tolerar la incomodidad del conflicto (C), de la emoción en vivo (E), de la vulnerabilidad en la divulgación (D).</p>
+              <p><strong>Defusión:</strong> soltar reglas sobre cómo deben ser las relaciones que sostienen los déficits.</p>
+              <p><strong>Yo como contexto:</strong> observar el propio impacto en otros (B) desde perspectiva sin fusión.</p>
+              <p><strong>Acción comprometida:</strong> pedir lo que se necesita (A), iniciar conflictos (C), divulgar (D) como acciones orientadas a valores, no contingentes al estado emocional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('cbs-dbt')">
+          <div class="theory-head-left"><span class="theory-icon">🟣</span><span class="theory-title">DBT — Terapia Dialéctica Conductual</span><span class="tag tag-dbt" style="margin-left:4px">DBT</span></div>
+          <span class="theory-arr" id="tarr-cbs-dbt">▼</span>
+        </div>
+        <div class="theory-body" id="cbs-dbt">
+          <p>El módulo de <strong>Efectividad Interpersonal</strong> (DEAR MAN, GIVE, FAST) opera directamente sobre las 5 clases. DEAR MAN → Clase A. GIVE → Clase B y D. FAST → Clase C.</p>
+          <p><strong>Regulación emocional</strong> → Clase E directamente. Identificación y etiquetado emocional (Mood Log), PLEASE para reducción de vulnerabilidad.</p>
+          <p><strong>Mindfulness</strong> → Clase B: observar el propio impacto en otros con conciencia plena, sin reactividad.</p>
+          <div class="sub-expand">
+            <div class="sub-head" onclick="toggleSub('s-dbt-map')"><span class="sub-head-title">🔍 Mapeo FIAT → habilidades DBT</span><span class="sub-arr" id="sarr-s-dbt-map">▼</span></div>
+            <div class="sub-body" id="s-dbt-map">
+              <p><strong>Clase A:</strong> DEAR MAN (estructura el pedido), FAST (autorrespeto al pedir).</p>
+              <p><strong>Clase B:</strong> Mindfulness interpersonal, GIVE (validar al otro).</p>
+              <p><strong>Clase C:</strong> DEAR MAN + FAST combinados, Acción Opuesta para evitación de conflicto.</p>
+              <p><strong>Clase D:</strong> GIVE (Gentle, Interested, Validate, Easy manner), dialectics cercanía/límites.</p>
+              <p><strong>Clase E:</strong> Módulo de Regulación Emocional completo, Acción Opuesta, PLEASE.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="theory-block">
+        <div class="theory-head" onclick="toggleTheory('cbs-rft')">
+          <div class="theory-head-left"><span class="theory-icon">🟢</span><span class="theory-title">RFT — Teoría del Marco Relacional</span><span class="tag tag-rft" style="margin-left:4px">RFT</span></div>
+          <span class="theory-arr" id="tarr-cbs-rft">▼</span>
+        </div>
+        <div class="theory-body" id="cbs-rft">
+          <p>Las <strong>reglas verbales</strong> explican por qué los déficits del FIAT resisten al cambio pese a sus consecuencias negativas. El pliance ("no debo pedir", "el conflicto siempre termina mal") suprime conductas incluso cuando el contexto las reforzaría.</p>
+          <p>El control por reglas aplicado a las relaciones interpersonales produce exactamente la inflexibilidad que Callaghan describe como criterio de problema.</p>
+          <div class="sub-expand">
+            <div class="sub-head" onclick="toggleSub('s-rft-rules')"><span class="sub-head-title">🔍 Reglas comunes por clase</span><span class="sub-arr" id="sarr-s-rft-rules">▼</span></div>
+            <div class="sub-body" id="s-rft-rules">
+              <p><strong>Clase A:</strong> "Pedir es ser una carga." "Si necesito ayuda es que soy débil." "Los demás deberían saber lo que necesito."</p>
+              <p><strong>Clase B:</strong> "Si me dicen algo negativo es porque no les gusto." "Dar feedback es agresivo."</p>
+              <p><strong>Clase C:</strong> "El conflicto destruye las relaciones." "Ceder es perder." "Si expreso lo que siento se termina todo."</p>
+              <p><strong>Clase D:</strong> "Si me muestro, me rechazan." "Las personas cercanas terminan lastimando." "La vulnerabilidad es peligrosa."</p>
+              <p><strong>Clase E:</strong> "No debo sentir esto." "Si siento X, voy a perder el control." "Las emociones son señal de debilidad."</p>
+            </div>
+          </div>
+          <p style="margin-top:8px">Identificar estas reglas y trabajar su función (defusión, flexibilidad relacional) es una de las vías más potentes para modificar los déficits del FIAT sin entrenar conductas directamente.</p>
+        </div>
+      </div>
+
+      <div style="height:20px"></div>
+      <div class="card" style="background:linear-gradient(135deg,var(--blue),#1E3A7A);border:none;text-align:center">
+        <div style="font-size:15px;font-weight:900;color:#fff;margin-bottom:6px">🎉 Guía completa</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.7);margin-bottom:14px;line-height:1.6">Tenés el mapa clínico completo del sistema FIAT. Ahora, a aplicarlo.</div>
         <div style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
           <a href="fiat-terapeuta.html" class="btn-main" style="flex:0 1 auto">🧠 Crear primer caso →</a>
           <button class="btn-sec" style="flex:0 1 auto" onclick="goHome()">↩ Volver al inicio</button>
@@ -858,7 +1148,8 @@ var STEPS=[
   {id:'sc-step-3',label:'Resultados'},
   {id:'sc-step-4',label:'Entrevista'},
   {id:'sc-step-5',label:'Conceptualizar'},
-  {id:'sc-step-6',label:'Seguimiento'}
+  {id:'sc-step-6',label:'Seguimiento'},
+  {id:'sc-step-7',label:'FAQ + CBS'}
 ];
 var currentStep=-1;
 var completedSteps=[];
