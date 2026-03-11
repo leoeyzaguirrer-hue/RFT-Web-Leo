@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FIAT-Q | Cuestionario</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--yellow:#F9C12E;--blue:#1B4F9B;--orange:#E87820;--lb:#2B9FD1;--green:#2BA55A}
+[data-theme="light"]{--bg:#F5F3EC;--bg2:#EDE9DF;--sur:#FFFFFF;--tx:#1B1F3B;--txs:#5A6280;--bd:rgba(27,79,155,.12);--bd2:rgba(27,79,155,.07);--sh:0 8px 32px rgba(27,79,155,.13);--shs:0 2px 10px rgba(27,79,155,.08)}
+[data-theme="dark"]{--bg:#08132A;--bg2:#101D3A;--sur:#101D3A;--tx:#EEF2FF;--txs:#8BA3CC;--bd:rgba(249,193,46,.15);--bd2:rgba(255,255,255,.07);--sh:0 8px 32px rgba(0,0,0,.5);--shs:0 2px 10px rgba(0,0,0,.4)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='70'%3E%3Cpolygon points='30,2 56,17 56,47 30,62 4,47 4,17' fill='none' stroke='%231B4F9B' stroke-width='1'/%3E%3C/svg%3E");opacity:.04;pointer-events:none;z-index:0}
+[data-theme="dark"] body::before{opacity:.07}
+.app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;z-index:1;display:flex;flex-direction:column}
+
+/* Topbar */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 10px;position:sticky;top:0;z-index:100;background:var(--bg);backdrop-filter:blur(10px)}
+.logo{display:flex;align-items:center;gap:8px}
+.hex{width:32px;height:32px;background:var(--blue);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);display:flex;align-items:center;justify-content:center}
+.hex span{color:var(--yellow);font-size:13px;font-weight:900}
+.logo-text{font-size:14px;font-weight:800;color:var(--blue)}
+[data-theme="dark"] .logo-text{color:var(--yellow)}
+.tbtn{background:var(--sur);border:1.5px solid var(--bd);border-radius:50px;padding:5px 12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--tx);cursor:pointer}
+
+/* Screens */
+.screen{display:none;flex-direction:column;flex:1;padding:20px 20px 48px;animation:fadeUp .3s ease}
+.screen.active{display:flex}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Invalid */
+.invalid-box{background:var(--sur);border:1.5px solid rgba(239,68,68,.3);border-radius:24px;padding:36px 28px;text-align:center;margin:20px 0}
+.inv-icon{font-size:48px;margin-bottom:16px}
+.inv-title{font-size:20px;font-weight:900;color:#EF4444;margin-bottom:10px}
+.inv-desc{font-size:14px;color:var(--txs);line-height:1.6}
+
+/* Welcome */
+.welcome-hero{background:var(--blue);border-radius:24px;padding:32px 28px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:var(--sh)}
+.welcome-hero::before{content:'';position:absolute;bottom:-20px;right:-20px;width:110px;height:110px;background:var(--yellow);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);opacity:.15}
+.badge{display:inline-block;background:var(--yellow);color:var(--blue);font-size:11px;font-weight:900;padding:4px 14px;border-radius:50px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.welcome-hero h1{font-size:36px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.welcome-hero h1 span{color:var(--yellow)}
+.welcome-hero p{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+.author{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border-radius:50px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,.9);font-weight:700}
+.info-box{background:var(--sur);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--txs);line-height:1.7;margin-bottom:16px}
+.info-box strong{color:var(--tx)}
+
+/* Scale demo */
+.scale-demo{display:flex;gap:5px;justify-content:space-between;margin:12px 0}
+.sd-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.sd-dot{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--blue);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:var(--blue)}
+.sd-dot.f{background:var(--blue);color:#fff}
+[data-theme="dark"] .sd-dot{border-color:var(--yellow);color:var(--yellow)}
+[data-theme="dark"] .sd-dot.f{background:var(--yellow);color:var(--blue)}
+.sd-lbl{font-size:9px;text-align:center;color:var(--txs);font-weight:700;line-height:1.2}
+
+/* Progress */
+.prog-head{background:var(--sur);border-radius:16px;padding:14px 16px;margin-bottom:14px;box-shadow:var(--shs);border:1.5px solid var(--bd)}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cls-chip{display:inline-flex;align-items:center;padding:4px 12px;border-radius:50px;font-size:12px;font-weight:900;color:#fff}
+.prog-cnt{font-size:11px;color:var(--txs);font-weight:700}
+.prog-bar-wrap{background:var(--bg2);border-radius:50px;height:7px;overflow:hidden;margin-bottom:8px}
+.prog-bar{height:100%;border-radius:50px;transition:width .4s ease}
+.cls-dots{display:flex;justify-content:center;gap:7px}
+.cdot{width:28px;height:5px;border-radius:50px;background:var(--bd);transition:all .3s}
+.cdot.done{background:var(--blue)}
+.cdot.cur{background:var(--yellow);width:34px}
+
+/* Questions */
+.q-item{background:var(--sur);border:1.5px solid var(--bd2);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--shs);transition:border-color .2s}
+.q-item.ans{border-color:rgba(27,79,155,.2)}
+[data-theme="dark"] .q-item.ans{border-color:rgba(249,193,46,.2)}
+.q-num{font-size:11px;font-weight:900;color:var(--txs);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.q-text{font-size:14px;font-weight:600;line-height:1.5;color:var(--tx);margin-bottom:12px}
+.scale-row{display:flex;justify-content:space-between;gap:3px}
+.scl-lbl-row{display:flex;justify-content:space-between;margin-top:5px}
+.scl-lbl-end{font-size:10px;color:var(--txs);font-weight:700;max-width:72px}
+.scl-lbl-end:last-child{text-align:right}
+.sbtn{flex:1;height:40px;border-radius:9px;border:2px solid var(--bd);background:var(--bg);font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--txs);cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.sbtn:hover{border-color:var(--blue);color:var(--blue)}
+[data-theme="dark"] .sbtn:hover{border-color:var(--yellow);color:var(--yellow)}
+.sbtn.sel{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(1.08);box-shadow:0 4px 12px rgba(27,79,155,.35)}
+[data-theme="dark"] .sbtn.sel{background:var(--yellow);border-color:var(--yellow);color:var(--blue);box-shadow:0 4px 12px rgba(249,193,46,.35)}
+
+/* Warn */
+.warn{background:rgba(232,120,32,.1);border:1.5px solid rgba(232,120,32,.3);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--orange);font-weight:700;margin-top:8px;display:none}
+.warn.show{display:block}
+
+/* Class intro */
+.cls-intro{border-radius:14px;padding:14px 16px;margin-bottom:12px;border:1.5px solid transparent}
+
+/* Nav */
+.nav-row{display:flex;gap:10px;margin-top:8px}
+.nav-row .btn{flex:1}
+
+/* Buttons */
+.btn{display:block;width:100%;padding:15px;border-radius:15px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .2s;text-align:center}
+.btn-p{background:var(--blue);color:#fff;box-shadow:0 4px 20px rgba(27,79,155,.3)}
+.btn-p:hover{transform:translateY(-2px)}
+.btn-y{background:var(--yellow);color:var(--blue);box-shadow:0 4px 20px rgba(249,193,46,.35)}
+.btn-y:hover{transform:translateY(-2px)}
+.btn-g{background:var(--sur);color:var(--txs);border:1.5px solid var(--bd)}
+.btn+.btn{margin-top:10px}
+
+/* Thank you */
+.ty-hero{background:linear-gradient(135deg,var(--green),#1D7A40);border-radius:24px;padding:36px 28px;text-align:center;margin-bottom:20px;box-shadow:var(--sh)}
+.ty-icon{font-size:52px;margin-bottom:14px}
+.ty-hero h2{font-size:24px;font-weight:900;color:#fff;margin-bottom:10px}
+.ty-hero p{font-size:14px;color:rgba(255,255,255,.85);line-height:1.6}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="topbar">
+  <div class="logo">
+    <div class="hex"><span>F</span></div>
+    <span class="logo-text">Sistema FIAT</span>
+  </div>
+  <button class="tbtn" onclick="toggleTheme()">☀️/🌙</button>
+</div>
+
+<!-- INVALID LINK -->
+<div class="screen" id="sc-invalid">
+  <div class="invalid-box">
+    <div class="inv-icon">⚠️</div>
+    <div class="inv-title">Link no válido</div>
+    <div class="inv-desc">Este link no tiene la información necesaria para cargar el cuestionario.<br><br>Por favor pedile a tu terapeuta que te envíe el link correcto.</div>
+  </div>
+</div>
+
+<!-- INSTRUCTIONS -->
+<div class="screen" id="sc-instructions">
+  <div class="welcome-hero">
+    <div class="badge">Callaghan, 2006</div>
+    <h1>FIAT-<span>Q</span></h1>
+    <p>Tu terapeuta te envió este cuestionario. Respondé con honestidad, no hay respuestas correctas o incorrectas.</p>
+    <div class="author">@leo.eyzaguirre</div>
+  </div>
+
+  <div class="info-box">
+    <strong>¿Cuánto lleva?</strong> Aproximadamente 15–20 minutos. Tenés <strong>117 preguntas</strong> organizadas en 5 áreas sobre cómo te relacionás con los demás.<br><br>
+    <strong>Tu privacidad:</strong> Solo tu terapeuta verá los resultados. Vos verás únicamente una pantalla de confirmación.
+  </div>
+
+  <div class="info-box">
+    <strong>Escala de respuesta</strong>
+    <div class="scale-demo">
+      <div class="sd-item"><div class="sd-dot f">1</div><div class="sd-lbl">Totalmente en desacuerdo</div></div>
+      <div class="sd-item"><div class="sd-dot">2</div><div class="sd-lbl">Moderada-mente en desacuerdo</div></div>
+      <div class="sd-item"><div class="sd-dot">3</div><div class="sd-lbl">Levemente en desacuerdo</div></div>
+      <div class="sd-item"><div class="sd-dot">4</div><div class="sd-lbl">Levemente de acuerdo</div></div>
+      <div class="sd-item"><div class="sd-dot">5</div><div class="sd-lbl">Moderada-mente de acuerdo</div></div>
+      <div class="sd-item"><div class="sd-dot">6</div><div class="sd-lbl">Totalmente de acuerdo</div></div>
+    </div>
+    Pensá en cómo sos <strong>en general</strong>, no solo hoy.
+  </div>
+
+  <button class="btn btn-p" onclick="startQuestions()">Comenzar cuestionario →</button>
+</div>
+
+<!-- QUESTIONS -->
+<div class="screen" id="sc-questions">
+  <div class="prog-head">
+    <div class="prog-top">
+      <div class="cls-chip" id="cls-chip">Clase A</div>
+      <div class="prog-cnt" id="prog-cnt">0 / 21</div>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+    <div class="cls-dots" id="cls-dots"></div>
+  </div>
+  <div id="q-container"></div>
+  <div class="warn" id="warn">⚠️ Por favor respondé todas las preguntas antes de continuar.</div>
+  <div class="nav-row">
+    <button class="btn btn-g" id="btn-prev" style="max-width:90px" onclick="prevPage()">← Atrás</button>
+    <button class="btn btn-p" id="btn-next" onclick="nextPage()">Siguiente →</button>
+  </div>
+</div>
+
+<!-- THANK YOU -->
+<div class="screen" id="sc-thanks">
+  <div class="ty-hero">
+    <div class="ty-icon">✅</div>
+    <h2>¡Gracias!</h2>
+    <p>Tus respuestas fueron enviadas correctamente. Tu terapeuta podrá acceder a los resultados en la próxima sesión.</p>
+  </div>
+  <div class="info-box">
+    Ya podés cerrar esta página. No necesitás hacer nada más. 😊
+  </div>
+</div>
+
+</div><!-- app -->
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────
+const CLASSES=[
+  {id:'A',name:'Clase A',title:'Asertividad de Necesidades',color:'#1B4F9B',
+   desc:'Las siguientes afirmaciones son sobre cómo manejás tus necesidades con otras personas.',
+   items:[
+    {id:'A1',r:false,text:'Tengo problemas para lograr que se satisfagan mis necesidades.'},
+    {id:'A2',r:true,text:'Mis necesidades se satisfacen en cuanto las pido.'},
+    {id:'A3',r:true,text:'Sé cuándo necesito ayuda o apoyo de otras personas.'},
+    {id:'A4',r:false,text:'Me doy cuenta de que necesitaba ayuda en una situación recién cuando ya pasó.'},
+    {id:'A5',r:false,text:'No sé cómo expresar con palabras lo que necesito.'},
+    {id:'A6',r:true,text:'Puedo identificar el tipo de ayuda o apoyo emocional que necesito de los demás.'},
+    {id:'A7',r:false,text:'Tengo dificultades para reconocer cuándo puedo pedirle algo a otra persona.'},
+    {id:'A8',r:true,text:'Cuando necesito algo, lo pido en cuanto lo necesito.'},
+    {id:'A9',r:true,text:'Puedo identificar personas que están dispuestas y son capaces de ayudarme.'},
+    {id:'A10',r:true,text:'Cuando necesito ayuda o apoyo emocional, se lo pido a un amigo cercano o familiar.'},
+    {id:'A11',r:false,text:'Le pido consejo sobre situaciones personales a personas desconocidas o conocidos casuales.'},
+    {id:'A12',r:false,text:'Evito pedirle ayuda a las personas para satisfacer mis necesidades.'},
+    {id:'A13',r:false,text:'Empiezo a pedirle algo a otra persona y luego retiro mi pedido.'},
+    {id:'A14',r:true,text:'Estoy dispuesto/a a aceptar la ayuda de alguien una vez que la persona acepta ayudarme.'},
+    {id:'A15',r:false,text:'Cuando alguien nota que necesito ayuda, niego necesitarla.'},
+    {id:'A16',r:false,text:'Las personas no responden cuando les pido ayuda o apoyo emocional.'},
+    {id:'A17',r:false,text:'Expreso mis necesidades de forma sutil, por ejemplo, dando indirectas de lo que quiero.'},
+    {id:'A18',r:true,text:'Cuando pido ayuda, las personas entienden lo que necesito.'},
+    {id:'A19',r:false,text:'En una relación, doy mucho apoyo emocional pero no recibo mucho apoyo de la otra persona.'},
+    {id:'A20',r:false,text:'Las personas me dicen que pido cosas con demasiada frecuencia.'},
+    {id:'A21',r:false,text:'A las personas no les gusta la manera en que pido las cosas.'},
+   ]},
+  {id:'B',name:'Clase B',title:'Comunicación Bidireccional',color:'#2B9FD1',
+   desc:'Las siguientes afirmaciones son sobre cómo afectás a otras personas y cómo das y recibís retroalimentación.',
+   items:[
+    {id:'B1',r:false,text:'Tengo problemas para recibir retroalimentación de otras personas.'},
+    {id:'B2',r:false,text:'Tengo problemas para dar retroalimentación a otras personas.'},
+    {id:'B3',r:false,text:'Me resulta difícil identificar cuándo las personas me están dando retroalimentación sobre mi comportamiento.'},
+    {id:'B4',r:false,text:'Cuando interactúo con otra persona, no estoy seguro/a de cómo la estoy afectando.'},
+    {id:'B5',r:true,text:'Sé cuándo tengo un impacto desagradable en los demás.'},
+    {id:'B6',r:true,text:'La retroalimentación que recibo de los demás me parece precisa.'},
+    {id:'B7',r:true,text:'Considero cuidadosamente la fuente de la retroalimentación antes de cambiar mi comportamiento.'},
+    {id:'B8',r:true,text:'Puedo identificar situaciones en las que sería útil dar retroalimentación a otra persona.'},
+    {id:'B9',r:false,text:'Evito situaciones donde podría recibir retroalimentación, como hablar en clase o en reuniones.'},
+    {id:'B10',r:true,text:'Si no estoy seguro/a del impacto que tengo en un amigo cercano, le pido retroalimentación.'},
+    {id:'B11',r:false,text:'Cuando alguien me da retroalimentación negativa, me bloqueo.'},
+    {id:'B12',r:false,text:'Soy excesivamente consciente del impacto que tengo en los demás.'},
+    {id:'B13',r:false,text:'Me hiero o me molesto fácilmente cuando me dan retroalimentación negativa.'},
+    {id:'B14',r:false,text:'Independientemente de si la retroalimentación es positiva o negativa, no sé cómo responder a ella.'},
+    {id:'B15',r:true,text:'Cambio mi comportamiento en respuesta a la retroalimentación que recibo.'},
+    {id:'B16',r:false,text:'Si alguien me da retroalimentación, creo que es el problema de esa persona, no el mío.'},
+    {id:'B17',r:false,text:'Cuando me doy cuenta de que tengo un impacto desagradable en alguien, trato de ignorar su malestar.'},
+    {id:'B18',r:false,text:'Si alguien me da retroalimentación que no me gusta, hago lo contrario de lo que la persona quiere.'},
+    {id:'B19',r:false,text:'Cuando las personas me dan retroalimentación desfavorable, discuto con ellas.'},
+    {id:'B20',r:false,text:'No le doy retroalimentación a otra persona si está teniendo un impacto desagradable en mí.'},
+    {id:'B21',r:false,text:'Cuando le digo a las personas que su comportamiento me afecta negativamente, no cambian lo que hacen.'},
+    {id:'B22',r:false,text:'Me dicen que la retroalimentación que doy es excesiva y demasiado detallada.'},
+    {id:'B23',r:true,text:'Cuando doy retroalimentación, respondo de manera breve y específica.'},
+    {id:'B24',r:false,text:'Me dicen que cuando doy retroalimentación, soy demasiado crítico/a de la otra persona.'},
+    {id:'B25',r:false,text:'Cuando doy retroalimentación, repito mi posición varias veces.'},
+   ]},
+  {id:'C',name:'Clase C',title:'Conflicto',color:'#E87820',
+   desc:'Las siguientes afirmaciones son sobre cómo identificás y manejás el conflicto. Conflicto NO significa violencia — refiere a desacuerdos y momentos incómodos.',
+   items:[
+    {id:'C1',r:false,text:'Tengo problemas con el conflicto en mis relaciones.'},
+    {id:'C2',r:false,text:'Me siento incómodo/a cuando experimento desacuerdo con otra persona.'},
+    {id:'C3',r:true,text:'Soy consciente cuando hay conflicto entre yo y otra persona.'},
+    {id:'C4',r:false,text:'Cuando otra persona está enojada conmigo, no entiendo el problema entre nosotros.'},
+    {id:'C5',r:true,text:'Siento que hay momentos en que es beneficioso expresar el desacuerdo en una relación.'},
+    {id:'C6',r:false,text:'Entro en conflicto con otras personas por cosas que no parecen importarles.'},
+    {id:'C7',r:false,text:'Las personas me dicen que quiero discutir el conflicto en momentos inconvenientes o inapropiados.'},
+    {id:'C8',r:false,text:'Me involucro en conflictos con otra persona sin considerar quién es.'},
+    {id:'C9',r:false,text:'Evito el conflicto a toda costa.'},
+    {id:'C10',r:false,text:'Para evitar el conflicto, trato de anticipar lo que la otra persona quiere que haga.'},
+    {id:'C11',r:false,text:'Me retiro ante el conflicto, independientemente de las circunstancias.'},
+    {id:'C12',r:false,text:'Después de expresar un desacuerdo con otra persona, inmediatamente me disculpo por haber planteado el tema.'},
+    {id:'C13',r:true,text:'Cuando tengo un conflicto con otra persona, pregunto qué puedo hacer para mejorar las cosas entre nosotros.'},
+    {id:'C14',r:true,text:'Tengo éxito en resolver conflictos con los demás.'},
+    {id:'C15',r:false,text:'Cuando tengo un desacuerdo con otra persona, explico repetidamente por qué creo que tengo razón.'},
+    {id:'C16',r:true,text:'Durante una discusión, tengo cuidado de no herir los sentimientos de la otra persona.'},
+    {id:'C17',r:true,text:'Abordo las soluciones al conflicto de manera directa, comunicando claramente qué se puede hacer para resolver nuestras diferencias.'},
+    {id:'C18',r:false,text:'Expreso el enojo de forma indirecta, por ejemplo, dejando de hablar con la otra persona.'},
+    {id:'C19',r:false,text:'Las personas dicen que no estoy dispuesto/a a ceder cuando hay un conflicto.'},
+    {id:'C20',r:false,text:'Cuando discuto con alguien, la discusión se prolonga por mucho tiempo.'},
+    {id:'C21',r:false,text:'Durante una discusión, me siento más conectado/a y cercano/a a la otra persona.'},
+    {id:'C22',r:false,text:'Cuando discuto con alguien, la discusión se vuelve más intensa con el tiempo.'},
+    {id:'C23',r:false,text:'Deliberadamente molesto a la otra persona durante una discusión.'},
+   ]},
+  {id:'D',name:'Clase D',title:'Divulgación y Cercanía',color:'#9B2DB5',
+   desc:'Las siguientes afirmaciones son sobre cómo te relacionás con los demás en términos de apertura y cercanía interpersonal.',
+   items:[
+    {id:'D1',r:false,text:'Tengo problemas para sentirme cercano/a a los demás.'},
+    {id:'D2',r:true,text:'He tenido una o más relaciones cercanas.'},
+    {id:'D3',r:false,text:'No puedo identificar cuándo me beneficiaría compartir mis experiencias con otra persona.'},
+    {id:'D4',r:true,text:'Soy consciente de cuándo es apropiado preguntarle a las personas sobre sus experiencias.'},
+    {id:'D5',r:false,text:'Comparto información personal con personas desconocidas o conocidos casuales.'},
+    {id:'D6',r:false,text:'Solo hablaré sobre mí y mis experiencias con un grupo pequeño y selecto de personas.'},
+    {id:'D7',r:false,text:'Cuando los amigos me preguntan cómo estoy, elijo no contarles.'},
+    {id:'D8',r:false,text:'Siento la necesidad de guardar secretos de las personas que son cercanas a mí.'},
+    {id:'D9',r:true,text:'Hablo sobre mí y mis experiencias con otras personas.'},
+    {id:'D10',r:false,text:'Siento que es mejor no hablar de mis propias experiencias con nadie.'},
+    {id:'D11',r:false,text:'Empiezo a hablar de lo que estoy pasando y luego decido que es mejor guardarme mis sentimientos.'},
+    {id:'D12',r:false,text:'Les he contado a personas sobre mis problemas y luego deseé no haberlo hecho.'},
+    {id:'D13',r:true,text:'Las relaciones cercanas son importantes para mí.'},
+    {id:'D14',r:false,text:'No quiero compartir cosas sobre mí con los demás.'},
+    {id:'D15',r:true,text:'Le pido a otras personas que me cuenten sobre sus sentimientos y experiencias.'},
+    {id:'D16',r:false,text:'Tengo dificultades para mantener una conversación con las personas.'},
+    {id:'D17',r:true,text:'Cuando hablo de mis experiencias, las personas entienden claramente lo que les estoy diciendo.'},
+    {id:'D18',r:false,text:'Después de compartir algo personal sobre mí, resto importancia a lo que divulgué.'},
+    {id:'D19',r:false,text:'Exagero mis buenos puntos y presumo sobre mis habilidades y capacidades.'},
+    {id:'D20',r:false,text:'Las personas dicen que hablo de mí mismo/a de una manera que minimiza mis buenas cualidades.'},
+    {id:'D21',r:false,text:'Me dicen que hablo demasiado sobre mí mismo/a.'},
+    {id:'D22',r:false,text:'Las personas me dicen que cuando hablo de mi propia experiencia, comparto información demasiado personal.'},
+    {id:'D23',r:true,text:'Escucho a los demás y les ofrezco apoyo.'},
+    {id:'D24',r:false,text:'Me dicen que en relaciones, pido mucho apoyo emocional pero doy poco apoyo a la otra persona.'},
+   ]},
+  {id:'E',name:'Clase E',title:'Experiencia Emocional',color:'#2BA55A',
+   desc:'Las siguientes afirmaciones son sobre cómo identificás y expresás tus emociones. Incluye todo tipo: alegría, tristeza, enojo, orgullo, etc.',
+   items:[
+    {id:'E1',r:false,text:'Tengo problemas con mis emociones.'},
+    {id:'E2',r:false,text:'Tengo problemas para identificar lo que siento.'},
+    {id:'E3',r:true,text:'Soy consciente de mis sentimientos y experiencias emocionales mientras están ocurriendo.'},
+    {id:'E4',r:false,text:'No noto mis emociones durante una experiencia, sino que me doy cuenta de ellas cuando miro hacia atrás.'},
+    {id:'E5',r:true,text:'Puedo distinguir entre una emoción y otra.'},
+    {id:'E6',r:true,text:'Mis respuestas emocionales tienen sentido para mí cuando considero las circunstancias.'},
+    {id:'E7',r:true,text:'Expreso mis emociones en momentos y lugares apropiados.'},
+    {id:'E8',r:false,text:'Hablaré de mis sentimientos en cualquier situación, sin importar el contexto.'},
+    {id:'E9',r:false,text:'Oculto intencionalmente mis sentimientos.'},
+    {id:'E10',r:false,text:'Trato de no sentir ciertas emociones.'},
+    {id:'E11',r:false,text:'Evito situaciones que puedan generar sentimientos intensos.'},
+    {id:'E12',r:true,text:'Me permito sentir todas las emociones, incluso las más intensas.'},
+    {id:'E13',r:false,text:'Cuando tengo una emoción desagradable, tomo medidas inmediatas para dejar de sentirla.'},
+    {id:'E14',r:true,text:'Puedo ponerle un nombre a lo que siento.'},
+    {id:'E15',r:false,text:'Le digo a las personas que me siento de una manera, cuando en realidad me siento de otra.'},
+    {id:'E16',r:false,text:'Las personas me dicen que mi expresión emocional es plana.'},
+    {id:'E17',r:false,text:'Cuando hablo de cómo me siento, uso las mismas pocas palabras para describir mis sentimientos.'},
+    {id:'E18',r:false,text:'Las personas me dicen que quieren que exprese mis sentimientos de manera más abierta.'},
+    {id:'E19',r:false,text:'Cuando comparto mis sentimientos con los demás, no reaccionan de la manera que espero.'},
+    {id:'E20',r:true,text:'Comunico mis emociones claramente a las personas para que sepan exactamente cómo me siento.'},
+    {id:'E21',r:false,text:'Las personas dicen que hablo demasiado sobre mis sentimientos.'},
+    {id:'E22',r:false,text:'Expreso mis emociones de manera excesivamente intensa.'},
+    {id:'E23',r:false,text:'A las personas no les gusta cuando hablo de mis emociones.'},
+    {id:'E24',r:false,text:'Las personas se molestan con la manera en que expreso mis emociones.'},
+   ]}
+];
+
+const PER_PAGE=5;
+let state={caseCode:'',vt:'',classIdx:0,pageIdx:0,answers:{}};
+
+// ─── INIT ────────────────────────────────────────────────────────────────
+(function init(){
+  const saved=localStorage.getItem('fiat-theme');
+  if(saved) document.documentElement.setAttribute('data-theme',saved);
+  else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)
+    document.documentElement.setAttribute('data-theme','dark');
+
+  const params=new URLSearchParams(window.location.search);
+  const code=params.get('case');
+  const vt=params.get('vt');
+
+  if(!code||!vt){
+    showScreen('sc-invalid'); return;
+  }
+
+  state.caseCode=code;
+  state.vt=vt;
+
+  // Load saved progress
+  const saved2=localStorage.getItem('fiat-progress-'+code);
+  if(saved2){
+    try{
+      const p=JSON.parse(saved2);
+      state.answers=p.answers||{};
+      state.classIdx=p.classIdx||0;
+      state.pageIdx=p.pageIdx||0;
+    }catch(e){}
+  }
+
+  showScreen('sc-instructions');
+})();
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function toggleTheme(){
+  const h=document.documentElement;
+  h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');
+  localStorage.setItem('fiat-theme',h.getAttribute('data-theme'));
+}
+function saveProgress(){
+  localStorage.setItem('fiat-progress-'+state.caseCode,JSON.stringify({answers:state.answers,classIdx:state.classIdx,pageIdx:state.pageIdx}));
+}
+
+function startQuestions(){
+  renderPage();
+  showScreen('sc-questions');
+}
+
+function getPages(ci){
+  const items=CLASSES[ci].items;
+  const pages=[];
+  for(let i=0;i<items.length;i+=PER_PAGE) pages.push(items.slice(i,i+PER_PAGE));
+  return pages;
+}
+
+function renderPage(){
+  const cls=CLASSES[state.classIdx];
+  const pages=getPages(state.classIdx);
+  const page=pages[state.pageIdx];
+  const total=cls.items.length;
+  const answered=cls.items.filter(it=>state.answers[it.id]!==undefined).length;
+
+  // Header
+  const chip=document.getElementById('cls-chip');
+  chip.textContent=cls.name+' — '+cls.title;
+  chip.style.background=cls.color;
+  document.getElementById('prog-cnt').textContent=answered+' / '+total+' respondidas';
+  const bar=document.getElementById('prog-bar');
+  bar.style.width=(answered/total*100)+'%';
+  bar.style.background=cls.color;
+
+  // Dots
+  document.getElementById('cls-dots').innerHTML=CLASSES.map((c,i)=>{
+    let cl='cdot';
+    if(i<state.classIdx) cl+=' done';
+    else if(i===state.classIdx) cl+=' cur';
+    return`<div class="${cl}"></div>`;
+  }).join('');
+
+  // Questions
+  let html='';
+  if(state.pageIdx===0){
+    html+=`<div class="cls-intro" style="background:${cls.color}12;border-color:${cls.color}30;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:900;color:${cls.color};margin-bottom:4px">${cls.name}: ${cls.title}</div>
+      <div style="font-size:12px;color:var(--txs);line-height:1.5">${cls.desc}</div>
+    </div>`;
+  }
+
+  page.forEach((item,idx)=>{
+    const gi=state.pageIdx*PER_PAGE+idx;
+    const ans=state.answers[item.id]!==undefined;
+    html+=`<div class="q-item ${ans?'ans':''}" id="qi-${item.id}">
+      <div class="q-num">${cls.id}${gi+1}</div>
+      <div class="q-text">${item.text}</div>
+      <div class="scale-row">
+        ${[1,2,3,4,5,6].map(n=>`<button class="sbtn ${state.answers[item.id]===n?'sel':''}" onclick="pick('${item.id}',${n},this)">${n}</button>`).join('')}
+      </div>
+      <div class="scl-lbl-row">
+        <span class="scl-lbl-end">Totalmente en desacuerdo</span>
+        <span class="scl-lbl-end">Totalmente de acuerdo</span>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('q-container').innerHTML=html;
+
+  // Nav
+  const btnPrev=document.getElementById('btn-prev');
+  const btnNext=document.getElementById('btn-next');
+  const isLast=state.classIdx===CLASSES.length-1&&state.pageIdx===pages.length-1;
+  btnPrev.style.display=(state.classIdx===0&&state.pageIdx===0)?'none':'block';
+  if(isLast){ btnNext.textContent='Enviar respuestas ✓'; btnNext.className='btn btn-y'; }
+  else if(state.pageIdx===pages.length-1){ btnNext.textContent='Siguiente área →'; btnNext.className='btn btn-p'; }
+  else{ btnNext.textContent='Siguiente →'; btnNext.className='btn btn-p'; }
+  document.getElementById('warn').classList.remove('show');
+}
+
+function pick(id,val,btn){
+  state.answers[id]=val;
+  const qi=document.getElementById('qi-'+id);
+  qi.classList.add('ans');
+  qi.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  saveProgress();
+  // update progress count
+  const cls=CLASSES[state.classIdx];
+  const ans=cls.items.filter(it=>state.answers[it.id]!==undefined).length;
+  document.getElementById('prog-cnt').textContent=ans+' / '+cls.items.length+' respondidas';
+  document.getElementById('prog-bar').style.width=(ans/cls.items.length*100)+'%';
+}
+
+function nextPage(){
+  const pages=getPages(state.classIdx);
+  const page=pages[state.pageIdx];
+  const unanswered=page.filter(it=>state.answers[it.id]===undefined);
+  if(unanswered.length>0){
+    document.getElementById('warn').classList.add('show');
+    const first=document.getElementById('qi-'+unanswered[0].id);
+    if(first) first.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  const isLastPage=state.pageIdx===pages.length-1;
+  const isLastClass=state.classIdx===CLASSES.length-1;
+  if(isLastPage&&isLastClass){ submitResults(); return; }
+  if(isLastPage){ state.classIdx++; state.pageIdx=0; }
+  else state.pageIdx++;
+  renderPage(); window.scrollTo(0,0); saveProgress();
+}
+
+function prevPage(){
+  if(state.pageIdx>0){ state.pageIdx--; }
+  else if(state.classIdx>0){
+    state.classIdx--;
+    const pages=getPages(state.classIdx);
+    state.pageIdx=pages.length-1;
+  } else { showScreen('sc-instructions'); return; }
+  renderPage(); window.scrollTo(0,0);
+}
+
+function submitResults(){
+  const results={ts:Date.now(),answers:state.answers};
+  localStorage.setItem('fiat-results-'+state.caseCode, JSON.stringify(results));
+  localStorage.removeItem('fiat-progress-'+state.caseCode);
+  showScreen('sc-thanks');
+}
+</script>
+</body>
+</html>
