@@ -55,6 +55,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .cinfo{flex:1}
 .ccode{font-size:14px;font-weight:900;color:var(--tx)}
 .cmeta{font-size:11px;color:var(--txs);margin-top:2px}
+.del-btn{background:rgba(239,68,68,.1);border:none;color:#EF4444;border-radius:8px;padding:6px 10px;font-size:14px;cursor:pointer;flex-shrink:0;transition:all .2s}
+.del-btn:hover{background:rgba(239,68,68,.25)}
 .empty{text-align:center;padding:28px 20px;color:var(--txs);font-size:13px;background:var(--sur);border:1.5px dashed var(--bd);border-radius:16px}
 .empty-icon{font-size:32px;margin-bottom:8px}
 
@@ -314,19 +316,26 @@ function renderCasesList(){
     return;
   }
   el.innerHTML=cases.slice().reverse().map(c=>`
-    <div class="case-item" onclick="prefillView('${c.code}')">
+    <div class="case-item">
       <div class="cdot"></div>
-      <div class="cinfo">
+      <div class="cinfo" onclick="prefillView('${c.code}')" style="cursor:pointer">
         <div class="ccode">${c.code}</div>
         <div class="cmeta">${c.alias} · ${formatDate(c.created)}</div>
       </div>
-      <span style="color:var(--txs);font-size:16px">›</span>
+      <button class="del-btn" onclick="deleteCase('${c.code}')" title="Eliminar caso">🗑️</button>
     </div>`).join('');
 }
 function prefillView(code){
   document.getElementById('v-code').value=code;
   goTo('sc-view');
   document.getElementById('v-pass').focus();
+}
+function deleteCase(code){
+  if(!confirm(`¿Eliminar el caso ${code}? Se borrarán también los resultados guardados.`)) return;
+  const cases=loadCases().filter(c=>c.code!==code);
+  saveCases(cases);
+  localStorage.removeItem('fiat-results-'+code);
+  renderCasesList();
 }
 
 // ─── CREATE CASE ─────────────────────────────────────────────────────────
