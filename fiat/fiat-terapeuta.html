@@ -185,7 +185,7 @@ label.lbl{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:8px;displ
   <div class="hero">
     <div class="hero-badge">Callaghan, 2006</div>
     <h1>Panel del<br><span>Terapeuta</span></h1>
-    <p>Creá casos, generá links para tus consultantes y accedé a los resultados con análisis funcional.</p>
+    <p>Creá casos, generá links para tus consultantes y accedé a los resultados del FIAT-Q y herramientas de seguimiento idiográfico.</p>
   </div>
   <div class="action-grid">
     <div class="acard" onclick="goTo('sc-create')">
@@ -198,6 +198,22 @@ label.lbl{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:8px;displ
       <h3>Ver resultados</h3>
       <p>Ingresá código y contraseña</p>
     </div>
+  </div>
+  <div class="action-grid" style="margin-top:0">
+    <a href="fiat-seguimiento.html" style="text-decoration:none">
+      <div class="acard">
+        <div class="aicon" style="background:rgba(43,159,209,.15)">🧠</div>
+        <h3>Seguimiento</h3>
+        <p>FIAT-T, DA, entrevista, conceptualización</p>
+      </div>
+    </a>
+    <a href="fiat.html" style="text-decoration:none">
+      <div class="acard">
+        <div class="aicon" style="background:rgba(155,45,181,.15)">📚</div>
+        <h3>Guía FIAT</h3>
+        <p>Fundamentos, clases y herramientas</p>
+      </div>
+    </a>
   </div>
   <div class="sec-label">Casos guardados</div>
   <div id="cases-list"></div>
@@ -264,6 +280,10 @@ label.lbl{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:8px;displ
     <div class="at-case" id="an-case">—</div>
     <div class="at-title" id="an-alias">Resultados</div>
     <div class="at-date" id="an-date">—</div>
+  </div>
+
+  <div style="margin:0 16px 0;background:rgba(232,120,32,.07);border:1.5px solid rgba(232,120,32,.2);border-radius:12px;padding:12px 14px;font-size:12px;color:#E87820;line-height:1.65">
+    <strong>⚠️ Nota metodológica:</strong> Los porcentajes son <em>señales orientativas</em> construidas para esta plataforma — no forman parte del sistema FIAT original. Callaghan (2006) describe el FIAT como herramienta <strong>cualitativa e idiográfica</strong>. Usá estos datos como punto de partida para tu análisis clínico y la entrevista semiestructurada, no como diagnóstico.
   </div>
 
   <div class="sec-label">Resumen por clase</div>
@@ -624,9 +644,9 @@ function computeScores(answers){
 }
 
 function getSeverity(pct){
-  if(pct>=66) return {label:'Alta preocupación',cls:'sev-hi'};
-  if(pct>=41) return {label:'Preocupación moderada',cls:'sev-md'};
-  return {label:'Baja preocupación',cls:'sev-lo'};
+  if(pct>=66) return {label:'Señal alta ↑',cls:'sev-hi'};
+  if(pct>=41) return {label:'Señal moderada',cls:'sev-md'};
+  return {label:'Señal baja',cls:'sev-lo'};
 }
 
 function renderAnalysis(caseData, results){
@@ -666,19 +686,19 @@ function renderAnalysis(caseData, results){
     }).filter(x=>x.score>=4).sort((a,b)=>b.score-a.score).slice(0,4);
 
     const flagHtml=flagged.length>0 ? `
-      <div class="flag-title">⚠️ Ítems de mayor preocupación</div>
+      <div class="flag-title">🔎 Ítems que orientan la entrevista</div>
       ${flagged.map(f=>`
         <div class="flag-item">
           <div class="fdot" style="background:${cls.color}"></div>
           <div class="ftext">${f.text}</div>
           <div class="fscore" style="color:${cls.color}">${f.score}/6</div>
-        </div>`).join('')}` : `<div style="font-size:12px;color:var(--txs);padding:8px 0">✓ No se identificaron ítems de alta preocupación en esta clase.</div>`;
+        </div>`).join('')}` : `<div style="font-size:12px;color:var(--txs);padding:8px 0">✓ No se identificaron ítems con señal alta en esta clase.</div>`;
 
     const intHtml=cls.interventions.map(int=>`
       <div class="int-item">
         <div class="int-tag ${int.tag}">${int.label}</div>
         <div class="int-text">${int.text}</div>
-        <div class="int-how">${int.how}</div>
+        <div class="int-how" style="font-style:italic;color:var(--txs)"><strong>Cómo explorarlo:</strong> ${int.how}</div>
       </div>`).join('');
 
     return `<div class="cls-card">
@@ -690,18 +710,18 @@ function renderAnalysis(caseData, results){
         </div>
         <div class="cls-score">
           <div class="cls-num" style="color:${cls.color}">${s.pct}%</div>
-          <div class="cls-score-lbl">Índice</div>
+          <div class="cls-score-lbl">Orientativo</div>
         </div>
       </div>
       <div class="cls-body" id="card-body-${cls.id}">
         <div class="sbar-wrap"><div class="sbar" style="width:${s.pct}%;background:${cls.color}"></div></div>
         <div class="sbar-labels">
-          <span class="sbar-lbl">Sin preocupación</span>
-          <span class="sbar-lbl">Alta preocupación</span>
+          <span class="sbar-lbl">Sin señal</span>
+          <span class="sbar-lbl">Señal alta</span>
         </div>
         <div class="divider"></div>
         ${flagHtml}
-        <div class="int-title">💡 Ideas de intervención</div>
+        <div class="int-title">🧭 Hipótesis para explorar</div>
         ${intHtml}
       </div>
     </div>`;
