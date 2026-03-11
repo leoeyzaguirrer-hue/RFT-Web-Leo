@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teoría de Marcos Relacionales · @leo.eyzaguirre</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; background: #0D1F4A; color: #E8E0D8; min-height: 100vh; }
+  button { cursor: pointer; transition: all 0.2s; font-family: 'Poppins', sans-serif; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .fade { animation: fadeIn 0.25s ease; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0D1F4A; }
+  ::-webkit-scrollbar-thumb { background: #1155A8; border-radius: 3px; }
+
+  /* HEADER */
+  #header {
+    background: linear-gradient(135deg, #162960 0%, #1155A8cc 100%);
+    border-bottom: 3px solid #FFC800;
+    padding: 28px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #header h1 { font-size: 36px; font-weight: 900; color: #E8E0D8; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 8px; }
+  #header .subtitle { font-size: 11px; letter-spacing: 4px; color: #FFC800; text-transform: uppercase; margin-bottom: 6px; font-weight: 700; }
+  #header .tagline { font-size: 16px; color: #2AACE2; font-weight: 500; }
+  .dots { display: flex; gap: 12px; align-items: center; }
+  .dot { border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); }
+
+  /* TABS */
+  #tabs { display: flex; background: #162960; border-bottom: 1px solid rgba(255,255,255,0.07); padding-left: 48px; overflow-x: auto; }
+  .tab-btn { padding: 18px 30px; background: none; border: none; color: rgba(232,224,216,0.45); font-size: 15px; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap; margin-bottom: -1px; }
+  .tab-btn.active { color: #FFC800; font-weight: 700; border-bottom: 3px solid #FFC800; }
+
+  /* MAIN */
+  #main { padding: 44px 64px; max-width: 1280px; margin: 0 auto; }
+  .section-title { color: #FFC800; font-weight: 800; font-size: 28px; margin-bottom: 8px; }
+  .section-desc { color: #2AACE2; font-size: 17px; line-height: 1.7; margin-bottom: 32px; max-width: 860px; }
+
+  /* MARCOS GRID */
+  #marcos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
+  .marco-card { background: rgba(255,255,255,0.04); border: 2px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 22px 18px; text-align: left; color: #E8E0D8; }
+  .marco-card:hover { background: rgba(255,255,255,0.08); }
+  .marco-card.active { }
+  .marco-simbolo { font-size: 30px; margin-bottom: 10px; }
+  .marco-nombre { font-weight: 800; font-size: 16px; margin-bottom: 6px; }
+  .marco-desc-short { font-size: 13px; opacity: 0.7; font-weight: 400; line-height: 1.5; }
+
+  /* MARCO DETAIL */
+  #marco-detail { background: rgba(255,255,255,0.04); border-radius: 20px; padding: 36px; display: none; }
+  .detail-header { display: flex; align-items: center; gap: 18px; margin-bottom: 30px; }
+  .detail-icon { width: 68px; height: 68px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 34px; flex-shrink: 0; }
+  .detail-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .detail-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 20px; }
+  .detail-card-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
+  .detail-card-text { font-size: 16px; font-style: italic; line-height: 1.65; }
+  .keys-label { font-size: 12px; color: rgba(232,224,216,0.4); margin-bottom: 12px; font-weight: 700; letter-spacing: 1.5px; }
+  .keys { display: flex; flex-wrap: wrap; gap: 8px; }
+  .key-tag { border-radius: 24px; padding: 6px 16px; font-size: 14px; font-weight: 600; }
+
+  /* ACTIVIDAD */
+  #frases-list { display: flex; flex-direction: column; gap: 16px; }
+  .frase-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 26px 30px; transition: all 0.3s; }
+  .frase-card.revealed { background: rgba(255,200,0,0.06); border-color: rgba(255,200,0,0.4); }
+  .frase-inner { display: flex; gap: 18px; align-items: flex-start; }
+  .frase-num { width: 38px; height: 38px; border-radius: 10px; background: rgba(17,85,168,0.5); border: 1px solid rgba(42,172,226,0.3); display: flex; align-items: center; justify-content: center; color: #FFC800; font-weight: 800; font-size: 15px; flex-shrink: 0; }
+  .frase-text { font-style: italic; font-size: 19px; color: #E8E0D8; margin-bottom: 16px; line-height: 1.6; font-weight: 500; }
+  .reveal-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; padding: 9px 20px; color: rgba(232,224,216,0.5); font-size: 14px; font-weight: 700; }
+  .reveal-btn.active { background: rgba(255,200,0,0.18); border-color: #FFC800; color: #FFC800; }
+  .respuesta { margin-top: 16px; background: rgba(255,200,0,0.08); border-left: 4px solid #FFC800; border-radius: 0 12px 12px 0; padding: 18px 22px; display: none; }
+  .respuesta.show { display: block; }
+  .resp-marco { font-size: 13px; color: #FFC800; font-weight: 800; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .resp-exp { font-size: 16px; color: rgba(232,224,216,0.85); line-height: 1.7; }
+
+  /* TERAPIAS */
+  .equiv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .equiv-card { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 22px; }
+  .equiv-title { font-weight: 800; margin-bottom: 16px; font-size: 17px; }
+  .equiv-item { display: flex; gap: 12px; margin-bottom: 11px; }
+  .equiv-item span:first-child { font-weight: 700; flex-shrink: 0; }
+  .equiv-item span:last-child { color: rgba(232,224,216,0.8); font-size: 15px; line-height: 1.5; }
+  .terapia-btns { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .ter-btn { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 10px 26px; color: #E8E0D8; font-weight: 800; font-size: 15px; }
+  #terapia-detail { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 28px; }
+  #terapia-detail h3 { font-weight: 800; font-size: 22px; margin-bottom: 20px; }
+  .ter-item { display: flex; gap: 14px; margin-bottom: 14px; }
+  .ter-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+  .ter-item span { color: rgba(232,224,216,0.85); font-size: 17px; line-height: 1.65; }
+
+  /* AF */
+  #af-list { display: flex; flex-direction: column; gap: 22px; }
+  .af-card { background: rgba(255,255,255,0.04); border-radius: 0 18px 18px 0; padding: 28px 32px; }
+  .af-paso { font-weight: 800; font-size: 18px; margin-bottom: 12px; }
+  .af-contenido { font-size: 17px; color: rgba(232,224,216,0.85); line-height: 1.7; margin-bottom: 16px; }
+  .af-ejemplo { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; }
+  .af-ejemplo span:first-child { font-size: 12px; color: rgba(232,224,216,0.4); letter-spacing: 1.5px; font-weight: 700; }
+  .af-ejemplo span:last-child { font-size: 16px; font-style: italic; color: #E8E0D8; }
+
+  /* METÁFORAS */
+  .meta-mec { background: rgba(255,200,0,0.08); border: 1px solid rgba(255,200,0,0.25); border-radius: 20px; padding: 30px; margin-bottom: 28px; }
+  .meta-mec h3 { color: #FFC800; font-weight: 800; font-size: 20px; margin-bottom: 24px; }
+  .meta-steps { display: grid; grid-template-columns: 1fr 36px 1fr 36px 1fr; align-items: center; }
+  .meta-arrow { text-align: center; font-size: 22px; color: rgba(232,224,216,0.25); }
+  .meta-step { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 22px 18px; text-align: center; }
+  .meta-step-icon { font-size: 32px; margin-bottom: 12px; }
+  .meta-step-title { font-weight: 800; font-size: 15px; margin-bottom: 10px; }
+  .meta-step-desc { font-size: 14px; color: rgba(232,224,216,0.75); line-height: 1.65; }
+  .meta-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
+  .meta-col { border-radius: 16px; padding: 26px; }
+  .meta-col-title { font-weight: 800; margin-bottom: 14px; font-size: 18px; }
+  .meta-col-text { font-size: 16px; color: rgba(232,224,216,0.85); line-height: 1.7; }
+  .meta-rule { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; }
+  .meta-rule-label { font-size: 12px; color: rgba(232,224,216,0.35); margin-bottom: 14px; font-weight: 700; letter-spacing: 2px; }
+  .meta-rule-text { font-size: 18px; color: #E8E0D8; line-height: 1.8; }
+  .meta-ace { border-radius: 16px; padding: 26px 30px; }
+  .meta-ace h3 { font-weight: 800; font-size: 19px; margin-bottom: 14px; }
+  .meta-ace p { font-size: 17px; color: rgba(232,224,216,0.85); line-height: 1.75; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 28px; color: rgba(232,224,216,0.18); font-size: 13px; font-weight: 500; }
+
+  /* INFO BOX */
+  .info-box { background: rgba(42,172,226,0.1); border-radius: 12px; padding: 16px 20px; border-left: 3px solid #2AACE2; margin-top: 20px; }
+  .info-box .label { color: #2AACE2; font-weight: 700; font-size: 15px; }
+  .info-box .text { color: rgba(232,224,216,0.8); font-size: 15px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <div>
+    <div class="subtitle">Club de Lectura · Ciencia del Comportamiento Contextual</div>
+    <h1>Teoría de Marcos Relacionales</h1>
+    <div class="tagline">Explorador Clínico Interactivo · @leo.eyzaguirre</div>
+  </div>
+  <div class="dots">
+    <div class="dot" style="width:18px;height:18px;background:#1155A8"></div>
+    <div class="dot" style="width:18px;height:18px;background:#2AACE2"></div>
+    <div class="dot" style="width:18px;height:18px;background:#F07D2A"></div>
+    <div class="dot" style="width:18px;height:18px;background:#FFC800"></div>
+    <div class="dot" style="width:14px;height:14px;background:#E8E0D8"></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div id="tabs">
+  <button class="tab-btn active" onclick="setTab(0)">🧠 Marcos Relacionales</button>
+  <button class="tab-btn" onclick="setTab(1)">🎯 Actividad Grupal</button>
+  <button class="tab-btn" onclick="setTab(2)">🔗 Otras Terapias</button>
+  <button class="tab-btn" onclick="setTab(3)">📋 Análisis Funcional</button>
+  <button class="tab-btn" onclick="setTab(4)">🪄 Metáforas y RFT</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- TAB 0: MARCOS -->
+  <div id="tab-0" class="fade">
+    <p class="section-desc" style="margin-top:0">
+      Hacé clic en cualquier marco para ver cómo se manifiesta en clínica. RFT sostiene que todo comportamiento verbal humano está organizado por estas relaciones aprendidas de manera arbitraria.
+    </p>
+    <div id="marcos-grid"></div>
+    <div id="marco-detail"></div>
+  </div>
+
+  <!-- TAB 1: ACTIVIDAD -->
+  <div id="tab-1" class="fade" style="display:none">
+    <h2 class="section-title">🎯 Actividad Grupal: Identificá el Marco</h2>
+    <p class="section-desc">
+      Leé cada frase clínica en voz alta. El grupo debate qué tipo de marco relacional está organizando ese lenguaje antes de revelar la respuesta.
+    </p>
+    <div id="frases-list"></div>
+  </div>
+
+  <!-- TAB 2: OTRAS TERAPIAS -->
+  <div id="tab-2" class="fade" style="display:none">
+    <h2 class="section-title">RFT no es solo ACT</h2>
+    <p class="section-desc">
+      RFT es una teoría básica del comportamiento verbal, no un protocolo clínico. Cualquier terapia contextual que trabaje con lenguaje puede beneficiarse de entender cómo los marcos relacionales organizan el sufrimiento y el cambio.
+    </p>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(42,172,226,0.35);border-radius:18px;padding:30px;margin-bottom:30px">
+      <h3 style="color:#2AACE2;font-weight:800;font-size:20px;margin-bottom:20px">📚 Clases de Equivalencia (Sidman) vs Teoría de Marcos Relacionales</h3>
+      <div class="equiv-grid">
+        <div class="equiv-card">
+          <div class="equiv-title" style="color:#B07FE8">Equivalencia — Sidman</div>
+          <div class="equiv-item"><span style="color:#B07FE8">▸</span><span>Requiere entrenamiento conductual directo</span></div>
+          <div class="equiv-item"><span style="color:#B07FE8">▸</span><span>Solo relaciones simétricas y transitivas</span></div>
+          <div class="equiv-item"><span style="color:#B07FE8">▸</span><span>No especifica mediación verbal</span></div>
+          <div class="equiv-item"><span style="color:#B07FE8">▸</span><span>Observable en animales no verbales</span></div>
+          <div class="equiv-item"><span style="color:#B07FE8">▸</span><span>Emergencia espontánea por historia de refuerzo</span></div>
+        </div>
+        <div class="equiv-card">
+          <div class="equiv-title" style="color:#FFC800">Marcos Relacionales — RFT</div>
+          <div class="equiv-item"><span style="color:#FFC800">▸</span><span>Mediada por contexto verbal (Crel y Cfunc)</span></div>
+          <div class="equiv-item"><span style="color:#FFC800">▸</span><span>8+ tipos de relación distintos</span></div>
+          <div class="equiv-item"><span style="color:#FFC800">▸</span><span>Exclusivamente humana (requiere lenguaje)</span></div>
+          <div class="equiv-item"><span style="color:#FFC800">▸</span><span>Incluye transformación de funciones</span></div>
+          <div class="equiv-item"><span style="color:#FFC800">▸</span><span>Explica la cognición compleja y el self narrativo</span></div>
+        </div>
+      </div>
+      <div class="info-box">
+        <span class="label">💡 Clave: </span>
+        <span class="text">La equivalencia de Sidman es un caso especial de <em>coordinación</em> dentro de RFT. Tu intuición es correcta: la diferencia central está en que RFT es mediada por contexto verbal y explica relaciones arbitrariamente aplicables, algo que la equivalencia clásica no contempla.</span>
+      </div>
+    </div>
+    <div class="terapia-btns" id="terapia-btns"></div>
+    <div id="terapia-detail"></div>
+  </div>
+
+  <!-- TAB 3: AF -->
+  <div id="tab-3" class="fade" style="display:none">
+    <h2 class="section-title">RFT en la Evaluación Clínica</h2>
+    <p class="section-desc">
+      Incorporar RFT al análisis funcional no reemplaza el ABC — lo enriquece. Agrega una capa verbal que explica por qué ciertos estímulos tienen las funciones que tienen, aunque nunca hayan estado en contacto directo con el problema.
+    </p>
+    <div id="af-list"></div>
+  </div>
+
+  <!-- TAB 4: METÁFORAS -->
+  <div id="tab-4" class="fade" style="display:none">
+    <h2 class="section-title">Metáforas y Marcos Relacionales</h2>
+    <p class="section-desc">
+      Las metáforas en ACT están explícitamente basadas en RFT. Una metáfora es en esencia un <strong>marco de coordinación</strong>: relaciona la experiencia del consultante con algo distinto para alterar sus funciones psicológicas sin necesidad de argumentación directa.
+    </p>
+    <div class="meta-mec">
+      <h3>¿Cómo funciona una metáfora desde RFT?</h3>
+      <div class="meta-steps">
+        <div class="meta-step">
+          <div class="meta-step-icon" style="color:#2AACE2">≡</div>
+          <div class="meta-step-title" style="color:#2AACE2">1 · Marco de Coordinación</div>
+          <div class="meta-step-desc">«Tus pensamientos son como nubes en el cielo»</div>
+        </div>
+        <div class="meta-arrow">→</div>
+        <div class="meta-step">
+          <div class="meta-step-icon" style="color:#F07D2A">→</div>
+          <div class="meta-step-title" style="color:#F07D2A">2 · Transferencia de Funciones</div>
+          <div class="meta-step-desc">Las funciones de 'nube' (pasan solas, se observan, no controlan) se transfieren a 'pensamientos'</div>
+        </div>
+        <div class="meta-arrow">→</div>
+        <div class="meta-step">
+          <div class="meta-step-icon" style="color:#3DD6A3">✓</div>
+          <div class="meta-step-title" style="color:#3DD6A3">3 · Efecto Terapéutico</div>
+          <div class="meta-step-desc">El consultante puede relacionarse con sus pensamientos como fenómenos pasajeros que no requieren acción</div>
+        </div>
+      </div>
+    </div>
+    <div class="meta-choice">
+      <div class="meta-col" style="background:rgba(42,172,226,0.1);border:1px solid rgba(42,172,226,0.3)">
+        <div class="meta-col-title" style="color:#2AACE2">Por Marco Relacional</div>
+        <div class="meta-col-text">Útil cuando identificás el tipo de rigidez verbal específica. Si el consultante usa mucha <strong style="color:#FFC800">causalidad rígida</strong>, elegís metáforas que flexibilicen esa relación.<br><br>Ej: «Pasajeros del autobús» para reglas causales que controlan la conducta.</div>
+      </div>
+      <div class="meta-col" style="background:rgba(240,125,42,0.1);border:1px solid rgba(240,125,42,0.3)">
+        <div class="meta-col-title" style="color:#F07D2A">Por Proceso ACT (Hexaflex)</div>
+        <div class="meta-col-text">Útil cuando tenés claro el proceso a trabajar. Si el foco es <strong style="color:#FFC800">aceptación</strong>, buscás metáforas que generen marcos de apertura.<br><br>Ej: «Arenas movedizas» — resistir hunde más, soltar permite moverse.</div>
+      </div>
+    </div>
+    <div class="meta-rule">
+      <div class="meta-rule-label">REGLA PRÁCTICA PARA ELEGIR METÁFORAS EN SESIÓN</div>
+      <div class="meta-rule-text">
+        Evaluá primero <span style="color:#FFC800;font-weight:700">qué proceso ACT está afectado</span> → identificá <span style="color:#2AACE2;font-weight:700">qué marco organiza ese problema</span> → elegí una metáfora que proponga <span style="color:#3DD6A3;font-weight:700">un marco alternativo</span> que transfiera funciones psicológicas nuevas al consultante.
+      </div>
+    </div>
+    <div class="meta-ace" style="background:rgba(61,214,163,0.1);border:1px solid rgba(61,214,163,0.3)">
+      <h3 style="color:#3DD6A3">Aceptación y RFT — el caso específico de la pregunta</h3>
+      <p>La <strong>aceptación</strong> desde RFT implica flexibilizar marcos de <span style="color:#F87171;font-weight:600">causalidad</span> (ansiedad → peligro), <span style="color:#F07D2A;font-weight:600">oposición</span> (o estoy bien o evito) y <span style="color:#2AACE2;font-weight:600">coordinación</span> (sentir miedo = estar en peligro). Las metáforas de aceptación crean nuevos marcos: la emoción puede estar presente <em>y</em> el comportamiento valioso puede ocurrir igualmente, sin que una cosa cancele a la otra.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>@leo.eyzaguirre · Club de Lectura CBS · Teoría de Marcos Relacionales</footer>
+
+<script>
+const C = { darkBlue:'#1155A8', lightBlue:'#2AACE2', orange:'#F07D2A', yellow:'#FFC800', cream:'#E8E0D8', navy:'#0D1F4A' };
+
+const MARCOS = [
+  { nombre:"Coordinación", simbolo:"≡", color:C.lightBlue, descripcion:"Relacionar cosas como 'iguales' o 'similares'. Base del lenguaje simbólico.", ejemplo_cotidiano:'"Él es igual que mi padre."', ejemplo_clinico:'"Cada vez que alguien me ignora, es como si me dijeran que no valgo."', acto_clinico:"El consultante iguala eventos distintos (ser ignorado = no valer). Esto extiende el dolor a múltiples situaciones que físicamente no tienen nada que ver.", claves:["es","igual a","como","significa que","es lo mismo que"] },
+  { nombre:"Distinción", simbolo:"≠", color:C.yellow, descripcion:"Relacionar cosas como 'diferentes'. Fundamental para defusión y discriminación.", ejemplo_cotidiano:'"Esta situación es distinta a las anteriores."', ejemplo_clinico:'"Yo no soy mis pensamientos. Tener miedo no es ser cobarde."', acto_clinico:"Crear distinción entre yo/pensamiento, emoción/acción, pasado/presente. Es la base operacional de la defusión cognitiva.", claves:["diferente","distinto","no es lo mismo","a diferencia de"] },
+  { nombre:"Oposición", simbolo:"↔", color:C.orange, descripcion:"Relacionar como opuestos. Genera polaridades que pueden atrapar al consultante.", ejemplo_cotidiano:'"O estoy bien o estoy mal."', ejemplo_clinico:'"Si no soy el mejor, soy un fracaso."', acto_clinico:"Pensamiento dicotómico. El consultante queda atrapado en extremos sin espacio para valores matizados o conducta intermedia.", claves:["o... o","contrario","opuesto","lo contrario de"] },
+  { nombre:"Comparación", simbolo:"≶", color:"#B07FE8", descripcion:"Relacionar por grado: 'más que', 'menos que', 'mejor', 'peor'.", ejemplo_cotidiano:'"Ella es más capaz que yo."', ejemplo_clinico:'"Los demás se recuperan más rápido. Yo soy peor que todos."', acto_clinico:"El 'yo' siempre pierde la comparación. Mantiene baja autoestima y evitación social de forma muy eficiente.", claves:["más que","menos que","mejor","peor","mayor","menor"] },
+  { nombre:"Jerarquía", simbolo:"⊃", color:"#3DD6A3", descripcion:"Relaciones de 'parte-todo', categorías, pertenencia. Base del autoconcepto.", ejemplo_cotidiano:'"Soy del tipo de personas que no puede con el estrés."', ejemplo_clinico:'"Soy ansioso. Es parte de quien soy. No puedo cambiarlo."', acto_clinico:"El problema se funde con la identidad. Bloquea el cambio porque 'cambiarlo' sería dejar de ser uno mismo.", claves:["soy","pertenezco","tipo de persona","forma parte de"] },
+  { nombre:"Causalidad", simbolo:"→", color:"#F87171", descripcion:"Relacionar eventos por causa-efecto. Motor de reglas verbales y fusión cognitiva.", ejemplo_cotidiano:'"Si me da ansiedad, significa que el peligro es real."', ejemplo_clinico:'"Si salgo, me va a dar pánico y me voy a morir."', acto_clinico:"Las reglas causales rígidas gobiernan el comportamiento más que la experiencia directa. Base fundamental de la evitación experiencial.", claves:["porque","entonces","hace que","provoca","si... entonces","por eso"] },
+  { nombre:"Perspectiva", simbolo:"👁", color:C.orange, descripcion:"Marcos yo/tú, aquí/allí, ahora/antes. Base de la Toma de Perspectiva y el Yo-Contexto.", ejemplo_cotidiano:'"Desde donde yo estoy, no puedo ver lo que ves vos."', ejemplo_clinico:'"¿Qué pensaría una versión tuya de dentro de 5 años al ver esto?"', acto_clinico:"Usados terapéuticamente para generar flexibilidad: perspectiva del otro, el yo observador, distancia temporal del sufrimiento.", claves:["yo","vos","aquí","allí","ahora","antes","después","desde tu lugar"] },
+  { nombre:"Temporal", simbolo:"⏱", color:C.lightBlue, descripcion:"Relaciones de 'antes/después', 'si/entonces'. Organiza narrativas de vida.", ejemplo_cotidiano:'"Antes era feliz. Después de ese evento, todo cambió."', ejemplo_clinico:'"Cuando termine de sanarme, entonces voy a empezar a vivir."', acto_clinico:"El consultante pospone la vida a una condición futura. Refuerza inacción y evitación bajo disfraz de 'preparación'.", claves:["antes","después","cuando","si... entonces","hasta que","desde que"] }
+];
+
+const FRASES = [
+  { frase:'"Soy una persona débil. Siempre lo fui."', marco:"Jerarquía", exp:"Se categoriza en una clase permanente ('soy... siempre'). La identidad queda fusionada con la etiqueta." },
+  { frase:'"Si lloro, los demás pensarán que soy un fracaso."', marco:"Causalidad", exp:"Regla verbal rígida: llorar CAUSA una evaluación negativa inevitable. Conducta gobernada por la regla, no por la experiencia real." },
+  { frase:'"Ella superó su ansiedad en 3 meses. Yo llevo 2 años y no puedo."', marco:"Comparación", exp:"Comparación en grado desfavorable, reforzando la narrativa de inadecuación y desmotivando el proceso terapéutico." },
+  { frase:'"O estoy completamente bien o es un desastre."', marco:"Oposición", exp:"Marco dicotómico sin espacio intermedio. Cualquier malestar parcial se convierte en fracaso total." },
+  { frase:'"Cada vez que alguien me critica, es como si me dijeran que no sirvo."', marco:"Coordinación", exp:"Equipara crítica puntual con juicio global sobre el self. Transferencia de funciones: la crítica adquiere la función del rechazo total." },
+  { frase:'"Cuando sea menos ansioso, podré vivir mi vida."', marco:"Temporal", exp:"Condicional temporal que pospone el vivir a una condición futura. Evitación experiencial con disfraz de planificación." },
+  { frase:'"¿Qué le dirías a un amigo que estuviera en tu lugar?"', marco:"Perspectiva", exp:"Intervención terapéutica: cambio de perspectiva deíctica (yo → otro) para crear distancia del self fusionado." },
+  { frase:'"Tener ansiedad no me hace ansioso. Son cosas distintas."', marco:"Distinción", exp:"Distinción entre experiencia y etiqueta de identidad. Base de la defusión y el yo-contexto." },
+];
+
+const TERAPIAS = [
+  { nombre:"ACT", color:C.lightBlue, usos:["Defusión: identificar marcos de coordinación rígidos (pensamiento = realidad)","Yo-Contexto: marcos deícticos (yo/aquí/ahora vs yo/allí/antes)","Valores: marcos temporales y jerárquicos para construir 'quién quiero ser'","Aceptación: flexibilizar marcos de causalidad (si siento ansiedad → evito)"] },
+  { nombre:"FAP", color:"#3DD6A3", usos:["Marcos de perspectiva en la relación terapéutica (yo/vos, aquí/allá)","Equivalencias problemáticas activadas en sesión (terapeuta = figura del pasado)","Reforzar nuevas relaciones verbales sobre el self en el contexto terapéutico","CCR2 como emergencia de marcos relacionales más flexibles"] },
+  { nombre:"DBT", color:C.yellow, usos:["Mente Dialéctica: flexibilizar marcos de oposición (emoción vs razón)","Habilidades de regulación: construir marcos causales alternativos","Validación: reconocer el marco relacional desde el que habla el consultante","Exposición: modificar marcos causales rígidos (emoción → catástrofe)"] },
+  { nombre:"IBCT / Parejas", color:C.orange, usos:["Marcos de coordinación: 'vos sos igual a mi madre'","Marcos de perspectiva: tomar el punto de vista del otro genuinamente","Reglas causales en la pareja: 'si llegás tarde = no me amás'","Unificación: marcos de jerarquía compartida ('somos un equipo con un problema común')"] }
+];
+
+const AF = [
+  { paso:"Paso 1 · Identificar relaciones verbales dominantes", color:C.lightBlue, contenido:"Durante la evaluación, ¿qué marcos aparecen con más frecuencia? ¿El consultante habla en términos de causalidad rígida? ¿De oposición? ¿De jerarquía fija? Esto orienta el foco del análisis funcional.", ejemplo:"«Soy ansioso (jerarquía) porque siempre que me expongo, algo malo pasa (causalidad). O controlo todo o todo se cae (oposición).»" },
+  { paso:"Paso 2 · Mapear la transformación de funciones", color:"#3DD6A3", contenido:"¿Qué estímulos adquieren funciones aversivas a través del lenguaje sin historia directa? Esto explica la generalización del sufrimiento más allá del aprendizaje directo.", ejemplo:"Reunión de trabajo → coordinación con 'quedar mal' → misma función aversiva que la crítica del padre. Evita la reunión aunque nunca pasó nada ahí." },
+  { paso:"Paso 3 · Analizar las reglas verbales", color:C.yellow, contenido:"¿El comportamiento está gobernado por reglas rígidas (pliance, tracking desadaptativo) o por contacto directo con las contingencias actuales? Las reglas verbales pueden desconectar al consultante del ambiente real.", ejemplo:"«Si muestro que tengo miedo, van a aprovecharse de mí» → Pliance: la conducta responde a la regla, no a lo que realmente ocurre." },
+  { paso:"Paso 4 · Evaluar yo-como-contexto vs yo-como-contenido", color:C.orange, contenido:"¿Hasta qué punto el consultante se funde con sus marcos de identidad? ¿Existe flexibilidad para tomar perspectiva? Esto informa el trabajo con defusión y el yo observador.", ejemplo:"«Soy ansioso» (jerarquía fusionada) vs «Noto que tengo el pensamiento de que soy ansioso» (perspectiva deíctica flexible, yo-contexto)." }
+];
+
+// ─── RENDER MARCOS ───
+let marcoActivo = null;
+const grid = document.getElementById('marcos-grid');
+const detail = document.getElementById('marco-detail');
+
+MARCOS.forEach((m, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'marco-card';
+  btn.id = 'mc-' + i;
+  btn.innerHTML = `<div class="marco-simbolo">${m.simbolo}</div><div class="marco-nombre">${m.nombre}</div><div class="marco-desc-short">${m.descripcion.slice(0,60)}...</div>`;
+  btn.onclick = () => toggleMarco(i);
+  grid.appendChild(btn);
+});
+
+function toggleMarco(i) {
+  const m = MARCOS[i];
+  if (marcoActivo === i) {
+    marcoActivo = null;
+    detail.style.display = 'none';
+    document.getElementById('mc-' + i).style.background = 'rgba(255,255,255,0.04)';
+    document.getElementById('mc-' + i).style.borderColor = 'rgba(255,255,255,0.1)';
+    document.getElementById('mc-' + i).style.color = '#E8E0D8';
+    return;
+  }
+  if (marcoActivo !== null) {
+    document.getElementById('mc-' + marcoActivo).style.background = 'rgba(255,255,255,0.04)';
+    document.getElementById('mc-' + marcoActivo).style.borderColor = 'rgba(255,255,255,0.1)';
+    document.getElementById('mc-' + marcoActivo).style.color = '#E8E0D8';
+  }
+  marcoActivo = i;
+  const btn = document.getElementById('mc-' + i);
+  btn.style.background = m.color;
+  btn.style.borderColor = m.color;
+  btn.style.color = C.navy;
+
+  detail.style.display = 'block';
+  detail.style.border = `2px solid ${m.color}`;
+  detail.className = 'fade';
+  detail.innerHTML = `
+    <div class="detail-header">
+      <div class="detail-icon" style="background:${m.color}18;border:2px solid ${m.color}">${m.simbolo}</div>
+      <div>
+        <h2 style="color:${m.color};font-weight:800;font-size:26px;margin-bottom:4px">Marco de ${m.nombre}</h2>
+        <p style="color:rgba(232,224,216,0.6);font-size:15px">${m.descripcion}</p>
+      </div>
+    </div>
+    <div class="detail-cards">
+      <div class="detail-card">
+        <div class="detail-card-label" style="color:${C.lightBlue}">Ejemplo cotidiano</div>
+        <div class="detail-card-text" style="color:${C.yellow}">${m.ejemplo_cotidiano}</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-label" style="color:${C.orange}">En sesión</div>
+        <div class="detail-card-text" style="color:${C.cream}">${m.ejemplo_clinico}</div>
+      </div>
+      <div class="detail-card" style="background:${m.color}12;border:1px solid ${m.color}30">
+        <div class="detail-card-label" style="color:${m.color}">¿Cómo mantiene el problema?</div>
+        <div class="detail-card-text" style="color:${C.cream};font-style:normal">${m.acto_clinico}</div>
+      </div>
+    </div>
+    <div class="keys-label">SEÑALES EN EL DISCURSO DEL CONSULTANTE:</div>
+    <div class="keys">${m.claves.map(c => `<span class="key-tag" style="background:${m.color}18;border:1px solid ${m.color}45;color:${m.color}">${c}</span>`).join('')}</div>
+  `;
+  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ─── RENDER FRASES ───
+const frasesList = document.getElementById('frases-list');
+FRASES.forEach((f, i) => {
+  frasesList.innerHTML += `
+    <div class="frase-card" id="fcard-${i}">
+      <div class="frase-inner">
+        <div class="frase-num">${i+1}</div>
+        <div style="flex:1">
+          <div class="frase-text">${f.frase}</div>
+          <button class="reveal-btn" id="rbtn-${i}" onclick="toggleFrase(${i})">▼ Revelar respuesta</button>
+          <div class="respuesta" id="resp-${i}">
+            <div class="resp-marco">MARCO: ${f.marco.toUpperCase()}</div>
+            <div class="resp-exp">${f.exp}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+});
+
+function toggleFrase(i) {
+  const resp = document.getElementById('resp-' + i);
+  const btn = document.getElementById('rbtn-' + i);
+  const card = document.getElementById('fcard-' + i);
+  const shown = resp.classList.contains('show');
+  resp.classList.toggle('show');
+  card.classList.toggle('revealed');
+  btn.classList.toggle('active');
+  btn.textContent = shown ? '▼ Revelar respuesta' : '▲ Ocultar respuesta';
+}
+
+// ─── RENDER TERAPIAS ───
+let terapiaActiva = 0;
+const terBtns = document.getElementById('terapia-btns');
+TERAPIAS.forEach((t, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'ter-btn';
+  btn.id = 'tbtn-' + i;
+  btn.textContent = t.nombre;
+  if (i === 0) { btn.style.background = t.color; btn.style.borderColor = t.color; btn.style.color = C.navy; }
+  btn.onclick = () => setTerapia(i);
+  terBtns.appendChild(btn);
+});
+renderTerapia(0);
+
+function setTerapia(i) {
+  document.getElementById('tbtn-' + terapiaActiva).style.background = 'rgba(255,255,255,0.05)';
+  document.getElementById('tbtn-' + terapiaActiva).style.borderColor = 'rgba(255,255,255,0.12)';
+  document.getElementById('tbtn-' + terapiaActiva).style.color = '#E8E0D8';
+  terapiaActiva = i;
+  const t = TERAPIAS[i];
+  document.getElementById('tbtn-' + i).style.background = t.color;
+  document.getElementById('tbtn-' + i).style.borderColor = t.color;
+  document.getElementById('tbtn-' + i).style.color = C.navy;
+  renderTerapia(i);
+}
+
+function renderTerapia(i) {
+  const t = TERAPIAS[i];
+  const el = document.getElementById('terapia-detail');
+  el.style.borderColor = t.color + '35';
+  el.innerHTML = `
+    <h3 style="color:${t.color}">RFT aplicado en ${t.nombre}</h3>
+    ${t.usos.map(u => `<div class="ter-item"><div class="ter-dot" style="background:${t.color}"></div><span>${u}</span></div>`).join('')}
+  `;
+}
+
+// ─── RENDER AF ───
+const afList = document.getElementById('af-list');
+AF.forEach(item => {
+  afList.innerHTML += `
+    <div class="af-card" style="border-left:5px solid ${item.color}">
+      <div class="af-paso" style="color:${item.color}">${item.paso}</div>
+      <div class="af-contenido">${item.contenido}</div>
+      <div class="af-ejemplo">
+        <span>EJEMPLO CLÍNICO: </span>
+        <span>${item.ejemplo}</span>
+      </div>
+    </div>`;
+});
+
+// ─── TABS ───
+let currentTab = 0;
+function setTab(i) {
+  document.getElementById('tab-' + currentTab).style.display = 'none';
+  document.querySelectorAll('.tab-btn')[currentTab].classList.remove('active');
+  currentTab = i;
+  const el = document.getElementById('tab-' + i);
+  el.style.display = 'block';
+  el.className = 'fade';
+  document.querySelectorAll('.tab-btn')[i].classList.add('active');
+}
+</script>
+</body>
+</html>
