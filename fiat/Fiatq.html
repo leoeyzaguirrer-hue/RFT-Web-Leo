@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FIAT-Q | Sistema FIAT</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #F9C12E;
+  --blue: #1B4F9B;
+  --orange: #E87820;
+  --lightblue: #2B9FD1;
+  --gray: #D9D9D9;
+  --bg: #F5F3EC;
+  --surface: #FFFFFF;
+  --text: #1B1F3B;
+  --text-soft: #5A6280;
+  --text-inv: #FFFFFF;
+  --border: rgba(27,79,155,0.12);
+  --shadow: 0 8px 32px rgba(27,79,155,0.13);
+  --shadow-sm: 0 2px 10px rgba(27,79,155,0.08);
+  --class-a: #1B4F9B;
+  --class-b: #2B9FD1;
+  --class-c: #E87820;
+  --class-d: #9B2DB5;
+  --class-e: #2BA55A;
+}
+[data-theme="dark"] {
+  --bg: #08132A;
+  --surface: #101D3A;
+  --text: #EEF2FF;
+  --text-soft: #8BA3CC;
+  --border: rgba(249,193,46,0.15);
+  --shadow: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.4);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='70'%3E%3Cpolygon points='30,2 56,17 56,47 30,62 4,47 4,17' fill='none' stroke='%231B4F9B' stroke-width='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+[data-theme="dark"] body::before { opacity: 0.06; filter: brightness(2); }
+
+/* Layout */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  backdrop-filter: blur(10px);
+}
+.logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-hex {
+  width: 32px; height: 32px;
+  background: var(--blue);
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-hex span { color: var(--yellow); font-size: 13px; font-weight: 900; }
+.logo-text { font-size: 14px; font-weight: 800; color: var(--blue); }
+[data-theme="dark"] .logo-text { color: var(--yellow); }
+.theme-btn {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+.theme-btn:hover { opacity: 0.8; }
+
+/* Screens */
+.screen { display: none; flex-direction: column; flex: 1; padding: 20px 20px 40px; animation: fadeIn 0.3s ease; }
+.screen.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Welcome screen */
+.welcome-hero {
+  background: var(--blue);
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.welcome-hero::before {
+  content: '';
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 120px; height: 120px;
+  background: var(--yellow);
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  opacity: 0.15;
+}
+.badge {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  padding: 4px 14px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.welcome-hero h1 {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 4px;
+  letter-spacing: -1px;
+}
+.welcome-hero h1 span { color: var(--yellow); }
+.welcome-hero p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+.author-tag {
+  display: inline-block;
+  margin-top: 16px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50px;
+  padding: 4px 14px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+}
+
+/* Code input */
+.card {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
+  margin-bottom: 16px;
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+[data-theme="dark"] .card-title { color: var(--yellow); }
+.card-desc {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.input-field {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.2s;
+  text-transform: uppercase;
+  text-align: center;
+}
+.input-field:focus { border-color: var(--blue); }
+[data-theme="dark"] .input-field:focus { border-color: var(--yellow); }
+.input-hint { font-size: 12px; color: var(--text-soft); margin-top: 8px; text-align: center; }
+
+/* Buttons */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(27,79,155,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(27,79,155,0.4); }
+.btn-primary:active { transform: translateY(0); }
+.btn-yellow {
+  background: var(--yellow);
+  color: var(--blue);
+  box-shadow: 0 4px 20px rgba(249,193,46,0.4);
+}
+.btn-yellow:hover { transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--text-soft);
+  border: 1.5px solid var(--border);
+}
+.btn-ghost:hover { background: var(--surface); }
+.btn-orange { background: var(--orange); color: #fff; }
+.btn-wa { background: #25D366; color: #fff; }
+.btn + .btn { margin-top: 10px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* Instructions screen */
+.instructions-section { margin-bottom: 20px; }
+.instructions-section h3 { font-size: 14px; font-weight: 800; margin-bottom: 10px; color: var(--blue); }
+[data-theme="dark"] .instructions-section h3 { color: var(--yellow); }
+.scale-demo {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+  margin: 14px 0;
+}
+.scale-demo-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.scale-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2.5px solid var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--blue);
+}
+.scale-dot.filled { background: var(--blue); color: #fff; }
+[data-theme="dark"] .scale-dot { border-color: var(--yellow); color: var(--yellow); }
+[data-theme="dark"] .scale-dot.filled { background: var(--yellow); color: var(--blue); }
+.scale-label { font-size: 9px; text-align: center; color: var(--text-soft); font-weight: 700; line-height: 1.2; }
+.info-box {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+.info-box strong { color: var(--text); }
+
+/* Progress bar */
+.progress-header {
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
+}
+.progress-class-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.class-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+}
+.progress-count { font-size: 12px; color: var(--text-soft); font-weight: 700; }
+.progress-bar-wrap {
+  background: var(--bg);
+  border-radius: 50px;
+  height: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 50px;
+  transition: width 0.4s ease;
+}
+.class-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.class-dot {
+  width: 28px; height: 6px;
+  border-radius: 50px;
+  background: var(--gray);
+  transition: all 0.3s;
+}
+.class-dot.done { background: var(--blue); }
+.class-dot.current { background: var(--yellow); width: 36px; }
+
+/* Question items */
+.question-item {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s;
+}
+.question-item.answered { border-color: rgba(27,79,155,0.25); }
+[data-theme="dark"] .question-item.answered { border-color: rgba(249,193,46,0.25); }
+.question-num {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.question-text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.scale-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+.scale-labels-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+.scale-label-end {
+  font-size: 10px;
+  color: var(--text-soft);
+  font-weight: 700;
+  max-width: 70px;
+}
+.scale-label-end:last-child { text-align: right; }
+.scale-btn {
+  flex: 1;
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scale-btn:hover { border-color: var(--blue); color: var(--blue); background: rgba(27,79,155,0.06); }
+[data-theme="dark"] .scale-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+.scale-btn.selected {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(27,79,155,0.35);
+}
+[data-theme="dark"] .scale-btn.selected { background: var(--yellow); border-color: var(--yellow); color: var(--blue); box-shadow: 0 4px 12px rgba(249,193,46,0.35); }
+
+/* Nav buttons */
+.nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.nav-row .btn { flex: 1; }
+
+/* Password screen */
+.password-hero {
+  background: linear-gradient(135deg, var(--blue), #2B5FC9);
+  border-radius: 24px;
+  padding: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.password-hero h2 { font-size: 22px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.password-hero p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+.password-input {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  text-align: center;
+  letter-spacing: 8px;
+  transition: border-color 0.2s;
+}
+.password-input:focus { border-color: var(--blue); }
+.password-input::placeholder { letter-spacing: 0; font-size: 14px; font-weight: 600; opacity: 0.5; }
+
+/* Result screen */
+.result-hero {
+  background: linear-gradient(135deg, #2BA55A, #1D7A40);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.result-hero .check { font-size: 48px; margin-bottom: 12px; }
+.result-hero h2 { font-size: 22px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.result-hero p { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+.link-box {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: var(--text-soft);
+  word-break: break-all;
+  font-family: monospace;
+  font-weight: 700;
+  margin-bottom: 12px;
+  max-height: 80px;
+  overflow: hidden;
+  position: relative;
+}
+.link-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 30px;
+  background: linear-gradient(transparent, var(--surface));
+}
+
+/* Error msg */
+.error-msg {
+  background: rgba(220,38,38,0.1);
+  border: 1.5px solid rgba(220,38,38,0.3);
+  color: #DC2626;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+  display: none;
+}
+.error-msg.visible { display: block; }
+
+/* Unanswered warning */
+.unanswered-warn {
+  background: rgba(232,120,32,0.1);
+  border: 1.5px solid rgba(232,120,32,0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--orange);
+  font-weight: 700;
+  margin-top: 8px;
+  display: none;
+}
+.unanswered-warn.visible { display: block; }
+
+/* Floating tag */
+.floating-class {
+  position: fixed;
+  top: 72px; right: 16px;
+  z-index: 99;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.floating-class.visible { opacity: 1; }
+
+/* Section title */
+.section-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+[data-theme="dark"] .section-title { color: var(--yellow); }
+.section-sub {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Steps indicator */
+.steps {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.step {
+  flex: 1;
+  height: 4px;
+  border-radius: 50px;
+  background: var(--gray);
+  transition: background 0.3s;
+}
+.step.active { background: var(--yellow); }
+.step.done { background: var(--blue); }
+
+/* Copy feedback */
+.copy-feedback {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2BA55A;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.copy-feedback.show { opacity: 1; }
+
+/* Responsive */
+@media (max-width: 360px) {
+  .scale-btn { height: 36px; font-size: 13px; }
+  .welcome-hero h1 { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="logo-mark">
+      <div class="logo-hex"><span>F</span></div>
+      <span class="logo-text">Sistema FIAT</span>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()">☀️ / 🌙</button>
+  </div>
+
+  <!-- SCREEN 1: WELCOME -->
+  <div class="screen active" id="screen-welcome">
+    <div class="welcome-hero">
+      <div class="badge">Callaghan, 2006</div>
+      <h1>FIAT-<span>Q</span></h1>
+      <p>Cuestionario de Relaciones Interpersonales. Tu terapeuta te pedirá que completes este formulario.</p>
+      <div class="author-tag">@leo.eyzaguirre</div>
+    </div>
+
+    <div class="steps">
+      <div class="step active"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Código de caso</div>
+      <div class="card-desc">Tu terapeuta te proporcionó un código. Ingrésalo aquí para comenzar.</div>
+      <input type="text" class="input-field" id="session-code" placeholder="Ej: FIAT-1234" maxlength="12" oninput="this.value=this.value.toUpperCase()">
+      <div class="input-hint">Si no tenés código, consultá con tu terapeuta.</div>
+      <div class="error-msg" id="code-error">Por favor ingresá el código que te dio tu terapeuta.</div>
+    </div>
+    <button class="btn btn-primary" onclick="startWithCode()">Comenzar cuestionario →</button>
+  </div>
+
+  <!-- SCREEN 2: INSTRUCTIONS -->
+  <div class="screen" id="screen-instructions">
+    <div class="section-title">Antes de comenzar</div>
+    <div class="section-sub">Leé estas instrucciones para responder correctamente.</div>
+
+    <div class="steps">
+      <div class="step done"></div>
+      <div class="step active"></div>
+      <div class="step"></div>
+    </div>
+
+    <div class="instructions-section">
+      <div class="info-box" style="margin-bottom:12px">
+        Este cuestionario tiene <strong>117 preguntas</strong> organizadas en 5 áreas. No hay respuestas correctas o incorrectas — respondé según cómo te sentís <strong>en general</strong>, no solo hoy.
+      </div>
+    </div>
+
+    <div class="instructions-section">
+      <h3>¿Cómo responder?</h3>
+      <div class="card-desc">Para cada afirmación, elegí un número del 1 al 6:</div>
+      <div class="scale-demo">
+        <div class="scale-demo-item">
+          <div class="scale-dot filled">1</div>
+          <div class="scale-label">Totalmente en desacuerdo</div>
+        </div>
+        <div class="scale-demo-item">
+          <div class="scale-dot">2</div>
+          <div class="scale-label">Moderadamente en desacuerdo</div>
+        </div>
+        <div class="scale-demo-item">
+          <div class="scale-dot">3</div>
+          <div class="scale-label">Levemente en desacuerdo</div>
+        </div>
+        <div class="scale-demo-item">
+          <div class="scale-dot">4</div>
+          <div class="scale-label">Levemente de acuerdo</div>
+        </div>
+        <div class="scale-demo-item">
+          <div class="scale-dot">5</div>
+          <div class="scale-label">Moderadamente de acuerdo</div>
+        </div>
+        <div class="scale-demo-item">
+          <div class="scale-dot">6</div>
+          <div class="scale-label">Totalmente de acuerdo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-bottom:20px">
+      ℹ️ <strong>Tu privacidad está protegida.</strong> Solo tu terapeuta podrá ver los resultados con una contraseña que él/ella definió. Vos solo verás una pantalla de confirmación.
+    </div>
+
+    <button class="btn btn-primary" onclick="goToClass(0)">Entendido, comenzar →</button>
+    <button class="btn btn-ghost" style="margin-top:10px" onclick="showScreen('screen-welcome')">← Volver</button>
+  </div>
+
+  <!-- SCREEN 3: QUESTIONS (used for all 5 classes) -->
+  <div class="screen" id="screen-questions">
+    <div class="progress-header">
+      <div class="progress-class-label">
+        <div class="class-chip" id="class-chip">Clase A</div>
+        <div class="progress-count" id="progress-count">1 / 21</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+      <div class="class-dots" id="class-dots"></div>
+    </div>
+
+    <div id="questions-container"></div>
+
+    <div class="unanswered-warn" id="unanswered-warn">
+      ⚠️ Por favor respondé todas las preguntas antes de continuar.
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-ghost" id="btn-prev" onclick="prevPage()" style="max-width:100px">← Atrás</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextPage()">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: PASSWORD -->
+  <div class="screen" id="screen-password">
+    <div class="steps">
+      <div class="step done"></div>
+      <div class="step done"></div>
+      <div class="step active"></div>
+    </div>
+    <div class="password-hero">
+      <h2>¡Casi terminás! 🎉</h2>
+      <p>Respondiste todas las preguntas. Ahora necesitamos un PIN de 4 dígitos para proteger tus respuestas antes de enviarlas.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Creá un PIN de 4 dígitos</div>
+      <div class="card-desc">Tu terapeuta te pedirá este PIN para acceder a los resultados. Anótalo antes de continuar.</div>
+      <input type="number" class="password-input" id="pin-input" placeholder="Ej: 4821" maxlength="4" oninput="validatePin(this)">
+      <div class="error-msg" id="pin-error">El PIN debe tener exactamente 4 dígitos numéricos.</div>
+    </div>
+    <button class="btn btn-yellow" onclick="generateLink()">Generar enlace de resultados →</button>
+  </div>
+
+  <!-- SCREEN 5: SHARE -->
+  <div class="screen" id="screen-share">
+    <div class="steps">
+      <div class="step done"></div>
+      <div class="step done"></div>
+      <div class="step done"></div>
+    </div>
+    <div class="result-hero">
+      <div class="check">✅</div>
+      <h2>¡Enviado!</h2>
+      <p>Tus respuestas están listas. Compartí el enlace con tu terapeuta. No podrás ver los resultados — solo tu terapeuta con el PIN puede acceder.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Enlace de resultados</div>
+      <div class="card-desc">Copiá y enviá este enlace a tu terapeuta junto con el PIN que elegiste.</div>
+      <div class="link-box" id="result-link-display">Generando enlace...</div>
+      <button class="btn btn-primary" onclick="copyLink()">📋 Copiar enlace</button>
+      <div class="copy-feedback" id="copy-feedback">✓ Enlace copiado</div>
+      <button class="btn btn-wa" style="margin-top:10px" onclick="shareWhatsApp()">📱 Compartir por WhatsApp</button>
+    </div>
+    <div class="info-box">
+      <strong>Recordá:</strong> Junto con el enlace, decile a tu terapeuta el PIN de 4 dígitos que elegiste. Sin el PIN, no puede ver los resultados.
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const CLASSES = [
+  {
+    id: 'A', name: 'Clase A', title: 'Asertividad de Necesidades',
+    color: '#1B4F9B', barColor: '#1B4F9B',
+    desc: 'Las siguientes afirmaciones describen cómo manejás tus necesidades con otras personas.',
+    items: [
+      { id:'A1', text:'Tengo problemas para lograr que se satisfagan mis necesidades.', r:false },
+      { id:'A2', text:'Mis necesidades se satisfacen en cuanto las pido.', r:true },
+      { id:'A3', text:'Sé cuándo necesito ayuda o apoyo de otras personas.', r:true },
+      { id:'A4', text:'Me doy cuenta de que necesitaba ayuda en una situación recién cuando ya pasó.', r:false },
+      { id:'A5', text:'No sé cómo expresar con palabras lo que necesito.', r:false },
+      { id:'A6', text:'Puedo identificar el tipo de ayuda o apoyo emocional que necesito de los demás.', r:true },
+      { id:'A7', text:'Tengo dificultades para reconocer cuándo puedo pedirle algo a otra persona.', r:false },
+      { id:'A8', text:'Cuando necesito algo, lo pido en cuanto lo necesito.', r:true },
+      { id:'A9', text:'Puedo identificar personas que están dispuestas y son capaces de ayudarme con mis necesidades.', r:true },
+      { id:'A10', text:'Cuando necesito ayuda o apoyo emocional, se lo pido a un amigo cercano o familiar.', r:true },
+      { id:'A11', text:'Le pido consejo sobre situaciones personales a personas desconocidas o conocidos casuales.', r:false },
+      { id:'A12', text:'Evito pedirle ayuda a las personas para satisfacer mis necesidades.', r:false },
+      { id:'A13', text:'Empiezo a pedirle algo a otra persona y luego retiro mi pedido.', r:false },
+      { id:'A14', text:'Estoy dispuesto/a a aceptar la ayuda de alguien una vez que la persona acepta ayudarme.', r:true },
+      { id:'A15', text:'Cuando alguien nota que necesito ayuda, niego necesitarla.', r:false },
+      { id:'A16', text:'Las personas no responden cuando les pido ayuda o apoyo emocional.', r:false },
+      { id:'A17', text:'Expreso mis necesidades de forma sutil, por ejemplo, dando indirectas de lo que quiero.', r:false },
+      { id:'A18', text:'Cuando pido ayuda, las personas entienden lo que necesito.', r:true },
+      { id:'A19', text:'En una relación, doy mucho apoyo emocional pero no recibo mucho apoyo de la otra persona.', r:false },
+      { id:'A20', text:'Las personas me dicen que pido cosas con demasiada frecuencia.', r:false },
+      { id:'A21', text:'A las personas no les gusta la manera en que pido las cosas.', r:false },
+    ]
+  },
+  {
+    id: 'B', name: 'Clase B', title: 'Comunicación Bidireccional',
+    color: '#2B9FD1', barColor: '#2B9FD1',
+    desc: 'Las siguientes afirmaciones describen cómo afectás a otras personas y cómo das y recibís retroalimentación.',
+    items: [
+      { id:'B1', text:'Tengo problemas para recibir retroalimentación de otras personas.', r:false },
+      { id:'B2', text:'Tengo problemas para dar retroalimentación a otras personas.', r:false },
+      { id:'B3', text:'Me resulta difícil identificar cuándo las personas me están dando retroalimentación sobre mi comportamiento.', r:false },
+      { id:'B4', text:'Cuando interactúo con otra persona, no estoy seguro/a de cómo la estoy afectando.', r:false },
+      { id:'B5', text:'Sé cuándo tengo un impacto desagradable en los demás.', r:true },
+      { id:'B6', text:'La retroalimentación que recibo de los demás me parece precisa.', r:true },
+      { id:'B7', text:'Considero cuidadosamente la fuente de la retroalimentación antes de cambiar mi comportamiento.', r:true },
+      { id:'B8', text:'Puedo identificar situaciones en las que sería útil dar retroalimentación a otra persona.', r:true },
+      { id:'B9', text:'Evito situaciones donde podría recibir retroalimentación, como hablar en clase o en reuniones.', r:false },
+      { id:'B10', text:'Si no estoy seguro/a del impacto que tengo en un amigo cercano, le pido retroalimentación.', r:true },
+      { id:'B11', text:'Cuando alguien me da retroalimentación negativa, me bloqueo.', r:false },
+      { id:'B12', text:'Soy excesivamente consciente del impacto que tengo en los demás.', r:false },
+      { id:'B13', text:'Me hiero o me molesto fácilmente cuando me dan retroalimentación negativa.', r:false },
+      { id:'B14', text:'Independientemente de si la retroalimentación es positiva o negativa, no sé cómo responder a ella.', r:false },
+      { id:'B15', text:'Cambio mi comportamiento en respuesta a la retroalimentación que recibo.', r:true },
+      { id:'B16', text:'Si alguien me da retroalimentación, creo que es el problema de esa persona, no el mío.', r:false },
+      { id:'B17', text:'Cuando me doy cuenta de que tengo un impacto desagradable en alguien, trato de ignorar su malestar.', r:false },
+      { id:'B18', text:'Si alguien me da retroalimentación que no me gusta, hago lo contrario de lo que la persona quiere.', r:false },
+      { id:'B19', text:'Cuando las personas me dan retroalimentación desfavorable, discuto con ellas.', r:false },
+      { id:'B20', text:'No le doy retroalimentación a otra persona si está teniendo un impacto desagradable en mí.', r:false },
+      { id:'B21', text:'Cuando le digo a las personas que su comportamiento me afecta negativamente, no cambian lo que hacen.', r:false },
+      { id:'B22', text:'Me dicen que la retroalimentación que doy es excesiva y demasiado detallada.', r:false },
+      { id:'B23', text:'Cuando doy retroalimentación, respondo de manera breve y específica.', r:true },
+      { id:'B24', text:'Me dicen que cuando doy retroalimentación, soy demasiado crítico/a de la otra persona.', r:false },
+      { id:'B25', text:'Cuando doy retroalimentación, repito mi posición varias veces.', r:false },
+    ]
+  },
+  {
+    id: 'C', name: 'Clase C', title: 'Conflicto',
+    color: '#E87820', barColor: '#E87820',
+    desc: 'Las siguientes afirmaciones describen cómo identificás y manejás el conflicto con otras personas. Conflicto no significa violencia — refiere a desacuerdos y situaciones incómodas.',
+    items: [
+      { id:'C1', text:'Tengo problemas con el conflicto en mis relaciones.', r:false },
+      { id:'C2', text:'Me siento incómodo/a cuando experimento desacuerdo con otra persona.', r:false },
+      { id:'C3', text:'Soy consciente cuando hay conflicto entre yo y otra persona.', r:true },
+      { id:'C4', text:'Cuando otra persona está enojada conmigo, no entiendo el problema entre nosotros.', r:false },
+      { id:'C5', text:'Siento que hay momentos en que es beneficioso expresar el desacuerdo en una relación.', r:true },
+      { id:'C6', text:'Entro en conflicto con otras personas por cosas que no parecen importarles.', r:false },
+      { id:'C7', text:'Las personas me dicen que quiero discutir el conflicto en momentos inconvenientes o inapropiados.', r:false },
+      { id:'C8', text:'Me involucro en conflictos con otra persona sin considerar quién es.', r:false },
+      { id:'C9', text:'Evito el conflicto a toda costa.', r:false },
+      { id:'C10', text:'Para evitar el conflicto, trato de anticipar lo que la otra persona quiere que haga.', r:false },
+      { id:'C11', text:'Me retiro ante el conflicto, independientemente de las circunstancias.', r:false },
+      { id:'C12', text:'Después de expresar un desacuerdo con otra persona, inmediatamente me disculpo por haber planteado el tema.', r:false },
+      { id:'C13', text:'Cuando tengo un conflicto con otra persona, pregunto qué puedo hacer para mejorar las cosas entre nosotros.', r:true },
+      { id:'C14', text:'Tengo éxito en resolver conflictos con los demás.', r:true },
+      { id:'C15', text:'Cuando tengo un desacuerdo con otra persona, explico repetidamente por qué creo que tengo razón.', r:false },
+      { id:'C16', text:'Durante una discusión, tengo cuidado de no herir los sentimientos de la otra persona.', r:true },
+      { id:'C17', text:'Abordo las soluciones al conflicto de manera directa, comunicando claramente qué se puede hacer para resolver nuestras diferencias.', r:true },
+      { id:'C18', text:'Expreso el enojo de forma indirecta, por ejemplo, dejando de hablar con la otra persona.', r:false },
+      { id:'C19', text:'Las personas dicen que no estoy dispuesto/a a ceder cuando hay un conflicto.', r:false },
+      { id:'C20', text:'Cuando discuto con alguien, la discusión se prolonga por mucho tiempo.', r:false },
+      { id:'C21', text:'Durante una discusión, me siento más conectado/a y cercano/a a la otra persona.', r:false },
+      { id:'C22', text:'Cuando discuto con alguien, la discusión se vuelve más intensa con el tiempo.', r:false },
+      { id:'C23', text:'Deliberadamente molesto a la otra persona durante una discusión.', r:false },
+    ]
+  },
+  {
+    id: 'D', name: 'Clase D', title: 'Divulgación y Cercanía Interpersonal',
+    color: '#9B2DB5', barColor: '#9B2DB5',
+    desc: 'Las siguientes afirmaciones describen cómo te relacionás con los demás en términos de apertura y cercanía.',
+    items: [
+      { id:'D1', text:'Tengo problemas para sentirme cercano/a a los demás.', r:false },
+      { id:'D2', text:'He tenido una o más relaciones cercanas.', r:true },
+      { id:'D3', text:'No puedo identificar cuándo me beneficiaría compartir mis experiencias con otra persona.', r:false },
+      { id:'D4', text:'Soy consciente de cuándo es apropiado preguntarle a las personas sobre sus experiencias.', r:true },
+      { id:'D5', text:'Comparto información personal con personas desconocidas o conocidos casuales.', r:false },
+      { id:'D6', text:'Solo hablaré sobre mí y mis experiencias con un grupo pequeño y selecto de personas.', r:false },
+      { id:'D7', text:'Cuando los amigos me preguntan cómo estoy, elijo no contarles.', r:false },
+      { id:'D8', text:'Siento la necesidad de guardar secretos de las personas que son cercanas a mí.', r:false },
+      { id:'D9', text:'Hablo sobre mí y mis experiencias con otras personas.', r:true },
+      { id:'D10', text:'Siento que es mejor no hablar de mis propias experiencias con nadie.', r:false },
+      { id:'D11', text:'Empiezo a hablar de lo que estoy pasando y luego decido que es mejor guardarme mis sentimientos.', r:false },
+      { id:'D12', text:'Les he contado a personas sobre mis problemas y luego deseé no haberlo hecho.', r:false },
+      { id:'D13', text:'Las relaciones cercanas son importantes para mí.', r:true },
+      { id:'D14', text:'No quiero compartir cosas sobre mí con los demás.', r:false },
+      { id:'D15', text:'Le pido a otras personas que me cuenten sobre sus sentimientos y experiencias.', r:true },
+      { id:'D16', text:'Tengo dificultades para mantener una conversación con las personas.', r:false },
+      { id:'D17', text:'Cuando hablo de mis experiencias, las personas entienden claramente lo que les estoy diciendo.', r:true },
+      { id:'D18', text:'Después de compartir algo personal sobre mí, resto importancia a lo que divulgué.', r:false },
+      { id:'D19', text:'Exagero mis buenos puntos y presumo sobre mis habilidades y capacidades.', r:false },
+      { id:'D20', text:'Las personas dicen que hablo de mí mismo/a de una manera que minimiza mis buenas cualidades.', r:false },
+      { id:'D21', text:'Me dicen que hablo demasiado sobre mí mismo/a.', r:false },
+      { id:'D22', text:'Las personas me dicen que cuando hablo de mi propia experiencia, comparto información demasiado personal.', r:false },
+      { id:'D23', text:'Escucho a los demás y les ofrezco apoyo.', r:true },
+      { id:'D24', text:'Me dicen que en las relaciones, pido mucho apoyo emocional pero doy poco apoyo a la otra persona.', r:false },
+    ]
+  },
+  {
+    id: 'E', name: 'Clase E', title: 'Experiencia y Expresión Emocional',
+    color: '#2BA55A', barColor: '#2BA55A',
+    desc: 'Las siguientes afirmaciones describen cómo identificás y expresás tus emociones. Incluye todo tipo de emociones: positivas, negativas, y mixtas.',
+    items: [
+      { id:'E1', text:'Tengo problemas con mis emociones.', r:false },
+      { id:'E2', text:'Tengo problemas para identificar lo que siento.', r:false },
+      { id:'E3', text:'Soy consciente de mis sentimientos y experiencias emocionales mientras están ocurriendo.', r:true },
+      { id:'E4', text:'No noto mis emociones durante una experiencia, sino que me doy cuenta de ellas cuando miro hacia atrás.', r:false },
+      { id:'E5', text:'Puedo distinguir entre una emoción y otra.', r:true },
+      { id:'E6', text:'Mis respuestas emocionales tienen sentido para mí cuando considero las circunstancias.', r:true },
+      { id:'E7', text:'Expreso mis emociones en momentos y lugares apropiados.', r:true },
+      { id:'E8', text:'Hablaré de mis sentimientos en cualquier situación, sin importar el contexto.', r:false },
+      { id:'E9', text:'Oculto intencionalmente mis sentimientos.', r:false },
+      { id:'E10', text:'Trato de no sentir ciertas emociones.', r:false },
+      { id:'E11', text:'Evito situaciones que puedan generar sentimientos intensos.', r:false },
+      { id:'E12', text:'Me permito sentir todas las emociones, incluso las más intensas.', r:true },
+      { id:'E13', text:'Cuando tengo una emoción desagradable, tomo medidas inmediatas para dejar de sentirla.', r:false },
+      { id:'E14', text:'Puedo ponerle un nombre a lo que siento.', r:true },
+      { id:'E15', text:'Le digo a las personas que me siento de una manera, cuando en realidad me siento de otra.', r:false },
+      { id:'E16', text:'Las personas me dicen que mi expresión emocional es plana.', r:false },
+      { id:'E17', text:'Cuando hablo de cómo me siento, uso las mismas pocas palabras para describir mis sentimientos.', r:false },
+      { id:'E18', text:'Las personas me dicen que quieren que exprese mis sentimientos de manera más abierta.', r:false },
+      { id:'E19', text:'Cuando comparto mis sentimientos con los demás, no reaccionan de la manera que espero.', r:false },
+      { id:'E20', text:'Comunico mis emociones claramente a las personas para que sepan exactamente cómo me siento.', r:true },
+      { id:'E21', text:'Las personas dicen que hablo demasiado sobre mis sentimientos.', r:false },
+      { id:'E22', text:'Expreso mis emociones de manera excesivamente intensa.', r:false },
+      { id:'E23', text:'A las personas no les gusta cuando hablo de mis emociones.', r:false },
+      { id:'E24', text:'Las personas se molestan con la manera en que expreso mis emociones.', r:false },
+    ]
+  }
+];
+
+const ITEMS_PER_PAGE = 5;
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let state = {
+  sessionCode: '',
+  currentClass: 0,
+  currentPage: 0,
+  answers: {},
+  resultLink: ''
+};
+
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('fiat-theme', html.getAttribute('data-theme'));
+}
+
+function saveState() {
+  localStorage.setItem('fiat-state-' + state.sessionCode, JSON.stringify(state));
+}
+
+function loadState(code) {
+  const saved = localStorage.getItem('fiat-state-' + code);
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    state = { ...state, ...parsed };
+    return true;
+  }
+  return false;
+}
+
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash).toString(36);
+}
+
+// ─── WELCOME ─────────────────────────────────────────────────────────────────
+function startWithCode() {
+  const code = document.getElementById('session-code').value.trim();
+  const err = document.getElementById('code-error');
+  if (!code || code.length < 3) {
+    err.classList.add('visible');
+    return;
+  }
+  err.classList.remove('visible');
+  state.sessionCode = code;
+  loadState(code);
+  showScreen('screen-instructions');
+}
+
+// ─── QUESTIONS ───────────────────────────────────────────────────────────────
+function goToClass(classIndex) {
+  state.currentClass = classIndex;
+  state.currentPage = 0;
+  renderQuestions();
+  showScreen('screen-questions');
+  saveState();
+}
+
+function getClassPages(classIndex) {
+  const items = CLASSES[classIndex].items;
+  const pages = [];
+  for (let i = 0; i < items.length; i += ITEMS_PER_PAGE) {
+    pages.push(items.slice(i, i + ITEMS_PER_PAGE));
+  }
+  return pages;
+}
+
+function renderQuestions() {
+  const cls = CLASSES[state.currentClass];
+  const pages = getClassPages(state.currentClass);
+  const page = pages[state.currentPage];
+  const totalPages = pages.length;
+  const totalItems = cls.items.length;
+
+  // Header
+  const chip = document.getElementById('class-chip');
+  chip.textContent = cls.name + ' — ' + cls.title;
+  chip.style.background = cls.color;
+
+  const answeredInClass = cls.items.filter(item => state.answers[item.id] !== undefined).length;
+  document.getElementById('progress-count').textContent = answeredInClass + ' / ' + totalItems + ' respondidas';
+
+  const pct = (answeredInClass / totalItems) * 100;
+  const bar = document.getElementById('progress-bar');
+  bar.style.width = pct + '%';
+  bar.style.background = cls.color;
+
+  // Class dots
+  const dotsEl = document.getElementById('class-dots');
+  dotsEl.innerHTML = CLASSES.map((c, i) => {
+    let cl = 'class-dot';
+    if (i < state.currentClass) cl += ' done';
+    else if (i === state.currentClass) cl += ' current';
+    return `<div class="${cl}" title="${c.name}"></div>`;
+  }).join('');
+
+  // Questions
+  const container = document.getElementById('questions-container');
+  let html = '';
+
+  if (state.currentPage === 0) {
+    html += `<div class="card" style="border-color:${cls.color}40; background: ${cls.color}10; margin-bottom:12px">
+      <div class="card-title" style="color:${cls.color}">${cls.name}: ${cls.title}</div>
+      <div class="card-desc" style="margin:0">${cls.desc}</div>
+    </div>`;
+  }
+
+  page.forEach((item, idx) => {
+    const globalIdx = state.currentPage * ITEMS_PER_PAGE + idx;
+    const answered = state.answers[item.id] !== undefined;
+    html += `<div class="question-item ${answered ? 'answered' : ''}" id="qi-${item.id}">
+      <div class="question-num">${cls.id}${globalIdx + 1}</div>
+      <div class="question-text">${item.text}</div>
+      <div class="scale-row">
+        ${[1,2,3,4,5,6].map(n => {
+          const sel = state.answers[item.id] === n ? 'selected' : '';
+          return `<button class="scale-btn ${sel}" onclick="selectAnswer('${item.id}', ${n}, this)">${n}</button>`;
+        }).join('')}
+      </div>
+      <div class="scale-labels-row">
+        <span class="scale-label-end">Totalmente en desacuerdo</span>
+        <span class="scale-label-end">Totalmente de acuerdo</span>
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+
+  // Nav buttons
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  const isLastClass = state.currentClass === CLASSES.length - 1;
+  const isLastPage = state.currentPage === totalPages - 1;
+
+  btnPrev.style.display = (state.currentPage === 0 && state.currentClass === 0) ? 'none' : 'block';
+
+  if (isLastClass && isLastPage) {
+    btnNext.textContent = 'Finalizar cuestionario →';
+    btnNext.className = 'btn btn-yellow';
+  } else if (isLastPage) {
+    btnNext.textContent = 'Siguiente área →';
+    btnNext.className = 'btn btn-primary';
+  } else {
+    btnNext.textContent = 'Siguiente →';
+    btnNext.className = 'btn btn-primary';
+  }
+
+  document.getElementById('unanswered-warn').classList.remove('visible');
+}
+
+function selectAnswer(itemId, value, btn) {
+  state.answers[itemId] = value;
+  // Update UI for this question
+  const qi = document.getElementById('qi-' + itemId);
+  qi.classList.add('answered');
+  qi.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  saveState();
+  // Update progress
+  const cls = CLASSES[state.currentClass];
+  const answeredInClass = cls.items.filter(item => state.answers[item.id] !== undefined).length;
+  document.getElementById('progress-count').textContent = answeredInClass + ' / ' + cls.items.length + ' respondidas';
+  const pct = (answeredInClass / cls.items.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function nextPage() {
+  const cls = CLASSES[state.currentClass];
+  const pages = getClassPages(state.currentClass);
+  const page = pages[state.currentPage];
+
+  // Check all answered
+  const unanswered = page.filter(item => state.answers[item.id] === undefined);
+  if (unanswered.length > 0) {
+    document.getElementById('unanswered-warn').classList.add('visible');
+    // Scroll to first unanswered
+    const firstUn = document.getElementById('qi-' + unanswered[0].id);
+    if (firstUn) firstUn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const isLastPage = state.currentPage === pages.length - 1;
+  const isLastClass = state.currentClass === CLASSES.length - 1;
+
+  if (isLastPage && isLastClass) {
+    showScreen('screen-password');
+  } else if (isLastPage) {
+    state.currentClass++;
+    state.currentPage = 0;
+  } else {
+    state.currentPage++;
+  }
+
+  if (!(isLastPage && isLastClass)) {
+    renderQuestions();
+    window.scrollTo(0, 0);
+  }
+  saveState();
+}
+
+function prevPage() {
+  if (state.currentPage > 0) {
+    state.currentPage--;
+  } else if (state.currentClass > 0) {
+    state.currentClass--;
+    const pages = getClassPages(state.currentClass);
+    state.currentPage = pages.length - 1;
+  } else {
+    showScreen('screen-instructions');
+    return;
+  }
+  renderQuestions();
+  window.scrollTo(0, 0);
+}
+
+// ─── PASSWORD & LINK ─────────────────────────────────────────────────────────
+function validatePin(input) {
+  input.value = input.value.replace(/\D/g, '').slice(0, 4);
+}
+
+function generateLink() {
+  const pin = document.getElementById('pin-input').value.trim();
+  const err = document.getElementById('pin-error');
+  if (pin.length !== 4 || isNaN(pin)) {
+    err.classList.add('visible');
+    return;
+  }
+  err.classList.remove('visible');
+
+  // Compute scores per class
+  const scores = {};
+  CLASSES.forEach(cls => {
+    let total = 0;
+    cls.items.forEach(item => {
+      const val = state.answers[item.id] || 0;
+      total += item.r ? (7 - val) : val;
+    });
+    scores[cls.id] = {
+      raw: total,
+      max: cls.items.length * 6,
+      pct: Math.round((total / (cls.items.length * 6)) * 100)
+    };
+  });
+
+  const payload = {
+    code: state.sessionCode,
+    ts: Date.now(),
+    answers: state.answers,
+    scores: scores
+  };
+
+  const encoded = btoa(encodeURIComponent(JSON.stringify(payload)));
+  const hash = simpleHash(pin + encoded);
+  const baseUrl = window.location.href.replace('/fiatq.html', '').replace(/\/$/, '');
+  const link = `${baseUrl}/fiat-terapeuta.html#d=${encoded}&h=${hash}`;
+
+  state.resultLink = link;
+  document.getElementById('result-link-display').textContent = link;
+
+  // Clear saved state so it can be used again
+  localStorage.removeItem('fiat-state-' + state.sessionCode);
+
+  showScreen('screen-share');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(state.resultLink).then(() => {
+    const fb = document.getElementById('copy-feedback');
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2000);
+  });
+}
+
+function shareWhatsApp() {
+  const text = encodeURIComponent('Hola, acá están mis respuestas del FIAT-Q:\n' + state.resultLink + '\n\nNo olvidés pedirme el PIN para acceder.');
+  window.open('https://wa.me/?text=' + text, '_blank');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+(function init() {
+  const savedTheme = localStorage.getItem('fiat-theme');
+  if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+  // Auto-detect system preference
+  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
+</script>
+</body>
+</html>
