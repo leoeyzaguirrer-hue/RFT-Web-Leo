@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>FIAT — Panel del Terapeuta</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--yellow:#F9C12E;--blue:#1B4F9B;--orange:#E87820;--lb:#2B9FD1;--green:#2BA55A;--purple:#9B2DB5}
+[data-theme="dark"]{--bg:#060F24;--bg2:#0D1B38;--sur:#111E3C;--sur2:#162347;--tx:#EEF2FF;--txs:#7A93C0;--bd:rgba(249,193,46,0.12);--bd2:rgba(255,255,255,0.07);--sh:0 8px 40px rgba(0,0,0,0.6);--shs:0 2px 12px rgba(0,0,0,0.4)}
+[data-theme="light"]{--bg:#F0F4FF;--bg2:#E8EDF8;--sur:#FFFFFF;--sur2:#F5F7FF;--tx:#0D1B38;--txs:#5A6E9A;--bd:rgba(27,79,155,0.15);--bd2:rgba(27,79,155,0.07);--sh:0 8px 40px rgba(27,79,155,0.12);--shs:0 2px 12px rgba(27,79,155,0.08)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='92'%3E%3Cpolygon points='40,3 74,22 74,60 40,79 6,60 6,22' fill='none' stroke='%231B4F9B' stroke-width='1'/%3E%3C/svg%3E");opacity:.05;pointer-events:none;z-index:0}
+[data-theme="light"] body::before{opacity:.03}
+.app{max-width:500px;margin:0 auto;min-height:100vh;position:relative;z-index:1;display:flex;flex-direction:column}
+
+/* Topbar */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--bd2);backdrop-filter:blur(12px)}
+.logo{display:flex;align-items:center;gap:10px}
+.hex{width:34px;height:34px;background:var(--yellow);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);display:flex;align-items:center;justify-content:center}
+.hex span{color:var(--blue);font-size:13px;font-weight:900}
+.logo-title{font-size:14px;font-weight:900;color:var(--yellow);line-height:1}
+[data-theme="light"] .logo-title{color:var(--blue)}
+.logo-sub{font-size:10px;color:var(--txs);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.topbar-r{display:flex;gap:8px}
+.tbtn{background:var(--sur);border:1.5px solid var(--bd);border-radius:50px;padding:5px 12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--tx);cursor:pointer;transition:all .2s}
+.tbtn:hover{opacity:.8}
+#back-btn{display:none}
+#back-btn.show{display:block}
+
+/* Screens */
+.screen{display:none;flex-direction:column;flex:1;padding:20px 20px 48px;animation:fadeUp .3s ease}
+.screen.active{display:flex}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Home */
+.hero{background:linear-gradient(135deg,var(--blue) 0%,#2B5FC9 60%,var(--lb) 100%);border-radius:24px;padding:28px 24px;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:var(--sh)}
+.hero::before{content:'';position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;background:var(--yellow);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);opacity:.18}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.18);border-radius:50px;padding:3px 12px;font-size:10px;font-weight:900;color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.hero h1{font-size:30px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}
+.hero h1 span{color:var(--yellow)}
+.hero p{font-size:13px;color:rgba(255,255,255,.8);line-height:1.5}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.acard{background:var(--sur);border:1.5px solid var(--bd);border-radius:20px;padding:20px 16px;cursor:pointer;transition:all .2s;box-shadow:var(--shs);display:flex;flex-direction:column;gap:10px}
+.acard:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--yellow)}
+[data-theme="light"] .acard:hover{border-color:var(--blue)}
+.aicon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.acard h3{font-size:14px;font-weight:900;color:var(--tx);line-height:1.3}
+.acard p{font-size:12px;color:var(--txs);line-height:1.4}
+.sec-label{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--txs);margin-bottom:12px;padding-left:4px}
+.case-item{background:var(--sur);border:1.5px solid var(--bd2);border-radius:14px;padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
+.case-item:hover{border-color:var(--bd);background:var(--sur2)}
+.cdot{width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0}
+.cinfo{flex:1}
+.ccode{font-size:14px;font-weight:900;color:var(--tx)}
+.cmeta{font-size:11px;color:var(--txs);margin-top:2px}
+.empty{text-align:center;padding:28px 20px;color:var(--txs);font-size:13px;background:var(--sur);border:1.5px dashed var(--bd);border-radius:16px}
+.empty-icon{font-size:32px;margin-bottom:8px}
+
+/* Create */
+.card{background:var(--sur);border:1.5px solid var(--bd);border-radius:20px;padding:24px;box-shadow:var(--shs);margin-bottom:16px}
+.card-title{font-size:16px;font-weight:900;color:var(--tx);margin-bottom:6px}
+.card-desc{font-size:13px;color:var(--txs);line-height:1.5;margin-bottom:16px}
+label.lbl{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:8px;display:block}
+.ifield{width:100%;padding:14px 18px;border:2px solid var(--bd);border-radius:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:var(--tx);background:var(--bg);outline:none;transition:border-color .2s}
+.ifield:focus{border-color:var(--yellow)}
+[data-theme="light"] .ifield:focus{border-color:var(--blue)}
+.ifield.pin-f{font-size:24px;font-weight:900;letter-spacing:8px;text-align:center}
+.ifield.pin-f::placeholder{letter-spacing:0;font-size:14px;font-weight:600;opacity:.4}
+.mb16{margin-bottom:16px}
+
+/* Generated code */
+.gen-box{background:linear-gradient(135deg,var(--blue),#1E3A7A);border-radius:20px;padding:28px 24px;text-align:center;margin-bottom:16px;box-shadow:var(--sh);display:none;animation:fadeUp .3s ease}
+.gen-box.show{display:block}
+.gen-label{font-size:11px;font-weight:900;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.gen-code{font-size:40px;font-weight:900;color:var(--yellow);letter-spacing:4px;margin-bottom:12px}
+.gen-desc{font-size:13px;color:rgba(255,255,255,.8);line-height:1.5;margin-bottom:16px}
+
+/* Buttons */
+.btn{display:block;width:100%;padding:15px;border-radius:16px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .2s;text-align:center}
+.btn-y{background:var(--yellow);color:var(--blue);box-shadow:0 4px 20px rgba(249,193,46,.3)}
+.btn-y:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(249,193,46,.4)}
+.btn-b{background:var(--blue);color:#fff;box-shadow:0 4px 20px rgba(27,79,155,.35)}
+.btn-b:hover{transform:translateY(-2px)}
+.btn-g{background:var(--sur);color:var(--tx);border:1.5px solid var(--bd)}
+.btn-g:hover{background:var(--sur2)}
+.btn-sm{font-size:13px;padding:10px 14px}
+.btn+.btn{margin-top:10px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* Error */
+.err{background:rgba(239,68,68,.1);border:1.5px solid rgba(239,68,68,.25);color:#EF4444;border-radius:12px;padding:12px 16px;font-size:13px;font-weight:700;margin-top:10px;display:none}
+.err.show{display:block}
+.fb{text-align:center;font-size:13px;font-weight:700;color:var(--green);margin-top:8px;opacity:0;transition:opacity .3s}
+.fb.show{opacity:1}
+.info-box{background:var(--sur);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--txs);line-height:1.7;margin-bottom:16px}
+.info-box strong{color:var(--tx)}
+
+/* Analysis */
+.analysis-top{background:linear-gradient(135deg,var(--blue),#1E3A7A);border-radius:24px;padding:24px;margin-bottom:20px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.analysis-top::after{content:'';position:absolute;right:-16px;top:-16px;width:90px;height:90px;background:var(--yellow);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);opacity:.18}
+.at-case{font-size:11px;font-weight:900;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.at-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:4px}
+.at-date{font-size:12px;color:rgba(255,255,255,.6)}
+
+/* Overview grid */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.ov-card{background:var(--sur);border:1.5px solid var(--bd2);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.ov-top{display:flex;justify-content:space-between;align-items:center}
+.cls-badge{font-size:11px;font-weight:900;padding:3px 10px;border-radius:50px;color:#fff}
+.sev{font-size:10px;font-weight:900;padding:2px 8px;border-radius:50px}
+.sev-hi{background:rgba(239,68,68,.15);color:#EF4444}
+.sev-md{background:rgba(249,193,46,.15);color:#D97706}
+.sev-lo{background:rgba(43,165,90,.15);color:var(--green)}
+.ov-bar-wrap{background:var(--bg2);border-radius:50px;height:8px;overflow:hidden}
+.ov-bar{height:100%;border-radius:50px;transition:width 1s ease}
+.ov-pct{font-size:22px;font-weight:900;color:var(--tx)}
+.ov-lbl{font-size:11px;color:var(--txs);font-weight:700}
+
+/* Class accordion */
+.cls-card{background:var(--sur);border:1.5px solid var(--bd2);border-radius:20px;margin-bottom:12px;overflow:hidden;box-shadow:var(--shs)}
+.cls-head{padding:16px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;transition:background .2s}
+.cls-head:hover{background:var(--sur2)}
+.cls-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.cls-info{flex:1}
+.cls-name{font-size:14px;font-weight:900;color:var(--tx)}
+.cls-sub{font-size:11px;color:var(--txs);font-weight:700;margin-top:2px}
+.cls-score{text-align:right}
+.cls-num{font-size:22px;font-weight:900}
+.cls-score-lbl{font-size:10px;color:var(--txs);font-weight:700}
+.cls-body{padding:0 18px 18px;display:none;border-top:1px solid var(--bd2)}
+.cls-body.open{display:block}
+
+/* Score bar */
+.sbar-wrap{background:var(--bg2);border-radius:50px;height:10px;overflow:hidden;margin:10px 0}
+.sbar{height:100%;border-radius:50px;transition:width 1s ease}
+.sbar-labels{display:flex;justify-content:space-between}
+.sbar-lbl{font-size:10px;color:var(--txs);font-weight:700}
+
+/* Flagged */
+.flag-title{font-size:11px;font-weight:900;color:var(--txs);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 10px}
+.flag-item{background:var(--bg2);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start}
+.fdot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.ftext{font-size:12px;color:var(--txs);line-height:1.5;flex:1}
+.fscore{font-size:11px;font-weight:900;flex-shrink:0;margin-top:2px}
+
+/* Interventions */
+.int-title{font-size:11px;font-weight:900;color:var(--yellow);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 10px}
+[data-theme="light"] .int-title{color:var(--blue)}
+.int-item{background:var(--sur2);border:1.5px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.int-tag{display:inline-block;font-size:10px;font-weight:900;padding:2px 8px;border-radius:50px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.t-fap{background:rgba(27,79,155,.2);color:var(--lb)}
+.t-act{background:rgba(43,165,90,.2);color:var(--green)}
+.t-dbt{background:rgba(155,45,181,.2);color:#C070E0}
+.t-gen{background:rgba(249,193,46,.2);color:var(--yellow)}
+[data-theme="light"] .t-gen{color:#B8860B}
+.int-text{font-size:13px;color:var(--tx);line-height:1.5;font-weight:700}
+.int-how{font-size:12px;color:var(--txs);margin-top:4px;line-height:1.4}
+.divider{height:1px;background:var(--bd2);margin:14px 0}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">
+    <div class="hex"><span>F</span></div>
+    <div>
+      <div class="logo-title">Sistema FIAT</div>
+      <div class="logo-sub">Panel del Terapeuta</div>
+    </div>
+  </div>
+  <div class="topbar-r">
+    <button class="tbtn" id="back-btn" onclick="goHome()">← Inicio</button>
+    <button class="tbtn" onclick="toggleTheme()">☀️/🌙</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen active" id="sc-home">
+  <div class="hero">
+    <div class="hero-badge">Callaghan, 2006</div>
+    <h1>Panel del<br><span>Terapeuta</span></h1>
+    <p>Creá casos, generá links para tus consultantes y accedé a los resultados con análisis funcional.</p>
+  </div>
+  <div class="action-grid">
+    <div class="acard" onclick="goTo('sc-create')">
+      <div class="aicon" style="background:rgba(249,193,46,.15)">🔑</div>
+      <h3>Nuevo caso</h3>
+      <p>Generá un link para tu consultante</p>
+    </div>
+    <div class="acard" onclick="goTo('sc-view')">
+      <div class="aicon" style="background:rgba(43,165,90,.15)">📊</div>
+      <h3>Ver resultados</h3>
+      <p>Ingresá código y contraseña</p>
+    </div>
+  </div>
+  <div class="sec-label">Casos guardados</div>
+  <div id="cases-list"></div>
+</div>
+
+<!-- CREATE CASE -->
+<div class="screen" id="sc-create">
+  <div class="card">
+    <div class="card-title">🔑 Crear nuevo caso</div>
+    <div class="card-desc">Asigná un alias a tu consultante y elegí una contraseña numérica. Se generará un link único para que el consultante complete el cuestionario.</div>
+  </div>
+
+  <div class="mb16">
+    <label class="lbl">Alias del consultante</label>
+    <input type="text" class="ifield" id="c-alias" placeholder="Ej: Consultante 01, María G...">
+  </div>
+  <div class="mb16">
+    <label class="lbl">Tu contraseña numérica (4–8 dígitos)</label>
+    <input type="number" class="ifield pin-f" id="c-pass" placeholder="Ej: 4821" oninput="this.value=this.value.slice(0,8)">
+    <div style="font-size:12px;color:var(--txs);margin-top:6px">Solo vos la sabés. La necesitarás para ver los resultados.</div>
+  </div>
+
+  <button class="btn btn-y" onclick="createCase()">Generar link del consultante →</button>
+  <div class="err" id="c-err">Completá el alias y la contraseña (mínimo 4 dígitos).</div>
+
+  <div class="gen-box" id="gen-box">
+    <div class="gen-label">Código del caso</div>
+    <div class="gen-code" id="gen-code-val">—</div>
+    <div class="gen-desc">Enviá este link a tu consultante. Cuando termine el cuestionario, te avisará y podés ver los resultados desde "Ver resultados" usando el código y tu contraseña.</div>
+    <button class="btn" style="background:rgba(255,255,255,.2);color:#fff;font-size:14px;padding:12px;border-radius:12px;margin-bottom:8px" onclick="copyClientLink()">📋 Copiar link del consultante</button>
+    <button class="btn" style="background:rgba(37,211,102,.25);color:#25D366;font-size:13px;padding:10px;border-radius:12px" onclick="shareWhatsApp()">📱 Compartir por WhatsApp</button>
+  </div>
+  <div class="fb" id="c-fb">✓ Link copiado</div>
+</div>
+
+<!-- VIEW RESULTS -->
+<div class="screen" id="sc-view">
+  <div class="card">
+    <div class="card-title">📊 Ver resultados</div>
+    <div class="card-desc">Ingresá el código del caso y tu contraseña para acceder al análisis completo del cuestionario.</div>
+  </div>
+
+  <div class="info-box">
+    <strong>¿Dónde encontrar el código?</strong><br>
+    Está en la sección "Casos guardados" en el inicio, o lo recordás de cuando creaste el caso.
+  </div>
+
+  <div class="mb16">
+    <label class="lbl">Código del caso</label>
+    <input type="text" class="ifield" id="v-code" placeholder="Ej: FIAT-X7K2" oninput="this.value=this.value.toUpperCase()">
+  </div>
+  <div class="mb16">
+    <label class="lbl">Tu contraseña</label>
+    <input type="number" class="ifield pin-f" id="v-pass" placeholder="••••" oninput="this.value=this.value.slice(0,8)">
+  </div>
+
+  <button class="btn btn-y" onclick="verifyAndLoad()">Acceder a resultados →</button>
+  <div class="err" id="v-err">Código o contraseña incorrectos. Verificá los datos.</div>
+</div>
+
+<!-- ANALYSIS -->
+<div class="screen" id="sc-analysis">
+  <div class="analysis-top">
+    <div class="at-case" id="an-case">—</div>
+    <div class="at-title" id="an-alias">Resultados</div>
+    <div class="at-date" id="an-date">—</div>
+  </div>
+
+  <div class="sec-label">Resumen por clase</div>
+  <div class="ov-grid" id="ov-grid"></div>
+
+  <div class="sec-label">Análisis detallado</div>
+  <div id="class-cards"></div>
+</div>
+
+</div><!-- app -->
+
+<script>
+// ─── UTILS ─────────────────────────────────────────────────────────────
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('back-btn').className = id==='sc-home' ? 'tbtn' : 'tbtn show';
+  window.scrollTo(0,0);
+}
+function goHome(){ goTo('sc-home'); renderCasesList(); }
+function toggleTheme(){
+  const h=document.documentElement;
+  h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');
+  localStorage.setItem('fiat-theme',h.getAttribute('data-theme'));
+}
+function simpleHash(str){
+  let h=5381;
+  for(let i=0;i<str.length;i++) h=((h<<5)+h)+str.charCodeAt(i);
+  return (h>>>0).toString(36);
+}
+function randCode(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let c='';
+  for(let i=0;i<4;i++) c+=chars[Math.floor(Math.random()*chars.length)];
+  return 'FIAT-'+c;
+}
+function getBaseUrl(){
+  return window.location.href.split('?')[0].replace('fiat-terapeuta.html','');
+}
+function saveCases(cases){ localStorage.setItem('fiat-cases',JSON.stringify(cases)); }
+function loadCases(){ try{ return JSON.parse(localStorage.getItem('fiat-cases')||'[]'); }catch(e){ return []; } }
+function formatDate(ts){ return new Date(ts).toLocaleDateString('es',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+
+// ─── CASES LIST ─────────────────────────────────────────────────────────
+function renderCasesList(){
+  const cases=loadCases();
+  const el=document.getElementById('cases-list');
+  if(!cases.length){
+    el.innerHTML=`<div class="empty"><div class="empty-icon">📋</div>Todavía no tenés casos. Creá uno nuevo.</div>`;
+    return;
+  }
+  el.innerHTML=cases.slice().reverse().map(c=>`
+    <div class="case-item" onclick="prefillView('${c.code}')">
+      <div class="cdot"></div>
+      <div class="cinfo">
+        <div class="ccode">${c.code}</div>
+        <div class="cmeta">${c.alias} · ${formatDate(c.created)}</div>
+      </div>
+      <span style="color:var(--txs);font-size:16px">›</span>
+    </div>`).join('');
+}
+function prefillView(code){
+  document.getElementById('v-code').value=code;
+  goTo('sc-view');
+  document.getElementById('v-pass').focus();
+}
+
+// ─── CREATE CASE ─────────────────────────────────────────────────────────
+let _currentLink='';
+function createCase(){
+  const alias=document.getElementById('c-alias').value.trim();
+  const pass=document.getElementById('c-pass').value.trim();
+  const err=document.getElementById('c-err');
+  if(!alias||pass.length<4){ err.classList.add('show'); return; }
+  err.classList.remove('show');
+
+  const code=randCode();
+  const vt=simpleHash(pass+code);
+
+  // Save case
+  const cases=loadCases();
+  cases.push({code,alias,vt,created:Date.now()});
+  saveCases(cases);
+
+  // Generate client link
+  const base=getBaseUrl();
+  _currentLink=`${base}fiatq.html?case=${code}&vt=${vt}`;
+
+  document.getElementById('gen-code-val').textContent=code;
+  document.getElementById('gen-box').classList.add('show');
+  document.getElementById('c-alias').value='';
+  document.getElementById('c-pass').value='';
+}
+function copyClientLink(){
+  navigator.clipboard.writeText(_currentLink).then(()=>{
+    const fb=document.getElementById('c-fb');
+    fb.classList.add('show');
+    setTimeout(()=>fb.classList.remove('show'),2000);
+  });
+}
+function shareWhatsApp(){
+  const txt=encodeURIComponent('Hola! Por favor completá este cuestionario breve para nuestra próxima sesión:\n'+_currentLink);
+  window.open('https://wa.me/?text='+txt,'_blank');
+}
+
+// ─── VIEW RESULTS ─────────────────────────────────────────────────────────
+function verifyAndLoad(){
+  const code=document.getElementById('v-code').value.trim().toUpperCase();
+  const pass=document.getElementById('v-pass').value.trim();
+  const err=document.getElementById('v-err');
+  err.classList.remove('show');
+  if(!code||!pass){ err.classList.add('show'); return; }
+
+  const cases=loadCases();
+  const found=cases.find(c=>c.code===code);
+  if(!found){ err.classList.add('show'); return; }
+
+  const vt=simpleHash(pass+code);
+  if(vt!==found.vt){ err.classList.add('show'); return; }
+
+  // Load results
+  const resultsKey='fiat-results-'+code;
+  let results=null;
+  try{ results=JSON.parse(localStorage.getItem(resultsKey)); }catch(e){}
+
+  if(!results){
+    err.textContent='El consultante todavía no completó el cuestionario para este caso.';
+    err.classList.add('show');
+    return;
+  }
+
+  renderAnalysis(found, results);
+  goTo('sc-analysis');
+}
+
+// ─── ANALYSIS ─────────────────────────────────────────────────────────────
+const CLASSES=[
+  {id:'A',name:'Clase A',title:'Asertividad de Necesidades',color:'#1B4F9B',icon:'🗣️',
+   items:[
+    {id:'A1',r:false},{id:'A2',r:true},{id:'A3',r:true},{id:'A4',r:false},{id:'A5',r:false},
+    {id:'A6',r:true},{id:'A7',r:false},{id:'A8',r:true},{id:'A9',r:true},{id:'A10',r:true},
+    {id:'A11',r:false},{id:'A12',r:false},{id:'A13',r:false},{id:'A14',r:true},{id:'A15',r:false},
+    {id:'A16',r:false},{id:'A17',r:false},{id:'A18',r:true},{id:'A19',r:false},{id:'A20',r:false},{id:'A21',r:false}
+   ],
+   texts:[
+    'Tiene problemas para lograr que sus necesidades sean satisfechas.',
+    'Sus necesidades se satisfacen en cuanto las pide.',
+    'Sabe cuándo necesita ayuda o apoyo de otras personas.',
+    'Se da cuenta de que necesitaba ayuda recién cuando la situación ya pasó.',
+    'No sabe cómo expresar con palabras lo que necesita.',
+    'Puede identificar el tipo de ayuda o apoyo emocional que necesita.',
+    'Tiene dificultades para reconocer cuándo puede pedirle algo a otra persona.',
+    'Cuando necesita algo, lo pide en cuanto lo necesita.',
+    'Puede identificar personas dispuestas a ayudarle.',
+    'Cuando necesita apoyo, se lo pide a alguien cercano.',
+    'Le pide consejo sobre situaciones personales a desconocidos o conocidos casuales.',
+    'Evita pedirle ayuda a las personas para satisfacer sus necesidades.',
+    'Empieza a pedir algo y luego retira el pedido.',
+    'Está dispuesto/a a aceptar ayuda una vez que la persona acepta ayudar.',
+    'Cuando alguien nota que necesita ayuda, niega necesitarla.',
+    'Las personas no responden cuando pide ayuda o apoyo.',
+    'Expresa sus necesidades de forma sutil, dando indirectas.',
+    'Cuando pide ayuda, las personas entienden lo que necesita.',
+    'En relaciones, da mucho apoyo emocional pero no recibe mucho a cambio.',
+    'Las personas le dicen que pide cosas con demasiada frecuencia.',
+    'A las personas no les gusta la manera en que pide las cosas.'
+   ],
+   interventions:[
+    {tag:'t-fap',label:'FAP',text:'Evocar y moldear la asertividad en sesión',how:'Identificá CRBs de inhibición de pedidos en sesión (ej: el consultante dice "no pasa nada" cuando algo sí molesta). Respondé naturalmente cuando aparezca una afirmación directa: "Gracias por decirme eso directamente."'},
+    {tag:'t-act',label:'ACT',text:'Clarificación de valores en relaciones',how:'Explorar qué tipo de relaciones quiere construir. Si pedir es coherente con sus valores de conexión genuina, el pedido se transforma en acción comprometida, no en vulnerabilidad.'},
+    {tag:'t-dbt',label:'DBT',text:'Habilidades DEAR MAN',how:'Entrenar la estructura: Describe, Express, Assert, Reinforce, Mindful, Appear confident, Negotiate. Practicar con situaciones reales de bajo riesgo primero.'},
+    {tag:'t-gen',label:'Conductual',text:'Jerarquía de exposición a hacer pedidos',how:'Construir una jerarquía de situaciones desde menor a mayor dificultad. Comenzar con pedidos concretos y de bajo costo interpersonal.'}
+   ]
+  },
+  {id:'B',name:'Clase B',title:'Comunicación Bidireccional',color:'#2B9FD1',icon:'🔄',
+   items:[
+    {id:'B1',r:false},{id:'B2',r:false},{id:'B3',r:false},{id:'B4',r:false},{id:'B5',r:true},
+    {id:'B6',r:true},{id:'B7',r:true},{id:'B8',r:true},{id:'B9',r:false},{id:'B10',r:true},
+    {id:'B11',r:false},{id:'B12',r:false},{id:'B13',r:false},{id:'B14',r:false},{id:'B15',r:true},
+    {id:'B16',r:false},{id:'B17',r:false},{id:'B18',r:false},{id:'B19',r:false},{id:'B20',r:false},
+    {id:'B21',r:false},{id:'B22',r:false},{id:'B23',r:true},{id:'B24',r:false},{id:'B25',r:false}
+   ],
+   texts:[
+    'Tiene problemas para recibir retroalimentación de otras personas.',
+    'Tiene problemas para dar retroalimentación a otras personas.',
+    'Le resulta difícil identificar cuándo le dan retroalimentación.',
+    'No está seguro/a de cómo está afectando a otros al interactuar.',
+    'Sabe cuándo tiene un impacto desagradable en los demás.',
+    'La retroalimentación que recibe de los demás le parece precisa.',
+    'Considera cuidadosamente la fuente antes de cambiar su comportamiento.',
+    'Puede identificar cuándo sería útil dar retroalimentación a alguien.',
+    'Evita situaciones donde podría recibir retroalimentación.',
+    'Si no está seguro/a de su impacto en un amigo, le pide retroalimentación.',
+    'Cuando recibe retroalimentación negativa, se bloquea.',
+    'Es excesivamente consciente del impacto que tiene en los demás.',
+    'Se hiere o molesta fácilmente cuando le dan retroalimentación negativa.',
+    'No sabe cómo responder a la retroalimentación, sea positiva o negativa.',
+    'Cambia su comportamiento en respuesta a la retroalimentación recibida.',
+    'Si le dan retroalimentación, cree que es el problema de esa persona.',
+    'Cuando nota que tiene un impacto desagradable, trata de ignorar el malestar ajeno.',
+    'Si recibe retroalimentación que no le gusta, hace lo contrario de lo que se le pide.',
+    'Cuando le dan retroalimentación desfavorable, discute.',
+    'No da retroalimentación aunque otro tenga un impacto desagradable en él/ella.',
+    'Cuando dice que el comportamiento de alguien le afecta, la persona no cambia.',
+    'Le dicen que la retroalimentación que da es excesiva y muy detallada.',
+    'Cuando da retroalimentación, responde de manera breve y específica.',
+    'Le dicen que cuando da retroalimentación, es demasiado crítico/a.',
+    'Cuando da retroalimentación, repite su posición varias veces.'
+   ],
+   interventions:[
+    {tag:'t-fap',label:'FAP',text:'Usar el impacto en sesión como dato clínico',how:'Cuando el consultante tenga un impacto en vos (positivo o negativo), describirlo naturalmente: "Cuando dijiste eso, noté que me alejé un poco. ¿Podemos explorar eso?" Esto entrena la sensibilidad al impacto interpersonal en vivo.'},
+    {tag:'t-act',label:'ACT',text:'Defusión del self-as-content',how:'El rechazo al feedback suele estar ligado a reglas sobre quién "soy". Trabajar la perspectiva del observador y flexibilidad con la auto-imagen.'},
+    {tag:'t-dbt',label:'DBT',text:'Habilidades GIVE y validación',how:'Entrenar la capacidad de recibir feedback sin contraatacar: validar la perspectiva ajena antes de defender la propia. Practicar la escucha activa validante.'},
+    {tag:'t-gen',label:'Conductual',text:'Ejercicios de retroalimentación graduada',how:'Exponer progresivamente a situaciones de feedback en contextos de bajo riesgo. Registrar la reacción emocional y conductual. Identificar reglas que activan el rechazo.'}
+   ]
+  },
+  {id:'C',name:'Clase C',title:'Conflicto',color:'#E87820',icon:'⚡',
+   items:[
+    {id:'C1',r:false},{id:'C2',r:false},{id:'C3',r:true},{id:'C4',r:false},{id:'C5',r:true},
+    {id:'C6',r:false},{id:'C7',r:false},{id:'C8',r:false},{id:'C9',r:false},{id:'C10',r:false},
+    {id:'C11',r:false},{id:'C12',r:false},{id:'C13',r:true},{id:'C14',r:true},{id:'C15',r:false},
+    {id:'C16',r:true},{id:'C17',r:true},{id:'C18',r:false},{id:'C19',r:false},{id:'C20',r:false},
+    {id:'C21',r:false},{id:'C22',r:false},{id:'C23',r:false}
+   ],
+   texts:[
+    'Tiene problemas con el conflicto en sus relaciones.',
+    'Se siente incómodo/a cuando experimenta desacuerdo con otra persona.',
+    'Es consciente cuando hay conflicto entre él/ella y otra persona.',
+    'Cuando otra persona está enojada, no entiende el problema entre ambos.',
+    'Siente que a veces es beneficioso expresar el desacuerdo.',
+    'Entra en conflicto con otros por cosas que no parecen importarles.',
+    'Le dicen que quiere discutir el conflicto en momentos inapropiados.',
+    'Se involucra en conflictos sin considerar con quién está.',
+    'Evita el conflicto a toda costa.',
+    'Para evitar el conflicto, trata de anticipar lo que la otra persona quiere.',
+    'Se retira ante el conflicto, independientemente de las circunstancias.',
+    'Después de expresar un desacuerdo, inmediatamente se disculpa.',
+    'En un conflicto, pregunta qué puede hacer para mejorar las cosas.',
+    'Tiene éxito en resolver conflictos con los demás.',
+    'En desacuerdos, explica repetidamente por qué cree tener razón.',
+    'Durante una discusión, cuida de no herir los sentimientos del otro.',
+    'Aborda soluciones al conflicto de manera directa y clara.',
+    'Expresa el enojo de forma indirecta (ej: dejando de hablar).',
+    'Le dicen que no está dispuesto/a a ceder.',
+    'Las discusiones se prolongan por mucho tiempo.',
+    'Durante una discusión, se siente más conectado/a a la otra persona.',
+    'Las discusiones se vuelven más intensas con el tiempo.',
+    'Deliberadamente molesta a la otra persona durante una discusión.'
+   ],
+   interventions:[
+    {tag:'t-fap',label:'FAP',text:'Usar conflictos en sesión terapéuticamente',how:'Si surge una tensión o desacuerdo en sesión, no desactivarlo enseguida. Explorarlo: "Noto que hay algo incómodo entre nosotros ahora mismo. ¿Podemos quedarnos con esto un momento?" Esto entrena la tolerancia al conflicto.'},
+    {tag:'t-act',label:'ACT',text:'Aceptación del malestar en el conflicto',how:'El conflicto evitado suele proteger una experiencia aversiva (vergüenza, miedo al rechazo). Trabajar la willingness: el conflicto como acción comprometida con valores de honestidad y conexión genuina.'},
+    {tag:'t-dbt',label:'DBT',text:'Habilidades DEAR MAN + FAST',how:'DEAR MAN para pedir cambios. FAST para mantener el autorrespeto en conflictos: Fair, Apologies (no excesivas), Stick to values, Truthful. Ensayar con role-play.'},
+    {tag:'t-gen',label:'Conductual',text:'Jerarquía de exposición a situaciones de conflicto',how:'Construir una jerarquía desde desacuerdos de bajo costo (opinión sobre algo neutro) hasta conflictos relacionalmente significativos. Identificar reglas de evitación activas.'}
+   ]
+  },
+  {id:'D',name:'Clase D',title:'Divulgación y Cercanía',color:'#9B2DB5',icon:'🤝',
+   items:[
+    {id:'D1',r:false},{id:'D2',r:true},{id:'D3',r:false},{id:'D4',r:true},{id:'D5',r:false},
+    {id:'D6',r:false},{id:'D7',r:false},{id:'D8',r:false},{id:'D9',r:true},{id:'D10',r:false},
+    {id:'D11',r:false},{id:'D12',r:false},{id:'D13',r:true},{id:'D14',r:false},{id:'D15',r:true},
+    {id:'D16',r:false},{id:'D17',r:true},{id:'D18',r:false},{id:'D19',r:false},{id:'D20',r:false},
+    {id:'D21',r:false},{id:'D22',r:false},{id:'D23',r:true},{id:'D24',r:false}
+   ],
+   texts:[
+    'Tiene problemas para sentirse cercano/a a los demás.',
+    'Ha tenido una o más relaciones cercanas.',
+    'No puede identificar cuándo le beneficiaría compartir sus experiencias.',
+    'Es consciente de cuándo es apropiado preguntar a otros sobre sus experiencias.',
+    'Comparte información personal con desconocidos o conocidos casuales.',
+    'Solo habla sobre sí mismo/a con un grupo pequeño y selecto.',
+    'Cuando los amigos le preguntan cómo está, elige no contarles.',
+    'Siente la necesidad de guardar secretos de las personas cercanas.',
+    'Habla sobre sí mismo/a y sus experiencias con otras personas.',
+    'Siente que es mejor no hablar de sus experiencias con nadie.',
+    'Empieza a hablar de lo que está pasando y luego decide guardarse los sentimientos.',
+    'Le ha contado a personas sobre sus problemas y luego lo lamentó.',
+    'Las relaciones cercanas son importantes para él/ella.',
+    'No quiere compartir cosas sobre sí mismo/a con los demás.',
+    'Le pide a otras personas que cuenten sobre sus sentimientos y experiencias.',
+    'Tiene dificultades para mantener una conversación.',
+    'Cuando habla de sus experiencias, las personas entienden lo que dice.',
+    'Después de compartir algo personal, resta importancia a lo divulgado.',
+    'Exagera sus buenos puntos y presume de sus habilidades.',
+    'Le dicen que habla de sí mismo/a de forma que minimiza sus buenas cualidades.',
+    'Le dicen que habla demasiado sobre sí mismo/a.',
+    'Le dicen que comparte información demasiado personal.',
+    'Escucha a los demás y les ofrece apoyo.',
+    'Le dicen que en relaciones pide mucho apoyo emocional pero da poco.'
+   ],
+   interventions:[
+    {tag:'t-fap',label:'FAP',text:'Moldear la auto-divulgación progresivamente en sesión',how:'La terapia es un contexto seguro para practicar la apertura. Reforzar naturalmente cada momento de auto-divulgación auténtica: "Gracias por contarme eso, no fue fácil." Esto entrena la generalización fuera de sesión.'},
+    {tag:'t-act',label:'ACT',text:'Flexibilidad psicológica alrededor de la vulnerabilidad',how:'Explorar reglas sobre la intimidad: "Las personas cercanas terminan lastimando" o "Si me muestro, me rechazan." Trabajar la willingness y defusión de estas reglas para habilitar conductas de cercanía coherentes con valores.'},
+    {tag:'t-dbt',label:'DBT',text:'Dialectics: cercanía y límites',how:'Trabajar la tensión dialéctica entre apertura y protección. La cercanía no implica ausencia de límites. Entrenar la discriminación contextual: con quién, cuándo y cuánto compartir.'},
+    {tag:'t-gen',label:'Conductual',text:'Jerarquía de divulgación gradual',how:'Construir una jerarquía de auto-divulgaciones desde temas neutros hasta experiencias emocionalmente cargadas. Registrar consecuencias naturales para corregir predicciones catastróficas.'}
+   ]
+  },
+  {id:'E',name:'Clase E',title:'Experiencia Emocional',color:'#2BA55A',icon:'💛',
+   items:[
+    {id:'E1',r:false},{id:'E2',r:false},{id:'E3',r:true},{id:'E4',r:false},{id:'E5',r:true},
+    {id:'E6',r:true},{id:'E7',r:true},{id:'E8',r:false},{id:'E9',r:false},{id:'E10',r:false},
+    {id:'E11',r:false},{id:'E12',r:true},{id:'E13',r:false},{id:'E14',r:true},{id:'E15',r:false},
+    {id:'E16',r:false},{id:'E17',r:false},{id:'E18',r:false},{id:'E19',r:false},{id:'E20',r:true},
+    {id:'E21',r:false},{id:'E22',r:false},{id:'E23',r:false},{id:'E24',r:false}
+   ],
+   texts:[
+    'Tiene problemas con sus emociones.',
+    'Tiene problemas para identificar lo que siente.',
+    'Es consciente de sus sentimientos mientras están ocurriendo.',
+    'No nota sus emociones durante una experiencia, sino que se da cuenta después.',
+    'Puede distinguir entre una emoción y otra.',
+    'Sus respuestas emocionales le tienen sentido dado el contexto.',
+    'Expresa sus emociones en momentos y lugares apropiados.',
+    'Habla de sus sentimientos en cualquier situación sin discriminar el contexto.',
+    'Oculta intencionalmente sus sentimientos.',
+    'Trata de no sentir ciertas emociones.',
+    'Evita situaciones que puedan generar sentimientos intensos.',
+    'Se permite sentir todas las emociones, incluso las más intensas.',
+    'Cuando tiene una emoción desagradable, toma medidas inmediatas para dejar de sentirla.',
+    'Puede ponerle un nombre a lo que siente.',
+    'Le dice a las personas que se siente de una manera cuando en realidad se siente de otra.',
+    'Las personas dicen que su expresión emocional es plana.',
+    'Cuando habla de sus sentimientos, usa las mismas pocas palabras.',
+    'Las personas dicen que quieren que exprese sus sentimientos más abiertamente.',
+    'Cuando comparte sus sentimientos, los demás no reaccionan como espera.',
+    'Comunica sus emociones claramente para que los demás sepan cómo se siente.',
+    'Las personas dicen que habla demasiado de sus sentimientos.',
+    'Expresa sus emociones de manera excesivamente intensa.',
+    'A las personas no les gusta cuando habla de sus emociones.',
+    'Las personas se molestan con la manera en que expresa sus emociones.'
+   ],
+   interventions:[
+    {tag:'t-fap',label:'FAP',text:'Evocar y validar la expresión emocional en sesión',how:'Cuando aparezca una emoción en sesión, no apresurarse a resolverla. Quedarse con ella: "Noto que algo te movió cuando dijiste eso. ¿Qué estás sintiendo ahora mismo?" El refuerzo natural en sesión entrena la expresión emocional contextual.'},
+    {tag:'t-act',label:'ACT',text:'Aceptación y defusión de reglas de regulación emocional',how:'Identificar reglas tipo "No debo sentir esto" o "Si siento X, voy a perder el control." Trabajar la aceptación como willingness, no como resignación. Las emociones como contexto para la acción, no como amenaza.'},
+    {tag:'t-dbt',label:'DBT',text:'Módulo de Regulación Emocional',how:'Psicoeducación sobre la función de las emociones. Entrenamiento en identificación y etiquetado emocional (Mood Log). Reducción de vulnerabilidad emocional (PLEASE). Acción opuesta para emociones que no se justifican.'},
+    {tag:'t-gen',label:'Conductual',text:'Entrenamiento en etiquetado emocional y exposición interocepetiva',how:'Ejercicios de identificación de sensaciones corporales asociadas a emociones. Registro de emociones con activador-emoción-respuesta. Exposición graduada a situaciones que generan emociones evitadas.'}
+   ]
+  }
+];
+
+function computeScores(answers){
+  return CLASSES.map(cls=>{
+    let total=0, max=cls.items.length*6;
+    cls.items.forEach(item=>{
+      const v=answers[item.id]||0;
+      total+=item.r ? (7-v) : v;
+    });
+    const pct=Math.round((total/max)*100);
+    return {id:cls.id, raw:total, max, pct};
+  });
+}
+
+function getSeverity(pct){
+  if(pct>=66) return {label:'Alta preocupación',cls:'sev-hi'};
+  if(pct>=41) return {label:'Preocupación moderada',cls:'sev-md'};
+  return {label:'Baja preocupación',cls:'sev-lo'};
+}
+
+function renderAnalysis(caseData, results){
+  document.getElementById('an-case').textContent=caseData.code;
+  document.getElementById('an-alias').textContent=caseData.alias;
+  document.getElementById('an-date').textContent='Completado: '+formatDate(results.ts);
+
+  const scores=computeScores(results.answers);
+
+  // Overview grid
+  const ovGrid=document.getElementById('ov-grid');
+  ovGrid.innerHTML=scores.map((s,i)=>{
+    const cls=CLASSES[i];
+    const sev=getSeverity(s.pct);
+    return `<div class="ov-card">
+      <div class="ov-top">
+        <div class="cls-badge" style="background:${cls.color}">${cls.id}</div>
+        <div class="sev ${sev.cls}">${sev.label}</div>
+      </div>
+      <div class="ov-bar-wrap"><div class="ov-bar" style="width:${s.pct}%;background:${cls.color}"></div></div>
+      <div class="ov-pct" style="color:${cls.color}">${s.pct}%</div>
+      <div class="ov-lbl">${cls.title}</div>
+    </div>`;
+  }).join('');
+
+  // Class cards
+  const cardsEl=document.getElementById('class-cards');
+  cardsEl.innerHTML=scores.map((s,i)=>{
+    const cls=CLASSES[i];
+    const sev=getSeverity(s.pct);
+
+    // Find most flagged items
+    const flagged=cls.items.map((item,idx)=>{
+      const v=results.answers[item.id]||0;
+      const score=item.r?(7-v):v;
+      return {idx,score,text:cls.texts[idx]};
+    }).filter(x=>x.score>=4).sort((a,b)=>b.score-a.score).slice(0,4);
+
+    const flagHtml=flagged.length>0 ? `
+      <div class="flag-title">⚠️ Ítems de mayor preocupación</div>
+      ${flagged.map(f=>`
+        <div class="flag-item">
+          <div class="fdot" style="background:${cls.color}"></div>
+          <div class="ftext">${f.text}</div>
+          <div class="fscore" style="color:${cls.color}">${f.score}/6</div>
+        </div>`).join('')}` : `<div style="font-size:12px;color:var(--txs);padding:8px 0">✓ No se identificaron ítems de alta preocupación en esta clase.</div>`;
+
+    const intHtml=cls.interventions.map(int=>`
+      <div class="int-item">
+        <div class="int-tag ${int.tag}">${int.label}</div>
+        <div class="int-text">${int.text}</div>
+        <div class="int-how">${int.how}</div>
+      </div>`).join('');
+
+    return `<div class="cls-card">
+      <div class="cls-head" onclick="toggleCard('card-body-${cls.id}')">
+        <div class="cls-icon" style="background:${cls.color}22">${cls.icon}</div>
+        <div class="cls-info">
+          <div class="cls-name">${cls.name}: ${cls.title}</div>
+          <div class="cls-sub">${sev.label}</div>
+        </div>
+        <div class="cls-score">
+          <div class="cls-num" style="color:${cls.color}">${s.pct}%</div>
+          <div class="cls-score-lbl">Índice</div>
+        </div>
+      </div>
+      <div class="cls-body" id="card-body-${cls.id}">
+        <div class="sbar-wrap"><div class="sbar" style="width:${s.pct}%;background:${cls.color}"></div></div>
+        <div class="sbar-labels">
+          <span class="sbar-lbl">Sin preocupación</span>
+          <span class="sbar-lbl">Alta preocupación</span>
+        </div>
+        <div class="divider"></div>
+        ${flagHtml}
+        <div class="int-title">💡 Ideas de intervención</div>
+        ${intHtml}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Animate bars after render
+  setTimeout(()=>{
+    document.querySelectorAll('.ov-bar, .sbar').forEach(b=>{
+      const w=b.style.width; b.style.width='0'; 
+      setTimeout(()=>b.style.width=w, 50);
+    });
+  },100);
+}
+
+function toggleCard(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────
+(function init(){
+  const saved=localStorage.getItem('fiat-theme');
+  if(saved) document.documentElement.setAttribute('data-theme',saved);
+  else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)
+    document.documentElement.setAttribute('data-theme','dark');
+  renderCasesList();
+})();
+</script>
+</body>
+</html>
