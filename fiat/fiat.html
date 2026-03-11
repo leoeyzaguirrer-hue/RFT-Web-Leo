@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Sistema FIAT | Guía Clínica</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--yellow:#F9C12E;--blue:#1B4F9B;--orange:#E87820;--lb:#2B9FD1;--green:#2BA55A;--purple:#9B2DB5}
+[data-theme="dark"]{--bg:#060F24;--bg2:#0D1B38;--sur:#111E3C;--sur2:#162347;--tx:#EEF2FF;--txs:#7A93C0;--bd:rgba(249,193,46,0.12);--bd2:rgba(255,255,255,0.07);--sh:0 8px 40px rgba(0,0,0,0.6);--shs:0 2px 12px rgba(0,0,0,0.4)}
+[data-theme="light"]{--bg:#F5F3EC;--bg2:#EDE9DF;--sur:#FFFFFF;--sur2:#F0EDE4;--tx:#1B1F3B;--txs:#5A6280;--bd:rgba(27,79,155,0.13);--bd2:rgba(27,79,155,0.07);--sh:0 8px 40px rgba(27,79,155,0.12);--shs:0 2px 12px rgba(27,79,155,0.08)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='92'%3E%3Cpolygon points='40,3 74,22 74,60 40,79 6,60 6,22' fill='none' stroke='%231B4F9B' stroke-width='1'/%3E%3C/svg%3E");opacity:.045;pointer-events:none;z-index:0}
+[data-theme="light"] body::before{opacity:.03}
+.wrap{max-width:600px;margin:0 auto;position:relative;z-index:1}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;position:sticky;top:0;z-index:200;background:var(--bg);border-bottom:1px solid var(--bd2);backdrop-filter:blur(14px)}
+.logo{display:flex;align-items:center;gap:10px}
+.hex{width:34px;height:34px;background:var(--yellow);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hex span{color:var(--blue);font-size:13px;font-weight:900}
+.logo-title{font-size:15px;font-weight:900;color:var(--yellow);line-height:1}
+[data-theme="light"] .logo-title{color:var(--blue)}
+.logo-sub{font-size:10px;color:var(--txs);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.tbtn{background:var(--sur);border:1.5px solid var(--bd);border-radius:50px;padding:6px 14px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--tx);cursor:pointer;transition:all .2s}
+.tbtn:hover{opacity:.8}
+
+.hero{background:linear-gradient(135deg,var(--blue) 0%,#1E3A7A 50%,#162B5C 100%);padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;background:var(--yellow);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);opacity:.1}
+.hero::after{content:'';position:absolute;left:-30px;top:-30px;width:140px;height:140px;background:var(--lb);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);opacity:.07}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border-radius:50px;padding:4px 16px;font-size:11px;font-weight:900;color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.hero h1{font-size:52px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1;margin-bottom:8px}
+.hero h1 span{color:var(--yellow)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.75);margin-bottom:4px;line-height:1.5}
+.hero-ref{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:28px}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hbtn{padding:13px 22px;border-radius:14px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;border:none;transition:all .2s;text-decoration:none;display:inline-block}
+.hbtn-y{background:var(--yellow);color:var(--blue);box-shadow:0 4px 20px rgba(249,193,46,.4)}
+.hbtn-y:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(249,193,46,.5)}
+.hbtn-o{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.hbtn-o:hover{background:rgba(255,255,255,.25)}
+.author-tag{display:inline-block;margin-top:20px;background:rgba(255,255,255,.1);border-radius:50px;padding:5px 16px;font-size:12px;color:rgba(255,255,255,.65);font-weight:700}
+
+.nav-tabs{display:flex;overflow-x:auto;background:var(--sur);border-bottom:2px solid var(--bd2);position:sticky;top:65px;z-index:150;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.ntab{padding:14px 18px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--txs);background:none;border:none;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;flex-shrink:0}
+.ntab:hover{color:var(--tx)}
+.ntab.active{color:var(--yellow);border-bottom-color:var(--yellow)}
+[data-theme="light"] .ntab.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+.section{display:none;padding:24px 20px 100px;animation:fadeUp .3s ease}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--sur);border:1.5px solid var(--bd2);border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:var(--shs)}
+.card-accent{border-left:4px solid var(--yellow)}
+[data-theme="light"] .card-accent{border-left-color:var(--blue)}
+.sec-title{font-size:22px;font-weight:900;color:var(--tx);margin-bottom:6px}
+.sec-sub{font-size:14px;color:var(--txs);line-height:1.6;margin-bottom:20px}
+.card-title{font-size:15px;font-weight:900;color:var(--tx);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card-body{font-size:14px;color:var(--txs);line-height:1.7}
+.card-body p{margin-bottom:10px}
+.card-body p:last-child{margin-bottom:0}
+.card-body strong{color:var(--tx)}
+.hl{color:var(--yellow);font-weight:900}
+[data-theme="light"] .hl{color:var(--blue)}
+
+.level-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.ltab{padding:8px 18px;border-radius:50px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;border:1.5px solid var(--bd);background:var(--sur);color:var(--txs);transition:all .2s}
+.ltab.active{background:var(--yellow);color:var(--blue);border-color:var(--yellow)}
+[data-theme="light"] .ltab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.level{display:none}
+.level.active{display:block}
+
+.cls-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.cls-card{border-radius:16px;padding:16px;border:1.5px solid transparent;cursor:pointer;transition:all .2s;user-select:none}
+.cls-card:hover{transform:translateY(-2px)}
+.cls-letter{font-size:30px;font-weight:900;margin-bottom:4px}
+.cls-name{font-size:12px;font-weight:800;line-height:1.3;color:var(--tx)}
+.cls-count{font-size:11px;opacity:.65;margin-top:4px}
+.cls-detail{border-radius:14px;margin-bottom:10px;padding:16px;display:none;border:1.5px solid transparent;animation:fadeUp .2s ease}
+
+.expand-item{background:var(--sur);border:1.5px solid var(--bd2);border-radius:14px;margin-bottom:8px;overflow:hidden}
+.expand-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;user-select:none}
+.expand-head:hover{background:var(--sur2)}
+.expand-title{font-size:14px;font-weight:800;color:var(--tx)}
+.expand-arrow{font-size:13px;color:var(--txs);transition:transform .3s}
+.expand-body{padding:0 16px 16px;display:none;font-size:13px;color:var(--txs);line-height:1.7}
+.expand-body strong{color:var(--tx)}
+.expand-body p{margin-bottom:8px}
+.expand-body p:last-child{margin-bottom:0}
+
+.example{background:var(--bg2);border-radius:12px;padding:14px 16px;margin:12px 0;border-left:3px solid var(--orange)}
+.example-label{font-size:10px;font-weight:900;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.example-text{font-size:13px;color:var(--txs);line-height:1.6;font-style:italic}
+.example-text strong{color:var(--tx);font-style:normal}
+
+.tip{background:rgba(249,193,46,.08);border:1.5px solid rgba(249,193,46,.2);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:13px;color:var(--txs);line-height:1.6}
+[data-theme="light"] .tip{background:rgba(27,79,155,.06);border-color:rgba(27,79,155,.15)}
+.tip strong{color:var(--yellow)}
+[data-theme="light"] .tip strong{color:var(--blue)}
+.warn-box{background:rgba(232,120,32,.08);border:1.5px solid rgba(232,120,32,.2);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:13px;color:var(--txs);line-height:1.6}
+.warn-box strong{color:var(--orange)}
+
+.actor-block{background:var(--sur);border:1.5px solid var(--bd2);border-radius:16px;padding:16px;margin-bottom:12px}
+.actor-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.actor-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.actor-name{font-size:14px;font-weight:900;color:var(--tx)}
+.actor-role{font-size:11px;color:var(--txs);font-weight:700}
+.step-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.step-list li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--txs);line-height:1.5}
+.step-list li::before{content:attr(data-n);font-size:11px;font-weight:900;color:#fff;background:var(--blue);border-radius:50%;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-list li strong{color:var(--tx)}
+
+.case-hero{background:linear-gradient(135deg,#7B22A0,#4A1065);border-radius:20px;padding:22px;margin-bottom:14px;box-shadow:var(--sh)}
+.case-hero h3{font-size:18px;font-weight:900;color:#fff;margin-bottom:6px}
+.case-hero p{font-size:13px;color:rgba(255,255,255,.8);line-height:1.6}
+.case-cls{border-radius:14px;padding:14px 16px;margin-bottom:10px;border:1.5px solid transparent}
+.case-cls-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cbadge{font-size:11px;font-weight:900;padding:3px 12px;border-radius:50px;color:#fff}
+.csev{font-size:11px;font-weight:900;padding:3px 10px;border-radius:50px}
+.case-text{font-size:13px;color:var(--txs);line-height:1.6}
+.case-text strong{color:var(--tx)}
+
+.faq-item{background:var(--sur);border:1.5px solid var(--bd2);border-radius:14px;margin-bottom:8px;overflow:hidden}
+.faq-q{padding:14px 16px;font-size:14px;font-weight:800;color:var(--tx);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s;user-select:none;gap:10px}
+.faq-q:hover{background:var(--sur2)}
+.faq-q span{flex-shrink:0;color:var(--txs);font-size:13px}
+.faq-a{padding:0 16px 14px;font-size:13px;color:var(--txs);line-height:1.7;display:none}
+.faq-a.open{display:block}
+.faq-a strong{color:var(--tx)}
+
+.tag{display:inline-block;font-size:11px;font-weight:900;padding:3px 10px;border-radius:50px;margin:2px 2px 2px 0}
+.tag-fap{background:rgba(27,79,155,.2);color:var(--lb)}
+.tag-act{background:rgba(43,165,90,.2);color:var(--green)}
+.tag-dbt{background:rgba(155,45,181,.2);color:#C070E0}
+
+.divider{height:1px;background:var(--bd2);margin:16px 0}
+
+.fab{position:fixed;bottom:24px;right:20px;z-index:300;background:var(--yellow);color:var(--blue);border:none;border-radius:50px;padding:13px 20px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 6px 24px rgba(249,193,46,.45);transition:all .2s}
+.fab:hover{transform:translateY(-3px)}
+[data-theme="light"] .fab{box-shadow:0 6px 24px rgba(27,79,155,.3)}
+
+@media(max-width:380px){.hero h1{font-size:40px}.cls-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">
+    <div class="hex"><span>F</span></div>
+    <div>
+      <div class="logo-title">Sistema FIAT</div>
+      <div class="logo-sub">Guía Clínica</div>
+    </div>
+  </div>
+  <button class="tbtn" onclick="toggleTheme()">☀️/🌙</button>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">Callaghan, 2006</div>
+  <h1>FIAT<span>.</span></h1>
+  <div class="hero-sub">Functional Idiographic Assessment Template</div>
+  <div class="hero-ref">Sistema de evaluación conductual de relaciones interpersonales</div>
+  <div class="hero-btns">
+    <a href="fiat-terapeuta.html" class="hbtn hbtn-y">🧠 Panel del Terapeuta</a>
+    <button class="hbtn hbtn-o" onclick="showSection('sc-uso')">📱 ¿Cómo usarlo?</button>
+  </div>
+  <div class="author-tag">@leo.eyzaguirre · Psicoterapeuta Conductual Contextual</div>
+</div>
+
+<div class="nav-tabs">
+  <button class="ntab active" onclick="showSection('sc-teoria')">📚 Teoría</button>
+  <button class="ntab" onclick="showSection('sc-clases')">🗂️ Las 5 Clases</button>
+  <button class="ntab" onclick="showSection('sc-caso')">🧩 Caso Clínico</button>
+  <button class="ntab" onclick="showSection('sc-uso')">📱 Cómo Usar</button>
+  <button class="ntab" onclick="showSection('sc-faq')">❓ FAQ</button>
+</div>
+
+<div class="wrap">
+
+<!-- ── TEORÍA ── -->
+<div class="section active" id="sc-teoria">
+  <div class="sec-title">¿Qué es el FIAT? 🧠</div>
+  <div class="sec-sub">Elegí tu nivel y explorá a tu ritmo.</div>
+  <div class="level-tabs">
+    <button class="ltab active" onclick="showLevel('teoria','basico',this)">🟢 Básico</button>
+    <button class="ltab" onclick="showLevel('teoria','medio',this)">🟡 Intermedio</button>
+    <button class="ltab" onclick="showLevel('teoria','avanzado',this)">🔴 Avanzado</button>
+  </div>
+
+  <div class="level active" id="teoria-basico">
+    <div class="card card-accent">
+      <div class="card-title">💡 La idea central</div>
+      <div class="card-body">
+        <p>El FIAT es un sistema de evaluación creado por <strong>Glenn Callaghan (2006)</strong> para identificar qué conductas interpersonales de un consultante son problemáticas y cuáles son fortalezas.</p>
+        <p>Su premisa es simple pero poderosa: <span class="hl">los patrones de relación que el consultante tiene con el mundo también aparecen dentro de la sesión</span> con el terapeuta.</p>
+        <p>Si Elena evita el conflicto con todos, probablemente también lo evitará con vos en sesión. Si Juan no puede pedir lo que necesita, tampoco lo pedirá en el consultorio.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔗 La conexión FAP</div>
+      <div class="card-body">
+        <p>El FIAT nace dentro de la <strong>Psicoterapia Analítico Funcional (FAP)</strong>. En FAP, la relación terapéutica no es un medio para llegar al cambio — <span class="hl">es el contexto donde el cambio ocurre</span>.</p>
+        <p>Para aprovechar eso, el terapeuta necesita saber qué conductas observar. El FIAT organiza esas conductas en <strong>5 clases</strong> que cubren las áreas más comunes de dificultad interpersonal.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🎯 ¿Para qué sirve?</div>
+      <div class="card-body">
+        <p>✅ <strong>Evalúa</strong> — identifica en qué clases el consultante tiene déficits o excesos conductuales.</p>
+        <p>🗺️ <strong>Orienta</strong> — le da al terapeuta un mapa de qué observar en sesión.</p>
+        <p>📏 <strong>Mide cambio</strong> — puede administrarse al inicio y al final para ver evolución.</p>
+      </div>
+    </div>
+    <div class="example">
+      <div class="example-label">Ejemplo clínico 💬</div>
+      <div class="example-text">Andrés consulta porque "no se lleva bien con nadie en el trabajo." En el FIAT-Q, sus puntajes más altos aparecen en Clase C (Conflicto) y Clase B (Comunicación). El terapeuta empieza a prestar atención a cómo Andrés maneja los desacuerdos <strong>dentro de sesión</strong> — y nota que cuando no está de acuerdo con algo, cambia de tema. Ese es el CRB que hay que trabajar.</div>
+    </div>
+  </div>
+
+  <div class="level" id="teoria-medio">
+    <div class="card card-accent">
+      <div class="card-title">🔬 Evaluación funcional idiográfica</div>
+      <div class="card-body">
+        <p>La palabra <strong>"idiográfica"</strong> es clave. A diferencia de instrumentos que comparan al individuo con una norma poblacional, el FIAT se enfoca en entender al individuo específico en su contexto.</p>
+        <p>Esto significa que <span class="hl">un mismo puntaje puede tener significados clínicos muy distintos</span> en dos consultantes diferentes. El FIAT no diagnostica — <strong>conceptualiza funcionalmente</strong>.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📐 Dos perspectivas, una conceptualización</div>
+      <div class="card-body">
+        <p>📋 <strong>FIAT-Q (consultante):</strong> Captura patrones generales y la perspectiva subjetiva del consultante.</p>
+        <p>🧠 <strong>Evaluación del terapeuta:</strong> Captura CRBs en vivo, con el terapeuta como contexto.</p>
+        <p>La <span class="hl">discrepancia entre ambas fuentes es información clínica valiosa</span>: un consultante que reporta alta asertividad pero que en sesión nunca contradice al terapeuta merece análisis.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚡ CRBs y el FIAT</div>
+      <div class="card-body">
+        <p>🔴 <strong>CRB1</strong> — conductas que replican los problemas del consultante en la vida real.</p>
+        <p>🟢 <strong>CRB2</strong> — conductas que representan mejoras respecto a los CRB1.</p>
+        <p>El FIAT actúa como un <span class="hl">mapa de CRBs anticipados</span>: si indica déficit en Clase E, el terapeuta puede anticipar CRB1s de supresión emocional en sesión y diseñar oportunidades para evocar y reforzar CRB2s.</p>
+      </div>
+    </div>
+    <div class="tip"><strong>💡 Punto clave:</strong> Callaghan propone que el terapeuta evalúe con el FIAT <strong>antes y después de cada sesión</strong> para ir mapeando cambios en los CRBs a lo largo del proceso.</div>
+    <div class="example">
+      <div class="example-label">Ejemplo clínico 💬</div>
+      <div class="example-text">Marta tiene puntajes altos en déficit de Clase D. El terapeuta nota que cuando comparte algo personal, lo minimiza inmediatamente: <strong>"pero tampoco es para tanto."</strong> Eso es un CRB1. El terapeuta empieza a reforzar naturalmente cada auto-divulgación genuina sin minimización — ese es el CRB2 objetivo.</div>
+    </div>
+  </div>
+
+  <div class="level" id="teoria-avanzado">
+    <div class="card card-accent">
+      <div class="card-title">🧬 Fundamentos conductuales</div>
+      <div class="card-body">
+        <p>El FIAT opera desde un marco <strong>contextual-funcional</strong>: la conducta interpersonal se entiende siempre en relación a su contexto y sus consecuencias. No hay conductas "disfuncionales" en abstracto — hay conductas que funcionan bien en un contexto y producen problemas en otro.</p>
+        <p>Las dificultades son <span class="hl">repertorios conductuales aprendidos que pueden modificarse</span> a través de contingencias interpersonales en el contexto terapéutico.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔄 Las clases como clases de respuesta</div>
+      <div class="card-body">
+        <p>Las 5 clases no son categorías diagnósticas — son <strong>clases funcionales de respuesta</strong>. Implicancias:</p>
+        <p>1. Una conducta puede pertenecer a más de una clase según su <em>función</em>, no su topografía. Llorar puede ser Clase E o Clase C, dependiendo de qué función cumpla.</p>
+        <p>2. <span class="hl">Déficits y excesos coexisten</span>: un consultante puede no saber que necesita ayuda (déficit en A1) pero cuando pide, lo hace demandantemente (exceso en A3).</p>
+        <p>3. El cambio en una clase genera efectos en otras — no son independientes.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🎛️ El terapeuta como contexto discriminativo</div>
+      <div class="card-body">
+        <p>El terapeuta no es un observador neutral — <strong>es parte del contexto que evoca las conductas que evalúa</strong>. La evaluación del terapeuta refleja la díada, no solo al consultante.</p>
+        <p>Por eso Callaghan insiste en evaluar pre y post sesión, y en que el terapeuta se monitoreé a sí mismo: <span class="hl">¿estoy evocando lo que quiero observar, o estoy evitando los mismos conflictos que el consultante?</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Integración CBS</div>
+      <div class="card-body">
+        <p><span class="tag tag-act">ACT</span> Los déficits en Clase E mapean sobre evitación experiencial y fusión. Los valores orientan la dirección del cambio conductual.</p>
+        <p><span class="tag tag-dbt">DBT</span> El módulo de Efectividad Interpersonal (DEAR MAN, GIVE, FAST) actúa como habilidades concretas para las 5 clases.</p>
+        <p><span class="tag tag-fap">RFT</span> El análisis de reglas verbales (pliance, tracking) explica por qué los déficits del FIAT resisten al cambio pese a sus consecuencias negativas.</p>
+      </div>
+    </div>
+    <div class="warn-box"><strong>⚠️ Limitación:</strong> El FIAT-Q es un autoinforme sujeto a sesgos. La evaluación del terapeuta es un contrapeso indispensable, no un complemento opcional.</div>
+  </div>
+</div>
+
+<!-- ── LAS 5 CLASES ── -->
+<div class="section" id="sc-clases">
+  <div class="sec-title">Las 5 Clases 🗂️</div>
+  <div class="sec-sub">Cada clase es un área funcional de la conducta interpersonal. Tocá una para expandirla.</div>
+  <div class="level-tabs">
+    <button class="ltab active" onclick="showLevel('clases','basico',this)">🟢 Básico</button>
+    <button class="ltab" onclick="showLevel('clases','medio',this)">🟡 Intermedio</button>
+    <button class="ltab" onclick="showLevel('clases','avanzado',this)">🔴 Avanzado</button>
+  </div>
+
+  <div class="level active" id="clases-basico">
+    <div class="cls-grid">
+      <div class="cls-card" style="background:#1B4F9B1A;border-color:#1B4F9B44" onclick="toggleCls('a')">
+        <div class="cls-letter" style="color:#1B4F9B">A</div>
+        <div class="cls-name">Asertividad de Necesidades</div>
+        <div class="cls-count" style="color:#1B4F9B">21 ítems</div>
+      </div>
+      <div class="cls-card" style="background:#2B9FD11A;border-color:#2B9FD144" onclick="toggleCls('b')">
+        <div class="cls-letter" style="color:#2B9FD1">B</div>
+        <div class="cls-name">Comunicación Bidireccional</div>
+        <div class="cls-count" style="color:#2B9FD1">25 ítems</div>
+      </div>
+      <div class="cls-card" style="background:#E878201A;border-color:#E8782044" onclick="toggleCls('c')">
+        <div class="cls-letter" style="color:#E87820">C</div>
+        <div class="cls-name">Conflicto</div>
+        <div class="cls-count" style="color:#E87820">23 ítems</div>
+      </div>
+      <div class="cls-card" style="background:#9B2DB51A;border-color:#9B2DB544" onclick="toggleCls('d')">
+        <div class="cls-letter" style="color:#9B2DB5">D</div>
+        <div class="cls-name">Divulgación y Cercanía</div>
+        <div class="cls-count" style="color:#9B2DB5">24 ítems</div>
+      </div>
+      <div class="cls-card" style="background:#2BA55A1A;border-color:#2BA55A44;grid-column:span 2" onclick="toggleCls('e')">
+        <div class="cls-letter" style="color:#2BA55A">E</div>
+        <div class="cls-name">Experiencia y Expresión Emocional</div>
+        <div class="cls-count" style="color:#2BA55A">24 ítems</div>
+      </div>
+    </div>
+    <div class="cls-detail" id="cls-a" style="background:#1B4F9B12;border-color:#1B4F9B33">
+      <strong style="color:#1B4F9B">🗣️ Clase A — Asertividad de Necesidades</strong>
+      <p style="margin-top:8px">Evalúa si el consultante puede <strong>identificar, comunicar y satisfacer sus propias necesidades</strong> de manera apropiada con las personas correctas.</p>
+      <div class="example"><div class="example-label">Déficit típico</div><div class="example-text">"Cuando necesito algo, espero que los demás lo adivinen. Si tengo que pedirlo, siento que ya no vale." → Necesidades expresadas con indirectas, o no expresadas.</div></div>
+      <div class="example"><div class="example-label">Exceso típico</div><div class="example-text">Pedir de forma tan frecuente o intensa que los demás se agotan. El consultante genera el resultado que más teme.</div></div>
+    </div>
+    <div class="cls-detail" id="cls-b" style="background:#2B9FD112;border-color:#2B9FD133">
+      <strong style="color:#2B9FD1">🔄 Clase B — Comunicación Bidireccional</strong>
+      <p style="margin-top:8px">Evalúa la capacidad de <strong>dar y recibir retroalimentación</strong> y de ser consciente del propio impacto en los demás.</p>
+      <div class="example"><div class="example-label">Déficit típico</div><div class="example-text">No registrar cuándo se está afectando negativamente a alguien hasta que la relación ya está dañada. Sorprenderse ante el enojo del otro.</div></div>
+      <div class="example"><div class="example-label">Exceso típico</div><div class="example-text">Hipersensibilidad: cualquier retroalimentación se vive como ataque y genera respuestas defensivas o de retirada.</div></div>
+    </div>
+    <div class="cls-detail" id="cls-c" style="background:#E8782012;border-color:#E8782033">
+      <strong style="color:#E87820">⚡ Clase C — Conflicto</strong>
+      <p style="margin-top:8px">Evalúa cómo el consultante <strong>identifica y maneja desacuerdos y tensiones</strong>. No se refiere a violencia, sino a la capacidad de estar en desacuerdo y resolverlo.</p>
+      <div class="example"><div class="example-label">Déficit típico</div><div class="example-text">Ceder siempre, no poder comunicar el propio punto de vista. La relación parece sin conflicto, pero la persona acumula resentimiento hasta la ruptura.</div></div>
+      <div class="example"><div class="example-label">Exceso típico</div><div class="example-text">Entrar en conflicto frecuentemente sin considerar el contexto ni la persona, y sin poder cerrarlo.</div></div>
+    </div>
+    <div class="cls-detail" id="cls-d" style="background:#9B2DB512;border-color:#9B2DB533">
+      <strong style="color:#9B2DB5">🤝 Clase D — Divulgación y Cercanía</strong>
+      <p style="margin-top:8px">Evalúa la capacidad de <strong>compartir aspectos personales y construir vínculos cercanos</strong> de manera contextualmente apropiada.</p>
+      <div class="example"><div class="example-label">Déficit típico</div><div class="example-text">Relaciones que permanecen en lo superficial aunque el consultante diga querer conexión real. Nunca compartir nada personal.</div></div>
+      <div class="example"><div class="example-label">Exceso típico</div><div class="example-text">Compartir información íntima con desconocidos o en contextos inapropiados, generando incomodidad y alejamiento.</div></div>
+    </div>
+    <div class="cls-detail" id="cls-e" style="background:#2BA55A12;border-color:#2BA55A33">
+      <strong style="color:#2BA55A">💛 Clase E — Experiencia y Expresión Emocional</strong>
+      <p style="margin-top:8px">Evalúa la capacidad de <strong>identificar, tolerar y expresar emociones</strong> de forma contextualmente apropiada.</p>
+      <div class="example"><div class="example-label">Déficit típico</div><div class="example-text">No identificar qué se siente, suprimir emociones activamente, o expresarlas solo en formas que no funcionan relacionalmente.</div></div>
+      <div class="example"><div class="example-label">Exceso típico</div><div class="example-text">Expresar emociones con tanta intensidad que los demás se retiran. La emoción "auténtica" funciona como evitación de la intimidad real.</div></div>
+    </div>
+  </div>
+
+  <div class="level" id="clases-medio">
+    <div class="tip" style="margin-bottom:16px"><strong>💡 Este nivel:</strong> Subclases de déficit/exceso y cómo una conducta puede pertenecer a múltiples clases según su función.</div>
+    <div class="expand-item">
+      <div class="expand-head" onclick="toggleExpand('cm-a')">
+        <span class="expand-title" style="color:#1B4F9B">🗣️ Clase A — Subclases de análisis</span>
+        <span class="expand-arrow" id="arr-cm-a">▼</span>
+      </div>
+      <div class="expand-body" id="cm-a">
+        <p><strong>A1 — Conciencia de necesidades:</strong> ¿sabe el consultante qué necesita? Algunos no tienen déficit en pedir, sino en reconocer que necesitan algo.</p>
+        <p><strong>A2 — Discriminación del receptor:</strong> ¿sabe a quién pedirle? Pedir apoyo emocional a alguien que no puede darlo indica déficit aquí.</p>
+        <p><strong>A3 — Comunicación del pedido:</strong> ¿puede articularlo directa y claramente?</p>
+        <p><strong>A4 — Aceptación de la ayuda:</strong> algunos piden y luego no pueden recibir. Rechazan la ayuda cuando llega.</p>
+        <div class="example"><div class="example-label">Patrón clínico</div><div class="example-text">Roberto tiene A1–A3 intactos pero A4 deficitario. Pide bien — pero cuando alguien trata de ayudarlo, lo rechaza. Funcionalmente: <strong>miedo a la dependencia</strong>.</div></div>
+      </div>
+    </div>
+    <div class="expand-item">
+      <div class="expand-head" onclick="toggleExpand('cm-b')">
+        <span class="expand-title" style="color:#2B9FD1">🔄 Clase B — Dos flujos independientes</span>
+        <span class="expand-arrow" id="arr-cm-b">▼</span>
+      </div>
+      <div class="expand-body" id="cm-b">
+        <p><strong>Dar retroalimentación:</strong> puede ser deficitario (no decir nada) o excesivo (feedback constante y muy detallado).</p>
+        <p><strong>Recibir retroalimentación:</strong> puede implicar ceguera ante el propio impacto, o hipersensibilidad que bloquea el procesamiento.</p>
+        <div class="example"><div class="example-label">Disociación clínica</div><div class="example-text">Carlos da retroalimentación excelente a sus colegas, pero se bloquea completamente cuando alguien le señala algo de su propia conducta. Su problema es <strong>selectivo: en un solo flujo</strong>.</div></div>
+      </div>
+    </div>
+    <div class="expand-item">
+      <div class="expand-head" onclick="toggleExpand('cm-multi')">
+        <span class="expand-title">🔀 Una conducta, múltiples clases</span>
+        <span class="expand-arrow" id="arr-cm-multi">▼</span>
+      </div>
+      <div class="expand-body" id="cm-multi">
+        <p><strong>La clase depende de la función, no de la forma.</strong> Llorar en sesión puede ser:</p>
+        <p>— <strong>Clase E</strong>: expresión emocional genuina y apropiada.</p>
+        <p>— <strong>Clase D</strong>: el único momento en que el consultante se permite ser visto.</p>
+        <p>— <strong>CRB1 de Clase C</strong>: aparece cada vez que hay desacuerdo y funciona para cortarlo.</p>
+        <div class="tip"><strong>💡 Implicación:</strong> No clasificar topográficamente. Siempre preguntarse: ¿qué función cumple esto aquí, con esta persona?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level" id="clases-avanzado">
+    <div class="expand-item">
+      <div class="expand-head" onclick="toggleExpand('ca-gen')">
+        <span class="expand-title">📡 Generalización entre clases</span>
+        <span class="expand-arrow" id="arr-ca-gen">▼</span>
+      </div>
+      <div class="expand-body" id="ca-gen">
+        <p><strong>Clase E como prerequisito:</strong> el acceso emocional (E) es frecuentemente necesario para la divulgación genuina (D) y la asertividad (A). Trabajar E suele desbloquear las otras.</p>
+        <p><strong>Clase B como regulador:</strong> un consultante que no puede incorporar feedback del terapeuta no aprenderá de los CRBs señalados. B regula el progreso en todas las clases.</p>
+        <p><strong>Clase C como derivado:</strong> la tolerancia al conflicto suele mejorar cuando mejoran A y E. Quien puede pedir lo que necesita y expresar emociones, necesita menos evitar el conflicto.</p>
+      </div>
+    </div>
+    <div class="expand-item">
+      <div class="expand-head" onclick="toggleExpand('ca-crb')">
+        <span class="expand-title">🎯 Mapeo FIAT → CRBs anticipados</span>
+        <span class="expand-arrow" id="arr-ca-crb">▼</span>
+      </div>
+      <div class="expand-body" id="ca-crb">
+        <p><strong>Déficit A →</strong> CRB1 de no pedir entre sesiones, minimizar necesidades, o aceptar pasivamente las decisiones del terapeuta.</p>
+        <p><strong>Déficit B →</strong> No registrar cuando el terapeuta está incómodo. No poder usar el feedback para cambiar.</p>
+        <p><strong>Déficit C →</strong> Evitar el desacuerdo con el terapeuta, cambiar de tema ante tensión, disculparse si contradice algo.</p>
+        <p><strong>Déficit D →</strong> Responder con monosílabos a preguntas personales. Divulgar algo y luego restarle importancia.</p>
+        <p><strong>Déficit E →</strong> Hablar de emociones de forma abstracta o intelectualizada. Interrumpir el contacto emocional cuando se vuelve intenso.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CASO CLÍNICO ── -->
+<div class="section" id="sc-caso">
+  <div class="sec-title">Caso Clínico 🧩</div>
+  <div class="sec-sub">Un caso ficticio para ilustrar el FIAT en la práctica clínica.</div>
+  <div class="case-hero">
+    <h3>👤 "Lucía", 32 años</h3>
+    <p>Consulta por dificultades en relaciones de pareja y sensación de que "siempre termino sola." Historial de relaciones que empiezan intensamente y se fracturan cuando aparece el primer conflicto. Trabaja como médica, descrita por colegas como "muy competente pero difícil de conocer."</p>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-title">📋 Resultados del FIAT-Q</div>
+    <div class="card-body"><p>Completado en la segunda sesión. Porcentaje = índice de preocupación (mayor = más déficit).</p></div>
+  </div>
+  <div class="case-cls" style="background:#1B4F9B12;border-color:#1B4F9B33">
+    <div class="case-cls-head">
+      <div class="cbadge" style="background:#1B4F9B">A — Asertividad</div>
+      <div class="csev" style="background:rgba(249,193,46,.15);color:#D97706">35% · Moderado</div>
+    </div>
+    <div class="case-text">Lucía <strong>sabe que necesita cosas</strong> (A1 preservado) pero tiene dificultad para pedirlas directamente. Tiende a dar indirectas y luego resentirse cuando no son captadas. <em>En sesión: hace preguntas disfrazadas de comentarios.</em></div>
+  </div>
+  <div class="case-cls" style="background:#2B9FD112;border-color:#2B9FD133">
+    <div class="case-cls-head">
+      <div class="cbadge" style="background:#2B9FD1">B — Comunicación</div>
+      <div class="csev" style="background:rgba(43,165,90,.15);color:var(--green)">28% · Bajo</div>
+    </div>
+    <div class="case-text">Relativamente preservada. <strong>Buena dando retroalimentación</strong> (práctica profesional). La recibe con cierta rigidez cuando es personal, pero puede incorporarla con tacto.</div>
+  </div>
+  <div class="case-cls" style="background:#E8782012;border-color:#E8782033">
+    <div class="case-cls-head">
+      <div class="cbadge" style="background:#E87820">C — Conflicto</div>
+      <div class="csev" style="background:rgba(239,68,68,.15);color:#EF4444">71% · Alto ⚠️</div>
+    </div>
+    <div class="case-text">Área de mayor preocupación. <strong>Evita el conflicto completamente</strong> hasta que llega a un punto de saturación y hay ruptura total. Sin zona intermedia. <em>En sesión: sonríe y asiente cuando algo le incomoda, cambia el tema.</em></div>
+  </div>
+  <div class="case-cls" style="background:#9B2DB512;border-color:#9B2DB533">
+    <div class="case-cls-head">
+      <div class="cbadge" style="background:#9B2DB5">D — Cercanía</div>
+      <div class="csev" style="background:rgba(239,68,68,.15);color:#EF4444">68% · Alto ⚠️</div>
+    </div>
+    <div class="case-text"><strong>Divulgación controlada al extremo.</strong> Comparte logros profesionales fácilmente pero bloquea lo personal. Cuando revela algo significativo, lo minimiza: "me afectó, pero bueno, ya pasó." <em>En sesión: responde concisamente y vuelve a temas abstractos.</em></div>
+  </div>
+  <div class="case-cls" style="background:#2BA55A12;border-color:#2BA55A33">
+    <div class="case-cls-head">
+      <div class="cbadge" style="background:#2BA55A">E — Emociones</div>
+      <div class="csev" style="background:rgba(249,193,46,.15);color:#D97706">52% · Moderado-Alto</div>
+    </div>
+    <div class="case-text"><strong>Acceso intelectual a emociones, no experiencial.</strong> Puede nombrar lo que siente en retrospectiva pero no "en vivo." <em>En sesión: habla de sus emociones como si fueran de otra persona ("uno siente que...").</em></div>
+  </div>
+  <div class="divider"></div>
+  <div class="card card-accent">
+    <div class="card-title">🔍 Conceptualización funcional</div>
+    <div class="card-body">
+      <p>El perfil de Lucía sugiere un patrón coherente: <strong>control como estrategia de regulación emocional y relacional.</strong></p>
+      <p>El déficit en E funciona como sustrato que mantiene los otros: sin acceso emocional en vivo, no puede expresar lo que siente (→D), ni tolerar la incomodidad del conflicto (→C), ni identificar claramente qué necesita (→A).</p>
+      <p><span class="hl">Hipótesis:</span> el control relacional (no divulgar, evitar el conflicto) funciona como evitación experiencial. La "ruptura total" es el resultado de acumular experiencias emocionales no procesadas hasta que desbordan.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">🎯 CRBs en sesión (3ª sesión)</div>
+    <div class="card-body">
+      <p>🔴 <strong>CRB1:</strong> Cuando el terapeuta señala algo incómodo, Lucía sonríe, dice "sí, puede ser" y cambia el tema. (Clase C + E)</p>
+      <p>🔴 <strong>CRB1:</strong> Al cierre de sesión, responde "bien" con monosílabo cuando le preguntan cómo se siente. (Clase D + E)</p>
+      <p>🟢 <strong>CRB2 objetivo:</strong> Que pueda quedarse con la incomodidad de un desacuerdo en sesión. Que nombre lo que siente "en este momento."</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">🗺️ Plan orientado por FIAT</div>
+    <div class="card-body">
+      <p>1. <strong>Prioridad: Clase E.</strong> Sin acceso emocional en vivo, el trabajo en C y D será intelectual. Comenzar con reconocimiento emocional dentro de sesión.</p>
+      <p>2. <strong>Usar la relación terapéutica para evocar CRB1s de Clase C.</strong> Introducir posiciones con espacio para el desacuerdo y reforzar naturalmente cada intento de sostenerse en él.</p>
+      <p>3. <strong>Clase D via CRB2:</strong> Reforzar cada divulgación personal genuina, especialmente si Lucía no la minimiza.</p>
+      <p>4. <span class="hl">No trabajar Clase A directamente al inicio</span> — es derivada de E y C. Mejorará en la medida que mejoren las clases centrales.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── CÓMO USAR ── -->
+<div class="section" id="sc-uso">
+  <div class="sec-title">¿Cómo usar el sistema? 📱</div>
+  <div class="sec-sub">Guía paso a paso para usar esta plataforma en tu práctica clínica.</div>
+  <div class="card" style="background:linear-gradient(135deg,var(--blue),#1E3A7A);border:none;margin-bottom:20px">
+    <div style="font-size:14px;font-weight:900;color:#fff;margin-bottom:14px">El sistema tiene 2 herramientas</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="fiat-terapeuta.html" style="flex:1;min-width:130px;background:var(--yellow);color:var(--blue);border-radius:12px;padding:13px 14px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;text-align:center;text-decoration:none;display:block">🧠 Panel Terapeuta</a>
+      <div style="flex:1;min-width:130px;background:rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:13px 14px;font-size:13px;font-weight:700;text-align:center">📋 FIAT-Q Consultante<br><span style="font-size:11px;opacity:.65">link generado desde el panel</span></div>
+    </div>
+  </div>
+  <div class="actor-block">
+    <div class="actor-head">
+      <div class="actor-icon" style="background:rgba(249,193,46,.15)">🧠</div>
+      <div><div class="actor-name">El terapeuta hace:</div><div class="actor-role">fiat-terapeuta.html</div></div>
+    </div>
+    <ul class="step-list">
+      <li data-n="1">Abrís el <strong>Panel del Terapeuta</strong> → tocás "Nuevo caso"</li>
+      <li data-n="2">Ponés un alias para el consultante y elegís una <strong>contraseña numérica de 4–8 dígitos</strong>. Guardala.</li>
+      <li data-n="3">El sistema genera un código (ej: FIAT-X7K2) y un <strong>link único para el consultante</strong></li>
+      <li data-n="4">Copiás el link y se lo enviás por WhatsApp o email</li>
+      <li data-n="5">Cuando el consultante termina, volvés al panel → "Ver resultados" → ingresás código + contraseña → <strong>ves el análisis completo</strong></li>
+    </ul>
+  </div>
+  <div class="actor-block">
+    <div class="actor-head">
+      <div class="actor-icon" style="background:rgba(43,165,90,.15)">👤</div>
+      <div><div class="actor-name">El consultante hace:</div><div class="actor-role">fiatq.html?case=FIAT-XXXX&vt=TOKEN</div></div>
+    </div>
+    <ul class="step-list">
+      <li data-n="1">Abre el link que recibió</li>
+      <li data-n="2">Lee las instrucciones y comienza el cuestionario</li>
+      <li data-n="3">Responde las <strong>117 preguntas</strong> en escala 1–6. Puede pausar y retomar</li>
+      <li data-n="4">Al terminar toca "Enviar" → ve solo <strong>"Gracias, tu terapeuta recibirá los resultados"</strong></li>
+      <li data-n="5">Le avisa al terapeuta que terminó</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">📊 ¿Qué ves en los resultados?</div>
+    <div class="card-body">
+      <p>✅ Resumen visual con índice de preocupación por clase</p>
+      <p>⚠️ Ítems más problemáticos de cada clase con puntaje</p>
+      <p>💡 Ideas de intervención por clase (FAP, ACT, DBT)</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">🗂️ Gestión de casos</div>
+    <div class="card-body">
+      <p>Todos los casos se guardan en el panel. Múltiples consultantes con códigos y contraseñas independientes.</p>
+      <p>Para <strong>eliminar un caso</strong>: tocá el 🗑️ al lado del caso en la lista. Borra el caso y sus resultados.</p>
+    </div>
+  </div>
+  <div class="warn-box"><strong>⚠️ Privacidad:</strong> Los datos se guardan localmente en el navegador (localStorage). No se envían a ningún servidor externo. Solo accesibles desde el mismo navegador y dispositivo donde se creó el caso.</div>
+  <div class="tip"><strong>💡 Recomendación:</strong> Administrá el FIAT-Q en la <strong>primera o segunda sesión</strong>, antes de tener una conceptualización cerrada. Dejá que los resultados desafíen tus hipótesis iniciales.</div>
+</div>
+
+<!-- ── FAQ ── -->
+<div class="section" id="sc-faq">
+  <div class="sec-title">Preguntas Frecuentes ❓</div>
+  <div class="sec-sub">Dudas clínicas comunes sobre el FIAT.</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq('f1','fa1')">¿El FIAT reemplaza la conceptualización de caso? <span id="fa1">▼</span></div>
+    <div class="faq-a" id="f1">No. El FIAT es una <strong>herramienta de evaluación</strong> que informa la conceptualización, no la reemplaza. Los resultados son hipótesis que el terapeuta debe contrastar con lo que observa en sesión. Un puntaje alto en Clase C no significa "tiene un problema con el conflicto" — significa que hay que prestar atención a cómo maneja los desacuerdos en el contexto terapéutico específico.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq('f2','fa2')">¿Cuándo es el mejor momento para administrarlo? <span id="fa2">▼</span></div>
+    <div class="faq-a" id="f2">Callaghan sugiere administrarlo en la <strong>primera o segunda sesión</strong>, antes de que el terapeuta forme una conceptualización rígida. También puede usarse al final del proceso como medida de cambio.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq('f3','fa3')">¿Qué hago si el consultante pregunta por sus resultados? <span id="fa3">▼</span></div>
+    <div class="faq-a" id="f3">El FIAT no está diseñado para ser compartido como informe numérico. Lo que sí puede hacerse es <strong>discutir cualitativamente</strong> los hallazgos: "noté que respondiste que a veces cuesta pedir lo que necesitás, ¿podemos explorar eso?" Usar los resultados como punto de entrada a la conversación, no como diagnóstico.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq('f4','fa4')">¿El índice porcentual es del paper original? <span id="fa4">▼</span></div>
+    <div class="faq-a" id="f4">No. Callaghan describe el FIAT como herramienta cualitativa e idiográfica, sin sistema de puntaje oficial. <strong>El índice porcentual fue construido para esta plataforma</strong> como indicador relativo de orientación clínica. Lo que importa es el patrón de respuesta, no el número absoluto.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq('f5','fa5')">¿Puedo usarlo fuera de un marco FAP? <span id="fa5">▼</span></div>
+    <div class="faq-a" id="f5">Sí. En <strong>ACT</strong> ayuda a identificar áreas donde la evitación experiencial interfiere con relaciones valiosas. En <strong>DBT</strong> complementa la evaluación de efectividad interpersonal. En <strong>terapia de pareja</strong> puede ser valioso para mapear los perfiles de ambos miembros.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq('f6','fa6')">¿Qué hago si hay puntajes altos en todas las clases? <span id="fa6">▼</span></div>
+    <div class="faq-a" id="f6">Puede indicar: dificultades pervasivas, respuesta de aquiescencia, o alta angustia al momento de completarlo. <strong>No trabajar todas las clases simultáneamente.</strong> Identificar cuál tiene más impacto en las otras si mejora — usualmente E o C — y comenzar ahí.</div>
+  </div>
+
+  <div style="height:16px"></div>
+  <div class="card" style="text-align:center;background:linear-gradient(135deg,var(--blue),#1E3A7A);border:none">
+    <div style="font-size:15px;font-weight:900;color:#fff;margin-bottom:6px">¿Listo para usar el sistema?</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:16px">Accedé al panel del terapeuta para crear tu primer caso.</div>
+    <a href="fiat-terapeuta.html" class="hbtn hbtn-y" style="display:inline-block">🧠 Ir al Panel del Terapeuta →</a>
+  </div>
+</div>
+
+</div><!-- wrap -->
+
+<button class="fab" onclick="window.location.href='fiat-terapeuta.html'">🧠 Panel Terapeuta</button>
+
+<script>
+function toggleTheme(){
+  const h=document.documentElement;
+  h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');
+  localStorage.setItem('fiat-theme',h.getAttribute('data-theme'));
+}
+
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const map={sc-teoria:0,'sc-clases':1,'sc-caso':2,'sc-uso':3,'sc-faq':4};
+  document.querySelectorAll('.ntab').forEach((t,i)=>t.classList.toggle('active',i===map[id]));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showLevel(sec,level,btn){
+  document.querySelectorAll(`#sc-${sec} .level`).forEach(l=>l.classList.remove('active'));
+  document.getElementById(`${sec}-${level}`).classList.add('active');
+  btn.closest('.level-tabs').querySelectorAll('.ltab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleExpand(id){
+  const body=document.getElementById(id);
+  if(!body) return;
+  const open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  const arr=document.getElementById('arr-'+id);
+  if(arr){arr.style.transform=open?'':'rotate(180deg)';}
+}
+
+function toggleCls(letter){
+  const target=document.getElementById('cls-'+letter);
+  if(!target) return;
+  const open=target.style.display==='block';
+  // close all
+  ['a','b','c','d','e'].forEach(l=>{
+    const el=document.getElementById('cls-'+l);
+    if(el) el.style.display='none';
+  });
+  if(!open) target.style.display='block';
+}
+
+function toggleFaq(id,arrid){
+  const body=document.getElementById(id);
+  const arr=document.getElementById(arrid);
+  const open=body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  if(arr) arr.textContent=open?'▼':'▲';
+}
+
+(function(){
+  const saved=localStorage.getItem('fiat-theme');
+  if(saved) document.documentElement.setAttribute('data-theme',saved);
+  else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)
+    document.documentElement.setAttribute('data-theme','dark');
+  // hide expand bodies
+  document.querySelectorAll('.expand-body').forEach(b=>b.style.display='none');
+  ['a','b','c','d','e'].forEach(l=>{
+    const el=document.getElementById('cls-'+l);
+    if(el) el.style.display='none';
+  });
+})();
+</script>
+</body>
+</html>
