@@ -6,144 +6,158 @@
 <title>ODT — Entrenamiento Clínico</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+/* ─── MODO NOCHE (default) ─── */
 :root{
   --y:#F9BC15;--db:#1B4F8A;--ce:#2B9ED4;--or:#E8720A;
   --bg:#09131e;--card:#112030;--card2:#182d45;
-  --txt:#EEF4FF;--mut:#4a7090;--bord:rgba(43,158,212,0.14);
+  --txt:#EEF4FF;--txt2:rgba(238,244,255,.65);--mut:#4a7090;
+  --bord:rgba(43,158,212,0.14);--bord2:rgba(255,255,255,.06);
   --ok:#3ecf72;--err:#f25c5c;--warn:#f0a830;--r:14px;
+  --shadow:none;
   --hex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104'%3E%3Cpath d='M30 2L58 18v33L30 67 2 51V18L30 2zm0 6L8 20v29l22 13 22-13V20L30 8z' fill='rgba(255,255,255,0.055)'/%3E%3C/svg%3E");
 }
+/* ─── MODO DÍA ─── */
+body.day{
+  --bg:#F5F2EB;--card:#FFFFFF;--card2:#EEE9DF;
+  --txt:#0F2A44;--txt2:rgba(15,42,68,.6);--mut:#7B9AB5;
+  --bord:rgba(27,79,138,0.12);--bord2:rgba(27,79,138,.07);
+  --shadow:0 2px 12px rgba(27,79,138,.08);
+  --hex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104'%3E%3Cpath d='M30 2L58 18v33L30 67 2 51V18L30 2zm0 6L8 20v29l22 13 22-13V20L30 8z' fill='rgba(27,79,138,0.04)'/%3E%3C/svg%3E");
+}
+
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Poppins',sans-serif;color:var(--txt)}
+html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Poppins',sans-serif;color:var(--txt);transition:background .3s,color .3s}
 #app{width:100%;max-width:430px;height:100vh;margin:0 auto;position:relative;overflow:hidden}
 .screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;display:none;background:var(--bg)}
 .screen.active{display:flex;flex-direction:column;animation:fup .3s ease both}
 @keyframes fup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pop{0%{transform:scale(0) rotate(-8deg)}65%{transform:scale(1.15)}100%{transform:scale(1)}}
-@keyframes xpfloat{0%{opacity:0;transform:translateY(0) scale(.8)}25%{opacity:1;transform:translateY(-16px) scale(1.15)}100%{opacity:0;transform:translateY(-52px) scale(.9)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes xpfloat{0%{opacity:0;transform:translateY(0) scale(.8)}20%{opacity:1;transform:translateY(-18px) scale(1.2)}100%{opacity:0;transform:translateY(-56px) scale(.9)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@keyframes streakpop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
 
-/* TOP BAR */
-#bar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:300;padding:10px 20px 7px;background:var(--bg);display:none}
-#prog{height:3px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+/* ─── TOP BAR ─── */
+#bar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:300;padding:10px 16px 7px;background:var(--bg);display:none;transition:background .3s;border-bottom:1px solid var(--bord2)}
+#barrow{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+#prog{height:3px;background:var(--bord2);border-radius:3px;overflow:hidden;flex:1}
 #pf{height:100%;background:linear-gradient(90deg,var(--y),var(--or));border-radius:3px;transition:width .7s ease;width:0}
-#xpr{display:flex;justify-content:flex-end;align-items:center;gap:4px;padding:3px 0;font-size:11px;font-weight:800;color:var(--y)}
+#xpr{font-size:11px;font-weight:800;color:var(--y);white-space:nowrap}
+#streakbadge{font-size:11px;font-weight:900;color:var(--or);display:none;animation:streakpop .3s ease;white-space:nowrap}
+#themetoggle{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--bord);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:all .2s}
+#themetoggle:active{transform:scale(.88)}
 
-/* UTILS */
+/* ─── BASE ─── */
 .p{padding:0 20px}
 .btn{width:100%;padding:15px;border-radius:var(--r);border:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.3px;text-align:center;display:block}
 .btn-p{background:linear-gradient(135deg,var(--y),var(--or));color:#09131e}
 .btn-p:active{transform:scale(.97)}
-.btn-g{background:var(--card);border:1px solid var(--bord);color:var(--txt)}
-.btn-g:active{background:var(--card2)}
-.card{background:var(--card);border-radius:var(--r);padding:18px;border:1px solid var(--bord)}
+.btn-g{background:var(--card);border:1px solid var(--bord);color:var(--txt);box-shadow:var(--shadow)}
+.btn-g:active{opacity:.8}
+.card{background:var(--card);border-radius:var(--r);padding:18px;border:1px solid var(--bord);box-shadow:var(--shadow);transition:background .3s,border-color .3s}
 .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px}
 .by{background:rgba(249,188,21,.12);color:var(--y)}
 .bc{background:rgba(43,158,212,.12);color:var(--ce)}
 .bo{background:rgba(232,114,10,.12);color:var(--or)}
-.bw{background:rgba(255,255,255,.07);color:rgba(255,255,255,.5)}
-.bg2{background:rgba(62,207,114,.12);color:var(--ok)}
-.ts{font-size:12px;line-height:1.75;color:rgba(238,244,255,.82)}
-.quote{background:rgba(249,188,21,.06);border-left:3px solid var(--y);border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:12px;font-style:italic;line-height:1.7}
-.note{background:rgba(27,79,138,.38);border-radius:10px;padding:13px;margin:10px 0;font-size:12px;line-height:1.75;border:1px solid var(--bord)}
-.tip{background:rgba(43,158,212,.07);border-left:3px solid var(--ce);border-radius:0 8px 8px 0;padding:12px 14px;margin:8px 0;font-size:12px;line-height:1.7}
+.bw{background:var(--bord2);color:var(--mut)}
+.ts{font-size:12px;line-height:1.75;color:var(--txt2)}
+.quote{background:rgba(249,188,21,.06);border-left:3px solid var(--y);border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:12px;font-style:italic;line-height:1.7;color:var(--txt2)}
+.note{background:var(--card2);border-radius:10px;padding:13px;margin:10px 0;font-size:12px;line-height:1.75;border:1px solid var(--bord);color:var(--txt2)}
+.tip{background:rgba(43,158,212,.07);border-left:3px solid var(--ce);border-radius:0 8px 8px 0;padding:12px 14px;margin:8px 0;font-size:12px;line-height:1.7;color:var(--txt2)}
 .pips{display:flex;gap:4px}
-.pip{height:3px;flex:1;background:rgba(255,255,255,.07);border-radius:2px}
-.pip.d{background:var(--y)}
-.pip.c{background:var(--ce)}
-.inp{width:100%;padding:15px;border-radius:12px;border:2px solid var(--bord);background:var(--card);color:var(--txt);font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;text-align:center;outline:none;transition:border-color .2s}
+.pip{height:3px;flex:1;background:var(--bord2);border-radius:2px}
+.pip.d{background:var(--y)}.pip.c{background:var(--ce)}
+.inp{width:100%;padding:15px;border-radius:12px;border:2px solid var(--bord);background:var(--card);color:var(--txt);font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;text-align:center;outline:none;transition:border-color .2s,background .3s}
 .inp:focus{border-color:var(--ce)}
 .inp::placeholder{color:var(--mut);font-weight:400;font-size:14px}
 .xpp{background:rgba(249,188,21,.1);border:1px solid rgba(249,188,21,.22);border-radius:12px;padding:10px 20px;display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:900;color:var(--y)}
-.xpfl{position:fixed;pointer-events:none;font-size:18px;font-weight:900;color:var(--y);text-shadow:0 0 12px rgba(249,188,21,.6);z-index:999;animation:xpfloat .9s ease both}
+.xpfl{position:fixed;pointer-events:none;font-size:18px;font-weight:900;color:var(--y);text-shadow:0 0 12px rgba(249,188,21,.5);z-index:999;animation:xpfloat .95s ease both}
 
-/* ACCORDION */
+/* ─── ACCORDION ─── */
 .acc-h{padding:15px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;gap:8px;border-bottom:1px solid var(--bord)}
 .acc-t{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;flex:1}
 .acc-arr{font-size:10px;color:var(--mut);transition:transform .25s;flex-shrink:0}
 .acc.open .acc-arr{transform:rotate(180deg)}
-.acc-b{display:none;padding:14px 20px;border-bottom:1px solid var(--bord)}
+.acc-b{display:none;padding:14px 20px;border-bottom:1px solid var(--bord);background:var(--card2)}
 .acc.open .acc-b{display:block}
 
-/* L1 - FLASH CARD */
-.skill-zone{flex:1;padding:18px 10px;border-radius:12px;border:2px solid;background:rgba(255,255,255,.02);font-family:'Poppins',sans-serif;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--txt)}
-.skill-zone:active{transform:scale(.94)}
-.skill-zone.O{border-color:var(--ce)}
-.skill-zone.O:active{background:rgba(43,158,212,.18)}
-.skill-zone.D{border-color:var(--or)}
-.skill-zone.D:active{background:rgba(232,114,10,.18)}
-.skill-zone.T{border-color:var(--y)}
-.skill-zone.T:active{background:rgba(249,188,21,.18)}
-.skill-zone.hit-ok{background:rgba(62,207,114,.18)!important;border-color:var(--ok)!important}
-.skill-zone.hit-err{background:rgba(242,92,92,.12)!important;border-color:var(--err)!important;animation:shake .25s ease}
+/* ─── L1 FLASH CARD ─── */
+.skill-zone{flex:1;padding:18px 6px;border-radius:12px;border:2px solid;background:var(--card2);font-family:'Poppins',sans-serif;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--txt)}
+.skill-zone:active{transform:scale(.92)}
+.skill-zone.O{border-color:var(--ce)}.skill-zone.D{border-color:var(--or)}.skill-zone.T{border-color:var(--y)}
+.skill-zone.hit-ok{background:rgba(62,207,114,.14)!important;border-color:var(--ok)!important}
+.skill-zone.hit-err{background:rgba(242,92,92,.1)!important;border-color:var(--err)!important;animation:shake .25s ease}
 
-/* L2 - DUELO */
-.duel-btn{width:100%;padding:15px 16px;border-radius:13px;border:2px solid var(--bord);background:var(--card);color:var(--txt);font-family:'Poppins',sans-serif;font-size:13px;line-height:1.6;text-align:left;cursor:pointer;transition:all .15s;display:block}
+/* ─── L2 DUELO ─── */
+.duel-btn{width:100%;padding:15px 16px;border-radius:13px;border:2px solid var(--bord);background:var(--card);color:var(--txt);font-family:'Poppins',sans-serif;font-size:13px;line-height:1.6;text-align:left;cursor:pointer;transition:all .15s;display:block;box-shadow:var(--shadow)}
 .duel-btn:active:not(:disabled){transform:scale(.98)}
-.duel-btn.winner{border-color:var(--ok);background:rgba(62,207,114,.07)}
-.duel-btn.loser{border-color:var(--err);background:rgba(242,92,92,.05)}
+.duel-btn.winner{border-color:var(--ok);background:rgba(62,207,114,.06)}
+.duel-btn.loser{border-color:var(--err);background:rgba(242,92,92,.04)}
 .duel-btn:disabled{cursor:default}
 
-/* L3 - ORDER */
-.ord-item{padding:12px 14px;background:var(--card);border:2px solid var(--bord);border-radius:11px;margin-bottom:8px;cursor:pointer;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;line-height:1.45;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+/* ─── L3 ORDER ─── */
+.ord-item{padding:12px 14px;background:var(--card);border:2px solid var(--bord);border-radius:11px;margin-bottom:8px;cursor:pointer;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;line-height:1.45;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none;box-shadow:var(--shadow)}
 .ord-item:active:not(.locked){transform:scale(.98);border-color:var(--ce)}
-.ord-item.locked{cursor:default}
 .ord-num{width:26px;height:26px;border-radius:50%;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;color:var(--mut);transition:all .2s}
 .ord-num.set{background:var(--ce);color:#fff}
 
-/* L3 - WORD BANK */
-.wchip{display:inline-block;padding:8px 13px;background:var(--card2);border:1.5px solid var(--bord);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;margin:3px;transition:all .12s;user-select:none}
-.wchip:active{transform:scale(.93)}
-.wchip.used{opacity:.28;pointer-events:none}
-.wchip.inbuilt{background:rgba(43,158,212,.15);border-color:var(--ce);color:var(--ce)}
+/* ─── WORD BANK ─── */
+.wchip{display:inline-block;padding:8px 13px;background:var(--card2);border:1.5px solid var(--bord);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;margin:3px;transition:all .12s;user-select:none;color:var(--txt)}
+.wchip:active{transform:scale(.91)}
+.wchip.used{opacity:.25;pointer-events:none}
+.wchip.inbuilt{background:rgba(43,158,212,.12);border-color:var(--ce);color:var(--ce)}
 
-/* L3 - ERROR HUNT */
-.eline{padding:12px 14px;border-radius:11px;border:2px solid var(--bord);background:var(--card);cursor:pointer;transition:all .15s;margin-bottom:8px}
-.eline:active:not(.locked){transform:scale(.99);border-color:rgba(255,255,255,.25)}
+/* ─── ERROR HUNT ─── */
+.eline{padding:12px 14px;border-radius:11px;border:2px solid var(--bord);background:var(--card);cursor:pointer;transition:all .15s;margin-bottom:8px;box-shadow:var(--shadow)}
+.eline:active:not(.locked){transform:scale(.99)}
 .eline.locked{cursor:default}
-.eline.efound{border-color:var(--err);background:rgba(242,92,92,.07)}
-.eline.ecorrect{border-color:var(--err);background:rgba(242,92,92,.07)}
+.eline.ecorrect{border-color:var(--err)!important;background:rgba(242,92,92,.06)!important}
 .eline.emiss{border-color:rgba(62,207,114,.3)}
 
-/* L4 - CHAT */
-.cmsg{max-width:88%}
-.cmsg.cs{align-self:flex-start}
-.cmsg.ct{align-self:flex-end}
-.clbl{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px;padding:0 3px}
-.cs .clbl{color:var(--ce)}
-.ct .clbl{color:var(--y);text-align:right}
-.cbub{padding:11px 14px;border-radius:14px;font-size:13px;line-height:1.6}
-.cs .cbub{background:var(--card2);border:1px solid var(--bord);border-radius:3px 14px 14px 14px}
-.ct .cbub{background:linear-gradient(135deg,#162d52,var(--db));border:1px solid rgba(43,158,212,.2);border-radius:14px 3px 14px 14px;text-align:right}
-
-/* FEEDBACK */
-.fbc{border-radius:11px;padding:14px;margin-top:10px;font-size:12px;line-height:1.7;animation:fup .25s ease;border:1px solid var(--bord);background:var(--card)}
-.fbc.bok{border-color:var(--ok)}
-.fbc.berr{border-color:var(--err)}
-.fbc.bnt{border-color:var(--warn)}
-.fbh{font-size:13px;font-weight:800;margin-bottom:5px}
-
-/* OPT (MCQ) */
-.opt{display:block;width:100%;padding:13px 15px;border-radius:11px;border:2px solid var(--bord);background:var(--card);color:var(--txt);font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;text-align:left;cursor:pointer;margin-bottom:9px;transition:all .15s;line-height:1.5}
+/* ─── OPT ─── */
+.opt{display:block;width:100%;padding:13px 15px;border-radius:11px;border:2px solid var(--bord);background:var(--card);color:var(--txt);font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;text-align:left;cursor:pointer;margin-bottom:9px;transition:all .15s;line-height:1.5;box-shadow:var(--shadow)}
 .opt:active:not(:disabled){transform:scale(.99)}
-.opt.ok2{border-color:var(--ok);background:rgba(62,207,114,.07)}
-.opt.err2{border-color:var(--err);background:rgba(242,92,92,.07)}
-.opt.nt2{border-color:var(--warn);background:rgba(240,168,48,.07)}
+.opt.ok2{border-color:var(--ok);background:rgba(62,207,114,.06)}
+.opt.err2{border-color:var(--err);background:rgba(242,92,92,.06)}
+.opt.nt2{border-color:var(--warn);background:rgba(240,168,48,.06)}
 .opt:disabled{cursor:default}
 
-/* AUTO BAR */
-.abar{height:6px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}
+/* ─── CHAT ─── */
+.cmsg{max-width:88%}
+.cmsg.cs{align-self:flex-start}.cmsg.ct{align-self:flex-end}
+.clbl{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px;padding:0 3px}
+.cs .clbl{color:var(--ce)}.ct .clbl{color:var(--y);text-align:right}
+.cbub{padding:11px 14px;border-radius:14px;font-size:13px;line-height:1.6}
+.cs .cbub{background:var(--card2);border:1px solid var(--bord);border-radius:3px 14px 14px 14px;color:var(--txt)}
+.ct .cbub{background:linear-gradient(135deg,#162d52,var(--db));border:1px solid rgba(43,158,212,.2);border-radius:14px 3px 14px 14px;text-align:right;color:#fff}
+
+/* ─── AUTO BAR ─── */
+.abar{height:6px;background:var(--bord2);border-radius:4px;overflow:hidden}
 .afill{height:100%;border-radius:4px;transition:width .8s ease,background .5s ease}
 
-/* CERT */
+/* ─── FEEDBACK ─── */
+.fbc{border-radius:11px;padding:14px;margin-top:10px;font-size:12px;line-height:1.7;animation:fup .25s ease;border:1px solid var(--bord);background:var(--card);box-shadow:var(--shadow)}
+.fbc.bok{border-color:var(--ok)}.fbc.berr{border-color:var(--err)}.fbc.bnt{border-color:var(--warn)}
+.fbh{font-size:13px;font-weight:800;margin-bottom:5px}
+
+/* ─── CERT ─── */
 .cert{background:linear-gradient(140deg,var(--db) 0%,#071425 100%);border-radius:20px;padding:26px 22px;border:2px solid rgba(249,188,21,.28);position:relative;overflow:hidden}
 .cert::before{content:'';position:absolute;inset:0;background-image:var(--hex);pointer-events:none}
 .cert-inner{position:relative;z-index:1}
+
+/* ─── RADAR ─── */
+#radarwrap{background:var(--card);border:1px solid var(--bord);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
 </style>
 </head>
 <body>
 <div id="app">
-  <div id="bar"><div id="prog"><div id="pf"></div></div><div id="xpr">⚡ <span id="xv">0</span> XP</div></div>
+  <div id="bar">
+    <div id="barrow">
+      <div id="prog"><div id="pf"></div></div>
+      <div id="streakbadge">🔥 <span id="stv">0</span></div>
+      <div id="xpr">⚡ <span id="xv">0</span></div>
+      <button id="themetoggle" onclick="toggleTheme()">☀️</button>
+    </div>
+  </div>
   <div class="screen active" id="s-cover"></div>
   <div class="screen" id="s-name"></div>
   <div class="screen" id="s-theory"></div>
@@ -155,8 +169,36 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Poppins'
   <div class="screen" id="s-cert"></div>
 </div>
 <script>
-// ═══ STATE ═══════════════════════════════════════
-const S={xp:0,name:'',l1:{i:0,sc:0},l2:{i:0,sc:0},l3:{i:0,sc:0},l4:{turn:0,auto:50,good:0,msgs:[]}};
+// ═══ THEME ════════════════════════════════════════
+function toggleTheme(){
+  const day=document.body.classList.toggle('day');
+  document.getElementById('themetoggle').textContent=day?'🌙':'☀️';
+  localStorage.setItem('odt-theme',day?'day':'night');
+}
+(function(){
+  if(localStorage.getItem('odt-theme')==='day'){
+    document.body.classList.add('day');
+    document.getElementById('themetoggle').textContent='🌙';
+  }
+})();
+
+// ═══ STATE ════════════════════════════════════════
+const SAVE_KEY='odt-progress-v2';
+let S={xp:0,name:'',streak:0,maxStreak:0,
+  l1:{i:0,sc:0,oSc:0,dSc:0,tSc:0},
+  l2:{i:0,sc:0,oSc:0,dSc:0,tSc:0},
+  l3:{i:0,sc:0},
+  l4:{turn:0,auto:50,good:0,msgs:[]}};
+
+function saveS(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));}catch(e){}}
+function loadS(){
+  try{
+    const d=localStorage.getItem(SAVE_KEY);
+    if(d){const p=JSON.parse(d);if(p&&p.name)S=p;}
+  }catch(e){}
+}
+loadS();
+
 const STEPS=['cover','name','theory','sofia','l1','r1','l2','r2','l3','r3','l4','r4','cert'];
 const NOBAR=['cover','name','theory','sofia'];
 
@@ -168,207 +210,182 @@ function go(id,fn){
   const idx=STEPS.indexOf(id);
   document.getElementById('pf').style.width=(idx/(STEPS.length-1)*100)+'%';
   document.getElementById('xv').textContent=S.xp;
+  updateStreak();
+  saveS();
   if(fn)fn(el);
 }
 function addXP(n){
   S.xp+=n;document.getElementById('xv').textContent=S.xp;
   const f=document.createElement('div');f.className='xpfl';f.textContent='+'+n+' XP';
-  f.style.cssText='top:55px;right:26px';document.getElementById('app').appendChild(f);
-  setTimeout(()=>f.remove(),950);
+  f.style.cssText=`top:50px;right:20px`;document.getElementById('app').appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+  saveS();
+}
+function hitStreak(ok){
+  if(ok){S.streak++;if(S.streak>S.maxStreak)S.maxStreak=S.streak;}
+  else{S.streak=0;}
+  updateStreak();saveS();
+}
+function updateStreak(){
+  const sb=document.getElementById('streakbadge');
+  const sv=document.getElementById('stv');
+  if(S.streak>=2){sb.style.display='flex';sv.textContent=S.streak;sb.style.animation='none';void sb.offsetWidth;sb.style.animation='streakpop .3s ease';}
+  else{sb.style.display='none';}
 }
 function acc(id){document.getElementById(id).classList.toggle('open')}
+function scrl(){const sc=document.querySelector('.screen.active');if(sc)setTimeout(()=>sc.scrollTop=sc.scrollHeight,120);}
 
 // ═══ DATA ════════════════════════════════════════
 
-// Nivel 1: Flash Cards — identificar la habilidad
 const D1=[
   {txt:'"¿Qué notas en tu cuerpo ahora mismo, cuando dices eso?"',sk:'O',
    fb:'🔍 <b>Observar</b> — orienta la atención al cuerpo en el momento presente. La clave temporal "ahora mismo" ancla el contacto a la experiencia directa, no al relato.',
-   rft:'En RFT: rompe la fusión con el mapa verbal al dirigir la atención al terreno sensorial inmediato.'},
+   rft:'Rompe la fusión con el mapa verbal dirigiendo la atención al terreno sensorial inmediato. Interrupción del pliance.'},
   {txt:'"¿Dónde sientes exactamente esa tensión? ¿Sube, baja, es constante o varía?"',sk:'D',
-   fb:'📝 <b>Describir</b> — pide precisión sobre las características de la experiencia. Preguntas como "¿sube?" o "¿varía?" abren la experiencia más allá del juicio evaluativo.',
-   rft:'El juicio "horrible" es una función derivada que cierra el contacto. Las características sensoriales son más directas y restauran el acceso.'},
+   fb:'📝 <b>Describir</b> — pide precisión sobre las características de la experiencia. "¿Varía?" abre la experiencia más allá del juicio evaluativo.',
+   rft:'Los adjetivos evaluativos (horrible, insoportable) son marcos de comparación que colapsan. Las características sensoriales son más discriminativas y restauran el contacto.'},
   {txt:'"¿Qué pasó justo después de que decidiste no ir a la reunión?"',sk:'T',
-   fb:'🔗 <b>Trackear</b> — explora qué consecuencia tuvo la conducta de evitación. Busca la contingencia real: antes/después, causa/consecuencia.',
-   rft:'Trackear restaura el contacto con las contingencias reales que el mapa verbal oscurecía con etiquetas como "siempre me pasa".'},
+   fb:'🔗 <b>Trackear</b> — explora qué consecuencia tuvo la conducta de evitación. Busca la contingencia real: antes/después.',
+   rft:'Restaura el contacto con las contingencias directas que el mapa verbal oscurece con etiquetas como "siempre me pasa".'},
   {txt:'"Si eso que sentís tuviera una forma o un color, ¿cuál sería?"',sk:'O',
-   fb:'🔍 <b>Observar — encuadre analógico.</b> Cuando el cliente no puede contactar la experiencia directamente, la analogía crea una vía de acceso. No evita la experiencia — la acerca desde un lugar menos amenazante.',
-   rft:'El encuadre analógico usa la flexibilidad de las redes relacionales para crear acceso indirecto a experiencias que están bloqueadas.'},
+   fb:'🔍 <b>Observar — encuadre analógico.</b> Cuando el cliente no puede contactar la experiencia directamente, la analogía crea una vía de acceso indirecta.',
+   rft:'Usa la flexibilidad de las redes relacionales para crear acceso a experiencias que están bloqueadas. No evita — acerca.'},
   {txt:'"¿Hay situaciones donde eso que llamás ansiedad no aparece, o aparece diferente?"',sk:'T',
-   fb:'🔗 <b>Trackear — variabilidad contextual.</b> Cuestiona la overgeneralización. El tracking mismo puede volverse una regla rígida si no se ancla al contexto.',
-   rft:'La overgeneralización "siempre me pasa" es pliance verbal. Explorar excepciones interrumpe ese seguimiento automático de la regla.'},
-  {txt:'"Describí ese dolor más allá de \'horrible\'. ¿Tiene temperatura, peso, movimiento?"',sk:'D',
-   fb:'📝 <b>Describir</b> — convierte el juicio evaluativo en una descripción con características físicas. La experiencia se abre y el cliente accede a más información clínica real.',
-   rft:'Los adjetivos evaluativos (horrible, insoportable) son marcos de comparación que colapsan. Las características sensoriales son más discriminativas.'},
+   fb:'🔗 <b>Trackear — variabilidad contextual.</b> Cuestiona la overgeneralización. El tracking mismo puede volverse regla rígida.',
+   rft:'La overgeneralización "siempre me pasa" es pliance verbal. Explorar excepciones interrumpe el seguimiento automático de la regla.'},
+  {txt:'"Describí ese malestar más allá de \'horrible\'. ¿Tiene temperatura, peso, movimiento?"',sk:'D',
+   fb:'📝 <b>Describir</b> — convierte el juicio evaluativo en descripción con características físicas. La experiencia se abre y el cliente accede a más información.',
+   rft:'Cada característica nueva que se describe amplía la red relacional de esa experiencia, aumentando la flexibilidad psicológica.'},
   {txt:'"Si pudieras verte a vos misma desde afuera ahora mismo, ¿qué verías?"',sk:'O',
-   fb:'🔍 <b>Observar — encuadre deíctico.</b> Cambio de perspectiva Yo/aquí → observador/allá. La distancia psicológica permite notar lo que el bloqueo impide ver desde adentro.',
-   rft:'El encuadre deíctico es fundamental en RFT para el desarrollo de la perspectiva y la flexibilidad psicológica. Es el núcleo del "yo observador" en ACT.'},
+   fb:'🔍 <b>Observar — encuadre deíctico.</b> Cambio Yo/aquí → observador/allá. La distancia permite notar lo que el bloqueo impide ver desde adentro.',
+   rft:'El encuadre deíctico es central en RFT para el desarrollo de la perspectiva. Es el núcleo del yo observador en ACT.'},
   {txt:'"Cuando decís \'soy así\', ¿qué se siente en el cuerpo al decirlo?"',sk:'D',
-   fb:'📝 <b>Describir</b> — convierte la etiqueta identitaria en un objeto de descripción. "Soy así" deja de ser una conclusión y pasa a ser otro dato más a examinar con precisión.',
+   fb:'📝 <b>Describir</b> — convierte la etiqueta identitaria en objeto de descripción. "Soy así" pasa de conclusión a dato.',
    rft:'La fusión con el self conceptualizado ("soy ansiosa") se debilita cuando se lleva la atención a la experiencia corporal de decirlo.'}
 ];
 
-// Nivel 2: Duelo A vs B — discriminar intervenciones
 const D2=[
-  {ctx:'Inicio de sesión',sofia:'Esta semana fue igual que siempre. Trabajo, casa, nada especial. Ya no creo que voy a mejorar.',skill:'🔍 Observar',
-   A:{lbl:'A',txt:'"Entiendo que te sientas así. La mejora no es lineal — es normal que haya semanas así."',tp:'b',
-      fb:'❌ Das una explicación de tu mapa ("no es lineal"). Sofía puede usarla para seguir sin observar su semana real. El mapa cambió, el contacto no.'},
-   B:{lbl:'B',txt:'"¿Qué notaste esta semana que te hace pensar eso?"',tp:'g',
-      fb:'✅ Evocás observación. No confrontás la conclusión — invitás a Sofía a mirar el terreno que generó esa regla. La autonomía empieza aquí.'},
-   better:'B'},
-  {ctx:'Sofía sobre su identidad',sofia:'Siento que soy muy ansiosa. Siempre fui así. Es mi personalidad.',skill:'🔗 Trackear',
-   A:{lbl:'A',txt:'"¿Hay situaciones donde eso que llamás ansiedad no aparece, o aparece diferente?"',tp:'g',
-      fb:'✅ Cuestionás la overgeneralización sin confrontarla. Invitás a observar variaciones — lo cual empieza a desmantelar la regla desde la experiencia de Sofía, no desde tu explicación.'},
-   B:{lbl:'B',txt:'"La ansiedad tiene muchas causas. Probablemente no es solo tu personalidad."',tp:'b',
-      fb:'❌ Das una explicación alternativa — otro mapa. Sofía puede intelectualizarlo ("ah, no es solo personalidad") sin que cambie su contacto con la experiencia real.'},
-   better:'A'},
-  {ctx:'Sofía describe angustia',sofia:'Me sentí fatal. Una angustia horrible, insoportable, lo peor de la semana.',skill:'📝 Describir',
-   A:{lbl:'A',txt:'"Sí, la angustia puede ser muy intensa. ¿Cuándo empezó exactamente?"',tp:'b',
-      fb:'❌ Aceptás la etiqueta "horrible" y avanzás al timeline. Sofía nunca abre la experiencia más allá de "insoportable" — el juicio queda cerrado como verdad.'},
-   B:{lbl:'B',txt:'"¿Puedes contarme más sobre esa angustia? ¿Dónde la sentís, cómo se mueve, varía con el tiempo?"',tp:'g',
-      fb:'✅ No negás que sea horrible — abrís la experiencia más allá del juicio. Cada característica que Sofía logra describir es contacto nuevo con su experiencia real.'},
-   better:'B'},
-  {ctx:'La trampa del pliance',sofia:'Creo que tenés razón en lo que dijiste la semana pasada. Debo dejar de evitar.',skill:'🔗 Trackear',
-   A:{lbl:'A',txt:'"Me alegra que lo hayas pensado. Eso es exactamente lo que trabajamos."',tp:'b',
-      fb:'⚠️ TRAMPA CLÁSICA. Sofía está siguiendo tu regla — pliance puro. Confirmarla refuerza que busque en vos las observaciones. Entrenás dependencia sin darte cuenta.'},
-   B:{lbl:'B',txt:'"¿Qué notaste en tu semana que te llevó a pensarlo?"',tp:'g',
-      fb:'✅ No confirmás la conclusión — verificás si viene de la experiencia real de Sofía. Si llegó por seguir tu regla, esto lo revela. Si vino de observación genuina, lo fortalece.'},
-   better:'B'},
-  {ctx:'Sofía no puede contactar',sofia:'No sé cómo explicarlo. Es como... nada. Como si no hubiera nada adentro.',skill:'🔍 Observar',
-   A:{lbl:'A',txt:'"Lo que describes suena a disociación o entumecimiento emocional — bastante frecuente en la ansiedad."',tp:'b',
-      fb:'❌ Das un mapa más sofisticado. Sofía puede usar "disociación" como nueva etiqueta sin contactar la experiencia. El mapa se volvió técnico, pero el contacto sigue siendo nulo.'},
-   B:{lbl:'B',txt:'"Ese \'como si no hubiera nada\'... si le dieras una forma o un color, ¿qué te viene?"',tp:'g',
-      fb:'✅ Usás la metáfora de Sofía como punto de entrada. Encuadre analógico: no llenás el blanco con tu interpretación — creás una vía de acceso a lo que no puede contactar directamente.'},
-   better:'B'}
+  {ctx:'Inicio de sesión',sofia:'Esta semana fue igual que siempre. Ya no creo que voy a mejorar.',skill:'🔍 Observar',
+   A:{tp:'b',txt:'"Entiendo que te sientas así. La mejora no es lineal — es normal que haya semanas así."',fb:'❌ Das una explicación de tu mapa ("no es lineal"). Sofía puede usarla sin observar su semana real.'},
+   B:{tp:'g',txt:'"¿Qué notaste esta semana que te hace pensar eso?"',fb:'✅ Evocás observación. No confrontás la conclusión — invitás a mirar el terreno que generó esa regla.'},better:'B',skillId:'O'},
+  {ctx:'Sobre su identidad',sofia:'Siento que soy muy ansiosa. Siempre fui así. Es mi personalidad.',skill:'🔗 Trackear',
+   A:{tp:'g',txt:'"¿Hay situaciones donde eso no aparece, o aparece diferente?"',fb:'✅ Cuestionás la overgeneralización sin confrontarla. Eso empieza a desmantelar la regla desde la experiencia de Sofía.'},
+   B:{tp:'b',txt:'"La ansiedad tiene muchas causas. Probablemente no es solo tu personalidad."',fb:'❌ Das una explicación alternativa — otro mapa. Sofía puede intelectualizarlo sin que cambie su contacto.'},better:'A',skillId:'T'},
+  {ctx:'Describe angustia',sofia:'Me sentí fatal. Una angustia horrible, insoportable, lo peor de la semana.',skill:'📝 Describir',
+   A:{tp:'b',txt:'"Sí, la angustia puede ser muy intensa. ¿Cuándo empezó exactamente?"',fb:'❌ Aceptás la etiqueta "horrible" y avanzás. Sofía nunca abre la experiencia más allá del juicio.'},
+   B:{tp:'g',txt:'"¿Puedes contarme más? ¿Dónde la sentís, cómo se mueve, varía con el tiempo?"',fb:'✅ No negás que sea horrible — abrís la experiencia más allá del juicio. Cada característica es contacto nuevo.'},better:'B',skillId:'D'},
+  {ctx:'Pliance en sesión',sofia:'Creo que tenés razón en lo que dijiste. Debo dejar de evitar.',skill:'🔗 Trackear',
+   A:{tp:'b',txt:'"Me alegra que lo hayas pensado. Eso es exactamente lo que trabajamos."',fb:'⚠️ TRAMPA CLÁSICA. Sofía sigue tu regla — pliance puro. Confirmarlo refuerza que busque en vos las respuestas.'},
+   B:{tp:'g',txt:'"¿Qué notaste en tu semana que te llevó a pensarlo?"',fb:'✅ Verificás si la conclusión viene de la experiencia de Sofía o de seguir tu regla. Autonomía real.'},better:'B',skillId:'T'},
+  {ctx:'No puede contactar',sofia:'No sé cómo explicarlo. Es como... nada. Como si no hubiera nada adentro.',skill:'🔍 Observar',
+   A:{tp:'b',txt:'"Lo que describes suena a disociación o entumecimiento emocional — bastante frecuente en la ansiedad."',fb:'❌ Das un mapa técnico. Sofía puede usar "disociación" como nueva etiqueta sin contactar nada.'},
+   B:{tp:'g',txt:'"Ese \'como si no hubiera nada\'... si le dieras una forma o un color, ¿qué te viene?"',fb:'✅ Encuadre analógico. No llenás el blanco con tu interpretación — creás vía de acceso a lo que no puede contactar.'},better:'B',skillId:'O'}
 ];
 
-// Nivel 3: Mixto — 4 ejercicios de tipos distintos
 const D3=[
-  {
-    type:'order',title:'🧩 Ordena los pasos',badge:'Intervención completa',
-    scene:'"Me bloqueé en la reunión. Fue horrible. Siempre me pasa lo mismo."',
-    instruction:'Toca los pasos en el orden correcto, del más prioritario al menos:',
-    items:[
-      {id:'a',txt:'🔍 Preguntar qué notó en su cuerpo justo cuando se bloqueó'},
-      {id:'b',txt:'📝 Pedir que describa "horrible" con más precisión'},
-      {id:'c',txt:'🔗 Explorar qué pasó después del bloqueo'},
-      {id:'d',txt:'🔗 Cuestionar si "siempre" es realmente siempre'}
-    ],
-    correct:['a','b','c','d'],
-    exp:'Primero <b>Observar (a)</b>: crear contacto con la experiencia corporal del momento. Luego <b>Describir (b)</b>: precisar más allá del juicio. Luego <b>Trackear consecuencias (c)</b>. Finalmente cuestionar la overgeneralización (d) — necesita material concreto de la experiencia primero, no al revés.'
-  },
-  {
-    type:'wordbank',title:'🔨 Construye la pregunta',badge:'Encuadre analógico',
-    scene:'Sofía está bloqueada. Dice: "No sé cómo explicarlo. Está como en blanco."',
-    instruction:'Toca las palabras en el orden correcto para construir la pregunta de Observar:',
-    words:['Si','eso','tuviera','una','forma','¿cuál','sería','?','color','peso','nombre'],
-    correct:['Si','eso','tuviera','una','forma','¿cuál','sería','?'],
-    correctStr:'Si eso tuviera una forma ¿cuál sería?',
-    exp:'✅ Encuadre analógico perfecto. Usas la flexibilidad relacional del lenguaje para crear acceso cuando la experiencia no está disponible directamente. No evitas la experiencia — la acercás desde donde hay menos activación.'
-  },
-  {
-    type:'errorhunt',title:'🔎 Caza el error clínico',badge:'Pliance en sesión',
-    instruction:'Lee el diálogo. Toca la línea donde el terapeuta comete el error clínico:',
-    lines:[
-      {id:0,sp:'Sofía',txt:'"No sé qué sentí exactamente. Algo raro, incómodo."',isErr:false},
-      {id:1,sp:'Terapeuta',txt:'"¿Qué notas en tu cuerpo al decir \'algo raro\'?"',isErr:false},
-      {id:2,sp:'Sofía',txt:'"Mmm... algo acá." (señala el pecho)',isErr:false},
-      {id:3,sp:'Terapeuta',txt:'"¿Podría ser vergüenza? Cuando sentimos que nos juzgan suele aparecer eso."',isErr:true,
-       exp:'❌ El terapeuta dio la observación que Sofía tendría que haber hecho. Sofía puede decir "sí, vergüenza" sin haber contactado realmente esa experiencia — es pliance. La etiqueta la puso el terapeuta, no la experiencia de Sofía. Esto se llama <b>proveer</b> en lugar de <b>evocar</b>.'},
-      {id:4,sp:'Sofía',txt:'"Sí... sí, creo que era vergüenza."',isErr:false}
-    ],errId:3
-  },
-  {
-    type:'wordbank',title:'🔨 Construye la pregunta',badge:'Trackear contingencias',
-    scene:'Sofía acaba de contar que fue a la reunión y que "estuvo bien, tenías razón".',
-    instruction:'Construye la pregunta que verifica el aprendizaje desde la experiencia:',
-    words:['¿Qué','notaste','que','pasó','en','tu','cuerpo','cuando','te','diste','cuenta','?','pensaste','sentiste'],
-    correct:['¿Qué','notaste','que','pasó','en','tu','cuerpo','cuando','te','diste','cuenta','?'],
-    correctStr:'¿Qué notaste que pasó en tu cuerpo cuando te diste cuenta?',
-    exp:'✅ Combina Trackear (qué pasó) con Observar (en tu cuerpo). Evita que Sofía responda desde el mapa verbal — la dirige al terreno de la experiencia somática. Las reglas nuevas también necesitan verificarse en la experiencia, no solo aceptarse.'
-  }
+  {type:'order',title:'🧩 Ordena los pasos',badge:'Intervención completa',
+   scene:'"Me bloqueé en la reunión. Fue horrible. Siempre me pasa lo mismo."',
+   instruction:'Toca los pasos en el orden correcto, del más prioritario al menos:',
+   items:[{id:'a',txt:'🔍 Preguntar qué notó en su cuerpo justo cuando se bloqueó'},{id:'b',txt:'📝 Pedir que describa "horrible" con más precisión'},{id:'c',txt:'🔗 Explorar qué pasó después del bloqueo'},{id:'d',txt:'🔗 Cuestionar si "siempre" es realmente siempre'}],
+   correct:['a','b','c','d'],
+   exp:'Primero <b>Observar (a)</b>: contacto corporal con el momento. Luego <b>Describir (b)</b>: precisar más allá del juicio. Luego <b>Trackear consecuencias (c)</b>. Finalmente, cuestionar la overgeneralización (d) — necesita material concreto de la experiencia primero.'},
+  {type:'wordbank',title:'🔨 Construye la pregunta',badge:'Encuadre analógico',
+   scene:'Sofía está bloqueada: "No sé cómo explicarlo. Está como en blanco."',
+   instruction:'Construye la pregunta de Observar tocando las palabras en orden:',
+   hint:'Empieza con "Si eso..."',
+   words:['Si','eso','tuviera','una','forma','¿cuál','sería','?','color','peso','nombre'],
+   correct:['Si','eso','tuviera','una','forma','¿cuál','sería','?'],
+   correctStr:'Si eso tuviera una forma ¿cuál sería?',
+   exp:'✅ Encuadre analógico. Creas acceso cuando la experiencia no está disponible directamente. No evitas la experiencia — la acercás desde donde hay menos activación.'},
+  {type:'errorhunt',title:'🔎 Caza el error clínico',badge:'Pliance en sesión',
+   instruction:'Toca la línea donde el terapeuta comete el error clínico:',
+   lines:[
+     {id:0,sp:'Sofía',txt:'"No sé qué sentí exactamente. Algo raro, incómodo."',isErr:false},
+     {id:1,sp:'Terapeuta',txt:'"¿Qué notas en tu cuerpo al decir \'algo raro\'?"',isErr:false},
+     {id:2,sp:'Sofía',txt:'"Mmm... algo acá." (señala el pecho)',isErr:false},
+     {id:3,sp:'Terapeuta',txt:'"¿Podría ser vergüenza? Cuando sentimos que nos juzgan suele aparecer eso."',isErr:true,
+      exp:'❌ El terapeuta dio la observación que Sofía tendría que haber hecho. Sofía puede decir "sí, vergüenza" sin haberla contactado realmente — pliance puro. La etiqueta la puso el terapeuta, no la experiencia de Sofía. Esto se llama <b>proveer</b> en lugar de <b>evocar</b>.'},
+     {id:4,sp:'Sofía',txt:'"Sí... sí, creo que era vergüenza."',isErr:false}
+   ],errId:3},
+  {type:'wordbank',title:'🔨 Construye la pregunta',badge:'Verificar aprendizaje',
+   scene:'Sofía fue a la reunión y dice: "Estuvo bien, tenías razón."',
+   instruction:'Construye la pregunta que verifica el aprendizaje desde la experiencia:',
+   hint:'Empieza con "¿Qué notaste..."',
+   words:['¿Qué','notaste','que','pasó','en','tu','cuerpo','cuando','te','diste','cuenta','?','pensaste','sentiste'],
+   correct:['¿Qué','notaste','que','pasó','en','tu','cuerpo','cuando','te','diste','cuenta','?'],
+   correctStr:'¿Qué notaste que pasó en tu cuerpo cuando te diste cuenta?',
+   exp:'✅ Combina Trackear (qué pasó) con Observar (en tu cuerpo). Evita que Sofía responda desde el mapa verbal — la dirige al terreno somático. Las reglas nuevas también se verifican en la experiencia.'}
 ];
 
-// Nivel 4: Simulación — sesión completa
 const D4=[
   {s:'No sé para qué vine hoy. Esta semana fue igual que siempre. Ya no creo que voy a mejorar.',
-   c:[
-    {t:'"¿Qué notaste esta semana que te hace pensar eso?"',tp:'g',da:+12,fb:'✅ Evocás observación sin confrontar la conclusión. Invitás a mirar el terreno que generó esa regla. Autonomía.',next:'Bueno... el jueves casi llamé para decir que estaba enferma. Pero no lo hice. Fui igual. Aunque después me sentí horrible igual.'},
-    {t:'"Entiendo. La mejora no es lineal."',tp:'n',da:0,fb:'⚠️ Das una explicación de tu mapa. Sofía sigue sin observar su semana real.',next:'Sí, supongo. Pero ya llevo meses y siento que doy dos pasos adelante y tres atrás.'},
-    {t:'"Eso no es cierto — hiciste avances importantes estas semanas."',tp:'b',da:-12,fb:'❌ Das tu evaluación del progreso de Sofía. Ella aprende a buscar en vos, no en su propia experiencia.',next:'Sí, sí, tenés razón. Supongo que mejoré. No lo sé ver yo sola.'}
-  ]},
+   c:[{t:'"¿Qué notaste esta semana que te hace pensar eso?"',tp:'g',da:+12,fb:'✅ Evocás observación sin confrontar la conclusión.',next:'Bueno... el jueves casi llamé para decir que estaba enferma. Pero no lo hice. Fui igual. Aunque después me sentí horrible igual.'},
+      {t:'"Entiendo. La mejora no es lineal."',tp:'n',da:0,fb:'⚠️ Das tu mapa. Sofía sigue sin observar su semana real.',next:'Sí, supongo. Pero llevo meses y siento que doy dos pasos adelante y tres atrás.'},
+      {t:'"Eso no es cierto — hiciste avances importantes."',tp:'b',da:-12,fb:'❌ Das tu evaluación del progreso. Ella aprende a buscar en vos, no en su propia experiencia.',next:'Sí, sí, tenés razón. No lo sé ver yo sola.'}]},
   {s:'El jueves casi llamé para decir que estaba enferma. Pero no lo hice. Fui igual. Aunque después me sentí horrible igual.',
-   c:[
-    {t:'"¿Qué pasó en tu cuerpo cuando decidiste ir de todas formas?"',tp:'g',da:+12,fb:'✅ Observar en el momento de la decisión. El terreno corporal debajo del relato.',next:'El corazón me latía muy fuerte. Las manos sudadas. Pensé que todos iban a ver que soy un desastre. Pero fui igual.'},
-    {t:'"¿Qué te hizo tomar esa decisión?"',tp:'n',da:+4,fb:'⚠️ Busca la explicación verbal. Lo más clínico es acceder a la experiencia corporal de ese momento.',next:'No sé... supongo que recordé lo que hablamos. Así que fui.'},
-    {t:'"Eso es un gran avance — fuiste a pesar del miedo."',tp:'b',da:-12,fb:'❌ Evaluás el resultado sin explorar la experiencia. Sofía sale con tu etiqueta positiva, no con mayor contacto.',next:'Sí... aunque no sé si fue tan bueno. Me sentí horrible igual.'}
-  ]},
+   c:[{t:'"¿Qué pasó en tu cuerpo cuando decidiste ir de todas formas?"',tp:'g',da:+12,fb:'✅ Observar en el momento de la decisión. El terreno corporal debajo del relato.',next:'El corazón me latía muy fuerte. Las manos sudadas. Pensé que todos iban a ver que soy un desastre. Pero fui igual.'},
+      {t:'"¿Qué te hizo tomar esa decisión?"',tp:'n',da:+4,fb:'⚠️ Busca explicación verbal. Lo más clínico: la experiencia corporal de ese momento.',next:'No sé... supongo que recordé lo que hablamos. Así que fui.'},
+      {t:'"Eso es un gran avance — fuiste a pesar del miedo."',tp:'b',da:-12,fb:'❌ Evaluás sin explorar la experiencia. Sofía sale con tu etiqueta positiva, no con más contacto.',next:'Sí... aunque no sé si fue tan bueno. Me sentí horrible igual.'}]},
   {s:'El corazón me latía muy fuerte. Las manos sudadas. Pensé que todos iban a ver que soy un desastre. Pero fui igual.',
-   c:[
-    {t:'"Fuiste con todo eso adentro. ¿Qué notaste que pasó cuando entraste?"',tp:'g',da:+12,fb:'✅ Reconocés el hecho y trackeas la consecuencia real. No das la conclusión — invitás a notar qué pasó.',next:'Entré y al principio estaba muy alerta. Pero después me di cuenta de que la gente estaba en lo suyo. No me miraban tanto como pensaba.'},
-    {t:'"Ese pensamiento de \'soy un desastre\' es una distorsión cognitiva típica."',tp:'b',da:-15,fb:'❌ Introducís un mapa técnico. Sofía tiene una etiqueta nueva pero no aprendió a observar ese pensamiento.',next:'Ah, sí. Entonces lo que pienso no es real. Qué alivio saber eso.'},
-    {t:'"¿Cuánto creías ese pensamiento en ese momento, del 0 al 100?"',tp:'n',da:+5,fb:'⚠️ Explorás la intensidad de la fusión. Útil, pero perdés la oportunidad de trackear qué pasó después de que fue igual.',next:'Mucho. Un 90%. Pero igual fui.'}
-  ]},
-  {s:'Al principio estaba muy alerta. Pero después me di cuenta de que la gente estaba en lo suyo. No me miraban tanto como pensaba.',
-   c:[
-    {t:'"¿Cómo notaste eso? ¿Qué cambió en tu cuerpo cuando te diste cuenta?"',tp:'g',da:+12,fb:'✅ Llevas la observación al nivel corporal — reforzás que el aprendizaje viene del terreno, no de las conclusiones verbales.',next:'El corazón fue bajando. Como que solté algo. Y pensé: "esto no es tan peligroso como creía".'},
-    {t:'"Eso confirma lo que trabajamos — los demás no te juzgan tanto como pensás."',tp:'b',da:-12,fb:'❌ Convertís el aprendizaje de Sofía en confirmación de tu modelo. El aprendizaje pasa a ser mapa tuyo, no experiencia de ella.',next:'Sí. Tenías razón. Debería confiar más en lo que me decís.'},
-    {t:'"¿Esto siempre pasa en reuniones o fue diferente esta vez?"',tp:'n',da:+5,fb:'⚠️ Útil para contextualizar. Pero primero vale que Sofía contacte lo que notó internamente antes de comparar.',next:'Creo que fue diferente. Otras veces no me doy cuenta — sigo alerta todo el tiempo.'}
-  ]},
+   c:[{t:'"Fuiste con todo eso adentro. ¿Qué notaste que pasó cuando entraste?"',tp:'g',da:+12,fb:'✅ Reconocés el hecho y trackeas la consecuencia real. No das la conclusión — invitás a notar.',next:'Al principio muy alerta. Pero después me di cuenta de que la gente estaba en lo suyo. No me miraban tanto.'},
+      {t:'"Ese pensamiento de \'soy un desastre\' es una distorsión cognitiva típica."',tp:'b',da:-15,fb:'❌ Mapa técnico. Sofía tiene una etiqueta nueva pero no aprendió a observar ese pensamiento.',next:'Ah, sí. Entonces lo que pienso no es real. Qué alivio saber eso.'},
+      {t:'"¿Cuánto creías ese pensamiento, del 0 al 100?"',tp:'n',da:+5,fb:'⚠️ Explorás intensidad. Útil, pero perdés la oportunidad de trackear qué pasó después.',next:'Mucho. Un 90%. Pero igual fui.'}]},
+  {s:'Al principio muy alerta. Pero después me di cuenta de que la gente estaba en lo suyo. No me miraban tanto.',
+   c:[{t:'"¿Cómo notaste eso? ¿Qué cambió en tu cuerpo cuando te diste cuenta?"',tp:'g',da:+12,fb:'✅ Llevas la observación al nivel corporal — reforzás que el aprendizaje viene del terreno.',next:'El corazón fue bajando. Como que solté algo. Y pensé: "esto no es tan peligroso como creía".'},
+      {t:'"Eso confirma lo que trabajamos — los demás no te juzgan tanto como pensás."',tp:'b',da:-12,fb:'❌ Convertís el aprendizaje de Sofía en confirmación de tu modelo. Pliance.',next:'Sí. Tenías razón. Debería confiar más en lo que me decís.'},
+      {t:'"¿Esto siempre pasa en reuniones o fue diferente esta vez?"',tp:'n',da:+5,fb:'⚠️ Útil para contextualizar. Pero primero vale que Sofía contacte lo que notó internamente.',next:'Creo que fue diferente. Otras veces no me doy cuenta.'}]},
   {s:'El corazón fue bajando. Como que solté algo. Y pensé: "esto no es tan peligroso como creía".',
-   c:[
-    {t:'"Antes de quedarnos con esa conclusión — ¿qué notaste en tu cuerpo cuando te diste cuenta de eso?"',tp:'g',da:+12,fb:'✅ Las reglas nuevas también necesitan verificarse en la experiencia. No confirmás — pedís que el aprendizaje se ancle en el cuerpo. Tracking real.',next:'Alivio. Real. No el de cuando evito, que después empeora. Fue diferente. Más sólido.'},
-    {t:'"Eso es un aprendizaje muy importante. El trabajo está dando resultado."',tp:'b',da:-12,fb:'❌ El aprendizaje de Sofía pasa a ser confirmación de tu modelo. Entrenás dependencia de tu validación — aunque con buena intención.',next:'Me alegra que lo veas así. Necesitaba escucharlo.'},
-    {t:'"¿Qué diferencia hay entre este alivio y el de cuando evitás?"',tp:'n',da:+7,fb:'⚠️ Muy buena pregunta. Un pequeño paso más: primero anclar en el cuerpo ("¿qué notaste?"), luego explorar la diferencia.',next:'Este se siente más firme. El otro después empeora. Este es como... más verdadero.'}
-  ]},
+   c:[{t:'"Antes de quedarnos con esa conclusión — ¿qué notaste en tu cuerpo cuando te diste cuenta de eso?"',tp:'g',da:+12,fb:'✅ Las reglas nuevas también se verifican en la experiencia. Tracking real, no solo aceptación.',next:'Alivio. Real. No el de cuando evito, que después empeora. Fue diferente. Más sólido.'},
+      {t:'"Eso es un aprendizaje muy importante. El trabajo está dando resultado."',tp:'b',da:-12,fb:'❌ El aprendizaje de Sofía pasa a ser confirmación de tu modelo. Dependencia.',next:'Me alegra que lo veas así. Necesitaba escucharlo.'},
+      {t:'"¿Qué diferencia hay entre este alivio y el de cuando evitás?"',tp:'n',da:+7,fb:'⚠️ Muy buena pregunta. Un paso más: primero anclar en el cuerpo, luego comparar.',next:'Este se siente más firme. El otro después empeora. Este es como... más verdadero.'}]},
   {s:'Alivio. Real. No el de cuando evito, que después empeora. Fue diferente. Más sólido.',
-   c:[
-    {t:'"¿Cómo vas a recordar esta diferencia la próxima vez — entre el alivio sólido y el que empeora?"',tp:'g',da:+12,fb:'✅ Cierre perfecto. No das una estrategia — preguntás cómo ella va a llevar este aprendizaje al contexto real. Entrenás la habilidad de observar, no una nueva regla.',next:null},
-    {t:'"Para la semana que viene, quiero que vayas a otra reunión y observes lo que pasa."',tp:'n',da:0,fb:'⚠️ Das la dirección vos. Lo más potente: que Sofía genere su propio plan desde lo que aprendió en su experiencia.',next:null},
-    {t:'"Guardá esa sensación. Es la prueba de que podés hacerlo."',tp:'b',da:-5,fb:'⚠️ Romantizás el momento sin construir habilidad. "Guardá esa sensación" no entrena observar — entrena memorizar.',next:null}
-  ]}
+   c:[{t:'"¿Cómo vas a recordar esta diferencia la próxima vez — entre el alivio sólido y el que empeora?"',tp:'g',da:+12,fb:'✅ Perfecto. No das una estrategia — preguntás cómo llevará esto al contexto real. Entrenás observar, no una nueva regla.',next:null},
+      {t:'"Para la semana que viene, quiero que vayas a otra reunión y observes lo que pasa."',tp:'n',da:0,fb:'⚠️ Das la dirección vos. Lo más potente: que Sofía genere su propio plan.',next:null},
+      {t:'"Guardá esa sensación. Es la prueba de que podés hacerlo."',tp:'b',da:-5,fb:'⚠️ No entrena observar — entrena memorizar. La habilidad no queda en ella.',next:null}]}
 ];
 
-// ═══ RENDER FUNCTIONS ════════════════════════════
+// ═══ RENDER ══════════════════════════════════════
 
 function rCover(el){
+  const isDayMode=document.body.classList.contains('day');
   el.style.background=`var(--db)`;
   el.innerHTML=`
   <div style="position:absolute;inset:0;background-image:var(--hex);pointer-events:none"></div>
   <div style="position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:56px 24px 44px">
     <div>
-      <div style="font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:52px">@leo.eyzaguirre · Psicología Contextual</div>
-      <span class="badge bc" style="background:rgba(43,158,212,.2);margin-bottom:16px">🧠 Entrenamiento Clínico</span>
-      <h1 style="font-size:40px;font-weight:900;line-height:1.07;margin-bottom:16px;color:#fff">Observar<br><span style="color:var(--y)">Describir</span><br>Trackear</h1>
-      <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.55);max-width:310px">Domina la habilidad central de la terapia contextual en 4 niveles de dificultad creciente.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px">
+        <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3)">@leo.eyzaguirre</div>
+        <button onclick="toggleTheme()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center">${isDayMode?'🌙':'☀️'}</button>
+      </div>
+      <span class="badge bc" style="background:rgba(43,158,212,.25);margin-bottom:16px">🧠 Entrenamiento Clínico</span>
+      <h1 style="font-size:40px;font-weight:900;line-height:1.07;margin-bottom:14px;color:#fff">Observar<br><span style="color:var(--y)">Describir</span><br>Trackear</h1>
+      <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.5);max-width:300px">Domina la habilidad central de la terapia contextual en 4 niveles de dificultad creciente.</p>
     </div>
     <div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
-        <div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 10px;text-align:center;border:1px solid rgba(43,158,212,.2)">
-          <div style="font-size:22px;margin-bottom:5px">🔍</div>
-          <div style="font-size:10px;font-weight:800;color:var(--ce)">OBSERVAR</div>
-          <div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px">Orientar</div>
-        </div>
-        <div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 10px;text-align:center;border:1px solid rgba(232,114,10,.2)">
-          <div style="font-size:22px;margin-bottom:5px">📝</div>
-          <div style="font-size:10px;font-weight:800;color:var(--or)">DESCRIBIR</div>
-          <div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px">Precisar</div>
-        </div>
-        <div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 10px;text-align:center;border:1px solid rgba(249,188,21,.2)">
-          <div style="font-size:22px;margin-bottom:5px">🔗</div>
-          <div style="font-size:10px;font-weight:800;color:var(--y)">TRACKEAR</div>
-          <div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px">Conectar</div>
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+        ${[['🃏','Flash Cards',bc='rgba(43,158,212,.2)'],['⚔️','A vs B','rgba(232,114,10,.2)'],['🔨','Construir','rgba(249,188,21,.2)']].map(([e,n,c])=>`<div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 8px;text-align:center;border:1px solid ${c}"><div style="font-size:22px;margin-bottom:4px">${e}</div><div style="font-size:10px;font-weight:800;color:rgba(255,255,255,.6)">${n}</div></div>`).join('')}
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px">
-        <span class="badge bw">🃏 Flash Cards</span>
-        <span class="badge bw">⚔️ A vs B</span>
-        <span class="badge bw">🔨 Construir</span>
-        <span class="badge bw">🎭 Sesión real</span>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:22px">
+        <div style="font-size:24px">🎭</div>
+        <div><div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.7)">NIVEL 4 · SESIÓN COMPLETA</div><div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:2px">Cada respuesta cambia cómo responde Sofía</div></div>
       </div>
-      <button class="btn btn-p" style="font-size:15px;padding:17px" onclick="go('name',rName)">Comenzar →</button>
+      ${S.name?`<div style="background:rgba(249,188,21,.1);border:1px solid rgba(249,188,21,.2);border-radius:12px;padding:12px 16px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+        <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:2px">Continuar como</div><div style="font-size:14px;font-weight:800;color:var(--y)">${S.name}</div></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.4)">⚡ ${S.xp} XP</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:4px">
+        <button class="btn btn-p" style="flex:.6" onclick="go('l1',rL1)">Continuar →</button>
+        <button class="btn btn-g" style="flex:.4;font-size:11px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)" onclick="resetProgress()">Reiniciar</button>
+      </div>`:`<button class="btn btn-p" style="font-size:15px;padding:17px" onclick="go('name',rName)">Comenzar →</button>`}
     </div>
   </div>`;
+}
+
+function resetProgress(){
+  if(confirm('¿Reiniciar progreso desde cero?')){
+    S={xp:0,name:'',streak:0,maxStreak:0,l1:{i:0,sc:0,oSc:0,dSc:0,tSc:0},l2:{i:0,sc:0,oSc:0,dSc:0,tSc:0},l3:{i:0,sc:0},l4:{turn:0,auto:50,good:0,msgs:[]}};
+    saveS();go('cover',rCover);
+  }
 }
 
 function rName(el){
@@ -377,7 +394,7 @@ function rName(el){
     <div style="text-align:center;margin-bottom:36px">
       <div style="font-size:56px;margin-bottom:16px;animation:pop .5s ease both">👋</div>
       <h2 style="font-size:26px;font-weight:900;margin-bottom:10px">¿Cómo te llamas?</h2>
-      <p class="ts" style="color:var(--mut)">Tu nombre aparece en el certificado final<br>y lo usamos durante el entrenamiento.</p>
+      <p class="ts" style="color:var(--mut)">Tu nombre aparece en el certificado final.</p>
     </div>
     <input class="inp" id="ni" placeholder="Tu nombre completo..." maxlength="50" style="margin-bottom:16px" onkeydown="if(event.key==='Enter')sName()">
     <button class="btn btn-p" onclick="sName()">Empezar →</button>
@@ -387,34 +404,34 @@ function rName(el){
 function sName(){
   const v=document.getElementById('ni').value.trim();
   if(!v){document.getElementById('ni').style.borderColor='var(--err)';return;}
-  S.name=v;go('theory',rTheory);
+  S.name=v;saveS();go('theory',rTheory);
 }
 
 function rTheory(el){
   el.innerHTML=`
   <div style="padding:32px 0 40px">
-    <div class="p" style="margin-bottom:24px">
+    <div class="p" style="margin-bottom:22px">
       <span class="badge bc" style="margin-bottom:12px">📚 Marco conceptual</span>
       <h2 style="font-size:24px;font-weight:900;line-height:1.2;margin-bottom:6px">El mapa y el terreno</h2>
       <p class="ts" style="color:var(--mut)">Villatte, Villatte & Hayes · <em>Mastering the Clinical Conversation</em></p>
     </div>
-    <div class="p" style="margin-bottom:20px">
+    <div class="p" style="margin-bottom:18px">
       <div class="card">
         <p class="ts" style="margin-bottom:10px">El lenguaje transforma lo que ocurre una vez en una regla. Un pensamiento se vuelve una creencia. Una emoción, un estado de ánimo. Una conducta, un hábito.</p>
         <div class="quote">"Sin sensibilidad a las variaciones en el contexto, una sola observación se convierte en una regla, un pensamiento en una creencia, una emoción en un estado de ánimo, y una conducta en un hábito."</div>
-        <p class="ts">El cliente responde al mapa que tiene sobre sí mismo — no al terreno real. Eso es lo que mantiene el sufrimiento.</p>
+        <p class="ts">El cliente responde al mapa que tiene — no al terreno real. ODT entrena restaurar ese contacto.</p>
       </div>
     </div>
     <div style="background:var(--card);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord)">
       ${[
-      {id:'a1',ico:'🔍',col:'var(--ce)',tit:'Observar — Orientar la atención',body:`<p class="ts" style="margin-bottom:8px">El nivel más básico: orientar la atención del cliente hacia algo que no está notando. No requiere que nombre nada — solo que contacte.</p><div class="tip">🛠️ <b>Herramientas:</b> Claves temporales ("¿qué notás ahora?"), encuadre analógico ("si tuviera una forma..."), encuadre deíctico ("si te vieras desde afuera...").</div><div class="note">💡 El solo acto de orientar la atención ya es una intervención de exposición. No necesita llamarse exposición para funcionar como tal.</div>`},
-      {id:'a2',ico:'📝',col:'var(--or)',tit:'Describir — Abrir la experiencia',body:`<p class="ts" style="margin-bottom:8px">Poner en palabras la experiencia con sus características funcionales, sin que los juicios la cierren en una etiqueta.</p><div class="tip">⚠️ <b>El juicio colapsa:</b> "Horrible" evalúa y cierra. Preguntar por dónde está, cómo se mueve, si varía — eso abre y restaura el contacto.</div><div class="note">💡 No se describe para acumular datos — se describe para que el cliente desarrolle la habilidad de contactar matices que antes pasaban desapercibidos.</div>`},
-      {id:'a3',ico:'🔗',col:'var(--y)',tit:'Trackear — Ver contingencias',body:`<p class="ts" style="margin-bottom:8px">Notar relaciones funcionales que conectan experiencias: qué precede a qué, qué sigue a qué, cómo se relacionan las acciones con sus consecuencias reales.</p><div class="tip">🛠️ No se pregunta "¿creés que tiene consecuencias?" Se pregunta "¿qué notaste que pasó?" — orientado a la experiencia directa.</div><div class="note">⚠️ <b>Riesgo:</b> el tracking mismo puede volverse regla rígida. Siempre verificar variabilidad contextual.</div>`},
-      {id:'a4',ico:'⚠️',col:'var(--err)',tit:'La trampa del terapeuta',body:`<p class="ts" style="margin-bottom:8px">El terapeuta nota lo que el cliente no nota — y se lo dice.</p><div class="tip">❌ <b>Das la observación:</b> el cliente aprende a escucharte. Pliance. Dependencia.<br><br>✅ <b>Evocás la observación:</b> el cliente aprende a observar. Tracking. Autonomía.</div><div class="quote">"El rol del terapeuta es preferentemente evocar más que proveer observaciones. De esta manera, el cliente aprende el proceso global de observar y sacar conclusiones basadas en su propia experiencia."</div>`},
-      {id:'a5',ico:'🧬',col:'rgba(255,255,255,.45)',tit:'Conexión con RFT',body:`<p class="ts" style="margin-bottom:8px"><b>Pliance:</b> conducta controlada por seguimiento de reglas sociales, independientemente de si la regla corresponde a la experiencia real.<br><br><b>Tracking:</b> conducta controlada por la correspondencia entre regla y experiencia directa.</p><div class="tip">🧬 La Teoría del Marco Relacional explica por qué el lenguaje desconecta: las redes de relaciones derivadas se vuelven más poderosas que las contingencias directas.</div><div class="note">💡 ODT entrena tracking — ayuda al cliente a re-establecer contacto con las contingencias reales en lugar de seguir el mapa verbal.</div>`}
-      ].map(a=>`<div class="acc" id="${a.id}"><div class="acc-h" onclick="acc('${a.id}')"><div class="acc-t" style="color:${a.col}">${a.ico} ${a.tit}</div><div class="acc-arr">▼</div></div><div class="acc-b">${a.body}</div></div>`).join('')}
+        {id:'a1',col:'var(--ce)',tit:'🔍 Observar — Orientar la atención',body:`<p class="ts" style="margin-bottom:8px">Orientar la atención hacia algo que no se está notando. No requiere que el cliente nombre nada — solo que contacte.</p><div class="tip">🛠️ Claves temporales ("¿qué notás ahora?"), encuadre analógico ("si tuviera una forma..."), encuadre deíctico ("si te vieras desde afuera...").</div><div class="note">💡 El solo acto de orientar la atención ya es exposición. No necesita ese nombre para funcionar como tal.</div>`},
+        {id:'a2',col:'var(--or)',tit:'📝 Describir — Abrir la experiencia',body:`<p class="ts" style="margin-bottom:8px">Poner en palabras la experiencia con sus características funcionales. Sin que los juicios la cierren en una etiqueta.</p><div class="tip">⚠️ "Horrible" evalúa y cierra. Preguntar dónde está, cómo se mueve, si varía — eso abre y restaura el contacto.</div><div class="note">💡 No se describe para acumular datos — se describe para que el cliente desarrolle la habilidad de contactar matices.</div>`},
+        {id:'a3',col:'var(--y)',tit:'🔗 Trackear — Ver contingencias',body:`<p class="ts" style="margin-bottom:8px">Notar relaciones funcionales: qué precede a qué, qué sigue a qué, cómo se relacionan acciones y consecuencias reales.</p><div class="tip">🛠️ No se pregunta "¿creés que tiene consecuencias?" — se pregunta "¿qué notaste que pasó?". Orientado a la experiencia directa.</div><div class="note">⚠️ El tracking mismo puede volverse regla rígida. Verificar siempre variabilidad contextual.</div>`},
+        {id:'a4',col:'var(--err)',tit:'⚠️ La trampa del terapeuta',body:`<p class="ts" style="margin-bottom:8px">El terapeuta nota lo que el cliente no nota — y se lo dice.</p><div class="tip">❌ <b>Proveer:</b> el cliente aprende a escucharte → pliance → dependencia.<br><br>✅ <b>Evocar:</b> el cliente aprende a observar → tracking → autonomía.</div><div class="quote">"El rol del terapeuta es preferentemente evocar más que proveer observaciones. De esta manera, el cliente aprende el proceso global de observar y sacar conclusiones basadas en su propia experiencia."</div>`},
+        {id:'a5',col:'rgba(180,140,255,1)',tit:'🧬 Conexión con RFT',body:`<p class="ts" style="margin-bottom:8px"><b>Pliance:</b> conducta controlada por seguimiento de reglas sociales, independientemente de si corresponden a la experiencia directa.<br><br><b>Tracking:</b> conducta controlada por la correspondencia entre regla y experiencia directa.</p><div class="tip">🧬 La Teoría del Marco Relacional explica por qué el lenguaje desconecta: las redes relacionales derivadas se vuelven más poderosas que las contingencias directas.</div><div class="note">💡 ODT entrena al cliente a re-establecer contacto con las contingencias reales en lugar de seguir el mapa verbal.</div>`}
+      ].map(a=>`<div class="acc" id="${a.id}"><div class="acc-h" onclick="acc('${a.id}')"><div class="acc-t" style="color:${a.col}">${a.tit}</div><div class="acc-arr">▼</div></div><div class="acc-b">${a.body}</div></div>`).join('')}
     </div>
-    <div class="p" style="margin-top:24px">
+    <div class="p" style="margin-top:22px">
       <button class="btn btn-p" onclick="go('sofia',rSofia)">Conocer a Sofía →</button>
     </div>
   </div>`;
@@ -431,8 +448,8 @@ function rSofia(el){
         <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--db),var(--ce));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">👩</div>
         <div><div style="font-size:20px;font-weight:900">Sofía</div><div style="font-size:12px;color:var(--mut)">32 años · Diseñadora gráfica</div><span class="badge bc" style="margin-top:4px;font-size:9px">3 meses en terapia</span></div>
       </div>
-      <div class="tip" style="margin-bottom:8px">📋 <b>Motivo de consulta:</b> Ansiedad social — evita reuniones y situaciones donde "la puedan juzgar".</div>
-      <div class="tip" style="margin-bottom:8px">🔄 <b>Patrón:</b> Anticipación → pensamientos catastrofistas → evitación → alivio inmediato → culpa después.</div>
+      <div class="tip" style="margin-bottom:8px">📋 <b>Motivo:</b> Ansiedad social — evita reuniones y situaciones donde "la puedan juzgar".</div>
+      <div class="tip" style="margin-bottom:8px">🔄 <b>Patrón:</b> Anticipación → catastrofismo → evitación → alivio inmediato → culpa después.</div>
       <div class="tip">📖 <b>Historia:</b> Sus observaciones sobre sí misma fueron sistemáticamente invalidadas en su familia.</div>
     </div>
     <div class="card" style="margin-bottom:16px">
@@ -440,24 +457,24 @@ function rSofia(el){
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <div style="background:rgba(242,92,92,.07);border:1px solid rgba(242,92,92,.2);border-radius:10px;padding:12px">
           <div style="font-size:9px;font-weight:800;color:var(--err);margin-bottom:6px;text-transform:uppercase">Reglas rígidas</div>
-          <div style="font-size:11px;line-height:1.7;color:rgba(238,244,255,.8)">"Soy ansiosa"<br>"Siempre me pasa"<br>"Van a verme mal"</div>
+          <div style="font-size:11px;line-height:1.7;color:var(--txt2)">"Soy ansiosa"<br>"Siempre me pasa"<br>"Van a verme mal"</div>
         </div>
         <div style="background:rgba(62,207,114,.07);border:1px solid rgba(62,207,114,.2);border-radius:10px;padding:12px">
           <div style="font-size:9px;font-weight:800;color:var(--ok);margin-bottom:6px;text-transform:uppercase">Potencial</div>
-          <div style="font-size:11px;line-height:1.7;color:rgba(238,244,255,.8)">Puede observar matices que aún no usa.<br>Pequeños avances reales.</div>
+          <div style="font-size:11px;line-height:1.7;color:var(--txt2)">Puede observar matices que aún no usa.<br>Pequeños avances reales.</div>
         </div>
       </div>
     </div>
-    <div style="background:rgba(249,188,21,.06);border:1px solid rgba(249,188,21,.2);border-radius:12px;padding:14px;margin-bottom:28px">
+    <div style="background:rgba(249,188,21,.06);border:1px solid rgba(249,188,21,.18);border-radius:12px;padding:14px;margin-bottom:28px">
       <div style="font-size:12px;font-weight:800;color:var(--y);margin-bottom:5px">⚠️ Recuerda</div>
       <p class="ts">Sofía responde diferente según lo que elijas. Si das tus observaciones, aprende a depender de ti. Si las evocás, aprende a observar sola.</p>
     </div>
-    <button class="btn btn-p" style="margin-top:auto" onclick="go('l1',rL1)">🃏 Nivel 1: Flash Cards →</button>
+    <button class="btn btn-p" onclick="go('l1',rL1)">🃏 Nivel 1: Flash Cards →</button>
   </div>`;
 }
 
-// ═══ NIVEL 1: FLASH CARDS ════════════════════════
-function rL1(el){S.l1={i:0,sc:0};drawL1(el)}
+// ═══ NIVEL 1 ══════════════════════════════════════
+function rL1(el){if(S.l1.i===0)S.l1={i:0,sc:0,oSc:0,dSc:0,tSc:0};drawL1(el)}
 function drawL1(el){
   const d=D1[S.l1.i];
   el.innerHTML=`
@@ -471,8 +488,8 @@ function drawL1(el){
     </div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
       <div style="font-size:10px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;text-align:center">¿Qué habilidad usa este terapeuta?</div>
-      <div class="card" style="margin-bottom:28px;border-color:rgba(43,158,212,.22);background:linear-gradient(135deg,var(--card),var(--card2));text-align:center">
-        <div style="font-size:16px;line-height:1.65;font-style:italic;color:rgba(238,244,255,.95);padding:8px 0">${d.txt}</div>
+      <div class="card" style="margin-bottom:28px;border-color:rgba(43,158,212,.22);text-align:center">
+        <div style="font-size:16px;line-height:1.65;font-style:italic;padding:8px 0;color:var(--txt)">${d.txt}</div>
       </div>
       <div id="zones" style="display:flex;gap:10px">
         <button class="skill-zone O" onclick="ansL1('O')"><span style="font-size:28px">🔍</span>Observar</button>
@@ -488,29 +505,25 @@ function ansL1(ans){
   const d=D1[S.l1.i];
   document.querySelectorAll('#zones .skill-zone').forEach(b=>b.disabled=true);
   const ok=ans===d.sk;
-  if(ok){S.l1.sc++;addXP(15);}
-  const zMap={O:0,D:1,T:2};
-  const zones=document.querySelectorAll('#zones .skill-zone');
-  zones[zMap[ans]].classList.add(ok?'hit-ok':'hit-err');
-  if(!ok)zones[zMap[d.sk]].classList.add('hit-ok');
+  if(ok){S.l1.sc++;S.l1[d.sk.toLowerCase()+'Sc']=(S.l1[d.sk.toLowerCase()+'Sc']||0)+1;}
+  hitStreak(ok);if(ok)addXP(15);
+  const zm={O:0,D:1,T:2};
+  const zz=document.querySelectorAll('#zones .skill-zone');
+  zz[zm[ans]].classList.add(ok?'hit-ok':'hit-err');
+  if(!ok)zz[zm[d.sk]].classList.add('hit-ok');
   const col={O:'var(--ce)',D:'var(--or)',T:'var(--y)'};
-  const nm={O:'Observar',D:'Describir',T:'Trackear'};
   document.getElementById('l1fb').innerHTML=`
     <div class="fbc ${ok?'bok':'berr'}" style="margin-top:20px">
-      <div class="fbh">${ok?'✅ Correcto':'❌ Es '+nm[d.sk]}</div>
+      <div class="fbh">${ok?'✅ Correcto':'❌ Es '+{O:'Observar',D:'Describir',T:'Trackear'}[d.sk]}</div>
       <p class="ts" style="margin-bottom:8px">${d.fb}</p>
-      <div style="background:rgba(255,255,255,.04);border-radius:8px;padding:10px;border-left:2px solid ${col[d.sk]}">
-        <div style="font-size:10px;font-weight:700;color:${col[d.sk]};margin-bottom:3px;text-transform:uppercase">🧬 Conexión RFT</div>
-        <p style="font-size:11px;line-height:1.65;color:rgba(238,244,255,.65)">${d.rft}</p>
+      <div style="background:var(--card2);border-radius:8px;padding:10px;border-left:2px solid ${col[d.sk]}">
+        <div style="font-size:10px;font-weight:700;color:${col[d.sk]};margin-bottom:3px;text-transform:uppercase">🧬 RFT</div>
+        <p style="font-size:11px;line-height:1.65;color:var(--mut)">${d.rft}</p>
       </div>
     </div>`;
   document.getElementById('l1nx').innerHTML=`<button class="btn btn-p" style="margin-top:12px" onclick="nxL1()">${S.l1.i+1>=D1.length?'Ver resultados →':'Siguiente →'}</button>`;
 }
-function nxL1(){
-  S.l1.i++;
-  if(S.l1.i>=D1.length)go('r1',rR1);
-  else drawL1(document.querySelector('.screen.active'));
-}
+function nxL1(){S.l1.i++;if(S.l1.i>=D1.length)go('r1',rR1);else drawL1(document.querySelector('.screen.active'));}
 
 function rR1(el){
   const sc=S.l1.sc,tot=D1.length,pct=Math.round(sc/tot*100);
@@ -518,21 +531,21 @@ function rR1(el){
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 24px;text-align:center">
     <div style="font-size:72px;animation:pop .5s ease both;margin-bottom:16px">${pct>=80?'🏆':pct>=60?'💪':'📖'}</div>
     <h2 style="font-size:28px;font-weight:900;margin-bottom:8px">Nivel 1 completado</h2>
-    <div class="xpp" style="margin-bottom:24px">⚡ ${S.xp} XP</div>
+    <div class="xpp" style="margin-bottom:24px">⚡ ${S.xp} XP · Racha máx: ${S.maxStreak} 🔥</div>
     <div style="display:flex;gap:12px;margin-bottom:24px">
       <div class="card" style="text-align:center;padding:16px 22px"><div style="font-size:30px;font-weight:900;color:var(--y)">${sc}/${tot}</div><div style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">Correctas</div></div>
       <div class="card" style="text-align:center;padding:16px 22px"><div style="font-size:30px;font-weight:900;color:${pct>=70?'var(--ok)':'var(--warn)'}">${pct}%</div><div style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">Precisión</div></div>
     </div>
     <div class="card" style="margin-bottom:28px;text-align:left;width:100%">
       <div style="font-size:12px;font-weight:800;color:var(--or);margin-bottom:8px">⚔️ Nivel 2 desbloqueado</div>
-      <p class="ts">Ahora no solo identificas la habilidad — decides cuál respuesta del terapeuta es más efectiva clínicamente y por qué. El foco: pliance vs tracking.</p>
+      <p class="ts">Ahora no solo identificas la habilidad — decidís cuál respuesta del terapeuta es más efectiva clínicamente.</p>
     </div>
     <button class="btn btn-p" onclick="go('l2',rL2)">⚔️ Nivel 2: A vs B →</button>
   </div>`;
 }
 
-// ═══ NIVEL 2: DUELO A vs B ═══════════════════════
-function rL2(el){S.l2={i:0,sc:0};drawL2(el)}
+// ═══ NIVEL 2 ══════════════════════════════════════
+function rL2(el){if(S.l2.i===0)S.l2={i:0,sc:0,oSc:0,dSc:0,tSc:0};drawL2(el)}
 function drawL2(el){
   const d=D2[S.l2.i];
   el.innerHTML=`
@@ -541,16 +554,16 @@ function drawL2(el){
       <span class="badge bo">⚔️ Nivel 2 · A vs B</span>
       <span style="font-size:11px;font-weight:800;color:var(--mut)">${S.l2.i+1}/${D2.length}</span>
     </div>
-    <div class="pips" style="margin-bottom:16px">
+    <div class="pips" style="margin-bottom:14px">
       ${D2.map((_,i)=>`<div class="pip${i<S.l2.i?' d':i===S.l2.i?' c':''}"></div>`).join('')}
     </div>
-    <div style="display:flex;gap:6px;margin-bottom:14px">
+    <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
       <span class="badge bw">${d.ctx}</span>
       <span class="badge bc">${d.skill}</span>
     </div>
     <div class="card" style="margin-bottom:18px;border-color:rgba(43,158,212,.22)">
       <div style="font-size:10px;font-weight:800;color:var(--ce);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">💬 Sofía dice...</div>
-      <div style="font-size:14px;font-style:italic;line-height:1.65">"${d.sofia}"</div>
+      <div style="font-size:14px;font-style:italic;line-height:1.65;color:var(--txt)">"${d.sofia}"</div>
     </div>
     <div style="font-size:13px;font-weight:700;margin-bottom:14px">¿Cuál respuesta es más efectiva clínicamente?</div>
     <div style="display:flex;flex-direction:column;gap:10px" id="dbts">
@@ -566,21 +579,18 @@ function ansL2(ans){
   const btns=document.querySelectorAll('#dbts .duel-btn');
   btns.forEach(b=>b.disabled=true);
   const ok=ans===d.better;
-  if(ok){S.l2.sc++;addXP(18);}
+  if(ok){S.l2.sc++;const sid=d.skillId;S.l2[sid.toLowerCase()+'Sc']=(S.l2[sid.toLowerCase()+'Sc']||0)+1;}
+  hitStreak(ok);if(ok)addXP(18);
   btns[0].classList.add(d.better==='A'?'winner':'loser');
   btns[1].classList.add(d.better==='B'?'winner':'loser');
   document.getElementById('l2fb').innerHTML=`
-    <div class="card" style="margin-top:12px;border-color:${ok?'var(--ok)':'var(--err)'}">
+    <div class="card" style="margin-top:12px;border-color:${ok?'var(--ok)':'var(--warn)'}">
       <div style="margin-bottom:10px"><div style="font-size:10px;font-weight:800;color:var(--mut);margin-bottom:3px;text-transform:uppercase">Opción A</div><p class="ts">${d.A.fb}</p></div>
       <div><div style="font-size:10px;font-weight:800;color:var(--mut);margin-bottom:3px;text-transform:uppercase">Opción B</div><p class="ts">${d.B.fb}</p></div>
     </div>`;
   document.getElementById('l2nx').innerHTML=`<button class="btn btn-p" onclick="nxL2()">${S.l2.i+1>=D2.length?'Ver resultados →':'Siguiente →'}</button>`;
 }
-function nxL2(){
-  S.l2.i++;
-  if(S.l2.i>=D2.length)go('r2',rR2);
-  else drawL2(document.querySelector('.screen.active'));
-}
+function nxL2(){S.l2.i++;if(S.l2.i>=D2.length)go('r2',rR2);else drawL2(document.querySelector('.screen.active'));}
 
 function rR2(el){
   const sc=S.l2.sc,tot=D2.length,pct=Math.round(sc/tot*100);
@@ -595,55 +605,38 @@ function rR2(el){
     </div>
     <div class="card" style="margin-bottom:28px;text-align:left;width:100%">
       <div style="font-size:12px;font-weight:800;color:var(--y);margin-bottom:8px">🔨 Nivel 3 desbloqueado</div>
-      <p class="ts">Nivel mixto: vas a ordenar pasos, construir preguntas palabra por palabra, y cazar errores clínicos en diálogos reales.</p>
+      <p class="ts">Nivel mixto: ordenás pasos, construís preguntas palabra por palabra, y cazás errores clínicos en diálogos reales.</p>
     </div>
     <button class="btn btn-p" onclick="go('l3',rL3)">🔨 Nivel 3: Construir →</button>
   </div>`;
 }
 
-// ═══ NIVEL 3: MIXTO ══════════════════════════════
-function rL3(el){S.l3={i:0,sc:0};drawL3(el)}
-function drawL3(el){
-  const d=D3[S.l3.i];
-  if(d.type==='order')drawOrder(el,d);
-  else if(d.type==='wordbank')drawWordBank(el,d);
-  else if(d.type==='errorhunt')drawErrorHunt(el,d);
-}
-function l3hdr(){
-  return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-    <span class="badge by">🔨 Nivel 3 · Construir</span>
-    <span style="font-size:11px;font-weight:800;color:var(--mut)">${S.l3.i+1}/${D3.length}</span>
-  </div>
-  <div class="pips" style="margin-bottom:18px">
-    ${D3.map((_,i)=>`<div class="pip${i<S.l3.i?' d':i===S.l3.i?' c':''}"></div>`).join('')}
-  </div>`;
-}
-function nxL3(){
-  S.l3.i++;
-  if(S.l3.i>=D3.length)go('r3',rR3);
-  else drawL3(document.querySelector('.screen.active'));
-}
+// ═══ NIVEL 3 ══════════════════════════════════════
+function rL3(el){if(S.l3.i===0)S.l3={i:0,sc:0};drawL3(el)}
+function drawL3(el){const d=D3[S.l3.i];if(d.type==='order')drawOrder(el,d);else if(d.type==='wordbank')drawWordBank(el,d);else drawErrorHunt(el,d);}
+function l3hdr(){return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span class="badge by">🔨 Nivel 3 · Construir</span><span style="font-size:11px;font-weight:800;color:var(--mut)">${S.l3.i+1}/${D3.length}</span></div><div class="pips" style="margin-bottom:16px">${D3.map((_,i)=>`<div class="pip${i<S.l3.i?' d':i===S.l3.i?' c':''}"></div>`).join('')}</div>`;}
+function nxL3(){S.l3.i++;if(S.l3.i>=D3.length)go('r3',rR3);else drawL3(document.querySelector('.screen.active'));}
 
 function drawOrder(el,d){
-  let sel=[];const items=[...d.items].sort(()=>Math.random()-.5);
+  let sel=[],items=[...d.items].sort(()=>Math.random()-.5);
   function draw(){
     el.innerHTML=`
     <div style="padding:76px 20px 30px;min-height:100vh">
       ${l3hdr()}
       <div style="font-size:13px;font-weight:800;color:var(--y);margin-bottom:8px">${d.title}</div>
       <span class="badge bw" style="margin-bottom:12px">${d.badge}</span>
-      <div class="card" style="margin-bottom:12px"><p style="font-size:12px;font-style:italic;line-height:1.65;color:rgba(238,244,255,.9)">${d.scene}</p></div>
-      <p style="font-size:12px;color:var(--mut);margin-bottom:14px">${d.instruction}</p>
-      ${sel.length>0?`<div style="margin-bottom:12px">${sel.map((it,i)=>`<div class="ord-item locked" style="border-color:var(--ce)"><div class="ord-num set">${i+1}</div><div>${it.txt}</div></div>`).join('')}</div>`:''}
+      <div class="card" style="margin-bottom:12px"><p style="font-size:12px;font-style:italic;line-height:1.65;color:var(--txt)">${d.scene}</p></div>
+      <p class="ts" style="margin-bottom:14px">${d.instruction}</p>
+      ${sel.length>0?`<div style="margin-bottom:10px">${sel.map((it,i)=>`<div class="ord-item locked" style="border-color:var(--ce)"><div class="ord-num set">${i+1}</div><div>${it.txt}</div></div>`).join('')}</div>`:''}
       <div id="oo">${items.filter(it=>!sel.find(s=>s.id===it.id)).map(it=>`<div class="ord-item" onclick="pickO('${it.id}')"><div class="ord-num">?</div><div>${it.txt}</div></div>`).join('')}</div>
       <div id="ofb"></div>
-      <div id="onx" style="margin-top:12px">${sel.length===d.items.length?`<button class="btn btn-p" onclick="checkO()">Verificar →</button>`:`<p style="font-size:11px;color:var(--mut);text-align:center">Toca los pasos en el orden que usarías</p>`}</div>
+      <div style="margin-top:10px" id="onx">${sel.length===d.items.length?`<button class="btn btn-p" onclick="checkO()">Verificar →</button>`:`<p class="ts" style="text-align:center">Toca los pasos en el orden que usarías</p>`}</div>
     </div>`;
   }
   window.pickO=id=>{const it=d.items.find(x=>x.id===id);if(it&&!sel.find(s=>s.id===id)){sel.push(it);draw();}};
   window.checkO=()=>{
     const ok=sel.map(s=>s.id).join('')===d.correct.join('');
-    if(ok){S.l3.sc++;addXP(22);}
+    if(ok){S.l3.sc++;addXP(22);}hitStreak(ok);
     document.getElementById('ofb').innerHTML=`<div class="fbc ${ok?'bok':'bnt'}" style="margin-top:10px"><div class="fbh">${ok?'✅ ¡Orden correcto!':'💡 No es el orden óptimo'}</div><p class="ts">${d.exp}</p></div>`;
     document.getElementById('onx').innerHTML=`<button class="btn btn-p" style="margin-top:10px" onclick="nxL3()">Siguiente →</button>`;
     document.querySelectorAll('#oo .ord-item').forEach(x=>x.style.pointerEvents='none');
@@ -652,23 +645,25 @@ function drawOrder(el,d){
 }
 
 function drawWordBank(el,d){
-  let built=[];
+  let built=[],hintUsed=false;
   function draw(){
     el.innerHTML=`
     <div style="padding:76px 20px 30px;min-height:100vh">
       ${l3hdr()}
       <div style="font-size:13px;font-weight:800;color:var(--y);margin-bottom:8px">${d.title}</div>
       <span class="badge bw" style="margin-bottom:12px">${d.badge}</span>
-      <div class="card" style="margin-bottom:12px"><p style="font-size:12px;font-style:italic;line-height:1.65;color:rgba(238,244,255,.9)">${d.scene}</p></div>
-      <p style="font-size:12px;color:var(--mut);margin-bottom:10px">${d.instruction}</p>
-      <div style="background:var(--card);border:2px solid ${built.length>0?'var(--ce)':'var(--bord)'};border-radius:12px;padding:14px;min-height:52px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:5px;align-items:center" id="builder">
+      <div class="card" style="margin-bottom:12px"><p style="font-size:12px;font-style:italic;line-height:1.65;color:var(--txt)">${d.scene}</p></div>
+      <p class="ts" style="margin-bottom:10px">${d.instruction}</p>
+      <div style="background:var(--card);border:2px solid ${built.length>0?'var(--ce)':'var(--bord)'};border-radius:12px;padding:14px;min-height:52px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;transition:border-color .2s" id="builder">
         ${built.length>0?built.map((w,i)=>`<span class="wchip inbuilt" onclick="rmW(${i})">${w}</span>`).join(''):`<span style="font-size:12px;color:var(--mut)">Construye la pregunta aquí...</span>`}
       </div>
-      <div style="display:flex;flex-wrap:wrap;margin-bottom:14px">
+      <div style="display:flex;flex-wrap:wrap;margin-bottom:12px">
         ${d.words.map(w=>`<span class="wchip${built.filter(x=>x===w).length>=d.words.filter(x=>x===w).length?' used':''}" onclick="addW('${w}')">${w}</span>`).join('')}
       </div>
+      ${!hintUsed?`<button onclick="useHint()" style="font-size:11px;font-weight:700;color:var(--mut);background:none;border:1px dashed var(--bord);border-radius:8px;padding:6px 12px;cursor:pointer;margin-bottom:10px;display:block">💡 Pista (-5 XP)</button>`:
+      `<div style="font-size:11px;color:var(--ce);margin-bottom:10px;font-weight:600">💡 Pista: ${d.hint}</div>`}
       <div id="wfb"></div>
-      <div style="display:flex;gap:8px;margin-top:12px">
+      <div style="display:flex;gap:8px;margin-top:10px">
         <button class="btn btn-g" style="flex:.4" onclick="clrW()">Limpiar</button>
         <button class="btn btn-p" style="flex:.6" onclick="chkW()">Verificar →</button>
       </div>
@@ -677,10 +672,11 @@ function drawWordBank(el,d){
   window.addW=w=>{const u=built.filter(x=>x===w).length,a=d.words.filter(x=>x===w).length;if(u<a){built.push(w);draw();}};
   window.rmW=i=>{built.splice(i,1);draw();};
   window.clrW=()=>{built=[];draw();};
+  window.useHint=()=>{hintUsed=true;draw();};
   window.chkW=()=>{
     const ok=built.join(' ')===d.correct.join(' ');
-    if(ok){S.l3.sc++;addXP(22);}
-    document.getElementById('wfb').innerHTML=`<div class="fbc ${ok?'bok':'bnt'}"><div class="fbh">${ok?'✅ ¡Correcto!':'💡 No exactamente'}</div>${!ok?`<p style="font-size:12px;margin-bottom:6px">Correcta: <b style="color:var(--ce)">${d.correctStr}</b></p>`:''}<p class="ts">${d.exp}</p></div>`;
+    if(ok){S.l3.sc++;addXP(hintUsed?10:22);}hitStreak(ok);
+    document.getElementById('wfb').innerHTML=`<div class="fbc ${ok?'bok':'bnt'}"><div class="fbh">${ok?'✅ ¡Correcto!':'💡 No exactamente'}</div>${!ok?`<p style="font-size:12px;margin-bottom:6px;color:var(--txt2)">Correcta: <b style="color:var(--ce)">${d.correctStr}</b></p>`:''}<p class="ts">${d.exp}</p></div>`;
     document.querySelector('[onclick="chkW()"]').parentElement.innerHTML=`<button class="btn btn-p" onclick="nxL3()">Siguiente →</button>`;
   };
   draw();
@@ -692,12 +688,12 @@ function drawErrorHunt(el,d){
     ${l3hdr()}
     <div style="font-size:13px;font-weight:800;color:var(--y);margin-bottom:8px">${d.title}</div>
     <span class="badge bw" style="margin-bottom:14px">${d.badge}</span>
-    <p style="font-size:13px;font-weight:700;margin-bottom:16px">${d.instruction}</p>
+    <p style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--txt)">${d.instruction}</p>
     <div id="dlines">
       ${d.lines.map(l=>`
       <div class="eline" id="el-${l.id}" onclick="tapEl(${l.id})">
         <div style="font-size:10px;font-weight:800;color:${l.sp==='Sofía'?'var(--ce)':'var(--or)'};text-transform:uppercase;margin-bottom:4px">${l.sp}</div>
-        <div style="font-size:12px;line-height:1.6">${l.txt}</div>
+        <div style="font-size:12px;line-height:1.6;color:var(--txt)">${l.txt}</div>
       </div>`).join('')}
     </div>
     <div id="ehfb" style="margin-top:14px"></div>
@@ -707,15 +703,10 @@ function drawErrorHunt(el,d){
     if(document.getElementById('ehfb').innerHTML)return;
     const line=d.lines.find(l=>l.id===id);
     const ok=line.isErr;
-    if(ok){S.l3.sc++;addXP(22);}
-    d.lines.forEach(l=>{
-      const e=document.getElementById('el-'+l.id);
-      e.classList.add('locked');
-      if(l.isErr)e.classList.add('ecorrect');
-      else if(l.id===id)e.classList.add('emiss');
-    });
+    if(ok){S.l3.sc++;addXP(22);}hitStreak(ok);
+    d.lines.forEach(l=>{const e=document.getElementById('el-'+l.id);e.classList.add('locked');if(l.isErr)e.classList.add('ecorrect');else if(l.id===id)e.classList.add('emiss');});
     const errLine=d.lines.find(l=>l.isErr);
-    document.getElementById('ehfb').innerHTML=`<div class="fbc ${ok?'bok':'berr'}"><div class="fbh">${ok?'✅ ¡Encontraste el error!':'❌ Esa no era la línea con el error'}</div><p class="ts">${errLine.exp}</p></div>`;
+    document.getElementById('ehfb').innerHTML=`<div class="fbc ${ok?'bok':'berr'}"><div class="fbh">${ok?'✅ ¡Encontraste el error!':'❌ Esa no era la línea'}</div><p class="ts">${errLine.exp}</p></div>`;
     document.getElementById('ehnx').innerHTML=`<button class="btn btn-p" onclick="nxL3()">Siguiente →</button>`;
   };
 }
@@ -733,14 +724,14 @@ function rR3(el){
     </div>
     <div class="card" style="margin-bottom:28px;text-align:left;width:100%">
       <div style="font-size:12px;font-weight:800;color:var(--or);margin-bottom:8px">🎭 Nivel final desbloqueado</div>
-      <p class="ts">Conduces una sesión completa con Sofía. Cada respuesta cambia lo que ella dice después. El medidor de autonomía muestra en tiempo real si estás entrenando dependencia o autonomía.</p>
+      <p class="ts">Conduces una sesión completa con Sofía. Cada respuesta cambia lo que ella dice después. El medidor de autonomía muestra si estás entrenando dependencia o autonomía.</p>
     </div>
     <button class="btn btn-p" onclick="go('l4',rL4)">🎭 Nivel 4: La sesión →</button>
   </div>`;
 }
 
-// ═══ NIVEL 4: SIMULACIÓN ══════════════════════════
-function rL4(el){S.l4={turn:0,auto:50,good:0,msgs:[]};drawL4(el)}
+// ═══ NIVEL 4 ══════════════════════════════════════
+function rL4(el){if(S.l4.turn===0)S.l4={turn:0,auto:50,good:0,msgs:[]};drawL4(el)}
 function drawL4(el){
   const d=D4[S.l4.turn];
   const ac=S.l4.auto>=65?'var(--ok)':S.l4.auto>=40?'var(--warn)':'var(--err)';
@@ -759,25 +750,21 @@ function drawL4(el){
       </div>
       <div class="abar"><div class="afill" style="width:${S.l4.auto}%;background:${ac}"></div></div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px" id="chat">
-      ${mh}
-      <div class="cmsg cs"><div class="clbl">Sofía</div><div class="cbub">${d.s}</div></div>
-    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px" id="chat">${mh}<div class="cmsg cs"><div class="clbl">Sofía</div><div class="cbub">${d.s}</div></div></div>
     <div style="font-size:10px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Tu respuesta:</div>
     <div id="l4o" style="display:flex;flex-direction:column;gap:8px">
       ${d.c.map((c,i)=>`<button class="opt" onclick="ansL4(${i})">${c.t}</button>`).join('')}
     </div>
     <div id="l4fb" style="padding-bottom:24px"></div>
   </div>`;
-  const sc=document.querySelector('.screen.active');
-  setTimeout(()=>sc.scrollTop=sc.scrollHeight,100);
+  scrl();
 }
 function ansL4(i){
   const d=D4[S.l4.turn],c=d.c[i];
   document.querySelectorAll('#l4o .opt').forEach(b=>b.disabled=true);
   document.querySelectorAll('#l4o .opt')[i].classList.add(c.tp==='g'?'ok2':c.tp==='b'?'err2':'nt2');
   S.l4.auto=Math.min(100,Math.max(0,S.l4.auto+c.da));
-  if(c.tp==='g'){S.l4.good++;addXP(25);}else if(c.tp==='n')addXP(8);
+  if(c.tp==='g'){S.l4.good++;hitStreak(true);addXP(25);}else{hitStreak(false);if(c.tp==='n')addXP(8);}
   S.l4.msgs.push({w:'s',t:d.s},{w:'t',t:c.t});
   if(c.next)S.l4.msgs.push({w:'s',t:c.next});
   S.l4.turn++;
@@ -787,16 +774,15 @@ function ansL4(i){
     <div class="fbc ${c.tp==='g'?'bok':c.tp==='b'?'berr':'bnt'}" style="margin-top:10px">
       <p class="ts">${c.fb}</p>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:11px">
-        <span style="color:var(--mut)">Autonomía:</span>
-        <span style="color:${ac};font-weight:800">${S.l4.auto}%</span>
+        <span style="color:var(--mut)">Autonomía ahora:</span>
+        <span style="font-weight:800;color:${ac}">${S.l4.auto}%</span>
       </div>
     </div>
     <button class="btn btn-p" style="margin-top:10px" onclick="${isLast?'finL4()':'contL4()'}">${isLast?'Ver resultados →':'Continuar →'}</button>`;
-  const sc=document.querySelector('.screen.active');
-  setTimeout(()=>sc.scrollTop=sc.scrollHeight,100);
+  saveS();scrl();
 }
-function contL4(){drawL4(document.querySelector('.screen.active'))}
-function finL4(){go('r4',rR4)}
+function contL4(){drawL4(document.querySelector('.screen.active'));}
+function finL4(){go('r4',rR4);}
 
 function rR4(el){
   const good=S.l4.good,tot=D4.length,auto=S.l4.auto;
@@ -806,7 +792,7 @@ function rR4(el){
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 24px;text-align:center">
     <div style="font-size:72px;animation:pop .5s ease both;margin-bottom:16px">${auto>=65?'🌟':'💼'}</div>
     <h2 style="font-size:28px;font-weight:900;margin-bottom:6px">Sesión completada</h2>
-    <p class="ts" style="color:var(--mut);margin-bottom:20px">Así quedó Sofía al final</p>
+    <p class="ts" style="color:var(--mut);margin-bottom:20px">Así quedó Sofía al final de la sesión</p>
     <div class="xpp" style="margin-bottom:20px">⚡ ${S.xp} XP totales</div>
     <div class="card" style="width:100%;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
@@ -814,31 +800,59 @@ function rR4(el){
         <span style="font-size:14px;font-weight:900;color:${ac}">${auto}%</span>
       </div>
       <div class="abar"><div class="afill" style="width:${auto}%;background:${ac}"></div></div>
-      <p class="ts" style="margin-top:10px">${auto>=65?'Sofía aprendió a mirar su propio terreno. Tus preguntas evocaron observaciones — no las diste vos.':auto>=40?'Sofía tuvo momentos de observación genuina y momentos de pliance. Hay equilibrio pero se puede afinar.':'Sofía buscó las respuestas en vos más de lo que aprendió a observar sola. Revisá la trampa del terapeuta.'}</p>
+      <p class="ts" style="margin-top:10px">${auto>=65?'Sofía aprendió a mirar su propio terreno. Tus preguntas evocaron — no diste.':auto>=40?'Sofía tuvo momentos de observación genuina y momentos de pliance.':'Sofía buscó las respuestas en vos más de lo que aprendió a observar sola.'}</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:24px">
-      <div class="card" style="text-align:center"><div style="font-size:30px;font-weight:900;color:var(--y)">${good}/${tot}</div><div style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">Óptimas</div></div>
-      <div class="card" style="text-align:center"><div style="font-size:30px;font-weight:900;color:var(--ce)">${S.xp}</div><div style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">XP totales</div></div>
+      <div class="card" style="text-align:center"><div style="font-size:30px;font-weight:900;color:var(--y)">${good}/${tot}</div><div style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">Respuestas óptimas</div></div>
+      <div class="card" style="text-align:center"><div style="font-size:30px;font-weight:900;color:var(--ce)">${S.maxStreak}🔥</div><div style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">Racha máxima</div></div>
     </div>
     <button class="btn btn-p" onclick="go('cert',rCert)">📜 Ver certificado →</button>
   </div>`;
 }
 
-// ═══ CERTIFICADO ══════════════════════════════════
+// ═══ CERTIFICADO ═════════════════════════════════
+function drawRadar(oSc,dSc,tSc,oTot,dTot,tTot){
+  const size=200,cx=100,cy=108,r=72;
+  const pct=(sc,tot)=>Math.max(0.08,sc/Math.max(tot,1));
+  const pts=[
+    {lbl:'Observar',col:'var(--ce)',pct:pct(oSc,oTot),angle:-90},
+    {lbl:'Describir',col:'var(--or)',pct:pct(dSc,dTot),angle:30},
+    {lbl:'Trackear',col:'var(--y)',pct:pct(tSc,tTot),angle:150}
+  ];
+  function pt(angle,dist){return{x:cx+dist*Math.cos(angle*Math.PI/180),y:cy+dist*Math.sin(angle*Math.PI/180)};}
+  const poly=pts.map(p=>pt(p.angle,p.pct*r));
+  const polyStr=poly.map(p=>`${p.x},${p.y}`).join(' ');
+  const axes=pts.map(p=>{const end=pt(p.angle,r);return `<line x1="${cx}" y1="${cy}" x2="${end.x}" y2="${end.y}" stroke="${p.col}" stroke-width="1" stroke-opacity=".25"/><circle cx="${end.x}" cy="${end.y}" r="3" fill="${p.col}" opacity=".4"/><text x="${pt(p.angle,r+18).x}" y="${pt(p.angle,r+18).y}" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="700" fill="${p.col}">${p.lbl}</text>`;}).join('');
+  const rings=[0.25,0.5,0.75,1].map(frac=>{const rpts=pts.map(p=>pt(p.angle,frac*r));return `<polygon points="${rpts.map(p=>`${p.x},${p.y}`).join(' ')}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`}).join('');
+  const dots=pts.map((p,i)=>`<circle cx="${poly[i].x}" cy="${poly[i].y}" r="4" fill="${p.col}"/>`).join('');
+  return `<svg viewBox="0 0 ${size} ${size+20}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px;margin:0 auto;display:block">
+    ${rings}${axes}
+    <polygon points="${polyStr}" fill="rgba(43,158,212,.15)" stroke="rgba(43,158,212,.5)" stroke-width="1.5"/>
+    ${dots}
+  </svg>`;
+}
+
 function rCert(el){
   const today=new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
-  const tot=D1.length+D2.length+D3.length+D4.length;
+  const totItems=D1.length+D2.length+D3.length+D4.length;
   const corr=S.l1.sc+S.l2.sc+S.l3.sc+S.l4.good;
-  const pct=Math.round(corr/tot*100);
+  const pct=Math.round(corr/totItems*100);
   const nv=pct>=85?'Experto':pct>=65?'Avanzado':'Practicante';
+  // Aggregate per-skill scores
+  const oSc=(S.l1.oSc||0)+(S.l2.oSc||0);
+  const dSc=(S.l1.dSc||0)+(S.l2.dSc||0);
+  const tSc=(S.l1.tSc||0)+(S.l2.tSc||0);
+  const oTot=D1.filter(d=>d.sk==='O').length+D2.filter(d=>d.skillId==='O').length;
+  const dTot=D1.filter(d=>d.sk==='D').length+D2.filter(d=>d.skillId==='D').length;
+  const tTot=D1.filter(d=>d.sk==='T').length+D2.filter(d=>d.skillId==='T').length;
+
   el.innerHTML=`
-  <div style="padding:32px 20px 50px;display:flex;flex-direction:column;gap:20px">
+  <div style="padding:32px 20px 60px;display:flex;flex-direction:column;gap:20px">
     <div style="text-align:center;padding:12px 0">
       <div style="font-size:56px;animation:pop .6s ease both;margin-bottom:10px">🎓</div>
       <h2 style="font-size:26px;font-weight:900;margin-bottom:6px">Entrenamiento completado</h2>
       <p class="ts" style="color:var(--mut)">Aquí está tu certificado, ${S.name.split(' ')[0]}</p>
     </div>
-
     <div class="cert">
       <div class="cert-inner">
         <div style="font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(249,188,21,.5);margin-bottom:16px">CERTIFICADO DE ENTRENAMIENTO</div>
@@ -860,38 +874,37 @@ function rCert(el){
           </div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:flex-end">
-          <div>
-            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:2px">${today}</div>
-            <div style="font-size:11px;font-weight:800;color:rgba(249,188,21,.6)">@leo.eyzaguirre</div>
-          </div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:2px">${today}</div><div style="font-size:11px;font-weight:800;color:rgba(249,188,21,.6)">@leo.eyzaguirre</div></div>
           <div style="text-align:right;font-size:9px;color:rgba(255,255,255,.28);line-height:1.6">Villatte et al.<br><em>Mastering the<br>Clinical Conversation</em></div>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <div style="font-size:12px;font-weight:800;color:var(--ce);margin-bottom:12px">📊 Detalle por nivel</div>
-      ${[{n:'🃏 Flash Cards',sc:S.l1.sc,tot:D1.length},{n:'⚔️ A vs B',sc:S.l2.sc,tot:D2.length},{n:'🔨 Construir',sc:S.l3.sc,tot:D3.length},{n:'🎭 Sesión',sc:S.l4.good,tot:D4.length}].map(x=>`
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-          <div style="font-size:12px;flex:1;font-weight:600">${x.n}</div>
-          <div style="font-size:11px;font-weight:800;color:var(--y)">${x.sc}/${x.tot}</div>
-        </div>
-        <div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:10px;overflow:hidden">
-          <div style="height:100%;width:${Math.round(x.sc/x.tot*100)}%;background:linear-gradient(90deg,var(--y),var(--or));border-radius:2px"></div>
-        </div>`).join('')}
+    <div id="radarwrap">
+      <div style="font-size:12px;font-weight:800;color:var(--ce);margin-bottom:6px;text-align:center">📊 Tu perfil de habilidades</div>
+      <p class="ts" style="text-align:center;margin-bottom:14px;font-size:11px">Basado en Niveles 1 y 2 — las que tienen datos por habilidad</p>
+      ${drawRadar(oSc,dSc,tSc,oTot,dTot,tTot)}
+      <div style="display:flex;justify-content:space-around;margin-top:10px">
+        ${[['🔍','Observar','var(--ce)',oSc,oTot],['📝','Describir','var(--or)',dSc,dTot],['🔗','Trackear','var(--y)',tSc,tTot]].map(([e,n,c,sc,tot])=>`<div style="text-align:center"><div style="font-size:13px;font-weight:900;color:${c}">${tot?Math.round(sc/tot*100):0}%</div><div style="font-size:9px;color:var(--mut)">${e} ${n}</div></div>`).join('')}
+      </div>
     </div>
 
-    <div style="background:linear-gradient(135deg,rgba(27,79,138,.3),rgba(43,158,212,.1));border:1px solid rgba(43,158,212,.2);border-radius:14px;padding:16px">
+    <div class="card">
+      <div style="font-size:12px;font-weight:800;color:var(--ce);margin-bottom:12px">📋 Detalle por nivel</div>
+      ${[{n:'🃏 Flash Cards',sc:S.l1.sc,tot:D1.length},{n:'⚔️ A vs B',sc:S.l2.sc,tot:D2.length},{n:'🔨 Construir',sc:S.l3.sc,tot:D3.length},{n:'🎭 Sesión',sc:S.l4.good,tot:D4.length}].map(x=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="font-size:12px;flex:1;font-weight:600;color:var(--txt)">${x.n}</div><div style="font-size:11px;font-weight:800;color:var(--y)">${x.sc}/${x.tot}</div></div><div style="height:3px;background:var(--bord2);border-radius:2px;margin-bottom:10px;overflow:hidden"><div style="height:100%;width:${Math.round(x.sc/x.tot*100)}%;background:linear-gradient(90deg,var(--y),var(--or));border-radius:2px"></div></div>`).join('')}
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(27,79,138,.2),rgba(43,158,212,.08));border:1px solid rgba(43,158,212,.2);border-radius:14px;padding:16px">
       <div style="font-size:13px;font-weight:800;margin-bottom:8px">📱 Compartí en Instagram</div>
-      <p class="ts" style="margin-bottom:12px">¿Lo lograste? Hacé captura del certificado y compartila en Stories etiquetando <b>@leo.eyzaguirre</b> 📸</p>
-      <div style="background:rgba(0,0,0,.2);border-radius:10px;padding:12px;font-size:11px;line-height:1.65;color:rgba(238,244,255,.5)">💡 Sugerencia de texto:<br><em>"Completé el entrenamiento ODT de @leo.eyzaguirre — ${pct}% de precisión. Si sos terapeuta contextual, te lo recomiendo 👇"</em></div>
+      <p class="ts" style="margin-bottom:10px">Hacé captura del certificado y compartila en Stories etiquetando <b>@leo.eyzaguirre</b></p>
+      <div style="background:var(--card2);border-radius:10px;padding:12px;font-size:11px;line-height:1.65;color:var(--mut)">💡 <em>"Completé el entrenamiento ODT de @leo.eyzaguirre — ${pct}% de precisión. Si sos terapeuta contextual, te lo recomiendo 👇"</em></div>
     </div>
 
     <button class="btn btn-g" onclick="go('cover',rCover)">← Volver al inicio</button>
   </div>`;
 }
 
-// ═══ INIT ══════════════════════════════════════════
+// ═══ INIT ════════════════════════════════════════
 go('cover',rCover);
 </script>
 </body>
